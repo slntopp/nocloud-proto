@@ -22,7 +22,7 @@ import (
 
 	"google.golang.org/protobuf/proto"
 
-	pb "github.com/slntopp/nocloud/pkg/hasher/hasherpb"
+	pb "github.com/slntopp/nocloud-proto/hasher/hasherpb"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	descriptorpb "google.golang.org/protobuf/types/descriptorpb"
 )

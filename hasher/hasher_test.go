@@ -21,10 +21,10 @@ import (
 	"testing"
 
 	"github.com/Pallinder/go-randomdata"
-	billing "github.com/slntopp/nocloud/pkg/billing/proto"
-	instances "github.com/slntopp/nocloud/pkg/instances/proto"
-	services "github.com/slntopp/nocloud/pkg/services/proto"
-	states "github.com/slntopp/nocloud/pkg/states/proto"
+	billing "github.com/slntopp/nocloud-proto/billing/proto"
+	instances "github.com/slntopp/nocloud-proto/instances/proto"
+	services "github.com/slntopp/nocloud-proto/services/proto"
+	states "github.com/slntopp/nocloud-proto/states/proto"
 	"google.golang.org/protobuf/proto"
 	structpb "google.golang.org/protobuf/types/known/structpb"
 )

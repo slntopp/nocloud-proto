@@ -16,9 +16,9 @@ class Hasher
         }
         $pool->internalAddGeneratedFile(
             '
-‰
- pkg/hasher/hasherpb/hasher.protonocloud.hasher google/protobuf/descriptor.protoBª
-com.nocloud.hasherBHasherProtoPZ.github.com/slntopp/nocloud/pkg/hasher/hasherpb¢NHXªNocloud.HasherÊNocloud\\HasherâNocloud\\Hasher\\GPBMetadataêNocloud::Hasherbproto3'
+ï¿½
+ pkg/hasher/hasherpb/hasher.protonocloud.hasher google/protobuf/descriptor.protoBï¿½
+com.nocloud.hasherBHasherProtoPZ.github.com/slntopp/nocloud-proto/hasher/hasherpbï¿½NHXï¿½Nocloud.Hasherï¿½Nocloud\\Hasherï¿½Nocloud\\Hasher\\GPBMetadataï¿½Nocloud::Hasherbproto3'
         , true);
 
         static::$is_initialized = true;
