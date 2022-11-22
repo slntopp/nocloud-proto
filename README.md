@@ -46,6 +46,12 @@ If you're generating using Docker, you'd have to build image first.
 `buf.gen.ts.yaml` as well as generated code can be found in this repo.
 To regenerate code, you would need to have dependencies listed in `dependencies.json` installed, as well as `protoc-gen-js`, which can either be installed using `brew install protobuf@3` or [downloaded as binary from Releases here](https://github.com/protocolbuffers/protobuf-javascript).
 
+Once you're all set up, run:
+
+```shell
+buf generate --template buf.gen.ts.yaml
+```
+
 ### PHP
 
 `buf.gen.php.yaml` as well as generated code can be found in this repo.
