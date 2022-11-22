@@ -1,0 +1,16 @@
+version: v1
+managed:
+  enabled: true
+
+plugins:
+  - name: js
+    out: proto/js
+    opt: import_style=commonjs,binary
+  - name: grpc
+    out: proto/js
+    opt: grpc_js
+    path: grpc_tools_node_protoc_plugin
+
+  - name: ts
+    out: proto/js
+    opt: grpc_js
