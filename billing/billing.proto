@@ -99,11 +99,6 @@ message Product {
   optional int32 sorter = 7; // Sorting order, might be needed in UIs
 }
 
-enum Priority{
-  NORMAL = 0;
-  URGENT = 1;
-}
-
 message Transaction {
   string uuid = 1;    // transaction UUID
   int64 exec = 2;     // Timestamp of Transaction planned execution time
@@ -111,13 +106,11 @@ message Transaction {
   bool processed = 4; // Wether Transaction has been processed(applied to
                       // Account balance, etc)
 
-  Priority priority = 5;
+  string account = 5;
+  string service = 6;
+  repeated string records = 7; // list of records UUIDs
 
-  string account = 6;
-  string service = 7;
-  repeated string records = 8; // list of records UUIDs
-
-  double total = 9; // Transaction total value in NCU
+  double total = 8; // Transaction total value in NCU
   /* Transaction meta data, like
       meta: {
           total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
@@ -126,7 +119,8 @@ message Transaction {
      Type(SSD/HDD/NVMe/etc)
       }
   */
-  map<string, google.protobuf.Value> meta = 10;
+  map<string, google.protobuf.Value> meta = 9;
+  Currency currency = 10;
 }
 
 message Transactions { repeated Transaction pool = 1; }
@@ -137,17 +131,15 @@ message Record {
   int64 end = 3;   // Timestamp of Record coverage frame end
   int64 exec = 4;  // Time when Record must be processed
 
-  bool processed =
-      5; // Wether Record has been processed(converted to Transaction)
+  bool processed = 5; // Wether Record has been processed(converted to Transaction)
 
-  Priority priority = 6;
-  string instance = 7;                   // Instance UUID
-  nocloud.states.NoCloudState state = 8; // Instance state
+  string instance = 6;                   // Instance UUID
+  nocloud.states.NoCloudState state = 7; // Instance state
 
-  string resource = 9; // Resource key
-  string product = 10;  // Product key
+  string resource = 8; // Resource key
+  string product = 9;  // Product key
 
-  double total = 11; // Record total value in NCU
+  double total = 10; // Record total value in NCU
   /* Record meta data, like
       meta: {
           total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
@@ -156,7 +148,8 @@ message Record {
      Type(SSD/HDD/NVMe/etc)
       }
   */
-  map<string, google.protobuf.Value> meta = 12;
+  map<string, google.protobuf.Value> meta = 11;
+  Currency currency = 12;
 }
 
 message Records { repeated Record pool = 1; }
@@ -264,7 +257,17 @@ message GetExchangeRateRequest {
   Currency to = 2;
 }
 
-message GetExchangeRateResponse { double rate = 1; }
+message GetExchangeRatesRequest {}
+
+message GetExchangeRateResponse {
+  Currency from = 1;
+  Currency to = 2;
+  double rate = 3; 
+}
+
+message GetExchangeRatesResponse {
+  repeated GetExchangeRateResponse rates = 1;
+}
 
 message ConversionRequest {
   Currency from = 1;
@@ -283,25 +286,31 @@ service CurrencyService {
   rpc GetExchangeRate(GetExchangeRateRequest)
       returns (GetExchangeRateResponse) {
     option (google.api.http) = {
-      get : "/billing/currencies/rate"
+      get : "/billing/currencies/rates/{from}/{to}"
+    };
+  };
+  rpc GetExchangeRates(GetExchangeRatesRequest)
+      returns (GetExchangeRatesResponse) {
+    option (google.api.http) = {
+      get : "/billing/currencies/rates"
     };
   };
   rpc CreateExchangeRate(CreateExchangeRateRequest)
       returns (CreateExchangeRateResponse) {
     option (google.api.http) = {
-      post : "/billing/currencies/rate"
+      post : "/billing/currencies/rates"
     };
   };
-  rpc UpdateExchangeRateRequest(CreateExchangeRateRequest)
-      returns (CreateExchangeRateResponse) {
+  rpc UpdateExchangeRate(UpdateExchangeRateRequest)
+      returns (UpdateExchangeRateResponse) {
     option (google.api.http) = {
-      put : "/billing/currencies/rate"
+      put : "/billing/currencies/rates"
     };
   };
-  rpc DeleteExchangeRateRequest(CreateExchangeRateRequest)
-      returns (CreateExchangeRateResponse) {
+  rpc DeleteExchangeRate(DeleteExchangeRateRequest)
+      returns (DeleteExchangeRateResponse) {
     option (google.api.http) = {
-      delete : "/billing/currencies/rate"
+      delete : "/billing/currencies/rate/{from}/{to}"
     };
   };
   rpc Convert(ConversionRequest) returns (ConversionResponse) {
