@@ -5,7 +5,6 @@ go 1.19
 require (
 	github.com/Pallinder/go-randomdata v1.2.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.12.0
-	github.com/slntopp/nocloud v0.0.16-r04
 	google.golang.org/genproto v0.0.0-20221014213838-99cd37c6964a
 	google.golang.org/grpc v1.50.1
 	google.golang.org/protobuf v1.28.1
