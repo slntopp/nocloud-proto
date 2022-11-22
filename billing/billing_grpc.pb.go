@@ -556,10 +556,9 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 type CurrencyServiceClient interface {
 	GetCurrencies(ctx context.Context, in *GetCurrenciesRequest, opts ...grpc.CallOption) (*GetCurrenciesResponse, error)
 	GetExchangeRate(ctx context.Context, in *GetExchangeRateRequest, opts ...grpc.CallOption) (*GetExchangeRateResponse, error)
-	GetExchangeRates(ctx context.Context, in *GetExchangeRatesRequest, opts ...grpc.CallOption) (*GetExchangeRatesResponse, error)
 	CreateExchangeRate(ctx context.Context, in *CreateExchangeRateRequest, opts ...grpc.CallOption) (*CreateExchangeRateResponse, error)
-	UpdateExchangeRate(ctx context.Context, in *UpdateExchangeRateRequest, opts ...grpc.CallOption) (*UpdateExchangeRateResponse, error)
-	DeleteExchangeRate(ctx context.Context, in *DeleteExchangeRateRequest, opts ...grpc.CallOption) (*DeleteExchangeRateResponse, error)
+	UpdateExchangeRateRequest(ctx context.Context, in *CreateExchangeRateRequest, opts ...grpc.CallOption) (*CreateExchangeRateResponse, error)
+	DeleteExchangeRateRequest(ctx context.Context, in *CreateExchangeRateRequest, opts ...grpc.CallOption) (*CreateExchangeRateResponse, error)
 	Convert(ctx context.Context, in *ConversionRequest, opts ...grpc.CallOption) (*ConversionResponse, error)
 }
 
@@ -589,15 +588,6 @@ func (c *currencyServiceClient) GetExchangeRate(ctx context.Context, in *GetExch
 	return out, nil
 }
 
-func (c *currencyServiceClient) GetExchangeRates(ctx context.Context, in *GetExchangeRatesRequest, opts ...grpc.CallOption) (*GetExchangeRatesResponse, error) {
-	out := new(GetExchangeRatesResponse)
-	err := c.cc.Invoke(ctx, "/nocloud.billing.CurrencyService/GetExchangeRates", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *currencyServiceClient) CreateExchangeRate(ctx context.Context, in *CreateExchangeRateRequest, opts ...grpc.CallOption) (*CreateExchangeRateResponse, error) {
 	out := new(CreateExchangeRateResponse)
 	err := c.cc.Invoke(ctx, "/nocloud.billing.CurrencyService/CreateExchangeRate", in, out, opts...)
@@ -607,18 +597,18 @@ func (c *currencyServiceClient) CreateExchangeRate(ctx context.Context, in *Crea
 	return out, nil
 }
 
-func (c *currencyServiceClient) UpdateExchangeRate(ctx context.Context, in *UpdateExchangeRateRequest, opts ...grpc.CallOption) (*UpdateExchangeRateResponse, error) {
-	out := new(UpdateExchangeRateResponse)
-	err := c.cc.Invoke(ctx, "/nocloud.billing.CurrencyService/UpdateExchangeRate", in, out, opts...)
+func (c *currencyServiceClient) UpdateExchangeRateRequest(ctx context.Context, in *CreateExchangeRateRequest, opts ...grpc.CallOption) (*CreateExchangeRateResponse, error) {
+	out := new(CreateExchangeRateResponse)
+	err := c.cc.Invoke(ctx, "/nocloud.billing.CurrencyService/UpdateExchangeRateRequest", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *currencyServiceClient) DeleteExchangeRate(ctx context.Context, in *DeleteExchangeRateRequest, opts ...grpc.CallOption) (*DeleteExchangeRateResponse, error) {
-	out := new(DeleteExchangeRateResponse)
-	err := c.cc.Invoke(ctx, "/nocloud.billing.CurrencyService/DeleteExchangeRate", in, out, opts...)
+func (c *currencyServiceClient) DeleteExchangeRateRequest(ctx context.Context, in *CreateExchangeRateRequest, opts ...grpc.CallOption) (*CreateExchangeRateResponse, error) {
+	out := new(CreateExchangeRateResponse)
+	err := c.cc.Invoke(ctx, "/nocloud.billing.CurrencyService/DeleteExchangeRateRequest", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -640,10 +630,9 @@ func (c *currencyServiceClient) Convert(ctx context.Context, in *ConversionReque
 type CurrencyServiceServer interface {
 	GetCurrencies(context.Context, *GetCurrenciesRequest) (*GetCurrenciesResponse, error)
 	GetExchangeRate(context.Context, *GetExchangeRateRequest) (*GetExchangeRateResponse, error)
-	GetExchangeRates(context.Context, *GetExchangeRatesRequest) (*GetExchangeRatesResponse, error)
 	CreateExchangeRate(context.Context, *CreateExchangeRateRequest) (*CreateExchangeRateResponse, error)
-	UpdateExchangeRate(context.Context, *UpdateExchangeRateRequest) (*UpdateExchangeRateResponse, error)
-	DeleteExchangeRate(context.Context, *DeleteExchangeRateRequest) (*DeleteExchangeRateResponse, error)
+	UpdateExchangeRateRequest(context.Context, *CreateExchangeRateRequest) (*CreateExchangeRateResponse, error)
+	DeleteExchangeRateRequest(context.Context, *CreateExchangeRateRequest) (*CreateExchangeRateResponse, error)
 	Convert(context.Context, *ConversionRequest) (*ConversionResponse, error)
 	mustEmbedUnimplementedCurrencyServiceServer()
 }
@@ -658,17 +647,14 @@ func (UnimplementedCurrencyServiceServer) GetCurrencies(context.Context, *GetCur
 func (UnimplementedCurrencyServiceServer) GetExchangeRate(context.Context, *GetExchangeRateRequest) (*GetExchangeRateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetExchangeRate not implemented")
 }
-func (UnimplementedCurrencyServiceServer) GetExchangeRates(context.Context, *GetExchangeRatesRequest) (*GetExchangeRatesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetExchangeRates not implemented")
-}
 func (UnimplementedCurrencyServiceServer) CreateExchangeRate(context.Context, *CreateExchangeRateRequest) (*CreateExchangeRateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateExchangeRate not implemented")
 }
-func (UnimplementedCurrencyServiceServer) UpdateExchangeRate(context.Context, *UpdateExchangeRateRequest) (*UpdateExchangeRateResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateExchangeRate not implemented")
+func (UnimplementedCurrencyServiceServer) UpdateExchangeRateRequest(context.Context, *CreateExchangeRateRequest) (*CreateExchangeRateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateExchangeRateRequest not implemented")
 }
-func (UnimplementedCurrencyServiceServer) DeleteExchangeRate(context.Context, *DeleteExchangeRateRequest) (*DeleteExchangeRateResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteExchangeRate not implemented")
+func (UnimplementedCurrencyServiceServer) DeleteExchangeRateRequest(context.Context, *CreateExchangeRateRequest) (*CreateExchangeRateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteExchangeRateRequest not implemented")
 }
 func (UnimplementedCurrencyServiceServer) Convert(context.Context, *ConversionRequest) (*ConversionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Convert not implemented")
@@ -722,24 +708,6 @@ func _CurrencyService_GetExchangeRate_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CurrencyService_GetExchangeRates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetExchangeRatesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CurrencyServiceServer).GetExchangeRates(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/nocloud.billing.CurrencyService/GetExchangeRates",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CurrencyServiceServer).GetExchangeRates(ctx, req.(*GetExchangeRatesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _CurrencyService_CreateExchangeRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateExchangeRateRequest)
 	if err := dec(in); err != nil {
@@ -758,38 +726,38 @@ func _CurrencyService_CreateExchangeRate_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CurrencyService_UpdateExchangeRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateExchangeRateRequest)
+func _CurrencyService_UpdateExchangeRateRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateExchangeRateRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CurrencyServiceServer).UpdateExchangeRate(ctx, in)
+		return srv.(CurrencyServiceServer).UpdateExchangeRateRequest(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nocloud.billing.CurrencyService/UpdateExchangeRate",
+		FullMethod: "/nocloud.billing.CurrencyService/UpdateExchangeRateRequest",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CurrencyServiceServer).UpdateExchangeRate(ctx, req.(*UpdateExchangeRateRequest))
+		return srv.(CurrencyServiceServer).UpdateExchangeRateRequest(ctx, req.(*CreateExchangeRateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CurrencyService_DeleteExchangeRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteExchangeRateRequest)
+func _CurrencyService_DeleteExchangeRateRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateExchangeRateRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CurrencyServiceServer).DeleteExchangeRate(ctx, in)
+		return srv.(CurrencyServiceServer).DeleteExchangeRateRequest(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nocloud.billing.CurrencyService/DeleteExchangeRate",
+		FullMethod: "/nocloud.billing.CurrencyService/DeleteExchangeRateRequest",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CurrencyServiceServer).DeleteExchangeRate(ctx, req.(*DeleteExchangeRateRequest))
+		return srv.(CurrencyServiceServer).DeleteExchangeRateRequest(ctx, req.(*CreateExchangeRateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -828,20 +796,16 @@ var CurrencyService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _CurrencyService_GetExchangeRate_Handler,
 		},
 		{
-			MethodName: "GetExchangeRates",
-			Handler:    _CurrencyService_GetExchangeRates_Handler,
-		},
-		{
 			MethodName: "CreateExchangeRate",
 			Handler:    _CurrencyService_CreateExchangeRate_Handler,
 		},
 		{
-			MethodName: "UpdateExchangeRate",
-			Handler:    _CurrencyService_UpdateExchangeRate_Handler,
+			MethodName: "UpdateExchangeRateRequest",
+			Handler:    _CurrencyService_UpdateExchangeRateRequest_Handler,
 		},
 		{
-			MethodName: "DeleteExchangeRate",
-			Handler:    _CurrencyService_DeleteExchangeRate_Handler,
+			MethodName: "DeleteExchangeRateRequest",
+			Handler:    _CurrencyService_DeleteExchangeRateRequest_Handler,
 		},
 		{
 			MethodName: "Convert",
