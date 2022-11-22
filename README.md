@@ -50,3 +50,8 @@ To regenerate code, you would need to have dependencies listed in `dependencies.
 
 `buf.gen.php.yaml` as well as generated code can be found in this repo.
 In order to regenerate code, you would need to have `grpc_php_plugin`.
+
+### Dart/Flutter
+
+`buf.gen.ts.yaml` can be found in this repo.
+In order to regenerate code, you would need to have `protoc_gen_dart` which can be obtained with `dart pub`.
