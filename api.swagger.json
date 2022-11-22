@@ -11,6 +11,9 @@
   },
   "tags": [
     {
+      "name": "AnsibleService"
+    },
+    {
       "name": "RecordsService"
     },
     {
@@ -18,6 +21,9 @@
     },
     {
       "name": "CurrencyService"
+    },
+    {
+      "name": "ChatService"
     },
     {
       "name": "DNS"
@@ -89,14 +95,12 @@
         "parameters": [
           {
             "name": "namespace",
-            "description": "Namespace ID to seek account in",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "depth",
-            "description": "Depth",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -794,21 +798,18 @@
           },
           {
             "name": "type",
-            "description": "Instance / InstanceGroup type supported by this plan",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "public",
-            "description": "if true, then this plan is available for all users",
             "in": "query",
             "required": false,
             "type": "boolean"
           },
           {
             "name": "kind",
-            "description": "dynamic(based on resources) or static(based on products)\n\n - UNKNOWN: Default value; should never be used but will be treated as DYNAMIC",
             "in": "query",
             "required": false,
             "type": "string",
@@ -882,21 +883,18 @@
           },
           {
             "name": "type",
-            "description": "Instance / InstanceGroup type supported by this plan",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "public",
-            "description": "if true, then this plan is available for all users",
             "in": "query",
             "required": false,
             "type": "boolean"
           },
           {
             "name": "kind",
-            "description": "dynamic(based on resources) or static(based on products)\n\n - UNKNOWN: Default value; should never be used but will be treated as DYNAMIC",
             "in": "query",
             "required": false,
             "type": "string",
@@ -973,30 +971,25 @@
                   "type": "string"
                 },
                 "type": {
-                  "type": "string",
-                  "title": "Instance / InstanceGroup type supported by this plan"
+                  "type": "string"
                 },
                 "public": {
-                  "type": "boolean",
-                  "title": "if true, then this plan is available for all users"
+                  "type": "boolean"
                 },
                 "kind": {
-                  "$ref": "#/definitions/billingPlanKind",
-                  "title": "dynamic(based on resources) or static(based on products)"
+                  "$ref": "#/definitions/billingPlanKind"
                 },
                 "resources": {
                   "type": "array",
                   "items": {
                     "$ref": "#/definitions/billingResourceConf"
-                  },
-                  "title": "Resources confs to make plan dynamic"
+                  }
                 },
                 "products": {
                   "type": "object",
                   "additionalProperties": {
                     "$ref": "#/definitions/billingProduct"
-                  },
-                  "title": "Products to make plan pre defined(map key is product key like sm, lg"
+                  }
                 },
                 "meta": {
                   "type": "object",
@@ -1101,14 +1094,12 @@
         "parameters": [
           {
             "name": "uuid",
-            "description": "transaction UUID",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "exec",
-            "description": "Timestamp of Transaction planned execution time",
             "in": "query",
             "required": false,
             "type": "string",
@@ -1116,7 +1107,6 @@
           },
           {
             "name": "proc",
-            "description": "Timestamp of Transaction processing time",
             "in": "query",
             "required": false,
             "type": "string",
@@ -1124,7 +1114,6 @@
           },
           {
             "name": "processed",
-            "description": "Wether Transaction has been processed(applied to",
             "in": "query",
             "required": false,
             "type": "boolean"
@@ -1154,7 +1143,6 @@
           },
           {
             "name": "records",
-            "description": "list of records UUIDs",
             "in": "query",
             "required": false,
             "type": "array",
@@ -1165,7 +1153,6 @@
           },
           {
             "name": "total",
-            "description": "Transaction total value in NCU",
             "in": "query",
             "required": false,
             "type": "number",
@@ -1174,6 +1161,188 @@
         ],
         "tags": [
           "BillingService"
+        ]
+      }
+    },
+    "/chats": {
+      "put": {
+        "operationId": "ChatService_CreateChat",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ccChat"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ccCreateChatRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ChatService"
+        ]
+      },
+      "patch": {
+        "operationId": "ChatService_UpdateChat",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ccChat"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ccChat"
+            }
+          }
+        ],
+        "tags": [
+          "ChatService"
+        ]
+      }
+    },
+    "/chats/invite": {
+      "post": {
+        "operationId": "ChatService_Invite",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/nocloudccResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ccInviteChatRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ChatService"
+        ]
+      }
+    },
+    "/chats/{chatUuid}/messages": {
+      "get": {
+        "operationId": "ChatService_ListChatMessages",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ccListChatMessagesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "chatUuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ChatService"
+        ]
+      }
+    },
+    "/chats/{uuid}": {
+      "get": {
+        "operationId": "ChatService_GetChat",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ccChat"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ChatService"
+        ]
+      },
+      "delete": {
+        "operationId": "ChatService_DeleteChat",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/nocloudccResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ChatService"
         ]
       }
     },
@@ -1366,6 +1535,165 @@
         ]
       }
     },
+    "/messages": {
+      "put": {
+        "operationId": "ChatService_SendChatMessage",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ccChatMessage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ccSendChatMessageRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ChatService"
+        ]
+      },
+      "patch": {
+        "operationId": "ChatService_UpdateChatMessage",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ccChatMessage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ccChatMessage"
+            }
+          }
+        ],
+        "tags": [
+          "ChatService"
+        ]
+      }
+    },
+    "/messages/{uuid}": {
+      "get": {
+        "operationId": "ChatService_GetChatMessage",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ccChatMessage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ChatService"
+        ]
+      },
+      "delete": {
+        "operationId": "ChatService_DeleteChatMessage",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/nocloudccResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ChatService"
+        ]
+      }
+    },
+    "/messages/{uuid}/stream": {
+      "get": {
+        "operationId": "ChatService_Stream",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/ccChatMessage"
+                },
+                "error": {
+                  "$ref": "#/definitions/googlerpcStatus"
+                }
+              },
+              "title": "Stream result of ccChatMessage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ChatService"
+        ]
+      }
+    },
     "/namespaces": {
       "get": {
         "operationId": "NamespacesService_List",
@@ -1386,7 +1714,6 @@
         "parameters": [
           {
             "name": "depth",
-            "description": "Depth",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -1464,8 +1791,7 @@
                 },
                 "access": {
                   "type": "integer",
-                  "format": "int32",
-                  "title": "Account access level to namespace"
+                  "format": "int32"
                 }
               }
             }
@@ -1512,8 +1838,7 @@
                 },
                 "access": {
                   "type": "integer",
-                  "format": "int32",
-                  "title": "Account access level to namespace"
+                  "format": "int32"
                 },
                 "role": {
                   "type": "string"
@@ -2317,8 +2642,7 @@
                 },
                 "secrets": {
                   "type": "object",
-                  "additionalProperties": {},
-                  "title": "json"
+                  "additionalProperties": {}
                 },
                 "vars": {
                   "type": "object",
@@ -2340,8 +2664,7 @@
                   "additionalProperties": {}
                 },
                 "public": {
-                  "type": "boolean",
-                  "title": "If set to true, the provider will be visible to all users"
+                  "type": "boolean"
                 },
                 "proxy": {
                   "$ref": "#/definitions/services_providersProxyConf"
@@ -2721,6 +3044,46 @@
         }
       }
     },
+    "ansibleDeleteRunResponse": {
+      "type": "object"
+    },
+    "ansibleRun": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "instances": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/nocloudansibleInstance"
+          }
+        },
+        "playbook": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "jobs": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "rc": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sshKey": {
+          "type": "string",
+          "title": "Use custom Private Key for SSH (applied to all Instances, can be\noverriden only with login/pass)"
+        }
+      }
+    },
     "billingConversionResponse": {
       "type": "object",
       "properties": {
@@ -2810,8 +3173,7 @@
         "POSTPAID",
         "PREPAID"
       ],
-      "default": "UNSPECIFIED",
-      "title": "- UNSPECIFIED: Shall never be used, requests will be rejected\n - POSTPAID: Transaction must be processed based on End time\n - PREPAID: Transaction must be processed based on Start time"
+      "default": "UNSPECIFIED"
     },
     "billingPlan": {
       "type": "object",
@@ -2823,30 +3185,25 @@
           "type": "string"
         },
         "type": {
-          "type": "string",
-          "title": "Instance / InstanceGroup type supported by this plan"
+          "type": "string"
         },
         "public": {
-          "type": "boolean",
-          "title": "if true, then this plan is available for all users"
+          "type": "boolean"
         },
         "kind": {
-          "$ref": "#/definitions/billingPlanKind",
-          "title": "dynamic(based on resources) or static(based on products)"
+          "$ref": "#/definitions/billingPlanKind"
         },
         "resources": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/billingResourceConf"
-          },
-          "title": "Resources confs to make plan dynamic"
+          }
         },
         "products": {
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/billingProduct"
-          },
-          "title": "Products to make plan pre defined(map key is product key like sm, lg"
+          }
         },
         "meta": {
           "type": "object",
@@ -2865,8 +3222,7 @@
         "DYNAMIC",
         "STATIC"
       ],
-      "default": "UNKNOWN",
-      "title": "- UNKNOWN: Default value; should never be used but will be treated as DYNAMIC"
+      "default": "UNKNOWN"
     },
     "billingPriority": {
       "type": "string",
@@ -2883,13 +3239,11 @@
           "$ref": "#/definitions/billingKind"
         },
         "title": {
-          "type": "string",
-          "title": "Product title"
+          "type": "string"
         },
         "price": {
           "type": "number",
-          "format": "double",
-          "title": "Product price in NCU per period"
+          "format": "double"
         },
         "period": {
           "type": "string",
@@ -2897,8 +3251,7 @@
         },
         "resources": {
           "type": "object",
-          "additionalProperties": {},
-          "title": "Map of resources keys to fixed units amount"
+          "additionalProperties": {}
         },
         "meta": {
           "type": "object",
@@ -2906,8 +3259,7 @@
         },
         "sorter": {
           "type": "integer",
-          "format": "int32",
-          "title": "Sorting order, might be needed in UIs"
+          "format": "int32"
         }
       }
     },
@@ -2933,13 +3285,11 @@
         },
         "price": {
           "type": "number",
-          "format": "double",
-          "title": "Price in NCU per period"
+          "format": "double"
         },
         "period": {
           "type": "string",
-          "format": "int64",
-          "title": "if set to 0, then it's a one-time payment"
+          "format": "int64"
         },
         "except": {
           "type": "boolean",
@@ -2970,22 +3320,18 @@
       "type": "object",
       "properties": {
         "uuid": {
-          "type": "string",
-          "title": "transaction UUID"
+          "type": "string"
         },
         "exec": {
           "type": "string",
-          "format": "int64",
-          "title": "Timestamp of Transaction planned execution time"
+          "format": "int64"
         },
         "proc": {
           "type": "string",
-          "format": "int64",
-          "title": "Timestamp of Transaction processing time"
+          "format": "int64"
         },
         "processed": {
-          "type": "boolean",
-          "title": "Wether Transaction has been processed(applied to"
+          "type": "boolean"
         },
         "priority": {
           "$ref": "#/definitions/billingPriority"
@@ -3000,13 +3346,11 @@
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "title": "list of records UUIDs"
+          }
         },
         "total": {
           "type": "number",
-          "format": "double",
-          "title": "Transaction total value in NCU"
+          "format": "double"
         },
         "meta": {
           "type": "object",
@@ -3022,6 +3366,82 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/billingTransaction"
+          }
+        }
+      }
+    },
+    "ccChat": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "ccChatMessage": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "meta": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "ccCreateChatRequest": {
+      "type": "object",
+      "properties": {
+        "chat": {
+          "$ref": "#/definitions/ccChat"
+        }
+      }
+    },
+    "ccInviteChatRequest": {
+      "type": "object",
+      "properties": {
+        "chatUuid": {
+          "type": "string"
+        },
+        "userUuid": {
+          "type": "string"
+        }
+      }
+    },
+    "ccListChatMessagesResponse": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ccChatMessage"
+          }
+        }
+      }
+    },
+    "ccSendChatMessageRequest": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "$ref": "#/definitions/ccChatMessage"
+        },
+        "entities": {
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
@@ -3167,47 +3587,6 @@
         }
       }
     },
-    "instancesInstance": {
-      "type": "object",
-      "properties": {
-        "uuid": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        },
-        "status": {
-          "$ref": "#/definitions/instancesInstanceStatus"
-        },
-        "config": {
-          "type": "object",
-          "additionalProperties": {}
-        },
-        "resources": {
-          "type": "object",
-          "additionalProperties": {}
-        },
-        "data": {
-          "type": "object",
-          "additionalProperties": {}
-        },
-        "state": {
-          "$ref": "#/definitions/statesState"
-        },
-        "hash": {
-          "type": "string"
-        },
-        "billingPlan": {
-          "$ref": "#/definitions/billingPlan"
-        },
-        "product": {
-          "type": "string"
-        },
-        "access": {
-          "$ref": "#/definitions/accessAccess"
-        }
-      }
-    },
     "instancesInstanceStatus": {
       "type": "string",
       "enum": [
@@ -3243,7 +3622,7 @@
         "instances": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/instancesInstance"
+            "$ref": "#/definitions/nocloudinstancesInstance"
           }
         },
         "resources": {
@@ -3320,6 +3699,27 @@
         }
       }
     },
+    "nocloudansibleInstance": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string",
+          "title": "SSH Setup"
+        },
+        "port": {
+          "type": "string"
+        },
+        "user": {
+          "type": "string"
+        },
+        "pass": {
+          "type": "string"
+        }
+      }
+    },
     "nocloudbillingListResponse": {
       "type": "object",
       "properties": {
@@ -3335,51 +3735,41 @@
       "type": "object",
       "properties": {
         "uuid": {
-          "type": "string",
-          "title": "Record UUID"
+          "type": "string"
         },
         "start": {
           "type": "string",
-          "format": "int64",
-          "title": "Timestamp of Record coverage frame start"
+          "format": "int64"
         },
         "end": {
           "type": "string",
-          "format": "int64",
-          "title": "Timestamp of Record coverage frame end"
+          "format": "int64"
         },
         "exec": {
           "type": "string",
-          "format": "int64",
-          "title": "Time when Record must be processed"
+          "format": "int64"
         },
         "processed": {
-          "type": "boolean",
-          "title": "Wether Record has been processed(converted to Transaction)"
+          "type": "boolean"
         },
         "priority": {
           "$ref": "#/definitions/billingPriority"
         },
         "instance": {
-          "type": "string",
-          "title": "Instance UUID"
+          "type": "string"
         },
         "state": {
-          "$ref": "#/definitions/statesNoCloudState",
-          "title": "Instance state"
+          "$ref": "#/definitions/statesNoCloudState"
         },
         "resource": {
-          "type": "string",
-          "title": "Resource key"
+          "type": "string"
         },
         "product": {
-          "type": "string",
-          "title": "Product key"
+          "type": "string"
         },
         "total": {
           "type": "number",
-          "format": "double",
-          "title": "Record total value in NCU"
+          "format": "double"
         },
         "meta": {
           "type": "object",
@@ -3387,6 +3777,9 @@
           "title": "Record meta data, like\nmeta: {\ntotal: \u003cnumber\u003e // resource \"quantity\", e.g. CPU cores, RAM Mb, Drive\nMb, IP quantity price_atm: \u003cnumber\u003e // hourly price per quant of resouce at\nthe moment, e.g. 1 NCU [other keys]: \u003cany\u003e // for example Drive\nType(SSD/HDD/NVMe/etc)\n}"
         }
       }
+    },
+    "nocloudccResponse": {
+      "type": "object"
     },
     "noclouddnsListResponse": {
       "type": "object",
@@ -3451,8 +3844,48 @@
         "HASERRS",
         "NOEXIST"
       ],
-      "default": "UNKNOWN",
-      "title": "- SERVING: Service is up and running\n - OFFLINE: Service is offline(down)\n - RUNNING: Routine is running\n - STOPPED: Routine is stopped\n - INTERNAL: Internal error while making status\n - HASERRS: Check has errors\n - NOEXIST: Service has no Routines"
+      "default": "UNKNOWN"
+    },
+    "nocloudinstancesInstance": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/instancesInstanceStatus"
+        },
+        "config": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "resources": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "state": {
+          "$ref": "#/definitions/statesState"
+        },
+        "hash": {
+          "type": "string"
+        },
+        "billingPlan": {
+          "$ref": "#/definitions/billingPlan"
+        },
+        "product": {
+          "type": "string"
+        },
+        "access": {
+          "$ref": "#/definitions/accessAccess"
+        }
+      }
     },
     "nocloudinstancesInvokeResponse": {
       "type": "object",
@@ -3604,21 +4037,17 @@
       "type": "object",
       "properties": {
         "title": {
-          "type": "string",
-          "title": "New Account title"
+          "type": "string"
         },
         "auth": {
-          "$ref": "#/definitions/accountsCredentials",
-          "title": "Credentials for New Account"
+          "$ref": "#/definitions/accountsCredentials"
         },
         "namespace": {
-          "type": "string",
-          "title": "Namespace to put Account under"
+          "type": "string"
         },
         "access": {
           "type": "integer",
-          "format": "int32",
-          "title": "Account access level to parent namespace"
+          "format": "int32"
         }
       }
     },
@@ -3867,8 +4296,7 @@
         },
         "secrets": {
           "type": "object",
-          "additionalProperties": {},
-          "title": "json"
+          "additionalProperties": {}
         },
         "vars": {
           "type": "object",
@@ -3890,8 +4318,7 @@
           "additionalProperties": {}
         },
         "public": {
-          "type": "boolean",
-          "title": "If set to true, the provider will be visible to all users"
+          "type": "boolean"
         },
         "proxy": {
           "$ref": "#/definitions/services_providersProxyConf"
@@ -3967,13 +4394,11 @@
       "type": "object",
       "properties": {
         "state": {
-          "$ref": "#/definitions/statesNoCloudState",
-          "title": "NoCloud Instance State"
+          "$ref": "#/definitions/statesNoCloudState"
         },
         "meta": {
           "type": "object",
-          "additionalProperties": {},
-          "title": "Driver(Provider/Hypervisor) State data"
+          "additionalProperties": {}
         },
         "ts": {
           "type": "string",
