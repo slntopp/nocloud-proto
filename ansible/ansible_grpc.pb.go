@@ -24,7 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 type AnsibleServiceClient interface {
 	Get(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (*Run, error)
 	Delete(ctx context.Context, in *DeleteRunRequest, opts ...grpc.CallOption) (*DeleteRunResponse, error)
-	Create(ctx context.Context, in *Run, opts ...grpc.CallOption) (*Run, error)
+	Create(ctx context.Context, in *CreateRunRequest, opts ...grpc.CallOption) (*Run, error)
 	Exec(ctx context.Context, in *ExecRunRequest, opts ...grpc.CallOption) (AnsibleService_ExecClient, error)
 	Watch(ctx context.Context, in *WatchRunRequest, opts ...grpc.CallOption) (AnsibleService_WatchClient, error)
 }
@@ -55,7 +55,7 @@ func (c *ansibleServiceClient) Delete(ctx context.Context, in *DeleteRunRequest,
 	return out, nil
 }
 
-func (c *ansibleServiceClient) Create(ctx context.Context, in *Run, opts ...grpc.CallOption) (*Run, error) {
+func (c *ansibleServiceClient) Create(ctx context.Context, in *CreateRunRequest, opts ...grpc.CallOption) (*Run, error) {
 	out := new(Run)
 	err := c.cc.Invoke(ctx, "/nocloud.ansible.AnsibleService/Create", in, out, opts...)
 	if err != nil {
@@ -134,7 +134,7 @@ func (x *ansibleServiceWatchClient) Recv() (*Run, error) {
 type AnsibleServiceServer interface {
 	Get(context.Context, *GetRunRequest) (*Run, error)
 	Delete(context.Context, *DeleteRunRequest) (*DeleteRunResponse, error)
-	Create(context.Context, *Run) (*Run, error)
+	Create(context.Context, *CreateRunRequest) (*Run, error)
 	Exec(*ExecRunRequest, AnsibleService_ExecServer) error
 	Watch(*WatchRunRequest, AnsibleService_WatchServer) error
 	mustEmbedUnimplementedAnsibleServiceServer()
@@ -150,7 +150,7 @@ func (UnimplementedAnsibleServiceServer) Get(context.Context, *GetRunRequest) (*
 func (UnimplementedAnsibleServiceServer) Delete(context.Context, *DeleteRunRequest) (*DeleteRunResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
-func (UnimplementedAnsibleServiceServer) Create(context.Context, *Run) (*Run, error) {
+func (UnimplementedAnsibleServiceServer) Create(context.Context, *CreateRunRequest) (*Run, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
 func (UnimplementedAnsibleServiceServer) Exec(*ExecRunRequest, AnsibleService_ExecServer) error {
@@ -209,7 +209,7 @@ func _AnsibleService_Delete_Handler(srv interface{}, ctx context.Context, dec fu
 }
 
 func _AnsibleService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Run)
+	in := new(CreateRunRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -221,7 +221,7 @@ func _AnsibleService_Create_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: "/nocloud.ansible.AnsibleService/Create",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AnsibleServiceServer).Create(ctx, req.(*Run))
+		return srv.(AnsibleServiceServer).Create(ctx, req.(*CreateRunRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

@@ -40,6 +40,10 @@ message Instance {
   optional string pass = 5; // SSH Password
 }
 
+message CreateRunRequest {
+  Run run = 1;
+  optional string namespace = 2;
+}
 message GetRunRequest {
   string uuid = 1;
 }
@@ -57,7 +61,7 @@ message DeleteRunResponse {}
 service AnsibleService {
   rpc Get(GetRunRequest) returns (Run);
   rpc Delete(DeleteRunRequest) returns (DeleteRunResponse);
-  rpc Create(Run) returns (Run);
+  rpc Create(CreateRunRequest) returns (Run);
   rpc Exec(ExecRunRequest) returns (stream Run);
   rpc Watch(WatchRunRequest) returns (stream Run);
 }
