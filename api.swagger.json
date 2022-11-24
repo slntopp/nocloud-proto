@@ -3081,6 +3081,9 @@
         "sshKey": {
           "type": "string",
           "title": "Use custom Private Key for SSH (applied to all Instances, can be\noverriden only with login/pass)"
+        },
+        "access": {
+          "$ref": "#/definitions/accessAccess"
         }
       }
     },
