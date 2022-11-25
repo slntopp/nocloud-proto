@@ -3,7 +3,7 @@ managed:
   enabled: true
 plugins:
   - name: php
-    out: proto/gen/php
+    out: proto/php
   - name: php
-    out: proto/gen/php
+    out: proto/php
     path: /usr/local/bin/grpc_php_plugin

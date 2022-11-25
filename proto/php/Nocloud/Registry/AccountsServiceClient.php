@@ -129,4 +129,32 @@ class AccountsServiceClient extends \Grpc\BaseStub {
         $metadata, $options);
     }
 
+    /**
+     * @param \Nocloud\Registry\Accounts\SuspendRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function Suspend(\Nocloud\Registry\Accounts\SuspendRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.registry.AccountsService/Suspend',
+        $argument,
+        ['\Nocloud\Registry\Accounts\SuspendResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Registry\Accounts\UnsuspendRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function Unsuspend(\Nocloud\Registry\Accounts\UnsuspendRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.registry.AccountsService/Unsuspend',
+        $argument,
+        ['\Nocloud\Registry\Accounts\UnsuspendResponse', 'decode'],
+        $metadata, $options);
+    }
+
 }
