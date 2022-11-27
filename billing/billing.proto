@@ -127,6 +127,7 @@ message Transaction {
       }
   */
   map<string, google.protobuf.Value> meta = 10;
+  Currency currency = 11;
 }
 
 message Transactions { repeated Transaction pool = 1; }
@@ -137,8 +138,7 @@ message Record {
   int64 end = 3;   // Timestamp of Record coverage frame end
   int64 exec = 4;  // Time when Record must be processed
 
-  bool processed =
-      5; // Wether Record has been processed(converted to Transaction)
+  bool processed = 5; // Wether Record has been processed(converted to Transaction)
 
   Priority priority = 6;
   string instance = 7;                   // Instance UUID
@@ -157,6 +157,7 @@ message Record {
       }
   */
   map<string, google.protobuf.Value> meta = 12;
+  Currency currency = 13;
 }
 
 message Records { repeated Record pool = 1; }
