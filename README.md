@@ -52,6 +52,10 @@ Once you're all set up, run:
 buf generate --template buf.gen.ts.yaml
 ```
 
+### How to Use
+
+See `examples/ts` for Example in TypeScript.
+
 ### PHP
 
 `buf.gen.php.yaml` as well as generated code can be found in this repo.
