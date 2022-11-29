@@ -54,7 +54,7 @@ buf generate --template buf.gen.ts.yaml
 
 ### How to Use
 
-See `examples/ts` for Example in TypeScript.
+See [`examples/ts`](examples/ts) for Example in TypeScript.
 
 ### PHP
 
