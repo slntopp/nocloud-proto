@@ -273,6 +273,9 @@ export class Transaction extends jspb.Message {
   getProcessed(): boolean;
   setProcessed(value: boolean): void;
 
+  getPriority(): PriorityMap[keyof PriorityMap];
+  setPriority(value: PriorityMap[keyof PriorityMap]): void;
+
   getAccount(): string;
   setAccount(value: string): void;
 
@@ -289,6 +292,9 @@ export class Transaction extends jspb.Message {
 
   getMetaMap(): jspb.Map<string, google_protobuf_struct_pb.Value>;
   clearMetaMap(): void;
+  getCurrency(): CurrencyMap[keyof CurrencyMap];
+  setCurrency(value: CurrencyMap[keyof CurrencyMap]): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Transaction.AsObject;
   static toObject(includeInstance: boolean, msg: Transaction): Transaction.AsObject;
@@ -305,11 +311,13 @@ export namespace Transaction {
     exec: number,
     proc: number,
     processed: boolean,
+    priority: PriorityMap[keyof PriorityMap],
     account: string,
     service: string,
     recordsList: Array<string>,
     total: number,
     metaMap: Array<[string, google_protobuf_struct_pb.Value.AsObject]>,
+    currency: CurrencyMap[keyof CurrencyMap],
   }
 }
 
@@ -351,6 +359,9 @@ export class Record extends jspb.Message {
   getProcessed(): boolean;
   setProcessed(value: boolean): void;
 
+  getPriority(): PriorityMap[keyof PriorityMap];
+  setPriority(value: PriorityMap[keyof PriorityMap]): void;
+
   getInstance(): string;
   setInstance(value: string): void;
 
@@ -368,6 +379,9 @@ export class Record extends jspb.Message {
 
   getMetaMap(): jspb.Map<string, google_protobuf_struct_pb.Value>;
   clearMetaMap(): void;
+  getCurrency(): CurrencyMap[keyof CurrencyMap];
+  setCurrency(value: CurrencyMap[keyof CurrencyMap]): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Record.AsObject;
   static toObject(includeInstance: boolean, msg: Record): Record.AsObject;
@@ -385,12 +399,14 @@ export namespace Record {
     end: number,
     exec: number,
     processed: boolean,
+    priority: PriorityMap[keyof PriorityMap],
     instance: string,
     state: states_states_pb.NoCloudStateMap[keyof states_states_pb.NoCloudStateMap],
     resource: string,
     product: string,
     total: number,
     metaMap: Array<[string, google_protobuf_struct_pb.Value.AsObject]>,
+    currency: CurrencyMap[keyof CurrencyMap],
   }
 }
 
@@ -674,7 +690,29 @@ export namespace GetExchangeRateRequest {
   }
 }
 
+export class GetExchangeRatesRequest extends jspb.Message {
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetExchangeRatesRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetExchangeRatesRequest): GetExchangeRatesRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GetExchangeRatesRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetExchangeRatesRequest;
+  static deserializeBinaryFromReader(message: GetExchangeRatesRequest, reader: jspb.BinaryReader): GetExchangeRatesRequest;
+}
+
+export namespace GetExchangeRatesRequest {
+  export type AsObject = {
+  }
+}
+
 export class GetExchangeRateResponse extends jspb.Message {
+  getFrom(): CurrencyMap[keyof CurrencyMap];
+  setFrom(value: CurrencyMap[keyof CurrencyMap]): void;
+
+  getTo(): CurrencyMap[keyof CurrencyMap];
+  setTo(value: CurrencyMap[keyof CurrencyMap]): void;
+
   getRate(): number;
   setRate(value: number): void;
 
@@ -690,7 +728,31 @@ export class GetExchangeRateResponse extends jspb.Message {
 
 export namespace GetExchangeRateResponse {
   export type AsObject = {
+    from: CurrencyMap[keyof CurrencyMap],
+    to: CurrencyMap[keyof CurrencyMap],
     rate: number,
+  }
+}
+
+export class GetExchangeRatesResponse extends jspb.Message {
+  clearRatesList(): void;
+  getRatesList(): Array<GetExchangeRateResponse>;
+  setRatesList(value: Array<GetExchangeRateResponse>): void;
+  addRates(value?: GetExchangeRateResponse, index?: number): GetExchangeRateResponse;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetExchangeRatesResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetExchangeRatesResponse): GetExchangeRatesResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GetExchangeRatesResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetExchangeRatesResponse;
+  static deserializeBinaryFromReader(message: GetExchangeRatesResponse, reader: jspb.BinaryReader): GetExchangeRatesResponse;
+}
+
+export namespace GetExchangeRatesResponse {
+  export type AsObject = {
+    ratesList: Array<GetExchangeRateResponse.AsObject>,
   }
 }
 
@@ -766,6 +828,13 @@ export interface KindMap {
 }
 
 export const Kind: KindMap;
+
+export interface PriorityMap {
+  NORMAL: 0;
+  URGENT: 1;
+}
+
+export const Priority: PriorityMap;
 
 export interface CurrencyMap {
   NCU: 0;

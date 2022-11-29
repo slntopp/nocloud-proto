@@ -66,6 +66,28 @@ function deserialize_nocloud_billing_CreateExchangeRateResponse(buffer_arg) {
   return billing_billing_pb.CreateExchangeRateResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_nocloud_billing_DeleteExchangeRateRequest(arg) {
+  if (!(arg instanceof billing_billing_pb.DeleteExchangeRateRequest)) {
+    throw new Error('Expected argument of type nocloud.billing.DeleteExchangeRateRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_nocloud_billing_DeleteExchangeRateRequest(buffer_arg) {
+  return billing_billing_pb.DeleteExchangeRateRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_nocloud_billing_DeleteExchangeRateResponse(arg) {
+  if (!(arg instanceof billing_billing_pb.DeleteExchangeRateResponse)) {
+    throw new Error('Expected argument of type nocloud.billing.DeleteExchangeRateResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_nocloud_billing_DeleteExchangeRateResponse(buffer_arg) {
+  return billing_billing_pb.DeleteExchangeRateResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_nocloud_billing_GetActiveRequest(arg) {
   if (!(arg instanceof billing_billing_pb.GetActiveRequest)) {
     throw new Error('Expected argument of type nocloud.billing.GetActiveRequest');
@@ -119,6 +141,28 @@ function serialize_nocloud_billing_GetExchangeRateResponse(arg) {
 
 function deserialize_nocloud_billing_GetExchangeRateResponse(buffer_arg) {
   return billing_billing_pb.GetExchangeRateResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_nocloud_billing_GetExchangeRatesRequest(arg) {
+  if (!(arg instanceof billing_billing_pb.GetExchangeRatesRequest)) {
+    throw new Error('Expected argument of type nocloud.billing.GetExchangeRatesRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_nocloud_billing_GetExchangeRatesRequest(buffer_arg) {
+  return billing_billing_pb.GetExchangeRatesRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_nocloud_billing_GetExchangeRatesResponse(arg) {
+  if (!(arg instanceof billing_billing_pb.GetExchangeRatesResponse)) {
+    throw new Error('Expected argument of type nocloud.billing.GetExchangeRatesResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_nocloud_billing_GetExchangeRatesResponse(buffer_arg) {
+  return billing_billing_pb.GetExchangeRatesResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_nocloud_billing_GetTransactionsRequest(arg) {
@@ -207,6 +251,28 @@ function serialize_nocloud_billing_Transactions(arg) {
 
 function deserialize_nocloud_billing_Transactions(buffer_arg) {
   return billing_billing_pb.Transactions.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_nocloud_billing_UpdateExchangeRateRequest(arg) {
+  if (!(arg instanceof billing_billing_pb.UpdateExchangeRateRequest)) {
+    throw new Error('Expected argument of type nocloud.billing.UpdateExchangeRateRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_nocloud_billing_UpdateExchangeRateRequest(buffer_arg) {
+  return billing_billing_pb.UpdateExchangeRateRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_nocloud_billing_UpdateExchangeRateResponse(arg) {
+  if (!(arg instanceof billing_billing_pb.UpdateExchangeRateResponse)) {
+    throw new Error('Expected argument of type nocloud.billing.UpdateExchangeRateResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_nocloud_billing_UpdateExchangeRateResponse(buffer_arg) {
+  return billing_billing_pb.UpdateExchangeRateResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 
@@ -373,6 +439,17 @@ var CurrencyServiceService = exports.CurrencyServiceService = {
     responseSerialize: serialize_nocloud_billing_GetExchangeRateResponse,
     responseDeserialize: deserialize_nocloud_billing_GetExchangeRateResponse,
   },
+  getExchangeRates: {
+    path: '/nocloud.billing.CurrencyService/GetExchangeRates',
+    requestStream: false,
+    responseStream: false,
+    requestType: billing_billing_pb.GetExchangeRatesRequest,
+    responseType: billing_billing_pb.GetExchangeRatesResponse,
+    requestSerialize: serialize_nocloud_billing_GetExchangeRatesRequest,
+    requestDeserialize: deserialize_nocloud_billing_GetExchangeRatesRequest,
+    responseSerialize: serialize_nocloud_billing_GetExchangeRatesResponse,
+    responseDeserialize: deserialize_nocloud_billing_GetExchangeRatesResponse,
+  },
   createExchangeRate: {
     path: '/nocloud.billing.CurrencyService/CreateExchangeRate',
     requestStream: false,
@@ -384,27 +461,27 @@ var CurrencyServiceService = exports.CurrencyServiceService = {
     responseSerialize: serialize_nocloud_billing_CreateExchangeRateResponse,
     responseDeserialize: deserialize_nocloud_billing_CreateExchangeRateResponse,
   },
-  updateExchangeRateRequest: {
-    path: '/nocloud.billing.CurrencyService/UpdateExchangeRateRequest',
+  updateExchangeRate: {
+    path: '/nocloud.billing.CurrencyService/UpdateExchangeRate',
     requestStream: false,
     responseStream: false,
-    requestType: billing_billing_pb.CreateExchangeRateRequest,
-    responseType: billing_billing_pb.CreateExchangeRateResponse,
-    requestSerialize: serialize_nocloud_billing_CreateExchangeRateRequest,
-    requestDeserialize: deserialize_nocloud_billing_CreateExchangeRateRequest,
-    responseSerialize: serialize_nocloud_billing_CreateExchangeRateResponse,
-    responseDeserialize: deserialize_nocloud_billing_CreateExchangeRateResponse,
+    requestType: billing_billing_pb.UpdateExchangeRateRequest,
+    responseType: billing_billing_pb.UpdateExchangeRateResponse,
+    requestSerialize: serialize_nocloud_billing_UpdateExchangeRateRequest,
+    requestDeserialize: deserialize_nocloud_billing_UpdateExchangeRateRequest,
+    responseSerialize: serialize_nocloud_billing_UpdateExchangeRateResponse,
+    responseDeserialize: deserialize_nocloud_billing_UpdateExchangeRateResponse,
   },
-  deleteExchangeRateRequest: {
-    path: '/nocloud.billing.CurrencyService/DeleteExchangeRateRequest',
+  deleteExchangeRate: {
+    path: '/nocloud.billing.CurrencyService/DeleteExchangeRate',
     requestStream: false,
     responseStream: false,
-    requestType: billing_billing_pb.CreateExchangeRateRequest,
-    responseType: billing_billing_pb.CreateExchangeRateResponse,
-    requestSerialize: serialize_nocloud_billing_CreateExchangeRateRequest,
-    requestDeserialize: deserialize_nocloud_billing_CreateExchangeRateRequest,
-    responseSerialize: serialize_nocloud_billing_CreateExchangeRateResponse,
-    responseDeserialize: deserialize_nocloud_billing_CreateExchangeRateResponse,
+    requestType: billing_billing_pb.DeleteExchangeRateRequest,
+    responseType: billing_billing_pb.DeleteExchangeRateResponse,
+    requestSerialize: serialize_nocloud_billing_DeleteExchangeRateRequest,
+    requestDeserialize: deserialize_nocloud_billing_DeleteExchangeRateRequest,
+    responseSerialize: serialize_nocloud_billing_DeleteExchangeRateResponse,
+    responseDeserialize: deserialize_nocloud_billing_DeleteExchangeRateResponse,
   },
   convert: {
     path: '/nocloud.billing.CurrencyService/Convert',
