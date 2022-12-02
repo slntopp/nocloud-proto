@@ -14,6 +14,9 @@
       "name": "AnsibleService"
     },
     {
+      "name": "PlaybookService"
+    },
+    {
       "name": "RecordsService"
     },
     {
@@ -3044,8 +3047,55 @@
         }
       }
     },
+    "ansibleCreatePlaybookResponse": {
+      "type": "object",
+      "properties": {
+        "playbook": {
+          "$ref": "#/definitions/ansiblePlaybook"
+        }
+      }
+    },
+    "ansibleDeletePlaybookResponse": {
+      "type": "object"
+    },
     "ansibleDeleteRunResponse": {
       "type": "object"
+    },
+    "ansibleGetPlaybookResponse": {
+      "type": "object",
+      "properties": {
+        "playbook": {
+          "$ref": "#/definitions/ansiblePlaybook"
+        }
+      }
+    },
+    "ansibleListPlaybooksResponse": {
+      "type": "object",
+      "properties": {
+        "playbooks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ansiblePlaybook"
+          }
+        }
+      }
+    },
+    "ansiblePlaybook": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "imagePath": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        }
+      }
     },
     "ansibleRun": {
       "type": "object",
@@ -3059,7 +3109,7 @@
             "$ref": "#/definitions/nocloudansibleInstance"
           }
         },
-        "playbook": {
+        "playbookUuid": {
           "type": "string"
         },
         "title": {
@@ -3084,6 +3134,14 @@
         },
         "access": {
           "$ref": "#/definitions/accessAccess"
+        }
+      }
+    },
+    "ansibleUpdatePlaybookResponse": {
+      "type": "object",
+      "properties": {
+        "playbook": {
+          "$ref": "#/definitions/ansiblePlaybook"
         }
       }
     },
