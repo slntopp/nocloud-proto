@@ -3094,6 +3094,10 @@
         },
         "content": {
           "type": "string"
+        },
+        "title": {
+          "type": "string",
+          "title": "Filename for playbook yaml"
         }
       }
     },
@@ -3110,9 +3114,6 @@
           }
         },
         "playbookUuid": {
-          "type": "string"
-        },
-        "title": {
           "type": "string"
         },
         "jobs": {
