@@ -61,6 +61,7 @@ message GetRunRequest {
 }
 message ExecRunRequest {
   string uuid = 1;
+  bool detached = 2;
 }
 message WatchRunRequest {
   string uuid = 1;
