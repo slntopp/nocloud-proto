@@ -111,7 +111,7 @@ service AnsibleService {
   rpc Watch(WatchRunRequest) returns (stream Run);
 }
 
-service PlaybookService {
+service PlaybooksService {
   rpc List(ListPlaybooksRequest) returns (ListPlaybooksResponse);
   rpc Get(GetPlaybookRequest) returns (GetPlaybookResponse);
   rpc Delete(DeletePlaybookRequest) returns (DeletePlaybookResponse);

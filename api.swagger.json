@@ -14,7 +14,7 @@
       "name": "AnsibleService"
     },
     {
-      "name": "PlaybookService"
+      "name": "PlaybooksService"
     },
     {
       "name": "RecordsService"

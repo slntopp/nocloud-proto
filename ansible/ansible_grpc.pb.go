@@ -303,10 +303,10 @@ var AnsibleService_ServiceDesc = grpc.ServiceDesc{
 	Metadata: "ansible/ansible.proto",
 }
 
-// PlaybookServiceClient is the client API for PlaybookService service.
+// PlaybooksServiceClient is the client API for PlaybooksService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type PlaybookServiceClient interface {
+type PlaybooksServiceClient interface {
 	List(ctx context.Context, in *ListPlaybooksRequest, opts ...grpc.CallOption) (*ListPlaybooksResponse, error)
 	Get(ctx context.Context, in *GetPlaybookRequest, opts ...grpc.CallOption) (*GetPlaybookResponse, error)
 	Delete(ctx context.Context, in *DeletePlaybookRequest, opts ...grpc.CallOption) (*DeletePlaybookResponse, error)
@@ -314,219 +314,219 @@ type PlaybookServiceClient interface {
 	Update(ctx context.Context, in *UpdatePlaybookRequest, opts ...grpc.CallOption) (*UpdatePlaybookResponse, error)
 }
 
-type playbookServiceClient struct {
+type playbooksServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewPlaybookServiceClient(cc grpc.ClientConnInterface) PlaybookServiceClient {
-	return &playbookServiceClient{cc}
+func NewPlaybooksServiceClient(cc grpc.ClientConnInterface) PlaybooksServiceClient {
+	return &playbooksServiceClient{cc}
 }
 
-func (c *playbookServiceClient) List(ctx context.Context, in *ListPlaybooksRequest, opts ...grpc.CallOption) (*ListPlaybooksResponse, error) {
+func (c *playbooksServiceClient) List(ctx context.Context, in *ListPlaybooksRequest, opts ...grpc.CallOption) (*ListPlaybooksResponse, error) {
 	out := new(ListPlaybooksResponse)
-	err := c.cc.Invoke(ctx, "/nocloud.ansible.PlaybookService/List", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/nocloud.ansible.PlaybooksService/List", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *playbookServiceClient) Get(ctx context.Context, in *GetPlaybookRequest, opts ...grpc.CallOption) (*GetPlaybookResponse, error) {
+func (c *playbooksServiceClient) Get(ctx context.Context, in *GetPlaybookRequest, opts ...grpc.CallOption) (*GetPlaybookResponse, error) {
 	out := new(GetPlaybookResponse)
-	err := c.cc.Invoke(ctx, "/nocloud.ansible.PlaybookService/Get", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/nocloud.ansible.PlaybooksService/Get", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *playbookServiceClient) Delete(ctx context.Context, in *DeletePlaybookRequest, opts ...grpc.CallOption) (*DeletePlaybookResponse, error) {
+func (c *playbooksServiceClient) Delete(ctx context.Context, in *DeletePlaybookRequest, opts ...grpc.CallOption) (*DeletePlaybookResponse, error) {
 	out := new(DeletePlaybookResponse)
-	err := c.cc.Invoke(ctx, "/nocloud.ansible.PlaybookService/Delete", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/nocloud.ansible.PlaybooksService/Delete", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *playbookServiceClient) Create(ctx context.Context, in *CreatePlaybookRequest, opts ...grpc.CallOption) (*CreatePlaybookResponse, error) {
+func (c *playbooksServiceClient) Create(ctx context.Context, in *CreatePlaybookRequest, opts ...grpc.CallOption) (*CreatePlaybookResponse, error) {
 	out := new(CreatePlaybookResponse)
-	err := c.cc.Invoke(ctx, "/nocloud.ansible.PlaybookService/Create", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/nocloud.ansible.PlaybooksService/Create", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *playbookServiceClient) Update(ctx context.Context, in *UpdatePlaybookRequest, opts ...grpc.CallOption) (*UpdatePlaybookResponse, error) {
+func (c *playbooksServiceClient) Update(ctx context.Context, in *UpdatePlaybookRequest, opts ...grpc.CallOption) (*UpdatePlaybookResponse, error) {
 	out := new(UpdatePlaybookResponse)
-	err := c.cc.Invoke(ctx, "/nocloud.ansible.PlaybookService/Update", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/nocloud.ansible.PlaybooksService/Update", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// PlaybookServiceServer is the server API for PlaybookService service.
-// All implementations must embed UnimplementedPlaybookServiceServer
+// PlaybooksServiceServer is the server API for PlaybooksService service.
+// All implementations must embed UnimplementedPlaybooksServiceServer
 // for forward compatibility
-type PlaybookServiceServer interface {
+type PlaybooksServiceServer interface {
 	List(context.Context, *ListPlaybooksRequest) (*ListPlaybooksResponse, error)
 	Get(context.Context, *GetPlaybookRequest) (*GetPlaybookResponse, error)
 	Delete(context.Context, *DeletePlaybookRequest) (*DeletePlaybookResponse, error)
 	Create(context.Context, *CreatePlaybookRequest) (*CreatePlaybookResponse, error)
 	Update(context.Context, *UpdatePlaybookRequest) (*UpdatePlaybookResponse, error)
-	mustEmbedUnimplementedPlaybookServiceServer()
+	mustEmbedUnimplementedPlaybooksServiceServer()
 }
 
-// UnimplementedPlaybookServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedPlaybookServiceServer struct {
+// UnimplementedPlaybooksServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedPlaybooksServiceServer struct {
 }
 
-func (UnimplementedPlaybookServiceServer) List(context.Context, *ListPlaybooksRequest) (*ListPlaybooksResponse, error) {
+func (UnimplementedPlaybooksServiceServer) List(context.Context, *ListPlaybooksRequest) (*ListPlaybooksResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
-func (UnimplementedPlaybookServiceServer) Get(context.Context, *GetPlaybookRequest) (*GetPlaybookResponse, error) {
+func (UnimplementedPlaybooksServiceServer) Get(context.Context, *GetPlaybookRequest) (*GetPlaybookResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedPlaybookServiceServer) Delete(context.Context, *DeletePlaybookRequest) (*DeletePlaybookResponse, error) {
+func (UnimplementedPlaybooksServiceServer) Delete(context.Context, *DeletePlaybookRequest) (*DeletePlaybookResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
-func (UnimplementedPlaybookServiceServer) Create(context.Context, *CreatePlaybookRequest) (*CreatePlaybookResponse, error) {
+func (UnimplementedPlaybooksServiceServer) Create(context.Context, *CreatePlaybookRequest) (*CreatePlaybookResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedPlaybookServiceServer) Update(context.Context, *UpdatePlaybookRequest) (*UpdatePlaybookResponse, error) {
+func (UnimplementedPlaybooksServiceServer) Update(context.Context, *UpdatePlaybookRequest) (*UpdatePlaybookResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedPlaybookServiceServer) mustEmbedUnimplementedPlaybookServiceServer() {}
+func (UnimplementedPlaybooksServiceServer) mustEmbedUnimplementedPlaybooksServiceServer() {}
 
-// UnsafePlaybookServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to PlaybookServiceServer will
+// UnsafePlaybooksServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to PlaybooksServiceServer will
 // result in compilation errors.
-type UnsafePlaybookServiceServer interface {
-	mustEmbedUnimplementedPlaybookServiceServer()
+type UnsafePlaybooksServiceServer interface {
+	mustEmbedUnimplementedPlaybooksServiceServer()
 }
 
-func RegisterPlaybookServiceServer(s grpc.ServiceRegistrar, srv PlaybookServiceServer) {
-	s.RegisterService(&PlaybookService_ServiceDesc, srv)
+func RegisterPlaybooksServiceServer(s grpc.ServiceRegistrar, srv PlaybooksServiceServer) {
+	s.RegisterService(&PlaybooksService_ServiceDesc, srv)
 }
 
-func _PlaybookService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _PlaybooksService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListPlaybooksRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PlaybookServiceServer).List(ctx, in)
+		return srv.(PlaybooksServiceServer).List(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nocloud.ansible.PlaybookService/List",
+		FullMethod: "/nocloud.ansible.PlaybooksService/List",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PlaybookServiceServer).List(ctx, req.(*ListPlaybooksRequest))
+		return srv.(PlaybooksServiceServer).List(ctx, req.(*ListPlaybooksRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PlaybookService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _PlaybooksService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetPlaybookRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PlaybookServiceServer).Get(ctx, in)
+		return srv.(PlaybooksServiceServer).Get(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nocloud.ansible.PlaybookService/Get",
+		FullMethod: "/nocloud.ansible.PlaybooksService/Get",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PlaybookServiceServer).Get(ctx, req.(*GetPlaybookRequest))
+		return srv.(PlaybooksServiceServer).Get(ctx, req.(*GetPlaybookRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PlaybookService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _PlaybooksService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeletePlaybookRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PlaybookServiceServer).Delete(ctx, in)
+		return srv.(PlaybooksServiceServer).Delete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nocloud.ansible.PlaybookService/Delete",
+		FullMethod: "/nocloud.ansible.PlaybooksService/Delete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PlaybookServiceServer).Delete(ctx, req.(*DeletePlaybookRequest))
+		return srv.(PlaybooksServiceServer).Delete(ctx, req.(*DeletePlaybookRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PlaybookService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _PlaybooksService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreatePlaybookRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PlaybookServiceServer).Create(ctx, in)
+		return srv.(PlaybooksServiceServer).Create(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nocloud.ansible.PlaybookService/Create",
+		FullMethod: "/nocloud.ansible.PlaybooksService/Create",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PlaybookServiceServer).Create(ctx, req.(*CreatePlaybookRequest))
+		return srv.(PlaybooksServiceServer).Create(ctx, req.(*CreatePlaybookRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PlaybookService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _PlaybooksService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdatePlaybookRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PlaybookServiceServer).Update(ctx, in)
+		return srv.(PlaybooksServiceServer).Update(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nocloud.ansible.PlaybookService/Update",
+		FullMethod: "/nocloud.ansible.PlaybooksService/Update",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PlaybookServiceServer).Update(ctx, req.(*UpdatePlaybookRequest))
+		return srv.(PlaybooksServiceServer).Update(ctx, req.(*UpdatePlaybookRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// PlaybookService_ServiceDesc is the grpc.ServiceDesc for PlaybookService service.
+// PlaybooksService_ServiceDesc is the grpc.ServiceDesc for PlaybooksService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var PlaybookService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "nocloud.ansible.PlaybookService",
-	HandlerType: (*PlaybookServiceServer)(nil),
+var PlaybooksService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "nocloud.ansible.PlaybooksService",
+	HandlerType: (*PlaybooksServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "List",
-			Handler:    _PlaybookService_List_Handler,
+			Handler:    _PlaybooksService_List_Handler,
 		},
 		{
 			MethodName: "Get",
-			Handler:    _PlaybookService_Get_Handler,
+			Handler:    _PlaybooksService_Get_Handler,
 		},
 		{
 			MethodName: "Delete",
-			Handler:    _PlaybookService_Delete_Handler,
+			Handler:    _PlaybooksService_Delete_Handler,
 		},
 		{
 			MethodName: "Create",
-			Handler:    _PlaybookService_Create_Handler,
+			Handler:    _PlaybooksService_Create_Handler,
 		},
 		{
 			MethodName: "Update",
-			Handler:    _PlaybookService_Update_Handler,
+			Handler:    _PlaybooksService_Update_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
