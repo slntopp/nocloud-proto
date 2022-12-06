@@ -3561,8 +3561,7 @@
           "type": "string"
         },
         "rc": {
-          "type": "string",
-          "format": "int64"
+          "type": "string"
         },
         "sshKey": {
           "type": "string",
