@@ -47,6 +47,8 @@ message Run {
   // overriden only with login/pass)
   optional string ssh_key = 7;
   optional nocloud.access.Access access = 8;
+  string create_time = 9;
+  string exec_time = 10;
 }
 message Runs { repeated Run pool = 1; }
 
