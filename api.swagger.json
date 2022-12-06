@@ -457,18 +457,28 @@
                 "playbook": {
                   "type": "object",
                   "properties": {
-                    "description": {
-                      "type": "string"
-                    },
-                    "imagePath": {
-                      "type": "string"
-                    },
-                    "content": {
+                    "logo": {
                       "type": "string"
                     },
                     "title": {
                       "type": "string",
+                      "title": "Url to or Base64 encoded Image to be used as Playbook logo in the\nMarketplace"
+                    },
+                    "description": {
+                      "type": "string",
                       "title": "Filename for playbook yaml"
+                    },
+                    "content": {
+                      "type": "string",
+                      "description": "Ansible Playbook written in YAML",
+                      "title": "(optionally Markdown) long description Marketplace like"
+                    },
+                    "supportedOs": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "title": "List of supported platforms(OS) by this Playbook"
                     }
                   }
                 }
@@ -3498,18 +3508,28 @@
         "uuid": {
           "type": "string"
         },
-        "description": {
-          "type": "string"
-        },
-        "imagePath": {
-          "type": "string"
-        },
-        "content": {
+        "logo": {
           "type": "string"
         },
         "title": {
           "type": "string",
+          "title": "Url to or Base64 encoded Image to be used as Playbook logo in the\nMarketplace"
+        },
+        "description": {
+          "type": "string",
           "title": "Filename for playbook yaml"
+        },
+        "content": {
+          "type": "string",
+          "description": "Ansible Playbook written in YAML",
+          "title": "(optionally Markdown) long description Marketplace like"
+        },
+        "supportedOs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "List of supported platforms(OS) by this Playbook"
         }
       }
     },
