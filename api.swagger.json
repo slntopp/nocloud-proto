@@ -687,7 +687,12 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object"
+              "type": "object",
+              "properties": {
+                "detached": {
+                  "type": "boolean"
+                }
+              }
             }
           }
         ],

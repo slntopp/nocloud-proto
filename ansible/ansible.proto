@@ -61,7 +61,10 @@ message CreateRunRequest {
 }
 message GetRunRequest { string uuid = 1; }
 message ListRunsRequest {}
-message ExecRunRequest { string uuid = 1; }
+message ExecRunRequest {
+  string uuid = 1;
+  bool detached = 2;
+}
 message WatchRunRequest { string uuid = 1; }
 message DeleteRunRequest { string uuid = 1; }
 message DeleteRunResponse {}
