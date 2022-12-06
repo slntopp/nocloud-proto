@@ -3572,10 +3572,12 @@
           "$ref": "#/definitions/accessAccess"
         },
         "createTime": {
-          "type": "string"
+          "type": "string",
+          "format": "int64"
         },
         "execTime": {
-          "type": "string"
+          "type": "string",
+          "format": "int64"
         }
       }
     },
