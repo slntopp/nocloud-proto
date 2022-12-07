@@ -68,12 +68,17 @@ message CreateRunRequest {
   optional string namespace = 2;
 }
 message GetRunRequest { string uuid = 1; }
+
 message ListRunsRequest {}
+
 message ExecRunRequest {
   string uuid = 1;
-  bool detached = 2;
 }
+
+message ExecRunResponse {}
+
 message WatchRunRequest { string uuid = 1; }
+
 message DeleteRunRequest { string uuid = 1; }
 message DeleteRunResponse {}
 
@@ -113,7 +118,7 @@ service AnsibleService {
       body : "*"
     };
   };
-  rpc Exec(ExecRunRequest) returns (stream Run) {
+  rpc Exec(ExecRunRequest) returns (ExecRunResponse) {
     option (google.api.http) = {
       post : "/ansible/runs/{uuid}/exec"
       body : "*"

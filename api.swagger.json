@@ -664,18 +664,9 @@
         "operationId": "AnsibleService_Exec",
         "responses": {
           "200": {
-            "description": "A successful response.(streaming responses)",
+            "description": "A successful response.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/ansibleRun"
-                },
-                "error": {
-                  "$ref": "#/definitions/googlerpcStatus"
-                }
-              },
-              "title": "Stream result of ansibleRun"
+              "$ref": "#/definitions/ansibleExecRunResponse"
             }
           },
           "default": {
@@ -697,12 +688,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "detached": {
-                  "type": "boolean"
-                }
-              }
+              "type": "object"
             }
           }
         ],
@@ -3481,6 +3467,9 @@
       "type": "object"
     },
     "ansibleDeleteRunResponse": {
+      "type": "object"
+    },
+    "ansibleExecRunResponse": {
       "type": "object"
     },
     "ansibleGetPlaybookResponse": {

@@ -25,7 +25,7 @@ type AnsibleServiceClient interface {
 	Get(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (*Run, error)
 	List(ctx context.Context, in *ListRunsRequest, opts ...grpc.CallOption) (*Runs, error)
 	Create(ctx context.Context, in *CreateRunRequest, opts ...grpc.CallOption) (*Run, error)
-	Exec(ctx context.Context, in *ExecRunRequest, opts ...grpc.CallOption) (AnsibleService_ExecClient, error)
+	Exec(ctx context.Context, in *ExecRunRequest, opts ...grpc.CallOption) (*ExecRunResponse, error)
 	Watch(ctx context.Context, in *WatchRunRequest, opts ...grpc.CallOption) (AnsibleService_WatchClient, error)
 	Delete(ctx context.Context, in *DeleteRunRequest, opts ...grpc.CallOption) (*DeleteRunResponse, error)
 }
@@ -65,40 +65,17 @@ func (c *ansibleServiceClient) Create(ctx context.Context, in *CreateRunRequest,
 	return out, nil
 }
 
-func (c *ansibleServiceClient) Exec(ctx context.Context, in *ExecRunRequest, opts ...grpc.CallOption) (AnsibleService_ExecClient, error) {
-	stream, err := c.cc.NewStream(ctx, &AnsibleService_ServiceDesc.Streams[0], "/nocloud.ansible.AnsibleService/Exec", opts...)
+func (c *ansibleServiceClient) Exec(ctx context.Context, in *ExecRunRequest, opts ...grpc.CallOption) (*ExecRunResponse, error) {
+	out := new(ExecRunResponse)
+	err := c.cc.Invoke(ctx, "/nocloud.ansible.AnsibleService/Exec", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &ansibleServiceExecClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type AnsibleService_ExecClient interface {
-	Recv() (*Run, error)
-	grpc.ClientStream
-}
-
-type ansibleServiceExecClient struct {
-	grpc.ClientStream
-}
-
-func (x *ansibleServiceExecClient) Recv() (*Run, error) {
-	m := new(Run)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
+	return out, nil
 }
 
 func (c *ansibleServiceClient) Watch(ctx context.Context, in *WatchRunRequest, opts ...grpc.CallOption) (AnsibleService_WatchClient, error) {
-	stream, err := c.cc.NewStream(ctx, &AnsibleService_ServiceDesc.Streams[1], "/nocloud.ansible.AnsibleService/Watch", opts...)
+	stream, err := c.cc.NewStream(ctx, &AnsibleService_ServiceDesc.Streams[0], "/nocloud.ansible.AnsibleService/Watch", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -145,7 +122,7 @@ type AnsibleServiceServer interface {
 	Get(context.Context, *GetRunRequest) (*Run, error)
 	List(context.Context, *ListRunsRequest) (*Runs, error)
 	Create(context.Context, *CreateRunRequest) (*Run, error)
-	Exec(*ExecRunRequest, AnsibleService_ExecServer) error
+	Exec(context.Context, *ExecRunRequest) (*ExecRunResponse, error)
 	Watch(*WatchRunRequest, AnsibleService_WatchServer) error
 	Delete(context.Context, *DeleteRunRequest) (*DeleteRunResponse, error)
 	mustEmbedUnimplementedAnsibleServiceServer()
@@ -164,8 +141,8 @@ func (UnimplementedAnsibleServiceServer) List(context.Context, *ListRunsRequest)
 func (UnimplementedAnsibleServiceServer) Create(context.Context, *CreateRunRequest) (*Run, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedAnsibleServiceServer) Exec(*ExecRunRequest, AnsibleService_ExecServer) error {
-	return status.Errorf(codes.Unimplemented, "method Exec not implemented")
+func (UnimplementedAnsibleServiceServer) Exec(context.Context, *ExecRunRequest) (*ExecRunResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Exec not implemented")
 }
 func (UnimplementedAnsibleServiceServer) Watch(*WatchRunRequest, AnsibleService_WatchServer) error {
 	return status.Errorf(codes.Unimplemented, "method Watch not implemented")
@@ -240,25 +217,22 @@ func _AnsibleService_Create_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AnsibleService_Exec_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ExecRunRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
+func _AnsibleService_Exec_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExecRunRequest)
+	if err := dec(in); err != nil {
+		return nil, err
 	}
-	return srv.(AnsibleServiceServer).Exec(m, &ansibleServiceExecServer{stream})
-}
-
-type AnsibleService_ExecServer interface {
-	Send(*Run) error
-	grpc.ServerStream
-}
-
-type ansibleServiceExecServer struct {
-	grpc.ServerStream
-}
-
-func (x *ansibleServiceExecServer) Send(m *Run) error {
-	return x.ServerStream.SendMsg(m)
+	if interceptor == nil {
+		return srv.(AnsibleServiceServer).Exec(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nocloud.ansible.AnsibleService/Exec",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnsibleServiceServer).Exec(ctx, req.(*ExecRunRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _AnsibleService_Watch_Handler(srv interface{}, stream grpc.ServerStream) error {
@@ -320,16 +294,15 @@ var AnsibleService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AnsibleService_Create_Handler,
 		},
 		{
+			MethodName: "Exec",
+			Handler:    _AnsibleService_Exec_Handler,
+		},
+		{
 			MethodName: "Delete",
 			Handler:    _AnsibleService_Delete_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "Exec",
-			Handler:       _AnsibleService_Exec_Handler,
-			ServerStreams: true,
-		},
 		{
 			StreamName:    "Watch",
 			Handler:       _AnsibleService_Watch_Handler,
