@@ -3492,6 +3492,9 @@
         "job": {
           "type": "string"
         },
+        "status": {
+          "type": "string"
+        },
         "rc": {
           "type": "string",
           "format": "int64"

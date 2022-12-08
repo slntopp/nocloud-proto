@@ -56,7 +56,8 @@ message Job {
   string run_uuid = 1;
   string job_uuid = 2;
   string job = 3;
-  optional int64 rc = 4;
+  string status = 4;
+  optional int64 rc = 5;
 }
 
 message Instance {
