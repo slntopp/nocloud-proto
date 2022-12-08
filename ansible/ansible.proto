@@ -41,7 +41,7 @@ message Run {
 
   map<string, string> jobs = 4;
   string status = 5;
-  string rc = 6;
+  int64 rc = 6;
 
   // Use custom Private Key for SSH (applied to all Instances, can be
   // overriden only with login/pass)

@@ -3550,7 +3550,8 @@
           "type": "string"
         },
         "rc": {
-          "type": "string"
+          "type": "string",
+          "format": "int64"
         },
         "sshKey": {
           "type": "string",
