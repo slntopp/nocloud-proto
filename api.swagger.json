@@ -707,13 +707,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/ansibleRun"
+                  "$ref": "#/definitions/ansibleJob"
                 },
                 "error": {
                   "$ref": "#/definitions/googlerpcStatus"
                 }
               },
-              "title": "Stream result of ansibleRun"
+              "title": "Stream result of ansibleJob"
             }
           },
           "default": {
@@ -3477,6 +3477,25 @@
       "properties": {
         "playbook": {
           "$ref": "#/definitions/ansiblePlaybook"
+        }
+      }
+    },
+    "ansibleJob": {
+      "type": "object",
+      "properties": {
+        "runUuid": {
+          "type": "string"
+        },
+        "jobId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "job": {
+          "type": "string"
+        },
+        "rc": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },

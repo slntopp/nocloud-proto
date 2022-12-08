@@ -90,7 +90,7 @@ func (c *ansibleServiceClient) Watch(ctx context.Context, in *WatchRunRequest, o
 }
 
 type AnsibleService_WatchClient interface {
-	Recv() (*Run, error)
+	Recv() (*Job, error)
 	grpc.ClientStream
 }
 
@@ -98,8 +98,8 @@ type ansibleServiceWatchClient struct {
 	grpc.ClientStream
 }
 
-func (x *ansibleServiceWatchClient) Recv() (*Run, error) {
-	m := new(Run)
+func (x *ansibleServiceWatchClient) Recv() (*Job, error) {
+	m := new(Job)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -244,7 +244,7 @@ func _AnsibleService_Watch_Handler(srv interface{}, stream grpc.ServerStream) er
 }
 
 type AnsibleService_WatchServer interface {
-	Send(*Run) error
+	Send(*Job) error
 	grpc.ServerStream
 }
 
@@ -252,7 +252,7 @@ type ansibleServiceWatchServer struct {
 	grpc.ServerStream
 }
 
-func (x *ansibleServiceWatchServer) Send(m *Run) error {
+func (x *ansibleServiceWatchServer) Send(m *Job) error {
 	return x.ServerStream.SendMsg(m)
 }
 

@@ -52,6 +52,13 @@ message Run {
 }
 message Runs { repeated Run pool = 1; }
 
+message Job {
+  string run_uuid = 1;
+  int64 job_id = 2;
+  string job = 3;
+  optional int64 rc = 4;
+}
+
 message Instance {
   string uuid = 1; // NoCloud Instance UUID
 
@@ -124,7 +131,7 @@ service AnsibleService {
       body : "*"
     };
   };
-  rpc Watch(WatchRunRequest) returns (stream Run) {
+  rpc Watch(WatchRunRequest) returns (stream Job) {
     option (google.api.http) = {
       get : "/ansible/runs/{uuid}/watch"
     };
