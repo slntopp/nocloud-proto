@@ -54,7 +54,7 @@ message Runs { repeated Run pool = 1; }
 
 message Job {
   string run_uuid = 1;
-  int64 job_id = 2;
+  string job_uuid = 2;
   string job = 3;
   optional int64 rc = 4;
 }

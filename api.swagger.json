@@ -3486,9 +3486,8 @@
         "runUuid": {
           "type": "string"
         },
-        "jobId": {
-          "type": "string",
-          "format": "int64"
+        "jobUuid": {
+          "type": "string"
         },
         "job": {
           "type": "string"
