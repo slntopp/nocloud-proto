@@ -47,6 +47,9 @@
       "name": "EdgeService"
     },
     {
+      "name": "EventsService"
+    },
+    {
       "name": "HealthService"
     },
     {
@@ -3547,6 +3550,18 @@
     "edgeEmpty": {
       "type": "object"
     },
+    "eventsEvent": {
+      "type": "object",
+      "properties": {
+        "topic": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
     "googlerpcStatus": {
       "type": "object",
       "properties": {
@@ -3885,6 +3900,9 @@
           "type": "string"
         }
       }
+    },
+    "nocloudeventsResponse": {
+      "type": "object"
     },
     "nocloudhealthStatus": {
       "type": "string",
