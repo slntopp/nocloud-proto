@@ -16,13 +16,17 @@ limitations under the License.
 syntax = "proto3";
 package nocloud.events;
 
+import "google/protobuf/struct.proto";
+
 message Event {
-    string topic = 1;
-    bytes body = 2;
+    string type = 1;
+    string key = 2;
+    string sender = 3;
+    map<string, google.protobuf.Value> data = 4;
 }
 
 message ConsumeRequest {
-    string topic = 1;
+    string key = 1;
 }
 
 message Response {}
