@@ -25,6 +25,10 @@ message Event {
     map<string, google.protobuf.Value> data = 3;
 }
 
+message Events {
+    repeated Event events = 1;
+}
+
 message ConsumeRequest {
     string type = 1;
     string uuid = 2;
@@ -44,4 +48,6 @@ service EventsService {
             get: "/bus/sub/{type}/{uuid}"
         };
     };
+
+    rpc List(ConsumeRequest) returns (Events);
 }

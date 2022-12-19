@@ -24,6 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 type EventsServiceClient interface {
 	Publish(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Response, error)
 	Consume(ctx context.Context, in *ConsumeRequest, opts ...grpc.CallOption) (EventsService_ConsumeClient, error)
+	List(ctx context.Context, in *ConsumeRequest, opts ...grpc.CallOption) (*Events, error)
 }
 
 type eventsServiceClient struct {
@@ -75,12 +76,22 @@ func (x *eventsServiceConsumeClient) Recv() (*Event, error) {
 	return m, nil
 }
 
+func (c *eventsServiceClient) List(ctx context.Context, in *ConsumeRequest, opts ...grpc.CallOption) (*Events, error) {
+	out := new(Events)
+	err := c.cc.Invoke(ctx, "/nocloud.events.EventsService/List", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EventsServiceServer is the server API for EventsService service.
 // All implementations must embed UnimplementedEventsServiceServer
 // for forward compatibility
 type EventsServiceServer interface {
 	Publish(context.Context, *Event) (*Response, error)
 	Consume(*ConsumeRequest, EventsService_ConsumeServer) error
+	List(context.Context, *ConsumeRequest) (*Events, error)
 	mustEmbedUnimplementedEventsServiceServer()
 }
 
@@ -93,6 +104,9 @@ func (UnimplementedEventsServiceServer) Publish(context.Context, *Event) (*Respo
 }
 func (UnimplementedEventsServiceServer) Consume(*ConsumeRequest, EventsService_ConsumeServer) error {
 	return status.Errorf(codes.Unimplemented, "method Consume not implemented")
+}
+func (UnimplementedEventsServiceServer) List(context.Context, *ConsumeRequest) (*Events, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
 func (UnimplementedEventsServiceServer) mustEmbedUnimplementedEventsServiceServer() {}
 
@@ -146,6 +160,24 @@ func (x *eventsServiceConsumeServer) Send(m *Event) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _EventsService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConsumeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EventsServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nocloud.events.EventsService/List",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EventsServiceServer).List(ctx, req.(*ConsumeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EventsService_ServiceDesc is the grpc.ServiceDesc for EventsService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -156,6 +188,10 @@ var EventsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Publish",
 			Handler:    _EventsService_Publish_Handler,
+		},
+		{
+			MethodName: "List",
+			Handler:    _EventsService_List_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
