@@ -17,6 +17,7 @@ syntax = "proto3";
 package nocloud.events;
 
 import "google/protobuf/struct.proto";
+import "google/api/annotations.proto";
 
 message Event {
     string type = 1;
@@ -32,6 +33,15 @@ message ConsumeRequest {
 message Response {}
 
 service EventsService {
-    rpc Publish(Event) returns (Response);
-    rpc Consume(ConsumeRequest) returns (stream Event);
+    rpc Publish(Event) returns (Response) {
+        option (google.api.http) = {
+            post: "/bus/pub"
+            body: "*"
+        };
+    };
+    rpc Consume(ConsumeRequest) returns (stream Event) {
+        option (google.api.http) = {
+            get: "/bus/sub/{type}/{uuid}"
+        };
+    };
 }
