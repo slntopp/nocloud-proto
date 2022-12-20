@@ -21,8 +21,9 @@ import "google/api/annotations.proto";
 
 message Event {
     string type = 1;
-    string uuid = 2;
-    map<string, google.protobuf.Value> data = 3;
+    string uuid = 2; // Entity uuid e.g. Account, Instance
+    string id = 3; // Event id
+    map<string, google.protobuf.Value> data = 4;
 }
 
 message Events {
@@ -32,6 +33,10 @@ message Events {
 message ConsumeRequest {
     string type = 1;
     string uuid = 2;
+}
+
+message CancelRequest {
+    string id = 1;
 }
 
 message Response {}
@@ -49,5 +54,16 @@ service EventsService {
         };
     };
 
-    rpc List(ConsumeRequest) returns (Events);
+    rpc List(ConsumeRequest) returns (Events) {
+        option (google.api.http) = {
+            get: "/bus/list/{type}/{uuid}"
+        };
+    };
+
+    rpc Cancel(CancelRequest) returns (Response) {
+        option (google.api.http) = {
+            post: "/bus/cancel"
+            body: "*"
+        };
+    };
 }

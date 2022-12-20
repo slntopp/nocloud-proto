@@ -25,6 +25,7 @@ type EventsServiceClient interface {
 	Publish(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Response, error)
 	Consume(ctx context.Context, in *ConsumeRequest, opts ...grpc.CallOption) (EventsService_ConsumeClient, error)
 	List(ctx context.Context, in *ConsumeRequest, opts ...grpc.CallOption) (*Events, error)
+	Cancel(ctx context.Context, in *CancelRequest, opts ...grpc.CallOption) (*Response, error)
 }
 
 type eventsServiceClient struct {
@@ -85,6 +86,15 @@ func (c *eventsServiceClient) List(ctx context.Context, in *ConsumeRequest, opts
 	return out, nil
 }
 
+func (c *eventsServiceClient) Cancel(ctx context.Context, in *CancelRequest, opts ...grpc.CallOption) (*Response, error) {
+	out := new(Response)
+	err := c.cc.Invoke(ctx, "/nocloud.events.EventsService/Cancel", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EventsServiceServer is the server API for EventsService service.
 // All implementations must embed UnimplementedEventsServiceServer
 // for forward compatibility
@@ -92,6 +102,7 @@ type EventsServiceServer interface {
 	Publish(context.Context, *Event) (*Response, error)
 	Consume(*ConsumeRequest, EventsService_ConsumeServer) error
 	List(context.Context, *ConsumeRequest) (*Events, error)
+	Cancel(context.Context, *CancelRequest) (*Response, error)
 	mustEmbedUnimplementedEventsServiceServer()
 }
 
@@ -107,6 +118,9 @@ func (UnimplementedEventsServiceServer) Consume(*ConsumeRequest, EventsService_C
 }
 func (UnimplementedEventsServiceServer) List(context.Context, *ConsumeRequest) (*Events, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedEventsServiceServer) Cancel(context.Context, *CancelRequest) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Cancel not implemented")
 }
 func (UnimplementedEventsServiceServer) mustEmbedUnimplementedEventsServiceServer() {}
 
@@ -178,6 +192,24 @@ func _EventsService_List_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EventsService_Cancel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EventsServiceServer).Cancel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nocloud.events.EventsService/Cancel",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EventsServiceServer).Cancel(ctx, req.(*CancelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EventsService_ServiceDesc is the grpc.ServiceDesc for EventsService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -192,6 +224,10 @@ var EventsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "List",
 			Handler:    _EventsService_List_Handler,
+		},
+		{
+			MethodName: "Cancel",
+			Handler:    _EventsService_Cancel_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
