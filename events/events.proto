@@ -36,7 +36,9 @@ message ConsumeRequest {
 }
 
 message CancelRequest {
-    string id = 1;
+    string type = 1;
+    string uuid = 2;
+    string id = 3;
 }
 
 message Response {}

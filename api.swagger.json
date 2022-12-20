@@ -3745,6 +3745,12 @@
     "eventsCancelRequest": {
       "type": "object",
       "properties": {
+        "type": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string"
+        },
         "id": {
           "type": "string"
         }
