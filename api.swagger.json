@@ -479,13 +479,6 @@
                         "type": "string"
                       },
                       "title": "List of supported platforms(OS) by this Playbook"
-                    },
-                    "vars": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "string"
-                      },
-                      "title": "Environment variables to setup"
                     }
                   }
                 }
@@ -3577,13 +3570,6 @@
             "type": "string"
           },
           "title": "List of supported platforms(OS) by this Playbook"
-        },
-        "vars": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "title": "Environment variables to setup"
         }
       }
     },
@@ -3632,6 +3618,12 @@
         "execTime": {
           "type": "string",
           "format": "int64"
+        },
+        "vars": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },

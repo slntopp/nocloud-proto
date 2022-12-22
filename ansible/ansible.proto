@@ -32,9 +32,6 @@ message Playbook {
 
   repeated string supported_os = 6;
   // List of supported platforms(OS) by this Playbook
-
-  map<string, string> vars = 7;
-  // Environment variables to setup
 }
 
 message Run {
@@ -52,6 +49,7 @@ message Run {
   optional nocloud.access.Access access = 8;
   int64 create_time = 9;
   int64 exec_time = 10;
+  map<string, string> vars = 11;
 }
 message Runs { repeated Run pool = 1; }
 
