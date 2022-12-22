@@ -28,6 +28,7 @@ type AnsibleServiceClient interface {
 	Exec(ctx context.Context, in *ExecRunRequest, opts ...grpc.CallOption) (*ExecRunResponse, error)
 	Watch(ctx context.Context, in *WatchRunRequest, opts ...grpc.CallOption) (AnsibleService_WatchClient, error)
 	Delete(ctx context.Context, in *DeleteRunRequest, opts ...grpc.CallOption) (*DeleteRunResponse, error)
+	Resync(ctx context.Context, in *ResyncRunRequest, opts ...grpc.CallOption) (*Run, error)
 }
 
 type ansibleServiceClient struct {
@@ -115,6 +116,15 @@ func (c *ansibleServiceClient) Delete(ctx context.Context, in *DeleteRunRequest,
 	return out, nil
 }
 
+func (c *ansibleServiceClient) Resync(ctx context.Context, in *ResyncRunRequest, opts ...grpc.CallOption) (*Run, error) {
+	out := new(Run)
+	err := c.cc.Invoke(ctx, "/nocloud.ansible.AnsibleService/Resync", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AnsibleServiceServer is the server API for AnsibleService service.
 // All implementations must embed UnimplementedAnsibleServiceServer
 // for forward compatibility
@@ -125,6 +135,7 @@ type AnsibleServiceServer interface {
 	Exec(context.Context, *ExecRunRequest) (*ExecRunResponse, error)
 	Watch(*WatchRunRequest, AnsibleService_WatchServer) error
 	Delete(context.Context, *DeleteRunRequest) (*DeleteRunResponse, error)
+	Resync(context.Context, *ResyncRunRequest) (*Run, error)
 	mustEmbedUnimplementedAnsibleServiceServer()
 }
 
@@ -149,6 +160,9 @@ func (UnimplementedAnsibleServiceServer) Watch(*WatchRunRequest, AnsibleService_
 }
 func (UnimplementedAnsibleServiceServer) Delete(context.Context, *DeleteRunRequest) (*DeleteRunResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedAnsibleServiceServer) Resync(context.Context, *ResyncRunRequest) (*Run, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Resync not implemented")
 }
 func (UnimplementedAnsibleServiceServer) mustEmbedUnimplementedAnsibleServiceServer() {}
 
@@ -274,6 +288,24 @@ func _AnsibleService_Delete_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AnsibleService_Resync_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResyncRunRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnsibleServiceServer).Resync(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nocloud.ansible.AnsibleService/Resync",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnsibleServiceServer).Resync(ctx, req.(*ResyncRunRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AnsibleService_ServiceDesc is the grpc.ServiceDesc for AnsibleService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -300,6 +332,10 @@ var AnsibleService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _AnsibleService_Delete_Handler,
+		},
+		{
+			MethodName: "Resync",
+			Handler:    _AnsibleService_Resync_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

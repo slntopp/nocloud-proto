@@ -32,6 +32,9 @@ message Playbook {
 
   repeated string supported_os = 6;
   // List of supported platforms(OS) by this Playbook
+
+  map<string, string> vars = 7;
+  // Environment variables to setup
 }
 
 message Run {
@@ -80,6 +83,9 @@ message GetRunRequest { string uuid = 1; }
 message ListRunsRequest {}
 
 message ExecRunRequest {
+  string uuid = 1;
+}
+message ResyncRunRequest {
   string uuid = 1;
 }
 
@@ -140,6 +146,11 @@ service AnsibleService {
   rpc Delete(DeleteRunRequest) returns (DeleteRunResponse) {
     option (google.api.http) = {
       delete : "/ansible/runs/{uuid}"
+    };
+  };
+  rpc Resync(ResyncRunRequest) returns (Run) {
+    option (google.api.http) = {
+      post : "/ansible/runs/{uuid}/resync"
     };
   };
 }

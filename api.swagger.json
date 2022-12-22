@@ -479,6 +479,13 @@
                         "type": "string"
                       },
                       "title": "List of supported platforms(OS) by this Playbook"
+                    },
+                    "vars": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "title": "Environment variables to setup"
                     }
                   }
                 }
@@ -690,6 +697,36 @@
             "schema": {
               "type": "object"
             }
+          }
+        ],
+        "tags": [
+          "AnsibleService"
+        ]
+      }
+    },
+    "/ansible/runs/{uuid}/resync": {
+      "post": {
+        "operationId": "AnsibleService_Resync",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ansibleRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "tags": [
@@ -3540,6 +3577,13 @@
             "type": "string"
           },
           "title": "List of supported platforms(OS) by this Playbook"
+        },
+        "vars": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Environment variables to setup"
         }
       }
     },
