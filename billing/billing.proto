@@ -307,12 +307,14 @@ service CurrencyService {
       returns (CreateExchangeRateResponse) {
     option (google.api.http) = {
       post : "/billing/currencies/rates"
+      body : "*"
     };
   };
   rpc UpdateExchangeRate(UpdateExchangeRateRequest)
       returns (UpdateExchangeRateResponse) {
     option (google.api.http) = {
       put : "/billing/currencies/rates"
+      body : "*"
     };
   };
   rpc DeleteExchangeRate(DeleteExchangeRateRequest)
@@ -324,6 +326,7 @@ service CurrencyService {
   rpc Convert(ConversionRequest) returns (ConversionResponse) {
     option (google.api.http) = {
       post : "/billing/currencies/convert"
+      body : "*"
     };
   };
 }
