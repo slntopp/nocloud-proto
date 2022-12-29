@@ -47,6 +47,9 @@
       "name": "EdgeService"
     },
     {
+      "name": "EventsService"
+    },
+    {
       "name": "HealthService"
     },
     {
@@ -1124,6 +1127,151 @@
         ],
         "tags": [
           "BillingService"
+        ]
+      }
+    },
+    "/bus/cancel": {
+      "post": {
+        "operationId": "EventsService_Cancel",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/nocloudeventsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/eventsCancelRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EventsService"
+        ]
+      }
+    },
+    "/bus/list/{type}/{uuid}": {
+      "get": {
+        "operationId": "EventsService_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/eventsEvents"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "EventsService"
+        ]
+      }
+    },
+    "/bus/pub": {
+      "post": {
+        "operationId": "EventsService_Publish",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/nocloudeventsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/eventsEvent"
+            }
+          }
+        ],
+        "tags": [
+          "EventsService"
+        ]
+      }
+    },
+    "/bus/sub/{type}/{uuid}": {
+      "get": {
+        "operationId": "EventsService_Consume",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/eventsEvent"
+                },
+                "error": {
+                  "$ref": "#/definitions/googlerpcStatus"
+                }
+              },
+              "title": "Stream result of eventsEvent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "EventsService"
         ]
       }
     },
@@ -3558,6 +3706,51 @@
     "edgeEmpty": {
       "type": "object"
     },
+    "eventsCancelRequest": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "eventsEvent": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string",
+          "title": "Entity uuid e.g. Account, Instance"
+        },
+        "id": {
+          "type": "string",
+          "title": "Event id"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "eventsEvents": {
+      "type": "object",
+      "properties": {
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/eventsEvent"
+          }
+        }
+      }
+    },
     "googlerpcStatus": {
       "type": "object",
       "properties": {
@@ -3911,6 +4104,9 @@
           "type": "string"
         }
       }
+    },
+    "nocloudeventsResponse": {
+      "type": "object"
     },
     "nocloudhealthStatus": {
       "type": "string",
