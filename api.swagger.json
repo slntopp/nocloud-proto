@@ -442,39 +442,12 @@
         },
         "parameters": [
           {
-            "name": "from",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "NCU",
-              "USD",
-              "EUR",
-              "BYN",
-              "PLN"
-            ],
-            "default": "NCU"
-          },
-          {
-            "name": "to",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "NCU",
-              "USD",
-              "EUR",
-              "BYN",
-              "PLN"
-            ],
-            "default": "NCU"
-          },
-          {
-            "name": "amount",
-            "in": "query",
-            "required": false,
-            "type": "number",
-            "format": "double"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingConversionRequest"
+            }
           }
         ],
         "tags": [
@@ -521,39 +494,12 @@
         },
         "parameters": [
           {
-            "name": "from",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "NCU",
-              "USD",
-              "EUR",
-              "BYN",
-              "PLN"
-            ],
-            "default": "NCU"
-          },
-          {
-            "name": "to",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "NCU",
-              "USD",
-              "EUR",
-              "BYN",
-              "PLN"
-            ],
-            "default": "NCU"
-          },
-          {
-            "name": "rate",
-            "in": "query",
-            "required": false,
-            "type": "number",
-            "format": "double"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingCreateExchangeRateRequest"
+            }
           }
         ],
         "tags": [
@@ -578,39 +524,12 @@
         },
         "parameters": [
           {
-            "name": "from",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "NCU",
-              "USD",
-              "EUR",
-              "BYN",
-              "PLN"
-            ],
-            "default": "NCU"
-          },
-          {
-            "name": "to",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "NCU",
-              "USD",
-              "EUR",
-              "BYN",
-              "PLN"
-            ],
-            "default": "NCU"
-          },
-          {
-            "name": "rate",
-            "in": "query",
-            "required": false,
-            "type": "number",
-            "format": "double"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingUpdateExchangeRateRequest"
+            }
           }
         ],
         "tags": [
@@ -3285,10 +3204,40 @@
         }
       }
     },
+    "billingConversionRequest": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "$ref": "#/definitions/billingCurrency"
+        },
+        "to": {
+          "$ref": "#/definitions/billingCurrency"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
     "billingConversionResponse": {
       "type": "object",
       "properties": {
         "amount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "billingCreateExchangeRateRequest": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "$ref": "#/definitions/billingCurrency"
+        },
+        "to": {
+          "$ref": "#/definitions/billingCurrency"
+        },
+        "rate": {
           "type": "number",
           "format": "double"
         }
@@ -3610,6 +3559,21 @@
           "items": {
             "$ref": "#/definitions/billingTransaction"
           }
+        }
+      }
+    },
+    "billingUpdateExchangeRateRequest": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "$ref": "#/definitions/billingCurrency"
+        },
+        "to": {
+          "$ref": "#/definitions/billingCurrency"
+        },
+        "rate": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
