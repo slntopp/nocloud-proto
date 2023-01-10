@@ -17,25 +17,38 @@ syntax = "proto3";
 package nocloud.states;
 
 import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
 
 enum NoCloudState {
-    INIT = 0;
-    UNKNOWN = 1;
-    STOPPED = 2;
-    RUNNING = 3;
-    FAILURE  = 4;
-    DELETED = 5;
-    SUSPENDED = 6;
-    OPERATION = 7;
+  INIT = 0;
+  UNKNOWN = 1;
+  STOPPED = 2;
+  RUNNING = 3;
+  FAILURE = 4;
+  DELETED = 5;
+  SUSPENDED = 6;
+  OPERATION = 7;
 }
 
 message State {
-    NoCloudState state = 1; // NoCloud Instance State
-    map<string, google.protobuf.Value> meta = 2; // Driver(Provider/Hypervisor) State data
-    optional int64 ts = 3;
+  NoCloudState state = 1; // NoCloud Instance State
+  map<string, google.protobuf.Value> meta =
+      2; // Driver(Provider/Hypervisor) State data
+  optional int64 ts = 3;
 }
 
 message ObjectState {
-    string uuid = 1;
-    State state = 2;
+  string uuid = 1;
+  State state = 2;
+}
+
+message TimelineItem {
+  google.protobuf.Timestamp from = 1;
+  google.protobuf.Timestamp to = 2;
+  NoCloudState state = 3;
+}
+
+message Timeline {
+  repeated TimelineItem items = 1;
+  optional string uuid = 2;
 }
