@@ -1,5 +1,5 @@
 /*
-Copyright © 2021-2022 Nikita Ivanovski info@slnt-opp.xyz
+Copyright © 2021-2023 Nikita Ivanovski info@slnt-opp.xyz
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -19,53 +19,54 @@ package nocloud.health;
 import "google/api/annotations.proto";
 
 message ProbeRequest {
-    string probe_type = 1;
-    string payload = 2;
+  string probe_type = 1;
+  string payload = 2;
 }
 
 enum Status {
-    UNKNOWN = 0;
-    SERVING = 1; // Service is up and running
-    OFFLINE = 2; // Service is offline(down)
-    RUNNING = 3; // Routine is running
-    STOPPED = 4; // Routine is stopped
-    INTERNAL = 5; // Internal error while making status
-    HASERRS = 6; // Check has errors
-    NOEXIST = 7; // Service has no Routines
+  UNKNOWN = 0;
+  SERVING = 1;  // Service is up and running
+  OFFLINE = 2;  // Service is offline(down)
+  RUNNING = 3;  // Routine is running
+  STOPPED = 4;  // Routine is stopped
+  INTERNAL = 5; // Internal error while making status
+  HASERRS = 6;  // Check has errors
+  NOEXIST = 7;  // Service has no Routines
 }
 
 message ProbeResponse {
-    string response = 1;
-    Status status = 2;
-    repeated ServingStatus serving = 3;
-    repeated RoutineStatus routines = 4;
+  string response = 1;
+  Status status = 2;
+  repeated ServingStatus serving = 3;
+  repeated RoutineStatus routines = 4;
 }
 
 message ServingStatus {
-    string service = 1;
-    Status status = 2;
-    optional string error = 3;
+  string service = 1;
+  Status status = 2;
+  optional string error = 3;
 }
 
 message RoutineStatus {
-    string routine = 1;
-    ServingStatus status = 2;
-    string last_execution = 3;
+  string routine = 1;
+  ServingStatus status = 2;
+  string last_execution = 3;
 }
-message RoutinesStatus {
-    repeated RoutineStatus routines = 1;
-}
+message RoutinesStatus { repeated RoutineStatus routines = 1; }
 
 service HealthService {
-    rpc Probe(nocloud.health.ProbeRequest) returns (nocloud.health.ProbeResponse) {
-        option (google.api.http) = {
-            post: "/health/probe"
-            body: "*"
-        };
+  rpc Probe(nocloud.health.ProbeRequest)
+      returns (nocloud.health.ProbeResponse) {
+    option (google.api.http) = {
+      post : "/health/probe"
+      body : "*"
     };
+  };
 };
 
 service InternalProbeService {
-    rpc Service(nocloud.health.ProbeRequest) returns (nocloud.health.ServingStatus);
-    rpc Routine(nocloud.health.ProbeRequest) returns (nocloud.health.RoutinesStatus);
+  rpc Service(nocloud.health.ProbeRequest)
+      returns (nocloud.health.ServingStatus);
+  rpc Routine(nocloud.health.ProbeRequest)
+      returns (nocloud.health.RoutinesStatus);
 };

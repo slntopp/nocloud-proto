@@ -1,5 +1,5 @@
 /*
-Copyright © 2021-2022 Nikita Ivanovski info@slnt-opp.xyz
+Copyright © 2021-2023 Nikita Ivanovski info@slnt-opp.xyz
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -20,52 +20,50 @@ import "google/protobuf/struct.proto";
 import "google/api/annotations.proto";
 
 message Event {
-    string type = 1;
-    string uuid = 2; // Entity uuid e.g. Account, Instance
-    string id = 3; // Event id
-    map<string, google.protobuf.Value> data = 4;
+  string type = 1;
+  string uuid = 2; // Entity uuid e.g. Account, Instance
+  string id = 3;   // Event id
+  map<string, google.protobuf.Value> data = 4;
 }
 
-message Events {
-    repeated Event events = 1;
-}
+message Events { repeated Event events = 1; }
 
 message ConsumeRequest {
-    string type = 1;
-    string uuid = 2;
+  string type = 1;
+  string uuid = 2;
 }
 
 message CancelRequest {
-    string type = 1;
-    string uuid = 2;
-    string id = 3;
+  string type = 1;
+  string uuid = 2;
+  string id = 3;
 }
 
 message Response {}
 
 service EventsService {
-    rpc Publish(Event) returns (Response) {
-        option (google.api.http) = {
-            post: "/bus/pub"
-            body: "*"
-        };
+  rpc Publish(Event) returns (Response) {
+    option (google.api.http) = {
+      post : "/bus/pub"
+      body : "*"
     };
-    rpc Consume(ConsumeRequest) returns (stream Event) {
-        option (google.api.http) = {
-            get: "/bus/sub/{type}/{uuid}"
-        };
+  };
+  rpc Consume(ConsumeRequest) returns (stream Event) {
+    option (google.api.http) = {
+      get : "/bus/sub/{type}/{uuid}"
     };
+  };
 
-    rpc List(ConsumeRequest) returns (Events) {
-        option (google.api.http) = {
-            get: "/bus/list/{type}/{uuid}"
-        };
+  rpc List(ConsumeRequest) returns (Events) {
+    option (google.api.http) = {
+      get : "/bus/list/{type}/{uuid}"
     };
+  };
 
-    rpc Cancel(CancelRequest) returns (Response) {
-        option (google.api.http) = {
-            post: "/bus/cancel"
-            body: "*"
-        };
+  rpc Cancel(CancelRequest) returns (Response) {
+    option (google.api.http) = {
+      post : "/bus/cancel"
+      body : "*"
     };
+  };
 }

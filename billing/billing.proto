@@ -1,5 +1,5 @@
 /*
-Copyright © 2021-2022 Nikita Ivanovski info@slnt-opp.xyz
+Copyright © 2021-2023 Nikita Ivanovski info@slnt-opp.xyz
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -99,7 +99,7 @@ message Product {
   optional int32 sorter = 7; // Sorting order, might be needed in UIs
 }
 
-enum Priority{
+enum Priority {
   NORMAL = 0;
   URGENT = 1;
 }
@@ -138,14 +138,15 @@ message Record {
   int64 end = 3;   // Timestamp of Record coverage frame end
   int64 exec = 4;  // Time when Record must be processed
 
-  bool processed = 5; // Wether Record has been processed(converted to Transaction)
+  bool processed =
+      5; // Wether Record has been processed(converted to Transaction)
 
   Priority priority = 6;
   string instance = 7;                   // Instance UUID
   nocloud.states.NoCloudState state = 8; // Instance state
 
   string resource = 9; // Resource key
-  string product = 10;  // Product key
+  string product = 10; // Product key
 
   double total = 11; // Record total value in NCU
   /* Record meta data, like
@@ -270,12 +271,10 @@ message GetExchangeRatesRequest {}
 message GetExchangeRateResponse {
   Currency from = 1;
   Currency to = 2;
-  double rate = 3; 
+  double rate = 3;
 }
 
-message GetExchangeRatesResponse {
-  repeated GetExchangeRateResponse rates = 1;
-}
+message GetExchangeRatesResponse { repeated GetExchangeRateResponse rates = 1; }
 
 message ConversionRequest {
   Currency from = 1;
@@ -294,7 +293,7 @@ service CurrencyService {
   rpc GetExchangeRate(GetExchangeRateRequest)
       returns (GetExchangeRateResponse) {
     option (google.api.http) = {
-     get : "/billing/currencies/rates/{from}/{to}"
+      get : "/billing/currencies/rates/{from}/{to}"
     };
   };
   rpc GetExchangeRates(GetExchangeRatesRequest)
