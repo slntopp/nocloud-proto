@@ -117,7 +117,7 @@ service InstancesService {
   rpc Delete(nocloud.instances.DeleteRequest)
       returns (nocloud.instances.DeleteResponse) {
     option (google.api.http) = {
-      delete : "/instances/{uuid}/invoke"
+      delete : "/instances/{uuid}"
     };
   };
 }
