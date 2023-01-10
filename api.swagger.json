@@ -14,6 +14,9 @@
       "name": "AnsibleService"
     },
     {
+      "name": "PlaybooksService"
+    },
+    {
       "name": "RecordsService"
     },
     {
@@ -366,6 +369,399 @@
         ],
         "tags": [
           "AccountsService"
+        ]
+      }
+    },
+    "/ansible/playbooks": {
+      "get": {
+        "operationId": "PlaybooksService_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ansibleListPlaybooksResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "PlaybooksService"
+        ]
+      },
+      "post": {
+        "operationId": "PlaybooksService_Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ansibleCreatePlaybookResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ansibleCreatePlaybookRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PlaybooksService"
+        ]
+      }
+    },
+    "/ansible/playbooks/{playbook.uuid}": {
+      "post": {
+        "operationId": "PlaybooksService_Update",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ansibleUpdatePlaybookResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "playbook.uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "playbook": {
+                  "type": "object",
+                  "properties": {
+                    "logo": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string",
+                      "title": "Url to or Base64 encoded Image to be used as Playbook logo in the\nMarketplace"
+                    },
+                    "description": {
+                      "type": "string",
+                      "title": "Filename for playbook yaml"
+                    },
+                    "content": {
+                      "type": "string",
+                      "title": "(optionally Markdown) long description Marketplace like"
+                    },
+                    "supportedOs": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "PlaybooksService"
+        ]
+      }
+    },
+    "/ansible/playbooks/{uuid}": {
+      "get": {
+        "operationId": "PlaybooksService_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ansibleGetPlaybookResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PlaybooksService"
+        ]
+      },
+      "delete": {
+        "operationId": "PlaybooksService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ansibleDeletePlaybookResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PlaybooksService"
+        ]
+      }
+    },
+    "/ansible/runs": {
+      "get": {
+        "operationId": "AnsibleService_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ansibleRuns"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "AnsibleService"
+        ]
+      },
+      "post": {
+        "operationId": "AnsibleService_Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ansibleRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ansibleCreateRunRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AnsibleService"
+        ]
+      }
+    },
+    "/ansible/runs/{uuid}": {
+      "get": {
+        "operationId": "AnsibleService_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ansibleRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AnsibleService"
+        ]
+      },
+      "delete": {
+        "operationId": "AnsibleService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ansibleDeleteRunResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AnsibleService"
+        ]
+      }
+    },
+    "/ansible/runs/{uuid}/exec": {
+      "post": {
+        "operationId": "AnsibleService_Exec",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ansibleExecRunResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "tags": [
+          "AnsibleService"
+        ]
+      }
+    },
+    "/ansible/runs/{uuid}/resync": {
+      "post": {
+        "operationId": "AnsibleService_Resync",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ansibleRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AnsibleService"
+        ]
+      }
+    },
+    "/ansible/runs/{uuid}/watch": {
+      "get": {
+        "operationId": "AnsibleService_Watch",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/ansibleJob"
+                },
+                "error": {
+                  "$ref": "#/definitions/googlerpcStatus"
+                }
+              },
+              "title": "Stream result of ansibleJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AnsibleService"
         ]
       }
     },
@@ -3198,8 +3594,110 @@
         }
       }
     },
+    "ansibleCreatePlaybookRequest": {
+      "type": "object",
+      "properties": {
+        "playbook": {
+          "$ref": "#/definitions/ansiblePlaybook"
+        }
+      }
+    },
+    "ansibleCreatePlaybookResponse": {
+      "type": "object",
+      "properties": {
+        "playbook": {
+          "$ref": "#/definitions/ansiblePlaybook"
+        }
+      }
+    },
+    "ansibleCreateRunRequest": {
+      "type": "object",
+      "properties": {
+        "run": {
+          "$ref": "#/definitions/ansibleRun"
+        },
+        "namespace": {
+          "type": "string"
+        }
+      }
+    },
+    "ansibleDeletePlaybookResponse": {
+      "type": "object"
+    },
     "ansibleDeleteRunResponse": {
       "type": "object"
+    },
+    "ansibleExecRunResponse": {
+      "type": "object"
+    },
+    "ansibleGetPlaybookResponse": {
+      "type": "object",
+      "properties": {
+        "playbook": {
+          "$ref": "#/definitions/ansiblePlaybook"
+        }
+      }
+    },
+    "ansibleJob": {
+      "type": "object",
+      "properties": {
+        "runUuid": {
+          "type": "string"
+        },
+        "jobUuid": {
+          "type": "string"
+        },
+        "job": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "rc": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "ansibleListPlaybooksResponse": {
+      "type": "object",
+      "properties": {
+        "playbooks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ansiblePlaybook"
+          }
+        }
+      }
+    },
+    "ansiblePlaybook": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "logo": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string",
+          "title": "Url to or Base64 encoded Image to be used as Playbook logo in the\nMarketplace"
+        },
+        "description": {
+          "type": "string",
+          "title": "Filename for playbook yaml"
+        },
+        "content": {
+          "type": "string",
+          "title": "(optionally Markdown) long description Marketplace like"
+        },
+        "supportedOs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "ansibleRun": {
       "type": "object",
@@ -3213,10 +3711,7 @@
             "$ref": "#/definitions/nocloudansibleInstance"
           }
         },
-        "playbook": {
-          "type": "string"
-        },
-        "title": {
+        "playbookUuid": {
           "type": "string"
         },
         "jobs": {
@@ -3235,6 +3730,42 @@
         "sshKey": {
           "type": "string",
           "title": "Use custom Private Key for SSH (applied to all Instances, can be\noverriden only with login/pass)"
+        },
+        "access": {
+          "$ref": "#/definitions/accessAccess"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "int64"
+        },
+        "execTime": {
+          "type": "string",
+          "format": "int64"
+        },
+        "vars": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ansibleRuns": {
+      "type": "object",
+      "properties": {
+        "pool": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ansibleRun"
+          }
+        }
+      }
+    },
+    "ansibleUpdatePlaybookResponse": {
+      "type": "object",
+      "properties": {
+        "playbook": {
+          "$ref": "#/definitions/ansiblePlaybook"
         }
       }
     },
