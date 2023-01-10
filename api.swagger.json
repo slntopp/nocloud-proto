@@ -1600,6 +1600,34 @@
       }
     },
     "/instances/{uuid}/invoke": {
+      "delete": {
+        "operationId": "InstancesService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/nocloudinstancesDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "InstancesService"
+        ]
+      },
       "post": {
         "operationId": "InstancesService_Invoke",
         "responses": {
@@ -4122,6 +4150,18 @@
       ],
       "default": "UNKNOWN",
       "title": "- SERVING: Service is up and running\n - OFFLINE: Service is offline(down)\n - RUNNING: Routine is running\n - STOPPED: Routine is stopped\n - INTERNAL: Internal error while making status\n - HASERRS: Check has errors\n - NOEXIST: Service has no Routines"
+    },
+    "nocloudinstancesDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "boolean"
+        },
+        "meta": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
     },
     "nocloudinstancesInstance": {
       "type": "object",
