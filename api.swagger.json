@@ -1581,6 +1581,34 @@
       }
     },
     "/instances/{uuid}/invoke": {
+      "delete": {
+        "operationId": "InstancesService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/nocloudinstancesDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "InstancesService"
+        ]
+      },
       "post": {
         "operationId": "InstancesService_Invoke",
         "responses": {
@@ -4057,6 +4085,18 @@
         "NOEXIST"
       ],
       "default": "UNKNOWN"
+    },
+    "nocloudinstancesDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "boolean"
+        },
+        "meta": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
     },
     "nocloudinstancesInstance": {
       "type": "object",
