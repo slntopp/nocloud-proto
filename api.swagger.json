@@ -4563,6 +4563,9 @@
     "services_providersPrepSP": {
       "type": "object",
       "properties": {
+        "type": {
+          "type": "string"
+        },
         "sp": {
           "$ref": "#/definitions/services_providersServicesProvider"
         },
