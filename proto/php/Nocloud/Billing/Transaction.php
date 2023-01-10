@@ -73,6 +73,10 @@ class Transaction extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 10 [json_name = "meta"];</code>
      */
     private $meta;
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.Currency currency = 11 [json_name = "currency"];</code>
+     */
+    protected $currency = 0;
 
     /**
      * Constructor.
@@ -103,6 +107,7 @@ class Transaction extends \Google\Protobuf\Internal\Message
      *           the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
      *           Type(SSD/HDD/NVMe/etc)
      *           }
+     *     @type int $currency
      * }
      */
     public function __construct($data = NULL) {
@@ -366,6 +371,28 @@ class Transaction extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::MESSAGE, \Google\Protobuf\Value::class);
         $this->meta = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.Currency currency = 11 [json_name = "currency"];</code>
+     * @return int
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.Currency currency = 11 [json_name = "currency"];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setCurrency($var)
+    {
+        GPBUtil::checkEnum($var, \Nocloud\Billing\Currency::class);
+        $this->currency = $var;
 
         return $this;
     }

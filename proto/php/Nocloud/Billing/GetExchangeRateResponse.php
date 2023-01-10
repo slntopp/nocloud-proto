@@ -14,7 +14,15 @@ use Google\Protobuf\Internal\GPBUtil;
 class GetExchangeRateResponse extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>double rate = 1 [json_name = "rate"];</code>
+     * Generated from protobuf field <code>.nocloud.billing.Currency from = 1 [json_name = "from"];</code>
+     */
+    protected $from = 0;
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.Currency to = 2 [json_name = "to"];</code>
+     */
+    protected $to = 0;
+    /**
+     * Generated from protobuf field <code>double rate = 3 [json_name = "rate"];</code>
      */
     protected $rate = 0.0;
 
@@ -24,6 +32,8 @@ class GetExchangeRateResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
+     *     @type int $from
+     *     @type int $to
      *     @type float $rate
      * }
      */
@@ -33,7 +43,51 @@ class GetExchangeRateResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>double rate = 1 [json_name = "rate"];</code>
+     * Generated from protobuf field <code>.nocloud.billing.Currency from = 1 [json_name = "from"];</code>
+     * @return int
+     */
+    public function getFrom()
+    {
+        return $this->from;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.Currency from = 1 [json_name = "from"];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setFrom($var)
+    {
+        GPBUtil::checkEnum($var, \Nocloud\Billing\Currency::class);
+        $this->from = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.Currency to = 2 [json_name = "to"];</code>
+     * @return int
+     */
+    public function getTo()
+    {
+        return $this->to;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.Currency to = 2 [json_name = "to"];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setTo($var)
+    {
+        GPBUtil::checkEnum($var, \Nocloud\Billing\Currency::class);
+        $this->to = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>double rate = 3 [json_name = "rate"];</code>
      * @return float
      */
     public function getRate()
@@ -42,7 +96,7 @@ class GetExchangeRateResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>double rate = 1 [json_name = "rate"];</code>
+     * Generated from protobuf field <code>double rate = 3 [json_name = "rate"];</code>
      * @param float $var
      * @return $this
      */

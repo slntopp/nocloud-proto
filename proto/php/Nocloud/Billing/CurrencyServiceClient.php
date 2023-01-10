@@ -60,6 +60,20 @@ class CurrencyServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * @param \Nocloud\Billing\GetExchangeRatesRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function GetExchangeRates(\Nocloud\Billing\GetExchangeRatesRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.CurrencyService/GetExchangeRates',
+        $argument,
+        ['\Nocloud\Billing\GetExchangeRatesResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * @param \Nocloud\Billing\CreateExchangeRateRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -74,30 +88,30 @@ class CurrencyServiceClient extends \Grpc\BaseStub {
     }
 
     /**
-     * @param \Nocloud\Billing\CreateExchangeRateRequest $argument input argument
+     * @param \Nocloud\Billing\UpdateExchangeRateRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      * @return \Grpc\UnaryCall
      */
-    public function UpdateExchangeRateRequest(\Nocloud\Billing\CreateExchangeRateRequest $argument,
+    public function UpdateExchangeRate(\Nocloud\Billing\UpdateExchangeRateRequest $argument,
       $metadata = [], $options = []) {
-        return $this->_simpleRequest('/nocloud.billing.CurrencyService/UpdateExchangeRateRequest',
+        return $this->_simpleRequest('/nocloud.billing.CurrencyService/UpdateExchangeRate',
         $argument,
-        ['\Nocloud\Billing\CreateExchangeRateResponse', 'decode'],
+        ['\Nocloud\Billing\UpdateExchangeRateResponse', 'decode'],
         $metadata, $options);
     }
 
     /**
-     * @param \Nocloud\Billing\CreateExchangeRateRequest $argument input argument
+     * @param \Nocloud\Billing\DeleteExchangeRateRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      * @return \Grpc\UnaryCall
      */
-    public function DeleteExchangeRateRequest(\Nocloud\Billing\CreateExchangeRateRequest $argument,
+    public function DeleteExchangeRate(\Nocloud\Billing\DeleteExchangeRateRequest $argument,
       $metadata = [], $options = []) {
-        return $this->_simpleRequest('/nocloud.billing.CurrencyService/DeleteExchangeRateRequest',
+        return $this->_simpleRequest('/nocloud.billing.CurrencyService/DeleteExchangeRate',
         $argument,
-        ['\Nocloud\Billing\CreateExchangeRateResponse', 'decode'],
+        ['\Nocloud\Billing\DeleteExchangeRateResponse', 'decode'],
         $metadata, $options);
     }
 
