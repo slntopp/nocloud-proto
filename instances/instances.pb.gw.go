@@ -190,7 +190,7 @@ func RegisterInstancesServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.instances.InstancesService/Delete", runtime.WithHTTPPathPattern("/instances/{uuid}/invoke"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.instances.InstancesService/Delete", runtime.WithHTTPPathPattern("/instances/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -276,7 +276,7 @@ func RegisterInstancesServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.instances.InstancesService/Delete", runtime.WithHTTPPathPattern("/instances/{uuid}/invoke"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.instances.InstancesService/Delete", runtime.WithHTTPPathPattern("/instances/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -298,7 +298,7 @@ func RegisterInstancesServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 var (
 	pattern_InstancesService_Invoke_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"instances", "uuid", "invoke"}, ""))
 
-	pattern_InstancesService_Delete_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"instances", "uuid", "invoke"}, ""))
+	pattern_InstancesService_Delete_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"instances", "uuid"}, ""))
 )
 
 var (

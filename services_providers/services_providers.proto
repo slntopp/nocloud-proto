@@ -93,6 +93,11 @@ message InvokeResponse {
   map<string, google.protobuf.Value> meta = 2;
 }
 
+message PrepSP {
+  nocloud.services_providers.ServicesProvider sp = 1;
+  map<string, google.protobuf.Value> extra = 2;
+}
+
 service ServicesProvidersService {
   rpc Test(nocloud.services_providers.ServicesProvider)
       returns (nocloud.services_providers.TestResponse) {
@@ -139,6 +144,14 @@ service ServicesProvidersService {
       returns (nocloud.services_providers.InvokeResponse) {
     option (google.api.http) = {
       post : "/sp/{uuid}/invoke"
+      body : "*"
+    };
+  };
+
+  rpc Prep(nocloud.services_providers.PrepSP)
+      returns (nocloud.services_providers.PrepSP) {
+    option (google.api.http) = {
+      post : "/sp-prep"
       body : "*"
     };
   };

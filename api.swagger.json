@@ -1580,7 +1580,7 @@
         ]
       }
     },
-    "/instances/{uuid}/invoke": {
+    "/instances/{uuid}": {
       "delete": {
         "operationId": "InstancesService_Delete",
         "responses": {
@@ -1608,7 +1608,9 @@
         "tags": [
           "InstancesService"
         ]
-      },
+      }
+    },
+    "/instances/{uuid}/invoke": {
       "post": {
         "operationId": "InstancesService_Invoke",
         "responses": {
@@ -2660,6 +2662,38 @@
             "in": "query",
             "required": false,
             "type": "boolean"
+          }
+        ],
+        "tags": [
+          "ServicesProvidersService"
+        ]
+      }
+    },
+    "/sp-prep": {
+      "post": {
+        "operationId": "ServicesProvidersService_Prep",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/services_providersPrepSP"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/services_providersPrepSP"
+            }
           }
         ],
         "tags": [
@@ -4519,6 +4553,18 @@
         },
         "title": {
           "type": "string"
+        },
+        "extra": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "services_providersPrepSP": {
+      "type": "object",
+      "properties": {
+        "sp": {
+          "$ref": "#/definitions/services_providersServicesProvider"
         },
         "extra": {
           "type": "object",

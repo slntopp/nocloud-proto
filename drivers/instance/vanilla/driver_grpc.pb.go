@@ -33,6 +33,7 @@ type DriverServiceClient interface {
 	SuspendMonitoring(ctx context.Context, in *MonitoringRequest, opts ...grpc.CallOption) (*MonitoringResponse, error)
 	Invoke(ctx context.Context, in *InvokeRequest, opts ...grpc.CallOption) (*instances.InvokeResponse, error)
 	SpInvoke(ctx context.Context, in *SpInvokeRequest, opts ...grpc.CallOption) (*services_providers.InvokeResponse, error)
+	SpPrep(ctx context.Context, in *services_providers.PrepSP, opts ...grpc.CallOption) (*services_providers.PrepSP, error)
 }
 
 type driverServiceClient struct {
@@ -124,6 +125,15 @@ func (c *driverServiceClient) SpInvoke(ctx context.Context, in *SpInvokeRequest,
 	return out, nil
 }
 
+func (c *driverServiceClient) SpPrep(ctx context.Context, in *services_providers.PrepSP, opts ...grpc.CallOption) (*services_providers.PrepSP, error) {
+	out := new(services_providers.PrepSP)
+	err := c.cc.Invoke(ctx, "/nocloud.instance.driver.vanilla.DriverService/SpPrep", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DriverServiceServer is the server API for DriverService service.
 // All implementations must embed UnimplementedDriverServiceServer
 // for forward compatibility
@@ -137,6 +147,7 @@ type DriverServiceServer interface {
 	SuspendMonitoring(context.Context, *MonitoringRequest) (*MonitoringResponse, error)
 	Invoke(context.Context, *InvokeRequest) (*instances.InvokeResponse, error)
 	SpInvoke(context.Context, *SpInvokeRequest) (*services_providers.InvokeResponse, error)
+	SpPrep(context.Context, *services_providers.PrepSP) (*services_providers.PrepSP, error)
 	mustEmbedUnimplementedDriverServiceServer()
 }
 
@@ -170,6 +181,9 @@ func (UnimplementedDriverServiceServer) Invoke(context.Context, *InvokeRequest) 
 }
 func (UnimplementedDriverServiceServer) SpInvoke(context.Context, *SpInvokeRequest) (*services_providers.InvokeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SpInvoke not implemented")
+}
+func (UnimplementedDriverServiceServer) SpPrep(context.Context, *services_providers.PrepSP) (*services_providers.PrepSP, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SpPrep not implemented")
 }
 func (UnimplementedDriverServiceServer) mustEmbedUnimplementedDriverServiceServer() {}
 
@@ -346,6 +360,24 @@ func _DriverService_SpInvoke_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DriverService_SpPrep_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(services_providers.PrepSP)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DriverServiceServer).SpPrep(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nocloud.instance.driver.vanilla.DriverService/SpPrep",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DriverServiceServer).SpPrep(ctx, req.(*services_providers.PrepSP))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DriverService_ServiceDesc is the grpc.ServiceDesc for DriverService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -388,6 +420,10 @@ var DriverService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SpInvoke",
 			Handler:    _DriverService_SpInvoke_Handler,
+		},
+		{
+			MethodName: "SpPrep",
+			Handler:    _DriverService_SpPrep_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

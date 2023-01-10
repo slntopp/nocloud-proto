@@ -85,4 +85,7 @@ service DriverService {
   rpc Invoke(InvokeRequest) returns (nocloud.instances.InvokeResponse);
   rpc SpInvoke(SpInvokeRequest)
       returns (nocloud.services_providers.InvokeResponse);
+
+  rpc SpPrep(nocloud.services_providers.PrepSP)
+      returns (nocloud.services_providers.PrepSP);
 }

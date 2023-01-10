@@ -29,6 +29,7 @@ type ServicesProvidersServiceClient interface {
 	Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*ServicesProvider, error)
 	List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListResponse, error)
 	Invoke(ctx context.Context, in *InvokeRequest, opts ...grpc.CallOption) (*InvokeResponse, error)
+	Prep(ctx context.Context, in *PrepSP, opts ...grpc.CallOption) (*PrepSP, error)
 	ListExtentions(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListExtentionsResponse, error)
 	BindPlan(ctx context.Context, in *BindPlanRequest, opts ...grpc.CallOption) (*BindPlanResponse, error)
 	UnbindPlan(ctx context.Context, in *UnbindPlanRequest, opts ...grpc.CallOption) (*UnbindPlanResponse, error)
@@ -105,6 +106,15 @@ func (c *servicesProvidersServiceClient) Invoke(ctx context.Context, in *InvokeR
 	return out, nil
 }
 
+func (c *servicesProvidersServiceClient) Prep(ctx context.Context, in *PrepSP, opts ...grpc.CallOption) (*PrepSP, error) {
+	out := new(PrepSP)
+	err := c.cc.Invoke(ctx, "/nocloud.services_providers.ServicesProvidersService/Prep", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *servicesProvidersServiceClient) ListExtentions(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListExtentionsResponse, error) {
 	out := new(ListExtentionsResponse)
 	err := c.cc.Invoke(ctx, "/nocloud.services_providers.ServicesProvidersService/ListExtentions", in, out, opts...)
@@ -143,6 +153,7 @@ type ServicesProvidersServiceServer interface {
 	Get(context.Context, *GetRequest) (*ServicesProvider, error)
 	List(context.Context, *ListRequest) (*ListResponse, error)
 	Invoke(context.Context, *InvokeRequest) (*InvokeResponse, error)
+	Prep(context.Context, *PrepSP) (*PrepSP, error)
 	ListExtentions(context.Context, *ListRequest) (*ListExtentionsResponse, error)
 	BindPlan(context.Context, *BindPlanRequest) (*BindPlanResponse, error)
 	UnbindPlan(context.Context, *UnbindPlanRequest) (*UnbindPlanResponse, error)
@@ -173,6 +184,9 @@ func (UnimplementedServicesProvidersServiceServer) List(context.Context, *ListRe
 }
 func (UnimplementedServicesProvidersServiceServer) Invoke(context.Context, *InvokeRequest) (*InvokeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Invoke not implemented")
+}
+func (UnimplementedServicesProvidersServiceServer) Prep(context.Context, *PrepSP) (*PrepSP, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Prep not implemented")
 }
 func (UnimplementedServicesProvidersServiceServer) ListExtentions(context.Context, *ListRequest) (*ListExtentionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListExtentions not implemented")
@@ -323,6 +337,24 @@ func _ServicesProvidersService_Invoke_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ServicesProvidersService_Prep_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PrepSP)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServicesProvidersServiceServer).Prep(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nocloud.services_providers.ServicesProvidersService/Prep",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServicesProvidersServiceServer).Prep(ctx, req.(*PrepSP))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ServicesProvidersService_ListExtentions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListRequest)
 	if err := dec(in); err != nil {
@@ -411,6 +443,10 @@ var ServicesProvidersService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Invoke",
 			Handler:    _ServicesProvidersService_Invoke_Handler,
+		},
+		{
+			MethodName: "Prep",
+			Handler:    _ServicesProvidersService_Prep_Handler,
 		},
 		{
 			MethodName: "ListExtentions",
