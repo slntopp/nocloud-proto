@@ -94,10 +94,9 @@ message InvokeResponse {
 }
 
 message PrepSP {
-  string type = 1;                                    // Driver Type
-  nocloud.services_providers.ServicesProvider sp = 2; // SP Base config
+  nocloud.services_providers.ServicesProvider sp = 1; // SP Base config
   map<string, google.protobuf.Value> extra =
-      3; // Extra Params not related to SP or method or alike
+      2; // Extra Params not related to SP or method or alike
 }
 
 service ServicesProvidersService {
