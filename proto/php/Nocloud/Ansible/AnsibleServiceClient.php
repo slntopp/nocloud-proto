@@ -3,7 +3,7 @@
 
 // Original file comments:
 //
-// Copyright © 2022 Nikita Ivanovski info@slnt-opp.xyz
+// Copyright © 2023 Nikita Ivanovski info@slnt-opp.xyz
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -44,6 +44,62 @@ class AnsibleServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * @param \Nocloud\Ansible\ListRunsRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function List(\Nocloud\Ansible\ListRunsRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.ansible.AnsibleService/List',
+        $argument,
+        ['\Nocloud\Ansible\Runs', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Ansible\CreateRunRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function Create(\Nocloud\Ansible\CreateRunRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.ansible.AnsibleService/Create',
+        $argument,
+        ['\Nocloud\Ansible\Run', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Ansible\ExecRunRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function Exec(\Nocloud\Ansible\ExecRunRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.ansible.AnsibleService/Exec',
+        $argument,
+        ['\Nocloud\Ansible\ExecRunResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Ansible\WatchRunRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\ServerStreamingCall
+     */
+    public function Watch(\Nocloud\Ansible\WatchRunRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_serverStreamRequest('/nocloud.ansible.AnsibleService/Watch',
+        $argument,
+        ['\Nocloud\Ansible\Job', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * @param \Nocloud\Ansible\DeleteRunRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -58,42 +114,14 @@ class AnsibleServiceClient extends \Grpc\BaseStub {
     }
 
     /**
-     * @param \Nocloud\Ansible\Run $argument input argument
+     * @param \Nocloud\Ansible\ResyncRunRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      * @return \Grpc\UnaryCall
      */
-    public function Create(\Nocloud\Ansible\Run $argument,
+    public function Resync(\Nocloud\Ansible\ResyncRunRequest $argument,
       $metadata = [], $options = []) {
-        return $this->_simpleRequest('/nocloud.ansible.AnsibleService/Create',
-        $argument,
-        ['\Nocloud\Ansible\Run', 'decode'],
-        $metadata, $options);
-    }
-
-    /**
-     * @param \Nocloud\Ansible\ExecRunRequest $argument input argument
-     * @param array $metadata metadata
-     * @param array $options call options
-     * @return \Grpc\ServerStreamingCall
-     */
-    public function Exec(\Nocloud\Ansible\ExecRunRequest $argument,
-      $metadata = [], $options = []) {
-        return $this->_serverStreamRequest('/nocloud.ansible.AnsibleService/Exec',
-        $argument,
-        ['\Nocloud\Ansible\Run', 'decode'],
-        $metadata, $options);
-    }
-
-    /**
-     * @param \Nocloud\Ansible\WatchRunRequest $argument input argument
-     * @param array $metadata metadata
-     * @param array $options call options
-     * @return \Grpc\ServerStreamingCall
-     */
-    public function Watch(\Nocloud\Ansible\WatchRunRequest $argument,
-      $metadata = [], $options = []) {
-        return $this->_serverStreamRequest('/nocloud.ansible.AnsibleService/Watch',
+        return $this->_simpleRequest('/nocloud.ansible.AnsibleService/Resync',
         $argument,
         ['\Nocloud\Ansible\Run', 'decode'],
         $metadata, $options);
