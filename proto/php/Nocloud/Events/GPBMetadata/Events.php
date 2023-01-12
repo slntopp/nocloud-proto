@@ -40,10 +40,10 @@ class Events
 
 Response2Ä
 EventsServiceO
-Publish.nocloud.events.Event.nocloud.events.Response"Ç”‰ì"/bus/pub:*b
+Publish.nocloud.events.Event.nocloud.events.Response"Ç”‰ì:*"/bus/pubb
 Consume.nocloud.events.ConsumeRequest.nocloud.events.Event"Ç”‰ì/bus/sub/{type}/{uuid}0_
 List.nocloud.events.ConsumeRequest.nocloud.events.Events"Ç”‰ì/bus/list/{type}/{uuid}Y
-Cancel.nocloud.events.CancelRequest.nocloud.events.Response"Ç”‰ì"/bus/cancel:*Bz
+Cancel.nocloud.events.CancelRequest.nocloud.events.Response"Ç”‰ì:*"/bus/cancelBz
 com.nocloud.eventsBEventsProtoP¢NEX™Nocloud.Events Nocloud\\Events‚Nocloud\\Events\\GPBMetadataÍNocloud::Eventsbproto3'
         , true);
 

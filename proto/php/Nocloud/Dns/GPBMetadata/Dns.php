@@ -50,7 +50,7 @@ class Dns
 DNS@
 Get.nocloud.dns.Zone.nocloud.dns.Zone"Ç”‰ì/dns/{name}I
 List.nocloud.dns.ListRequest.nocloud.dns.ListResponse"Ç”‰ì/dns>
-Put.nocloud.dns.Zone.nocloud.dns.Result"Ç”‰ì	/dns:*E
+Put.nocloud.dns.Zone.nocloud.dns.Result"Ç”‰ì	:*/dnsE
 Delete.nocloud.dns.Zone.nocloud.dns.Result"Ç”‰ì*/dns/{name}Bh
 com.nocloud.dnsBDnsProtoP¢NDX™Nocloud.Dns Nocloud\\Dns‚Nocloud\\Dns\\GPBMetadataÍNocloud::Dnsbproto3'
         , true);

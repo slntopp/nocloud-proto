@@ -22,20 +22,20 @@ class Registry
 â
 registry/registry.protonocloud.registry registry/accounts/accounts.proto$registry/namespaces/namespaces.proto2Ú
 AccountsServicem
-Token\'.nocloud.registry.accounts.TokenRequest(.nocloud.registry.accounts.TokenResponse"Ç”‰ì"/token:*°
-SetCredentials0.nocloud.registry.accounts.SetCredentialsRequest1.nocloud.registry.accounts.SetCredentialsResponse"*Ç”‰ì$"/accounts/{account}/credentials:*s
-Create(.nocloud.registry.accounts.CreateRequest).nocloud.registry.accounts.CreateResponse"Ç”‰ì	/accounts:*t
-Update".nocloud.registry.accounts.Account).nocloud.registry.accounts.UpdateResponse"Ç”‰ì2/accounts/{uuid}:*j
+Token\'.nocloud.registry.accounts.TokenRequest(.nocloud.registry.accounts.TokenResponse"Ç”‰ì:*"/token°
+SetCredentials0.nocloud.registry.accounts.SetCredentialsRequest1.nocloud.registry.accounts.SetCredentialsResponse"*Ç”‰ì$:*"/accounts/{account}/credentialss
+Create(.nocloud.registry.accounts.CreateRequest).nocloud.registry.accounts.CreateResponse"Ç”‰ì:*	/accountst
+Update".nocloud.registry.accounts.Account).nocloud.registry.accounts.UpdateResponse"Ç”‰ì:*2/accounts/{uuid}j
 Get%.nocloud.registry.accounts.GetRequest".nocloud.registry.accounts.Account"Ç”‰ì/accounts/{uuid}j
 List&.nocloud.registry.accounts.ListRequest\'.nocloud.registry.accounts.ListResponse"Ç”‰ì	/accountsw
 Delete(.nocloud.registry.accounts.DeleteRequest).nocloud.registry.accounts.DeleteResponse"Ç”‰ì*/accounts/{uuid}Ç
 Suspend).nocloud.registry.accounts.SuspendRequest*.nocloud.registry.accounts.SuspendResponse" Ç”‰ì"/accounts/{uuid}/suspendä
 	Unsuspend+.nocloud.registry.accounts.UnsuspendRequest,.nocloud.registry.accounts.UnsuspendResponse""Ç”‰ì"/accounts/{uuid}/unsuspend2ç
 NamespacesServicey
-Create*.nocloud.registry.namespaces.CreateRequest+.nocloud.registry.namespaces.CreateResponse"Ç”‰ì/namespaces:*p
+Create*.nocloud.registry.namespaces.CreateRequest+.nocloud.registry.namespaces.CreateResponse"Ç”‰ì:*/namespacesp
 List(.nocloud.registry.namespaces.ListRequest).nocloud.registry.namespaces.ListResponse"Ç”‰ì/namespacesÑ
-Join(.nocloud.registry.namespaces.JoinRequest).nocloud.registry.namespaces.JoinResponse"\'Ç”‰ì!"/namespaces/{namespace}/join:*Ñ
-Link(.nocloud.registry.namespaces.LinkRequest).nocloud.registry.namespaces.LinkResponse"\'Ç”‰ì!"/namespaces/{namespace}/link:*}
+Join(.nocloud.registry.namespaces.JoinRequest).nocloud.registry.namespaces.JoinResponse"\'Ç”‰ì!:*"/namespaces/{namespace}/joinÑ
+Link(.nocloud.registry.namespaces.LinkRequest).nocloud.registry.namespaces.LinkResponse"\'Ç”‰ì!:*"/namespaces/{namespace}/link}
 Delete*.nocloud.registry.namespaces.DeleteRequest+.nocloud.registry.namespaces.DeleteResponse"Ç”‰ì*/namespaces/{uuid}BÜ
 com.nocloud.registryBRegistryProtoP¢NRX™Nocloud.Registry Nocloud\\Registry‚Nocloud\\Registry\\GPBMetadataÍNocloud::Registrybproto3'
         , true);

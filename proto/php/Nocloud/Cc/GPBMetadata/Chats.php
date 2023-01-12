@@ -58,19 +58,19 @@ nocloud.ccgoogle/protobuf/struct.proto"0
 
 Response2≠
 ChatServiced
-SendChatMessage".nocloud.cc.SendChatMessageRequest.nocloud.cc.ChatMessage"Ç”‰ì	/messages:*Å
+SendChatMessage".nocloud.cc.SendChatMessageRequest.nocloud.cc.ChatMessage"Ç”‰ì:*	/messagesÅ
 ListChatMessages#.nocloud.cc.ListChatMessagesRequest$.nocloud.cc.ListChatMessagesResponse""Ç”‰ì/chats/{chatUuid}/messagesf
 GetChatMessage!.nocloud.cc.GetChatMessageRequest.nocloud.cc.ChatMessage"Ç”‰ì/messages/{uuid}i
 DeleteChatMessage$.nocloud.cc.DeleteChatMessageRequest.nocloud.cc.Response"Ç”‰ì*/messages/{uuid}[
-UpdateChatMessage.nocloud.cc.ChatMessage.nocloud.cc.ChatMessage"Ç”‰ì2	/messages:*N
+UpdateChatMessage.nocloud.cc.ChatMessage.nocloud.cc.ChatMessage"Ç”‰ì:*2	/messagesN
 GetChat.nocloud.cc.GetChatRequest.nocloud.cc.Chat"Ç”‰ì/chats/{uuid}W
-Invite.nocloud.cc.InviteChatRequest.nocloud.cc.Response"Ç”‰ì"/chats/invite:*P
+Invite.nocloud.cc.InviteChatRequest.nocloud.cc.Response"Ç”‰ì:*"/chats/inviteP
 
-CreateChat.nocloud.cc.CreateChatRequest.nocloud.cc.Chat"Ç”‰ì/chats:*X
+CreateChat.nocloud.cc.CreateChatRequest.nocloud.cc.Chat"Ç”‰ì:*/chatsX
 
 DeleteChat.nocloud.cc.DeleteChatRequest.nocloud.cc.Response"Ç”‰ì*/chats/{uuid}C
 
-UpdateChat.nocloud.cc.Chat.nocloud.cc.Chat"Ç”‰ì2/chats:*j
+UpdateChat.nocloud.cc.Chat.nocloud.cc.Chat"Ç”‰ì:*2/chatsj
 Stream$.nocloud.cc.ChatMessageStreamRequest.nocloud.cc.ChatMessage"Ç”‰ì/messages/{uuid}/stream0Be
 com.nocloud.ccB
 ChatsProtoP¢NCX™
