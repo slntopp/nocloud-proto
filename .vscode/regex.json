@@ -1,0 +1,23 @@
+[
+    {
+        "command": "ssmacro.replace",
+        "args": {
+            "info": "Remove gRPC Gateway options",
+            "find": "(    option \\(google\\.api\\.http\\) = \\{\n((.|\n)*?)    \\};)",
+            "replace": "",
+            "all": true,
+            "reg": true,
+            "flag": "gm"
+        }
+    },
+    {
+        "command": "ssmacro.replace",
+        "args": {
+            "info": "Remove Google Annotations imports",
+            "find": "import \"google/api/annotations.proto\";",
+            "replace": "",
+            "all": true,
+            "reg": false
+        }
+    }
+]
