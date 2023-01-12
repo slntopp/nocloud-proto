@@ -3,7 +3,7 @@
 
 // Original file comments:
 //
-// Copyright © 2021-2022 Nikita Ivanovski info@slnt-opp.xyz
+// Copyright © 2021-2023 Nikita Ivanovski info@slnt-opp.xyz
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -60,7 +60,8 @@ class SettingsServiceClient extends \Grpc\BaseStub {
     }
 
     /**
-     * rpc Sub(nocloud.settings.SubRequest) returns (stream nocloud.settings.SubRequest);
+     * rpc Sub(nocloud.settings.SubRequest) returns (stream
+     * nocloud.settings.SubRequest);
      * @param \Nocloud\Settings\KeysRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options

@@ -3,7 +3,7 @@
 
 // Original file comments:
 //
-// Copyright © 2021-2022 Nikita Ivanovski info@slnt-opp.xyz
+// Copyright © 2021-2023 Nikita Ivanovski info@slnt-opp.xyz
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -126,6 +126,20 @@ class ServicesProvidersServiceClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/nocloud.services_providers.ServicesProvidersService/Invoke',
         $argument,
         ['\Nocloud\ServicesProviders\InvokeResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\ServicesProviders\PrepSP $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function Prep(\Nocloud\ServicesProviders\PrepSP $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.services_providers.ServicesProvidersService/Prep',
+        $argument,
+        ['\Nocloud\ServicesProviders\PrepSP', 'decode'],
         $metadata, $options);
     }
 

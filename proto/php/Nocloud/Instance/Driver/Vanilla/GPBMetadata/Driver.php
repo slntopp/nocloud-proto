@@ -20,7 +20,7 @@ class Driver
         \GPBMetadata\Google\Protobuf\Struct::initOnce();
         $pool->internalAddGeneratedFile(
             '
-Á
+“
 %drivers/instance/vanilla/driver.protonocloud.instance.driver.vanillainstances/instances.proto+services_providers/services_providers.protogoogle/protobuf/struct.proto"ž
  TestServiceProviderConfigRequestY
 services_provider (2,.nocloud.services_providers.ServicesProviderRservicesProvider
@@ -59,7 +59,7 @@ UpResponse7
 params (2<.nocloud.instance.driver.vanilla.SpInvokeRequest.ParamsEntryRparamsQ
 ParamsEntry
 key (	Rkey,
-value (2.google.protobuf.ValueRvalue:82Ž
+value (2.google.protobuf.ValueRvalue:82à
 DriverServiceˆ
 TestServiceProviderConfigA.nocloud.instance.driver.vanilla.TestServiceProviderConfigRequest(.nocloud.services_providers.TestResponseƒ
 TestInstancesGroupConfig2.nocloud.instances.TestInstancesGroupConfigRequest3.nocloud.instances.TestInstancesGroupConfigResponsel
@@ -70,7 +70,8 @@ UpResponse7
 Monitoring2.nocloud.instance.driver.vanilla.MonitoringRequest3.nocloud.instance.driver.vanilla.MonitoringResponse|
 SuspendMonitoring2.nocloud.instance.driver.vanilla.MonitoringRequest3.nocloud.instance.driver.vanilla.MonitoringResponse[
 Invoke..nocloud.instance.driver.vanilla.InvokeRequest!.nocloud.instances.InvokeResponseh
-SpInvoke0.nocloud.instance.driver.vanilla.SpInvokeRequest*.nocloud.services_providers.InvokeResponseBÒ
+SpInvoke0.nocloud.instance.driver.vanilla.SpInvokeRequest*.nocloud.services_providers.InvokeResponseP
+SpPrep".nocloud.services_providers.PrepSP".nocloud.services_providers.PrepSPBÒ
 #com.nocloud.instance.driver.vanillaBDriverProtoP¢NIDVªNocloud.Instance.Driver.VanillaÊNocloud\\Instance\\Driver\\Vanillaâ+Nocloud\\Instance\\Driver\\Vanilla\\GPBMetadataê"Nocloud::Instance::Driver::Vanillabproto3'
         , true);
 

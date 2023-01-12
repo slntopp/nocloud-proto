@@ -3,7 +3,7 @@
 
 // Original file comments:
 //
-// Copyright © 2021-2022 Nikita Ivanovski info@slnt-opp.xyz
+// Copyright © 2021-2023 Nikita Ivanovski info@slnt-opp.xyz
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -42,6 +42,20 @@ class InstancesServiceClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/nocloud.instances.InstancesService/Invoke',
         $argument,
         ['\Nocloud\Instances\InvokeResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Instances\DeleteRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function Delete(\Nocloud\Instances\DeleteRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.instances.InstancesService/Delete',
+        $argument,
+        ['\Nocloud\Instances\DeleteResponse', 'decode'],
         $metadata, $options);
     }
 
