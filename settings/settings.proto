@@ -49,6 +49,11 @@ message DeleteRequest { string key = 1; }
 
 message DeleteResponse { string key = 1; }
 
+message KeyEvent {
+  string key = 1;
+  string event = 2;
+}
+
 service SettingsService {
   rpc Get(nocloud.settings.GetRequest) returns (google.protobuf.Struct) {
     option (google.api.http) = {
@@ -62,8 +67,12 @@ service SettingsService {
       body : "*"
     };
   };
-  // rpc Sub(nocloud.settings.SubRequest) returns (stream
-  // nocloud.settings.SubRequest);
+  rpc Sub(nocloud.settings.GetRequest)
+      returns (stream nocloud.settings.KeyEvent) {
+    option (google.api.http) = {
+      get : "/settings/watch"
+    };
+  };
   rpc Keys(nocloud.settings.KeysRequest)
       returns (nocloud.settings.KeysResponse) {
     option (google.api.http) = {

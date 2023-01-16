@@ -25,8 +25,7 @@ const _ = grpc.SupportPackageIsVersion7
 type SettingsServiceClient interface {
 	Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*structpb.Struct, error)
 	Put(ctx context.Context, in *PutRequest, opts ...grpc.CallOption) (*PutResponse, error)
-	// rpc Sub(nocloud.settings.SubRequest) returns (stream
-	// nocloud.settings.SubRequest);
+	Sub(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (SettingsService_SubClient, error)
 	Keys(ctx context.Context, in *KeysRequest, opts ...grpc.CallOption) (*KeysResponse, error)
 	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
 }
@@ -57,6 +56,38 @@ func (c *settingsServiceClient) Put(ctx context.Context, in *PutRequest, opts ..
 	return out, nil
 }
 
+func (c *settingsServiceClient) Sub(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (SettingsService_SubClient, error) {
+	stream, err := c.cc.NewStream(ctx, &SettingsService_ServiceDesc.Streams[0], "/nocloud.settings.SettingsService/Sub", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &settingsServiceSubClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type SettingsService_SubClient interface {
+	Recv() (*KeyEvent, error)
+	grpc.ClientStream
+}
+
+type settingsServiceSubClient struct {
+	grpc.ClientStream
+}
+
+func (x *settingsServiceSubClient) Recv() (*KeyEvent, error) {
+	m := new(KeyEvent)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *settingsServiceClient) Keys(ctx context.Context, in *KeysRequest, opts ...grpc.CallOption) (*KeysResponse, error) {
 	out := new(KeysResponse)
 	err := c.cc.Invoke(ctx, "/nocloud.settings.SettingsService/Keys", in, out, opts...)
@@ -81,8 +112,7 @@ func (c *settingsServiceClient) Delete(ctx context.Context, in *DeleteRequest, o
 type SettingsServiceServer interface {
 	Get(context.Context, *GetRequest) (*structpb.Struct, error)
 	Put(context.Context, *PutRequest) (*PutResponse, error)
-	// rpc Sub(nocloud.settings.SubRequest) returns (stream
-	// nocloud.settings.SubRequest);
+	Sub(*GetRequest, SettingsService_SubServer) error
 	Keys(context.Context, *KeysRequest) (*KeysResponse, error)
 	Delete(context.Context, *DeleteRequest) (*DeleteResponse, error)
 	mustEmbedUnimplementedSettingsServiceServer()
@@ -97,6 +127,9 @@ func (UnimplementedSettingsServiceServer) Get(context.Context, *GetRequest) (*st
 }
 func (UnimplementedSettingsServiceServer) Put(context.Context, *PutRequest) (*PutResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Put not implemented")
+}
+func (UnimplementedSettingsServiceServer) Sub(*GetRequest, SettingsService_SubServer) error {
+	return status.Errorf(codes.Unimplemented, "method Sub not implemented")
 }
 func (UnimplementedSettingsServiceServer) Keys(context.Context, *KeysRequest) (*KeysResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Keys not implemented")
@@ -151,6 +184,27 @@ func _SettingsService_Put_Handler(srv interface{}, ctx context.Context, dec func
 		return srv.(SettingsServiceServer).Put(ctx, req.(*PutRequest))
 	}
 	return interceptor(ctx, in, info, handler)
+}
+
+func _SettingsService_Sub_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(SettingsServiceServer).Sub(m, &settingsServiceSubServer{stream})
+}
+
+type SettingsService_SubServer interface {
+	Send(*KeyEvent) error
+	grpc.ServerStream
+}
+
+type settingsServiceSubServer struct {
+	grpc.ServerStream
+}
+
+func (x *settingsServiceSubServer) Send(m *KeyEvent) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _SettingsService_Keys_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -213,6 +267,12 @@ var SettingsService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _SettingsService_Delete_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "Sub",
+			Handler:       _SettingsService_Sub_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "settings/settings.proto",
 }

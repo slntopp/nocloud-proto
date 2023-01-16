@@ -2817,7 +2817,6 @@
     },
     "/settings": {
       "get": {
-        "summary": "rpc Sub(nocloud.settings.SubRequest) returns (stream\nnocloud.settings.SubRequest);",
         "operationId": "SettingsService_Keys",
         "responses": {
           "200": {
@@ -2861,6 +2860,49 @@
             "schema": {
               "$ref": "#/definitions/nocloudsettingsGetRequest"
             }
+          }
+        ],
+        "tags": [
+          "SettingsService"
+        ]
+      }
+    },
+    "/settings/watch": {
+      "get": {
+        "operationId": "SettingsService_Sub",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/settingsKeyEvent"
+                },
+                "error": {
+                  "$ref": "#/definitions/googlerpcStatus"
+                }
+              },
+              "title": "Stream result of settingsKeyEvent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "keys",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           }
         ],
         "tags": [
@@ -5172,6 +5214,17 @@
         "value": {
           "type": "object",
           "additionalProperties": {}
+        }
+      }
+    },
+    "settingsKeyEvent": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "event": {
+          "type": "string"
         }
       }
     },
