@@ -102,6 +102,7 @@ message Product {
 enum Priority {
   NORMAL = 0;
   URGENT = 1;
+  ADDITIONAL = 2;
 }
 
 message Transaction {
