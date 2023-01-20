@@ -23,7 +23,8 @@ message Event {
   string type = 1;
   string uuid = 2; // Entity uuid e.g. Account, Instance
   string id = 3;   // Event id
-  map<string, google.protobuf.Value> data = 4;
+  string key = 4;
+  map<string, google.protobuf.Value> data = 5;
 }
 
 message Events { repeated Event events = 1; }

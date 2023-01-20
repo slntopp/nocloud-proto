@@ -4374,6 +4374,9 @@
           "type": "string",
           "title": "Event id"
         },
+        "key": {
+          "type": "string"
+        },
         "data": {
           "type": "object",
           "additionalProperties": {}
