@@ -60,8 +60,20 @@ class SettingsServiceClient extends \Grpc\BaseStub {
     }
 
     /**
-     * rpc Sub(nocloud.settings.SubRequest) returns (stream
-     * nocloud.settings.SubRequest);
+     * @param \Nocloud\Settings\GetRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\ServerStreamingCall
+     */
+    public function Sub(\Nocloud\Settings\GetRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_serverStreamRequest('/nocloud.settings.SettingsService/Sub',
+        $argument,
+        ['\Nocloud\Settings\KeyEvent', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * @param \Nocloud\Settings\KeysRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options

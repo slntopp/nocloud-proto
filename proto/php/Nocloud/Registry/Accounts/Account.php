@@ -41,6 +41,12 @@ class Account extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>optional bool suspended = 7 [json_name = "suspended"];</code>
      */
     protected $suspended = null;
+    /**
+     * Account Balance Currency
+     *
+     * Generated from protobuf field <code>optional .nocloud.billing.Currency currency = 8 [json_name = "currency"];</code>
+     */
+    protected $currency = null;
 
     /**
      * Constructor.
@@ -55,6 +61,8 @@ class Account extends \Google\Protobuf\Internal\Message
      *     @type \Nocloud\Access\Access $access
      *     @type \Nocloud\Registry\Accounts\SuspendConf $suspend_conf
      *     @type bool $suspended
+     *     @type int $currency
+     *           Account Balance Currency
      * }
      */
     public function __construct($data = NULL) {
@@ -262,6 +270,42 @@ class Account extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkBool($var);
         $this->suspended = $var;
+
+        return $this;
+    }
+
+    /**
+     * Account Balance Currency
+     *
+     * Generated from protobuf field <code>optional .nocloud.billing.Currency currency = 8 [json_name = "currency"];</code>
+     * @return int
+     */
+    public function getCurrency()
+    {
+        return isset($this->currency) ? $this->currency : 0;
+    }
+
+    public function hasCurrency()
+    {
+        return isset($this->currency);
+    }
+
+    public function clearCurrency()
+    {
+        unset($this->currency);
+    }
+
+    /**
+     * Account Balance Currency
+     *
+     * Generated from protobuf field <code>optional .nocloud.billing.Currency currency = 8 [json_name = "currency"];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setCurrency($var)
+    {
+        GPBUtil::checkEnum($var, \Nocloud\Billing\Currency::class);
+        $this->currency = $var;
 
         return $this;
     }

@@ -30,7 +30,11 @@ class Event extends \Google\Protobuf\Internal\Message
      */
     protected $id = '';
     /**
-     * Generated from protobuf field <code>map<string, .google.protobuf.Value> data = 4 [json_name = "data"];</code>
+     * Generated from protobuf field <code>string key = 4 [json_name = "key"];</code>
+     */
+    protected $key = '';
+    /**
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> data = 5 [json_name = "data"];</code>
      */
     private $data;
 
@@ -45,6 +49,7 @@ class Event extends \Google\Protobuf\Internal\Message
      *           Entity uuid e.g. Account, Instance
      *     @type string $id
      *           Event id
+     *     @type string $key
      *     @type array|\Google\Protobuf\Internal\MapField $data
      * }
      */
@@ -128,7 +133,29 @@ class Event extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>map<string, .google.protobuf.Value> data = 4 [json_name = "data"];</code>
+     * Generated from protobuf field <code>string key = 4 [json_name = "key"];</code>
+     * @return string
+     */
+    public function getKey()
+    {
+        return $this->key;
+    }
+
+    /**
+     * Generated from protobuf field <code>string key = 4 [json_name = "key"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setKey($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->key = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> data = 5 [json_name = "data"];</code>
      * @return \Google\Protobuf\Internal\MapField
      */
     public function getData()
@@ -137,7 +164,7 @@ class Event extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>map<string, .google.protobuf.Value> data = 4 [json_name = "data"];</code>
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> data = 5 [json_name = "data"];</code>
      * @param array|\Google\Protobuf\Internal\MapField $var
      * @return $this
      */

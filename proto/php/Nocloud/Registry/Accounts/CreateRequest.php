@@ -37,6 +37,12 @@ class CreateRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>optional int32 access = 4 [json_name = "access"];</code>
      */
     protected $access = null;
+    /**
+     * Account Balance Currency
+     *
+     * Generated from protobuf field <code>.nocloud.billing.Currency currency = 5 [json_name = "currency"];</code>
+     */
+    protected $currency = 0;
 
     /**
      * Constructor.
@@ -52,6 +58,8 @@ class CreateRequest extends \Google\Protobuf\Internal\Message
      *           Namespace to put Account under
      *     @type int $access
      *           Account access level to parent namespace
+     *     @type int $currency
+     *           Account Balance Currency
      * }
      */
     public function __construct($data = NULL) {
@@ -179,6 +187,32 @@ class CreateRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt32($var);
         $this->access = $var;
+
+        return $this;
+    }
+
+    /**
+     * Account Balance Currency
+     *
+     * Generated from protobuf field <code>.nocloud.billing.Currency currency = 5 [json_name = "currency"];</code>
+     * @return int
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * Account Balance Currency
+     *
+     * Generated from protobuf field <code>.nocloud.billing.Currency currency = 5 [json_name = "currency"];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setCurrency($var)
+    {
+        GPBUtil::checkEnum($var, \Nocloud\Billing\Currency::class);
+        $this->currency = $var;
 
         return $this;
     }

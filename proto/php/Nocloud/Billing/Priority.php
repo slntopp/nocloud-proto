@@ -19,10 +19,15 @@ class Priority
      * Generated from protobuf enum <code>URGENT = 1;</code>
      */
     const URGENT = 1;
+    /**
+     * Generated from protobuf enum <code>ADDITIONAL = 2;</code>
+     */
+    const ADDITIONAL = 2;
 
     private static $valueToName = [
         self::NORMAL => 'NORMAL',
         self::URGENT => 'URGENT',
+        self::ADDITIONAL => 'ADDITIONAL',
     ];
 
     public static function name($value)
