@@ -18,6 +18,7 @@ package nocloud.registry.accounts;
 
 import "google/protobuf/struct.proto";
 import "access/access.proto";
+import "billing/billing.proto";
 
 message Credentials {
   string type = 1;
@@ -29,6 +30,7 @@ message CreateRequest {
   Credentials auth = 2;      // Credentials for New Account
   string namespace = 3;      // Namespace to put Account under
   optional int32 access = 4; // Account access level to parent namespace
+  nocloud.billing.Currency currency = 5; // Account Balance Currency
 }
 
 message CreateResponse { string uuid = 1; }
@@ -53,6 +55,7 @@ message Account {
   optional nocloud.access.Access access = 5;
   optional SuspendConf suspend_conf = 6;
   optional bool suspended = 7;
+  optional nocloud.billing.Currency currency = 8; // Account Balance Currency
 }
 
 message UpdateResponse { bool result = 1; }
