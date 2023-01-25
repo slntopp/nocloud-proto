@@ -151,8 +151,8 @@ func local_request_InstancesService_Delete_0(ctx context.Context, marshaler runt
 
 }
 
-func request_InstancesService_ChangeOwnership_0(ctx context.Context, marshaler runtime.Marshaler, client InstancesServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ChangeOwnershipRequest
+func request_InstancesService_Transfer_0(ctx context.Context, marshaler runtime.Marshaler, client InstancesServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq TransferRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -180,13 +180,13 @@ func request_InstancesService_ChangeOwnership_0(ctx context.Context, marshaler r
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "uuid", err)
 	}
 
-	msg, err := client.ChangeOwnership(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.Transfer(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_InstancesService_ChangeOwnership_0(ctx context.Context, marshaler runtime.Marshaler, server InstancesServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ChangeOwnershipRequest
+func local_request_InstancesService_Transfer_0(ctx context.Context, marshaler runtime.Marshaler, server InstancesServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq TransferRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -214,7 +214,7 @@ func local_request_InstancesService_ChangeOwnership_0(ctx context.Context, marsh
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "uuid", err)
 	}
 
-	msg, err := server.ChangeOwnership(ctx, &protoReq)
+	msg, err := server.Transfer(ctx, &protoReq)
 	return msg, metadata, err
 
 }
@@ -275,7 +275,7 @@ func RegisterInstancesServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 
 	})
 
-	mux.Handle("POST", pattern_InstancesService_ChangeOwnership_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_InstancesService_Transfer_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -283,12 +283,12 @@ func RegisterInstancesServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.instances.InstancesService/ChangeOwnership", runtime.WithHTTPPathPattern("/igs/{uuid}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.instances.InstancesService/Transfer", runtime.WithHTTPPathPattern("/igs/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_InstancesService_ChangeOwnership_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_InstancesService_Transfer_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -296,7 +296,7 @@ func RegisterInstancesServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 			return
 		}
 
-		forward_InstancesService_ChangeOwnership_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_InstancesService_Transfer_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -385,25 +385,25 @@ func RegisterInstancesServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 
 	})
 
-	mux.Handle("POST", pattern_InstancesService_ChangeOwnership_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_InstancesService_Transfer_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.instances.InstancesService/ChangeOwnership", runtime.WithHTTPPathPattern("/igs/{uuid}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.instances.InstancesService/Transfer", runtime.WithHTTPPathPattern("/igs/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_InstancesService_ChangeOwnership_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_InstancesService_Transfer_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_InstancesService_ChangeOwnership_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_InstancesService_Transfer_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -415,7 +415,7 @@ var (
 
 	pattern_InstancesService_Delete_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"instances", "uuid"}, ""))
 
-	pattern_InstancesService_ChangeOwnership_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"igs", "uuid"}, ""))
+	pattern_InstancesService_Transfer_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"igs", "uuid"}, ""))
 )
 
 var (
@@ -423,5 +423,5 @@ var (
 
 	forward_InstancesService_Delete_0 = runtime.ForwardResponseMessage
 
-	forward_InstancesService_ChangeOwnership_0 = runtime.ForwardResponseMessage
+	forward_InstancesService_Transfer_0 = runtime.ForwardResponseMessage
 )
