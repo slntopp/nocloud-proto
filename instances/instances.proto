@@ -101,6 +101,16 @@ message DeleteResponse {
   map<string, google.protobuf.Value> meta = 2;
 }
 
+message ChangeOwnershipRequest {
+  string uuid = 1;
+  string user = 2;
+}
+
+message ChangeOwnershipResponse {
+  bool result = 1;
+  map<string, google.protobuf.Value> meta = 2;
+}
+
 message ObjectData {
   string uuid = 1;
   map<string, google.protobuf.Value> data = 2;
@@ -118,6 +128,13 @@ service InstancesService {
       returns (nocloud.instances.DeleteResponse) {
     option (google.api.http) = {
       delete : "/instances/{uuid}"
+    };
+  };
+  rpc ChangeOwnership(nocloud.instances.ChangeOwnershipRequest)
+      returns (nocloud.instances.ChangeOwnershipResponse) {
+    option (google.api.http) = {
+      post : "/igs/{uuid}"
+      body: "*"
     };
   };
 }
