@@ -134,7 +134,7 @@ func local_request_BillingService_UpdatePlan_0(ctx context.Context, marshaler ru
 }
 
 var (
-	filter_BillingService_GetPlan_0 = &utilities.DoubleArray{Encoding: map[string]int{"uuid": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+	filter_BillingService_GetPlan_0 = &utilities.DoubleArray{Encoding: map[string]int{"uuid": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
 )
 
 func request_BillingService_GetPlan_0(ctx context.Context, marshaler runtime.Marshaler, client BillingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -240,7 +240,7 @@ func local_request_BillingService_ListPlans_0(ctx context.Context, marshaler run
 }
 
 var (
-	filter_BillingService_DeletePlan_0 = &utilities.DoubleArray{Encoding: map[string]int{"uuid": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+	filter_BillingService_DeletePlan_0 = &utilities.DoubleArray{Encoding: map[string]int{"uuid": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
 )
 
 func request_BillingService_DeletePlan_0(ctx context.Context, marshaler runtime.Marshaler, client BillingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -380,7 +380,7 @@ func local_request_BillingService_GetTransactions_0(ctx context.Context, marshal
 }
 
 var (
-	filter_BillingService_GetRecords_0 = &utilities.DoubleArray{Encoding: map[string]int{"uuid": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+	filter_BillingService_GetRecords_0 = &utilities.DoubleArray{Encoding: map[string]int{"uuid": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
 )
 
 func request_BillingService_GetRecords_0(ctx context.Context, marshaler runtime.Marshaler, client BillingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {

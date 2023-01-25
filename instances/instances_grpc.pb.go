@@ -24,6 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 type InstancesServiceClient interface {
 	Invoke(ctx context.Context, in *InvokeRequest, opts ...grpc.CallOption) (*InvokeResponse, error)
 	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
+	Transfer(ctx context.Context, in *TransferRequest, opts ...grpc.CallOption) (*TransferResponse, error)
 }
 
 type instancesServiceClient struct {
@@ -52,12 +53,22 @@ func (c *instancesServiceClient) Delete(ctx context.Context, in *DeleteRequest, 
 	return out, nil
 }
 
+func (c *instancesServiceClient) Transfer(ctx context.Context, in *TransferRequest, opts ...grpc.CallOption) (*TransferResponse, error) {
+	out := new(TransferResponse)
+	err := c.cc.Invoke(ctx, "/nocloud.instances.InstancesService/Transfer", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // InstancesServiceServer is the server API for InstancesService service.
 // All implementations must embed UnimplementedInstancesServiceServer
 // for forward compatibility
 type InstancesServiceServer interface {
 	Invoke(context.Context, *InvokeRequest) (*InvokeResponse, error)
 	Delete(context.Context, *DeleteRequest) (*DeleteResponse, error)
+	Transfer(context.Context, *TransferRequest) (*TransferResponse, error)
 	mustEmbedUnimplementedInstancesServiceServer()
 }
 
@@ -70,6 +81,9 @@ func (UnimplementedInstancesServiceServer) Invoke(context.Context, *InvokeReques
 }
 func (UnimplementedInstancesServiceServer) Delete(context.Context, *DeleteRequest) (*DeleteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedInstancesServiceServer) Transfer(context.Context, *TransferRequest) (*TransferResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Transfer not implemented")
 }
 func (UnimplementedInstancesServiceServer) mustEmbedUnimplementedInstancesServiceServer() {}
 
@@ -120,6 +134,24 @@ func _InstancesService_Delete_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _InstancesService_Transfer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TransferRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstancesServiceServer).Transfer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nocloud.instances.InstancesService/Transfer",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstancesServiceServer).Transfer(ctx, req.(*TransferRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // InstancesService_ServiceDesc is the grpc.ServiceDesc for InstancesService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -134,6 +166,10 @@ var InstancesService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _InstancesService_Delete_Handler,
+		},
+		{
+			MethodName: "Transfer",
+			Handler:    _InstancesService_Transfer_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

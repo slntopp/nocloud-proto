@@ -101,6 +101,16 @@ message DeleteResponse {
   map<string, google.protobuf.Value> meta = 2;
 }
 
+message TransferRequest {
+  string uuid = 1;
+  string service = 2;
+}
+
+message TransferResponse {
+  bool result = 1;
+  map<string, google.protobuf.Value> meta = 2;
+}
+
 message ObjectData {
   string uuid = 1;
   map<string, google.protobuf.Value> data = 2;
@@ -118,6 +128,13 @@ service InstancesService {
       returns (nocloud.instances.DeleteResponse) {
     option (google.api.http) = {
       delete : "/instances/{uuid}"
+    };
+  };
+  rpc Transfer(nocloud.instances.TransferRequest)
+      returns (nocloud.instances.TransferResponse) {
+    option (google.api.http) = {
+      post : "/igs/{uuid}"
+      body: "*"
     };
   };
 }
