@@ -4,133 +4,113 @@ package nocloud.cc;
 import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
 
-message Chat{
-    string uuid = 1;
-    string title = 2;
+message Chat {
+  string uuid = 1;
+  string title = 2;
 }
 
-message ChatMessage{
-    string uuid = 1;
-    string from = 2;
-    string to = 3;
-    string message = 4;
-    map<string, google.protobuf.Value> meta = 5;
+message ChatMessage {
+  string uuid = 1;
+  string from = 2;
+  string to = 3;
+  string message = 4;
+  map<string, google.protobuf.Value> meta = 5;
 }
 
-message ChatMessageStreamRequest {
-    string uuid = 1;
-}
+message ChatMessageStreamRequest { string uuid = 1; }
 message SendChatMessageRequest {
-    ChatMessage message = 1;
-    repeated string entities = 2;
+  ChatMessage message = 1;
+  repeated string entities = 2;
 }
-message DeleteChatMessageRequest {
-    string uuid = 1;
-}
-message GetChatMessageRequest {
-    string uuid = 1;
-}
-message ListChatMessagesRequest {
-    string chatUuid = 1;
-}
-message ListChatMessagesResponse {
-    repeated ChatMessage messages = 1;
-}
+message DeleteChatMessageRequest { string uuid = 1; }
+message GetChatMessageRequest { string uuid = 1; }
+message ListChatMessagesRequest { string chatUuid = 1; }
+message ListChatMessagesResponse { repeated ChatMessage messages = 1; }
 
 message InviteChatRequest {
-    string chatUuid = 1;
-    string userUuid = 2;
+  string chatUuid = 1;
+  string userUuid = 2;
 }
-message CreateChatRequest {
-    Chat chat = 1;
-}
-message GetChatRequest {
-    string uuid = 1;
-}
-message DeleteChatRequest {
-    string uuid = 1;
-}
+message CreateChatRequest { Chat chat = 1; }
+message GetChatRequest { string uuid = 1; }
+message DeleteChatRequest { string uuid = 1; }
 
 message Response {}
 
 service ChatService {
-    rpc SendChatMessage(nocloud.cc.SendChatMessageRequest) 
-        returns (nocloud.cc.ChatMessage) {
-        option (google.api.http) = {
-            put: "/messages"
-            body: "*"
-        };
+  rpc SendChatMessage(nocloud.cc.SendChatMessageRequest)
+      returns (nocloud.cc.ChatMessage) {
+    option (google.api.http) = {
+      put : "/messages"
+      body : "*"
     };
-    rpc ListChatMessages(nocloud.cc.ListChatMessagesRequest) 
-        returns (nocloud.cc.ListChatMessagesResponse) {
-        option (google.api.http) = {
-            get: "/chats/{chatUuid}/messages"
-        };
+  };
+  rpc ListChatMessages(nocloud.cc.ListChatMessagesRequest)
+      returns (nocloud.cc.ListChatMessagesResponse) {
+    option (google.api.http) = {
+      get : "/chats/{chatUuid}/messages"
     };
+  };
 
-    rpc GetChatMessage(nocloud.cc.GetChatMessageRequest) 
-        returns (nocloud.cc.ChatMessage) {
-        option (google.api.http) = {
-            get: "/messages/{uuid}"
-        };
+  rpc GetChatMessage(nocloud.cc.GetChatMessageRequest)
+      returns (nocloud.cc.ChatMessage) {
+    option (google.api.http) = {
+      get : "/messages/{uuid}"
     };
+  };
 
-    rpc DeleteChatMessage(nocloud.cc.DeleteChatMessageRequest) 
-        returns (nocloud.cc.Response) {
-        option (google.api.http) = {
-            delete: "/messages/{uuid}"
-        };
+  rpc DeleteChatMessage(nocloud.cc.DeleteChatMessageRequest)
+      returns (nocloud.cc.Response) {
+    option (google.api.http) = {
+      delete : "/messages/{uuid}"
     };
+  };
 
-    rpc UpdateChatMessage(nocloud.cc.ChatMessage) 
-        returns (nocloud.cc.ChatMessage) {
-        option (google.api.http) = {
-            patch: "/messages"
-            body: "*"
-        };
+  rpc UpdateChatMessage(nocloud.cc.ChatMessage)
+      returns (nocloud.cc.ChatMessage) {
+    option (google.api.http) = {
+      patch : "/messages"
+      body : "*"
     };
+  };
 
-    rpc GetChat(nocloud.cc.GetChatRequest) 
-        returns (nocloud.cc.Chat) {
-        option (google.api.http) = {
-            get: "/chats/{uuid}"
-        };
+  rpc GetChat(nocloud.cc.GetChatRequest) returns (nocloud.cc.Chat) {
+    option (google.api.http) = {
+      get : "/chats/{uuid}"
     };
+  };
 
-    rpc Invite(nocloud.cc.InviteChatRequest) 
-        returns (nocloud.cc.Response) {
-        option (google.api.http) = {
-            post: "/chats/invite"
-            body: "*"
-        };
+  rpc Invite(nocloud.cc.InviteChatRequest) returns (nocloud.cc.Response) {
+    option (google.api.http) = {
+      post : "/chats/invite"
+      body : "*"
     };
+  };
 
-    rpc CreateChat(nocloud.cc.CreateChatRequest) 
-        returns (nocloud.cc.Chat) {
-        option (google.api.http) = {
-            put: "/chats"
-            body: "*"
-        };
+  rpc CreateChat(nocloud.cc.CreateChatRequest) returns (nocloud.cc.Chat) {
+    option (google.api.http) = {
+      put : "/chats"
+      body : "*"
     };
+  };
 
-    rpc DeleteChat(nocloud.cc.DeleteChatRequest) 
-        returns (nocloud.cc.Response) {
-        option (google.api.http) = {
-            delete: "/chats/{uuid}"
-        };
+  rpc DeleteChat(nocloud.cc.DeleteChatRequest) returns (nocloud.cc.Response) {
+    option (google.api.http) = {
+      delete : "/chats/{uuid}"
     };
+  };
 
-    rpc UpdateChat(nocloud.cc.Chat) 
-        returns (nocloud.cc.Chat) {
-        option (google.api.http) = {
-            patch: "/chats"
-            body: "*"
-        };
+  rpc UpdateChat(nocloud.cc.Chat) returns (nocloud.cc.Chat) {
+    option (google.api.http) = {
+      patch : "/chats"
+      body : "*"
     };
+  };
 
-    rpc Stream(nocloud.cc.ChatMessageStreamRequest) returns (stream nocloud.cc.ChatMessage) {
-        option (google.api.http) = {
-            get: "/messages/{uuid}/stream"
-        };
+  rpc Stream(nocloud.cc.ChatMessageStreamRequest)
+      returns (stream nocloud.cc.ChatMessage) {
+    option (google.api.http) = {
+      get : "/messages/{uuid}/stream"
     };
+  };
 }
