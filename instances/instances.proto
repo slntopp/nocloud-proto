@@ -92,9 +92,7 @@ message InvokeResponse {
   map<string, google.protobuf.Value> meta = 2;
 }
 
-message DeleteRequest {
-  string uuid = 1;
-}
+message DeleteRequest { string uuid = 1; }
 
 message DeleteResponse {
   bool result = 1;
@@ -134,7 +132,7 @@ service InstancesService {
       returns (nocloud.instances.TransferResponse) {
     option (google.api.http) = {
       post : "/igs/{uuid}"
-      body: "*"
+      body : "*"
     };
   };
 }

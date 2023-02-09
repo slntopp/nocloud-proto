@@ -57,7 +57,7 @@ message Plan {
   repeated ResourceConf resources = 6; // Resources confs to make plan dynamic
   map<string, Product> products =
       7; // Products to make plan pre defined(map key is product key like sm, lg
-         // or whatever)
+  // or whatever)
   map<string, google.protobuf.Value> meta = 8;
   Fee fee = 9;
 }
@@ -110,7 +110,7 @@ message Transaction {
   int64 exec = 2;     // Timestamp of Transaction planned execution time
   int64 proc = 3;     // Timestamp of Transaction processing time
   bool processed = 4; // Wether Transaction has been processed(applied to
-                      // Account balance, etc)
+  // Account balance, etc)
 
   Priority priority = 5;
 
@@ -171,6 +171,8 @@ message GetActiveRequest {
 message GetTransactionsRequest {
   optional string account = 1;
   optional string service = 2;
+  optional uint64 page = 3;
+  optional uint64 limit = 4;
 }
 
 message ReprocessTransactionsRequest { string account = 1; }
