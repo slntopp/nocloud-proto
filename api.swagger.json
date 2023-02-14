@@ -1996,12 +1996,12 @@
     },
     "/igs/{uuid}": {
       "post": {
-        "operationId": "InstancesService_Transfer",
+        "operationId": "InstancesService_TransferIG",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/instancesTransferResponse"
+              "$ref": "#/definitions/instancesTransferIGResponse"
             }
           },
           "default": {
@@ -2060,6 +2060,47 @@
             "in": "path",
             "required": true,
             "type": "string"
+          }
+        ],
+        "tags": [
+          "InstancesService"
+        ]
+      },
+      "post": {
+        "operationId": "InstancesService_TransferInstance",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/instancesTransferInstanceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ig": {
+                  "type": "string"
+                }
+              }
+            }
           }
         ],
         "tags": [
@@ -4578,7 +4619,19 @@
         }
       }
     },
-    "instancesTransferResponse": {
+    "instancesTransferIGResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "boolean"
+        },
+        "meta": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "instancesTransferInstanceResponse": {
       "type": "object",
       "properties": {
         "result": {
