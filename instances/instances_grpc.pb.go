@@ -24,7 +24,8 @@ const _ = grpc.SupportPackageIsVersion7
 type InstancesServiceClient interface {
 	Invoke(ctx context.Context, in *InvokeRequest, opts ...grpc.CallOption) (*InvokeResponse, error)
 	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
-	Transfer(ctx context.Context, in *TransferRequest, opts ...grpc.CallOption) (*TransferResponse, error)
+	TransferIG(ctx context.Context, in *TransferIGRequest, opts ...grpc.CallOption) (*TransferIGResponse, error)
+	TransferInstance(ctx context.Context, in *TransferInstanceRequest, opts ...grpc.CallOption) (*TransferInstanceResponse, error)
 }
 
 type instancesServiceClient struct {
@@ -53,9 +54,18 @@ func (c *instancesServiceClient) Delete(ctx context.Context, in *DeleteRequest, 
 	return out, nil
 }
 
-func (c *instancesServiceClient) Transfer(ctx context.Context, in *TransferRequest, opts ...grpc.CallOption) (*TransferResponse, error) {
-	out := new(TransferResponse)
-	err := c.cc.Invoke(ctx, "/nocloud.instances.InstancesService/Transfer", in, out, opts...)
+func (c *instancesServiceClient) TransferIG(ctx context.Context, in *TransferIGRequest, opts ...grpc.CallOption) (*TransferIGResponse, error) {
+	out := new(TransferIGResponse)
+	err := c.cc.Invoke(ctx, "/nocloud.instances.InstancesService/TransferIG", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *instancesServiceClient) TransferInstance(ctx context.Context, in *TransferInstanceRequest, opts ...grpc.CallOption) (*TransferInstanceResponse, error) {
+	out := new(TransferInstanceResponse)
+	err := c.cc.Invoke(ctx, "/nocloud.instances.InstancesService/TransferInstance", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +78,8 @@ func (c *instancesServiceClient) Transfer(ctx context.Context, in *TransferReque
 type InstancesServiceServer interface {
 	Invoke(context.Context, *InvokeRequest) (*InvokeResponse, error)
 	Delete(context.Context, *DeleteRequest) (*DeleteResponse, error)
-	Transfer(context.Context, *TransferRequest) (*TransferResponse, error)
+	TransferIG(context.Context, *TransferIGRequest) (*TransferIGResponse, error)
+	TransferInstance(context.Context, *TransferInstanceRequest) (*TransferInstanceResponse, error)
 	mustEmbedUnimplementedInstancesServiceServer()
 }
 
@@ -82,8 +93,11 @@ func (UnimplementedInstancesServiceServer) Invoke(context.Context, *InvokeReques
 func (UnimplementedInstancesServiceServer) Delete(context.Context, *DeleteRequest) (*DeleteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
-func (UnimplementedInstancesServiceServer) Transfer(context.Context, *TransferRequest) (*TransferResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Transfer not implemented")
+func (UnimplementedInstancesServiceServer) TransferIG(context.Context, *TransferIGRequest) (*TransferIGResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TransferIG not implemented")
+}
+func (UnimplementedInstancesServiceServer) TransferInstance(context.Context, *TransferInstanceRequest) (*TransferInstanceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TransferInstance not implemented")
 }
 func (UnimplementedInstancesServiceServer) mustEmbedUnimplementedInstancesServiceServer() {}
 
@@ -134,20 +148,38 @@ func _InstancesService_Delete_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _InstancesService_Transfer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(TransferRequest)
+func _InstancesService_TransferIG_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TransferIGRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(InstancesServiceServer).Transfer(ctx, in)
+		return srv.(InstancesServiceServer).TransferIG(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nocloud.instances.InstancesService/Transfer",
+		FullMethod: "/nocloud.instances.InstancesService/TransferIG",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(InstancesServiceServer).Transfer(ctx, req.(*TransferRequest))
+		return srv.(InstancesServiceServer).TransferIG(ctx, req.(*TransferIGRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InstancesService_TransferInstance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TransferInstanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstancesServiceServer).TransferInstance(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nocloud.instances.InstancesService/TransferInstance",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstancesServiceServer).TransferInstance(ctx, req.(*TransferInstanceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -168,8 +200,12 @@ var InstancesService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _InstancesService_Delete_Handler,
 		},
 		{
-			MethodName: "Transfer",
-			Handler:    _InstancesService_Transfer_Handler,
+			MethodName: "TransferIG",
+			Handler:    _InstancesService_TransferIG_Handler,
+		},
+		{
+			MethodName: "TransferInstance",
+			Handler:    _InstancesService_TransferInstance_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
