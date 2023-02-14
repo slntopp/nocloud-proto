@@ -39,13 +39,13 @@ message Instance {
   string title = 2;
   InstanceStatus status = 3;
   map<string, google.protobuf.Value> config = 4
-  [(nocloud.hasher.hashed) = true];
+      [ (nocloud.hasher.hashed) = true ];
   map<string, google.protobuf.Value> resources = 5
-  [(nocloud.hasher.hashed) = true];
+      [ (nocloud.hasher.hashed) = true ];
   map<string, google.protobuf.Value> data = 6;
   nocloud.states.State state = 7;
-  string hash = 8 [(nocloud.hasher.hash) = true];
-  nocloud.billing.Plan billing_plan = 9 [(nocloud.hasher.skipped) = true];
+  string hash = 8 [ (nocloud.hasher.hash) = true ];
+  nocloud.billing.Plan billing_plan = 9 [ (nocloud.hasher.skipped) = true ];
   optional string product = 10;
   optional nocloud.access.Access access = 11;
 }
@@ -56,12 +56,12 @@ message InstancesGroup {
   string title = 3;
   InstanceStatus status = 4;
   map<string, google.protobuf.Value> config = 5
-  [(nocloud.hasher.hashed) = true];
-  repeated Instance instances = 6 [(nocloud.hasher.hashed) = true];
+      [ (nocloud.hasher.hashed) = true ];
+  repeated Instance instances = 6 [ (nocloud.hasher.hashed) = true ];
   map<string, google.protobuf.Value> resources = 7
-  [(nocloud.hasher.hashed) = true];
+      [ (nocloud.hasher.hashed) = true ];
   map<string, google.protobuf.Value> data = 8;
-  string hash = 9 [(nocloud.hasher.hash) = true];
+  string hash = 9 [ (nocloud.hasher.hash) = true ];
   optional string sp = 10;
   optional nocloud.access.Access access = 11;
 }
@@ -92,7 +92,7 @@ message InvokeResponse {
   map<string, google.protobuf.Value> meta = 2;
 }
 
-message DeleteRequest {string uuid = 1;}
+message DeleteRequest { string uuid = 1; }
 
 message DeleteResponse {
   bool result = 1;
