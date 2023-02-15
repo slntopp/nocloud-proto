@@ -36,17 +36,17 @@ enum ServiceStatus {
 
 message Service {
   string uuid = 1;
-  string version = 2 [ (nocloud.hasher.hashed) = true ];
+  string version = 2 [(nocloud.hasher.hashed) = true];
   string title = 3;
   ServiceStatus status = 4;
   map<string, google.protobuf.Value> context = 5
-      [ (nocloud.hasher.hashed) = true ];
+  [(nocloud.hasher.hashed) = true];
   repeated nocloud.instances.InstancesGroup instances_groups = 6;
-  string hash = 7 [ (nocloud.hasher.hash) = true ];
+  string hash = 7 [(nocloud.hasher.hash) = true];
   optional nocloud.access.Access access = 8;
 }
 
-message Services { repeated Service pool = 1; }
+message Services {repeated Service pool = 1;}
 
 message TestConfigError {
   string error = 1;
@@ -64,19 +64,19 @@ message CreateRequest {
   string namespace = 2;
 }
 
-message DeleteRequest { string uuid = 1; }
+message DeleteRequest {string uuid = 1;}
 
 message DeleteResponse {
   bool result = 1;
   string error = 2;
 }
 
-message UpRequest { string uuid = 1; }
+message UpRequest {string uuid = 1;}
 
-message UpError { map<string, string> data = 1; }
-message UpResponse { repeated UpError errors = 1; }
+message UpError {map<string, string> data = 1;}
+message UpResponse {repeated UpError errors = 1;}
 
-message DownRequest { string uuid = 1; }
+message DownRequest {string uuid = 1;}
 message DownResponse {}
 
 message ListRequest {
@@ -85,17 +85,20 @@ message ListRequest {
   optional int32 depth = 3;
 }
 
-message GetRequest { string uuid = 1; }
+message GetRequest {
+  string uuid = 1;
+  optional string show_deleted = 2;
+}
 
 message GetStatesRequest {
   string uuid = 1; // Service UUID
 }
 
-message StreamRequest { string uuid = 1; }
+message StreamRequest {string uuid = 1;}
 
-message SuspendRequest { string uuid = 1; }
+message SuspendRequest {string uuid = 1;}
 
-message UnsuspendRequest { string uuid = 1; }
+message UnsuspendRequest {string uuid = 1;}
 
 message SuspendResponse {}
 message UnsuspendResponse {}
