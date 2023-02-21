@@ -25,6 +25,7 @@ import (
 	instances "github.com/slntopp/nocloud-proto/instances"
 	services "github.com/slntopp/nocloud-proto/services"
 	states "github.com/slntopp/nocloud-proto/states"
+	"github.com/slntopp/nocloud-proto/statuses"
 	"google.golang.org/protobuf/proto"
 	structpb "google.golang.org/protobuf/types/known/structpb"
 )
@@ -96,7 +97,7 @@ func initMessage() *services.Service {
 		Uuid:            "Uuid",
 		Version:         "Version",
 		Title:           "Title",
-		Status:          services.ServiceStatus_INIT,
+		Status:          statuses.NoCloudStatus_INIT,
 		Context:         ctx,
 		InstancesGroups: igm,
 		// Hash:            "uuid",
