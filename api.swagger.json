@@ -4874,8 +4874,9 @@
         "access": {
           "$ref": "#/definitions/accessAccess"
         },
-        "timestamp": {
-          "type": "string"
+        "created": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
