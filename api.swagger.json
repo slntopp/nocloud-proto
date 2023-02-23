@@ -2500,6 +2500,47 @@
         "tags": [
           "NamespacesService"
         ]
+      },
+      "patch": {
+        "operationId": "NamespacesService_Patch",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/namespacesPatchResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "NamespacesService"
+        ]
       }
     },
     "/services": {
@@ -4667,6 +4708,14 @@
         },
         "access": {
           "$ref": "#/definitions/accessAccess"
+        }
+      }
+    },
+    "namespacesPatchResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "boolean"
         }
       }
     },
