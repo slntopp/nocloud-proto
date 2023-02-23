@@ -3377,6 +3377,10 @@
                 },
                 "access": {
                   "$ref": "#/definitions/accessAccess"
+                },
+                "meta": {
+                  "type": "object",
+                  "additionalProperties": {}
                 }
               }
             }
@@ -5317,6 +5321,10 @@
         },
         "access": {
           "$ref": "#/definitions/accessAccess"
+        },
+        "meta": {
+          "type": "object",
+          "additionalProperties": {}
         }
       }
     },
