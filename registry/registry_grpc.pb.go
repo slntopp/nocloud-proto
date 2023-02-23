@@ -403,6 +403,7 @@ type NamespacesServiceClient interface {
 	Join(ctx context.Context, in *namespaces.JoinRequest, opts ...grpc.CallOption) (*namespaces.JoinResponse, error)
 	Link(ctx context.Context, in *namespaces.LinkRequest, opts ...grpc.CallOption) (*namespaces.LinkResponse, error)
 	Delete(ctx context.Context, in *namespaces.DeleteRequest, opts ...grpc.CallOption) (*namespaces.DeleteResponse, error)
+	Patch(ctx context.Context, in *namespaces.PatchRequest, opts ...grpc.CallOption) (*namespaces.PatchResponse, error)
 }
 
 type namespacesServiceClient struct {
@@ -458,6 +459,15 @@ func (c *namespacesServiceClient) Delete(ctx context.Context, in *namespaces.Del
 	return out, nil
 }
 
+func (c *namespacesServiceClient) Patch(ctx context.Context, in *namespaces.PatchRequest, opts ...grpc.CallOption) (*namespaces.PatchResponse, error) {
+	out := new(namespaces.PatchResponse)
+	err := c.cc.Invoke(ctx, "/nocloud.registry.NamespacesService/Patch", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NamespacesServiceServer is the server API for NamespacesService service.
 // All implementations must embed UnimplementedNamespacesServiceServer
 // for forward compatibility
@@ -467,6 +477,7 @@ type NamespacesServiceServer interface {
 	Join(context.Context, *namespaces.JoinRequest) (*namespaces.JoinResponse, error)
 	Link(context.Context, *namespaces.LinkRequest) (*namespaces.LinkResponse, error)
 	Delete(context.Context, *namespaces.DeleteRequest) (*namespaces.DeleteResponse, error)
+	Patch(context.Context, *namespaces.PatchRequest) (*namespaces.PatchResponse, error)
 	mustEmbedUnimplementedNamespacesServiceServer()
 }
 
@@ -488,6 +499,9 @@ func (UnimplementedNamespacesServiceServer) Link(context.Context, *namespaces.Li
 }
 func (UnimplementedNamespacesServiceServer) Delete(context.Context, *namespaces.DeleteRequest) (*namespaces.DeleteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedNamespacesServiceServer) Patch(context.Context, *namespaces.PatchRequest) (*namespaces.PatchResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Patch not implemented")
 }
 func (UnimplementedNamespacesServiceServer) mustEmbedUnimplementedNamespacesServiceServer() {}
 
@@ -592,6 +606,24 @@ func _NamespacesService_Delete_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NamespacesService_Patch_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(namespaces.PatchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NamespacesServiceServer).Patch(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nocloud.registry.NamespacesService/Patch",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NamespacesServiceServer).Patch(ctx, req.(*namespaces.PatchRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // NamespacesService_ServiceDesc is the grpc.ServiceDesc for NamespacesService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -618,6 +650,10 @@ var NamespacesService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _NamespacesService_Delete_Handler,
+		},
+		{
+			MethodName: "Patch",
+			Handler:    _NamespacesService_Patch_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

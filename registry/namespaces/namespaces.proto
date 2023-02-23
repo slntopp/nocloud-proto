@@ -18,9 +18,9 @@ package nocloud.registry.namespaces;
 
 import "access/access.proto";
 
-message CreateRequest { string title = 1; }
+message CreateRequest {string title = 1;}
 
-message CreateResponse { string uuid = 1; }
+message CreateResponse {string uuid = 1;}
 
 message Namespace {
   string uuid = 1;
@@ -34,7 +34,7 @@ message JoinRequest {
   optional int32 access = 3; // Account access level to namespace
 }
 
-message JoinResponse { bool result = 1; }
+message JoinResponse {bool result = 1;}
 
 message LinkRequest {
   string namespace = 1;
@@ -43,14 +43,21 @@ message LinkRequest {
   optional string role = 4;
 }
 
-message LinkResponse { bool result = 1; }
+message LinkResponse {bool result = 1;}
 
 message ListRequest {
   optional int32 depth = 1; // Depth
 }
 
-message ListResponse { repeated Namespace pool = 1; }
+message ListResponse {repeated Namespace pool = 1;}
 
-message DeleteRequest { string uuid = 1; }
+message DeleteRequest {string uuid = 1;}
 
-message DeleteResponse { bool result = 1; }
+message DeleteResponse {bool result = 1;}
+
+message PatchRequest {
+  string uuid = 1;
+  string title = 2;
+}
+
+message PatchResponse {bool result = 1;}

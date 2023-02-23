@@ -115,4 +115,11 @@ service NamespacesService {
       delete : "/namespaces/{uuid}"
     };
   };
+  rpc Patch(nocloud.registry.namespaces.PatchRequest)
+      returns (nocloud.registry.namespaces.PatchResponse) {
+    option (google.api.http) = {
+      patch : "/namespaces/{uuid}"
+      body : "*"
+    };
+  };
 }
