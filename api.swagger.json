@@ -456,35 +456,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "playbook": {
-                  "type": "object",
-                  "properties": {
-                    "logo": {
-                      "type": "string"
-                    },
-                    "title": {
-                      "type": "string",
-                      "title": "Url to or Base64 encoded Image to be used as Playbook logo in the\nMarketplace"
-                    },
-                    "description": {
-                      "type": "string",
-                      "title": "Filename for playbook yaml"
-                    },
-                    "content": {
-                      "type": "string",
-                      "title": "(optionally Markdown) long description Marketplace like"
-                    },
-                    "supportedOs": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              }
+              "$ref": "#/definitions/ansibleUpdatePlaybookRequest"
             }
           }
         ],
@@ -1325,7 +1297,9 @@
                 },
                 "meta": {
                   "type": "object",
-                  "additionalProperties": {},
+                  "additionalProperties": {
+                    "type": "object"
+                  },
                   "title": "or whatever)"
                 },
                 "fee": {
@@ -2144,7 +2118,9 @@
                 },
                 "params": {
                   "type": "object",
-                  "additionalProperties": {}
+                  "additionalProperties": {
+                    "type": "object"
+                  }
                 }
               }
             }
@@ -2750,7 +2726,9 @@
                 },
                 "context": {
                   "type": "object",
-                  "additionalProperties": {}
+                  "additionalProperties": {
+                    "type": "object"
+                  }
                 },
                 "instancesGroups": {
                   "type": "array",
@@ -3383,7 +3361,9 @@
                 },
                 "secrets": {
                   "type": "object",
-                  "additionalProperties": {}
+                  "additionalProperties": {
+                    "type": "object"
+                  }
                 },
                 "vars": {
                   "type": "object",
@@ -3402,7 +3382,9 @@
                 },
                 "publicData": {
                   "type": "object",
-                  "additionalProperties": {}
+                  "additionalProperties": {
+                    "type": "object"
+                  }
                 },
                 "public": {
                   "type": "boolean"
@@ -3421,7 +3403,9 @@
                 },
                 "meta": {
                   "type": "object",
-                  "additionalProperties": {}
+                  "additionalProperties": {
+                    "type": "object"
+                  }
                 }
               }
             }
@@ -3512,7 +3496,9 @@
                 },
                 "params": {
                   "type": "object",
-                  "additionalProperties": {}
+                  "additionalProperties": {
+                    "type": "object"
+                  }
                 }
               }
             }
@@ -3959,6 +3945,14 @@
         }
       }
     },
+    "ansibleUpdatePlaybookRequest": {
+      "type": "object",
+      "properties": {
+        "playbook": {
+          "$ref": "#/definitions/ansiblePlaybook"
+        }
+      }
+    },
     "ansibleUpdatePlaybookResponse": {
       "type": "object",
       "properties": {
@@ -4140,7 +4134,9 @@
         },
         "meta": {
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": {
+            "type": "object"
+          },
           "title": "or whatever)"
         },
         "fee": {
@@ -4185,11 +4181,15 @@
         },
         "resources": {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "object"
+          }
         },
         "meta": {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "object"
+          }
         },
         "sorter": {
           "type": "integer",
@@ -4288,7 +4288,9 @@
         },
         "meta": {
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": {
+            "type": "object"
+          },
           "title": "Transaction meta data, like\nmeta: {\ntotal: \u003cnumber\u003e // resource \"quantity\", e.g. CPU cores, RAM Mb, Drive\nMb, IP quantity price_atm: \u003cnumber\u003e // hourly price per quant of resouce at\nthe moment, e.g. 1 NCU [other keys]: \u003cany\u003e // for example Drive\nType(SSD/HDD/NVMe/etc)\n}"
         },
         "currency": {
@@ -4353,7 +4355,9 @@
         },
         "meta": {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "object"
+          }
         }
       }
     },
@@ -4482,7 +4486,9 @@
         },
         "data": {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "object"
+          }
         }
       }
     },
@@ -4605,7 +4611,9 @@
         },
         "config": {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "object"
+          }
         },
         "instances": {
           "type": "array",
@@ -4615,11 +4623,15 @@
         },
         "resources": {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "object"
+          }
         },
         "data": {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "object"
+          }
         },
         "hash": {
           "type": "string"
@@ -4665,7 +4677,9 @@
         },
         "meta": {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "object"
+          }
         }
       }
     },
@@ -4677,7 +4691,9 @@
         },
         "meta": {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "object"
+          }
         }
       }
     },
@@ -4793,7 +4809,9 @@
         },
         "meta": {
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": {
+            "type": "object"
+          },
           "title": "Record meta data, like\nmeta: {\ntotal: \u003cnumber\u003e // resource \"quantity\", e.g. CPU cores, RAM Mb, Drive\nMb, IP quantity price_atm: \u003cnumber\u003e // hourly price per quant of resouce at\nthe moment, e.g. 1 NCU [other keys]: \u003cany\u003e // for example Drive\nType(SSD/HDD/NVMe/etc)\n}"
         },
         "currency": {
@@ -4880,7 +4898,9 @@
         },
         "meta": {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "object"
+          }
         }
       }
     },
@@ -4898,15 +4918,21 @@
         },
         "config": {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "object"
+          }
         },
         "resources": {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "object"
+          }
         },
         "data": {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "object"
+          }
         },
         "state": {
           "$ref": "#/definitions/statesState"
@@ -4937,7 +4963,9 @@
         },
         "meta": {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "object"
+          }
         }
       }
     },
@@ -5013,7 +5041,9 @@
         },
         "meta": {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "object"
+          }
         }
       }
     },
@@ -5191,7 +5221,9 @@
         },
         "context": {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "object"
+          }
         },
         "instancesGroups": {
           "type": "array",
@@ -5301,7 +5333,9 @@
         },
         "extra": {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "object"
+          }
         }
       }
     },
@@ -5313,7 +5347,9 @@
         },
         "extra": {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "object"
+          }
         }
       }
     },
@@ -5339,7 +5375,9 @@
         },
         "secrets": {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "object"
+          }
         },
         "vars": {
           "type": "object",
@@ -5358,7 +5396,9 @@
         },
         "publicData": {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "object"
+          }
         },
         "public": {
           "type": "boolean"
@@ -5377,7 +5417,9 @@
         },
         "meta": {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "object"
+          }
         }
       }
     },
@@ -5389,7 +5431,9 @@
       "properties": {
         "value": {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "object"
+          }
         }
       }
     },
@@ -5456,7 +5500,9 @@
         },
         "meta": {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "object"
+          }
         },
         "ts": {
           "type": "string",
