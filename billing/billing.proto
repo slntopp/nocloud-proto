@@ -66,7 +66,7 @@ message ListRequest {
   string sp_uuid = 1;
   bool anonymously = 2;
 }
-message ListResponse { repeated Plan pool = 1; }
+message ListResponse {repeated Plan pool = 1;}
 
 enum Kind {
   UNSPECIFIED = 0; // Shall never be used, requests will be rejected
@@ -131,7 +131,7 @@ message Transaction {
   Currency currency = 11;
 }
 
-message Transactions { repeated Transaction pool = 1; }
+message Transactions {repeated Transaction pool = 1;}
 
 message Record {
   string uuid = 1; // Record UUID
@@ -162,7 +162,7 @@ message Record {
   Currency currency = 13;
 }
 
-message Records { repeated Record pool = 1; }
+message Records {repeated Record pool = 1;}
 
 message GetActiveRequest {
   string uuid = 1; // Instance UUID
@@ -173,9 +173,21 @@ message GetTransactionsRequest {
   optional string service = 2;
   optional uint64 page = 3;
   optional uint64 limit = 4;
+  optional string field = 5;
+  optional string sort = 6;
 }
 
-message ReprocessTransactionsRequest { string account = 1; }
+message ReprocessTransactionsRequest {string account = 1;}
+
+message GetTransactionsCountRequest {
+  optional string account = 1;
+  optional string service = 2;
+}
+
+message GetTransactionsCountResponse {
+  uint64 total = 1;
+}
+
 
 service RecordsService {
   rpc GetActive(GetActiveRequest) returns (Records);
@@ -223,6 +235,11 @@ service BillingService {
       get : "/billing/transactions"
     };
   };
+  rpc GetTransactionsCount (GetTransactionsCountRequest) returns (GetTransactionsCountResponse) {
+    option (google.api.http) = {
+      get : "/billing/transactions/count"
+    };
+  };
   rpc GetRecords(Transaction) returns (Records) {
     option (google.api.http) = {
       get : "/billing/transactions/{uuid}"
@@ -262,7 +279,7 @@ message DeleteExchangeRateRequest {
 message DeleteExchangeRateResponse {}
 
 message GetCurrenciesRequest {}
-message GetCurrenciesResponse { repeated Currency currencies = 1; }
+message GetCurrenciesResponse {repeated Currency currencies = 1;}
 
 message GetExchangeRateRequest {
   Currency from = 1;
@@ -277,7 +294,7 @@ message GetExchangeRateResponse {
   double rate = 3;
 }
 
-message GetExchangeRatesResponse { repeated GetExchangeRateResponse rates = 1; }
+message GetExchangeRatesResponse {repeated GetExchangeRateResponse rates = 1;}
 
 message ConversionRequest {
   Currency from = 1;
@@ -285,7 +302,7 @@ message ConversionRequest {
   double amount = 3;
 }
 
-message ConversionResponse { double amount = 1; }
+message ConversionResponse {double amount = 1;}
 
 service CurrencyService {
   rpc GetCurrencies(GetCurrenciesRequest) returns (GetCurrenciesResponse) {
