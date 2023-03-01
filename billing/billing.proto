@@ -237,7 +237,7 @@ service BillingService {
   };
   rpc GetTransactionsCount (GetTransactionsCountRequest) returns (GetTransactionsCountResponse) {
     option (google.api.http) = {
-      get : "/billing/transactions/count"
+      get : "/billing/count/transactions"
     };
   };
   rpc GetRecords(Transaction) returns (Records) {
