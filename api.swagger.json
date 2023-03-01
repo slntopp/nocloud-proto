@@ -803,6 +803,42 @@
         ]
       }
     },
+    "/billing/count/transactions": {
+      "get": {
+        "operationId": "BillingService_GetTransactionsCount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingGetTransactionsCountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "account",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "service",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
     "/billing/currencies": {
       "get": {
         "operationId": "CurrencyService_GetCurrencies",
@@ -1328,6 +1364,7 @@
                 "resources": {
                   "type": "array",
                   "items": {
+                    "type": "object",
                     "$ref": "#/definitions/billingResourceConf"
                   },
                   "title": "Resources confs to make plan dynamic"
@@ -1441,42 +1478,6 @@
             "schema": {
               "$ref": "#/definitions/billingTransaction"
             }
-          }
-        ],
-        "tags": [
-          "BillingService"
-        ]
-      }
-    },
-    "/billing/transactions/count": {
-      "get": {
-        "operationId": "BillingService_GetTransactionsCount",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/billingGetTransactionsCountResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "account",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "service",
-            "in": "query",
-            "required": false,
-            "type": "string"
           }
         ],
         "tags": [
@@ -2828,6 +2829,7 @@
                 "instancesGroups": {
                   "type": "array",
                   "items": {
+                    "type": "object",
                     "$ref": "#/definitions/instancesInstancesGroup"
                   }
                 },
@@ -3488,6 +3490,7 @@
                 "locations": {
                   "type": "array",
                   "items": {
+                    "type": "object",
                     "$ref": "#/definitions/services_providersLocationConf"
                   }
                 },
@@ -3939,6 +3942,7 @@
         "playbooks": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/ansiblePlaybook"
           }
         }
@@ -3985,6 +3989,7 @@
         "instances": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/nocloudansibleInstance"
           },
           "title": "Instances to run Playbook at"
@@ -4035,6 +4040,7 @@
         "pool": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/ansibleRun"
           }
         }
@@ -4121,6 +4127,7 @@
         "ranges": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/billingFeeRange"
           }
         }
@@ -4175,6 +4182,7 @@
         "rates": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/billingGetExchangeRateResponse"
           }
         }
@@ -4223,6 +4231,7 @@
         "resources": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/billingResourceConf"
           },
           "title": "Resources confs to make plan dynamic"
@@ -4304,6 +4313,7 @@
         "pool": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/nocloudbillingRecord"
           }
         }
@@ -4411,6 +4421,7 @@
         "pool": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/billingTransaction"
           }
         }
@@ -4491,6 +4502,7 @@
         "messages": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/ccChatMessage"
           }
         }
@@ -4603,6 +4615,7 @@
         "events": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/eventsEvent"
           }
         }
@@ -4621,6 +4634,7 @@
         "details": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/protobufAny"
           }
         }
@@ -4649,12 +4663,14 @@
         "serving": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/healthServingStatus"
           }
         },
         "routines": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/healthRoutineStatus"
           }
         }
@@ -4680,6 +4696,7 @@
         "routines": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/healthRoutineStatus"
           }
         }
@@ -4721,6 +4738,7 @@
         "instances": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/nocloudinstancesInstance"
           }
         },
@@ -4763,6 +4781,7 @@
         "errors": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/instancesTestInstancesGroupConfigError"
           }
         }
@@ -4862,6 +4881,7 @@
         "pool": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/billingPlan"
           }
         }
@@ -4947,24 +4967,28 @@
         "a": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/RecordA"
           }
         },
         "aaaa": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/RecordAAAA"
           }
         },
         "cname": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/RecordCNAME"
           }
         },
         "txt": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/RecordTXT"
           }
         }
@@ -5105,6 +5129,7 @@
         "errors": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/servicesUpError"
           }
         }
@@ -5150,6 +5175,7 @@
         "pool": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/services_providersServicesProvider"
           }
         }
@@ -5250,6 +5276,7 @@
         "pool": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/accountsAccount"
           }
         }
@@ -5301,6 +5328,7 @@
         "pool": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/namespacesNamespace"
           }
         }
@@ -5328,6 +5356,7 @@
         "instancesGroups": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/instancesInstancesGroup"
           }
         },
@@ -5345,6 +5374,7 @@
         "pool": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/servicesService"
           }
         }
@@ -5373,6 +5403,7 @@
         "errors": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/servicesTestConfigError"
           }
         }
@@ -5505,6 +5536,7 @@
         "locations": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/services_providersLocationConf"
           }
         },
@@ -5546,6 +5578,7 @@
         "pool": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/KeysResponseKey"
           }
         }

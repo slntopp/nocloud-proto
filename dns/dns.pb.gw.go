@@ -335,7 +335,7 @@ func RegisterDNSHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 // RegisterDNSHandlerFromEndpoint is same as RegisterDNSHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
 func RegisterDNSHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
-	conn, err := grpc.Dial(endpoint, opts...)
+	conn, err := grpc.DialContext(ctx, endpoint, opts...)
 	if err != nil {
 		return err
 	}
