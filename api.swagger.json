@@ -4606,6 +4606,10 @@
         "data": {
           "type": "object",
           "additionalProperties": {}
+        },
+        "ts": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
