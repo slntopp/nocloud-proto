@@ -251,7 +251,7 @@ service BillingService {
   };
   rpc UpdateTransaction (UpdateTransactionRequest) returns (UpdateTransactionResponse){
     option (google.api.http) = {
-      patch : "/billing/transactions"
+      patch : "/billing/transactions/{uuid}"
       body : "*"
     };
   };
