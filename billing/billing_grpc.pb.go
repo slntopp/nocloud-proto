@@ -188,6 +188,7 @@ type BillingServiceClient interface {
 	CreateTransaction(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*Transaction, error)
 	GetTransactions(ctx context.Context, in *GetTransactionsRequest, opts ...grpc.CallOption) (*Transactions, error)
 	GetTransactionsCount(ctx context.Context, in *GetTransactionsCountRequest, opts ...grpc.CallOption) (*GetTransactionsCountResponse, error)
+	UpdateTransaction(ctx context.Context, in *UpdateTransactionRequest, opts ...grpc.CallOption) (*UpdateTransactionResponse, error)
 	GetRecords(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*Records, error)
 	Reprocess(ctx context.Context, in *ReprocessTransactionsRequest, opts ...grpc.CallOption) (*Transactions, error)
 }
@@ -272,6 +273,15 @@ func (c *billingServiceClient) GetTransactionsCount(ctx context.Context, in *Get
 	return out, nil
 }
 
+func (c *billingServiceClient) UpdateTransaction(ctx context.Context, in *UpdateTransactionRequest, opts ...grpc.CallOption) (*UpdateTransactionResponse, error) {
+	out := new(UpdateTransactionResponse)
+	err := c.cc.Invoke(ctx, "/nocloud.billing.BillingService/UpdateTransaction", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *billingServiceClient) GetRecords(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*Records, error) {
 	out := new(Records)
 	err := c.cc.Invoke(ctx, "/nocloud.billing.BillingService/GetRecords", in, out, opts...)
@@ -302,6 +312,7 @@ type BillingServiceServer interface {
 	CreateTransaction(context.Context, *Transaction) (*Transaction, error)
 	GetTransactions(context.Context, *GetTransactionsRequest) (*Transactions, error)
 	GetTransactionsCount(context.Context, *GetTransactionsCountRequest) (*GetTransactionsCountResponse, error)
+	UpdateTransaction(context.Context, *UpdateTransactionRequest) (*UpdateTransactionResponse, error)
 	GetRecords(context.Context, *Transaction) (*Records, error)
 	Reprocess(context.Context, *ReprocessTransactionsRequest) (*Transactions, error)
 	mustEmbedUnimplementedBillingServiceServer()
@@ -334,6 +345,9 @@ func (UnimplementedBillingServiceServer) GetTransactions(context.Context, *GetTr
 }
 func (UnimplementedBillingServiceServer) GetTransactionsCount(context.Context, *GetTransactionsCountRequest) (*GetTransactionsCountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTransactionsCount not implemented")
+}
+func (UnimplementedBillingServiceServer) UpdateTransaction(context.Context, *UpdateTransactionRequest) (*UpdateTransactionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTransaction not implemented")
 }
 func (UnimplementedBillingServiceServer) GetRecords(context.Context, *Transaction) (*Records, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRecords not implemented")
@@ -498,6 +512,24 @@ func _BillingService_GetTransactionsCount_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BillingService_UpdateTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTransactionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).UpdateTransaction(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nocloud.billing.BillingService/UpdateTransaction",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).UpdateTransaction(ctx, req.(*UpdateTransactionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BillingService_GetRecords_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Transaction)
 	if err := dec(in); err != nil {
@@ -572,6 +604,10 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetTransactionsCount",
 			Handler:    _BillingService_GetTransactionsCount_Handler,
+		},
+		{
+			MethodName: "UpdateTransaction",
+			Handler:    _BillingService_UpdateTransaction_Handler,
 		},
 		{
 			MethodName: "GetRecords",
