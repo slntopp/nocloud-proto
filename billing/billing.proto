@@ -189,7 +189,8 @@ message GetTransactionsCountResponse {
 }
 
 message UpdateTransactionRequest {
-  int64 exec = 1;
+  string uuid = 1;
+  int64 exec = 2;
 }
 
 message UpdateTransactionResponse {

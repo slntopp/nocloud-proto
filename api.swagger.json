@@ -4478,6 +4478,9 @@
     "billingUpdateTransactionRequest": {
       "type": "object",
       "properties": {
+        "uuid": {
+          "type": "string"
+        },
         "exec": {
           "type": "string",
           "format": "int64"
