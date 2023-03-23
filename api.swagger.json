@@ -1483,6 +1483,36 @@
         "tags": [
           "BillingService"
         ]
+      },
+      "patch": {
+        "operationId": "BillingService_UpdateTransaction",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingUpdateTransactionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingUpdateTransactionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
       }
     },
     "/billing/transactions/{uuid}": {
@@ -4444,6 +4474,23 @@
     },
     "billingUpdateExchangeRateResponse": {
       "type": "object"
+    },
+    "billingUpdateTransactionRequest": {
+      "type": "object",
+      "properties": {
+        "exec": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "billingUpdateTransactionResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "boolean"
+        }
+      }
     },
     "ccChat": {
       "type": "object",

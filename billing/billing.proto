@@ -188,6 +188,14 @@ message GetTransactionsCountResponse {
   uint64 total = 1;
 }
 
+message UpdateTransactionRequest {
+  int64 exec = 1;
+}
+
+message UpdateTransactionResponse {
+  bool result = 1;
+}
+
 
 service RecordsService {
   rpc GetActive(GetActiveRequest) returns (Records);
@@ -238,6 +246,12 @@ service BillingService {
   rpc GetTransactionsCount (GetTransactionsCountRequest) returns (GetTransactionsCountResponse) {
     option (google.api.http) = {
       get : "/billing/count/transactions"
+    };
+  };
+  rpc UpdateTransaction (UpdateTransactionRequest) returns (UpdateTransactionResponse){
+    option (google.api.http) = {
+      patch : "/billing/transactions"
+      body : "*"
     };
   };
   rpc GetRecords(Transaction) returns (Records) {
