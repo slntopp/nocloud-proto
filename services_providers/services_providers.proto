@@ -23,7 +23,10 @@ import "access/access.proto";
 
 message Var {map<string, google.protobuf.Value> value = 1;}
 
-message ProxyConf {optional string socket = 1;}
+message ProxyConf {
+  optional string socket = 1;
+  optional string console = 2;
+}
 
 message LocationConf {
   float x = 1;

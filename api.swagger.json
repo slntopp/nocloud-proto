@@ -5541,6 +5541,9 @@
       "properties": {
         "socket": {
           "type": "string"
+        },
+        "console": {
+          "type": "string"
         }
       }
     },
