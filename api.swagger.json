@@ -53,6 +53,9 @@
       "name": "EventsService"
     },
     {
+      "name": "EventsLoggingService"
+    },
+    {
       "name": "HealthService"
     },
     {
@@ -1677,7 +1680,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/eventsEvents"
+              "$ref": "#/definitions/nocloudeventsEvents"
             }
           },
           "default": {
@@ -1729,7 +1732,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/eventsEvent"
+              "$ref": "#/definitions/nocloudeventsEvent"
             }
           }
         ],
@@ -1748,13 +1751,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/eventsEvent"
+                  "$ref": "#/definitions/nocloudeventsEvent"
                 },
                 "error": {
                   "$ref": "#/definitions/googlerpcStatus"
                 }
               },
-              "title": "Stream result of eventsEvent"
+              "title": "Stream result of nocloudeventsEvent"
             }
           },
           "default": {
@@ -2265,6 +2268,85 @@
         ],
         "tags": [
           "InstancesService"
+        ]
+      }
+    },
+    "/logging/trace/{requestor}": {
+      "get": {
+        "operationId": "EventsLoggingService_GetTrace",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/nocloudevents_loggingEvents"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "requestor",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "EventsLoggingService"
+        ]
+      }
+    },
+    "/logging/{uuid}": {
+      "get": {
+        "operationId": "EventsLoggingService_GetEvents",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/nocloudevents_loggingEvents"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entity",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "EventsLoggingService"
         ]
       }
     },
@@ -4636,42 +4718,14 @@
         }
       }
     },
-    "eventsEvent": {
+    "events_loggingSnapshot": {
       "type": "object",
       "properties": {
-        "type": {
-          "type": "string"
-        },
-        "uuid": {
-          "type": "string",
-          "title": "Entity uuid e.g. Account, Instance"
-        },
         "id": {
-          "type": "string",
-          "title": "Event id"
-        },
-        "key": {
           "type": "string"
         },
-        "data": {
-          "type": "object",
-          "additionalProperties": {}
-        },
-        "ts": {
-          "type": "string",
-          "format": "int64"
-        }
-      }
-    },
-    "eventsEvents": {
-      "type": "object",
-      "properties": {
-        "events": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/eventsEvent"
-          }
+        "diff": {
+          "type": "string"
         }
       }
     },
@@ -5059,8 +5113,97 @@
         }
       }
     },
+    "nocloudeventsEvent": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string",
+          "title": "Entity uuid e.g. Account, Instance"
+        },
+        "id": {
+          "type": "string",
+          "title": "Event id"
+        },
+        "key": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "ts": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "nocloudeventsEvents": {
+      "type": "object",
+      "properties": {
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/nocloudeventsEvent"
+          }
+        }
+      }
+    },
     "nocloudeventsResponse": {
       "type": "object"
+    },
+    "nocloudevents_loggingEvent": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "entity": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string"
+        },
+        "rc": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "requestor": {
+          "type": "string"
+        },
+        "ts": {
+          "type": "string",
+          "format": "int64"
+        },
+        "snapshot": {
+          "$ref": "#/definitions/events_loggingSnapshot"
+        }
+      }
+    },
+    "nocloudevents_loggingEvents": {
+      "type": "object",
+      "properties": {
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/nocloudevents_loggingEvent"
+          }
+        },
+        "count": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
     },
     "nocloudhealthStatus": {
       "type": "string",
