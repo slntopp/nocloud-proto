@@ -5159,7 +5159,8 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "integer",
+          "format": "int32"
         },
         "entity": {
           "type": "string"
