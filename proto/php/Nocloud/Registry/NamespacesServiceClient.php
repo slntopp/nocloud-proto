@@ -101,4 +101,18 @@ class NamespacesServiceClient extends \Grpc\BaseStub {
         $metadata, $options);
     }
 
+    /**
+     * @param \Nocloud\Registry\Namespaces\PatchRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function Patch(\Nocloud\Registry\Namespaces\PatchRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.registry.NamespacesService/Patch',
+        $argument,
+        ['\Nocloud\Registry\Namespaces\PatchResponse', 'decode'],
+        $metadata, $options);
+    }
+
 }

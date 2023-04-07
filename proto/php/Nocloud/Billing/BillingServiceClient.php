@@ -130,6 +130,34 @@ class BillingServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * @param \Nocloud\Billing\GetTransactionsCountRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function GetTransactionsCount(\Nocloud\Billing\GetTransactionsCountRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/GetTransactionsCount',
+        $argument,
+        ['\Nocloud\Billing\GetTransactionsCountResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Billing\UpdateTransactionRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function UpdateTransaction(\Nocloud\Billing\UpdateTransactionRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/UpdateTransaction',
+        $argument,
+        ['\Nocloud\Billing\UpdateTransactionResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * @param \Nocloud\Billing\Transaction $argument input argument
      * @param array $metadata metadata
      * @param array $options call options

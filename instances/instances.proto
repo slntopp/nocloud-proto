@@ -29,15 +29,20 @@ message Instance {
   string uuid = 1;
   string title = 2;
   statuses.NoCloudStatus status = 3;
+
   map<string, google.protobuf.Value> config = 4
   [(nocloud.hasher.hashed) = true];
   map<string, google.protobuf.Value> resources = 5
   [(nocloud.hasher.hashed) = true];
+
   map<string, google.protobuf.Value> data = 6;
   nocloud.states.State state = 7;
+
   string hash = 8 [(nocloud.hasher.hash) = true];
+
   nocloud.billing.Plan billing_plan = 9 [(nocloud.hasher.skipped) = true];
   optional string product = 10;
+
   optional nocloud.access.Access access = 11;
   int64 created = 12;
 }

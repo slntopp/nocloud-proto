@@ -65,6 +65,10 @@ class ServicesProvider extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>optional .nocloud.access.Access access = 12 [json_name = "access"];</code>
      */
     protected $access = null;
+    /**
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 13 [json_name = "meta"];</code>
+     */
+    private $meta;
 
     /**
      * Constructor.
@@ -86,6 +90,7 @@ class ServicesProvider extends \Google\Protobuf\Internal\Message
      *     @type \Nocloud\ServicesProviders\ProxyConf $proxy
      *     @type array<\Nocloud\ServicesProviders\LocationConf>|\Google\Protobuf\Internal\RepeatedField $locations
      *     @type \Nocloud\Access\Access $access
+     *     @type array|\Google\Protobuf\Internal\MapField $meta
      * }
      */
     public function __construct($data = NULL) {
@@ -391,6 +396,28 @@ class ServicesProvider extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Nocloud\Access\Access::class);
         $this->access = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 13 [json_name = "meta"];</code>
+     * @return \Google\Protobuf\Internal\MapField
+     */
+    public function getMeta()
+    {
+        return $this->meta;
+    }
+
+    /**
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 13 [json_name = "meta"];</code>
+     * @param array|\Google\Protobuf\Internal\MapField $var
+     * @return $this
+     */
+    public function setMeta($var)
+    {
+        $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::MESSAGE, \Google\Protobuf\Value::class);
+        $this->meta = $arr;
 
         return $this;
     }

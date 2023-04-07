@@ -59,4 +59,32 @@ class InstancesServiceClient extends \Grpc\BaseStub {
         $metadata, $options);
     }
 
+    /**
+     * @param \Nocloud\Instances\TransferIGRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function TransferIG(\Nocloud\Instances\TransferIGRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.instances.InstancesService/TransferIG',
+        $argument,
+        ['\Nocloud\Instances\TransferIGResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Instances\TransferInstanceRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function TransferInstance(\Nocloud\Instances\TransferInstanceRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.instances.InstancesService/TransferInstance',
+        $argument,
+        ['\Nocloud\Instances\TransferInstanceResponse', 'decode'],
+        $metadata, $options);
+    }
+
 }

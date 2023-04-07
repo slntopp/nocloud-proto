@@ -37,6 +37,10 @@ class Event extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>map<string, .google.protobuf.Value> data = 5 [json_name = "data"];</code>
      */
     private $data;
+    /**
+     * Generated from protobuf field <code>int64 ts = 6 [json_name = "ts"];</code>
+     */
+    protected $ts = 0;
 
     /**
      * Constructor.
@@ -51,6 +55,7 @@ class Event extends \Google\Protobuf\Internal\Message
      *           Event id
      *     @type string $key
      *     @type array|\Google\Protobuf\Internal\MapField $data
+     *     @type int|string $ts
      * }
      */
     public function __construct($data = NULL) {
@@ -172,6 +177,28 @@ class Event extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::MESSAGE, \Google\Protobuf\Value::class);
         $this->data = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>int64 ts = 6 [json_name = "ts"];</code>
+     * @return int|string
+     */
+    public function getTs()
+    {
+        return $this->ts;
+    }
+
+    /**
+     * Generated from protobuf field <code>int64 ts = 6 [json_name = "ts"];</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setTs($var)
+    {
+        GPBUtil::checkInt64($var);
+        $this->ts = $var;
 
         return $this;
     }

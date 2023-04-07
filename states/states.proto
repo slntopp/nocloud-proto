@@ -29,10 +29,22 @@ enum NoCloudState {
   OPERATION = 7;
 }
 
+enum InterfaceKind {
+  UNSPECIFIED = 0;
+  SSH = 1; // Interface data must contain `host` and may contain `port` and `user`
+}
+
+message Interface {
+  InterfaceKind kind = 1;
+  map<string, string> data = 2;
+}
+
 message State {
   NoCloudState state = 1; // NoCloud Instance State
-  map<string, google.protobuf.Value> meta =
-      2; // Driver(Provider/Hypervisor) State data
+  map<string, google.protobuf.Value> meta = 2; // Driver(Provider/Hypervisor) State data
+    
+  repeated Interface interfaces = 4;
+
   optional int64 ts = 3;
 }
 

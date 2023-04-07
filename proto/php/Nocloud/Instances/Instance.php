@@ -22,7 +22,7 @@ class Instance extends \Google\Protobuf\Internal\Message
      */
     protected $title = '';
     /**
-     * Generated from protobuf field <code>.nocloud.instances.InstanceStatus status = 3 [json_name = "status"];</code>
+     * Generated from protobuf field <code>.nocloud.statuses.NoCloudStatus status = 3 [json_name = "status"];</code>
      */
     protected $status = 0;
     /**
@@ -57,6 +57,10 @@ class Instance extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>optional .nocloud.access.Access access = 11 [json_name = "access"];</code>
      */
     protected $access = null;
+    /**
+     * Generated from protobuf field <code>int64 created = 12 [json_name = "created"];</code>
+     */
+    protected $created = 0;
 
     /**
      * Constructor.
@@ -75,6 +79,7 @@ class Instance extends \Google\Protobuf\Internal\Message
      *     @type \Nocloud\Billing\Plan $billing_plan
      *     @type string $product
      *     @type \Nocloud\Access\Access $access
+     *     @type int|string $created
      * }
      */
     public function __construct($data = NULL) {
@@ -127,7 +132,7 @@ class Instance extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.nocloud.instances.InstanceStatus status = 3 [json_name = "status"];</code>
+     * Generated from protobuf field <code>.nocloud.statuses.NoCloudStatus status = 3 [json_name = "status"];</code>
      * @return int
      */
     public function getStatus()
@@ -136,13 +141,13 @@ class Instance extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.nocloud.instances.InstanceStatus status = 3 [json_name = "status"];</code>
+     * Generated from protobuf field <code>.nocloud.statuses.NoCloudStatus status = 3 [json_name = "status"];</code>
      * @param int $var
      * @return $this
      */
     public function setStatus($var)
     {
-        GPBUtil::checkEnum($var, \Nocloud\Instances\InstanceStatus::class);
+        GPBUtil::checkEnum($var, \Nocloud\Statuses\NoCloudStatus::class);
         $this->status = $var;
 
         return $this;
@@ -360,6 +365,28 @@ class Instance extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Nocloud\Access\Access::class);
         $this->access = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>int64 created = 12 [json_name = "created"];</code>
+     * @return int|string
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Generated from protobuf field <code>int64 created = 12 [json_name = "created"];</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setCreated($var)
+    {
+        GPBUtil::checkInt64($var);
+        $this->created = $var;
 
         return $this;
     }
