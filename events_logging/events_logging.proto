@@ -48,10 +48,14 @@ message GetEventsRequest {
 
   optional string scope = 3;
   optional int64 page = 4;
+  optional int64 limit = 5;
 }
 
 message GetTraceRequest {
   string requestor = 1;
+
+  optional int64 page = 2;
+  optional int64 limit = 3;
 }
 
 service EventsLoggingService {
