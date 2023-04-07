@@ -175,6 +175,7 @@ message GetTransactionsRequest {
   optional uint64 limit = 4;
   optional string field = 5;
   optional string sort = 6;
+  optional string uuid = 7; // Get a single Transaction (would embed records too)
 }
 
 message ReprocessTransactionsRequest {string account = 1;}
