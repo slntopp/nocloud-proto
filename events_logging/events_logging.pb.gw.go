@@ -32,7 +32,7 @@ var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
 var (
-	filter_EventsLoggingService_GetEvents_0 = &utilities.DoubleArray{Encoding: map[string]int{"uuid": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
+	filter_EventsLoggingService_GetEvents_0 = &utilities.DoubleArray{Encoding: map[string]int{"uuid": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 )
 
 func request_EventsLoggingService_GetEvents_0(ctx context.Context, marshaler runtime.Marshaler, client EventsLoggingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -101,6 +101,10 @@ func local_request_EventsLoggingService_GetEvents_0(ctx context.Context, marshal
 
 }
 
+var (
+	filter_EventsLoggingService_GetTrace_0 = &utilities.DoubleArray{Encoding: map[string]int{"requestor": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+)
+
 func request_EventsLoggingService_GetTrace_0(ctx context.Context, marshaler runtime.Marshaler, client EventsLoggingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetTraceRequest
 	var metadata runtime.ServerMetadata
@@ -120,6 +124,13 @@ func request_EventsLoggingService_GetTrace_0(ctx context.Context, marshaler runt
 	protoReq.Requestor, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "requestor", err)
+	}
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_EventsLoggingService_GetTrace_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
 	msg, err := client.GetTrace(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -146,6 +157,13 @@ func local_request_EventsLoggingService_GetTrace_0(ctx context.Context, marshale
 	protoReq.Requestor, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "requestor", err)
+	}
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_EventsLoggingService_GetTrace_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
 	msg, err := server.GetTrace(ctx, &protoReq)
@@ -215,7 +233,7 @@ func RegisterEventsLoggingServiceHandlerServer(ctx context.Context, mux *runtime
 // RegisterEventsLoggingServiceHandlerFromEndpoint is same as RegisterEventsLoggingServiceHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
 func RegisterEventsLoggingServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
-	conn, err := grpc.DialContext(ctx, endpoint, opts...)
+	conn, err := grpc.Dial(endpoint, opts...)
 	if err != nil {
 		return err
 	}
