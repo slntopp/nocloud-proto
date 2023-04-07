@@ -26,7 +26,7 @@ class Service extends \Google\Protobuf\Internal\Message
      */
     protected $title = '';
     /**
-     * Generated from protobuf field <code>.nocloud.services.ServiceStatus status = 4 [json_name = "status"];</code>
+     * Generated from protobuf field <code>.nocloud.statuses.NoCloudStatus status = 4 [json_name = "status"];</code>
      */
     protected $status = 0;
     /**
@@ -134,7 +134,7 @@ class Service extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.nocloud.services.ServiceStatus status = 4 [json_name = "status"];</code>
+     * Generated from protobuf field <code>.nocloud.statuses.NoCloudStatus status = 4 [json_name = "status"];</code>
      * @return int
      */
     public function getStatus()
@@ -143,13 +143,13 @@ class Service extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.nocloud.services.ServiceStatus status = 4 [json_name = "status"];</code>
+     * Generated from protobuf field <code>.nocloud.statuses.NoCloudStatus status = 4 [json_name = "status"];</code>
      * @param int $var
      * @return $this
      */
     public function setStatus($var)
     {
-        GPBUtil::checkEnum($var, \Nocloud\Services\ServiceStatus::class);
+        GPBUtil::checkEnum($var, \Nocloud\Statuses\NoCloudStatus::class);
         $this->status = $var;
 
         return $this;
