@@ -134,7 +134,7 @@ func local_request_BillingService_UpdatePlan_0(ctx context.Context, marshaler ru
 }
 
 var (
-	filter_BillingService_GetPlan_0 = &utilities.DoubleArray{Encoding: map[string]int{"uuid": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+	filter_BillingService_GetPlan_0 = &utilities.DoubleArray{Encoding: map[string]int{"uuid": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
 )
 
 func request_BillingService_GetPlan_0(ctx context.Context, marshaler runtime.Marshaler, client BillingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -240,7 +240,7 @@ func local_request_BillingService_ListPlans_0(ctx context.Context, marshaler run
 }
 
 var (
-	filter_BillingService_DeletePlan_0 = &utilities.DoubleArray{Encoding: map[string]int{"uuid": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+	filter_BillingService_DeletePlan_0 = &utilities.DoubleArray{Encoding: map[string]int{"uuid": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
 )
 
 func request_BillingService_DeletePlan_0(ctx context.Context, marshaler runtime.Marshaler, client BillingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -484,7 +484,7 @@ func local_request_BillingService_UpdateTransaction_0(ctx context.Context, marsh
 }
 
 var (
-	filter_BillingService_GetRecords_0 = &utilities.DoubleArray{Encoding: map[string]int{"uuid": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+	filter_BillingService_GetRecords_0 = &utilities.DoubleArray{Encoding: map[string]int{"uuid": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
 )
 
 func request_BillingService_GetRecords_0(ctx context.Context, marshaler runtime.Marshaler, client BillingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -605,9 +605,20 @@ func local_request_BillingService_Reprocess_0(ctx context.Context, marshaler run
 
 }
 
+var (
+	filter_CurrencyService_GetCurrencies_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+)
+
 func request_CurrencyService_GetCurrencies_0(ctx context.Context, marshaler runtime.Marshaler, client CurrencyServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetCurrenciesRequest
 	var metadata runtime.ServerMetadata
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_CurrencyService_GetCurrencies_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
 
 	msg, err := client.GetCurrencies(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
@@ -617,6 +628,13 @@ func request_CurrencyService_GetCurrencies_0(ctx context.Context, marshaler runt
 func local_request_CurrencyService_GetCurrencies_0(ctx context.Context, marshaler runtime.Marshaler, server CurrencyServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetCurrenciesRequest
 	var metadata runtime.ServerMetadata
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_CurrencyService_GetCurrencies_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
 
 	msg, err := server.GetCurrencies(ctx, &protoReq)
 	return msg, metadata, err
@@ -705,9 +723,20 @@ func local_request_CurrencyService_GetExchangeRate_0(ctx context.Context, marsha
 
 }
 
+var (
+	filter_CurrencyService_GetExchangeRates_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+)
+
 func request_CurrencyService_GetExchangeRates_0(ctx context.Context, marshaler runtime.Marshaler, client CurrencyServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetExchangeRatesRequest
 	var metadata runtime.ServerMetadata
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_CurrencyService_GetExchangeRates_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
 
 	msg, err := client.GetExchangeRates(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
@@ -717,6 +746,13 @@ func request_CurrencyService_GetExchangeRates_0(ctx context.Context, marshaler r
 func local_request_CurrencyService_GetExchangeRates_0(ctx context.Context, marshaler runtime.Marshaler, server CurrencyServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetExchangeRatesRequest
 	var metadata runtime.ServerMetadata
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_CurrencyService_GetExchangeRates_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
 
 	msg, err := server.GetExchangeRates(ctx, &protoReq)
 	return msg, metadata, err
@@ -1378,7 +1414,7 @@ func RegisterCurrencyServiceHandlerServer(ctx context.Context, mux *runtime.Serv
 // RegisterBillingServiceHandlerFromEndpoint is same as RegisterBillingServiceHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
 func RegisterBillingServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
-	conn, err := grpc.Dial(endpoint, opts...)
+	conn, err := grpc.DialContext(ctx, endpoint, opts...)
 	if err != nil {
 		return err
 	}
@@ -1709,7 +1745,7 @@ var (
 // RegisterCurrencyServiceHandlerFromEndpoint is same as RegisterCurrencyServiceHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
 func RegisterCurrencyServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
-	conn, err := grpc.Dial(endpoint, opts...)
+	conn, err := grpc.DialContext(ctx, endpoint, opts...)
 	if err != nil {
 		return err
 	}

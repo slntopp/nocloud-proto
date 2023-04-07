@@ -294,7 +294,9 @@ message DeleteExchangeRateRequest {
 }
 message DeleteExchangeRateResponse {}
 
-message GetCurrenciesRequest {}
+message GetCurrenciesRequest {
+  bool anonymously = 1;
+}
 message GetCurrenciesResponse {repeated Currency currencies = 1;}
 
 message GetExchangeRateRequest {
@@ -302,7 +304,9 @@ message GetExchangeRateRequest {
   Currency to = 2;
 }
 
-message GetExchangeRatesRequest {}
+message GetExchangeRatesRequest {
+  bool anonymously = 1;
+}
 
 message GetExchangeRateResponse {
   Currency from = 1;
