@@ -43,31 +43,31 @@ message Events {
 }
 
 message GetEventsRequest {
-  string entity = 1;
-  string uuid = 2;
-
-  optional string scope = 3;
-  optional int64 page = 4;
-  optional int64 limit = 5;
+  optional string requestor = 1;
+  optional string uuid = 2;
+  optional int64 page = 3;
+  optional int64 limit = 4;
 }
 
-message GetTraceRequest {
-  string requestor = 1;
+message GetEventsCountRequest {
+  optional string requestor = 1;
+  optional string uuid = 2;
+}
 
-  optional int64 page = 2;
-  optional int64 limit = 3;
+message GetEventsCountResponse {
+  uint64 total = 1;
 }
 
 service EventsLoggingService {
   rpc GetEvents(GetEventsRequest) returns (Events) {
     option (google.api.http) = {
-      get : "/logging/{uuid}"
+      get : "/logging"
     };
   };
 
-  rpc GetTrace(GetTraceRequest) returns (Events) {
+  rpc GetCount(GetEventsCountRequest) returns (GetEventsCountResponse) {
     option (google.api.http) = {
-      get : "/logging/trace/{requestor}"
+      get : "/logging/count"
     };
   };
 }

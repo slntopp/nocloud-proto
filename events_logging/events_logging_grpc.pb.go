@@ -23,7 +23,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type EventsLoggingServiceClient interface {
 	GetEvents(ctx context.Context, in *GetEventsRequest, opts ...grpc.CallOption) (*Events, error)
-	GetTrace(ctx context.Context, in *GetTraceRequest, opts ...grpc.CallOption) (*Events, error)
+	GetCount(ctx context.Context, in *GetEventsCountRequest, opts ...grpc.CallOption) (*GetEventsCountResponse, error)
 }
 
 type eventsLoggingServiceClient struct {
@@ -43,9 +43,9 @@ func (c *eventsLoggingServiceClient) GetEvents(ctx context.Context, in *GetEvent
 	return out, nil
 }
 
-func (c *eventsLoggingServiceClient) GetTrace(ctx context.Context, in *GetTraceRequest, opts ...grpc.CallOption) (*Events, error) {
-	out := new(Events)
-	err := c.cc.Invoke(ctx, "/nocloud.events_logging.EventsLoggingService/GetTrace", in, out, opts...)
+func (c *eventsLoggingServiceClient) GetCount(ctx context.Context, in *GetEventsCountRequest, opts ...grpc.CallOption) (*GetEventsCountResponse, error) {
+	out := new(GetEventsCountResponse)
+	err := c.cc.Invoke(ctx, "/nocloud.events_logging.EventsLoggingService/GetCount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ func (c *eventsLoggingServiceClient) GetTrace(ctx context.Context, in *GetTraceR
 // for forward compatibility
 type EventsLoggingServiceServer interface {
 	GetEvents(context.Context, *GetEventsRequest) (*Events, error)
-	GetTrace(context.Context, *GetTraceRequest) (*Events, error)
+	GetCount(context.Context, *GetEventsCountRequest) (*GetEventsCountResponse, error)
 	mustEmbedUnimplementedEventsLoggingServiceServer()
 }
 
@@ -68,8 +68,8 @@ type UnimplementedEventsLoggingServiceServer struct {
 func (UnimplementedEventsLoggingServiceServer) GetEvents(context.Context, *GetEventsRequest) (*Events, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetEvents not implemented")
 }
-func (UnimplementedEventsLoggingServiceServer) GetTrace(context.Context, *GetTraceRequest) (*Events, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetTrace not implemented")
+func (UnimplementedEventsLoggingServiceServer) GetCount(context.Context, *GetEventsCountRequest) (*GetEventsCountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCount not implemented")
 }
 func (UnimplementedEventsLoggingServiceServer) mustEmbedUnimplementedEventsLoggingServiceServer() {}
 
@@ -102,20 +102,20 @@ func _EventsLoggingService_GetEvents_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _EventsLoggingService_GetTrace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTraceRequest)
+func _EventsLoggingService_GetCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetEventsCountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EventsLoggingServiceServer).GetTrace(ctx, in)
+		return srv.(EventsLoggingServiceServer).GetCount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nocloud.events_logging.EventsLoggingService/GetTrace",
+		FullMethod: "/nocloud.events_logging.EventsLoggingService/GetCount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EventsLoggingServiceServer).GetTrace(ctx, req.(*GetTraceRequest))
+		return srv.(EventsLoggingServiceServer).GetCount(ctx, req.(*GetEventsCountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -132,8 +132,8 @@ var EventsLoggingService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _EventsLoggingService_GetEvents_Handler,
 		},
 		{
-			MethodName: "GetTrace",
-			Handler:    _EventsLoggingService_GetTrace_Handler,
+			MethodName: "GetCount",
+			Handler:    _EventsLoggingService_GetCount_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

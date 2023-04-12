@@ -399,7 +399,7 @@ func RegisterInstancesServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 // RegisterInstancesServiceHandlerFromEndpoint is same as RegisterInstancesServiceHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
 func RegisterInstancesServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
-	conn, err := grpc.Dial(endpoint, opts...)
+	conn, err := grpc.DialContext(ctx, endpoint, opts...)
 	if err != nil {
 		return err
 	}
