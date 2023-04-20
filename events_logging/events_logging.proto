@@ -59,7 +59,7 @@ message GetEventsCountRequest {
 
 message GetEventsCountResponse {
   uint64 total = 1;
-  map<string, google.protobuf.Value> unique = 2;
+  google.protobuf.Value unique = 2;
 }
 
 service EventsLoggingService {
