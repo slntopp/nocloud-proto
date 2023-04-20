@@ -47,6 +47,8 @@ message GetEventsRequest {
   optional string uuid = 2;
   optional int64 page = 3;
   optional int64 limit = 4;
+  optional string field = 5;
+  optional string sort = 6;
 }
 
 message GetEventsCountRequest {
