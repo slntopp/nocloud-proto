@@ -42,10 +42,6 @@ message Events {
   int64 count = 2;
 }
 
-message FilterValues {
-  repeated string values = 1;
-}
-
 message GetEventsRequest {
   optional string requestor = 1;
   optional string uuid = 2;
@@ -53,8 +49,7 @@ message GetEventsRequest {
   optional int64 limit = 4;
   optional string field = 5;
   optional string sort = 6;
-  optional string filter = 7;
-  repeated string filter_values = 8;
+  map<string, google.protobuf.Value> filters = 7;
 }
 
 message GetEventsCountRequest {

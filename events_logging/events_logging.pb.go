@@ -25,7 +25,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/known/structpb"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	reflect "reflect"
 	sync "sync"
 )
@@ -258,72 +258,24 @@ func (x *Events) GetCount() int64 {
 	return 0
 }
 
-type FilterValues struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Values []string `protobuf:"bytes,1,rep,name=values,proto3" json:"values,omitempty"`
-}
-
-func (x *FilterValues) Reset() {
-	*x = FilterValues{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_events_logging_events_logging_proto_msgTypes[3]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *FilterValues) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*FilterValues) ProtoMessage() {}
-
-func (x *FilterValues) ProtoReflect() protoreflect.Message {
-	mi := &file_events_logging_events_logging_proto_msgTypes[3]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use FilterValues.ProtoReflect.Descriptor instead.
-func (*FilterValues) Descriptor() ([]byte, []int) {
-	return file_events_logging_events_logging_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *FilterValues) GetValues() []string {
-	if x != nil {
-		return x.Values
-	}
-	return nil
-}
-
 type GetEventsRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Requestor    *string  `protobuf:"bytes,1,opt,name=requestor,proto3,oneof" json:"requestor,omitempty"`
-	Uuid         *string  `protobuf:"bytes,2,opt,name=uuid,proto3,oneof" json:"uuid,omitempty"`
-	Page         *int64   `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	Limit        *int64   `protobuf:"varint,4,opt,name=limit,proto3,oneof" json:"limit,omitempty"`
-	Field        *string  `protobuf:"bytes,5,opt,name=field,proto3,oneof" json:"field,omitempty"`
-	Sort         *string  `protobuf:"bytes,6,opt,name=sort,proto3,oneof" json:"sort,omitempty"`
-	Filter       *string  `protobuf:"bytes,7,opt,name=filter,proto3,oneof" json:"filter,omitempty"`
-	FilterValues []string `protobuf:"bytes,8,rep,name=filter_values,json=filterValues,proto3" json:"filter_values,omitempty"`
+	Requestor *string                    `protobuf:"bytes,1,opt,name=requestor,proto3,oneof" json:"requestor,omitempty"`
+	Uuid      *string                    `protobuf:"bytes,2,opt,name=uuid,proto3,oneof" json:"uuid,omitempty"`
+	Page      *int64                     `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	Limit     *int64                     `protobuf:"varint,4,opt,name=limit,proto3,oneof" json:"limit,omitempty"`
+	Field     *string                    `protobuf:"bytes,5,opt,name=field,proto3,oneof" json:"field,omitempty"`
+	Sort      *string                    `protobuf:"bytes,6,opt,name=sort,proto3,oneof" json:"sort,omitempty"`
+	Filters   map[string]*structpb.Value `protobuf:"bytes,7,rep,name=filters,proto3" json:"filters,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *GetEventsRequest) Reset() {
 	*x = GetEventsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_events_logging_events_logging_proto_msgTypes[4]
+		mi := &file_events_logging_events_logging_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -336,7 +288,7 @@ func (x *GetEventsRequest) String() string {
 func (*GetEventsRequest) ProtoMessage() {}
 
 func (x *GetEventsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_events_logging_events_logging_proto_msgTypes[4]
+	mi := &file_events_logging_events_logging_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -349,7 +301,7 @@ func (x *GetEventsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetEventsRequest.ProtoReflect.Descriptor instead.
 func (*GetEventsRequest) Descriptor() ([]byte, []int) {
-	return file_events_logging_events_logging_proto_rawDescGZIP(), []int{4}
+	return file_events_logging_events_logging_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *GetEventsRequest) GetRequestor() string {
@@ -394,16 +346,9 @@ func (x *GetEventsRequest) GetSort() string {
 	return ""
 }
 
-func (x *GetEventsRequest) GetFilter() string {
-	if x != nil && x.Filter != nil {
-		return *x.Filter
-	}
-	return ""
-}
-
-func (x *GetEventsRequest) GetFilterValues() []string {
+func (x *GetEventsRequest) GetFilters() map[string]*structpb.Value {
 	if x != nil {
-		return x.FilterValues
+		return x.Filters
 	}
 	return nil
 }
@@ -420,7 +365,7 @@ type GetEventsCountRequest struct {
 func (x *GetEventsCountRequest) Reset() {
 	*x = GetEventsCountRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_events_logging_events_logging_proto_msgTypes[5]
+		mi := &file_events_logging_events_logging_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -433,7 +378,7 @@ func (x *GetEventsCountRequest) String() string {
 func (*GetEventsCountRequest) ProtoMessage() {}
 
 func (x *GetEventsCountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_events_logging_events_logging_proto_msgTypes[5]
+	mi := &file_events_logging_events_logging_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -446,7 +391,7 @@ func (x *GetEventsCountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetEventsCountRequest.ProtoReflect.Descriptor instead.
 func (*GetEventsCountRequest) Descriptor() ([]byte, []int) {
-	return file_events_logging_events_logging_proto_rawDescGZIP(), []int{5}
+	return file_events_logging_events_logging_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *GetEventsCountRequest) GetRequestor() string {
@@ -474,7 +419,7 @@ type GetEventsCountResponse struct {
 func (x *GetEventsCountResponse) Reset() {
 	*x = GetEventsCountResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_events_logging_events_logging_proto_msgTypes[6]
+		mi := &file_events_logging_events_logging_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -487,7 +432,7 @@ func (x *GetEventsCountResponse) String() string {
 func (*GetEventsCountResponse) ProtoMessage() {}
 
 func (x *GetEventsCountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_events_logging_events_logging_proto_msgTypes[6]
+	mi := &file_events_logging_events_logging_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -500,7 +445,7 @@ func (x *GetEventsCountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetEventsCountResponse.ProtoReflect.Descriptor instead.
 func (*GetEventsCountResponse) Descriptor() ([]byte, []int) {
-	return file_events_logging_events_logging_proto_rawDescGZIP(), []int{6}
+	return file_events_logging_events_logging_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *GetEventsCountResponse) GetTotal() uint64 {
@@ -545,29 +490,32 @@ var file_events_logging_events_logging_proto_rawDesc = []byte{
 	0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x5f, 0x6c, 0x6f, 0x67, 0x67, 0x69, 0x6e, 0x67, 0x2e, 0x45,
 	0x76, 0x65, 0x6e, 0x74, 0x52, 0x06, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x12, 0x14, 0x0a, 0x05,
 	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x63, 0x6f, 0x75,
-	0x6e, 0x74, 0x22, 0x26, 0x0a, 0x0c, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x56, 0x61, 0x6c, 0x75,
-	0x65, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03,
-	0x28, 0x09, 0x52, 0x06, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x73, 0x22, 0xc0, 0x02, 0x0a, 0x10, 0x47,
-	0x65, 0x74, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
-	0x21, 0x0a, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x6f, 0x72, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x09, 0x48, 0x00, 0x52, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x6f, 0x72, 0x88,
-	0x01, 0x01, 0x12, 0x17, 0x0a, 0x04, 0x75, 0x75, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
-	0x48, 0x01, 0x52, 0x04, 0x75, 0x75, 0x69, 0x64, 0x88, 0x01, 0x01, 0x12, 0x17, 0x0a, 0x04, 0x70,
-	0x61, 0x67, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x48, 0x02, 0x52, 0x04, 0x70, 0x61, 0x67,
-	0x65, 0x88, 0x01, 0x01, 0x12, 0x19, 0x0a, 0x05, 0x6c, 0x69, 0x6d, 0x69, 0x74, 0x18, 0x04, 0x20,
-	0x01, 0x28, 0x03, 0x48, 0x03, 0x52, 0x05, 0x6c, 0x69, 0x6d, 0x69, 0x74, 0x88, 0x01, 0x01, 0x12,
-	0x19, 0x0a, 0x05, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x48, 0x04,
-	0x52, 0x05, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x88, 0x01, 0x01, 0x12, 0x17, 0x0a, 0x04, 0x73, 0x6f,
-	0x72, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x48, 0x05, 0x52, 0x04, 0x73, 0x6f, 0x72, 0x74,
-	0x88, 0x01, 0x01, 0x12, 0x1b, 0x0a, 0x06, 0x66, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x18, 0x07, 0x20,
-	0x01, 0x28, 0x09, 0x48, 0x06, 0x52, 0x06, 0x66, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x88, 0x01, 0x01,
-	0x12, 0x23, 0x0a, 0x0d, 0x66, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x5f, 0x76, 0x61, 0x6c, 0x75, 0x65,
-	0x73, 0x18, 0x08, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0c, 0x66, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x56,
-	0x61, 0x6c, 0x75, 0x65, 0x73, 0x42, 0x0c, 0x0a, 0x0a, 0x5f, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x6f, 0x72, 0x42, 0x07, 0x0a, 0x05, 0x5f, 0x75, 0x75, 0x69, 0x64, 0x42, 0x07, 0x0a, 0x05,
-	0x5f, 0x70, 0x61, 0x67, 0x65, 0x42, 0x08, 0x0a, 0x06, 0x5f, 0x6c, 0x69, 0x6d, 0x69, 0x74, 0x42,
-	0x08, 0x0a, 0x06, 0x5f, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x42, 0x07, 0x0a, 0x05, 0x5f, 0x73, 0x6f,
-	0x72, 0x74, 0x42, 0x09, 0x0a, 0x07, 0x5f, 0x66, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x22, 0x6a, 0x0a,
+	0x6e, 0x74, 0x22, 0x98, 0x03, 0x0a, 0x10, 0x47, 0x65, 0x74, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x73,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x21, 0x0a, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x6f, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x48, 0x00, 0x52, 0x09, 0x72, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x6f, 0x72, 0x88, 0x01, 0x01, 0x12, 0x17, 0x0a, 0x04, 0x75, 0x75,
+	0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x48, 0x01, 0x52, 0x04, 0x75, 0x75, 0x69, 0x64,
+	0x88, 0x01, 0x01, 0x12, 0x17, 0x0a, 0x04, 0x70, 0x61, 0x67, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x03, 0x48, 0x02, 0x52, 0x04, 0x70, 0x61, 0x67, 0x65, 0x88, 0x01, 0x01, 0x12, 0x19, 0x0a, 0x05,
+	0x6c, 0x69, 0x6d, 0x69, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x48, 0x03, 0x52, 0x05, 0x6c,
+	0x69, 0x6d, 0x69, 0x74, 0x88, 0x01, 0x01, 0x12, 0x19, 0x0a, 0x05, 0x66, 0x69, 0x65, 0x6c, 0x64,
+	0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x48, 0x04, 0x52, 0x05, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x88,
+	0x01, 0x01, 0x12, 0x17, 0x0a, 0x04, 0x73, 0x6f, 0x72, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09,
+	0x48, 0x05, 0x52, 0x04, 0x73, 0x6f, 0x72, 0x74, 0x88, 0x01, 0x01, 0x12, 0x4f, 0x0a, 0x07, 0x66,
+	0x69, 0x6c, 0x74, 0x65, 0x72, 0x73, 0x18, 0x07, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x35, 0x2e, 0x6e,
+	0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x5f, 0x6c, 0x6f,
+	0x67, 0x67, 0x69, 0x6e, 0x67, 0x2e, 0x47, 0x65, 0x74, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x73, 0x45, 0x6e,
+	0x74, 0x72, 0x79, 0x52, 0x07, 0x66, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x73, 0x1a, 0x52, 0x0a, 0x0c,
+	0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03,
+	0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x2c,
+	0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e,
+	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e,
+	0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01,
+	0x42, 0x0c, 0x0a, 0x0a, 0x5f, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x6f, 0x72, 0x42, 0x07,
+	0x0a, 0x05, 0x5f, 0x75, 0x75, 0x69, 0x64, 0x42, 0x07, 0x0a, 0x05, 0x5f, 0x70, 0x61, 0x67, 0x65,
+	0x42, 0x08, 0x0a, 0x06, 0x5f, 0x6c, 0x69, 0x6d, 0x69, 0x74, 0x42, 0x08, 0x0a, 0x06, 0x5f, 0x66,
+	0x69, 0x65, 0x6c, 0x64, 0x42, 0x07, 0x0a, 0x05, 0x5f, 0x73, 0x6f, 0x72, 0x74, 0x22, 0x6a, 0x0a,
 	0x15, 0x47, 0x65, 0x74, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x52,
 	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x21, 0x0a, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73,
 	0x74, 0x6f, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x48, 0x00, 0x52, 0x09, 0x72, 0x65, 0x71,
@@ -627,23 +575,26 @@ var file_events_logging_events_logging_proto_goTypes = []interface{}{
 	(*Snapshot)(nil),               // 0: nocloud.events_logging.Snapshot
 	(*Event)(nil),                  // 1: nocloud.events_logging.Event
 	(*Events)(nil),                 // 2: nocloud.events_logging.Events
-	(*FilterValues)(nil),           // 3: nocloud.events_logging.FilterValues
-	(*GetEventsRequest)(nil),       // 4: nocloud.events_logging.GetEventsRequest
-	(*GetEventsCountRequest)(nil),  // 5: nocloud.events_logging.GetEventsCountRequest
-	(*GetEventsCountResponse)(nil), // 6: nocloud.events_logging.GetEventsCountResponse
+	(*GetEventsRequest)(nil),       // 3: nocloud.events_logging.GetEventsRequest
+	(*GetEventsCountRequest)(nil),  // 4: nocloud.events_logging.GetEventsCountRequest
+	(*GetEventsCountResponse)(nil), // 5: nocloud.events_logging.GetEventsCountResponse
+	nil,                            // 6: nocloud.events_logging.GetEventsRequest.FiltersEntry
+	(*structpb.Value)(nil),         // 7: google.protobuf.Value
 }
 var file_events_logging_events_logging_proto_depIdxs = []int32{
 	0, // 0: nocloud.events_logging.Event.snapshot:type_name -> nocloud.events_logging.Snapshot
 	1, // 1: nocloud.events_logging.Events.events:type_name -> nocloud.events_logging.Event
-	4, // 2: nocloud.events_logging.EventsLoggingService.GetEvents:input_type -> nocloud.events_logging.GetEventsRequest
-	5, // 3: nocloud.events_logging.EventsLoggingService.GetCount:input_type -> nocloud.events_logging.GetEventsCountRequest
-	2, // 4: nocloud.events_logging.EventsLoggingService.GetEvents:output_type -> nocloud.events_logging.Events
-	6, // 5: nocloud.events_logging.EventsLoggingService.GetCount:output_type -> nocloud.events_logging.GetEventsCountResponse
-	4, // [4:6] is the sub-list for method output_type
-	2, // [2:4] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	6, // 2: nocloud.events_logging.GetEventsRequest.filters:type_name -> nocloud.events_logging.GetEventsRequest.FiltersEntry
+	7, // 3: nocloud.events_logging.GetEventsRequest.FiltersEntry.value:type_name -> google.protobuf.Value
+	3, // 4: nocloud.events_logging.EventsLoggingService.GetEvents:input_type -> nocloud.events_logging.GetEventsRequest
+	4, // 5: nocloud.events_logging.EventsLoggingService.GetCount:input_type -> nocloud.events_logging.GetEventsCountRequest
+	2, // 6: nocloud.events_logging.EventsLoggingService.GetEvents:output_type -> nocloud.events_logging.Events
+	5, // 7: nocloud.events_logging.EventsLoggingService.GetCount:output_type -> nocloud.events_logging.GetEventsCountResponse
+	6, // [6:8] is the sub-list for method output_type
+	4, // [4:6] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_events_logging_events_logging_proto_init() }
@@ -689,18 +640,6 @@ func file_events_logging_events_logging_proto_init() {
 			}
 		}
 		file_events_logging_events_logging_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*FilterValues); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_events_logging_events_logging_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetEventsRequest); i {
 			case 0:
 				return &v.state
@@ -712,7 +651,7 @@ func file_events_logging_events_logging_proto_init() {
 				return nil
 			}
 		}
-		file_events_logging_events_logging_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+		file_events_logging_events_logging_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetEventsCountRequest); i {
 			case 0:
 				return &v.state
@@ -724,7 +663,7 @@ func file_events_logging_events_logging_proto_init() {
 				return nil
 			}
 		}
-		file_events_logging_events_logging_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+		file_events_logging_events_logging_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetEventsCountResponse); i {
 			case 0:
 				return &v.state
@@ -738,8 +677,8 @@ func file_events_logging_events_logging_proto_init() {
 		}
 	}
 	file_events_logging_events_logging_proto_msgTypes[1].OneofWrappers = []interface{}{}
+	file_events_logging_events_logging_proto_msgTypes[3].OneofWrappers = []interface{}{}
 	file_events_logging_events_logging_proto_msgTypes[4].OneofWrappers = []interface{}{}
-	file_events_logging_events_logging_proto_msgTypes[5].OneofWrappers = []interface{}{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
