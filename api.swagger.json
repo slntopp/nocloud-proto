@@ -4750,6 +4750,10 @@
         "total": {
           "type": "string",
           "format": "uint64"
+        },
+        "unique": {
+          "type": "object",
+          "additionalProperties": {}
         }
       }
     },
