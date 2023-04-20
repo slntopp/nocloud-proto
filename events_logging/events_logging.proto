@@ -65,7 +65,8 @@ message GetEventsCountResponse {
 service EventsLoggingService {
   rpc GetEvents(GetEventsRequest) returns (Events) {
     option (google.api.http) = {
-      get : "/logging"
+      post : "/logging"
+      body: "*"
     };
   };
 
