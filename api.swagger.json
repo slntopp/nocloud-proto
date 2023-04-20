@@ -2341,7 +2341,7 @@
             "type": "string"
           },
           {
-            "name": "filterValues.values",
+            "name": "filterValues",
             "in": "query",
             "required": false,
             "type": "array",
@@ -4757,17 +4757,6 @@
         },
         "id": {
           "type": "string"
-        }
-      }
-    },
-    "events_loggingFilterValues": {
-      "type": "object",
-      "properties": {
-        "values": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },

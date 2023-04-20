@@ -54,7 +54,7 @@ message GetEventsRequest {
   optional string field = 5;
   optional string sort = 6;
   optional string filter = 7;
-  optional FilterValues filter_values = 8;
+  repeated string filter_values = 8;
 }
 
 message GetEventsCountRequest {
