@@ -2311,7 +2311,7 @@
       }
     },
     "/logging/count": {
-      "get": {
+      "post": {
         "operationId": "EventsLoggingService_GetCount",
         "responses": {
           "200": {
@@ -2329,16 +2329,12 @@
         },
         "parameters": [
           {
-            "name": "requestor",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "uuid",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/events_loggingGetEventsCountRequest"
+            }
           }
         ],
         "tags": [
@@ -4711,6 +4707,21 @@
         },
         "id": {
           "type": "string"
+        }
+      }
+    },
+    "events_loggingGetEventsCountRequest": {
+      "type": "object",
+      "properties": {
+        "requestor": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string"
+        },
+        "filters": {
+          "type": "object",
+          "additionalProperties": {}
         }
       }
     },
