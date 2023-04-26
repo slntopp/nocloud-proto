@@ -176,6 +176,7 @@ message GetTransactionsRequest {
   optional string field = 5;
   optional string sort = 6;
   optional string uuid = 7; // Get a single Transaction (would embed records too)
+  optional string type = 8;
 }
 
 message ReprocessTransactionsRequest {string account = 1;}
@@ -183,6 +184,7 @@ message ReprocessTransactionsRequest {string account = 1;}
 message GetTransactionsCountRequest {
   optional string account = 1;
   optional string service = 2;
+  optional string type = 3;
 }
 
 message GetTransactionsCountResponse {
