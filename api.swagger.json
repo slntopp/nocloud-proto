@@ -5005,6 +5005,9 @@
         },
         "access": {
           "$ref": "#/definitions/accessAccess"
+        },
+        "type": {
+          "type": "string"
         }
       }
     },
