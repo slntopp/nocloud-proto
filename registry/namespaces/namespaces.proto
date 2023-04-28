@@ -17,6 +17,7 @@ syntax = "proto3";
 package nocloud.registry.namespaces;
 
 import "access/access.proto";
+import "google/protobuf/struct.proto";
 
 message CreateRequest {string title = 1;}
 
@@ -26,6 +27,7 @@ message Namespace {
   string uuid = 1;
   string title = 2;
   optional nocloud.access.Access access = 3;
+  optional string type = 4;
 }
 
 message JoinRequest {
