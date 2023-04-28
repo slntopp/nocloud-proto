@@ -25,6 +25,10 @@ class PBNamespace extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>optional .nocloud.access.Access access = 3 [json_name = "access"];</code>
      */
     protected $access = null;
+    /**
+     * Generated from protobuf field <code>optional string type = 4 [json_name = "type"];</code>
+     */
+    protected $type = null;
 
     /**
      * Constructor.
@@ -35,6 +39,7 @@ class PBNamespace extends \Google\Protobuf\Internal\Message
      *     @type string $uuid
      *     @type string $title
      *     @type \Nocloud\Access\Access $access
+     *     @type string $type
      * }
      */
     public function __construct($data = NULL) {
@@ -114,6 +119,38 @@ class PBNamespace extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Nocloud\Access\Access::class);
         $this->access = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string type = 4 [json_name = "type"];</code>
+     * @return string
+     */
+    public function getType()
+    {
+        return isset($this->type) ? $this->type : '';
+    }
+
+    public function hasType()
+    {
+        return isset($this->type);
+    }
+
+    public function clearType()
+    {
+        unset($this->type);
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string type = 4 [json_name = "type"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setType($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->type = $var;
 
         return $this;
     }

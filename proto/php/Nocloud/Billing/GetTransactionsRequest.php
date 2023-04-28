@@ -43,6 +43,10 @@ class GetTransactionsRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>optional string uuid = 7 [json_name = "uuid"];</code>
      */
     protected $uuid = null;
+    /**
+     * Generated from protobuf field <code>optional string type = 8 [json_name = "type"];</code>
+     */
+    protected $type = null;
 
     /**
      * Constructor.
@@ -58,6 +62,7 @@ class GetTransactionsRequest extends \Google\Protobuf\Internal\Message
      *     @type string $sort
      *     @type string $uuid
      *           Get a single Transaction (would embed records too)
+     *     @type string $type
      * }
      */
     public function __construct($data = NULL) {
@@ -289,6 +294,38 @@ class GetTransactionsRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->uuid = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string type = 8 [json_name = "type"];</code>
+     * @return string
+     */
+    public function getType()
+    {
+        return isset($this->type) ? $this->type : '';
+    }
+
+    public function hasType()
+    {
+        return isset($this->type);
+    }
+
+    public function clearType()
+    {
+        unset($this->type);
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string type = 8 [json_name = "type"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setType($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->type = $var;
 
         return $this;
     }

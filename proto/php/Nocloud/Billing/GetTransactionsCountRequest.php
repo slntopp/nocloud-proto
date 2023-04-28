@@ -21,6 +21,10 @@ class GetTransactionsCountRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>optional string service = 2 [json_name = "service"];</code>
      */
     protected $service = null;
+    /**
+     * Generated from protobuf field <code>optional string type = 3 [json_name = "type"];</code>
+     */
+    protected $type = null;
 
     /**
      * Constructor.
@@ -30,6 +34,7 @@ class GetTransactionsCountRequest extends \Google\Protobuf\Internal\Message
      *
      *     @type string $account
      *     @type string $service
+     *     @type string $type
      * }
      */
     public function __construct($data = NULL) {
@@ -97,6 +102,38 @@ class GetTransactionsCountRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->service = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string type = 3 [json_name = "type"];</code>
+     * @return string
+     */
+    public function getType()
+    {
+        return isset($this->type) ? $this->type : '';
+    }
+
+    public function hasType()
+    {
+        return isset($this->type);
+    }
+
+    public function clearType()
+    {
+        unset($this->type);
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string type = 3 [json_name = "type"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setType($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->type = $var;
 
         return $this;
     }
