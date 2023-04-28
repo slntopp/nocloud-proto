@@ -5006,8 +5006,9 @@
         "access": {
           "$ref": "#/definitions/accessAccess"
         },
-        "type": {
-          "type": "string"
+        "meta": {
+          "type": "object",
+          "additionalProperties": {}
         }
       }
     },
@@ -5511,9 +5512,6 @@
         "currency": {
           "$ref": "#/definitions/billingCurrency",
           "title": "Account Balance Currency"
-        },
-        "type": {
-          "type": "string"
         }
       }
     },
@@ -5521,6 +5519,9 @@
       "type": "object",
       "properties": {
         "uuid": {
+          "type": "string"
+        },
+        "namespace": {
           "type": "string"
         }
       }

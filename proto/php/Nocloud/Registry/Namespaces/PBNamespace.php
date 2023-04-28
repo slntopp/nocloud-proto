@@ -26,9 +26,9 @@ class PBNamespace extends \Google\Protobuf\Internal\Message
      */
     protected $access = null;
     /**
-     * Generated from protobuf field <code>optional string type = 4 [json_name = "type"];</code>
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 4 [json_name = "meta"];</code>
      */
-    protected $type = null;
+    private $meta;
 
     /**
      * Constructor.
@@ -39,7 +39,7 @@ class PBNamespace extends \Google\Protobuf\Internal\Message
      *     @type string $uuid
      *     @type string $title
      *     @type \Nocloud\Access\Access $access
-     *     @type string $type
+     *     @type array|\Google\Protobuf\Internal\MapField $meta
      * }
      */
     public function __construct($data = NULL) {
@@ -124,33 +124,23 @@ class PBNamespace extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>optional string type = 4 [json_name = "type"];</code>
-     * @return string
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 4 [json_name = "meta"];</code>
+     * @return \Google\Protobuf\Internal\MapField
      */
-    public function getType()
+    public function getMeta()
     {
-        return isset($this->type) ? $this->type : '';
-    }
-
-    public function hasType()
-    {
-        return isset($this->type);
-    }
-
-    public function clearType()
-    {
-        unset($this->type);
+        return $this->meta;
     }
 
     /**
-     * Generated from protobuf field <code>optional string type = 4 [json_name = "type"];</code>
-     * @param string $var
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 4 [json_name = "meta"];</code>
+     * @param array|\Google\Protobuf\Internal\MapField $var
      * @return $this
      */
-    public function setType($var)
+    public function setMeta($var)
     {
-        GPBUtil::checkString($var, True);
-        $this->type = $var;
+        $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::MESSAGE, \Google\Protobuf\Value::class);
+        $this->meta = $arr;
 
         return $this;
     }

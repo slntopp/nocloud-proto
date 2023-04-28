@@ -43,10 +43,6 @@ class CreateRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.nocloud.billing.Currency currency = 5 [json_name = "currency"];</code>
      */
     protected $currency = 0;
-    /**
-     * Generated from protobuf field <code>optional string type = 6 [json_name = "type"];</code>
-     */
-    protected $type = null;
 
     /**
      * Constructor.
@@ -64,7 +60,6 @@ class CreateRequest extends \Google\Protobuf\Internal\Message
      *           Account access level to parent namespace
      *     @type int $currency
      *           Account Balance Currency
-     *     @type string $type
      * }
      */
     public function __construct($data = NULL) {
@@ -218,38 +213,6 @@ class CreateRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkEnum($var, \Nocloud\Billing\Currency::class);
         $this->currency = $var;
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>optional string type = 6 [json_name = "type"];</code>
-     * @return string
-     */
-    public function getType()
-    {
-        return isset($this->type) ? $this->type : '';
-    }
-
-    public function hasType()
-    {
-        return isset($this->type);
-    }
-
-    public function clearType()
-    {
-        unset($this->type);
-    }
-
-    /**
-     * Generated from protobuf field <code>optional string type = 6 [json_name = "type"];</code>
-     * @param string $var
-     * @return $this
-     */
-    public function setType($var)
-    {
-        GPBUtil::checkString($var, True);
-        $this->type = $var;
 
         return $this;
     }
