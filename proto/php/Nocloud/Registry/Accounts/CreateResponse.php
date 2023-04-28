@@ -17,6 +17,10 @@ class CreateResponse extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string uuid = 1 [json_name = "uuid"];</code>
      */
     protected $uuid = '';
+    /**
+     * Generated from protobuf field <code>string namespace = 2 [json_name = "namespace"];</code>
+     */
+    protected $namespace = '';
 
     /**
      * Constructor.
@@ -25,6 +29,7 @@ class CreateResponse extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $uuid
+     *     @type string $namespace
      * }
      */
     public function __construct($data = NULL) {
@@ -50,6 +55,28 @@ class CreateResponse extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->uuid = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string namespace = 2 [json_name = "namespace"];</code>
+     * @return string
+     */
+    public function getNamespace()
+    {
+        return $this->namespace;
+    }
+
+    /**
+     * Generated from protobuf field <code>string namespace = 2 [json_name = "namespace"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setNamespace($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->namespace = $var;
 
         return $this;
     }
