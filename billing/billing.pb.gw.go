@@ -416,7 +416,7 @@ func local_request_BillingService_GetTransactionsCount_0(ctx context.Context, ma
 }
 
 func request_BillingService_UpdateTransaction_0(ctx context.Context, marshaler runtime.Marshaler, client BillingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq UpdateTransactionRequest
+	var protoReq Transaction
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -450,7 +450,7 @@ func request_BillingService_UpdateTransaction_0(ctx context.Context, marshaler r
 }
 
 func local_request_BillingService_UpdateTransaction_0(ctx context.Context, marshaler runtime.Marshaler, server BillingServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq UpdateTransactionRequest
+	var protoReq Transaction
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)

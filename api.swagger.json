@@ -1636,6 +1636,7 @@
         "parameters": [
           {
             "name": "uuid",
+            "description": "transaction UUID",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1649,7 +1650,46 @@
               "properties": {
                 "exec": {
                   "type": "string",
-                  "format": "int64"
+                  "format": "int64",
+                  "title": "Timestamp of Transaction planned execution time"
+                },
+                "proc": {
+                  "type": "string",
+                  "format": "int64",
+                  "title": "Timestamp of Transaction processing time"
+                },
+                "processed": {
+                  "type": "boolean",
+                  "title": "Wether Transaction has been processed(applied to"
+                },
+                "priority": {
+                  "$ref": "#/definitions/billingPriority"
+                },
+                "account": {
+                  "type": "string"
+                },
+                "service": {
+                  "type": "string"
+                },
+                "records": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "title": "list of records UUIDs"
+                },
+                "total": {
+                  "type": "number",
+                  "format": "double",
+                  "title": "Transaction total value in NCU"
+                },
+                "meta": {
+                  "type": "object",
+                  "additionalProperties": {},
+                  "title": "Transaction meta data, like\nmeta: {\ntotal: \u003cnumber\u003e // resource \"quantity\", e.g. CPU cores, RAM Mb, Drive\nMb, IP quantity price_atm: \u003cnumber\u003e // hourly price per quant of resouce at\nthe moment, e.g. 1 NCU [other keys]: \u003cany\u003e // for example Drive\nType(SSD/HDD/NVMe/etc)\n}"
+                },
+                "currency": {
+                  "$ref": "#/definitions/billingCurrency"
                 }
               }
             }

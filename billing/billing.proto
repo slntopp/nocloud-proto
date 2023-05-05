@@ -252,7 +252,7 @@ service BillingService {
       get : "/billing/count/transactions"
     };
   };
-  rpc UpdateTransaction (UpdateTransactionRequest) returns (UpdateTransactionResponse){
+  rpc UpdateTransaction (Transaction) returns (UpdateTransactionResponse){
     option (google.api.http) = {
       patch : "/billing/transactions/{uuid}"
       body : "*"
