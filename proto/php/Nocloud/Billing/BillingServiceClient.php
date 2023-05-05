@@ -144,12 +144,12 @@ class BillingServiceClient extends \Grpc\BaseStub {
     }
 
     /**
-     * @param \Nocloud\Billing\UpdateTransactionRequest $argument input argument
+     * @param \Nocloud\Billing\Transaction $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      * @return \Grpc\UnaryCall
      */
-    public function UpdateTransaction(\Nocloud\Billing\UpdateTransactionRequest $argument,
+    public function UpdateTransaction(\Nocloud\Billing\Transaction $argument,
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/nocloud.billing.BillingService/UpdateTransaction',
         $argument,
