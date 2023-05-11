@@ -69,16 +69,20 @@ message DeleteResponse {
 
 message ListExtentionsResponse {repeated string types = 1;}
 
+message Plans {
+  repeated string plans_pool = 1;
+}
+
 message BindPlanRequest {
   string uuid = 1;
-  string plan_uuid = 2;
+  string Plans = 2;
 }
 
 message BindPlanResponse {}
 
 message UnbindPlanRequest {
   string uuid = 1;
-  string plan_uuid = 2;
+  string Plans = 2;
 }
 
 message UnbindPlanResponse {}
@@ -168,7 +172,7 @@ service ServicesProvidersService {
   rpc BindPlan(nocloud.services_providers.BindPlanRequest)
       returns (nocloud.services_providers.BindPlanResponse) {
     option (google.api.http) = {
-      post : "/sp/{uuid}/bind_plan/{plan_uuid}"
+      post : "/sp/{uuid}/bind_plan"
       body : '*'
     };
   };
@@ -176,7 +180,7 @@ service ServicesProvidersService {
   rpc UnbindPlan(nocloud.services_providers.UnbindPlanRequest)
       returns (nocloud.services_providers.UnbindPlanResponse) {
     option (google.api.http) = {
-      post : "/sp/{uuid}/unbind_plan/{plan_uuid}"
+      post : "/sp/{uuid}/unbind_plan"
       body : '*'
     };
   };

@@ -474,16 +474,6 @@ func request_ServicesProvidersService_BindPlan_0(ctx context.Context, marshaler 
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "uuid", err)
 	}
 
-	val, ok = pathParams["plan_uuid"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "plan_uuid")
-	}
-
-	protoReq.PlanUuid, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "plan_uuid", err)
-	}
-
 	msg, err := client.BindPlan(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
@@ -516,16 +506,6 @@ func local_request_ServicesProvidersService_BindPlan_0(ctx context.Context, mars
 	protoReq.Uuid, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "uuid", err)
-	}
-
-	val, ok = pathParams["plan_uuid"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "plan_uuid")
-	}
-
-	protoReq.PlanUuid, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "plan_uuid", err)
 	}
 
 	msg, err := server.BindPlan(ctx, &protoReq)
@@ -562,16 +542,6 @@ func request_ServicesProvidersService_UnbindPlan_0(ctx context.Context, marshale
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "uuid", err)
 	}
 
-	val, ok = pathParams["plan_uuid"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "plan_uuid")
-	}
-
-	protoReq.PlanUuid, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "plan_uuid", err)
-	}
-
 	msg, err := client.UnbindPlan(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
@@ -604,16 +574,6 @@ func local_request_ServicesProvidersService_UnbindPlan_0(ctx context.Context, ma
 	protoReq.Uuid, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "uuid", err)
-	}
-
-	val, ok = pathParams["plan_uuid"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "plan_uuid")
-	}
-
-	protoReq.PlanUuid, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "plan_uuid", err)
 	}
 
 	msg, err := server.UnbindPlan(ctx, &protoReq)
@@ -860,7 +820,7 @@ func RegisterServicesProvidersServiceHandlerServer(ctx context.Context, mux *run
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.services_providers.ServicesProvidersService/BindPlan", runtime.WithHTTPPathPattern("/sp/{uuid}/bind_plan/{plan_uuid}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.services_providers.ServicesProvidersService/BindPlan", runtime.WithHTTPPathPattern("/sp/{uuid}/bind_plan"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -885,7 +845,7 @@ func RegisterServicesProvidersServiceHandlerServer(ctx context.Context, mux *run
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.services_providers.ServicesProvidersService/UnbindPlan", runtime.WithHTTPPathPattern("/sp/{uuid}/unbind_plan/{plan_uuid}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.services_providers.ServicesProvidersService/UnbindPlan", runtime.WithHTTPPathPattern("/sp/{uuid}/unbind_plan"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1147,7 +1107,7 @@ func RegisterServicesProvidersServiceHandlerClient(ctx context.Context, mux *run
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.services_providers.ServicesProvidersService/BindPlan", runtime.WithHTTPPathPattern("/sp/{uuid}/bind_plan/{plan_uuid}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.services_providers.ServicesProvidersService/BindPlan", runtime.WithHTTPPathPattern("/sp/{uuid}/bind_plan"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1169,7 +1129,7 @@ func RegisterServicesProvidersServiceHandlerClient(ctx context.Context, mux *run
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.services_providers.ServicesProvidersService/UnbindPlan", runtime.WithHTTPPathPattern("/sp/{uuid}/unbind_plan/{plan_uuid}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.services_providers.ServicesProvidersService/UnbindPlan", runtime.WithHTTPPathPattern("/sp/{uuid}/unbind_plan"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1207,9 +1167,9 @@ var (
 
 	pattern_ServicesProvidersService_ListExtentions_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"sp-ext"}, ""))
 
-	pattern_ServicesProvidersService_BindPlan_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"sp", "uuid", "bind_plan", "plan_uuid"}, ""))
+	pattern_ServicesProvidersService_BindPlan_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"sp", "uuid", "bind_plan"}, ""))
 
-	pattern_ServicesProvidersService_UnbindPlan_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"sp", "uuid", "unbind_plan", "plan_uuid"}, ""))
+	pattern_ServicesProvidersService_UnbindPlan_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"sp", "uuid", "unbind_plan"}, ""))
 )
 
 var (
