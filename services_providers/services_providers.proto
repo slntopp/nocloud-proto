@@ -69,20 +69,16 @@ message DeleteResponse {
 
 message ListExtentionsResponse {repeated string types = 1;}
 
-message Plans {
-  repeated string plans_pool = 1;
-}
-
 message BindPlanRequest {
   string uuid = 1;
-  string Plans = 2;
+  repeated string plans = 2;
 }
 
 message BindPlanResponse {}
 
 message UnbindPlanRequest {
   string uuid = 1;
-  string Plans = 2;
+  repeated string plans = 2;
 }
 
 message UnbindPlanResponse {}
