@@ -3678,7 +3678,7 @@
         ]
       }
     },
-    "/sp/{uuid}/bind_plan/{planUuid}": {
+    "/sp/{uuid}/bind_plan": {
       "post": {
         "operationId": "ServicesProvidersService_BindPlan",
         "responses": {
@@ -3703,17 +3703,16 @@
             "type": "string"
           },
           {
-            "name": "planUuid",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object"
+              "type": "object",
+              "properties": {
+                "Plans": {
+                  "type": "string"
+                }
+              }
             }
           }
         ],
@@ -3769,7 +3768,7 @@
         ]
       }
     },
-    "/sp/{uuid}/unbind_plan/{planUuid}": {
+    "/sp/{uuid}/unbind_plan": {
       "post": {
         "operationId": "ServicesProvidersService_UnbindPlan",
         "responses": {
@@ -3794,17 +3793,16 @@
             "type": "string"
           },
           {
-            "name": "planUuid",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object"
+              "type": "object",
+              "properties": {
+                "Plans": {
+                  "type": "string"
+                }
+              }
             }
           }
         ],
