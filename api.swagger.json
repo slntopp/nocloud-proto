@@ -3709,8 +3709,11 @@
             "schema": {
               "type": "object",
               "properties": {
-                "Plans": {
-                  "type": "string"
+                "plans": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 }
               }
             }
@@ -3799,8 +3802,11 @@
             "schema": {
               "type": "object",
               "properties": {
-                "Plans": {
-                  "type": "string"
+                "plans": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 }
               }
             }
