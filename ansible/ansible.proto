@@ -18,6 +18,16 @@ import "google/api/annotations.proto";
 
 import "access/access.proto";
 
+// Required for Billing Plans and Instances first run
+message Software {
+  string playbook = 1; // Playbook UUID
+  map<string, string> vars = 2; // Playbook Vars
+  bool autorun = 3; // Automatically run Playbooks once Instance is RUNNING
+  
+  string run = 4; // Run UUID when created
+  bool done = 5; // Is Playbook finished
+}
+
 message Playbook {
   string uuid = 1;
   string logo = 2;

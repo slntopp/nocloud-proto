@@ -18,12 +18,14 @@ package nocloud.instances;
 
 import "google/protobuf/struct.proto";
 import "hasher/hasherpb/hasher.proto";
+
 import "states/states.proto";
 import "billing/billing.proto";
 import "services_providers/services_providers.proto";
 import "google/api/annotations.proto";
 import "access/access.proto";
 import "statuses/statuses.proto";
+import "ansible/ansible.proto";
 
 message Instance {
   string uuid = 1;
@@ -45,6 +47,8 @@ message Instance {
 
   optional nocloud.access.Access access = 11;
   int64 created = 12;
+
+  repeated nocloud.ansible.Software software = 13; // Must match contain all the software from the Billing Plan
 }
 
 message InstancesGroup {
