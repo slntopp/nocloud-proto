@@ -1165,6 +1165,14 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "anonymously",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
         "tags": [
           "BillingService"
         ]

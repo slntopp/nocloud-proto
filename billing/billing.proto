@@ -72,7 +72,9 @@ message ListRequest {
 }
 message ListResponse {repeated Plan pool = 1;}
 
-message ListPlansInstancesRequest{}
+message ListPlansInstancesRequest{
+  bool anonymously = 1;
+}
 
 message ListPlansInstancesResponse{
   map<string, google.protobuf.Value> plans = 1;
