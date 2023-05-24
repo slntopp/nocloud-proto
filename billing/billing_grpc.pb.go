@@ -184,6 +184,7 @@ type BillingServiceClient interface {
 	UpdatePlan(ctx context.Context, in *Plan, opts ...grpc.CallOption) (*Plan, error)
 	GetPlan(ctx context.Context, in *Plan, opts ...grpc.CallOption) (*Plan, error)
 	ListPlans(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListResponse, error)
+	ListPlansInstances(ctx context.Context, in *ListPlansInstancesRequest, opts ...grpc.CallOption) (*ListPlansInstancesResponse, error)
 	DeletePlan(ctx context.Context, in *Plan, opts ...grpc.CallOption) (*Plan, error)
 	CreateTransaction(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*Transaction, error)
 	GetTransactions(ctx context.Context, in *GetTransactionsRequest, opts ...grpc.CallOption) (*Transactions, error)
@@ -231,6 +232,15 @@ func (c *billingServiceClient) GetPlan(ctx context.Context, in *Plan, opts ...gr
 func (c *billingServiceClient) ListPlans(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListResponse, error) {
 	out := new(ListResponse)
 	err := c.cc.Invoke(ctx, "/nocloud.billing.BillingService/ListPlans", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingServiceClient) ListPlansInstances(ctx context.Context, in *ListPlansInstancesRequest, opts ...grpc.CallOption) (*ListPlansInstancesResponse, error) {
+	out := new(ListPlansInstancesResponse)
+	err := c.cc.Invoke(ctx, "/nocloud.billing.BillingService/ListPlansInstances", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -308,6 +318,7 @@ type BillingServiceServer interface {
 	UpdatePlan(context.Context, *Plan) (*Plan, error)
 	GetPlan(context.Context, *Plan) (*Plan, error)
 	ListPlans(context.Context, *ListRequest) (*ListResponse, error)
+	ListPlansInstances(context.Context, *ListPlansInstancesRequest) (*ListPlansInstancesResponse, error)
 	DeletePlan(context.Context, *Plan) (*Plan, error)
 	CreateTransaction(context.Context, *Transaction) (*Transaction, error)
 	GetTransactions(context.Context, *GetTransactionsRequest) (*Transactions, error)
@@ -333,6 +344,9 @@ func (UnimplementedBillingServiceServer) GetPlan(context.Context, *Plan) (*Plan,
 }
 func (UnimplementedBillingServiceServer) ListPlans(context.Context, *ListRequest) (*ListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPlans not implemented")
+}
+func (UnimplementedBillingServiceServer) ListPlansInstances(context.Context, *ListPlansInstancesRequest) (*ListPlansInstancesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPlansInstances not implemented")
 }
 func (UnimplementedBillingServiceServer) DeletePlan(context.Context, *Plan) (*Plan, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeletePlan not implemented")
@@ -436,6 +450,24 @@ func _BillingService_ListPlans_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BillingServiceServer).ListPlans(ctx, req.(*ListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BillingService_ListPlansInstances_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPlansInstancesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).ListPlansInstances(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nocloud.billing.BillingService/ListPlansInstances",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).ListPlansInstances(ctx, req.(*ListPlansInstancesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -588,6 +620,10 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListPlans",
 			Handler:    _BillingService_ListPlans_Handler,
+		},
+		{
+			MethodName: "ListPlansInstances",
+			Handler:    _BillingService_ListPlansInstances_Handler,
 		},
 		{
 			MethodName: "DeletePlan",

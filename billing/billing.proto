@@ -72,6 +72,12 @@ message ListRequest {
 }
 message ListResponse {repeated Plan pool = 1;}
 
+message ListPlansInstancesRequest{}
+
+message ListPlansInstancesResponse{
+  map<string, google.protobuf.Value> plans = 1;
+}
+
 enum Kind {
   UNSPECIFIED = 0; // Shall never be used, requests will be rejected
   POSTPAID = 1;    // Transaction must be processed based on End time
@@ -232,6 +238,11 @@ service BillingService {
   rpc ListPlans(ListRequest) returns (ListResponse) {
     option (google.api.http) = {
       get : "/billing/plans"
+    };
+  };
+  rpc ListPlansInstances(ListPlansInstancesRequest) returns (ListPlansInstancesResponse) {
+    option (google.api.http) = {
+      get : "/billing/plans/instances"
     };
   };
   rpc DeletePlan(Plan) returns (Plan) {
