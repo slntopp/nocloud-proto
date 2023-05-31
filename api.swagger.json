@@ -5863,6 +5863,9 @@
         "extra": {
           "type": "object",
           "additionalProperties": {}
+        },
+        "type": {
+          "type": "string"
         }
       }
     },
