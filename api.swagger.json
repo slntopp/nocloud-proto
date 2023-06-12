@@ -1236,6 +1236,18 @@
             "default": "UNKNOWN"
           },
           {
+            "name": "products",
+            "description": "Products to make plan pre defined(map key is product key like sm, lg\n\nThis is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "meta",
+            "description": "or whatever)\n\nThis is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          },
+          {
             "name": "fee.precision",
             "in": "query",
             "required": false,
@@ -1322,6 +1334,18 @@
               "STATIC"
             ],
             "default": "UNKNOWN"
+          },
+          {
+            "name": "products",
+            "description": "Products to make plan pre defined(map key is product key like sm, lg\n\nThis is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "meta",
+            "description": "or whatever)\n\nThis is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
           },
           {
             "name": "fee.precision",
@@ -1634,6 +1658,12 @@
             "required": false,
             "type": "number",
             "format": "double"
+          },
+          {
+            "name": "meta",
+            "description": "Transaction meta data, like\nmeta: {\ntotal: \u003cnumber\u003e // resource \"quantity\", e.g. CPU cores, RAM Mb, Drive\nMb, IP quantity price_atm: \u003cnumber\u003e // hourly price per quant of resouce at\nthe moment, e.g. 1 NCU [other keys]: \u003cany\u003e // for example Drive\nType(SSD/HDD/NVMe/etc)\n}\n\nThis is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
           },
           {
             "name": "currency",
@@ -2139,6 +2169,12 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "locations",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
           }
         ],
         "tags": [
@@ -2167,6 +2203,12 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "locations",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
           }
         ],
         "tags": [
@@ -4316,6 +4358,26 @@
         }
       }
     },
+    "billingCostEstimation": {
+      "type": "object",
+      "properties": {
+        "resources": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "product": {
+          "type": "number",
+          "format": "double"
+        },
+        "total": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
     "billingCreateExchangeRateRequest": {
       "type": "object",
       "properties": {
@@ -5009,6 +5071,17 @@
         }
       }
     },
+    "instancesInstanceCostEstimation": {
+      "type": "object",
+      "properties": {
+        "downPayment": {
+          "$ref": "#/definitions/billingCostEstimation"
+        },
+        "general": {
+          "$ref": "#/definitions/billingCostEstimation"
+        }
+      }
+    },
     "instancesInstancesGroup": {
       "type": "object",
       "properties": {
@@ -5076,6 +5149,12 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/instancesTestInstancesGroupConfigError"
+          }
+        },
+        "estimations": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/instancesInstanceCostEstimation"
           }
         }
       }
