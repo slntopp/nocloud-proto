@@ -38,6 +38,9 @@
       "name": "ServicesProvidersExtentionsService"
     },
     {
+      "name": "ShowcasesService"
+    },
+    {
       "name": "InstancesService"
     },
     {
@@ -3458,6 +3461,190 @@
         ]
       }
     },
+    "/showcase": {
+      "get": {
+        "operationId": "ShowcasesService_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/services_providersShowcases"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "anonymously",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "tags": [
+          "ShowcasesService"
+        ]
+      },
+      "post": {
+        "operationId": "ShowcasesService_Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/services_providersShowcase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/services_providersShowcase"
+            }
+          }
+        ],
+        "tags": [
+          "ShowcasesService"
+        ]
+      }
+    },
+    "/showcase/{uuid}": {
+      "get": {
+        "operationId": "ShowcasesService_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/services_providersShowcase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ShowcasesService"
+        ]
+      },
+      "delete": {
+        "operationId": "ShowcasesService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/nocloudservices_providersDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ShowcasesService"
+        ]
+      },
+      "patch": {
+        "operationId": "ShowcasesService_Update",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/services_providersShowcase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "icon": {
+                  "type": "string"
+                },
+                "plans": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "$ref": "#/definitions/billingPlan"
+                  }
+                },
+                "servicesProviders": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "$ref": "#/definitions/services_providersServicesProvider"
+                  }
+                },
+                "locations": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "$ref": "#/definitions/services_providersLocationConf"
+                  }
+                },
+                "promo": {}
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ShowcasesService"
+        ]
+      }
+    },
     "/sp": {
       "get": {
         "operationId": "ServicesProvidersService_List",
@@ -4666,6 +4853,9 @@
         },
         "fee": {
           "$ref": "#/definitions/billingFee"
+        },
+        "title": {
+          "type": "string"
         }
       }
     },
@@ -6026,6 +6216,54 @@
         "meta": {
           "type": "object",
           "additionalProperties": {}
+        }
+      }
+    },
+    "services_providersShowcase": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "plans": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/billingPlan"
+          }
+        },
+        "servicesProviders": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/services_providersServicesProvider"
+          }
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/services_providersLocationConf"
+          }
+        },
+        "promo": {}
+      }
+    },
+    "services_providersShowcases": {
+      "type": "object",
+      "properties": {
+        "showcases": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/services_providersShowcase"
+          }
         }
       }
     },

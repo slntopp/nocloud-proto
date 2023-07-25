@@ -97,6 +97,7 @@ message ResourceConf {
   bool except = 5;
   repeated nocloud.states.NoCloudState on = 6;
   Fee fee = 7;
+  string title = 8;
 }
 
 message Product {

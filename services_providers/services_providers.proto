@@ -20,6 +20,8 @@ import "google/protobuf/struct.proto";
 import "google/api/annotations.proto";
 import "states/states.proto";
 import "access/access.proto";
+import "billing/billing.proto";
+
 
 message Var {map<string, google.protobuf.Value> value = 1;}
 
@@ -202,6 +204,59 @@ service ServicesProvidersExtentionsService {
   rpc Register(ServicesProvidersExtentionData) returns (GenericResponse);
   rpc Update(ServicesProvidersExtentionData) returns (GenericResponse);
   rpc Unregister(ServicesProvidersExtentionData) returns (GenericResponse);
+}
+
+message Showcase {
+  string uuid = 1;
+  string title = 2;
+  string icon = 3;
+  repeated billing.Plan plans = 4;
+  repeated ServicesProvider services_providers = 5;
+  repeated LocationConf locations = 6;
+  google.protobuf.Value promo = 7;
+}
+
+message Showcases {
+  repeated Showcase showcases = 1;
+}
+
+service ShowcasesService {
+  rpc Create(nocloud.services_providers.Showcase)
+      returns (nocloud.services_providers.Showcase) {
+    option (google.api.http) = {
+      post : "/showcase"
+      body : "*"
+    };
+  };
+
+  rpc Delete(nocloud.services_providers.DeleteRequest)
+      returns (nocloud.services_providers.DeleteResponse) {
+    option (google.api.http) = {
+      delete : "/showcase/{uuid}"
+    };
+  };
+
+  rpc Update(nocloud.services_providers.Showcase)
+      returns (nocloud.services_providers.Showcase) {
+    option (google.api.http) = {
+      patch : "/showcase/{uuid}"
+      body : "*"
+    };
+  };
+
+  rpc Get(nocloud.services_providers.GetRequest)
+      returns (nocloud.services_providers.Showcase) {
+    option (google.api.http) = {
+      get : "/showcase/{uuid}"
+    };
+  };
+
+  rpc List(nocloud.services_providers.ListRequest)
+      returns (nocloud.services_providers.Showcases) {
+    option (google.api.http) = {
+      get : "/showcase"
+    };
+  };
 }
 
 message ObjectPublicData {
