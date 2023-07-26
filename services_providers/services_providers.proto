@@ -210,8 +210,8 @@ message Showcase {
   string uuid = 1;
   string title = 2;
   string icon = 3;
-  repeated billing.Plan plans = 4;
-  repeated ServicesProvider services_providers = 5;
+  repeated string plans = 4;
+  repeated string services_providers = 5;
   repeated LocationConf locations = 6;
   google.protobuf.Value promo = 7;
 }
