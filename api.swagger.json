@@ -3461,7 +3461,7 @@
         ]
       }
     },
-    "/showcase": {
+    "/showcases": {
       "get": {
         "operationId": "ShowcasesService_List",
         "responses": {
@@ -3521,7 +3521,7 @@
         ]
       }
     },
-    "/showcase/{uuid}": {
+    "/showcases/{uuid}": {
       "get": {
         "operationId": "ShowcasesService_Get",
         "responses": {

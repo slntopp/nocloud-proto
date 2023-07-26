@@ -1121,7 +1121,7 @@ func RegisterShowcasesServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.services_providers.ShowcasesService/Create", runtime.WithHTTPPathPattern("/showcase"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.services_providers.ShowcasesService/Create", runtime.WithHTTPPathPattern("/showcases"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1146,7 +1146,7 @@ func RegisterShowcasesServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.services_providers.ShowcasesService/Delete", runtime.WithHTTPPathPattern("/showcase/{uuid}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.services_providers.ShowcasesService/Delete", runtime.WithHTTPPathPattern("/showcases/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1171,7 +1171,7 @@ func RegisterShowcasesServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.services_providers.ShowcasesService/Update", runtime.WithHTTPPathPattern("/showcase/{uuid}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.services_providers.ShowcasesService/Update", runtime.WithHTTPPathPattern("/showcases/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1196,7 +1196,7 @@ func RegisterShowcasesServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.services_providers.ShowcasesService/Get", runtime.WithHTTPPathPattern("/showcase/{uuid}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.services_providers.ShowcasesService/Get", runtime.WithHTTPPathPattern("/showcases/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1221,7 +1221,7 @@ func RegisterShowcasesServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.services_providers.ShowcasesService/List", runtime.WithHTTPPathPattern("/showcase"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.services_providers.ShowcasesService/List", runtime.WithHTTPPathPattern("/showcases"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1616,7 +1616,7 @@ func RegisterShowcasesServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.services_providers.ShowcasesService/Create", runtime.WithHTTPPathPattern("/showcase"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.services_providers.ShowcasesService/Create", runtime.WithHTTPPathPattern("/showcases"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1638,7 +1638,7 @@ func RegisterShowcasesServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.services_providers.ShowcasesService/Delete", runtime.WithHTTPPathPattern("/showcase/{uuid}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.services_providers.ShowcasesService/Delete", runtime.WithHTTPPathPattern("/showcases/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1660,7 +1660,7 @@ func RegisterShowcasesServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.services_providers.ShowcasesService/Update", runtime.WithHTTPPathPattern("/showcase/{uuid}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.services_providers.ShowcasesService/Update", runtime.WithHTTPPathPattern("/showcases/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1682,7 +1682,7 @@ func RegisterShowcasesServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.services_providers.ShowcasesService/Get", runtime.WithHTTPPathPattern("/showcase/{uuid}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.services_providers.ShowcasesService/Get", runtime.WithHTTPPathPattern("/showcases/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1704,7 +1704,7 @@ func RegisterShowcasesServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.services_providers.ShowcasesService/List", runtime.WithHTTPPathPattern("/showcase"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.services_providers.ShowcasesService/List", runtime.WithHTTPPathPattern("/showcases"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1724,15 +1724,15 @@ func RegisterShowcasesServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 }
 
 var (
-	pattern_ShowcasesService_Create_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"showcase"}, ""))
+	pattern_ShowcasesService_Create_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"showcases"}, ""))
 
-	pattern_ShowcasesService_Delete_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"showcase", "uuid"}, ""))
+	pattern_ShowcasesService_Delete_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"showcases", "uuid"}, ""))
 
-	pattern_ShowcasesService_Update_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"showcase", "uuid"}, ""))
+	pattern_ShowcasesService_Update_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"showcases", "uuid"}, ""))
 
-	pattern_ShowcasesService_Get_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"showcase", "uuid"}, ""))
+	pattern_ShowcasesService_Get_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"showcases", "uuid"}, ""))
 
-	pattern_ShowcasesService_List_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"showcase"}, ""))
+	pattern_ShowcasesService_List_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"showcases"}, ""))
 )
 
 var (

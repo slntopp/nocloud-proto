@@ -224,7 +224,7 @@ service ShowcasesService {
   rpc Create(nocloud.services_providers.Showcase)
       returns (nocloud.services_providers.Showcase) {
     option (google.api.http) = {
-      post : "/showcase"
+      post : "/showcases"
       body : "*"
     };
   };
@@ -232,14 +232,14 @@ service ShowcasesService {
   rpc Delete(nocloud.services_providers.DeleteRequest)
       returns (nocloud.services_providers.DeleteResponse) {
     option (google.api.http) = {
-      delete : "/showcase/{uuid}"
+      delete : "/showcases/{uuid}"
     };
   };
 
   rpc Update(nocloud.services_providers.Showcase)
       returns (nocloud.services_providers.Showcase) {
     option (google.api.http) = {
-      patch : "/showcase/{uuid}"
+      patch : "/showcases/{uuid}"
       body : "*"
     };
   };
@@ -247,14 +247,14 @@ service ShowcasesService {
   rpc Get(nocloud.services_providers.GetRequest)
       returns (nocloud.services_providers.Showcase) {
     option (google.api.http) = {
-      get : "/showcase/{uuid}"
+      get : "/showcases/{uuid}"
     };
   };
 
   rpc List(nocloud.services_providers.ListRequest)
       returns (nocloud.services_providers.Showcases) {
     option (google.api.http) = {
-      get : "/showcase"
+      get : "/showcases"
     };
   };
 }
