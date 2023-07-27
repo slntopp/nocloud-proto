@@ -3633,7 +3633,10 @@
                     "$ref": "#/definitions/services_providersLocationConf"
                   }
                 },
-                "promo": {}
+                "promo": {},
+                "primary": {
+                  "type": "boolean"
+                }
               }
             }
           }
@@ -6248,7 +6251,10 @@
             "$ref": "#/definitions/services_providersLocationConf"
           }
         },
-        "promo": {}
+        "promo": {},
+        "primary": {
+          "type": "boolean"
+        }
       }
     },
     "services_providersShowcases": {

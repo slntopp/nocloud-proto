@@ -214,6 +214,7 @@ message Showcase {
   repeated string services_providers = 5;
   repeated LocationConf locations = 6;
   google.protobuf.Value promo = 7;
+  bool primary = 8;
 }
 
 message Showcases {
