@@ -3617,15 +3617,13 @@
                 "plans": {
                   "type": "array",
                   "items": {
-                    "type": "object",
-                    "$ref": "#/definitions/billingPlan"
+                    "type": "string"
                   }
                 },
                 "servicesProviders": {
                   "type": "array",
                   "items": {
-                    "type": "object",
-                    "$ref": "#/definitions/services_providersServicesProvider"
+                    "type": "string"
                   }
                 },
                 "locations": {
@@ -3635,7 +3633,10 @@
                     "$ref": "#/definitions/services_providersLocationConf"
                   }
                 },
-                "promo": {}
+                "promo": {},
+                "primary": {
+                  "type": "boolean"
+                }
               }
             }
           }
@@ -6234,15 +6235,13 @@
         "plans": {
           "type": "array",
           "items": {
-            "type": "object",
-            "$ref": "#/definitions/billingPlan"
+            "type": "string"
           }
         },
         "servicesProviders": {
           "type": "array",
           "items": {
-            "type": "object",
-            "$ref": "#/definitions/services_providersServicesProvider"
+            "type": "string"
           }
         },
         "locations": {
@@ -6252,7 +6251,10 @@
             "$ref": "#/definitions/services_providersLocationConf"
           }
         },
-        "promo": {}
+        "promo": {},
+        "primary": {
+          "type": "boolean"
+        }
       }
     },
     "services_providersShowcases": {
@@ -6343,7 +6345,8 @@
         "FAILURE",
         "DELETED",
         "SUSPENDED",
-        "OPERATION"
+        "OPERATION",
+        "PENDING"
       ],
       "default": "INIT"
     },
