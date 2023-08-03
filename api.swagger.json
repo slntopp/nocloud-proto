@@ -3617,15 +3617,13 @@
                 "plans": {
                   "type": "array",
                   "items": {
-                    "type": "object",
-                    "$ref": "#/definitions/billingPlan"
+                    "type": "string"
                   }
                 },
                 "servicesProviders": {
                   "type": "array",
                   "items": {
-                    "type": "object",
-                    "$ref": "#/definitions/services_providersServicesProvider"
+                    "type": "string"
                   }
                 },
                 "locations": {
@@ -6234,15 +6232,13 @@
         "plans": {
           "type": "array",
           "items": {
-            "type": "object",
-            "$ref": "#/definitions/billingPlan"
+            "type": "string"
           }
         },
         "servicesProviders": {
           "type": "array",
           "items": {
-            "type": "object",
-            "$ref": "#/definitions/services_providersServicesProvider"
+            "type": "string"
           }
         },
         "locations": {
