@@ -1466,6 +1466,50 @@
         ]
       }
     },
+    "/billing/report/{uuid}": {
+      "get": {
+        "operationId": "BillingService_GetInstanceReport",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingGetInstanceReportResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
     "/billing/transactions": {
       "get": {
         "operationId": "BillingService_GetTransactions",
@@ -4672,6 +4716,18 @@
             "type": "object",
             "$ref": "#/definitions/billingGetExchangeRateResponse"
           }
+        }
+      }
+    },
+    "billingGetInstanceReportResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currency": {
+          "$ref": "#/definitions/billingCurrency"
         }
       }
     },
