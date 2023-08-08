@@ -110,6 +110,7 @@ message Product {
   map<string, google.protobuf.Value> meta = 6;
 
   optional int32 sorter = 7; // Sorting order, might be needed in UIs
+  optional double installation_fee = 8;
 }
 
 enum Priority {
