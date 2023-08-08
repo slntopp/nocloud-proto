@@ -27,6 +27,7 @@ enum NoCloudState {
   DELETED = 5;
   SUSPENDED = 6;
   OPERATION = 7;
+  PENDING = 8;
 }
 
 enum InterfaceKind {
