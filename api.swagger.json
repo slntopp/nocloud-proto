@@ -3658,6 +3658,13 @@
                 "icon": {
                   "type": "string"
                 },
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "$ref": "#/definitions/services_providersShowcaseItem"
+                  }
+                },
                 "promo": {},
                 "primary": {
                   "type": "boolean"
@@ -6273,9 +6280,34 @@
         "icon": {
           "type": "string"
         },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/services_providersShowcaseItem"
+          }
+        },
         "promo": {},
         "primary": {
           "type": "boolean"
+        }
+      }
+    },
+    "services_providersShowcaseItem": {
+      "type": "object",
+      "properties": {
+        "plan": {
+          "type": "string"
+        },
+        "servicesProvider": {
+          "type": "string"
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/services_providersLocationConf"
+          }
         }
       }
     },

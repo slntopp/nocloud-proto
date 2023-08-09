@@ -1334,8 +1334,9 @@ type Showcase struct {
 	Uuid    string          `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
 	Title   string          `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
 	Icon    string          `protobuf:"bytes,3,opt,name=icon,proto3" json:"icon,omitempty"`
-	Promo   *structpb.Value `protobuf:"bytes,4,opt,name=promo,proto3" json:"promo,omitempty"`
-	Primary bool            `protobuf:"varint,5,opt,name=primary,proto3" json:"primary,omitempty"`
+	Items   []*ShowcaseItem `protobuf:"bytes,4,rep,name=items,proto3" json:"items,omitempty"`
+	Promo   *structpb.Value `protobuf:"bytes,5,opt,name=promo,proto3" json:"promo,omitempty"`
+	Primary bool            `protobuf:"varint,6,opt,name=primary,proto3" json:"primary,omitempty"`
 }
 
 func (x *Showcase) Reset() {
@@ -1389,6 +1390,13 @@ func (x *Showcase) GetIcon() string {
 		return x.Icon
 	}
 	return ""
+}
+
+func (x *Showcase) GetItems() []*ShowcaseItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
 }
 
 func (x *Showcase) GetPromo() *structpb.Value {
@@ -1726,16 +1734,20 @@ var file_services_providers_services_providers_proto_rawDesc = []byte{
 	0x32, 0x28, 0x2e, 0x6e, 0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69,
 	0x63, 0x65, 0x73, 0x5f, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x73, 0x2e, 0x4c, 0x6f,
 	0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x6f, 0x6e, 0x66, 0x52, 0x09, 0x6c, 0x6f, 0x63, 0x61,
-	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x42, 0x07, 0x0a, 0x05, 0x5f, 0x70, 0x6c, 0x61, 0x6e, 0x22, 0x90,
+	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x42, 0x07, 0x0a, 0x05, 0x5f, 0x70, 0x6c, 0x61, 0x6e, 0x22, 0xd0,
 	0x01, 0x0a, 0x08, 0x53, 0x68, 0x6f, 0x77, 0x63, 0x61, 0x73, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x75,
 	0x75, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x75, 0x75, 0x69, 0x64, 0x12,
 	0x14, 0x0a, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05,
 	0x74, 0x69, 0x74, 0x6c, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x69, 0x63, 0x6f, 0x6e, 0x18, 0x03, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x04, 0x69, 0x63, 0x6f, 0x6e, 0x12, 0x2c, 0x0a, 0x05, 0x70, 0x72, 0x6f,
-	0x6d, 0x6f, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c,
+	0x01, 0x28, 0x09, 0x52, 0x04, 0x69, 0x63, 0x6f, 0x6e, 0x12, 0x3e, 0x0a, 0x05, 0x69, 0x74, 0x65,
+	0x6d, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x28, 0x2e, 0x6e, 0x6f, 0x63, 0x6c, 0x6f,
+	0x75, 0x64, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x5f, 0x70, 0x72, 0x6f, 0x76,
+	0x69, 0x64, 0x65, 0x72, 0x73, 0x2e, 0x53, 0x68, 0x6f, 0x77, 0x63, 0x61, 0x73, 0x65, 0x49, 0x74,
+	0x65, 0x6d, 0x52, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x73, 0x12, 0x2c, 0x0a, 0x05, 0x70, 0x72, 0x6f,
+	0x6d, 0x6f, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c,
 	0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x56, 0x61, 0x6c, 0x75, 0x65,
 	0x52, 0x05, 0x70, 0x72, 0x6f, 0x6d, 0x6f, 0x12, 0x18, 0x0a, 0x07, 0x70, 0x72, 0x69, 0x6d, 0x61,
-	0x72, 0x79, 0x18, 0x05, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x70, 0x72, 0x69, 0x6d, 0x61, 0x72,
+	0x72, 0x79, 0x18, 0x06, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x70, 0x72, 0x69, 0x6d, 0x61, 0x72,
 	0x79, 0x22, 0x4f, 0x0a, 0x09, 0x53, 0x68, 0x6f, 0x77, 0x63, 0x61, 0x73, 0x65, 0x73, 0x12, 0x42,
 	0x0a, 0x09, 0x73, 0x68, 0x6f, 0x77, 0x63, 0x61, 0x73, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28,
 	0x0b, 0x32, 0x24, 0x2e, 0x6e, 0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x73, 0x65, 0x72, 0x76,
@@ -2006,67 +2018,68 @@ var file_services_providers_services_providers_proto_depIdxs = []int32{
 	35, // 15: nocloud.services_providers.PrepSP.extra:type_name -> nocloud.services_providers.PrepSP.ExtraEntry
 	39, // 16: nocloud.services_providers.ServicesProvidersExtentionData.data:type_name -> google.protobuf.Struct
 	2,  // 17: nocloud.services_providers.ShowcaseItem.locations:type_name -> nocloud.services_providers.LocationConf
-	40, // 18: nocloud.services_providers.Showcase.promo:type_name -> google.protobuf.Value
-	23, // 19: nocloud.services_providers.Showcases.showcases:type_name -> nocloud.services_providers.Showcase
-	36, // 20: nocloud.services_providers.ObjectPublicData.data:type_name -> nocloud.services_providers.ObjectPublicData.DataEntry
-	40, // 21: nocloud.services_providers.Var.ValueEntry.value:type_name -> google.protobuf.Value
-	40, // 22: nocloud.services_providers.LocationConf.ExtraEntry.value:type_name -> google.protobuf.Value
-	40, // 23: nocloud.services_providers.ServicesProvider.SecretsEntry.value:type_name -> google.protobuf.Value
-	0,  // 24: nocloud.services_providers.ServicesProvider.VarsEntry.value:type_name -> nocloud.services_providers.Var
-	39, // 25: nocloud.services_providers.ServicesProvider.ExtentionsEntry.value:type_name -> google.protobuf.Struct
-	40, // 26: nocloud.services_providers.ServicesProvider.PublicDataEntry.value:type_name -> google.protobuf.Value
-	40, // 27: nocloud.services_providers.ServicesProvider.MetaEntry.value:type_name -> google.protobuf.Value
-	40, // 28: nocloud.services_providers.InvokeRequest.ParamsEntry.value:type_name -> google.protobuf.Value
-	40, // 29: nocloud.services_providers.InvokeResponse.MetaEntry.value:type_name -> google.protobuf.Value
-	40, // 30: nocloud.services_providers.PrepSP.ExtraEntry.value:type_name -> google.protobuf.Value
-	40, // 31: nocloud.services_providers.ObjectPublicData.DataEntry.value:type_name -> google.protobuf.Value
-	3,  // 32: nocloud.services_providers.ServicesProvidersService.Test:input_type -> nocloud.services_providers.ServicesProvider
-	3,  // 33: nocloud.services_providers.ServicesProvidersService.Create:input_type -> nocloud.services_providers.ServicesProvider
-	8,  // 34: nocloud.services_providers.ServicesProvidersService.Delete:input_type -> nocloud.services_providers.DeleteRequest
-	3,  // 35: nocloud.services_providers.ServicesProvidersService.Update:input_type -> nocloud.services_providers.ServicesProvider
-	5,  // 36: nocloud.services_providers.ServicesProvidersService.Get:input_type -> nocloud.services_providers.GetRequest
-	6,  // 37: nocloud.services_providers.ServicesProvidersService.List:input_type -> nocloud.services_providers.ListRequest
-	15, // 38: nocloud.services_providers.ServicesProvidersService.Invoke:input_type -> nocloud.services_providers.InvokeRequest
-	17, // 39: nocloud.services_providers.ServicesProvidersService.Prep:input_type -> nocloud.services_providers.PrepSP
-	6,  // 40: nocloud.services_providers.ServicesProvidersService.ListExtentions:input_type -> nocloud.services_providers.ListRequest
-	11, // 41: nocloud.services_providers.ServicesProvidersService.BindPlan:input_type -> nocloud.services_providers.BindPlanRequest
-	13, // 42: nocloud.services_providers.ServicesProvidersService.UnbindPlan:input_type -> nocloud.services_providers.UnbindPlanRequest
-	18, // 43: nocloud.services_providers.ServicesProvidersExtentionsService.GetType:input_type -> nocloud.services_providers.GetTypeRequest
-	20, // 44: nocloud.services_providers.ServicesProvidersExtentionsService.Test:input_type -> nocloud.services_providers.ServicesProvidersExtentionData
-	20, // 45: nocloud.services_providers.ServicesProvidersExtentionsService.Register:input_type -> nocloud.services_providers.ServicesProvidersExtentionData
-	20, // 46: nocloud.services_providers.ServicesProvidersExtentionsService.Update:input_type -> nocloud.services_providers.ServicesProvidersExtentionData
-	20, // 47: nocloud.services_providers.ServicesProvidersExtentionsService.Unregister:input_type -> nocloud.services_providers.ServicesProvidersExtentionData
-	23, // 48: nocloud.services_providers.ShowcasesService.Create:input_type -> nocloud.services_providers.Showcase
-	8,  // 49: nocloud.services_providers.ShowcasesService.Delete:input_type -> nocloud.services_providers.DeleteRequest
-	23, // 50: nocloud.services_providers.ShowcasesService.Update:input_type -> nocloud.services_providers.Showcase
-	5,  // 51: nocloud.services_providers.ShowcasesService.Get:input_type -> nocloud.services_providers.GetRequest
-	6,  // 52: nocloud.services_providers.ShowcasesService.List:input_type -> nocloud.services_providers.ListRequest
-	4,  // 53: nocloud.services_providers.ServicesProvidersService.Test:output_type -> nocloud.services_providers.TestResponse
-	3,  // 54: nocloud.services_providers.ServicesProvidersService.Create:output_type -> nocloud.services_providers.ServicesProvider
-	9,  // 55: nocloud.services_providers.ServicesProvidersService.Delete:output_type -> nocloud.services_providers.DeleteResponse
-	3,  // 56: nocloud.services_providers.ServicesProvidersService.Update:output_type -> nocloud.services_providers.ServicesProvider
-	3,  // 57: nocloud.services_providers.ServicesProvidersService.Get:output_type -> nocloud.services_providers.ServicesProvider
-	7,  // 58: nocloud.services_providers.ServicesProvidersService.List:output_type -> nocloud.services_providers.ListResponse
-	16, // 59: nocloud.services_providers.ServicesProvidersService.Invoke:output_type -> nocloud.services_providers.InvokeResponse
-	17, // 60: nocloud.services_providers.ServicesProvidersService.Prep:output_type -> nocloud.services_providers.PrepSP
-	10, // 61: nocloud.services_providers.ServicesProvidersService.ListExtentions:output_type -> nocloud.services_providers.ListExtentionsResponse
-	12, // 62: nocloud.services_providers.ServicesProvidersService.BindPlan:output_type -> nocloud.services_providers.BindPlanResponse
-	14, // 63: nocloud.services_providers.ServicesProvidersService.UnbindPlan:output_type -> nocloud.services_providers.UnbindPlanResponse
-	19, // 64: nocloud.services_providers.ServicesProvidersExtentionsService.GetType:output_type -> nocloud.services_providers.GetTypeResponse
-	21, // 65: nocloud.services_providers.ServicesProvidersExtentionsService.Test:output_type -> nocloud.services_providers.GenericResponse
-	21, // 66: nocloud.services_providers.ServicesProvidersExtentionsService.Register:output_type -> nocloud.services_providers.GenericResponse
-	21, // 67: nocloud.services_providers.ServicesProvidersExtentionsService.Update:output_type -> nocloud.services_providers.GenericResponse
-	21, // 68: nocloud.services_providers.ServicesProvidersExtentionsService.Unregister:output_type -> nocloud.services_providers.GenericResponse
-	23, // 69: nocloud.services_providers.ShowcasesService.Create:output_type -> nocloud.services_providers.Showcase
-	9,  // 70: nocloud.services_providers.ShowcasesService.Delete:output_type -> nocloud.services_providers.DeleteResponse
-	23, // 71: nocloud.services_providers.ShowcasesService.Update:output_type -> nocloud.services_providers.Showcase
-	23, // 72: nocloud.services_providers.ShowcasesService.Get:output_type -> nocloud.services_providers.Showcase
-	24, // 73: nocloud.services_providers.ShowcasesService.List:output_type -> nocloud.services_providers.Showcases
-	53, // [53:74] is the sub-list for method output_type
-	32, // [32:53] is the sub-list for method input_type
-	32, // [32:32] is the sub-list for extension type_name
-	32, // [32:32] is the sub-list for extension extendee
-	0,  // [0:32] is the sub-list for field type_name
+	22, // 18: nocloud.services_providers.Showcase.items:type_name -> nocloud.services_providers.ShowcaseItem
+	40, // 19: nocloud.services_providers.Showcase.promo:type_name -> google.protobuf.Value
+	23, // 20: nocloud.services_providers.Showcases.showcases:type_name -> nocloud.services_providers.Showcase
+	36, // 21: nocloud.services_providers.ObjectPublicData.data:type_name -> nocloud.services_providers.ObjectPublicData.DataEntry
+	40, // 22: nocloud.services_providers.Var.ValueEntry.value:type_name -> google.protobuf.Value
+	40, // 23: nocloud.services_providers.LocationConf.ExtraEntry.value:type_name -> google.protobuf.Value
+	40, // 24: nocloud.services_providers.ServicesProvider.SecretsEntry.value:type_name -> google.protobuf.Value
+	0,  // 25: nocloud.services_providers.ServicesProvider.VarsEntry.value:type_name -> nocloud.services_providers.Var
+	39, // 26: nocloud.services_providers.ServicesProvider.ExtentionsEntry.value:type_name -> google.protobuf.Struct
+	40, // 27: nocloud.services_providers.ServicesProvider.PublicDataEntry.value:type_name -> google.protobuf.Value
+	40, // 28: nocloud.services_providers.ServicesProvider.MetaEntry.value:type_name -> google.protobuf.Value
+	40, // 29: nocloud.services_providers.InvokeRequest.ParamsEntry.value:type_name -> google.protobuf.Value
+	40, // 30: nocloud.services_providers.InvokeResponse.MetaEntry.value:type_name -> google.protobuf.Value
+	40, // 31: nocloud.services_providers.PrepSP.ExtraEntry.value:type_name -> google.protobuf.Value
+	40, // 32: nocloud.services_providers.ObjectPublicData.DataEntry.value:type_name -> google.protobuf.Value
+	3,  // 33: nocloud.services_providers.ServicesProvidersService.Test:input_type -> nocloud.services_providers.ServicesProvider
+	3,  // 34: nocloud.services_providers.ServicesProvidersService.Create:input_type -> nocloud.services_providers.ServicesProvider
+	8,  // 35: nocloud.services_providers.ServicesProvidersService.Delete:input_type -> nocloud.services_providers.DeleteRequest
+	3,  // 36: nocloud.services_providers.ServicesProvidersService.Update:input_type -> nocloud.services_providers.ServicesProvider
+	5,  // 37: nocloud.services_providers.ServicesProvidersService.Get:input_type -> nocloud.services_providers.GetRequest
+	6,  // 38: nocloud.services_providers.ServicesProvidersService.List:input_type -> nocloud.services_providers.ListRequest
+	15, // 39: nocloud.services_providers.ServicesProvidersService.Invoke:input_type -> nocloud.services_providers.InvokeRequest
+	17, // 40: nocloud.services_providers.ServicesProvidersService.Prep:input_type -> nocloud.services_providers.PrepSP
+	6,  // 41: nocloud.services_providers.ServicesProvidersService.ListExtentions:input_type -> nocloud.services_providers.ListRequest
+	11, // 42: nocloud.services_providers.ServicesProvidersService.BindPlan:input_type -> nocloud.services_providers.BindPlanRequest
+	13, // 43: nocloud.services_providers.ServicesProvidersService.UnbindPlan:input_type -> nocloud.services_providers.UnbindPlanRequest
+	18, // 44: nocloud.services_providers.ServicesProvidersExtentionsService.GetType:input_type -> nocloud.services_providers.GetTypeRequest
+	20, // 45: nocloud.services_providers.ServicesProvidersExtentionsService.Test:input_type -> nocloud.services_providers.ServicesProvidersExtentionData
+	20, // 46: nocloud.services_providers.ServicesProvidersExtentionsService.Register:input_type -> nocloud.services_providers.ServicesProvidersExtentionData
+	20, // 47: nocloud.services_providers.ServicesProvidersExtentionsService.Update:input_type -> nocloud.services_providers.ServicesProvidersExtentionData
+	20, // 48: nocloud.services_providers.ServicesProvidersExtentionsService.Unregister:input_type -> nocloud.services_providers.ServicesProvidersExtentionData
+	23, // 49: nocloud.services_providers.ShowcasesService.Create:input_type -> nocloud.services_providers.Showcase
+	8,  // 50: nocloud.services_providers.ShowcasesService.Delete:input_type -> nocloud.services_providers.DeleteRequest
+	23, // 51: nocloud.services_providers.ShowcasesService.Update:input_type -> nocloud.services_providers.Showcase
+	5,  // 52: nocloud.services_providers.ShowcasesService.Get:input_type -> nocloud.services_providers.GetRequest
+	6,  // 53: nocloud.services_providers.ShowcasesService.List:input_type -> nocloud.services_providers.ListRequest
+	4,  // 54: nocloud.services_providers.ServicesProvidersService.Test:output_type -> nocloud.services_providers.TestResponse
+	3,  // 55: nocloud.services_providers.ServicesProvidersService.Create:output_type -> nocloud.services_providers.ServicesProvider
+	9,  // 56: nocloud.services_providers.ServicesProvidersService.Delete:output_type -> nocloud.services_providers.DeleteResponse
+	3,  // 57: nocloud.services_providers.ServicesProvidersService.Update:output_type -> nocloud.services_providers.ServicesProvider
+	3,  // 58: nocloud.services_providers.ServicesProvidersService.Get:output_type -> nocloud.services_providers.ServicesProvider
+	7,  // 59: nocloud.services_providers.ServicesProvidersService.List:output_type -> nocloud.services_providers.ListResponse
+	16, // 60: nocloud.services_providers.ServicesProvidersService.Invoke:output_type -> nocloud.services_providers.InvokeResponse
+	17, // 61: nocloud.services_providers.ServicesProvidersService.Prep:output_type -> nocloud.services_providers.PrepSP
+	10, // 62: nocloud.services_providers.ServicesProvidersService.ListExtentions:output_type -> nocloud.services_providers.ListExtentionsResponse
+	12, // 63: nocloud.services_providers.ServicesProvidersService.BindPlan:output_type -> nocloud.services_providers.BindPlanResponse
+	14, // 64: nocloud.services_providers.ServicesProvidersService.UnbindPlan:output_type -> nocloud.services_providers.UnbindPlanResponse
+	19, // 65: nocloud.services_providers.ServicesProvidersExtentionsService.GetType:output_type -> nocloud.services_providers.GetTypeResponse
+	21, // 66: nocloud.services_providers.ServicesProvidersExtentionsService.Test:output_type -> nocloud.services_providers.GenericResponse
+	21, // 67: nocloud.services_providers.ServicesProvidersExtentionsService.Register:output_type -> nocloud.services_providers.GenericResponse
+	21, // 68: nocloud.services_providers.ServicesProvidersExtentionsService.Update:output_type -> nocloud.services_providers.GenericResponse
+	21, // 69: nocloud.services_providers.ServicesProvidersExtentionsService.Unregister:output_type -> nocloud.services_providers.GenericResponse
+	23, // 70: nocloud.services_providers.ShowcasesService.Create:output_type -> nocloud.services_providers.Showcase
+	9,  // 71: nocloud.services_providers.ShowcasesService.Delete:output_type -> nocloud.services_providers.DeleteResponse
+	23, // 72: nocloud.services_providers.ShowcasesService.Update:output_type -> nocloud.services_providers.Showcase
+	23, // 73: nocloud.services_providers.ShowcasesService.Get:output_type -> nocloud.services_providers.Showcase
+	24, // 74: nocloud.services_providers.ShowcasesService.List:output_type -> nocloud.services_providers.Showcases
+	54, // [54:75] is the sub-list for method output_type
+	33, // [33:54] is the sub-list for method input_type
+	33, // [33:33] is the sub-list for extension type_name
+	33, // [33:33] is the sub-list for extension extendee
+	0,  // [0:33] is the sub-list for field type_name
 }
 
 func init() { file_services_providers_services_providers_proto_init() }

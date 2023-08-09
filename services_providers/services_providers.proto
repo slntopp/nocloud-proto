@@ -216,8 +216,9 @@ message Showcase {
   string uuid = 1;
   string title = 2;
   string icon = 3;
-  google.protobuf.Value promo = 4;
-  bool primary = 5;
+  repeated ShowcaseItem items = 4;
+  google.protobuf.Value promo = 5;
+  bool primary = 6;
 }
 
 message Showcases {
