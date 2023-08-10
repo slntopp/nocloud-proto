@@ -71,6 +71,9 @@
       "name": "NamespacesService"
     },
     {
+      "name": "SessionsService"
+    },
+    {
       "name": "SettingsService"
     }
   ],
@@ -3333,6 +3336,106 @@
         ]
       }
     },
+    "/sessions": {
+      "get": {
+        "operationId": "SessionsService_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/sessionsSessions"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "SessionsService"
+        ]
+      }
+    },
+    "/sessions/activity": {
+      "get": {
+        "operationId": "SessionsService_GetActivity",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/sessionsActivity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "SessionsService"
+        ]
+      }
+    },
+    "/sessions/{id}": {
+      "delete": {
+        "operationId": "SessionsService_Revoke",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/nocloudsessionsDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "client",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "expires",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "created",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "current",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "tags": [
+          "SessionsService"
+        ]
+      }
+    },
     "/settings": {
       "get": {
         "operationId": "SettingsService_Keys",
@@ -5905,6 +6008,9 @@
         }
       }
     },
+    "nocloudsessionsDeleteResponse": {
+      "type": "object"
+    },
     "nocloudsettingsDeleteResponse": {
       "type": "object",
       "properties": {
@@ -6332,6 +6438,52 @@
         "value": {
           "type": "object",
           "additionalProperties": {}
+        }
+      }
+    },
+    "sessionsActivity": {
+      "type": "object",
+      "properties": {
+        "lastSeen": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    "sessionsSession": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "client": {
+          "type": "string"
+        },
+        "expires": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "current": {
+          "type": "boolean"
+        }
+      }
+    },
+    "sessionsSessions": {
+      "type": "object",
+      "properties": {
+        "sessions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/sessionsSession"
+          }
         }
       }
     },

@@ -1,0 +1,43 @@
+syntax = "proto3";
+package nocloud.sessions;
+
+import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
+
+message EmptyMessage {}
+message DeleteResponse {}
+
+message Session {
+  string id = 1;
+  string client = 2;
+  optional google.protobuf.Timestamp expires = 3;
+  google.protobuf.Timestamp created = 4;
+
+  optional bool current = 5;
+}
+
+message Activity {
+  map<string, google.protobuf.Timestamp> last_seen = 1;
+}
+
+message Sessions {
+  repeated Session sessions = 1;
+}
+
+service SessionsService {
+  rpc Get(EmptyMessage) returns (Sessions) {
+    option (google.api.http) = {
+      get : "/sessions"
+    };
+  };
+  rpc Revoke(Session) returns (DeleteResponse) {
+    option (google.api.http) = {
+      delete : "/sessions/{id}"
+    };
+  };
+  rpc GetActivity(EmptyMessage) returns (Activity) {
+    option (google.api.http) = {
+      get : "/sessions/activity"
+    };
+  };
+}
