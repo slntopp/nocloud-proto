@@ -1466,6 +1466,50 @@
         ]
       }
     },
+    "/billing/report/{uuid}": {
+      "get": {
+        "operationId": "BillingService_GetInstanceReport",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingGetInstanceReportResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
     "/billing/transactions": {
       "get": {
         "operationId": "BillingService_GetTransactions",
@@ -3614,23 +3658,11 @@
                 "icon": {
                   "type": "string"
                 },
-                "plans": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "servicesProviders": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "locations": {
+                "items": {
                   "type": "array",
                   "items": {
                     "type": "object",
-                    "$ref": "#/definitions/services_providersLocationConf"
+                    "$ref": "#/definitions/services_providersShowcaseItem"
                   }
                 },
                 "promo": {},
@@ -4676,6 +4708,18 @@
         }
       }
     },
+    "billingGetInstanceReportResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currency": {
+          "$ref": "#/definitions/billingCurrency"
+        }
+      }
+    },
     "billingGetTransactionsCountResponse": {
       "type": "object",
       "properties": {
@@ -4808,6 +4852,10 @@
           "type": "integer",
           "format": "int32",
           "title": "Sorting order, might be needed in UIs"
+        },
+        "installationFee": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
@@ -6232,17 +6280,27 @@
         "icon": {
           "type": "string"
         },
-        "plans": {
+        "items": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "object",
+            "$ref": "#/definitions/services_providersShowcaseItem"
           }
         },
-        "servicesProviders": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "promo": {},
+        "primary": {
+          "type": "boolean"
+        }
+      }
+    },
+    "services_providersShowcaseItem": {
+      "type": "object",
+      "properties": {
+        "plan": {
+          "type": "string"
+        },
+        "servicesProvider": {
+          "type": "string"
         },
         "locations": {
           "type": "array",
@@ -6250,10 +6308,6 @@
             "type": "object",
             "$ref": "#/definitions/services_providersLocationConf"
           }
-        },
-        "promo": {},
-        "primary": {
-          "type": "boolean"
         }
       }
     },

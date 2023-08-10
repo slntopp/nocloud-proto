@@ -110,6 +110,7 @@ message Product {
   map<string, google.protobuf.Value> meta = 6;
 
   optional int32 sorter = 7; // Sorting order, might be needed in UIs
+  optional double installation_fee = 8;
 }
 
 enum Priority {
@@ -217,12 +218,23 @@ message CostEstimation {
   map<string, double> resources = 1;
   double product = 2;
   double total = 3;
-} 
+}
 
 service RecordsService {
   rpc GetActive(GetActiveRequest) returns (Records);
   rpc Create(Records) returns (Records);
   rpc Update(Records) returns (Records);
+}
+
+message GetInstanceReportRequest {
+  string uuid = 1;
+  optional int64 from = 2;
+  optional int64 to = 3;
+}
+
+message GetInstanceReportResponse {
+  int64 total = 1;
+  Currency currency = 2;
 }
 
 service BillingService {
@@ -284,6 +296,11 @@ service BillingService {
   rpc GetRecords(Transaction) returns (Records) {
     option (google.api.http) = {
       get : "/billing/transactions/{uuid}"
+    };
+  };
+  rpc GetInstanceReport(GetInstanceReportRequest) returns (GetInstanceReportResponse) {
+    option (google.api.http) = {
+      get : "/billing/report/{uuid}"
     };
   };
   rpc Reprocess(ReprocessTransactionsRequest) returns (Transactions) {
