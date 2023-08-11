@@ -219,6 +219,7 @@ message Showcase {
   repeated ShowcaseItem items = 4;
   google.protobuf.Value promo = 5;
   bool primary = 6;
+  bool public = 7;
 }
 
 message Showcases {

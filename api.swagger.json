@@ -3771,6 +3771,9 @@
                 "promo": {},
                 "primary": {
                   "type": "boolean"
+                },
+                "public": {
+                  "type": "boolean"
                 }
               }
             }
@@ -6395,6 +6398,9 @@
         },
         "promo": {},
         "primary": {
+          "type": "boolean"
+        },
+        "public": {
           "type": "boolean"
         }
       }
