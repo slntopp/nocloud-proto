@@ -3774,6 +3774,12 @@
                 },
                 "public": {
                   "type": "boolean"
+                },
+                "locations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 }
               }
             }
@@ -6402,6 +6408,12 @@
         },
         "public": {
           "type": "boolean"
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
