@@ -3778,7 +3778,8 @@
                 "locations": {
                   "type": "array",
                   "items": {
-                    "type": "string"
+                    "type": "object",
+                    "$ref": "#/definitions/services_providersLocationConf"
                   }
                 }
               }
@@ -6412,7 +6413,8 @@
         "locations": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "object",
+            "$ref": "#/definitions/services_providersLocationConf"
           }
         }
       }
@@ -6429,8 +6431,7 @@
         "locations": {
           "type": "array",
           "items": {
-            "type": "object",
-            "$ref": "#/definitions/services_providersLocationConf"
+            "type": "string"
           }
         }
       }

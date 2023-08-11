@@ -209,7 +209,7 @@ service ServicesProvidersExtentionsService {
 message ShowcaseItem {
   optional string plan = 1;
   string services_provider = 2;
-  repeated LocationConf locations = 3;
+  repeated string locations = 3;
 }
 
 message Showcase {
@@ -220,7 +220,7 @@ message Showcase {
   google.protobuf.Value promo = 5;
   bool primary = 6;
   bool public = 7;
-  repeated string locations = 8;
+  repeated LocationConf locations = 8;
 }
 
 message Showcases {
