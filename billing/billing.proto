@@ -226,15 +226,31 @@ service RecordsService {
   rpc Update(Records) returns (Records);
 }
 
-message GetInstanceReportRequest {
+message GetInstancesReportRequest {
+  optional int64 from = 1;
+  optional int64 to = 2;
+}
+
+message InstanceReport {
+  string uuid = 1;
+  int64 total = 2;
+  Currency currency = 3;
+}
+
+message GetInstancesReportResponse {
+  repeated InstanceReport reports = 1;
+}
+
+message GetDetailedInstanceReportRequest {
   string uuid = 1;
   optional int64 from = 2;
   optional int64 to = 3;
 }
 
-message GetInstanceReportResponse {
-  int64 total = 1;
-  Currency currency = 2;
+message GetDetailedInstanceReportResponse {
+  repeated Record records = 1;
+  int64 total = 2;
+  int64 count = 3;
 }
 
 service BillingService {
@@ -298,9 +314,14 @@ service BillingService {
       get : "/billing/transactions/{uuid}"
     };
   };
-  rpc GetInstanceReport(GetInstanceReportRequest) returns (GetInstanceReportResponse) {
+  rpc GetInstancesReports(GetInstancesReportRequest) returns (GetInstancesReportResponse) {
     option (google.api.http) = {
-      get : "/billing/report/{uuid}"
+      get : "/billing/reports"
+    };
+  };
+  rpc GetInstanceReport(GetDetailedInstanceReportRequest) returns (GetDetailedInstanceReportResponse) {
+    option (google.api.http) = {
+      get : "/billing/reports/{uuid}"
     };
   };
   rpc Reprocess(ReprocessTransactionsRequest) returns (Transactions) {
