@@ -233,7 +233,7 @@ message GetInstancesReportRequest {
 
 message InstanceReport {
   string uuid = 1;
-  int64 total = 2;
+  double total = 2;
   Currency currency = 3;
 }
 
@@ -249,7 +249,7 @@ message GetDetailedInstanceReportRequest {
 
 message GetDetailedInstanceReportResponse {
   repeated Record records = 1;
-  int64 total = 2;
+  double total = 2;
   int64 count = 3;
 }
 

@@ -4843,8 +4843,8 @@
           }
         },
         "total": {
-          "type": "string",
-          "format": "int64"
+          "type": "number",
+          "format": "double"
         },
         "count": {
           "type": "string",
@@ -4907,8 +4907,8 @@
           "type": "string"
         },
         "total": {
-          "type": "string",
-          "format": "int64"
+          "type": "number",
+          "format": "double"
         },
         "currency": {
           "$ref": "#/definitions/billingCurrency"
