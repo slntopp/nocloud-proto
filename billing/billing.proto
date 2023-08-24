@@ -229,6 +229,11 @@ service RecordsService {
 message GetInstancesReportRequest {
   optional int64 from = 1;
   optional int64 to = 2;
+
+  optional int64 page = 3;
+  optional int64 limit = 4;
+  optional string field = 5;
+  optional string sort = 6;
 }
 
 message InstanceReport {
@@ -245,6 +250,11 @@ message GetDetailedInstanceReportRequest {
   string uuid = 1;
   optional int64 from = 2;
   optional int64 to = 3;
+
+  optional int64 page = 4;
+  optional int64 limit = 5;
+  optional string field = 6;
+  optional string sort = 7;
 }
 
 message GetDetailedInstanceReportResponse {
