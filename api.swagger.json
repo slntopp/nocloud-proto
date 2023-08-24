@@ -1533,6 +1533,28 @@
         ]
       }
     },
+    "/billing/reports/count": {
+      "get": {
+        "operationId": "BillingService_GetInstancesReportsCount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingGetReportsCountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
     "/billing/reports/{uuid}": {
       "get": {
         "operationId": "BillingService_GetInstanceReport",
@@ -1595,6 +1617,36 @@
             "name": "sort",
             "in": "query",
             "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
+    "/billing/reports/{uuid}/count": {
+      "get": {
+        "operationId": "BillingService_GetInstanceReportsCount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingGetReportsCountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
             "type": "string"
           }
         ],
@@ -4940,6 +4992,15 @@
             "type": "object",
             "$ref": "#/definitions/billingInstanceReport"
           }
+        }
+      }
+    },
+    "billingGetReportsCountResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },

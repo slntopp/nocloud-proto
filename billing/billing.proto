@@ -263,6 +263,16 @@ message GetDetailedInstanceReportResponse {
   int64 count = 3;
 }
 
+message GetReportsCountRequest {}
+
+message GetInstanceReportCountRequest {
+  string uuid = 1;
+}
+
+message GetReportsCountResponse {
+  int64 total = 1;
+}
+
 service BillingService {
   rpc CreatePlan(Plan) returns (Plan) {
     option (google.api.http) = {
@@ -329,9 +339,19 @@ service BillingService {
       get : "/billing/reports"
     };
   };
+  rpc GetInstancesReportsCount(GetReportsCountRequest) returns (GetReportsCountResponse) {
+    option (google.api.http) = {
+      get : "/billing/reports/count"
+    };
+  };
   rpc GetInstanceReport(GetDetailedInstanceReportRequest) returns (GetDetailedInstanceReportResponse) {
     option (google.api.http) = {
       get : "/billing/reports/{uuid}"
+    };
+  };
+  rpc GetInstanceReportsCount(GetInstanceReportCountRequest) returns (GetReportsCountResponse) {
+    option (google.api.http) = {
+      get : "/billing/reports/{uuid}/count"
     };
   };
   rpc Reprocess(ReprocessTransactionsRequest) returns (Transactions) {
