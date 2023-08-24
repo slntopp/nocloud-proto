@@ -1451,7 +1451,7 @@ func RegisterBillingServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.BillingService/GetInstancesReportsCount", runtime.WithHTTPPathPattern("/billing/reports/count"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.BillingService/GetInstancesReportsCount", runtime.WithHTTPPathPattern("/billing/count/reports"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1501,7 +1501,7 @@ func RegisterBillingServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.BillingService/GetInstanceReportsCount", runtime.WithHTTPPathPattern("/billing/reports/{uuid}/count"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.BillingService/GetInstanceReportsCount", runtime.WithHTTPPathPattern("/billing/count/reports/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2038,7 +2038,7 @@ func RegisterBillingServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.BillingService/GetInstancesReportsCount", runtime.WithHTTPPathPattern("/billing/reports/count"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.BillingService/GetInstancesReportsCount", runtime.WithHTTPPathPattern("/billing/count/reports"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2082,7 +2082,7 @@ func RegisterBillingServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.BillingService/GetInstanceReportsCount", runtime.WithHTTPPathPattern("/billing/reports/{uuid}/count"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.BillingService/GetInstanceReportsCount", runtime.WithHTTPPathPattern("/billing/count/reports/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2148,11 +2148,11 @@ var (
 
 	pattern_BillingService_GetInstancesReports_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"billing", "reports"}, ""))
 
-	pattern_BillingService_GetInstancesReportsCount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"billing", "reports", "count"}, ""))
+	pattern_BillingService_GetInstancesReportsCount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"billing", "count", "reports"}, ""))
 
 	pattern_BillingService_GetInstanceReport_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"billing", "reports", "uuid"}, ""))
 
-	pattern_BillingService_GetInstanceReportsCount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"billing", "reports", "uuid", "count"}, ""))
+	pattern_BillingService_GetInstanceReportsCount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"billing", "count", "reports", "uuid"}, ""))
 
 	pattern_BillingService_Reprocess_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"billing", "account", "reprocess"}, ""))
 )

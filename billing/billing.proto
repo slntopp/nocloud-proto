@@ -343,7 +343,7 @@ service BillingService {
   };
   rpc GetInstancesReportsCount(GetReportsCountRequest) returns (GetReportsCountResponse) {
     option (google.api.http) = {
-      get : "/billing/reports/count"
+      get : "/billing/count/reports"
     };
   };
   rpc GetInstanceReport(GetDetailedInstanceReportRequest) returns (GetDetailedInstanceReportResponse) {
@@ -353,7 +353,7 @@ service BillingService {
   };
   rpc GetInstanceReportsCount(GetInstanceReportCountRequest) returns (GetReportsCountResponse) {
     option (google.api.http) = {
-      get : "/billing/reports/{uuid}/count"
+      get : "/billing/count/reports/{uuid}"
     };
   };
   rpc Reprocess(ReprocessTransactionsRequest) returns (Transactions) {
