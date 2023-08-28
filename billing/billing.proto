@@ -174,6 +174,8 @@ message Record {
   */
   map<string, google.protobuf.Value> meta = 12;
   Currency currency = 13;
+  string service = 14;
+  string account = 15;
 }
 
 message Records {repeated Record pool = 1;}
@@ -247,14 +249,15 @@ message GetInstancesReportResponse {
 }
 
 message GetDetailedInstanceReportRequest {
-  string uuid = 1;
-  optional int64 from = 2;
-  optional int64 to = 3;
+  optional int64 from = 1;
+  optional int64 to = 2;
 
-  optional int64 page = 4;
-  optional int64 limit = 5;
-  optional string field = 6;
-  optional string sort = 7;
+  optional int64 page = 3;
+  optional int64 limit = 4;
+  optional string field = 5;
+  optional string sort = 6;
+
+  map<string, google.protobuf.Value> filters = 7;
 }
 
 message GetDetailedInstanceReportResponse {
@@ -266,9 +269,9 @@ message GetDetailedInstanceReportResponse {
 message GetReportsCountRequest {}
 
 message GetInstanceReportCountRequest {
-  string uuid = 1;
   optional int64 from = 2;
   optional int64 to = 3;
+  map<string, google.protobuf.Value> filters = 7;
 }
 
 message GetReportsCountResponse {
@@ -338,22 +341,24 @@ service BillingService {
   };
   rpc GetInstancesReports(GetInstancesReportRequest) returns (GetInstancesReportResponse) {
     option (google.api.http) = {
-      get : "/billing/reports"
+      get : "/billing/base_reports"
     };
   };
   rpc GetInstancesReportsCount(GetReportsCountRequest) returns (GetReportsCountResponse) {
     option (google.api.http) = {
-      get : "/billing/count/reports"
+      get : "/billing/count/base_reports"
     };
   };
   rpc GetInstanceReport(GetDetailedInstanceReportRequest) returns (GetDetailedInstanceReportResponse) {
     option (google.api.http) = {
-      get : "/billing/reports/{uuid}"
+      post : "/billing/reports"
+      body : "*"
     };
   };
   rpc GetInstanceReportsCount(GetInstanceReportCountRequest) returns (GetReportsCountResponse) {
     option (google.api.http) = {
-      get : "/billing/count/reports/{uuid}"
+      post : "/billing/count/reports"
+      body : "*"
     };
   };
   rpc Reprocess(ReprocessTransactionsRequest) returns (Transactions) {
