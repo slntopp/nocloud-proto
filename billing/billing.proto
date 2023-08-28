@@ -248,7 +248,7 @@ message GetInstancesReportResponse {
   repeated InstanceReport reports = 1;
 }
 
-message GetDetailedInstanceReportRequest {
+message GetRecordsReportsRequest {
   optional int64 from = 1;
   optional int64 to = 2;
 
@@ -260,15 +260,15 @@ message GetDetailedInstanceReportRequest {
   map<string, google.protobuf.Value> filters = 7;
 }
 
-message GetDetailedInstanceReportResponse {
+message GetRecordsReportsResponse {
   repeated Record records = 1;
   double total = 2;
   int64 count = 3;
 }
 
-message GetReportsCountRequest {}
+message GetInstancesReportsCountRequest {}
 
-message GetInstanceReportCountRequest {
+message GetRecordsReportsCountRequest {
   optional int64 from = 2;
   optional int64 to = 3;
   map<string, google.protobuf.Value> filters = 7;
@@ -344,18 +344,18 @@ service BillingService {
       get : "/billing/base_reports"
     };
   };
-  rpc GetInstancesReportsCount(GetReportsCountRequest) returns (GetReportsCountResponse) {
+  rpc GetInstancesReportsCount(GetInstancesReportsCountRequest) returns (GetReportsCountResponse) {
     option (google.api.http) = {
       get : "/billing/count/base_reports"
     };
   };
-  rpc GetInstanceReport(GetDetailedInstanceReportRequest) returns (GetDetailedInstanceReportResponse) {
+  rpc GetRecordsReports(GetRecordsReportsRequest) returns (GetRecordsReportsResponse) {
     option (google.api.http) = {
       post : "/billing/reports"
       body : "*"
     };
   };
-  rpc GetInstanceReportsCount(GetInstanceReportCountRequest) returns (GetReportsCountResponse) {
+  rpc GetRecordsReportsCount(GetRecordsReportsCountRequest) returns (GetReportsCountResponse) {
     option (google.api.http) = {
       post : "/billing/count/reports"
       body : "*"

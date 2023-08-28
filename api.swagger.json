@@ -900,7 +900,7 @@
     },
     "/billing/count/reports": {
       "post": {
-        "operationId": "BillingService_GetInstanceReportsCount",
+        "operationId": "BillingService_GetRecordsReportsCount",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -921,7 +921,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/billingGetInstanceReportCountRequest"
+              "$ref": "#/definitions/billingGetRecordsReportsCountRequest"
             }
           }
         ],
@@ -1589,12 +1589,12 @@
     },
     "/billing/reports": {
       "post": {
-        "operationId": "BillingService_GetInstanceReport",
+        "operationId": "BillingService_GetRecordsReports",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/billingGetDetailedInstanceReportResponse"
+              "$ref": "#/definitions/billingGetRecordsReportsResponse"
             }
           },
           "default": {
@@ -1610,7 +1610,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/billingGetDetailedInstanceReportRequest"
+              "$ref": "#/definitions/billingGetRecordsReportsRequest"
             }
           }
         ],
@@ -4900,7 +4900,63 @@
         }
       }
     },
-    "billingGetDetailedInstanceReportRequest": {
+    "billingGetExchangeRateResponse": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "$ref": "#/definitions/billingCurrency"
+        },
+        "to": {
+          "$ref": "#/definitions/billingCurrency"
+        },
+        "rate": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "billingGetExchangeRatesResponse": {
+      "type": "object",
+      "properties": {
+        "rates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/billingGetExchangeRateResponse"
+          }
+        }
+      }
+    },
+    "billingGetInstancesReportResponse": {
+      "type": "object",
+      "properties": {
+        "reports": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/billingInstanceReport"
+          }
+        }
+      }
+    },
+    "billingGetRecordsReportsCountRequest": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "type": "string",
+          "format": "int64"
+        },
+        "to": {
+          "type": "string",
+          "format": "int64"
+        },
+        "filters": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "billingGetRecordsReportsRequest": {
       "type": "object",
       "properties": {
         "from": {
@@ -4931,7 +4987,7 @@
         }
       }
     },
-    "billingGetDetailedInstanceReportResponse": {
+    "billingGetRecordsReportsResponse": {
       "type": "object",
       "properties": {
         "records": {
@@ -4948,62 +5004,6 @@
         "count": {
           "type": "string",
           "format": "int64"
-        }
-      }
-    },
-    "billingGetExchangeRateResponse": {
-      "type": "object",
-      "properties": {
-        "from": {
-          "$ref": "#/definitions/billingCurrency"
-        },
-        "to": {
-          "$ref": "#/definitions/billingCurrency"
-        },
-        "rate": {
-          "type": "number",
-          "format": "double"
-        }
-      }
-    },
-    "billingGetExchangeRatesResponse": {
-      "type": "object",
-      "properties": {
-        "rates": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/billingGetExchangeRateResponse"
-          }
-        }
-      }
-    },
-    "billingGetInstanceReportCountRequest": {
-      "type": "object",
-      "properties": {
-        "from": {
-          "type": "string",
-          "format": "int64"
-        },
-        "to": {
-          "type": "string",
-          "format": "int64"
-        },
-        "filters": {
-          "type": "object",
-          "additionalProperties": {}
-        }
-      }
-    },
-    "billingGetInstancesReportResponse": {
-      "type": "object",
-      "properties": {
-        "reports": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/billingInstanceReport"
-          }
         }
       }
     },

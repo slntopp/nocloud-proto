@@ -626,7 +626,7 @@ func local_request_BillingService_GetInstancesReports_0(ctx context.Context, mar
 }
 
 func request_BillingService_GetInstancesReportsCount_0(ctx context.Context, marshaler runtime.Marshaler, client BillingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetReportsCountRequest
+	var protoReq GetInstancesReportsCountRequest
 	var metadata runtime.ServerMetadata
 
 	msg, err := client.GetInstancesReportsCount(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -635,7 +635,7 @@ func request_BillingService_GetInstancesReportsCount_0(ctx context.Context, mars
 }
 
 func local_request_BillingService_GetInstancesReportsCount_0(ctx context.Context, marshaler runtime.Marshaler, server BillingServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetReportsCountRequest
+	var protoReq GetInstancesReportsCountRequest
 	var metadata runtime.ServerMetadata
 
 	msg, err := server.GetInstancesReportsCount(ctx, &protoReq)
@@ -643,8 +643,8 @@ func local_request_BillingService_GetInstancesReportsCount_0(ctx context.Context
 
 }
 
-func request_BillingService_GetInstanceReport_0(ctx context.Context, marshaler runtime.Marshaler, client BillingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetDetailedInstanceReportRequest
+func request_BillingService_GetRecordsReports_0(ctx context.Context, marshaler runtime.Marshaler, client BillingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetRecordsReportsRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -655,13 +655,13 @@ func request_BillingService_GetInstanceReport_0(ctx context.Context, marshaler r
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := client.GetInstanceReport(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.GetRecordsReports(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_BillingService_GetInstanceReport_0(ctx context.Context, marshaler runtime.Marshaler, server BillingServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetDetailedInstanceReportRequest
+func local_request_BillingService_GetRecordsReports_0(ctx context.Context, marshaler runtime.Marshaler, server BillingServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetRecordsReportsRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -672,13 +672,13 @@ func local_request_BillingService_GetInstanceReport_0(ctx context.Context, marsh
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := server.GetInstanceReport(ctx, &protoReq)
+	msg, err := server.GetRecordsReports(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-func request_BillingService_GetInstanceReportsCount_0(ctx context.Context, marshaler runtime.Marshaler, client BillingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetInstanceReportCountRequest
+func request_BillingService_GetRecordsReportsCount_0(ctx context.Context, marshaler runtime.Marshaler, client BillingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetRecordsReportsCountRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -689,13 +689,13 @@ func request_BillingService_GetInstanceReportsCount_0(ctx context.Context, marsh
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := client.GetInstanceReportsCount(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.GetRecordsReportsCount(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_BillingService_GetInstanceReportsCount_0(ctx context.Context, marshaler runtime.Marshaler, server BillingServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetInstanceReportCountRequest
+func local_request_BillingService_GetRecordsReportsCount_0(ctx context.Context, marshaler runtime.Marshaler, server BillingServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetRecordsReportsCountRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -706,7 +706,7 @@ func local_request_BillingService_GetInstanceReportsCount_0(ctx context.Context,
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := server.GetInstanceReportsCount(ctx, &protoReq)
+	msg, err := server.GetRecordsReportsCount(ctx, &protoReq)
 	return msg, metadata, err
 
 }
@@ -1396,7 +1396,7 @@ func RegisterBillingServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 
 	})
 
-	mux.Handle("POST", pattern_BillingService_GetInstanceReport_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_BillingService_GetRecordsReports_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -1404,12 +1404,12 @@ func RegisterBillingServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.BillingService/GetInstanceReport", runtime.WithHTTPPathPattern("/billing/reports"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.BillingService/GetRecordsReports", runtime.WithHTTPPathPattern("/billing/reports"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_BillingService_GetInstanceReport_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_BillingService_GetRecordsReports_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -1417,11 +1417,11 @@ func RegisterBillingServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 			return
 		}
 
-		forward_BillingService_GetInstanceReport_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BillingService_GetRecordsReports_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_BillingService_GetInstanceReportsCount_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_BillingService_GetRecordsReportsCount_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -1429,12 +1429,12 @@ func RegisterBillingServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.BillingService/GetInstanceReportsCount", runtime.WithHTTPPathPattern("/billing/count/reports"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.BillingService/GetRecordsReportsCount", runtime.WithHTTPPathPattern("/billing/count/reports"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_BillingService_GetInstanceReportsCount_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_BillingService_GetRecordsReportsCount_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -1442,7 +1442,7 @@ func RegisterBillingServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 			return
 		}
 
-		forward_BillingService_GetInstanceReportsCount_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BillingService_GetRecordsReportsCount_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -1982,47 +1982,47 @@ func RegisterBillingServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 
 	})
 
-	mux.Handle("POST", pattern_BillingService_GetInstanceReport_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_BillingService_GetRecordsReports_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.BillingService/GetInstanceReport", runtime.WithHTTPPathPattern("/billing/reports"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.BillingService/GetRecordsReports", runtime.WithHTTPPathPattern("/billing/reports"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_BillingService_GetInstanceReport_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_BillingService_GetRecordsReports_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_BillingService_GetInstanceReport_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BillingService_GetRecordsReports_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_BillingService_GetInstanceReportsCount_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_BillingService_GetRecordsReportsCount_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.BillingService/GetInstanceReportsCount", runtime.WithHTTPPathPattern("/billing/count/reports"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.BillingService/GetRecordsReportsCount", runtime.WithHTTPPathPattern("/billing/count/reports"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_BillingService_GetInstanceReportsCount_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_BillingService_GetRecordsReportsCount_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_BillingService_GetInstanceReportsCount_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BillingService_GetRecordsReportsCount_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -2078,9 +2078,9 @@ var (
 
 	pattern_BillingService_GetInstancesReportsCount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"billing", "count", "base_reports"}, ""))
 
-	pattern_BillingService_GetInstanceReport_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"billing", "reports"}, ""))
+	pattern_BillingService_GetRecordsReports_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"billing", "reports"}, ""))
 
-	pattern_BillingService_GetInstanceReportsCount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"billing", "count", "reports"}, ""))
+	pattern_BillingService_GetRecordsReportsCount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"billing", "count", "reports"}, ""))
 
 	pattern_BillingService_Reprocess_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"billing", "account", "reprocess"}, ""))
 )
@@ -2112,9 +2112,9 @@ var (
 
 	forward_BillingService_GetInstancesReportsCount_0 = runtime.ForwardResponseMessage
 
-	forward_BillingService_GetInstanceReport_0 = runtime.ForwardResponseMessage
+	forward_BillingService_GetRecordsReports_0 = runtime.ForwardResponseMessage
 
-	forward_BillingService_GetInstanceReportsCount_0 = runtime.ForwardResponseMessage
+	forward_BillingService_GetRecordsReportsCount_0 = runtime.ForwardResponseMessage
 
 	forward_BillingService_Reprocess_0 = runtime.ForwardResponseMessage
 )
