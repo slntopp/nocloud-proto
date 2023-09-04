@@ -5167,6 +5167,9 @@
         "installationFee": {
           "type": "number",
           "format": "double"
+        },
+        "public": {
+          "type": "boolean"
         }
       }
     },
