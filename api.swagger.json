@@ -812,6 +812,124 @@
         ]
       }
     },
+    "/billing/base_reports": {
+      "get": {
+        "operationId": "BillingService_GetInstancesReports",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingGetInstancesReportResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "field",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
+    "/billing/count/base_reports": {
+      "get": {
+        "operationId": "BillingService_GetInstancesReportsCount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingGetReportsCountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
+    "/billing/count/reports": {
+      "post": {
+        "operationId": "BillingService_GetRecordsReportsCount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingGetReportsCountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingGetRecordsReportsCountRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
     "/billing/count/transactions": {
       "get": {
         "operationId": "BillingService_GetTransactionsCount",
@@ -1469,14 +1587,14 @@
         ]
       }
     },
-    "/billing/report/{uuid}": {
-      "get": {
-        "operationId": "BillingService_GetInstanceReport",
+    "/billing/reports": {
+      "post": {
+        "operationId": "BillingService_GetRecordsReports",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/billingGetInstanceReportResponse"
+              "$ref": "#/definitions/billingGetRecordsReportsResponse"
             }
           },
           "default": {
@@ -1488,24 +1606,12 @@
         },
         "parameters": [
           {
-            "name": "uuid",
-            "in": "path",
+            "name": "body",
+            "in": "body",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "from",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "int64"
-          },
-          {
-            "name": "to",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "int64"
+            "schema": {
+              "$ref": "#/definitions/billingGetRecordsReportsRequest"
+            }
           }
         ],
         "tags": [
@@ -4821,15 +4927,92 @@
         }
       }
     },
-    "billingGetInstanceReportResponse": {
+    "billingGetInstancesReportResponse": {
+      "type": "object",
+      "properties": {
+        "reports": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/billingInstanceReport"
+          }
+        }
+      }
+    },
+    "billingGetRecordsReportsCountRequest": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "type": "string",
+          "format": "int64"
+        },
+        "to": {
+          "type": "string",
+          "format": "int64"
+        },
+        "filters": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "billingGetRecordsReportsRequest": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "type": "string",
+          "format": "int64"
+        },
+        "to": {
+          "type": "string",
+          "format": "int64"
+        },
+        "page": {
+          "type": "string",
+          "format": "int64"
+        },
+        "limit": {
+          "type": "string",
+          "format": "int64"
+        },
+        "field": {
+          "type": "string"
+        },
+        "sort": {
+          "type": "string"
+        },
+        "filters": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "billingGetRecordsReportsResponse": {
+      "type": "object",
+      "properties": {
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/nocloudbillingRecord"
+          }
+        },
+        "total": {
+          "type": "number",
+          "format": "double"
+        },
+        "count": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "billingGetReportsCountResponse": {
       "type": "object",
       "properties": {
         "total": {
           "type": "string",
           "format": "int64"
-        },
-        "currency": {
-          "$ref": "#/definitions/billingCurrency"
         }
       }
     },
@@ -4839,6 +5022,21 @@
         "total": {
           "type": "string",
           "format": "uint64"
+        }
+      }
+    },
+    "billingInstanceReport": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "total": {
+          "type": "number",
+          "format": "double"
+        },
+        "currency": {
+          "$ref": "#/definitions/billingCurrency"
         }
       }
     },
@@ -5672,6 +5870,12 @@
         },
         "currency": {
           "$ref": "#/definitions/billingCurrency"
+        },
+        "service": {
+          "type": "string"
+        },
+        "account": {
+          "type": "string"
         }
       }
     },

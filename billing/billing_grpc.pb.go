@@ -198,19 +198,22 @@ var RecordsService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	BillingService_CreatePlan_FullMethodName           = "/nocloud.billing.BillingService/CreatePlan"
-	BillingService_UpdatePlan_FullMethodName           = "/nocloud.billing.BillingService/UpdatePlan"
-	BillingService_GetPlan_FullMethodName              = "/nocloud.billing.BillingService/GetPlan"
-	BillingService_ListPlans_FullMethodName            = "/nocloud.billing.BillingService/ListPlans"
-	BillingService_ListPlansInstances_FullMethodName   = "/nocloud.billing.BillingService/ListPlansInstances"
-	BillingService_DeletePlan_FullMethodName           = "/nocloud.billing.BillingService/DeletePlan"
-	BillingService_CreateTransaction_FullMethodName    = "/nocloud.billing.BillingService/CreateTransaction"
-	BillingService_GetTransactions_FullMethodName      = "/nocloud.billing.BillingService/GetTransactions"
-	BillingService_GetTransactionsCount_FullMethodName = "/nocloud.billing.BillingService/GetTransactionsCount"
-	BillingService_UpdateTransaction_FullMethodName    = "/nocloud.billing.BillingService/UpdateTransaction"
-	BillingService_GetRecords_FullMethodName           = "/nocloud.billing.BillingService/GetRecords"
-	BillingService_GetInstanceReport_FullMethodName    = "/nocloud.billing.BillingService/GetInstanceReport"
-	BillingService_Reprocess_FullMethodName            = "/nocloud.billing.BillingService/Reprocess"
+	BillingService_CreatePlan_FullMethodName               = "/nocloud.billing.BillingService/CreatePlan"
+	BillingService_UpdatePlan_FullMethodName               = "/nocloud.billing.BillingService/UpdatePlan"
+	BillingService_GetPlan_FullMethodName                  = "/nocloud.billing.BillingService/GetPlan"
+	BillingService_ListPlans_FullMethodName                = "/nocloud.billing.BillingService/ListPlans"
+	BillingService_ListPlansInstances_FullMethodName       = "/nocloud.billing.BillingService/ListPlansInstances"
+	BillingService_DeletePlan_FullMethodName               = "/nocloud.billing.BillingService/DeletePlan"
+	BillingService_CreateTransaction_FullMethodName        = "/nocloud.billing.BillingService/CreateTransaction"
+	BillingService_GetTransactions_FullMethodName          = "/nocloud.billing.BillingService/GetTransactions"
+	BillingService_GetTransactionsCount_FullMethodName     = "/nocloud.billing.BillingService/GetTransactionsCount"
+	BillingService_UpdateTransaction_FullMethodName        = "/nocloud.billing.BillingService/UpdateTransaction"
+	BillingService_GetRecords_FullMethodName               = "/nocloud.billing.BillingService/GetRecords"
+	BillingService_GetInstancesReports_FullMethodName      = "/nocloud.billing.BillingService/GetInstancesReports"
+	BillingService_GetInstancesReportsCount_FullMethodName = "/nocloud.billing.BillingService/GetInstancesReportsCount"
+	BillingService_GetRecordsReports_FullMethodName        = "/nocloud.billing.BillingService/GetRecordsReports"
+	BillingService_GetRecordsReportsCount_FullMethodName   = "/nocloud.billing.BillingService/GetRecordsReportsCount"
+	BillingService_Reprocess_FullMethodName                = "/nocloud.billing.BillingService/Reprocess"
 )
 
 // BillingServiceClient is the client API for BillingService service.
@@ -228,7 +231,10 @@ type BillingServiceClient interface {
 	GetTransactionsCount(ctx context.Context, in *GetTransactionsCountRequest, opts ...grpc.CallOption) (*GetTransactionsCountResponse, error)
 	UpdateTransaction(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*UpdateTransactionResponse, error)
 	GetRecords(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*Records, error)
-	GetInstanceReport(ctx context.Context, in *GetInstanceReportRequest, opts ...grpc.CallOption) (*GetInstanceReportResponse, error)
+	GetInstancesReports(ctx context.Context, in *GetInstancesReportRequest, opts ...grpc.CallOption) (*GetInstancesReportResponse, error)
+	GetInstancesReportsCount(ctx context.Context, in *GetInstancesReportsCountRequest, opts ...grpc.CallOption) (*GetReportsCountResponse, error)
+	GetRecordsReports(ctx context.Context, in *GetRecordsReportsRequest, opts ...grpc.CallOption) (*GetRecordsReportsResponse, error)
+	GetRecordsReportsCount(ctx context.Context, in *GetRecordsReportsCountRequest, opts ...grpc.CallOption) (*GetReportsCountResponse, error)
 	Reprocess(ctx context.Context, in *ReprocessTransactionsRequest, opts ...grpc.CallOption) (*Transactions, error)
 }
 
@@ -339,9 +345,36 @@ func (c *billingServiceClient) GetRecords(ctx context.Context, in *Transaction, 
 	return out, nil
 }
 
-func (c *billingServiceClient) GetInstanceReport(ctx context.Context, in *GetInstanceReportRequest, opts ...grpc.CallOption) (*GetInstanceReportResponse, error) {
-	out := new(GetInstanceReportResponse)
-	err := c.cc.Invoke(ctx, BillingService_GetInstanceReport_FullMethodName, in, out, opts...)
+func (c *billingServiceClient) GetInstancesReports(ctx context.Context, in *GetInstancesReportRequest, opts ...grpc.CallOption) (*GetInstancesReportResponse, error) {
+	out := new(GetInstancesReportResponse)
+	err := c.cc.Invoke(ctx, BillingService_GetInstancesReports_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingServiceClient) GetInstancesReportsCount(ctx context.Context, in *GetInstancesReportsCountRequest, opts ...grpc.CallOption) (*GetReportsCountResponse, error) {
+	out := new(GetReportsCountResponse)
+	err := c.cc.Invoke(ctx, BillingService_GetInstancesReportsCount_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingServiceClient) GetRecordsReports(ctx context.Context, in *GetRecordsReportsRequest, opts ...grpc.CallOption) (*GetRecordsReportsResponse, error) {
+	out := new(GetRecordsReportsResponse)
+	err := c.cc.Invoke(ctx, BillingService_GetRecordsReports_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingServiceClient) GetRecordsReportsCount(ctx context.Context, in *GetRecordsReportsCountRequest, opts ...grpc.CallOption) (*GetReportsCountResponse, error) {
+	out := new(GetReportsCountResponse)
+	err := c.cc.Invoke(ctx, BillingService_GetRecordsReportsCount_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -372,7 +405,10 @@ type BillingServiceServer interface {
 	GetTransactionsCount(context.Context, *GetTransactionsCountRequest) (*GetTransactionsCountResponse, error)
 	UpdateTransaction(context.Context, *Transaction) (*UpdateTransactionResponse, error)
 	GetRecords(context.Context, *Transaction) (*Records, error)
-	GetInstanceReport(context.Context, *GetInstanceReportRequest) (*GetInstanceReportResponse, error)
+	GetInstancesReports(context.Context, *GetInstancesReportRequest) (*GetInstancesReportResponse, error)
+	GetInstancesReportsCount(context.Context, *GetInstancesReportsCountRequest) (*GetReportsCountResponse, error)
+	GetRecordsReports(context.Context, *GetRecordsReportsRequest) (*GetRecordsReportsResponse, error)
+	GetRecordsReportsCount(context.Context, *GetRecordsReportsCountRequest) (*GetReportsCountResponse, error)
 	Reprocess(context.Context, *ReprocessTransactionsRequest) (*Transactions, error)
 	mustEmbedUnimplementedBillingServiceServer()
 }
@@ -414,8 +450,17 @@ func (UnimplementedBillingServiceServer) UpdateTransaction(context.Context, *Tra
 func (UnimplementedBillingServiceServer) GetRecords(context.Context, *Transaction) (*Records, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRecords not implemented")
 }
-func (UnimplementedBillingServiceServer) GetInstanceReport(context.Context, *GetInstanceReportRequest) (*GetInstanceReportResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetInstanceReport not implemented")
+func (UnimplementedBillingServiceServer) GetInstancesReports(context.Context, *GetInstancesReportRequest) (*GetInstancesReportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInstancesReports not implemented")
+}
+func (UnimplementedBillingServiceServer) GetInstancesReportsCount(context.Context, *GetInstancesReportsCountRequest) (*GetReportsCountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInstancesReportsCount not implemented")
+}
+func (UnimplementedBillingServiceServer) GetRecordsReports(context.Context, *GetRecordsReportsRequest) (*GetRecordsReportsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRecordsReports not implemented")
+}
+func (UnimplementedBillingServiceServer) GetRecordsReportsCount(context.Context, *GetRecordsReportsCountRequest) (*GetReportsCountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRecordsReportsCount not implemented")
 }
 func (UnimplementedBillingServiceServer) Reprocess(context.Context, *ReprocessTransactionsRequest) (*Transactions, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Reprocess not implemented")
@@ -631,20 +676,74 @@ func _BillingService_GetRecords_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BillingService_GetInstanceReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetInstanceReportRequest)
+func _BillingService_GetInstancesReports_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInstancesReportRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BillingServiceServer).GetInstanceReport(ctx, in)
+		return srv.(BillingServiceServer).GetInstancesReports(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BillingService_GetInstanceReport_FullMethodName,
+		FullMethod: BillingService_GetInstancesReports_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BillingServiceServer).GetInstanceReport(ctx, req.(*GetInstanceReportRequest))
+		return srv.(BillingServiceServer).GetInstancesReports(ctx, req.(*GetInstancesReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BillingService_GetInstancesReportsCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInstancesReportsCountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).GetInstancesReportsCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_GetInstancesReportsCount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).GetInstancesReportsCount(ctx, req.(*GetInstancesReportsCountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BillingService_GetRecordsReports_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRecordsReportsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).GetRecordsReports(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_GetRecordsReports_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).GetRecordsReports(ctx, req.(*GetRecordsReportsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BillingService_GetRecordsReportsCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRecordsReportsCountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).GetRecordsReportsCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_GetRecordsReportsCount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).GetRecordsReportsCount(ctx, req.(*GetRecordsReportsCountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -719,8 +818,20 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BillingService_GetRecords_Handler,
 		},
 		{
-			MethodName: "GetInstanceReport",
-			Handler:    _BillingService_GetInstanceReport_Handler,
+			MethodName: "GetInstancesReports",
+			Handler:    _BillingService_GetInstancesReports_Handler,
+		},
+		{
+			MethodName: "GetInstancesReportsCount",
+			Handler:    _BillingService_GetInstancesReportsCount_Handler,
+		},
+		{
+			MethodName: "GetRecordsReports",
+			Handler:    _BillingService_GetRecordsReports_Handler,
+		},
+		{
+			MethodName: "GetRecordsReportsCount",
+			Handler:    _BillingService_GetRecordsReportsCount_Handler,
 		},
 		{
 			MethodName: "Reprocess",
