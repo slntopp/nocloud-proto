@@ -49,6 +49,10 @@ class Product extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>optional int32 sorter = 7 [json_name = "sorter"];</code>
      */
     protected $sorter = null;
+    /**
+     * Generated from protobuf field <code>optional double installation_fee = 8 [json_name = "installationFee"];</code>
+     */
+    protected $installation_fee = null;
 
     /**
      * Constructor.
@@ -67,6 +71,7 @@ class Product extends \Google\Protobuf\Internal\Message
      *     @type array|\Google\Protobuf\Internal\MapField $meta
      *     @type int $sorter
      *           Sorting order, might be needed in UIs
+     *     @type float $installation_fee
      * }
      */
     public function __construct($data = NULL) {
@@ -250,6 +255,38 @@ class Product extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt32($var);
         $this->sorter = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>optional double installation_fee = 8 [json_name = "installationFee"];</code>
+     * @return float
+     */
+    public function getInstallationFee()
+    {
+        return isset($this->installation_fee) ? $this->installation_fee : 0.0;
+    }
+
+    public function hasInstallationFee()
+    {
+        return isset($this->installation_fee);
+    }
+
+    public function clearInstallationFee()
+    {
+        unset($this->installation_fee);
+    }
+
+    /**
+     * Generated from protobuf field <code>optional double installation_fee = 8 [json_name = "installationFee"];</code>
+     * @param float $var
+     * @return $this
+     */
+    public function setInstallationFee($var)
+    {
+        GPBUtil::checkDouble($var);
+        $this->installation_fee = $var;
 
         return $this;
     }

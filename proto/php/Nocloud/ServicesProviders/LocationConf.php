@@ -33,6 +33,10 @@ class LocationConf extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>map<string, .google.protobuf.Value> extra = 5 [json_name = "extra"];</code>
      */
     private $extra;
+    /**
+     * Generated from protobuf field <code>string type = 6 [json_name = "type"];</code>
+     */
+    protected $type = '';
 
     /**
      * Constructor.
@@ -45,6 +49,7 @@ class LocationConf extends \Google\Protobuf\Internal\Message
      *     @type string $id
      *     @type string $title
      *     @type array|\Google\Protobuf\Internal\MapField $extra
+     *     @type string $type
      * }
      */
     public function __construct($data = NULL) {
@@ -158,6 +163,28 @@ class LocationConf extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::MESSAGE, \Google\Protobuf\Value::class);
         $this->extra = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string type = 6 [json_name = "type"];</code>
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Generated from protobuf field <code>string type = 6 [json_name = "type"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setType($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->type = $var;
 
         return $this;
     }

@@ -63,12 +63,12 @@ class Transaction extends \Google\Protobuf\Internal\Message
     protected $total = 0.0;
     /**
      * Transaction meta data, like
-     * meta: {
-     * total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
-     * Mb, IP quantity price_atm: <number> // hourly price per quant of resouce at
-     * the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
-     * Type(SSD/HDD/NVMe/etc)
-     * }
+     *meta: {
+     *total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
+     *Mb, IP quantity price_atm: <number> // hourly price per quant of resouce at
+     *the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
+     *Type(SSD/HDD/NVMe/etc)
+     *}
      *
      * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 10 [json_name = "meta"];</code>
      */
@@ -101,12 +101,12 @@ class Transaction extends \Google\Protobuf\Internal\Message
      *           Transaction total value in NCU
      *     @type array|\Google\Protobuf\Internal\MapField $meta
      *           Transaction meta data, like
-     *           meta: {
-     *           total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
-     *           Mb, IP quantity price_atm: <number> // hourly price per quant of resouce at
-     *           the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
-     *           Type(SSD/HDD/NVMe/etc)
-     *           }
+     *          meta: {
+     *          total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
+     *          Mb, IP quantity price_atm: <number> // hourly price per quant of resouce at
+     *          the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
+     *          Type(SSD/HDD/NVMe/etc)
+     *          }
      *     @type int $currency
      * }
      */
@@ -339,12 +339,12 @@ class Transaction extends \Google\Protobuf\Internal\Message
 
     /**
      * Transaction meta data, like
-     * meta: {
-     * total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
-     * Mb, IP quantity price_atm: <number> // hourly price per quant of resouce at
-     * the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
-     * Type(SSD/HDD/NVMe/etc)
-     * }
+     *meta: {
+     *total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
+     *Mb, IP quantity price_atm: <number> // hourly price per quant of resouce at
+     *the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
+     *Type(SSD/HDD/NVMe/etc)
+     *}
      *
      * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 10 [json_name = "meta"];</code>
      * @return \Google\Protobuf\Internal\MapField
@@ -356,12 +356,12 @@ class Transaction extends \Google\Protobuf\Internal\Message
 
     /**
      * Transaction meta data, like
-     * meta: {
-     * total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
-     * Mb, IP quantity price_atm: <number> // hourly price per quant of resouce at
-     * the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
-     * Type(SSD/HDD/NVMe/etc)
-     * }
+     *meta: {
+     *total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
+     *Mb, IP quantity price_atm: <number> // hourly price per quant of resouce at
+     *the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
+     *Type(SSD/HDD/NVMe/etc)
+     *}
      *
      * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 10 [json_name = "meta"];</code>
      * @param array|\Google\Protobuf\Internal\MapField $var

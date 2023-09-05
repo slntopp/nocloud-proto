@@ -18,9 +18,9 @@ class BindPlanRequest extends \Google\Protobuf\Internal\Message
      */
     protected $uuid = '';
     /**
-     * Generated from protobuf field <code>string plan_uuid = 2 [json_name = "planUuid"];</code>
+     * Generated from protobuf field <code>repeated string plans = 2 [json_name = "plans"];</code>
      */
-    protected $plan_uuid = '';
+    private $plans;
 
     /**
      * Constructor.
@@ -29,7 +29,7 @@ class BindPlanRequest extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $uuid
-     *     @type string $plan_uuid
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $plans
      * }
      */
     public function __construct($data = NULL) {
@@ -60,23 +60,23 @@ class BindPlanRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string plan_uuid = 2 [json_name = "planUuid"];</code>
-     * @return string
+     * Generated from protobuf field <code>repeated string plans = 2 [json_name = "plans"];</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
      */
-    public function getPlanUuid()
+    public function getPlans()
     {
-        return $this->plan_uuid;
+        return $this->plans;
     }
 
     /**
-     * Generated from protobuf field <code>string plan_uuid = 2 [json_name = "planUuid"];</code>
-     * @param string $var
+     * Generated from protobuf field <code>repeated string plans = 2 [json_name = "plans"];</code>
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
-    public function setPlanUuid($var)
+    public function setPlans($var)
     {
-        GPBUtil::checkString($var, True);
-        $this->plan_uuid = $var;
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
+        $this->plans = $arr;
 
         return $this;
     }

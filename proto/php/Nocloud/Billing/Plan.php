@@ -61,6 +61,10 @@ class Plan extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.nocloud.billing.Fee fee = 9 [json_name = "fee"];</code>
      */
     protected $fee = null;
+    /**
+     * Generated from protobuf field <code>repeated .nocloud.ansible.Software software = 10 [json_name = "software"];</code>
+     */
+    private $software;
 
     /**
      * Constructor.
@@ -83,6 +87,7 @@ class Plan extends \Google\Protobuf\Internal\Message
      *     @type array|\Google\Protobuf\Internal\MapField $meta
      *           or whatever)
      *     @type \Nocloud\Billing\Fee $fee
+     *     @type array<\Nocloud\Ansible\Software>|\Google\Protobuf\Internal\RepeatedField $software
      * }
      */
     public function __construct($data = NULL) {
@@ -318,6 +323,28 @@ class Plan extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Nocloud\Billing\Fee::class);
         $this->fee = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated .nocloud.ansible.Software software = 10 [json_name = "software"];</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getSoftware()
+    {
+        return $this->software;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated .nocloud.ansible.Software software = 10 [json_name = "software"];</code>
+     * @param array<\Nocloud\Ansible\Software>|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setSoftware($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Nocloud\Ansible\Software::class);
+        $this->software = $arr;
 
         return $this;
     }

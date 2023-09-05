@@ -79,12 +79,12 @@ class Record extends \Google\Protobuf\Internal\Message
     protected $total = 0.0;
     /**
      * Record meta data, like
-     * meta: {
-     * total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
-     * Mb, IP quantity price_atm: <number> // hourly price per quant of resouce at
-     * the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
-     * Type(SSD/HDD/NVMe/etc)
-     * }
+     *meta: {
+     *total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
+     *Mb, IP quantity price_atm: <number> // hourly price per quant of resouce at
+     *the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
+     *Type(SSD/HDD/NVMe/etc)
+     *}
      *
      * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 12 [json_name = "meta"];</code>
      */
@@ -93,6 +93,14 @@ class Record extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.nocloud.billing.Currency currency = 13 [json_name = "currency"];</code>
      */
     protected $currency = 0;
+    /**
+     * Generated from protobuf field <code>string service = 14 [json_name = "service"];</code>
+     */
+    protected $service = '';
+    /**
+     * Generated from protobuf field <code>string account = 15 [json_name = "account"];</code>
+     */
+    protected $account = '';
 
     /**
      * Constructor.
@@ -123,13 +131,15 @@ class Record extends \Google\Protobuf\Internal\Message
      *           Record total value in NCU
      *     @type array|\Google\Protobuf\Internal\MapField $meta
      *           Record meta data, like
-     *           meta: {
-     *           total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
-     *           Mb, IP quantity price_atm: <number> // hourly price per quant of resouce at
-     *           the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
-     *           Type(SSD/HDD/NVMe/etc)
-     *           }
+     *          meta: {
+     *          total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
+     *          Mb, IP quantity price_atm: <number> // hourly price per quant of resouce at
+     *          the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
+     *          Type(SSD/HDD/NVMe/etc)
+     *          }
      *     @type int $currency
+     *     @type string $service
+     *     @type string $account
      * }
      */
     public function __construct($data = NULL) {
@@ -421,12 +431,12 @@ class Record extends \Google\Protobuf\Internal\Message
 
     /**
      * Record meta data, like
-     * meta: {
-     * total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
-     * Mb, IP quantity price_atm: <number> // hourly price per quant of resouce at
-     * the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
-     * Type(SSD/HDD/NVMe/etc)
-     * }
+     *meta: {
+     *total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
+     *Mb, IP quantity price_atm: <number> // hourly price per quant of resouce at
+     *the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
+     *Type(SSD/HDD/NVMe/etc)
+     *}
      *
      * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 12 [json_name = "meta"];</code>
      * @return \Google\Protobuf\Internal\MapField
@@ -438,12 +448,12 @@ class Record extends \Google\Protobuf\Internal\Message
 
     /**
      * Record meta data, like
-     * meta: {
-     * total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
-     * Mb, IP quantity price_atm: <number> // hourly price per quant of resouce at
-     * the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
-     * Type(SSD/HDD/NVMe/etc)
-     * }
+     *meta: {
+     *total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
+     *Mb, IP quantity price_atm: <number> // hourly price per quant of resouce at
+     *the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
+     *Type(SSD/HDD/NVMe/etc)
+     *}
      *
      * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 12 [json_name = "meta"];</code>
      * @param array|\Google\Protobuf\Internal\MapField $var
@@ -475,6 +485,50 @@ class Record extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkEnum($var, \Nocloud\Billing\Currency::class);
         $this->currency = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string service = 14 [json_name = "service"];</code>
+     * @return string
+     */
+    public function getService()
+    {
+        return $this->service;
+    }
+
+    /**
+     * Generated from protobuf field <code>string service = 14 [json_name = "service"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setService($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->service = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string account = 15 [json_name = "account"];</code>
+     * @return string
+     */
+    public function getAccount()
+    {
+        return $this->account;
+    }
+
+    /**
+     * Generated from protobuf field <code>string account = 15 [json_name = "account"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setAccount($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->account = $var;
 
         return $this;
     }

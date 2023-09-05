@@ -88,6 +88,20 @@ class BillingServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * @param \Nocloud\Billing\ListPlansInstancesRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function ListPlansInstances(\Nocloud\Billing\ListPlansInstancesRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/ListPlansInstances',
+        $argument,
+        ['\Nocloud\Billing\ListPlansInstancesResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * @param \Nocloud\Billing\Plan $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -168,6 +182,62 @@ class BillingServiceClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/nocloud.billing.BillingService/GetRecords',
         $argument,
         ['\Nocloud\Billing\Records', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Billing\GetInstancesReportRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function GetInstancesReports(\Nocloud\Billing\GetInstancesReportRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/GetInstancesReports',
+        $argument,
+        ['\Nocloud\Billing\GetInstancesReportResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Billing\GetInstancesReportsCountRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function GetInstancesReportsCount(\Nocloud\Billing\GetInstancesReportsCountRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/GetInstancesReportsCount',
+        $argument,
+        ['\Nocloud\Billing\GetReportsCountResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Billing\GetRecordsReportsRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function GetRecordsReports(\Nocloud\Billing\GetRecordsReportsRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/GetRecordsReports',
+        $argument,
+        ['\Nocloud\Billing\GetRecordsReportsResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Billing\GetRecordsReportsCountRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function GetRecordsReportsCount(\Nocloud\Billing\GetRecordsReportsCountRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/GetRecordsReportsCount',
+        $argument,
+        ['\Nocloud\Billing\GetReportsCountResponse', 'decode'],
         $metadata, $options);
     }
 

@@ -21,6 +21,10 @@ class TestInstancesGroupConfigResponse extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>repeated .nocloud.instances.TestInstancesGroupConfigError errors = 2 [json_name = "errors"];</code>
      */
     private $errors;
+    /**
+     * Generated from protobuf field <code>map<string, .nocloud.instances.InstanceCostEstimation> estimations = 3 [json_name = "estimations"];</code>
+     */
+    private $estimations;
 
     /**
      * Constructor.
@@ -30,6 +34,7 @@ class TestInstancesGroupConfigResponse extends \Google\Protobuf\Internal\Message
      *
      *     @type bool $result
      *     @type array<\Nocloud\Instances\TestInstancesGroupConfigError>|\Google\Protobuf\Internal\RepeatedField $errors
+     *     @type array|\Google\Protobuf\Internal\MapField $estimations
      * }
      */
     public function __construct($data = NULL) {
@@ -77,6 +82,28 @@ class TestInstancesGroupConfigResponse extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Nocloud\Instances\TestInstancesGroupConfigError::class);
         $this->errors = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>map<string, .nocloud.instances.InstanceCostEstimation> estimations = 3 [json_name = "estimations"];</code>
+     * @return \Google\Protobuf\Internal\MapField
+     */
+    public function getEstimations()
+    {
+        return $this->estimations;
+    }
+
+    /**
+     * Generated from protobuf field <code>map<string, .nocloud.instances.InstanceCostEstimation> estimations = 3 [json_name = "estimations"];</code>
+     * @param array|\Google\Protobuf\Internal\MapField $var
+     * @return $this
+     */
+    public function setEstimations($var)
+    {
+        $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::MESSAGE, \Nocloud\Instances\InstanceCostEstimation::class);
+        $this->estimations = $arr;
 
         return $this;
     }

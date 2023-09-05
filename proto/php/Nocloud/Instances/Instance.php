@@ -61,6 +61,12 @@ class Instance extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>int64 created = 12 [json_name = "created"];</code>
      */
     protected $created = 0;
+    /**
+     * Must match contain all the software from the Billing Plan
+     *
+     * Generated from protobuf field <code>repeated .nocloud.ansible.Software software = 13 [json_name = "software"];</code>
+     */
+    private $software;
 
     /**
      * Constructor.
@@ -80,6 +86,8 @@ class Instance extends \Google\Protobuf\Internal\Message
      *     @type string $product
      *     @type \Nocloud\Access\Access $access
      *     @type int|string $created
+     *     @type array<\Nocloud\Ansible\Software>|\Google\Protobuf\Internal\RepeatedField $software
+     *           Must match contain all the software from the Billing Plan
      * }
      */
     public function __construct($data = NULL) {
@@ -387,6 +395,32 @@ class Instance extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt64($var);
         $this->created = $var;
+
+        return $this;
+    }
+
+    /**
+     * Must match contain all the software from the Billing Plan
+     *
+     * Generated from protobuf field <code>repeated .nocloud.ansible.Software software = 13 [json_name = "software"];</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getSoftware()
+    {
+        return $this->software;
+    }
+
+    /**
+     * Must match contain all the software from the Billing Plan
+     *
+     * Generated from protobuf field <code>repeated .nocloud.ansible.Software software = 13 [json_name = "software"];</code>
+     * @param array<\Nocloud\Ansible\Software>|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setSoftware($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Nocloud\Ansible\Software::class);
+        $this->software = $arr;
 
         return $this;
     }

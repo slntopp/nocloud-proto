@@ -49,6 +49,10 @@ class ResourceConf extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.nocloud.billing.Fee fee = 7 [json_name = "fee"];</code>
      */
     protected $fee = null;
+    /**
+     * Generated from protobuf field <code>string title = 8 [json_name = "title"];</code>
+     */
+    protected $title = '';
 
     /**
      * Constructor.
@@ -68,6 +72,7 @@ class ResourceConf extends \Google\Protobuf\Internal\Message
      *           be created if Instance is NOT in one of the states listed in on
      *     @type array<int>|\Google\Protobuf\Internal\RepeatedField $on
      *     @type \Nocloud\Billing\Fee $fee
+     *     @type string $title
      * }
      */
     public function __construct($data = NULL) {
@@ -251,6 +256,28 @@ class ResourceConf extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Nocloud\Billing\Fee::class);
         $this->fee = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string title = 8 [json_name = "title"];</code>
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Generated from protobuf field <code>string title = 8 [json_name = "title"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setTitle($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->title = $var;
 
         return $this;
     }

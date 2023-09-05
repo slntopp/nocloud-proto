@@ -21,6 +21,12 @@ class TestInstancesGroupConfigRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.nocloud.services_providers.ServicesProvider sp = 2 [json_name = "sp"];</code>
      */
     protected $sp = null;
+    /**
+     * UUIDs of instances to estimate cost
+     *
+     * Generated from protobuf field <code>repeated string estimate_instances = 3 [json_name = "estimateInstances"];</code>
+     */
+    private $estimate_instances;
 
     /**
      * Constructor.
@@ -30,6 +36,8 @@ class TestInstancesGroupConfigRequest extends \Google\Protobuf\Internal\Message
      *
      *     @type \Nocloud\Instances\InstancesGroup $group
      *     @type \Nocloud\ServicesProviders\ServicesProvider $sp
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $estimate_instances
+     *           UUIDs of instances to estimate cost
      * }
      */
     public function __construct($data = NULL) {
@@ -97,6 +105,32 @@ class TestInstancesGroupConfigRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Nocloud\ServicesProviders\ServicesProvider::class);
         $this->sp = $var;
+
+        return $this;
+    }
+
+    /**
+     * UUIDs of instances to estimate cost
+     *
+     * Generated from protobuf field <code>repeated string estimate_instances = 3 [json_name = "estimateInstances"];</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getEstimateInstances()
+    {
+        return $this->estimate_instances;
+    }
+
+    /**
+     * UUIDs of instances to estimate cost
+     *
+     * Generated from protobuf field <code>repeated string estimate_instances = 3 [json_name = "estimateInstances"];</code>
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setEstimateInstances($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
+        $this->estimate_instances = $arr;
 
         return $this;
     }

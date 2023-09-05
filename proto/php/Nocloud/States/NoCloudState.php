@@ -43,6 +43,10 @@ class NoCloudState
      * Generated from protobuf enum <code>OPERATION = 7;</code>
      */
     const OPERATION = 7;
+    /**
+     * Generated from protobuf enum <code>PENDING = 8;</code>
+     */
+    const PENDING = 8;
 
     private static $valueToName = [
         self::INIT => 'INIT',
@@ -53,6 +57,7 @@ class NoCloudState
         self::DELETED => 'DELETED',
         self::SUSPENDED => 'SUSPENDED',
         self::OPERATION => 'OPERATION',
+        self::PENDING => 'PENDING',
     ];
 
     public static function name($value)
