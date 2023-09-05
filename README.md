@@ -61,6 +61,32 @@ See [`examples/ts`](examples/ts) for Example in TypeScript.
 `buf.gen.php.yaml` as well as generated code can be found in this repo.
 In order to regenerate code, you would need to have `grpc_php_plugin`.
 
+#### PHP gRPC
+
+Follow the [offical manual](https://cloud.google.com/php/grpc) from Google to install all the necessary tools
+
+#### grpc_php_plugin
+
+You need the `grpc_php_plugin` to generate the PHP client stub classes. This plugin works with the main protoc binary to generate classes that you can import into your project.
+
+You can build `grpc_php_plugin` with cmake (mind that you have to replace `RELEASE_TAG_HERE`):
+
+```shell
+git clone -b RELEASE_TAG_HERE https://github.com/grpc/grpc
+cd grpc
+git submodule update --init
+mkdir -p cmake/build
+cd cmake/build
+cmake ../..
+make protoc grpc_php_plugin
+```
+
+Put `grpc_php_plugin` to `/usr/local/bin` or another directory
+
+> It is necessary to change the `path` option in `buf.gen.php.yaml` if `grpc_php_plugin` location differs from `/usr/local/bin`
+
+[Source](https://grpc.github.io/grpc/php/md_src_php__r_e_a_d_m_e.html)
+
 ### Dart/Flutter
 
 `buf.gen.ts.yaml` can be found in this repo.
