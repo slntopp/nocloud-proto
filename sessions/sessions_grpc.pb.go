@@ -28,9 +28,9 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SessionsServiceClient interface {
-	Get(ctx context.Context, in *EmptyMessage, opts ...grpc.CallOption) (*Sessions, error)
+	Get(ctx context.Context, in *GetSessions, opts ...grpc.CallOption) (*Sessions, error)
 	Revoke(ctx context.Context, in *Session, opts ...grpc.CallOption) (*DeleteResponse, error)
-	GetActivity(ctx context.Context, in *EmptyMessage, opts ...grpc.CallOption) (*Activity, error)
+	GetActivity(ctx context.Context, in *GetActivityRequest, opts ...grpc.CallOption) (*Activity, error)
 }
 
 type sessionsServiceClient struct {
@@ -41,7 +41,7 @@ func NewSessionsServiceClient(cc grpc.ClientConnInterface) SessionsServiceClient
 	return &sessionsServiceClient{cc}
 }
 
-func (c *sessionsServiceClient) Get(ctx context.Context, in *EmptyMessage, opts ...grpc.CallOption) (*Sessions, error) {
+func (c *sessionsServiceClient) Get(ctx context.Context, in *GetSessions, opts ...grpc.CallOption) (*Sessions, error) {
 	out := new(Sessions)
 	err := c.cc.Invoke(ctx, SessionsService_Get_FullMethodName, in, out, opts...)
 	if err != nil {
@@ -59,7 +59,7 @@ func (c *sessionsServiceClient) Revoke(ctx context.Context, in *Session, opts ..
 	return out, nil
 }
 
-func (c *sessionsServiceClient) GetActivity(ctx context.Context, in *EmptyMessage, opts ...grpc.CallOption) (*Activity, error) {
+func (c *sessionsServiceClient) GetActivity(ctx context.Context, in *GetActivityRequest, opts ...grpc.CallOption) (*Activity, error) {
 	out := new(Activity)
 	err := c.cc.Invoke(ctx, SessionsService_GetActivity_FullMethodName, in, out, opts...)
 	if err != nil {
@@ -72,9 +72,9 @@ func (c *sessionsServiceClient) GetActivity(ctx context.Context, in *EmptyMessag
 // All implementations must embed UnimplementedSessionsServiceServer
 // for forward compatibility
 type SessionsServiceServer interface {
-	Get(context.Context, *EmptyMessage) (*Sessions, error)
+	Get(context.Context, *GetSessions) (*Sessions, error)
 	Revoke(context.Context, *Session) (*DeleteResponse, error)
-	GetActivity(context.Context, *EmptyMessage) (*Activity, error)
+	GetActivity(context.Context, *GetActivityRequest) (*Activity, error)
 	mustEmbedUnimplementedSessionsServiceServer()
 }
 
@@ -82,13 +82,13 @@ type SessionsServiceServer interface {
 type UnimplementedSessionsServiceServer struct {
 }
 
-func (UnimplementedSessionsServiceServer) Get(context.Context, *EmptyMessage) (*Sessions, error) {
+func (UnimplementedSessionsServiceServer) Get(context.Context, *GetSessions) (*Sessions, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
 func (UnimplementedSessionsServiceServer) Revoke(context.Context, *Session) (*DeleteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Revoke not implemented")
 }
-func (UnimplementedSessionsServiceServer) GetActivity(context.Context, *EmptyMessage) (*Activity, error) {
+func (UnimplementedSessionsServiceServer) GetActivity(context.Context, *GetActivityRequest) (*Activity, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetActivity not implemented")
 }
 func (UnimplementedSessionsServiceServer) mustEmbedUnimplementedSessionsServiceServer() {}
@@ -105,7 +105,7 @@ func RegisterSessionsServiceServer(s grpc.ServiceRegistrar, srv SessionsServiceS
 }
 
 func _SessionsService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EmptyMessage)
+	in := new(GetSessions)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -117,7 +117,7 @@ func _SessionsService_Get_Handler(srv interface{}, ctx context.Context, dec func
 		FullMethod: SessionsService_Get_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SessionsServiceServer).Get(ctx, req.(*EmptyMessage))
+		return srv.(SessionsServiceServer).Get(ctx, req.(*GetSessions))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -141,7 +141,7 @@ func _SessionsService_Revoke_Handler(srv interface{}, ctx context.Context, dec f
 }
 
 func _SessionsService_GetActivity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EmptyMessage)
+	in := new(GetActivityRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -153,7 +153,7 @@ func _SessionsService_GetActivity_Handler(srv interface{}, ctx context.Context, 
 		FullMethod: SessionsService_GetActivity_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SessionsServiceServer).GetActivity(ctx, req.(*EmptyMessage))
+		return srv.(SessionsServiceServer).GetActivity(ctx, req.(*GetActivityRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
