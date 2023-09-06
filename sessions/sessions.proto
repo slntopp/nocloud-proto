@@ -24,8 +24,16 @@ message Sessions {
   repeated Session sessions = 1;
 }
 
+message GetSessions {
+  optional string user_id = 1;
+}
+
+message GetActivityRequest {
+  string uuid = 1;
+}
+
 service SessionsService {
-  rpc Get(EmptyMessage) returns (Sessions) {
+  rpc Get(GetSessions) returns (Sessions) {
     option (google.api.http) = {
       get : "/sessions"
     };
@@ -35,9 +43,9 @@ service SessionsService {
       delete : "/sessions/{id}"
     };
   };
-  rpc GetActivity(EmptyMessage) returns (Activity) {
+  rpc GetActivity(GetActivityRequest) returns (Activity) {
     option (google.api.http) = {
-      get : "/sessions/activity"
+      get : "/sessions/activity/{uuid}"
     };
   };
 }

@@ -3459,12 +3459,20 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
         "tags": [
           "SessionsService"
         ]
       }
     },
-    "/sessions/activity": {
+    "/sessions/activity/{uuid}": {
       "get": {
         "operationId": "SessionsService_GetActivity",
         "responses": {
@@ -3481,6 +3489,14 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "tags": [
           "SessionsService"
         ]
