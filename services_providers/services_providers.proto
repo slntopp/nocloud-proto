@@ -20,7 +20,6 @@ import "google/protobuf/struct.proto";
 import "google/api/annotations.proto";
 import "states/states.proto";
 import "access/access.proto";
-import "billing/billing.proto";
 
 
 message Var {map<string, google.protobuf.Value> value = 1;}
