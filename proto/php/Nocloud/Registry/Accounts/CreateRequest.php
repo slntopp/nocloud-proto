@@ -43,6 +43,10 @@ class CreateRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.nocloud.billing.Currency currency = 5 [json_name = "currency"];</code>
      */
     protected $currency = 0;
+    /**
+     * Generated from protobuf field <code>.google.protobuf.Struct data = 6 [json_name = "data"];</code>
+     */
+    protected $data = null;
 
     /**
      * Constructor.
@@ -60,6 +64,7 @@ class CreateRequest extends \Google\Protobuf\Internal\Message
      *           Account access level to parent namespace
      *     @type int $currency
      *           Account Balance Currency
+     *     @type \Google\Protobuf\Struct $data
      * }
      */
     public function __construct($data = NULL) {
@@ -213,6 +218,38 @@ class CreateRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkEnum($var, \Nocloud\Billing\Currency::class);
         $this->currency = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.google.protobuf.Struct data = 6 [json_name = "data"];</code>
+     * @return \Google\Protobuf\Struct|null
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    public function hasData()
+    {
+        return isset($this->data);
+    }
+
+    public function clearData()
+    {
+        unset($this->data);
+    }
+
+    /**
+     * Generated from protobuf field <code>.google.protobuf.Struct data = 6 [json_name = "data"];</code>
+     * @param \Google\Protobuf\Struct $var
+     * @return $this
+     */
+    public function setData($var)
+    {
+        GPBUtil::checkMessage($var, \Google\Protobuf\Struct::class);
+        $this->data = $var;
 
         return $this;
     }

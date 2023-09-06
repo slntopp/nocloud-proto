@@ -17,12 +17,12 @@ class SessionsServiceClient extends \Grpc\BaseStub {
     }
 
     /**
-     * @param \Nocloud\Sessions\EmptyMessage $argument input argument
+     * @param \Nocloud\Sessions\GetSessions $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      * @return \Grpc\UnaryCall
      */
-    public function Get(\Nocloud\Sessions\EmptyMessage $argument,
+    public function Get(\Nocloud\Sessions\GetSessions $argument,
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/nocloud.sessions.SessionsService/Get',
         $argument,
@@ -45,12 +45,12 @@ class SessionsServiceClient extends \Grpc\BaseStub {
     }
 
     /**
-     * @param \Nocloud\Sessions\EmptyMessage $argument input argument
+     * @param \Nocloud\Sessions\GetActivityRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      * @return \Grpc\UnaryCall
      */
-    public function GetActivity(\Nocloud\Sessions\EmptyMessage $argument,
+    public function GetActivity(\Nocloud\Sessions\GetActivityRequest $argument,
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/nocloud.sessions.SessionsService/GetActivity',
         $argument,
