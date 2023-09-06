@@ -31,6 +31,7 @@ message CreateRequest {
   string namespace = 3;      // Namespace to put Account under
   optional int32 access = 4; // Account access level to parent namespace
   nocloud.billing.Currency currency = 5; // Account Balance Currency
+  google.protobuf.Struct data = 6;
 }
 
 message CreateResponse {

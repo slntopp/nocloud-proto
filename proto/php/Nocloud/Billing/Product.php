@@ -53,6 +53,10 @@ class Product extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>optional double installation_fee = 8 [json_name = "installationFee"];</code>
      */
     protected $installation_fee = null;
+    /**
+     * Generated from protobuf field <code>bool public = 9 [json_name = "public"];</code>
+     */
+    protected $public = false;
 
     /**
      * Constructor.
@@ -72,6 +76,7 @@ class Product extends \Google\Protobuf\Internal\Message
      *     @type int $sorter
      *           Sorting order, might be needed in UIs
      *     @type float $installation_fee
+     *     @type bool $public
      * }
      */
     public function __construct($data = NULL) {
@@ -287,6 +292,28 @@ class Product extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkDouble($var);
         $this->installation_fee = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool public = 9 [json_name = "public"];</code>
+     * @return bool
+     */
+    public function getPublic()
+    {
+        return $this->public;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool public = 9 [json_name = "public"];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setPublic($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->public = $var;
 
         return $this;
     }

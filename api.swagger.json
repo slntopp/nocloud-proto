@@ -6303,6 +6303,9 @@
         "currency": {
           "$ref": "#/definitions/billingCurrency",
           "title": "Account Balance Currency"
+        },
+        "data": {
+          "type": "object"
         }
       }
     },
