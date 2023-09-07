@@ -422,12 +422,14 @@ var AccountsService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	NamespacesService_Create_FullMethodName = "/nocloud.registry.NamespacesService/Create"
-	NamespacesService_List_FullMethodName   = "/nocloud.registry.NamespacesService/List"
-	NamespacesService_Join_FullMethodName   = "/nocloud.registry.NamespacesService/Join"
-	NamespacesService_Link_FullMethodName   = "/nocloud.registry.NamespacesService/Link"
-	NamespacesService_Delete_FullMethodName = "/nocloud.registry.NamespacesService/Delete"
-	NamespacesService_Patch_FullMethodName  = "/nocloud.registry.NamespacesService/Patch"
+	NamespacesService_Create_FullMethodName  = "/nocloud.registry.NamespacesService/Create"
+	NamespacesService_List_FullMethodName    = "/nocloud.registry.NamespacesService/List"
+	NamespacesService_Join_FullMethodName    = "/nocloud.registry.NamespacesService/Join"
+	NamespacesService_Disjoin_FullMethodName = "/nocloud.registry.NamespacesService/Disjoin"
+	NamespacesService_Link_FullMethodName    = "/nocloud.registry.NamespacesService/Link"
+	NamespacesService_Unlink_FullMethodName  = "/nocloud.registry.NamespacesService/Unlink"
+	NamespacesService_Delete_FullMethodName  = "/nocloud.registry.NamespacesService/Delete"
+	NamespacesService_Patch_FullMethodName   = "/nocloud.registry.NamespacesService/Patch"
 )
 
 // NamespacesServiceClient is the client API for NamespacesService service.
@@ -437,7 +439,9 @@ type NamespacesServiceClient interface {
 	Create(ctx context.Context, in *namespaces.CreateRequest, opts ...grpc.CallOption) (*namespaces.CreateResponse, error)
 	List(ctx context.Context, in *namespaces.ListRequest, opts ...grpc.CallOption) (*namespaces.ListResponse, error)
 	Join(ctx context.Context, in *namespaces.JoinRequest, opts ...grpc.CallOption) (*namespaces.JoinResponse, error)
+	Disjoin(ctx context.Context, in *namespaces.DisjoinRequest, opts ...grpc.CallOption) (*namespaces.DisjoinResponse, error)
 	Link(ctx context.Context, in *namespaces.LinkRequest, opts ...grpc.CallOption) (*namespaces.LinkResponse, error)
+	Unlink(ctx context.Context, in *namespaces.UnlinkRequest, opts ...grpc.CallOption) (*namespaces.UnlinkResponse, error)
 	Delete(ctx context.Context, in *namespaces.DeleteRequest, opts ...grpc.CallOption) (*namespaces.DeleteResponse, error)
 	Patch(ctx context.Context, in *namespaces.PatchRequest, opts ...grpc.CallOption) (*namespaces.PatchResponse, error)
 }
@@ -477,9 +481,27 @@ func (c *namespacesServiceClient) Join(ctx context.Context, in *namespaces.JoinR
 	return out, nil
 }
 
+func (c *namespacesServiceClient) Disjoin(ctx context.Context, in *namespaces.DisjoinRequest, opts ...grpc.CallOption) (*namespaces.DisjoinResponse, error) {
+	out := new(namespaces.DisjoinResponse)
+	err := c.cc.Invoke(ctx, NamespacesService_Disjoin_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *namespacesServiceClient) Link(ctx context.Context, in *namespaces.LinkRequest, opts ...grpc.CallOption) (*namespaces.LinkResponse, error) {
 	out := new(namespaces.LinkResponse)
 	err := c.cc.Invoke(ctx, NamespacesService_Link_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *namespacesServiceClient) Unlink(ctx context.Context, in *namespaces.UnlinkRequest, opts ...grpc.CallOption) (*namespaces.UnlinkResponse, error) {
+	out := new(namespaces.UnlinkResponse)
+	err := c.cc.Invoke(ctx, NamespacesService_Unlink_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -511,7 +533,9 @@ type NamespacesServiceServer interface {
 	Create(context.Context, *namespaces.CreateRequest) (*namespaces.CreateResponse, error)
 	List(context.Context, *namespaces.ListRequest) (*namespaces.ListResponse, error)
 	Join(context.Context, *namespaces.JoinRequest) (*namespaces.JoinResponse, error)
+	Disjoin(context.Context, *namespaces.DisjoinRequest) (*namespaces.DisjoinResponse, error)
 	Link(context.Context, *namespaces.LinkRequest) (*namespaces.LinkResponse, error)
+	Unlink(context.Context, *namespaces.UnlinkRequest) (*namespaces.UnlinkResponse, error)
 	Delete(context.Context, *namespaces.DeleteRequest) (*namespaces.DeleteResponse, error)
 	Patch(context.Context, *namespaces.PatchRequest) (*namespaces.PatchResponse, error)
 	mustEmbedUnimplementedNamespacesServiceServer()
@@ -530,8 +554,14 @@ func (UnimplementedNamespacesServiceServer) List(context.Context, *namespaces.Li
 func (UnimplementedNamespacesServiceServer) Join(context.Context, *namespaces.JoinRequest) (*namespaces.JoinResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Join not implemented")
 }
+func (UnimplementedNamespacesServiceServer) Disjoin(context.Context, *namespaces.DisjoinRequest) (*namespaces.DisjoinResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Disjoin not implemented")
+}
 func (UnimplementedNamespacesServiceServer) Link(context.Context, *namespaces.LinkRequest) (*namespaces.LinkResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Link not implemented")
+}
+func (UnimplementedNamespacesServiceServer) Unlink(context.Context, *namespaces.UnlinkRequest) (*namespaces.UnlinkResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Unlink not implemented")
 }
 func (UnimplementedNamespacesServiceServer) Delete(context.Context, *namespaces.DeleteRequest) (*namespaces.DeleteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
@@ -606,6 +636,24 @@ func _NamespacesService_Join_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NamespacesService_Disjoin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(namespaces.DisjoinRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NamespacesServiceServer).Disjoin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NamespacesService_Disjoin_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NamespacesServiceServer).Disjoin(ctx, req.(*namespaces.DisjoinRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _NamespacesService_Link_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(namespaces.LinkRequest)
 	if err := dec(in); err != nil {
@@ -620,6 +668,24 @@ func _NamespacesService_Link_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(NamespacesServiceServer).Link(ctx, req.(*namespaces.LinkRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NamespacesService_Unlink_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(namespaces.UnlinkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NamespacesServiceServer).Unlink(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NamespacesService_Unlink_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NamespacesServiceServer).Unlink(ctx, req.(*namespaces.UnlinkRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -680,8 +746,16 @@ var NamespacesService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _NamespacesService_Join_Handler,
 		},
 		{
+			MethodName: "Disjoin",
+			Handler:    _NamespacesService_Disjoin_Handler,
+		},
+		{
 			MethodName: "Link",
 			Handler:    _NamespacesService_Link_Handler,
+		},
+		{
+			MethodName: "Unlink",
+			Handler:    _NamespacesService_Unlink_Handler,
 		},
 		{
 			MethodName: "Delete",

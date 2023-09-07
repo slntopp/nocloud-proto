@@ -102,10 +102,24 @@ service NamespacesService {
       body : "*"
     };
   };
+  rpc Disjoin(nocloud.registry.namespaces.DisjoinRequest)
+      returns (nocloud.registry.namespaces.DisjoinResponse) {
+    option (google.api.http) = {
+      post : "/namespaces/{namespace}/disjoin"
+      body : "*"
+    };
+  };
   rpc Link(nocloud.registry.namespaces.LinkRequest)
       returns (nocloud.registry.namespaces.LinkResponse) {
     option (google.api.http) = {
       post : "/namespaces/{namespace}/link"
+      body : "*"
+    };
+  };
+  rpc Unlink(nocloud.registry.namespaces.UnlinkRequest)
+      returns (nocloud.registry.namespaces.UnlinkResponse) {
+    option (google.api.http) = {
+      post : "/namespaces/{namespace}/unlink"
       body : "*"
     };
   };

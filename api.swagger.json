@@ -2850,6 +2850,49 @@
         ]
       }
     },
+    "/namespaces/{namespace}/disjoin": {
+      "post": {
+        "operationId": "NamespacesService_Disjoin",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/namespacesDisjoinResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "namespace",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "account": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "NamespacesService"
+        ]
+      }
+    },
     "/namespaces/{namespace}/join": {
       "post": {
         "operationId": "NamespacesService_Join",
@@ -2938,6 +2981,49 @@
                   "title": "Account access level to namespace"
                 },
                 "role": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "NamespacesService"
+        ]
+      }
+    },
+    "/namespaces/{namespace}/unlink": {
+      "post": {
+        "operationId": "NamespacesService_Unlink",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/namespacesUnlinkResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "namespace",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "account": {
                   "type": "string"
                 }
               }
@@ -5752,6 +5838,14 @@
         }
       }
     },
+    "namespacesDisjoinResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "boolean"
+        }
+      }
+    },
     "namespacesJoinResponse": {
       "type": "object",
       "properties": {
@@ -5787,6 +5881,14 @@
       }
     },
     "namespacesPatchResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "boolean"
+        }
+      }
+    },
+    "namespacesUnlinkResponse": {
       "type": "object",
       "properties": {
         "result": {
