@@ -259,6 +259,9 @@ message GetRecordsReportsRequest {
   optional string sort = 6;
 
   map<string, google.protobuf.Value> filters = 7;
+
+  optional string account = 8;
+  optional string service = 9;
 }
 
 message GetRecordsReportsResponse {
@@ -270,9 +273,12 @@ message GetRecordsReportsResponse {
 message GetInstancesReportsCountRequest {}
 
 message GetRecordsReportsCountRequest {
-  optional int64 from = 2;
-  optional int64 to = 3;
-  map<string, google.protobuf.Value> filters = 7;
+  optional int64 from = 1;
+  optional int64 to = 2;
+  map<string, google.protobuf.Value> filters = 3;
+
+  optional string account = 4;
+  optional string service = 5;
 }
 
 message GetReportsCountResponse {

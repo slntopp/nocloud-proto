@@ -4969,6 +4969,12 @@
         "filters": {
           "type": "object",
           "additionalProperties": {}
+        },
+        "account": {
+          "type": "string"
+        },
+        "service": {
+          "type": "string"
         }
       }
     },
@@ -5000,6 +5006,12 @@
         "filters": {
           "type": "object",
           "additionalProperties": {}
+        },
+        "account": {
+          "type": "string"
+        },
+        "service": {
+          "type": "string"
         }
       }
     },
