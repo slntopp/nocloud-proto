@@ -2319,7 +2319,8 @@ type GetReportsCountResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Total int64 `protobuf:"varint,1,opt,name=total,proto3" json:"total,omitempty"`
+	Total  int64           `protobuf:"varint,1,opt,name=total,proto3" json:"total,omitempty"`
+	Unique *structpb.Value `protobuf:"bytes,2,opt,name=unique,proto3" json:"unique,omitempty"`
 }
 
 func (x *GetReportsCountResponse) Reset() {
@@ -2359,6 +2360,13 @@ func (x *GetReportsCountResponse) GetTotal() int64 {
 		return x.Total
 	}
 	return 0
+}
+
+func (x *GetReportsCountResponse) GetUnique() *structpb.Value {
+	if x != nil {
+		return x.Unique
+	}
+	return nil
 }
 
 type CreateExchangeRateRequest struct {
@@ -3413,10 +3421,13 @@ var file_billing_billing_proto_rawDesc = []byte{
 	0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x42, 0x07, 0x0a, 0x05, 0x5f, 0x66,
 	0x72, 0x6f, 0x6d, 0x42, 0x05, 0x0a, 0x03, 0x5f, 0x74, 0x6f, 0x42, 0x0a, 0x0a, 0x08, 0x5f, 0x61,
 	0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x42, 0x0a, 0x0a, 0x08, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69,
-	0x63, 0x65, 0x22, 0x2f, 0x0a, 0x17, 0x47, 0x65, 0x74, 0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x73,
+	0x63, 0x65, 0x22, 0x5f, 0x0a, 0x17, 0x47, 0x65, 0x74, 0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x73,
 	0x43, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x14, 0x0a,
 	0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x74, 0x6f,
-	0x74, 0x61, 0x6c, 0x22, 0x89, 0x01, 0x0a, 0x19, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x45, 0x78,
+	0x74, 0x61, 0x6c, 0x12, 0x2e, 0x0a, 0x06, 0x75, 0x6e, 0x69, 0x71, 0x75, 0x65, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x06, 0x75, 0x6e, 0x69,
+	0x71, 0x75, 0x65, 0x22, 0x89, 0x01, 0x0a, 0x19, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x45, 0x78,
 	0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x52, 0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
 	0x74, 0x12, 0x2d, 0x0a, 0x04, 0x66, 0x72, 0x6f, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32,
 	0x19, 0x2e, 0x6e, 0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e,
@@ -3829,86 +3840,87 @@ var file_billing_billing_proto_depIdxs = []int32{
 	56, // 28: nocloud.billing.GetRecordsReportsRequest.filters:type_name -> nocloud.billing.GetRecordsReportsRequest.FiltersEntry
 	16, // 29: nocloud.billing.GetRecordsReportsResponse.records:type_name -> nocloud.billing.Record
 	57, // 30: nocloud.billing.GetRecordsReportsCountRequest.filters:type_name -> nocloud.billing.GetRecordsReportsCountRequest.FiltersEntry
-	4,  // 31: nocloud.billing.CreateExchangeRateRequest.from:type_name -> nocloud.billing.Currency
-	4,  // 32: nocloud.billing.CreateExchangeRateRequest.to:type_name -> nocloud.billing.Currency
-	4,  // 33: nocloud.billing.UpdateExchangeRateRequest.from:type_name -> nocloud.billing.Currency
-	4,  // 34: nocloud.billing.UpdateExchangeRateRequest.to:type_name -> nocloud.billing.Currency
-	4,  // 35: nocloud.billing.DeleteExchangeRateRequest.from:type_name -> nocloud.billing.Currency
-	4,  // 36: nocloud.billing.DeleteExchangeRateRequest.to:type_name -> nocloud.billing.Currency
-	4,  // 37: nocloud.billing.GetCurrenciesResponse.currencies:type_name -> nocloud.billing.Currency
-	4,  // 38: nocloud.billing.GetExchangeRateRequest.from:type_name -> nocloud.billing.Currency
-	4,  // 39: nocloud.billing.GetExchangeRateRequest.to:type_name -> nocloud.billing.Currency
-	4,  // 40: nocloud.billing.GetExchangeRateResponse.from:type_name -> nocloud.billing.Currency
-	4,  // 41: nocloud.billing.GetExchangeRateResponse.to:type_name -> nocloud.billing.Currency
-	44, // 42: nocloud.billing.GetExchangeRatesResponse.rates:type_name -> nocloud.billing.GetExchangeRateResponse
-	4,  // 43: nocloud.billing.ConversionRequest.from:type_name -> nocloud.billing.Currency
-	4,  // 44: nocloud.billing.ConversionRequest.to:type_name -> nocloud.billing.Currency
-	13, // 45: nocloud.billing.Plan.ProductsEntry.value:type_name -> nocloud.billing.Product
-	60, // 46: nocloud.billing.Plan.MetaEntry.value:type_name -> google.protobuf.Value
-	60, // 47: nocloud.billing.ListPlansInstancesResponse.PlansEntry.value:type_name -> google.protobuf.Value
-	60, // 48: nocloud.billing.Product.ResourcesEntry.value:type_name -> google.protobuf.Value
-	60, // 49: nocloud.billing.Product.MetaEntry.value:type_name -> google.protobuf.Value
-	60, // 50: nocloud.billing.Transaction.MetaEntry.value:type_name -> google.protobuf.Value
-	60, // 51: nocloud.billing.Record.MetaEntry.value:type_name -> google.protobuf.Value
-	60, // 52: nocloud.billing.GetRecordsReportsRequest.FiltersEntry.value:type_name -> google.protobuf.Value
-	60, // 53: nocloud.billing.GetRecordsReportsCountRequest.FiltersEntry.value:type_name -> google.protobuf.Value
-	18, // 54: nocloud.billing.RecordsService.GetActive:input_type -> nocloud.billing.GetActiveRequest
-	17, // 55: nocloud.billing.RecordsService.Create:input_type -> nocloud.billing.Records
-	17, // 56: nocloud.billing.RecordsService.Update:input_type -> nocloud.billing.Records
-	7,  // 57: nocloud.billing.BillingService.CreatePlan:input_type -> nocloud.billing.Plan
-	7,  // 58: nocloud.billing.BillingService.UpdatePlan:input_type -> nocloud.billing.Plan
-	7,  // 59: nocloud.billing.BillingService.GetPlan:input_type -> nocloud.billing.Plan
-	8,  // 60: nocloud.billing.BillingService.ListPlans:input_type -> nocloud.billing.ListRequest
-	10, // 61: nocloud.billing.BillingService.ListPlansInstances:input_type -> nocloud.billing.ListPlansInstancesRequest
-	7,  // 62: nocloud.billing.BillingService.DeletePlan:input_type -> nocloud.billing.Plan
-	14, // 63: nocloud.billing.BillingService.CreateTransaction:input_type -> nocloud.billing.Transaction
-	19, // 64: nocloud.billing.BillingService.GetTransactions:input_type -> nocloud.billing.GetTransactionsRequest
-	21, // 65: nocloud.billing.BillingService.GetTransactionsCount:input_type -> nocloud.billing.GetTransactionsCountRequest
-	14, // 66: nocloud.billing.BillingService.UpdateTransaction:input_type -> nocloud.billing.Transaction
-	14, // 67: nocloud.billing.BillingService.GetRecords:input_type -> nocloud.billing.Transaction
-	26, // 68: nocloud.billing.BillingService.GetInstancesReports:input_type -> nocloud.billing.GetInstancesReportRequest
-	31, // 69: nocloud.billing.BillingService.GetInstancesReportsCount:input_type -> nocloud.billing.GetInstancesReportsCountRequest
-	29, // 70: nocloud.billing.BillingService.GetRecordsReports:input_type -> nocloud.billing.GetRecordsReportsRequest
-	32, // 71: nocloud.billing.BillingService.GetRecordsReportsCount:input_type -> nocloud.billing.GetRecordsReportsCountRequest
-	20, // 72: nocloud.billing.BillingService.Reprocess:input_type -> nocloud.billing.ReprocessTransactionsRequest
-	40, // 73: nocloud.billing.CurrencyService.GetCurrencies:input_type -> nocloud.billing.GetCurrenciesRequest
-	42, // 74: nocloud.billing.CurrencyService.GetExchangeRate:input_type -> nocloud.billing.GetExchangeRateRequest
-	43, // 75: nocloud.billing.CurrencyService.GetExchangeRates:input_type -> nocloud.billing.GetExchangeRatesRequest
-	34, // 76: nocloud.billing.CurrencyService.CreateExchangeRate:input_type -> nocloud.billing.CreateExchangeRateRequest
-	36, // 77: nocloud.billing.CurrencyService.UpdateExchangeRate:input_type -> nocloud.billing.UpdateExchangeRateRequest
-	38, // 78: nocloud.billing.CurrencyService.DeleteExchangeRate:input_type -> nocloud.billing.DeleteExchangeRateRequest
-	46, // 79: nocloud.billing.CurrencyService.Convert:input_type -> nocloud.billing.ConversionRequest
-	17, // 80: nocloud.billing.RecordsService.GetActive:output_type -> nocloud.billing.Records
-	17, // 81: nocloud.billing.RecordsService.Create:output_type -> nocloud.billing.Records
-	17, // 82: nocloud.billing.RecordsService.Update:output_type -> nocloud.billing.Records
-	7,  // 83: nocloud.billing.BillingService.CreatePlan:output_type -> nocloud.billing.Plan
-	7,  // 84: nocloud.billing.BillingService.UpdatePlan:output_type -> nocloud.billing.Plan
-	7,  // 85: nocloud.billing.BillingService.GetPlan:output_type -> nocloud.billing.Plan
-	9,  // 86: nocloud.billing.BillingService.ListPlans:output_type -> nocloud.billing.ListResponse
-	11, // 87: nocloud.billing.BillingService.ListPlansInstances:output_type -> nocloud.billing.ListPlansInstancesResponse
-	7,  // 88: nocloud.billing.BillingService.DeletePlan:output_type -> nocloud.billing.Plan
-	14, // 89: nocloud.billing.BillingService.CreateTransaction:output_type -> nocloud.billing.Transaction
-	15, // 90: nocloud.billing.BillingService.GetTransactions:output_type -> nocloud.billing.Transactions
-	22, // 91: nocloud.billing.BillingService.GetTransactionsCount:output_type -> nocloud.billing.GetTransactionsCountResponse
-	24, // 92: nocloud.billing.BillingService.UpdateTransaction:output_type -> nocloud.billing.UpdateTransactionResponse
-	17, // 93: nocloud.billing.BillingService.GetRecords:output_type -> nocloud.billing.Records
-	28, // 94: nocloud.billing.BillingService.GetInstancesReports:output_type -> nocloud.billing.GetInstancesReportResponse
-	33, // 95: nocloud.billing.BillingService.GetInstancesReportsCount:output_type -> nocloud.billing.GetReportsCountResponse
-	30, // 96: nocloud.billing.BillingService.GetRecordsReports:output_type -> nocloud.billing.GetRecordsReportsResponse
-	33, // 97: nocloud.billing.BillingService.GetRecordsReportsCount:output_type -> nocloud.billing.GetReportsCountResponse
-	15, // 98: nocloud.billing.BillingService.Reprocess:output_type -> nocloud.billing.Transactions
-	41, // 99: nocloud.billing.CurrencyService.GetCurrencies:output_type -> nocloud.billing.GetCurrenciesResponse
-	44, // 100: nocloud.billing.CurrencyService.GetExchangeRate:output_type -> nocloud.billing.GetExchangeRateResponse
-	45, // 101: nocloud.billing.CurrencyService.GetExchangeRates:output_type -> nocloud.billing.GetExchangeRatesResponse
-	35, // 102: nocloud.billing.CurrencyService.CreateExchangeRate:output_type -> nocloud.billing.CreateExchangeRateResponse
-	37, // 103: nocloud.billing.CurrencyService.UpdateExchangeRate:output_type -> nocloud.billing.UpdateExchangeRateResponse
-	39, // 104: nocloud.billing.CurrencyService.DeleteExchangeRate:output_type -> nocloud.billing.DeleteExchangeRateResponse
-	47, // 105: nocloud.billing.CurrencyService.Convert:output_type -> nocloud.billing.ConversionResponse
-	80, // [80:106] is the sub-list for method output_type
-	54, // [54:80] is the sub-list for method input_type
-	54, // [54:54] is the sub-list for extension type_name
-	54, // [54:54] is the sub-list for extension extendee
-	0,  // [0:54] is the sub-list for field type_name
+	60, // 31: nocloud.billing.GetReportsCountResponse.unique:type_name -> google.protobuf.Value
+	4,  // 32: nocloud.billing.CreateExchangeRateRequest.from:type_name -> nocloud.billing.Currency
+	4,  // 33: nocloud.billing.CreateExchangeRateRequest.to:type_name -> nocloud.billing.Currency
+	4,  // 34: nocloud.billing.UpdateExchangeRateRequest.from:type_name -> nocloud.billing.Currency
+	4,  // 35: nocloud.billing.UpdateExchangeRateRequest.to:type_name -> nocloud.billing.Currency
+	4,  // 36: nocloud.billing.DeleteExchangeRateRequest.from:type_name -> nocloud.billing.Currency
+	4,  // 37: nocloud.billing.DeleteExchangeRateRequest.to:type_name -> nocloud.billing.Currency
+	4,  // 38: nocloud.billing.GetCurrenciesResponse.currencies:type_name -> nocloud.billing.Currency
+	4,  // 39: nocloud.billing.GetExchangeRateRequest.from:type_name -> nocloud.billing.Currency
+	4,  // 40: nocloud.billing.GetExchangeRateRequest.to:type_name -> nocloud.billing.Currency
+	4,  // 41: nocloud.billing.GetExchangeRateResponse.from:type_name -> nocloud.billing.Currency
+	4,  // 42: nocloud.billing.GetExchangeRateResponse.to:type_name -> nocloud.billing.Currency
+	44, // 43: nocloud.billing.GetExchangeRatesResponse.rates:type_name -> nocloud.billing.GetExchangeRateResponse
+	4,  // 44: nocloud.billing.ConversionRequest.from:type_name -> nocloud.billing.Currency
+	4,  // 45: nocloud.billing.ConversionRequest.to:type_name -> nocloud.billing.Currency
+	13, // 46: nocloud.billing.Plan.ProductsEntry.value:type_name -> nocloud.billing.Product
+	60, // 47: nocloud.billing.Plan.MetaEntry.value:type_name -> google.protobuf.Value
+	60, // 48: nocloud.billing.ListPlansInstancesResponse.PlansEntry.value:type_name -> google.protobuf.Value
+	60, // 49: nocloud.billing.Product.ResourcesEntry.value:type_name -> google.protobuf.Value
+	60, // 50: nocloud.billing.Product.MetaEntry.value:type_name -> google.protobuf.Value
+	60, // 51: nocloud.billing.Transaction.MetaEntry.value:type_name -> google.protobuf.Value
+	60, // 52: nocloud.billing.Record.MetaEntry.value:type_name -> google.protobuf.Value
+	60, // 53: nocloud.billing.GetRecordsReportsRequest.FiltersEntry.value:type_name -> google.protobuf.Value
+	60, // 54: nocloud.billing.GetRecordsReportsCountRequest.FiltersEntry.value:type_name -> google.protobuf.Value
+	18, // 55: nocloud.billing.RecordsService.GetActive:input_type -> nocloud.billing.GetActiveRequest
+	17, // 56: nocloud.billing.RecordsService.Create:input_type -> nocloud.billing.Records
+	17, // 57: nocloud.billing.RecordsService.Update:input_type -> nocloud.billing.Records
+	7,  // 58: nocloud.billing.BillingService.CreatePlan:input_type -> nocloud.billing.Plan
+	7,  // 59: nocloud.billing.BillingService.UpdatePlan:input_type -> nocloud.billing.Plan
+	7,  // 60: nocloud.billing.BillingService.GetPlan:input_type -> nocloud.billing.Plan
+	8,  // 61: nocloud.billing.BillingService.ListPlans:input_type -> nocloud.billing.ListRequest
+	10, // 62: nocloud.billing.BillingService.ListPlansInstances:input_type -> nocloud.billing.ListPlansInstancesRequest
+	7,  // 63: nocloud.billing.BillingService.DeletePlan:input_type -> nocloud.billing.Plan
+	14, // 64: nocloud.billing.BillingService.CreateTransaction:input_type -> nocloud.billing.Transaction
+	19, // 65: nocloud.billing.BillingService.GetTransactions:input_type -> nocloud.billing.GetTransactionsRequest
+	21, // 66: nocloud.billing.BillingService.GetTransactionsCount:input_type -> nocloud.billing.GetTransactionsCountRequest
+	14, // 67: nocloud.billing.BillingService.UpdateTransaction:input_type -> nocloud.billing.Transaction
+	14, // 68: nocloud.billing.BillingService.GetRecords:input_type -> nocloud.billing.Transaction
+	26, // 69: nocloud.billing.BillingService.GetInstancesReports:input_type -> nocloud.billing.GetInstancesReportRequest
+	31, // 70: nocloud.billing.BillingService.GetInstancesReportsCount:input_type -> nocloud.billing.GetInstancesReportsCountRequest
+	29, // 71: nocloud.billing.BillingService.GetRecordsReports:input_type -> nocloud.billing.GetRecordsReportsRequest
+	32, // 72: nocloud.billing.BillingService.GetRecordsReportsCount:input_type -> nocloud.billing.GetRecordsReportsCountRequest
+	20, // 73: nocloud.billing.BillingService.Reprocess:input_type -> nocloud.billing.ReprocessTransactionsRequest
+	40, // 74: nocloud.billing.CurrencyService.GetCurrencies:input_type -> nocloud.billing.GetCurrenciesRequest
+	42, // 75: nocloud.billing.CurrencyService.GetExchangeRate:input_type -> nocloud.billing.GetExchangeRateRequest
+	43, // 76: nocloud.billing.CurrencyService.GetExchangeRates:input_type -> nocloud.billing.GetExchangeRatesRequest
+	34, // 77: nocloud.billing.CurrencyService.CreateExchangeRate:input_type -> nocloud.billing.CreateExchangeRateRequest
+	36, // 78: nocloud.billing.CurrencyService.UpdateExchangeRate:input_type -> nocloud.billing.UpdateExchangeRateRequest
+	38, // 79: nocloud.billing.CurrencyService.DeleteExchangeRate:input_type -> nocloud.billing.DeleteExchangeRateRequest
+	46, // 80: nocloud.billing.CurrencyService.Convert:input_type -> nocloud.billing.ConversionRequest
+	17, // 81: nocloud.billing.RecordsService.GetActive:output_type -> nocloud.billing.Records
+	17, // 82: nocloud.billing.RecordsService.Create:output_type -> nocloud.billing.Records
+	17, // 83: nocloud.billing.RecordsService.Update:output_type -> nocloud.billing.Records
+	7,  // 84: nocloud.billing.BillingService.CreatePlan:output_type -> nocloud.billing.Plan
+	7,  // 85: nocloud.billing.BillingService.UpdatePlan:output_type -> nocloud.billing.Plan
+	7,  // 86: nocloud.billing.BillingService.GetPlan:output_type -> nocloud.billing.Plan
+	9,  // 87: nocloud.billing.BillingService.ListPlans:output_type -> nocloud.billing.ListResponse
+	11, // 88: nocloud.billing.BillingService.ListPlansInstances:output_type -> nocloud.billing.ListPlansInstancesResponse
+	7,  // 89: nocloud.billing.BillingService.DeletePlan:output_type -> nocloud.billing.Plan
+	14, // 90: nocloud.billing.BillingService.CreateTransaction:output_type -> nocloud.billing.Transaction
+	15, // 91: nocloud.billing.BillingService.GetTransactions:output_type -> nocloud.billing.Transactions
+	22, // 92: nocloud.billing.BillingService.GetTransactionsCount:output_type -> nocloud.billing.GetTransactionsCountResponse
+	24, // 93: nocloud.billing.BillingService.UpdateTransaction:output_type -> nocloud.billing.UpdateTransactionResponse
+	17, // 94: nocloud.billing.BillingService.GetRecords:output_type -> nocloud.billing.Records
+	28, // 95: nocloud.billing.BillingService.GetInstancesReports:output_type -> nocloud.billing.GetInstancesReportResponse
+	33, // 96: nocloud.billing.BillingService.GetInstancesReportsCount:output_type -> nocloud.billing.GetReportsCountResponse
+	30, // 97: nocloud.billing.BillingService.GetRecordsReports:output_type -> nocloud.billing.GetRecordsReportsResponse
+	33, // 98: nocloud.billing.BillingService.GetRecordsReportsCount:output_type -> nocloud.billing.GetReportsCountResponse
+	15, // 99: nocloud.billing.BillingService.Reprocess:output_type -> nocloud.billing.Transactions
+	41, // 100: nocloud.billing.CurrencyService.GetCurrencies:output_type -> nocloud.billing.GetCurrenciesResponse
+	44, // 101: nocloud.billing.CurrencyService.GetExchangeRate:output_type -> nocloud.billing.GetExchangeRateResponse
+	45, // 102: nocloud.billing.CurrencyService.GetExchangeRates:output_type -> nocloud.billing.GetExchangeRatesResponse
+	35, // 103: nocloud.billing.CurrencyService.CreateExchangeRate:output_type -> nocloud.billing.CreateExchangeRateResponse
+	37, // 104: nocloud.billing.CurrencyService.UpdateExchangeRate:output_type -> nocloud.billing.UpdateExchangeRateResponse
+	39, // 105: nocloud.billing.CurrencyService.DeleteExchangeRate:output_type -> nocloud.billing.DeleteExchangeRateResponse
+	47, // 106: nocloud.billing.CurrencyService.Convert:output_type -> nocloud.billing.ConversionResponse
+	81, // [81:107] is the sub-list for method output_type
+	55, // [55:81] is the sub-list for method input_type
+	55, // [55:55] is the sub-list for extension type_name
+	55, // [55:55] is the sub-list for extension extendee
+	0,  // [0:55] is the sub-list for field type_name
 }
 
 func init() { file_billing_billing_proto_init() }

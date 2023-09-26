@@ -283,6 +283,7 @@ message GetRecordsReportsCountRequest {
 
 message GetReportsCountResponse {
   int64 total = 1;
+  google.protobuf.Value unique = 2;
 }
 
 service BillingService {

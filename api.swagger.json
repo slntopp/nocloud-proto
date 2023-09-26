@@ -5041,7 +5041,8 @@
         "total": {
           "type": "string",
           "format": "int64"
-        }
+        },
+        "unique": {}
       }
     },
     "billingGetTransactionsCountResponse": {
