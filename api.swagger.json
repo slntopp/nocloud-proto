@@ -5199,6 +5199,9 @@
         },
         "public": {
           "type": "boolean"
+        },
+        "group": {
+          "type": "string"
         }
       }
     },
