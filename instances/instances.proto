@@ -152,6 +152,12 @@ service InstancesService {
       delete : "/instances/detach/{uuid}"
     };
   };
+  rpc Attach(nocloud.instances.DeleteRequest)
+      returns (nocloud.instances.DeleteResponse) {
+    option (google.api.http) = {
+      delete : "/instances/attach/{uuid}"
+    };
+  };
   rpc TransferIG(nocloud.instances.TransferIGRequest)
       returns (nocloud.instances.TransferIGResponse) {
     option (google.api.http) = {
