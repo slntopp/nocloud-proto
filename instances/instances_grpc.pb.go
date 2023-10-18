@@ -36,6 +36,7 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	InstancesService_Invoke_FullMethodName           = "/nocloud.instances.InstancesService/Invoke"
 	InstancesService_Delete_FullMethodName           = "/nocloud.instances.InstancesService/Delete"
+	InstancesService_Detach_FullMethodName           = "/nocloud.instances.InstancesService/Detach"
 	InstancesService_TransferIG_FullMethodName       = "/nocloud.instances.InstancesService/TransferIG"
 	InstancesService_TransferInstance_FullMethodName = "/nocloud.instances.InstancesService/TransferInstance"
 )
@@ -46,6 +47,7 @@ const (
 type InstancesServiceClient interface {
 	Invoke(ctx context.Context, in *InvokeRequest, opts ...grpc.CallOption) (*InvokeResponse, error)
 	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
+	Detach(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
 	TransferIG(ctx context.Context, in *TransferIGRequest, opts ...grpc.CallOption) (*TransferIGResponse, error)
 	TransferInstance(ctx context.Context, in *TransferInstanceRequest, opts ...grpc.CallOption) (*TransferInstanceResponse, error)
 }
@@ -76,6 +78,15 @@ func (c *instancesServiceClient) Delete(ctx context.Context, in *DeleteRequest, 
 	return out, nil
 }
 
+func (c *instancesServiceClient) Detach(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error) {
+	out := new(DeleteResponse)
+	err := c.cc.Invoke(ctx, InstancesService_Detach_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *instancesServiceClient) TransferIG(ctx context.Context, in *TransferIGRequest, opts ...grpc.CallOption) (*TransferIGResponse, error) {
 	out := new(TransferIGResponse)
 	err := c.cc.Invoke(ctx, InstancesService_TransferIG_FullMethodName, in, out, opts...)
@@ -100,6 +111,7 @@ func (c *instancesServiceClient) TransferInstance(ctx context.Context, in *Trans
 type InstancesServiceServer interface {
 	Invoke(context.Context, *InvokeRequest) (*InvokeResponse, error)
 	Delete(context.Context, *DeleteRequest) (*DeleteResponse, error)
+	Detach(context.Context, *DeleteRequest) (*DeleteResponse, error)
 	TransferIG(context.Context, *TransferIGRequest) (*TransferIGResponse, error)
 	TransferInstance(context.Context, *TransferInstanceRequest) (*TransferInstanceResponse, error)
 	mustEmbedUnimplementedInstancesServiceServer()
@@ -114,6 +126,9 @@ func (UnimplementedInstancesServiceServer) Invoke(context.Context, *InvokeReques
 }
 func (UnimplementedInstancesServiceServer) Delete(context.Context, *DeleteRequest) (*DeleteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedInstancesServiceServer) Detach(context.Context, *DeleteRequest) (*DeleteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Detach not implemented")
 }
 func (UnimplementedInstancesServiceServer) TransferIG(context.Context, *TransferIGRequest) (*TransferIGResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TransferIG not implemented")
@@ -170,6 +185,24 @@ func _InstancesService_Delete_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _InstancesService_Detach_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstancesServiceServer).Detach(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstancesService_Detach_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstancesServiceServer).Detach(ctx, req.(*DeleteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _InstancesService_TransferIG_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TransferIGRequest)
 	if err := dec(in); err != nil {
@@ -220,6 +253,10 @@ var InstancesService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _InstancesService_Delete_Handler,
+		},
+		{
+			MethodName: "Detach",
+			Handler:    _InstancesService_Detach_Handler,
 		},
 		{
 			MethodName: "TransferIG",

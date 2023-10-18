@@ -2447,6 +2447,36 @@
         ]
       }
     },
+    "/instances/detach/{uuid}": {
+      "delete": {
+        "operationId": "InstancesService_Detach",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/nocloudinstancesDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "InstancesService"
+        ]
+      }
+    },
     "/instances/{uuid}": {
       "delete": {
         "operationId": "InstancesService_Delete",
@@ -6864,7 +6894,7 @@
         "DEL",
         "PROC",
         "SUS",
-        "DETATCHED"
+        "DETACHED"
       ],
       "default": "UNSPECIFIED"
     },
