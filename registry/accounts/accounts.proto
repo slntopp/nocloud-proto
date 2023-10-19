@@ -49,6 +49,12 @@ message SuspendConf {
   optional float limit = 2;
 }
 
+enum AccountStatus {
+  ACTIVE = 0;
+  LOCK = 1;
+  PERMANENT_LOCK = 2;
+}
+
 message Account {
   string uuid = 1;
   string title = 2;
@@ -60,6 +66,7 @@ message Account {
   optional SuspendConf suspend_conf = 6;
   optional bool suspended = 7;
   optional nocloud.billing.Currency currency = 8; // Account Balance Currency
+  AccountStatus status = 9;
 }
 
 message UpdateResponse {bool result = 1;}

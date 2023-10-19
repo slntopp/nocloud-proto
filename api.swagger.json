@@ -317,6 +317,9 @@
                 "currency": {
                   "$ref": "#/definitions/billingCurrency",
                   "title": "Account Balance Currency"
+                },
+                "status": {
+                  "$ref": "#/definitions/accountsAccountStatus"
                 }
               }
             }
@@ -4560,8 +4563,20 @@
         "currency": {
           "$ref": "#/definitions/billingCurrency",
           "title": "Account Balance Currency"
+        },
+        "status": {
+          "$ref": "#/definitions/accountsAccountStatus"
         }
       }
+    },
+    "accountsAccountStatus": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "LOCK",
+        "PERMANENT_LOCK"
+      ],
+      "default": "ACTIVE"
     },
     "accountsCredentials": {
       "type": "object",
