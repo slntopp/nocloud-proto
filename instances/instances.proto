@@ -86,7 +86,7 @@ message InstanceCostEstimation {
 message TestInstancesGroupConfigResponse {
   bool result = 1;
   repeated TestInstancesGroupConfigError errors = 2;
-  map<string, InstanceCostEstimation> estimations = 3; 
+  map<string, InstanceCostEstimation> estimations = 3;
 }
 
 message InvokeRequest {
@@ -144,6 +144,18 @@ service InstancesService {
       returns (nocloud.instances.DeleteResponse) {
     option (google.api.http) = {
       delete : "/instances/{uuid}"
+    };
+  };
+  rpc Detach(nocloud.instances.DeleteRequest)
+      returns (nocloud.instances.DeleteResponse) {
+    option (google.api.http) = {
+      delete : "/instances/detach/{uuid}"
+    };
+  };
+  rpc Attach(nocloud.instances.DeleteRequest)
+      returns (nocloud.instances.DeleteResponse) {
+    option (google.api.http) = {
+      delete : "/instances/attach/{uuid}"
     };
   };
   rpc TransferIG(nocloud.instances.TransferIGRequest)

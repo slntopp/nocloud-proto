@@ -27,6 +27,7 @@ enum NoCloudStatus {
   DEL = 5;
   PROC = 6;
   SUS = 7;
+  DETACHED = 8;
 }
 
 message Status {
