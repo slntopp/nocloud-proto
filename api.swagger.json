@@ -1837,6 +1837,13 @@
               "PLN"
             ],
             "default": "NCU"
+          },
+          {
+            "name": "created",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -1916,6 +1923,10 @@
                 },
                 "currency": {
                   "$ref": "#/definitions/billingCurrency"
+                },
+                "created": {
+                  "type": "string",
+                  "format": "int64"
                 }
               }
             }
@@ -5388,6 +5399,10 @@
         },
         "currency": {
           "$ref": "#/definitions/billingCurrency"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },

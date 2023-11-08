@@ -145,6 +145,7 @@ message Transaction {
   */
   map<string, google.protobuf.Value> meta = 10;
   Currency currency = 11;
+  int64 created = 12;
 }
 
 message Transactions {repeated Transaction pool = 1;}
