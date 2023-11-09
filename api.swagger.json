@@ -5044,14 +5044,6 @@
     "billingGetRecordsReportsCountRequest": {
       "type": "object",
       "properties": {
-        "from": {
-          "type": "string",
-          "format": "int64"
-        },
-        "to": {
-          "type": "string",
-          "format": "int64"
-        },
         "filters": {
           "type": "object",
           "additionalProperties": {}
@@ -5062,19 +5054,12 @@
         "service": {
           "type": "string"
         }
-      }
+      },
+      "title": "-------------------------------------"
     },
     "billingGetRecordsReportsRequest": {
       "type": "object",
       "properties": {
-        "from": {
-          "type": "string",
-          "format": "int64"
-        },
-        "to": {
-          "type": "string",
-          "format": "int64"
-        },
         "page": {
           "type": "string",
           "format": "int64"
@@ -5099,7 +5084,8 @@
         "service": {
           "type": "string"
         }
-      }
+      },
+      "title": "-------------------------------------"
     },
     "billingGetRecordsReportsResponse": {
       "type": "object",
