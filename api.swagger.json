@@ -320,6 +320,12 @@
                 },
                 "status": {
                   "$ref": "#/definitions/accountsAccountStatus"
+                },
+                "ccIsBot": {
+                  "type": "boolean"
+                },
+                "ccUsername": {
+                  "type": "string"
                 }
               }
             }
@@ -4577,6 +4583,12 @@
         },
         "status": {
           "$ref": "#/definitions/accountsAccountStatus"
+        },
+        "ccIsBot": {
+          "type": "boolean"
+        },
+        "ccUsername": {
+          "type": "string"
         }
       }
     },
