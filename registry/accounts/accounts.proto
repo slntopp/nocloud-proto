@@ -67,10 +67,6 @@ message Account {
   optional bool suspended = 7;
   optional nocloud.billing.Currency currency = 8; // Account Balance Currency
   AccountStatus status = 9;
-
-  bool cc_is_bot = 10;
-  string cc_username = 11;
-  map<string, string> cc_commands = 12;
 }
 
 message UpdateResponse {bool result = 1;}
