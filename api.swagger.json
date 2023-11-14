@@ -326,6 +326,12 @@
                 },
                 "ccUsername": {
                   "type": "string"
+                },
+                "ccComands": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
                 }
               }
             }
@@ -4589,6 +4595,12 @@
         },
         "ccUsername": {
           "type": "string"
+        },
+        "ccComands": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
