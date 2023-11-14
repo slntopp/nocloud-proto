@@ -327,7 +327,7 @@
                 "ccUsername": {
                   "type": "string"
                 },
-                "ccComands": {
+                "ccCommands": {
                   "type": "object",
                   "additionalProperties": {
                     "type": "string"
@@ -4596,7 +4596,7 @@
         "ccUsername": {
           "type": "string"
         },
-        "ccComands": {
+        "ccCommands": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
