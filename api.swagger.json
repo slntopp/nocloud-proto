@@ -3977,6 +3977,10 @@
                     "type": "object",
                     "$ref": "#/definitions/services_providersLocationConf"
                   }
+                },
+                "sorter": {
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             }
@@ -6734,6 +6738,10 @@
             "type": "object",
             "$ref": "#/definitions/services_providersLocationConf"
           }
+        },
+        "sorter": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
