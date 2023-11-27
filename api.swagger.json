@@ -5327,6 +5327,10 @@
         },
         "title": {
           "type": "string"
+        },
+        "meta": {
+          "type": "object",
+          "additionalProperties": {}
         }
       }
     },
