@@ -18,6 +18,7 @@ package nocloud.billing;
 
 import "states/states.proto";
 import "ansible/ansible.proto";
+import "statuses/statuses.proto";
 
 import "google/protobuf/struct.proto";
 import "google/api/annotations.proto";
@@ -64,11 +65,14 @@ message Plan {
   Fee fee = 9;
 
   repeated nocloud.ansible.Software software = 10;
+
+  statuses.NoCloudStatus status = 11;
 }
 
 message ListRequest {
   string sp_uuid = 1;
   bool anonymously = 2;
+  bool show_deleted = 3;
 }
 message ListResponse {repeated Plan pool = 1;}
 

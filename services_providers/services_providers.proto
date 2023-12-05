@@ -20,6 +20,7 @@ import "google/protobuf/struct.proto";
 import "google/api/annotations.proto";
 import "states/states.proto";
 import "access/access.proto";
+import "statuses/statuses.proto";
 
 
 message Var {map<string, google.protobuf.Value> value = 1;}
@@ -50,6 +51,8 @@ message ServicesProvider {
   repeated LocationConf locations = 11;
   optional nocloud.access.Access access = 12;
   map<string, google.protobuf.Value> meta = 13;
+
+  statuses.NoCloudStatus status = 14;
 }
 
 message TestResponse {
@@ -59,7 +62,10 @@ message TestResponse {
 
 message GetRequest {string uuid = 1;}
 
-message ListRequest {bool anonymously = 1;}
+message ListRequest {
+  bool anonymously = 1;
+  bool show_deleted = 2;
+}
 
 message ListResponse {repeated ServicesProvider pool = 1;}
 

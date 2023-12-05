@@ -1238,6 +1238,12 @@
             "in": "query",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "showDeleted",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -1400,6 +1406,24 @@
             "required": false,
             "type": "number",
             "format": "double"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNSPECIFIED",
+              "INIT",
+              "MODIFIED",
+              "UP",
+              "DOWN",
+              "DEL",
+              "PROC",
+              "SUS",
+              "DETACHED"
+            ],
+            "default": "UNSPECIFIED"
           }
         ],
         "tags": [
@@ -1500,6 +1524,24 @@
             "required": false,
             "type": "number",
             "format": "double"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNSPECIFIED",
+              "INIT",
+              "MODIFIED",
+              "UP",
+              "DOWN",
+              "DEL",
+              "PROC",
+              "SUS",
+              "DETACHED"
+            ],
+            "default": "UNSPECIFIED"
           }
         ],
         "tags": [
@@ -1580,6 +1622,9 @@
                     "type": "object",
                     "$ref": "#/definitions/ansibleSoftware"
                   }
+                },
+                "status": {
+                  "$ref": "#/definitions/statusesNoCloudStatus"
                 }
               }
             }
@@ -3827,6 +3872,12 @@
             "in": "query",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "showDeleted",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -4014,6 +4065,12 @@
             "in": "query",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "showDeleted",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -4101,6 +4158,12 @@
         "parameters": [
           {
             "name": "anonymously",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "showDeleted",
             "in": "query",
             "required": false,
             "type": "boolean"
@@ -4280,6 +4343,9 @@
                 "meta": {
                   "type": "object",
                   "additionalProperties": {}
+                },
+                "status": {
+                  "$ref": "#/definitions/statusesNoCloudStatus"
                 }
               }
             }
@@ -5214,6 +5280,9 @@
             "type": "object",
             "$ref": "#/definitions/ansibleSoftware"
           }
+        },
+        "status": {
+          "$ref": "#/definitions/statusesNoCloudStatus"
         }
       }
     },
@@ -6707,6 +6776,9 @@
         "meta": {
           "type": "object",
           "additionalProperties": {}
+        },
+        "status": {
+          "$ref": "#/definitions/statusesNoCloudStatus"
         }
       }
     },
