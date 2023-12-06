@@ -57,6 +57,10 @@ class Product extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>bool public = 9 [json_name = "public"];</code>
      */
     protected $public = false;
+    /**
+     * Generated from protobuf field <code>string group = 10 [json_name = "group"];</code>
+     */
+    protected $group = '';
 
     /**
      * Constructor.
@@ -77,6 +81,7 @@ class Product extends \Google\Protobuf\Internal\Message
      *           Sorting order, might be needed in UIs
      *     @type float $installation_fee
      *     @type bool $public
+     *     @type string $group
      * }
      */
     public function __construct($data = NULL) {
@@ -314,6 +319,28 @@ class Product extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkBool($var);
         $this->public = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string group = 10 [json_name = "group"];</code>
+     * @return string
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
+
+    /**
+     * Generated from protobuf field <code>string group = 10 [json_name = "group"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setGroup($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->group = $var;
 
         return $this;
     }

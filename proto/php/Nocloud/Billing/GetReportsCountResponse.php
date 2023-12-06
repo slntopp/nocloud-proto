@@ -17,6 +17,10 @@ class GetReportsCountResponse extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>int64 total = 1 [json_name = "total"];</code>
      */
     protected $total = 0;
+    /**
+     * Generated from protobuf field <code>.google.protobuf.Value unique = 2 [json_name = "unique"];</code>
+     */
+    protected $unique = null;
 
     /**
      * Constructor.
@@ -25,6 +29,7 @@ class GetReportsCountResponse extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type int|string $total
+     *     @type \Google\Protobuf\Value $unique
      * }
      */
     public function __construct($data = NULL) {
@@ -50,6 +55,38 @@ class GetReportsCountResponse extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt64($var);
         $this->total = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.google.protobuf.Value unique = 2 [json_name = "unique"];</code>
+     * @return \Google\Protobuf\Value|null
+     */
+    public function getUnique()
+    {
+        return $this->unique;
+    }
+
+    public function hasUnique()
+    {
+        return isset($this->unique);
+    }
+
+    public function clearUnique()
+    {
+        unset($this->unique);
+    }
+
+    /**
+     * Generated from protobuf field <code>.google.protobuf.Value unique = 2 [json_name = "unique"];</code>
+     * @param \Google\Protobuf\Value $var
+     * @return $this
+     */
+    public function setUnique($var)
+    {
+        GPBUtil::checkMessage($var, \Google\Protobuf\Value::class);
+        $this->unique = $var;
 
         return $this;
     }

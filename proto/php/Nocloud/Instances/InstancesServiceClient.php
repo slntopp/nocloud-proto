@@ -60,6 +60,34 @@ class InstancesServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * @param \Nocloud\Instances\DeleteRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function Detach(\Nocloud\Instances\DeleteRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.instances.InstancesService/Detach',
+        $argument,
+        ['\Nocloud\Instances\DeleteResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Instances\DeleteRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function Attach(\Nocloud\Instances\DeleteRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.instances.InstancesService/Attach',
+        $argument,
+        ['\Nocloud\Instances\DeleteResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * @param \Nocloud\Instances\TransferIGRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options

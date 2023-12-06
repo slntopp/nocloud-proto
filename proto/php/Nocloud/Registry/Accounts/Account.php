@@ -47,6 +47,10 @@ class Account extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>optional .nocloud.billing.Currency currency = 8 [json_name = "currency"];</code>
      */
     protected $currency = null;
+    /**
+     * Generated from protobuf field <code>.nocloud.registry.accounts.AccountStatus status = 9 [json_name = "status"];</code>
+     */
+    protected $status = 0;
 
     /**
      * Constructor.
@@ -63,6 +67,7 @@ class Account extends \Google\Protobuf\Internal\Message
      *     @type bool $suspended
      *     @type int $currency
      *           Account Balance Currency
+     *     @type int $status
      * }
      */
     public function __construct($data = NULL) {
@@ -306,6 +311,28 @@ class Account extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkEnum($var, \Nocloud\Billing\Currency::class);
         $this->currency = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.registry.accounts.AccountStatus status = 9 [json_name = "status"];</code>
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.registry.accounts.AccountStatus status = 9 [json_name = "status"];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setStatus($var)
+    {
+        GPBUtil::checkEnum($var, \Nocloud\Registry\Accounts\AccountStatus::class);
+        $this->status = $var;
 
         return $this;
     }

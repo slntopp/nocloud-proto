@@ -9,38 +9,40 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
+ *-------------------------------------
+ *
  * Generated from protobuf message <code>nocloud.billing.GetRecordsReportsRequest</code>
  */
 class GetRecordsReportsRequest extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>optional int64 from = 1 [json_name = "from"];</code>
-     */
-    protected $from = null;
-    /**
-     * Generated from protobuf field <code>optional int64 to = 2 [json_name = "to"];</code>
-     */
-    protected $to = null;
-    /**
-     * Generated from protobuf field <code>optional int64 page = 3 [json_name = "page"];</code>
+     * Generated from protobuf field <code>optional int64 page = 1 [json_name = "page"];</code>
      */
     protected $page = null;
     /**
-     * Generated from protobuf field <code>optional int64 limit = 4 [json_name = "limit"];</code>
+     * Generated from protobuf field <code>optional int64 limit = 2 [json_name = "limit"];</code>
      */
     protected $limit = null;
     /**
-     * Generated from protobuf field <code>optional string field = 5 [json_name = "field"];</code>
+     * Generated from protobuf field <code>optional string field = 3 [json_name = "field"];</code>
      */
     protected $field = null;
     /**
-     * Generated from protobuf field <code>optional string sort = 6 [json_name = "sort"];</code>
+     * Generated from protobuf field <code>optional string sort = 4 [json_name = "sort"];</code>
      */
     protected $sort = null;
     /**
-     * Generated from protobuf field <code>map<string, .google.protobuf.Value> filters = 7 [json_name = "filters"];</code>
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> filters = 5 [json_name = "filters"];</code>
      */
     private $filters;
+    /**
+     * Generated from protobuf field <code>optional string account = 6 [json_name = "account"];</code>
+     */
+    protected $account = null;
+    /**
+     * Generated from protobuf field <code>optional string service = 7 [json_name = "service"];</code>
+     */
+    protected $service = null;
 
     /**
      * Constructor.
@@ -48,13 +50,13 @@ class GetRecordsReportsRequest extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type int|string $from
-     *     @type int|string $to
      *     @type int|string $page
      *     @type int|string $limit
      *     @type string $field
      *     @type string $sort
      *     @type array|\Google\Protobuf\Internal\MapField $filters
+     *     @type string $account
+     *     @type string $service
      * }
      */
     public function __construct($data = NULL) {
@@ -63,71 +65,7 @@ class GetRecordsReportsRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>optional int64 from = 1 [json_name = "from"];</code>
-     * @return int|string
-     */
-    public function getFrom()
-    {
-        return isset($this->from) ? $this->from : 0;
-    }
-
-    public function hasFrom()
-    {
-        return isset($this->from);
-    }
-
-    public function clearFrom()
-    {
-        unset($this->from);
-    }
-
-    /**
-     * Generated from protobuf field <code>optional int64 from = 1 [json_name = "from"];</code>
-     * @param int|string $var
-     * @return $this
-     */
-    public function setFrom($var)
-    {
-        GPBUtil::checkInt64($var);
-        $this->from = $var;
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>optional int64 to = 2 [json_name = "to"];</code>
-     * @return int|string
-     */
-    public function getTo()
-    {
-        return isset($this->to) ? $this->to : 0;
-    }
-
-    public function hasTo()
-    {
-        return isset($this->to);
-    }
-
-    public function clearTo()
-    {
-        unset($this->to);
-    }
-
-    /**
-     * Generated from protobuf field <code>optional int64 to = 2 [json_name = "to"];</code>
-     * @param int|string $var
-     * @return $this
-     */
-    public function setTo($var)
-    {
-        GPBUtil::checkInt64($var);
-        $this->to = $var;
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>optional int64 page = 3 [json_name = "page"];</code>
+     * Generated from protobuf field <code>optional int64 page = 1 [json_name = "page"];</code>
      * @return int|string
      */
     public function getPage()
@@ -146,7 +84,7 @@ class GetRecordsReportsRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>optional int64 page = 3 [json_name = "page"];</code>
+     * Generated from protobuf field <code>optional int64 page = 1 [json_name = "page"];</code>
      * @param int|string $var
      * @return $this
      */
@@ -159,7 +97,7 @@ class GetRecordsReportsRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>optional int64 limit = 4 [json_name = "limit"];</code>
+     * Generated from protobuf field <code>optional int64 limit = 2 [json_name = "limit"];</code>
      * @return int|string
      */
     public function getLimit()
@@ -178,7 +116,7 @@ class GetRecordsReportsRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>optional int64 limit = 4 [json_name = "limit"];</code>
+     * Generated from protobuf field <code>optional int64 limit = 2 [json_name = "limit"];</code>
      * @param int|string $var
      * @return $this
      */
@@ -191,7 +129,7 @@ class GetRecordsReportsRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>optional string field = 5 [json_name = "field"];</code>
+     * Generated from protobuf field <code>optional string field = 3 [json_name = "field"];</code>
      * @return string
      */
     public function getField()
@@ -210,7 +148,7 @@ class GetRecordsReportsRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>optional string field = 5 [json_name = "field"];</code>
+     * Generated from protobuf field <code>optional string field = 3 [json_name = "field"];</code>
      * @param string $var
      * @return $this
      */
@@ -223,7 +161,7 @@ class GetRecordsReportsRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>optional string sort = 6 [json_name = "sort"];</code>
+     * Generated from protobuf field <code>optional string sort = 4 [json_name = "sort"];</code>
      * @return string
      */
     public function getSort()
@@ -242,7 +180,7 @@ class GetRecordsReportsRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>optional string sort = 6 [json_name = "sort"];</code>
+     * Generated from protobuf field <code>optional string sort = 4 [json_name = "sort"];</code>
      * @param string $var
      * @return $this
      */
@@ -255,7 +193,7 @@ class GetRecordsReportsRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>map<string, .google.protobuf.Value> filters = 7 [json_name = "filters"];</code>
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> filters = 5 [json_name = "filters"];</code>
      * @return \Google\Protobuf\Internal\MapField
      */
     public function getFilters()
@@ -264,7 +202,7 @@ class GetRecordsReportsRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>map<string, .google.protobuf.Value> filters = 7 [json_name = "filters"];</code>
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> filters = 5 [json_name = "filters"];</code>
      * @param array|\Google\Protobuf\Internal\MapField $var
      * @return $this
      */
@@ -272,6 +210,70 @@ class GetRecordsReportsRequest extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::MESSAGE, \Google\Protobuf\Value::class);
         $this->filters = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string account = 6 [json_name = "account"];</code>
+     * @return string
+     */
+    public function getAccount()
+    {
+        return isset($this->account) ? $this->account : '';
+    }
+
+    public function hasAccount()
+    {
+        return isset($this->account);
+    }
+
+    public function clearAccount()
+    {
+        unset($this->account);
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string account = 6 [json_name = "account"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setAccount($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->account = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string service = 7 [json_name = "service"];</code>
+     * @return string
+     */
+    public function getService()
+    {
+        return isset($this->service) ? $this->service : '';
+    }
+
+    public function hasService()
+    {
+        return isset($this->service);
+    }
+
+    public function clearService()
+    {
+        unset($this->service);
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string service = 7 [json_name = "service"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setService($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->service = $var;
 
         return $this;
     }

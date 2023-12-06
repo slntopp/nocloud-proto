@@ -9,6 +9,8 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
+ *-------------------------------------
+ *
  * Generated from protobuf message <code>nocloud.billing.GetInstancesReportsCountRequest</code>
  */
 class GetInstancesReportsCountRequest extends \Google\Protobuf\Internal\Message

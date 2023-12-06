@@ -77,6 +77,10 @@ class Transaction extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.nocloud.billing.Currency currency = 11 [json_name = "currency"];</code>
      */
     protected $currency = 0;
+    /**
+     * Generated from protobuf field <code>int64 created = 12 [json_name = "created"];</code>
+     */
+    protected $created = 0;
 
     /**
      * Constructor.
@@ -108,6 +112,7 @@ class Transaction extends \Google\Protobuf\Internal\Message
      *          Type(SSD/HDD/NVMe/etc)
      *          }
      *     @type int $currency
+     *     @type int|string $created
      * }
      */
     public function __construct($data = NULL) {
@@ -393,6 +398,28 @@ class Transaction extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkEnum($var, \Nocloud\Billing\Currency::class);
         $this->currency = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>int64 created = 12 [json_name = "created"];</code>
+     * @return int|string
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Generated from protobuf field <code>int64 created = 12 [json_name = "created"];</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setCreated($var)
+    {
+        GPBUtil::checkInt64($var);
+        $this->created = $var;
 
         return $this;
     }

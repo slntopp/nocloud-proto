@@ -45,6 +45,10 @@ class Showcase extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>repeated .nocloud.services_providers.LocationConf locations = 8 [json_name = "locations"];</code>
      */
     private $locations;
+    /**
+     * Generated from protobuf field <code>optional int32 sorter = 9 [json_name = "sorter"];</code>
+     */
+    protected $sorter = null;
 
     /**
      * Constructor.
@@ -60,6 +64,7 @@ class Showcase extends \Google\Protobuf\Internal\Message
      *     @type bool $primary
      *     @type bool $public
      *     @type array<\Nocloud\ServicesProviders\LocationConf>|\Google\Protobuf\Internal\RepeatedField $locations
+     *     @type int $sorter
      * }
      */
     public function __construct($data = NULL) {
@@ -249,6 +254,38 @@ class Showcase extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Nocloud\ServicesProviders\LocationConf::class);
         $this->locations = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>optional int32 sorter = 9 [json_name = "sorter"];</code>
+     * @return int
+     */
+    public function getSorter()
+    {
+        return isset($this->sorter) ? $this->sorter : 0;
+    }
+
+    public function hasSorter()
+    {
+        return isset($this->sorter);
+    }
+
+    public function clearSorter()
+    {
+        unset($this->sorter);
+    }
+
+    /**
+     * Generated from protobuf field <code>optional int32 sorter = 9 [json_name = "sorter"];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setSorter($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->sorter = $var;
 
         return $this;
     }

@@ -53,6 +53,10 @@ class ResourceConf extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string title = 8 [json_name = "title"];</code>
      */
     protected $title = '';
+    /**
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 9 [json_name = "meta"];</code>
+     */
+    private $meta;
 
     /**
      * Constructor.
@@ -73,6 +77,7 @@ class ResourceConf extends \Google\Protobuf\Internal\Message
      *     @type array<int>|\Google\Protobuf\Internal\RepeatedField $on
      *     @type \Nocloud\Billing\Fee $fee
      *     @type string $title
+     *     @type array|\Google\Protobuf\Internal\MapField $meta
      * }
      */
     public function __construct($data = NULL) {
@@ -278,6 +283,28 @@ class ResourceConf extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->title = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 9 [json_name = "meta"];</code>
+     * @return \Google\Protobuf\Internal\MapField
+     */
+    public function getMeta()
+    {
+        return $this->meta;
+    }
+
+    /**
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 9 [json_name = "meta"];</code>
+     * @param array|\Google\Protobuf\Internal\MapField $var
+     * @return $this
+     */
+    public function setMeta($var)
+    {
+        $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::MESSAGE, \Google\Protobuf\Value::class);
+        $this->meta = $arr;
 
         return $this;
     }

@@ -43,6 +43,10 @@ class NoCloudStatus
      * Generated from protobuf enum <code>SUS = 7;</code>
      */
     const SUS = 7;
+    /**
+     * Generated from protobuf enum <code>DETACHED = 8;</code>
+     */
+    const DETACHED = 8;
 
     private static $valueToName = [
         self::UNSPECIFIED => 'UNSPECIFIED',
@@ -53,6 +57,7 @@ class NoCloudStatus
         self::DEL => 'DEL',
         self::PROC => 'PROC',
         self::SUS => 'SUS',
+        self::DETACHED => 'DETACHED',
     ];
 
     public static function name($value)
