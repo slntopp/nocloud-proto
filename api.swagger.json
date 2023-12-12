@@ -320,6 +320,13 @@
                 },
                 "status": {
                   "$ref": "#/definitions/accountsAccountStatus"
+                },
+                "adminNotes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "$ref": "#/definitions/notesAdminNote"
+                  }
                 }
               }
             }
@@ -4647,6 +4654,13 @@
         },
         "status": {
           "$ref": "#/definitions/accountsAccountStatus"
+        },
+        "adminNotes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/notesAdminNote"
+          }
         }
       }
     },
@@ -6295,6 +6309,13 @@
             "$ref": "#/definitions/ansibleSoftware"
           },
           "title": "Must match contain all the software from the Billing Plan"
+        },
+        "adminNotes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/notesAdminNote"
+          }
         }
       }
     },
@@ -6432,6 +6453,17 @@
         }
       }
     },
+    "notesAdminNote": {
+      "type": "object",
+      "properties": {
+        "admin": {
+          "type": "string"
+        },
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -6447,7 +6479,7 @@
         "NULL_VALUE"
       ],
       "default": "NULL_VALUE",
-      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\n The JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
+      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\nThe JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
     },
     "registryaccountsCreateRequest": {
       "type": "object",
