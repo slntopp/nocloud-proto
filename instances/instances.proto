@@ -148,6 +148,19 @@ service InstancesService {
             delete: "/instances/{uuid}"
         };
     };
+    rpc AddNote (nocloud.notes.AddNoteRequest)
+            returns (nocloud.notes.NoteResponse) {
+        option (google.api.http) = {
+            post: "/instances/{uuid}/note"
+            body: "*"
+        };
+    };
+    rpc RemoveNote (nocloud.notes.RemoveNoteRequest)
+            returns (nocloud.notes.NoteResponse) {
+        option (google.api.http) = {
+            delete: "/instances/{uuid}/note"
+        };
+    };
     rpc Detach (nocloud.instances.DeleteRequest)
             returns (nocloud.instances.DeleteResponse) {
         option (google.api.http) = {

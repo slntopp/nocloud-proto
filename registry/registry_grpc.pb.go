@@ -23,6 +23,7 @@ package registry
 
 import (
 	context "context"
+	notes "github.com/slntopp/nocloud-proto/notes"
 	accounts "github.com/slntopp/nocloud-proto/registry/accounts"
 	namespaces "github.com/slntopp/nocloud-proto/registry/namespaces"
 	grpc "google.golang.org/grpc"
@@ -38,6 +39,8 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	AccountsService_Token_FullMethodName          = "/nocloud.registry.AccountsService/Token"
 	AccountsService_SetCredentials_FullMethodName = "/nocloud.registry.AccountsService/SetCredentials"
+	AccountsService_AddNote_FullMethodName        = "/nocloud.registry.AccountsService/AddNote"
+	AccountsService_RemoveNote_FullMethodName     = "/nocloud.registry.AccountsService/RemoveNote"
 	AccountsService_Create_FullMethodName         = "/nocloud.registry.AccountsService/Create"
 	AccountsService_Update_FullMethodName         = "/nocloud.registry.AccountsService/Update"
 	AccountsService_Get_FullMethodName            = "/nocloud.registry.AccountsService/Get"
@@ -53,6 +56,8 @@ const (
 type AccountsServiceClient interface {
 	Token(ctx context.Context, in *accounts.TokenRequest, opts ...grpc.CallOption) (*accounts.TokenResponse, error)
 	SetCredentials(ctx context.Context, in *accounts.SetCredentialsRequest, opts ...grpc.CallOption) (*accounts.SetCredentialsResponse, error)
+	AddNote(ctx context.Context, in *notes.AddNoteRequest, opts ...grpc.CallOption) (*notes.NoteResponse, error)
+	RemoveNote(ctx context.Context, in *notes.RemoveNoteRequest, opts ...grpc.CallOption) (*notes.NoteResponse, error)
 	Create(ctx context.Context, in *accounts.CreateRequest, opts ...grpc.CallOption) (*accounts.CreateResponse, error)
 	Update(ctx context.Context, in *accounts.Account, opts ...grpc.CallOption) (*accounts.UpdateResponse, error)
 	Get(ctx context.Context, in *accounts.GetRequest, opts ...grpc.CallOption) (*accounts.Account, error)
@@ -82,6 +87,24 @@ func (c *accountsServiceClient) Token(ctx context.Context, in *accounts.TokenReq
 func (c *accountsServiceClient) SetCredentials(ctx context.Context, in *accounts.SetCredentialsRequest, opts ...grpc.CallOption) (*accounts.SetCredentialsResponse, error) {
 	out := new(accounts.SetCredentialsResponse)
 	err := c.cc.Invoke(ctx, AccountsService_SetCredentials_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsServiceClient) AddNote(ctx context.Context, in *notes.AddNoteRequest, opts ...grpc.CallOption) (*notes.NoteResponse, error) {
+	out := new(notes.NoteResponse)
+	err := c.cc.Invoke(ctx, AccountsService_AddNote_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountsServiceClient) RemoveNote(ctx context.Context, in *notes.RemoveNoteRequest, opts ...grpc.CallOption) (*notes.NoteResponse, error) {
+	out := new(notes.NoteResponse)
+	err := c.cc.Invoke(ctx, AccountsService_RemoveNote_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -157,6 +180,8 @@ func (c *accountsServiceClient) Unsuspend(ctx context.Context, in *accounts.Unsu
 type AccountsServiceServer interface {
 	Token(context.Context, *accounts.TokenRequest) (*accounts.TokenResponse, error)
 	SetCredentials(context.Context, *accounts.SetCredentialsRequest) (*accounts.SetCredentialsResponse, error)
+	AddNote(context.Context, *notes.AddNoteRequest) (*notes.NoteResponse, error)
+	RemoveNote(context.Context, *notes.RemoveNoteRequest) (*notes.NoteResponse, error)
 	Create(context.Context, *accounts.CreateRequest) (*accounts.CreateResponse, error)
 	Update(context.Context, *accounts.Account) (*accounts.UpdateResponse, error)
 	Get(context.Context, *accounts.GetRequest) (*accounts.Account, error)
@@ -176,6 +201,12 @@ func (UnimplementedAccountsServiceServer) Token(context.Context, *accounts.Token
 }
 func (UnimplementedAccountsServiceServer) SetCredentials(context.Context, *accounts.SetCredentialsRequest) (*accounts.SetCredentialsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetCredentials not implemented")
+}
+func (UnimplementedAccountsServiceServer) AddNote(context.Context, *notes.AddNoteRequest) (*notes.NoteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddNote not implemented")
+}
+func (UnimplementedAccountsServiceServer) RemoveNote(context.Context, *notes.RemoveNoteRequest) (*notes.NoteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveNote not implemented")
 }
 func (UnimplementedAccountsServiceServer) Create(context.Context, *accounts.CreateRequest) (*accounts.CreateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
@@ -243,6 +274,42 @@ func _AccountsService_SetCredentials_Handler(srv interface{}, ctx context.Contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AccountsServiceServer).SetCredentials(ctx, req.(*accounts.SetCredentialsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountsService_AddNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(notes.AddNoteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServiceServer).AddNote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountsService_AddNote_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServiceServer).AddNote(ctx, req.(*notes.AddNoteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountsService_RemoveNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(notes.RemoveNoteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServiceServer).RemoveNote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountsService_RemoveNote_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServiceServer).RemoveNote(ctx, req.(*notes.RemoveNoteRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -387,6 +454,14 @@ var AccountsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetCredentials",
 			Handler:    _AccountsService_SetCredentials_Handler,
+		},
+		{
+			MethodName: "AddNote",
+			Handler:    _AccountsService_AddNote_Handler,
+		},
+		{
+			MethodName: "RemoveNote",
+			Handler:    _AccountsService_RemoveNote_Handler,
 		},
 		{
 			MethodName: "Create",

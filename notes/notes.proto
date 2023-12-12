@@ -21,3 +21,15 @@ message AdminNote {
     string admin = 1;
     string msg = 2;
 }
+
+message AddNoteRequest {
+    string uuid = 1;
+    string msg = 2;
+}
+
+message RemoveNoteRequest {
+    string uuid = 1;
+    uint64 index = 2;
+}
+
+message NoteResponse {bool result = 1;}

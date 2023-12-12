@@ -337,6 +337,84 @@
         ]
       }
     },
+    "/accounts/{uuid}/note": {
+      "delete": {
+        "operationId": "AccountsService_RemoveNote",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/notesNoteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "index",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "AccountsService"
+        ]
+      },
+      "post": {
+        "operationId": "AccountsService_AddNote",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/notesNoteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "AccountsService"
+        ]
+      }
+    },
     "/accounts/{uuid}/suspend": {
       "post": {
         "operationId": "AccountsService_Suspend",
@@ -2681,6 +2759,84 @@
                 "params": {
                   "type": "object",
                   "additionalProperties": {}
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "InstancesService"
+        ]
+      }
+    },
+    "/instances/{uuid}/note": {
+      "delete": {
+        "operationId": "InstancesService_RemoveNote",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/notesNoteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "index",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "InstancesService"
+        ]
+      },
+      "post": {
+        "operationId": "InstancesService_AddNote",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/notesNoteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string"
                 }
               }
             }
@@ -6461,6 +6617,14 @@
         },
         "msg": {
           "type": "string"
+        }
+      }
+    },
+    "notesNoteResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "boolean"
         }
       }
     },
