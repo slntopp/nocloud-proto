@@ -64,10 +64,10 @@ service AccountsService {
             body: "*"
         };
     };
-    rpc StandartCreate (nocloud.registry.accounts.CreateRequest)
+    rpc SignUp (nocloud.registry.accounts.CreateRequest)
             returns (nocloud.registry.accounts.CreateResponse) {
         option (google.api.http) = {
-            post: "/accounts"
+            post: "/accounts/signup"
             body: "*"
         };
     };

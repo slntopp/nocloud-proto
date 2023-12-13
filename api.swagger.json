@@ -128,8 +128,8 @@
           "AccountsService"
         ]
       },
-      "post": {
-        "operationId": "AccountsService_StandartCreate",
+      "put": {
+        "operationId": "AccountsService_Create",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -157,9 +157,11 @@
         "tags": [
           "AccountsService"
         ]
-      },
-      "put": {
-        "operationId": "AccountsService_Create",
+      }
+    },
+    "/accounts/signup": {
+      "post": {
+        "operationId": "AccountsService_SignUp",
         "responses": {
           "200": {
             "description": "A successful response.",
