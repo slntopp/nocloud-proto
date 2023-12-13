@@ -5660,6 +5660,9 @@
         "meta": {
           "type": "object",
           "additionalProperties": {}
+        },
+        "public": {
+          "type": "boolean"
         }
       }
     },
