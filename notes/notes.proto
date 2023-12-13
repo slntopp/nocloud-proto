@@ -20,6 +20,8 @@ package nocloud.notes;
 message AdminNote {
     string admin = 1;
     string msg = 2;
+    int64 created = 3;
+    int64 updated = 4;
 }
 
 message AddNoteRequest {

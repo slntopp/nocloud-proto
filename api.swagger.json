@@ -6707,6 +6707,14 @@
         },
         "msg": {
           "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
