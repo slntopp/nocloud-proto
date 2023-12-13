@@ -27,6 +27,12 @@ message AddNoteRequest {
     string msg = 2;
 }
 
+message PatchNoteRequest {
+    string uuid = 1;
+    uint64 index = 2;
+    string msg = 3;
+}
+
 message RemoveNoteRequest {
     string uuid = 1;
     uint64 index = 2;

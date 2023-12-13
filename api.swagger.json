@@ -413,6 +413,51 @@
         "tags": [
           "AccountsService"
         ]
+      },
+      "patch": {
+        "operationId": "AccountsService_PatchNote",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/notesNoteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "index": {
+                  "type": "string",
+                  "format": "uint64"
+                },
+                "msg": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "AccountsService"
+        ]
       }
     },
     "/accounts/{uuid}/suspend": {
@@ -2835,6 +2880,51 @@
             "schema": {
               "type": "object",
               "properties": {
+                "msg": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "InstancesService"
+        ]
+      },
+      "patch": {
+        "operationId": "InstancesService_PatchNote",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/notesNoteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "index": {
+                  "type": "string",
+                  "format": "uint64"
+                },
                 "msg": {
                   "type": "string"
                 }

@@ -38,6 +38,7 @@ const (
 	InstancesService_Invoke_FullMethodName           = "/nocloud.instances.InstancesService/Invoke"
 	InstancesService_Delete_FullMethodName           = "/nocloud.instances.InstancesService/Delete"
 	InstancesService_AddNote_FullMethodName          = "/nocloud.instances.InstancesService/AddNote"
+	InstancesService_PatchNote_FullMethodName        = "/nocloud.instances.InstancesService/PatchNote"
 	InstancesService_RemoveNote_FullMethodName       = "/nocloud.instances.InstancesService/RemoveNote"
 	InstancesService_Detach_FullMethodName           = "/nocloud.instances.InstancesService/Detach"
 	InstancesService_Attach_FullMethodName           = "/nocloud.instances.InstancesService/Attach"
@@ -52,6 +53,7 @@ type InstancesServiceClient interface {
 	Invoke(ctx context.Context, in *InvokeRequest, opts ...grpc.CallOption) (*InvokeResponse, error)
 	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
 	AddNote(ctx context.Context, in *notes.AddNoteRequest, opts ...grpc.CallOption) (*notes.NoteResponse, error)
+	PatchNote(ctx context.Context, in *notes.PatchNoteRequest, opts ...grpc.CallOption) (*notes.NoteResponse, error)
 	RemoveNote(ctx context.Context, in *notes.RemoveNoteRequest, opts ...grpc.CallOption) (*notes.NoteResponse, error)
 	Detach(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
 	Attach(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
@@ -88,6 +90,15 @@ func (c *instancesServiceClient) Delete(ctx context.Context, in *DeleteRequest, 
 func (c *instancesServiceClient) AddNote(ctx context.Context, in *notes.AddNoteRequest, opts ...grpc.CallOption) (*notes.NoteResponse, error) {
 	out := new(notes.NoteResponse)
 	err := c.cc.Invoke(ctx, InstancesService_AddNote_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *instancesServiceClient) PatchNote(ctx context.Context, in *notes.PatchNoteRequest, opts ...grpc.CallOption) (*notes.NoteResponse, error) {
+	out := new(notes.NoteResponse)
+	err := c.cc.Invoke(ctx, InstancesService_PatchNote_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -146,6 +157,7 @@ type InstancesServiceServer interface {
 	Invoke(context.Context, *InvokeRequest) (*InvokeResponse, error)
 	Delete(context.Context, *DeleteRequest) (*DeleteResponse, error)
 	AddNote(context.Context, *notes.AddNoteRequest) (*notes.NoteResponse, error)
+	PatchNote(context.Context, *notes.PatchNoteRequest) (*notes.NoteResponse, error)
 	RemoveNote(context.Context, *notes.RemoveNoteRequest) (*notes.NoteResponse, error)
 	Detach(context.Context, *DeleteRequest) (*DeleteResponse, error)
 	Attach(context.Context, *DeleteRequest) (*DeleteResponse, error)
@@ -166,6 +178,9 @@ func (UnimplementedInstancesServiceServer) Delete(context.Context, *DeleteReques
 }
 func (UnimplementedInstancesServiceServer) AddNote(context.Context, *notes.AddNoteRequest) (*notes.NoteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddNote not implemented")
+}
+func (UnimplementedInstancesServiceServer) PatchNote(context.Context, *notes.PatchNoteRequest) (*notes.NoteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PatchNote not implemented")
 }
 func (UnimplementedInstancesServiceServer) RemoveNote(context.Context, *notes.RemoveNoteRequest) (*notes.NoteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveNote not implemented")
@@ -245,6 +260,24 @@ func _InstancesService_AddNote_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(InstancesServiceServer).AddNote(ctx, req.(*notes.AddNoteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InstancesService_PatchNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(notes.PatchNoteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstancesServiceServer).PatchNote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstancesService_PatchNote_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstancesServiceServer).PatchNote(ctx, req.(*notes.PatchNoteRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -357,6 +390,10 @@ var InstancesService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddNote",
 			Handler:    _InstancesService_AddNote_Handler,
+		},
+		{
+			MethodName: "PatchNote",
+			Handler:    _InstancesService_PatchNote_Handler,
 		},
 		{
 			MethodName: "RemoveNote",

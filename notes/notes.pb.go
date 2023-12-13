@@ -145,6 +145,69 @@ func (x *AddNoteRequest) GetMsg() string {
 	return ""
 }
 
+type PatchNoteRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Uuid  string `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	Index uint64 `protobuf:"varint,2,opt,name=index,proto3" json:"index,omitempty"`
+	Msg   string `protobuf:"bytes,3,opt,name=msg,proto3" json:"msg,omitempty"`
+}
+
+func (x *PatchNoteRequest) Reset() {
+	*x = PatchNoteRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_notes_notes_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PatchNoteRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PatchNoteRequest) ProtoMessage() {}
+
+func (x *PatchNoteRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_notes_notes_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PatchNoteRequest.ProtoReflect.Descriptor instead.
+func (*PatchNoteRequest) Descriptor() ([]byte, []int) {
+	return file_notes_notes_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *PatchNoteRequest) GetUuid() string {
+	if x != nil {
+		return x.Uuid
+	}
+	return ""
+}
+
+func (x *PatchNoteRequest) GetIndex() uint64 {
+	if x != nil {
+		return x.Index
+	}
+	return 0
+}
+
+func (x *PatchNoteRequest) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 type RemoveNoteRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -157,7 +220,7 @@ type RemoveNoteRequest struct {
 func (x *RemoveNoteRequest) Reset() {
 	*x = RemoveNoteRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_notes_notes_proto_msgTypes[2]
+		mi := &file_notes_notes_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -170,7 +233,7 @@ func (x *RemoveNoteRequest) String() string {
 func (*RemoveNoteRequest) ProtoMessage() {}
 
 func (x *RemoveNoteRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_notes_notes_proto_msgTypes[2]
+	mi := &file_notes_notes_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -183,7 +246,7 @@ func (x *RemoveNoteRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveNoteRequest.ProtoReflect.Descriptor instead.
 func (*RemoveNoteRequest) Descriptor() ([]byte, []int) {
-	return file_notes_notes_proto_rawDescGZIP(), []int{2}
+	return file_notes_notes_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *RemoveNoteRequest) GetUuid() string {
@@ -211,7 +274,7 @@ type NoteResponse struct {
 func (x *NoteResponse) Reset() {
 	*x = NoteResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_notes_notes_proto_msgTypes[3]
+		mi := &file_notes_notes_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -224,7 +287,7 @@ func (x *NoteResponse) String() string {
 func (*NoteResponse) ProtoMessage() {}
 
 func (x *NoteResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_notes_notes_proto_msgTypes[3]
+	mi := &file_notes_notes_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -237,7 +300,7 @@ func (x *NoteResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NoteResponse.ProtoReflect.Descriptor instead.
 func (*NoteResponse) Descriptor() ([]byte, []int) {
-	return file_notes_notes_proto_rawDescGZIP(), []int{3}
+	return file_notes_notes_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *NoteResponse) GetResult() bool {
@@ -259,6 +322,11 @@ var file_notes_notes_proto_rawDesc = []byte{
 	0x74, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x75, 0x75, 0x69,
 	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x75, 0x75, 0x69, 0x64, 0x12, 0x10, 0x0a,
 	0x03, 0x6d, 0x73, 0x67, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x22,
+	0x4e, 0x0a, 0x10, 0x50, 0x61, 0x74, 0x63, 0x68, 0x4e, 0x6f, 0x74, 0x65, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x75, 0x75, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x04, 0x75, 0x75, 0x69, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x69, 0x6e, 0x64, 0x65, 0x78,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x05, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x12, 0x10, 0x0a,
+	0x03, 0x6d, 0x73, 0x67, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x22,
 	0x3d, 0x0a, 0x11, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65, 0x4e, 0x6f, 0x74, 0x65, 0x52, 0x65, 0x71,
 	0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x75, 0x75, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
 	0x28, 0x09, 0x52, 0x04, 0x75, 0x75, 0x69, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x69, 0x6e, 0x64, 0x65,
@@ -290,12 +358,13 @@ func file_notes_notes_proto_rawDescGZIP() []byte {
 	return file_notes_notes_proto_rawDescData
 }
 
-var file_notes_notes_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_notes_notes_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_notes_notes_proto_goTypes = []interface{}{
 	(*AdminNote)(nil),         // 0: nocloud.notes.AdminNote
 	(*AddNoteRequest)(nil),    // 1: nocloud.notes.AddNoteRequest
-	(*RemoveNoteRequest)(nil), // 2: nocloud.notes.RemoveNoteRequest
-	(*NoteResponse)(nil),      // 3: nocloud.notes.NoteResponse
+	(*PatchNoteRequest)(nil),  // 2: nocloud.notes.PatchNoteRequest
+	(*RemoveNoteRequest)(nil), // 3: nocloud.notes.RemoveNoteRequest
+	(*NoteResponse)(nil),      // 4: nocloud.notes.NoteResponse
 }
 var file_notes_notes_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -336,7 +405,7 @@ func file_notes_notes_proto_init() {
 			}
 		}
 		file_notes_notes_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RemoveNoteRequest); i {
+			switch v := v.(*PatchNoteRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -348,6 +417,18 @@ func file_notes_notes_proto_init() {
 			}
 		}
 		file_notes_notes_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RemoveNoteRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_notes_notes_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*NoteResponse); i {
 			case 0:
 				return &v.state
@@ -366,7 +447,7 @@ func file_notes_notes_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_notes_notes_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

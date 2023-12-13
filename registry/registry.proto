@@ -44,6 +44,13 @@ service AccountsService {
             body: "*"
         };
     };
+    rpc PatchNote (nocloud.notes.PatchNoteRequest)
+            returns (nocloud.notes.NoteResponse) {
+        option (google.api.http) = {
+            patch: "/accounts/{uuid}/note"
+            body: "*"
+        };
+    };
     rpc RemoveNote (nocloud.notes.RemoveNoteRequest)
             returns (nocloud.notes.NoteResponse) {
         option (google.api.http) = {
