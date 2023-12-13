@@ -43,6 +43,7 @@ const (
 	AccountsService_PatchNote_FullMethodName      = "/nocloud.registry.AccountsService/PatchNote"
 	AccountsService_RemoveNote_FullMethodName     = "/nocloud.registry.AccountsService/RemoveNote"
 	AccountsService_Create_FullMethodName         = "/nocloud.registry.AccountsService/Create"
+	AccountsService_StandartCreate_FullMethodName = "/nocloud.registry.AccountsService/StandartCreate"
 	AccountsService_Update_FullMethodName         = "/nocloud.registry.AccountsService/Update"
 	AccountsService_Get_FullMethodName            = "/nocloud.registry.AccountsService/Get"
 	AccountsService_List_FullMethodName           = "/nocloud.registry.AccountsService/List"
@@ -61,6 +62,7 @@ type AccountsServiceClient interface {
 	PatchNote(ctx context.Context, in *notes.PatchNoteRequest, opts ...grpc.CallOption) (*notes.NoteResponse, error)
 	RemoveNote(ctx context.Context, in *notes.RemoveNoteRequest, opts ...grpc.CallOption) (*notes.NoteResponse, error)
 	Create(ctx context.Context, in *accounts.CreateRequest, opts ...grpc.CallOption) (*accounts.CreateResponse, error)
+	StandartCreate(ctx context.Context, in *accounts.CreateRequest, opts ...grpc.CallOption) (*accounts.CreateResponse, error)
 	Update(ctx context.Context, in *accounts.Account, opts ...grpc.CallOption) (*accounts.UpdateResponse, error)
 	Get(ctx context.Context, in *accounts.GetRequest, opts ...grpc.CallOption) (*accounts.Account, error)
 	List(ctx context.Context, in *accounts.ListRequest, opts ...grpc.CallOption) (*accounts.ListResponse, error)
@@ -131,6 +133,15 @@ func (c *accountsServiceClient) Create(ctx context.Context, in *accounts.CreateR
 	return out, nil
 }
 
+func (c *accountsServiceClient) StandartCreate(ctx context.Context, in *accounts.CreateRequest, opts ...grpc.CallOption) (*accounts.CreateResponse, error) {
+	out := new(accounts.CreateResponse)
+	err := c.cc.Invoke(ctx, AccountsService_StandartCreate_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *accountsServiceClient) Update(ctx context.Context, in *accounts.Account, opts ...grpc.CallOption) (*accounts.UpdateResponse, error) {
 	out := new(accounts.UpdateResponse)
 	err := c.cc.Invoke(ctx, AccountsService_Update_FullMethodName, in, out, opts...)
@@ -195,6 +206,7 @@ type AccountsServiceServer interface {
 	PatchNote(context.Context, *notes.PatchNoteRequest) (*notes.NoteResponse, error)
 	RemoveNote(context.Context, *notes.RemoveNoteRequest) (*notes.NoteResponse, error)
 	Create(context.Context, *accounts.CreateRequest) (*accounts.CreateResponse, error)
+	StandartCreate(context.Context, *accounts.CreateRequest) (*accounts.CreateResponse, error)
 	Update(context.Context, *accounts.Account) (*accounts.UpdateResponse, error)
 	Get(context.Context, *accounts.GetRequest) (*accounts.Account, error)
 	List(context.Context, *accounts.ListRequest) (*accounts.ListResponse, error)
@@ -225,6 +237,9 @@ func (UnimplementedAccountsServiceServer) RemoveNote(context.Context, *notes.Rem
 }
 func (UnimplementedAccountsServiceServer) Create(context.Context, *accounts.CreateRequest) (*accounts.CreateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (UnimplementedAccountsServiceServer) StandartCreate(context.Context, *accounts.CreateRequest) (*accounts.CreateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StandartCreate not implemented")
 }
 func (UnimplementedAccountsServiceServer) Update(context.Context, *accounts.Account) (*accounts.UpdateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
@@ -361,6 +376,24 @@ func _AccountsService_Create_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AccountsServiceServer).Create(ctx, req.(*accounts.CreateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountsService_StandartCreate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(accounts.CreateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServiceServer).StandartCreate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountsService_StandartCreate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServiceServer).StandartCreate(ctx, req.(*accounts.CreateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -503,6 +536,10 @@ var AccountsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Create",
 			Handler:    _AccountsService_Create_Handler,
+		},
+		{
+			MethodName: "StandartCreate",
+			Handler:    _AccountsService_StandartCreate_Handler,
 		},
 		{
 			MethodName: "Update",

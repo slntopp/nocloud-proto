@@ -128,6 +128,36 @@
           "AccountsService"
         ]
       },
+      "post": {
+        "operationId": "AccountsService_StandartCreate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/registryaccountsCreateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/registryaccountsCreateRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AccountsService"
+        ]
+      },
       "put": {
         "operationId": "AccountsService_Create",
         "responses": {
