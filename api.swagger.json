@@ -6758,6 +6758,13 @@
       "properties": {
         "result": {
           "type": "boolean"
+        },
+        "adminNotes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/notesAdminNote"
+          }
         }
       }
     },
