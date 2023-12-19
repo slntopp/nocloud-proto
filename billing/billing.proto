@@ -152,6 +152,8 @@ message Transaction {
     map<string, google.protobuf.Value> meta = 10;
     Currency currency = 11;
     int64 created = 12;
+    optional string base = 13;
+    optional string previous = 14;
 }
 
 message Transactions {repeated Transaction pool = 1;}
@@ -185,6 +187,8 @@ message Record {
     Currency currency = 13;
     string service = 14;
     string account = 15;
+    optional string base = 16;
+    optional string previous = 17;
 }
 
 message Records {repeated Record pool = 1;}
