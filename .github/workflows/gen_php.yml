@@ -8,6 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
       - name: Find and Replace swagger options
         uses: jacobtomlinson/gha-find-replace@v3
         with:
@@ -58,12 +61,8 @@ jobs:
           echo '```' >> $GITHUB_STEP_SUMMARY
 
       - name: GIT commit and push
-        env: 
-          CI_COMMIT_MESSAGE: Continuous Integration Build Protobuf Client Libraries for PHP
-          CI_COMMIT_AUTHOR: Continuous Integration
-        run: |
-          git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
-          git config --global user.email "team@nocloud.zone"
-          git add proto/php
-          git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
-          git push
+        uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
+          message: Continuous Integration Build Protobuf Client Libraries for PHP
+          add: 'proto/php'
