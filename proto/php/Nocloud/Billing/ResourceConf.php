@@ -73,6 +73,10 @@ class ResourceConf extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>optional int32 max = 13 [json_name = "max"];</code>
      */
     protected $max = null;
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.PeriodKind period_kind = 14 [json_name = "periodKind"];</code>
+     */
+    protected $period_kind = 0;
 
     /**
      * Constructor.
@@ -98,6 +102,7 @@ class ResourceConf extends \Google\Protobuf\Internal\Message
      *     @type bool $virtual
      *     @type int $min
      *     @type int $max
+     *     @type int $period_kind
      * }
      */
     public function __construct($data = NULL) {
@@ -433,6 +438,28 @@ class ResourceConf extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt32($var);
         $this->max = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.PeriodKind period_kind = 14 [json_name = "periodKind"];</code>
+     * @return int
+     */
+    public function getPeriodKind()
+    {
+        return $this->period_kind;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.PeriodKind period_kind = 14 [json_name = "periodKind"];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setPeriodKind($var)
+    {
+        GPBUtil::checkEnum($var, \Nocloud\Billing\PeriodKind::class);
+        $this->period_kind = $var;
 
         return $this;
     }

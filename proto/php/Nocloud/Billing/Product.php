@@ -61,6 +61,10 @@ class Product extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string group = 10 [json_name = "group"];</code>
      */
     protected $group = '';
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.PeriodKind period_kind = 11 [json_name = "periodKind"];</code>
+     */
+    protected $period_kind = 0;
 
     /**
      * Constructor.
@@ -82,6 +86,7 @@ class Product extends \Google\Protobuf\Internal\Message
      *     @type float $installation_fee
      *     @type bool $public
      *     @type string $group
+     *     @type int $period_kind
      * }
      */
     public function __construct($data = NULL) {
@@ -341,6 +346,28 @@ class Product extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->group = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.PeriodKind period_kind = 11 [json_name = "periodKind"];</code>
+     * @return int
+     */
+    public function getPeriodKind()
+    {
+        return $this->period_kind;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.PeriodKind period_kind = 11 [json_name = "periodKind"];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setPeriodKind($var)
+    {
+        GPBUtil::checkEnum($var, \Nocloud\Billing\PeriodKind::class);
+        $this->period_kind = $var;
 
         return $this;
     }
