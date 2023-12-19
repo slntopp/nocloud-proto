@@ -25,5 +25,5 @@ jobs:
         run: |
           echo "### dns.proto" >> $GITHUB_STEP_SUMMARY
           echo "```protobuf" >> $GITHUB_STEP_SUMMARY
-          GITHUB_STEP_SUMMARY=$(cat dns/dns.proto)
+          cat dns/dns.proto >$GITHUB_STEP_SUMMARY
           echo "```" >> $GITHUB_STEP_SUMMARY
