@@ -24,9 +24,9 @@ jobs:
       - name: (debug) Check if swagger options are removed
         run: |
           echo "### dns.proto" >> $GITHUB_STEP_SUMMARY
-          echo "```protobuf" >> $GITHUB_STEP_SUMMARY
+          echo '```protobuf' >> $GITHUB_STEP_SUMMARY
           cat dns/dns.proto >$GITHUB_STEP_SUMMARY
-          echo "```" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
 
       - name: Setup PHP Action
         uses: shivammathur/setup-php@2.28.0
@@ -37,9 +37,9 @@ jobs:
       - name: (debug) Check grpc_php_plugin location
         run: |
           echo "### grpc_php_plugin location" >> $GITHUB_STEP_SUMMARY
-          echo "```" >> $GITHUB_STEP_SUMMARY
-          echo $(which grpc_php_plugin) >> $GITHUB_STEP_SUMMARY
-          echo "```" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "$(which grpc_php_plugin)" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
       
       - name: Setup Buf Cli
         uses: bufbuild/buf-setup-action@v1
@@ -53,6 +53,6 @@ jobs:
       - name: (debug) Check if generated files are correct
         run: |
           echo "### Generated files" >> $GITHUB_STEP_SUMMARY
-          echo "```protobuf" >> $GITHUB_STEP_SUMMARY
-          echo $(git status) >> $GITHUB_STEP_SUMMARY
-          echo "```" >> $GITHUB_STEP_SUMMARY
+          echo '```protobuf' >> $GITHUB_STEP_SUMMARY
+          echo "$(git status)" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
