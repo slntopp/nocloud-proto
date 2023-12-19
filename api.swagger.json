@@ -2051,6 +2051,18 @@
             "required": false,
             "type": "string",
             "format": "int64"
+          },
+          {
+            "name": "base",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "previous",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -2134,6 +2146,12 @@
                 "created": {
                   "type": "string",
                   "format": "int64"
+                },
+                "base": {
+                  "type": "string"
+                },
+                "previous": {
+                  "type": "string"
                 }
               }
             }
@@ -5695,6 +5713,17 @@
         },
         "public": {
           "type": "boolean"
+        },
+        "virtual": {
+          "type": "boolean"
+        },
+        "min": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "max": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -5761,6 +5790,12 @@
         "created": {
           "type": "string",
           "format": "int64"
+        },
+        "base": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
         }
       }
     },
@@ -6358,6 +6393,12 @@
           "type": "string"
         },
         "account": {
+          "type": "string"
+        },
+        "base": {
+          "type": "string"
+        },
+        "previous": {
           "type": "string"
         }
       }

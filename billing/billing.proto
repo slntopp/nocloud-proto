@@ -104,6 +104,9 @@ message ResourceConf {
     string title = 8;
     map<string, google.protobuf.Value> meta = 9;
     bool public = 10;
+    bool virtual = 11;
+    optional int32 min = 12;
+    optional int32 max = 13;
 }
 
 message Product {
@@ -152,6 +155,8 @@ message Transaction {
     map<string, google.protobuf.Value> meta = 10;
     Currency currency = 11;
     int64 created = 12;
+    optional string base = 13;
+    optional string previous = 14;
 }
 
 message Transactions {repeated Transaction pool = 1;}
@@ -185,6 +190,8 @@ message Record {
     Currency currency = 13;
     string service = 14;
     string account = 15;
+    optional string base = 16;
+    optional string previous = 17;
 }
 
 message Records {repeated Record pool = 1;}
