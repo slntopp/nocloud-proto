@@ -104,6 +104,9 @@ message ResourceConf {
     string title = 8;
     map<string, google.protobuf.Value> meta = 9;
     bool public = 10;
+    bool virtual = 11;
+    optional int32 min = 12;
+    optional int32 max = 13;
 }
 
 message Product {
