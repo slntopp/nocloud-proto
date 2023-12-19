@@ -27,3 +27,16 @@ jobs:
           echo "```protobuf" >> $GITHUB_STEP_SUMMARY
           cat dns/dns.proto >$GITHUB_STEP_SUMMARY
           echo "```" >> $GITHUB_STEP_SUMMARY
+
+      - name: Setup PHP Action
+        uses: shivammathur/setup-php@2.28.0
+        with:
+          php-version: '8.2'
+          tools: composer, grpc_php_plugin
+      
+      - name: Setup Buf Cli
+        uses: bufbuild/buf-setup-action@v1
+
+      - name: Generate Protobuf Client Libraries
+        run: |
+          buf generate --template buf.gen.php.yaml
