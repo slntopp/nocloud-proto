@@ -5540,6 +5540,15 @@
         }
       }
     },
+    "billingPeriodKind": {
+      "type": "string",
+      "enum": [
+        "DEFAULT",
+        "CALENDAR_MONTH",
+        "CALENDAR_YEAR"
+      ],
+      "default": "DEFAULT"
+    },
     "billingPlan": {
       "type": "object",
       "properties": {
@@ -5657,6 +5666,9 @@
         },
         "group": {
           "type": "string"
+        },
+        "periodKind": {
+          "$ref": "#/definitions/billingPeriodKind"
         }
       }
     },
@@ -5724,6 +5736,9 @@
         "max": {
           "type": "integer",
           "format": "int32"
+        },
+        "periodKind": {
+          "$ref": "#/definitions/billingPeriodKind"
         }
       }
     },

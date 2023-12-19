@@ -90,6 +90,12 @@ enum Kind {
     PREPAID = 2;     // Transaction must be processed based on Start time
 }
 
+enum PeriodKind {
+    DEFAULT = 0;
+    CALENDAR_MONTH = 1;
+    CALENDAR_YEAR = 2;
+}
+
 message ResourceConf {
     string key = 1;
     Kind kind = 2;
@@ -107,6 +113,7 @@ message ResourceConf {
     bool virtual = 11;
     optional int32 min = 12;
     optional int32 max = 13;
+    PeriodKind period_kind = 14;
 }
 
 message Product {
@@ -122,6 +129,7 @@ message Product {
     optional double installation_fee = 8;
     bool public = 9;
     string group = 10;
+    PeriodKind period_kind = 11;
 }
 
 enum Priority {
