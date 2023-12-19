@@ -56,3 +56,14 @@ jobs:
           echo '```protobuf' >> $GITHUB_STEP_SUMMARY
           echo "$(git status)" >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
+
+      - name: GIT commit and push
+        env: 
+          CI_COMMIT_MESSAGE: Continuous Integration Build Protobuf Client Libraries for PHP
+          CI_COMMIT_AUTHOR: Continuous Integration
+        run: |
+          git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
+          git config --global user.email "team@nocloud.zone"
+          git add proto/php
+          git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
+          git push
