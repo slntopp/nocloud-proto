@@ -81,6 +81,14 @@ class Transaction extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>int64 created = 12 [json_name = "created"];</code>
      */
     protected $created = 0;
+    /**
+     * Generated from protobuf field <code>optional string base = 13 [json_name = "base"];</code>
+     */
+    protected $base = null;
+    /**
+     * Generated from protobuf field <code>optional string previous = 14 [json_name = "previous"];</code>
+     */
+    protected $previous = null;
 
     /**
      * Constructor.
@@ -113,6 +121,8 @@ class Transaction extends \Google\Protobuf\Internal\Message
      *          }
      *     @type int $currency
      *     @type int|string $created
+     *     @type string $base
+     *     @type string $previous
      * }
      */
     public function __construct($data = NULL) {
@@ -420,6 +430,70 @@ class Transaction extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt64($var);
         $this->created = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string base = 13 [json_name = "base"];</code>
+     * @return string
+     */
+    public function getBase()
+    {
+        return isset($this->base) ? $this->base : '';
+    }
+
+    public function hasBase()
+    {
+        return isset($this->base);
+    }
+
+    public function clearBase()
+    {
+        unset($this->base);
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string base = 13 [json_name = "base"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setBase($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->base = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string previous = 14 [json_name = "previous"];</code>
+     * @return string
+     */
+    public function getPrevious()
+    {
+        return isset($this->previous) ? $this->previous : '';
+    }
+
+    public function hasPrevious()
+    {
+        return isset($this->previous);
+    }
+
+    public function clearPrevious()
+    {
+        unset($this->previous);
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string previous = 14 [json_name = "previous"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setPrevious($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->previous = $var;
 
         return $this;
     }

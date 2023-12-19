@@ -69,6 +69,10 @@ class ServicesProvider extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 13 [json_name = "meta"];</code>
      */
     private $meta;
+    /**
+     * Generated from protobuf field <code>.nocloud.statuses.NoCloudStatus status = 14 [json_name = "status"];</code>
+     */
+    protected $status = 0;
 
     /**
      * Constructor.
@@ -91,6 +95,7 @@ class ServicesProvider extends \Google\Protobuf\Internal\Message
      *     @type array<\Nocloud\ServicesProviders\LocationConf>|\Google\Protobuf\Internal\RepeatedField $locations
      *     @type \Nocloud\Access\Access $access
      *     @type array|\Google\Protobuf\Internal\MapField $meta
+     *     @type int $status
      * }
      */
     public function __construct($data = NULL) {
@@ -418,6 +423,28 @@ class ServicesProvider extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::MESSAGE, \Google\Protobuf\Value::class);
         $this->meta = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.statuses.NoCloudStatus status = 14 [json_name = "status"];</code>
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.statuses.NoCloudStatus status = 14 [json_name = "status"];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setStatus($var)
+    {
+        GPBUtil::checkEnum($var, \Nocloud\Statuses\NoCloudStatus::class);
+        $this->status = $var;
 
         return $this;
     }

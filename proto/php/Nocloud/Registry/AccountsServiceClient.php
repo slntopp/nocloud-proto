@@ -60,6 +60,48 @@ class AccountsServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * @param \Nocloud\Notes\AddNoteRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function AddNote(\Nocloud\Notes\AddNoteRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.registry.AccountsService/AddNote',
+        $argument,
+        ['\Nocloud\Notes\NoteResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Notes\PatchNoteRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function PatchNote(\Nocloud\Notes\PatchNoteRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.registry.AccountsService/PatchNote',
+        $argument,
+        ['\Nocloud\Notes\NoteResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Notes\RemoveNoteRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function RemoveNote(\Nocloud\Notes\RemoveNoteRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.registry.AccountsService/RemoveNote',
+        $argument,
+        ['\Nocloud\Notes\NoteResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * @param \Nocloud\Registry\Accounts\CreateRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -68,6 +110,20 @@ class AccountsServiceClient extends \Grpc\BaseStub {
     public function Create(\Nocloud\Registry\Accounts\CreateRequest $argument,
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/nocloud.registry.AccountsService/Create',
+        $argument,
+        ['\Nocloud\Registry\Accounts\CreateResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Registry\Accounts\CreateRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function SignUp(\Nocloud\Registry\Accounts\CreateRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.registry.AccountsService/SignUp',
         $argument,
         ['\Nocloud\Registry\Accounts\CreateResponse', 'decode'],
         $metadata, $options);

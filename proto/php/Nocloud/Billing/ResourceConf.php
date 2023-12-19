@@ -57,6 +57,22 @@ class ResourceConf extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 9 [json_name = "meta"];</code>
      */
     private $meta;
+    /**
+     * Generated from protobuf field <code>bool public = 10 [json_name = "public"];</code>
+     */
+    protected $public = false;
+    /**
+     * Generated from protobuf field <code>bool virtual = 11 [json_name = "virtual"];</code>
+     */
+    protected $virtual = false;
+    /**
+     * Generated from protobuf field <code>optional int32 min = 12 [json_name = "min"];</code>
+     */
+    protected $min = null;
+    /**
+     * Generated from protobuf field <code>optional int32 max = 13 [json_name = "max"];</code>
+     */
+    protected $max = null;
 
     /**
      * Constructor.
@@ -78,6 +94,10 @@ class ResourceConf extends \Google\Protobuf\Internal\Message
      *     @type \Nocloud\Billing\Fee $fee
      *     @type string $title
      *     @type array|\Google\Protobuf\Internal\MapField $meta
+     *     @type bool $public
+     *     @type bool $virtual
+     *     @type int $min
+     *     @type int $max
      * }
      */
     public function __construct($data = NULL) {
@@ -305,6 +325,114 @@ class ResourceConf extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::MESSAGE, \Google\Protobuf\Value::class);
         $this->meta = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool public = 10 [json_name = "public"];</code>
+     * @return bool
+     */
+    public function getPublic()
+    {
+        return $this->public;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool public = 10 [json_name = "public"];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setPublic($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->public = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool virtual = 11 [json_name = "virtual"];</code>
+     * @return bool
+     */
+    public function getVirtual()
+    {
+        return $this->virtual;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool virtual = 11 [json_name = "virtual"];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setVirtual($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->virtual = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>optional int32 min = 12 [json_name = "min"];</code>
+     * @return int
+     */
+    public function getMin()
+    {
+        return isset($this->min) ? $this->min : 0;
+    }
+
+    public function hasMin()
+    {
+        return isset($this->min);
+    }
+
+    public function clearMin()
+    {
+        unset($this->min);
+    }
+
+    /**
+     * Generated from protobuf field <code>optional int32 min = 12 [json_name = "min"];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setMin($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->min = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>optional int32 max = 13 [json_name = "max"];</code>
+     * @return int
+     */
+    public function getMax()
+    {
+        return isset($this->max) ? $this->max : 0;
+    }
+
+    public function hasMax()
+    {
+        return isset($this->max);
+    }
+
+    public function clearMax()
+    {
+        unset($this->max);
+    }
+
+    /**
+     * Generated from protobuf field <code>optional int32 max = 13 [json_name = "max"];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setMax($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->max = $var;
 
         return $this;
     }

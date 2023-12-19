@@ -21,6 +21,10 @@ class ListRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>bool anonymously = 2 [json_name = "anonymously"];</code>
      */
     protected $anonymously = false;
+    /**
+     * Generated from protobuf field <code>bool show_deleted = 3 [json_name = "showDeleted"];</code>
+     */
+    protected $show_deleted = false;
 
     /**
      * Constructor.
@@ -30,6 +34,7 @@ class ListRequest extends \Google\Protobuf\Internal\Message
      *
      *     @type string $sp_uuid
      *     @type bool $anonymously
+     *     @type bool $show_deleted
      * }
      */
     public function __construct($data = NULL) {
@@ -77,6 +82,28 @@ class ListRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkBool($var);
         $this->anonymously = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool show_deleted = 3 [json_name = "showDeleted"];</code>
+     * @return bool
+     */
+    public function getShowDeleted()
+    {
+        return $this->show_deleted;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool show_deleted = 3 [json_name = "showDeleted"];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setShowDeleted($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->show_deleted = $var;
 
         return $this;
     }

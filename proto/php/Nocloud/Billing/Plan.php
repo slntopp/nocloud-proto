@@ -65,6 +65,10 @@ class Plan extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>repeated .nocloud.ansible.Software software = 10 [json_name = "software"];</code>
      */
     private $software;
+    /**
+     * Generated from protobuf field <code>.nocloud.statuses.NoCloudStatus status = 11 [json_name = "status"];</code>
+     */
+    protected $status = 0;
 
     /**
      * Constructor.
@@ -88,6 +92,7 @@ class Plan extends \Google\Protobuf\Internal\Message
      *           or whatever)
      *     @type \Nocloud\Billing\Fee $fee
      *     @type array<\Nocloud\Ansible\Software>|\Google\Protobuf\Internal\RepeatedField $software
+     *     @type int $status
      * }
      */
     public function __construct($data = NULL) {
@@ -345,6 +350,28 @@ class Plan extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Nocloud\Ansible\Software::class);
         $this->software = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.statuses.NoCloudStatus status = 11 [json_name = "status"];</code>
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.statuses.NoCloudStatus status = 11 [json_name = "status"];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setStatus($var)
+    {
+        GPBUtil::checkEnum($var, \Nocloud\Statuses\NoCloudStatus::class);
+        $this->status = $var;
 
         return $this;
     }

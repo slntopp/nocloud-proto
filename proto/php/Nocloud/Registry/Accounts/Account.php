@@ -51,6 +51,10 @@ class Account extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.nocloud.registry.accounts.AccountStatus status = 9 [json_name = "status"];</code>
      */
     protected $status = 0;
+    /**
+     * Generated from protobuf field <code>repeated .nocloud.notes.AdminNote admin_notes = 10 [json_name = "adminNotes"];</code>
+     */
+    private $admin_notes;
 
     /**
      * Constructor.
@@ -68,6 +72,7 @@ class Account extends \Google\Protobuf\Internal\Message
      *     @type int $currency
      *           Account Balance Currency
      *     @type int $status
+     *     @type array<\Nocloud\Notes\AdminNote>|\Google\Protobuf\Internal\RepeatedField $admin_notes
      * }
      */
     public function __construct($data = NULL) {
@@ -333,6 +338,28 @@ class Account extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkEnum($var, \Nocloud\Registry\Accounts\AccountStatus::class);
         $this->status = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated .nocloud.notes.AdminNote admin_notes = 10 [json_name = "adminNotes"];</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getAdminNotes()
+    {
+        return $this->admin_notes;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated .nocloud.notes.AdminNote admin_notes = 10 [json_name = "adminNotes"];</code>
+     * @param array<\Nocloud\Notes\AdminNote>|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setAdminNotes($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Nocloud\Notes\AdminNote::class);
+        $this->admin_notes = $arr;
 
         return $this;
     }

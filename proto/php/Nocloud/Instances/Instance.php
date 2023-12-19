@@ -67,6 +67,10 @@ class Instance extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>repeated .nocloud.ansible.Software software = 13 [json_name = "software"];</code>
      */
     private $software;
+    /**
+     * Generated from protobuf field <code>repeated .nocloud.notes.AdminNote admin_notes = 14 [json_name = "adminNotes"];</code>
+     */
+    private $admin_notes;
 
     /**
      * Constructor.
@@ -88,6 +92,7 @@ class Instance extends \Google\Protobuf\Internal\Message
      *     @type int|string $created
      *     @type array<\Nocloud\Ansible\Software>|\Google\Protobuf\Internal\RepeatedField $software
      *           Must match contain all the software from the Billing Plan
+     *     @type array<\Nocloud\Notes\AdminNote>|\Google\Protobuf\Internal\RepeatedField $admin_notes
      * }
      */
     public function __construct($data = NULL) {
@@ -421,6 +426,28 @@ class Instance extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Nocloud\Ansible\Software::class);
         $this->software = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated .nocloud.notes.AdminNote admin_notes = 14 [json_name = "adminNotes"];</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getAdminNotes()
+    {
+        return $this->admin_notes;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated .nocloud.notes.AdminNote admin_notes = 14 [json_name = "adminNotes"];</code>
+     * @param array<\Nocloud\Notes\AdminNote>|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setAdminNotes($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Nocloud\Notes\AdminNote::class);
+        $this->admin_notes = $arr;
 
         return $this;
     }
