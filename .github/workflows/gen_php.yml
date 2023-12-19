@@ -40,3 +40,10 @@ jobs:
       - name: Generate Protobuf Client Libraries
         run: |
           buf generate --template buf.gen.php.yaml
+
+      - name: (debug) Check if generated files are correct
+        run: |
+          echo "### Generated files" >> $GITHUB_STEP_SUMMARY
+          echo "```protobuf" >> $GITHUB_STEP_SUMMARY
+          echo $(git status) >> $GITHUB_STEP_SUMMARY
+          echo "```" >> $GITHUB_STEP_SUMMARY
