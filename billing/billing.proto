@@ -14,393 +14,394 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 syntax = "proto3";
+
 package nocloud.billing;
 
-import "states/states.proto";
 import "ansible/ansible.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+import "states/states.proto";
 import "statuses/statuses.proto";
 
-import "google/protobuf/struct.proto";
-import "google/api/annotations.proto";
-
 enum PlanKind {
-  UNKNOWN =
-      0; // Default value; should never be used but will be treated as DYNAMIC
-  DYNAMIC = 1;
-  STATIC = 2;
+    UNKNOWN =
+            0; // Default value; should never be used but will be treated as DYNAMIC
+    DYNAMIC = 1;
+    STATIC = 2;
 }
 
 message FeeRange {
-  double from = 1;
-  double to = 2;
-  double factor = 3;
+    double from = 1;
+    double to = 2;
+    double factor = 3;
 }
 
 enum Round {
-  NONE = 0;
-  FLOOR = 1;
-  ROUND = 2;
-  CEIL = 3;
+    NONE = 0;
+    FLOOR = 1;
+    ROUND = 2;
+    CEIL = 3;
 }
 
 message Fee {
-  int64 precision = 1;
-  Round round = 2;
-  double default = 3;
-  repeated FeeRange ranges = 4;
+    int64 precision = 1;
+    Round round = 2;
+    double default = 3;
+    repeated FeeRange ranges = 4;
 }
 
 message Plan {
-  string uuid = 1;
-  string title = 2;
-  string type = 3; // Instance / InstanceGroup type supported by this plan
-  bool public = 4; // if true, then this plan is available for all users
+    string uuid = 1;
+    string title = 2;
+    string type = 3; // Instance / InstanceGroup type supported by this plan
+    bool public = 4; // if true, then this plan is available for all users
 
-  PlanKind kind = 5; // dynamic(based on resources) or static(based on products)
-  repeated ResourceConf resources = 6; // Resources confs to make plan dynamic
-  map<string, Product> products =
-      7; // Products to make plan pre defined(map key is product key like sm, lg
+    PlanKind kind = 5; // dynamic(based on resources) or static(based on products)
+    repeated ResourceConf resources = 6; // Resources confs to make plan dynamic
+    map<string, Product> products =
+            7; // Products to make plan pre defined(map key is product key like sm, lg
   // or whatever)
-  map<string, google.protobuf.Value> meta = 8;
-  Fee fee = 9;
+    map<string, google.protobuf.Value> meta = 8;
+    Fee fee = 9;
 
-  repeated nocloud.ansible.Software software = 10;
+    repeated nocloud.ansible.Software software = 10;
 
-  statuses.NoCloudStatus status = 11;
+    statuses.NoCloudStatus status = 11;
 }
 
 message ListRequest {
-  string sp_uuid = 1;
-  bool anonymously = 2;
-  bool show_deleted = 3;
+    string sp_uuid = 1;
+    bool anonymously = 2;
+    bool show_deleted = 3;
 }
 message ListResponse {repeated Plan pool = 1;}
 
-message ListPlansInstancesRequest{
-  bool anonymously = 1;
+message ListPlansInstancesRequest {
+    bool anonymously = 1;
 }
 
-message ListPlansInstancesResponse{
-  map<string, google.protobuf.Value> plans = 1;
+message ListPlansInstancesResponse {
+    map<string, google.protobuf.Value> plans = 1;
 }
 
 enum Kind {
-  UNSPECIFIED = 0; // Shall never be used, requests will be rejected
-  POSTPAID = 1;    // Transaction must be processed based on End time
-  PREPAID = 2;     // Transaction must be processed based on Start time
+    UNSPECIFIED = 0; // Shall never be used, requests will be rejected
+    POSTPAID = 1;    // Transaction must be processed based on End time
+    PREPAID = 2;     // Transaction must be processed based on Start time
 }
 
 message ResourceConf {
-  string key = 1;
-  Kind kind = 2;
-  double price = 3; // Price in NCU per period
-  int64 period = 4; // if set to 0, then it's a one-time payment
+    string key = 1;
+    Kind kind = 2;
+    double price = 3; // Price in NCU per period
+    int64 period = 4; // if set to 0, then it's a one-time payment
   // If except set to true then transaction will be created if Instance is in
   // one of the states listed in on If except set to false then transaction will
   // be created if Instance is NOT in one of the states listed in on
-  bool except = 5;
-  repeated nocloud.states.NoCloudState on = 6;
-  Fee fee = 7;
-  string title = 8;
-  map<string, google.protobuf.Value> meta = 9;
+    bool except = 5;
+    repeated nocloud.states.NoCloudState on = 6;
+    Fee fee = 7;
+    string title = 8;
+    map<string, google.protobuf.Value> meta = 9;
+    bool public = 10;
 }
 
 message Product {
-  Kind kind = 1;
-  string title = 2; // Product title
-  double price = 3; // Product price in NCU per period
-  int64 period = 4;
-  map<string, google.protobuf.Value> resources =
-      5; // Map of resources keys to fixed units amount
-  map<string, google.protobuf.Value> meta = 6;
+    Kind kind = 1;
+    string title = 2; // Product title
+    double price = 3; // Product price in NCU per period
+    int64 period = 4;
+    map<string, google.protobuf.Value> resources =
+            5; // Map of resources keys to fixed units amount
+    map<string, google.protobuf.Value> meta = 6;
 
-  optional int32 sorter = 7; // Sorting order, might be needed in UIs
-  optional double installation_fee = 8;
-  bool public = 9;
-  string group = 10;
+    optional int32 sorter = 7; // Sorting order, might be needed in UIs
+    optional double installation_fee = 8;
+    bool public = 9;
+    string group = 10;
 }
 
 enum Priority {
-  NORMAL = 0;
-  URGENT = 1;
-  ADDITIONAL = 2;
+    NORMAL = 0;
+    URGENT = 1;
+    ADDITIONAL = 2;
 }
 
 message Transaction {
-  string uuid = 1;    // transaction UUID
-  int64 exec = 2;     // Timestamp of Transaction planned execution time
-  int64 proc = 3;     // Timestamp of Transaction processing time
-  bool processed = 4; // Wether Transaction has been processed(applied to
+    string uuid = 1;    // transaction UUID
+    int64 exec = 2;     // Timestamp of Transaction planned execution time
+    int64 proc = 3;     // Timestamp of Transaction processing time
+    bool processed = 4; // Wether Transaction has been processed(applied to
   // Account balance, etc)
 
-  Priority priority = 5;
+    Priority priority = 5;
 
-  string account = 6;
-  string service = 7;
-  repeated string records = 8; // list of records UUIDs
+    string account = 6;
+    string service = 7;
+    repeated string records = 8; // list of records UUIDs
 
-  double total = 9; // Transaction total value in NCU
-  /* Transaction meta data, like
-      meta: {
-          total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
-     Mb, IP quantity price_atm: <number> // hourly price per quant of resouce at
-     the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
-     Type(SSD/HDD/NVMe/etc)
-      }
-  */
-  map<string, google.protobuf.Value> meta = 10;
-  Currency currency = 11;
-  int64 created = 12;
+    double total = 9; // Transaction total value in NCU
+    /* Transaction meta data, like
+        meta: {
+            total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
+       Mb, IP quantity price_atm: <number> // hourly price per quant of resouce at
+       the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
+       Type(SSD/HDD/NVMe/etc)
+        }
+    */
+    map<string, google.protobuf.Value> meta = 10;
+    Currency currency = 11;
+    int64 created = 12;
 }
 
 message Transactions {repeated Transaction pool = 1;}
 
 message Record {
-  string uuid = 1; // Record UUID
-  int64 start = 2; // Timestamp of Record coverage frame start
-  int64 end = 3;   // Timestamp of Record coverage frame end
-  int64 exec = 4;  // Time when Record must be processed
+    string uuid = 1; // Record UUID
+    int64 start = 2; // Timestamp of Record coverage frame start
+    int64 end = 3;   // Timestamp of Record coverage frame end
+    int64 exec = 4;  // Time when Record must be processed
 
-  bool processed =
-      5; // Wether Record has been processed(converted to Transaction)
+    bool processed =
+            5; // Wether Record has been processed(converted to Transaction)
 
-  Priority priority = 6;
-  string instance = 7;                   // Instance UUID
-  nocloud.states.NoCloudState state = 8; // Instance state
+    Priority priority = 6;
+    string instance = 7;                   // Instance UUID
+    nocloud.states.NoCloudState state = 8; // Instance state
 
-  string resource = 9; // Resource key
-  string product = 10; // Product key
+    string resource = 9; // Resource key
+    string product = 10; // Product key
 
-  double total = 11; // Record total value in NCU
-  /* Record meta data, like
-      meta: {
-          total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
-     Mb, IP quantity price_atm: <number> // hourly price per quant of resouce at
-     the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
-     Type(SSD/HDD/NVMe/etc)
-      }
-  */
-  map<string, google.protobuf.Value> meta = 12;
-  Currency currency = 13;
-  string service = 14;
-  string account = 15;
+    double total = 11; // Record total value in NCU
+    /* Record meta data, like
+        meta: {
+            total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
+       Mb, IP quantity price_atm: <number> // hourly price per quant of resouce at
+       the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
+       Type(SSD/HDD/NVMe/etc)
+        }
+    */
+    map<string, google.protobuf.Value> meta = 12;
+    Currency currency = 13;
+    string service = 14;
+    string account = 15;
 }
 
 message Records {repeated Record pool = 1;}
 
 message GetActiveRequest {
-  string uuid = 1; // Instance UUID
+    string uuid = 1; // Instance UUID
 }
 
 message GetTransactionsRequest {
-  optional string account = 1;
-  optional string service = 2;
-  optional uint64 page = 3;
-  optional uint64 limit = 4;
-  optional string field = 5;
-  optional string sort = 6;
-  optional string uuid = 7; // Get a single Transaction (would embed records too)
-  optional string type = 8;
+    optional string account = 1;
+    optional string service = 2;
+    optional uint64 page = 3;
+    optional uint64 limit = 4;
+    optional string field = 5;
+    optional string sort = 6;
+    optional string uuid = 7; // Get a single Transaction (would embed records too)
+    optional string type = 8;
 }
 
 message ReprocessTransactionsRequest {string account = 1;}
 
 message GetTransactionsCountRequest {
-  optional string account = 1;
-  optional string service = 2;
-  optional string type = 3;
+    optional string account = 1;
+    optional string service = 2;
+    optional string type = 3;
 }
 
 message GetTransactionsCountResponse {
-  uint64 total = 1;
+    uint64 total = 1;
 }
 
 message UpdateTransactionRequest {
-  string uuid = 1;
-  int64 exec = 2;
+    string uuid = 1;
+    int64 exec = 2;
 }
 
 message UpdateTransactionResponse {
-  bool result = 1;
+    bool result = 1;
 }
 
 message CostEstimation {
-  map<string, double> resources = 1;
-  double product = 2;
-  double total = 3;
+    map<string, double> resources = 1;
+    double product = 2;
+    double total = 3;
 }
 
 service RecordsService {
-  rpc GetActive(GetActiveRequest) returns (Records);
-  rpc Create(Records) returns (Records);
-  rpc Update(Records) returns (Records);
+    rpc GetActive (GetActiveRequest) returns (Records);
+    rpc Create (Records) returns (Records);
+    rpc Update (Records) returns (Records);
 }
 //-------------------------------------
 message GetInstancesReportRequest {
-  optional int64 from = 1;
-  optional int64 to = 2;
+    optional int64 from = 1;
+    optional int64 to = 2;
 
-  optional int64 page = 3;
-  optional int64 limit = 4;
-  optional string field = 5;
-  optional string sort = 6;
+    optional int64 page = 3;
+    optional int64 limit = 4;
+    optional string field = 5;
+    optional string sort = 6;
 }
 
 message InstanceReport {
-  string uuid = 1;
-  double total = 2;
-  Currency currency = 3;
+    string uuid = 1;
+    double total = 2;
+    Currency currency = 3;
 }
 
 message GetInstancesReportResponse {
-  repeated InstanceReport reports = 1;
+    repeated InstanceReport reports = 1;
 }
 //-------------------------------------
 message GetRecordsReportsRequest {
-  optional int64 page = 1;
-  optional int64 limit = 2;
-  optional string field = 3;
-  optional string sort = 4;
+    optional int64 page = 1;
+    optional int64 limit = 2;
+    optional string field = 3;
+    optional string sort = 4;
 
-  map<string, google.protobuf.Value> filters = 5;
+    map<string, google.protobuf.Value> filters = 5;
 
-  optional string account = 6;
-  optional string service = 7;
+    optional string account = 6;
+    optional string service = 7;
 }
 
 message GetRecordsReportsResponse {
-  repeated Record records = 1;
-  double total = 2;
-  int64 count = 3;
+    repeated Record records = 1;
+    double total = 2;
+    int64 count = 3;
 }
 //-------------------------------------
 message GetInstancesReportsCountRequest {}
 //-------------------------------------
 message GetRecordsReportsCountRequest {
-  map<string, google.protobuf.Value> filters = 1;
+    map<string, google.protobuf.Value> filters = 1;
 
-  optional string account = 2;
-  optional string service = 3;
+    optional string account = 2;
+    optional string service = 3;
 }
 
 message GetReportsCountResponse {
-  int64 total = 1;
-  google.protobuf.Value unique = 2;
+    int64 total = 1;
+    google.protobuf.Value unique = 2;
 }
 
 service BillingService {
-  rpc CreatePlan(Plan) returns (Plan) {
-    option (google.api.http) = {
-      put : "/billing/plans"
-      body : "*"
+    rpc CreatePlan (Plan) returns (Plan) {
+        option (google.api.http) = {
+            put: "/billing/plans"
+            body: "*"
+        };
     };
-  };
-  rpc UpdatePlan(Plan) returns (Plan) {
-    option (google.api.http) = {
-      patch : "/billing/plans/{uuid}"
-      body : "*"
+    rpc UpdatePlan (Plan) returns (Plan) {
+        option (google.api.http) = {
+            patch: "/billing/plans/{uuid}"
+            body: "*"
+        };
     };
-  };
-  rpc GetPlan(Plan) returns (Plan) {
-    option (google.api.http) = {
-      get : "/billing/plans/{uuid}"
+    rpc GetPlan (Plan) returns (Plan) {
+        option (google.api.http) = {
+            get: "/billing/plans/{uuid}"
+        };
     };
-  };
-  rpc ListPlans(ListRequest) returns (ListResponse) {
-    option (google.api.http) = {
-      get : "/billing/plans"
+    rpc ListPlans (ListRequest) returns (ListResponse) {
+        option (google.api.http) = {
+            get: "/billing/plans"
+        };
     };
-  };
-  rpc ListPlansInstances(ListPlansInstancesRequest) returns (ListPlansInstancesResponse) {
-    option (google.api.http) = {
-      get : "/billing/plans/instances"
+    rpc ListPlansInstances (ListPlansInstancesRequest) returns (ListPlansInstancesResponse) {
+        option (google.api.http) = {
+            get: "/billing/plans/instances"
+        };
     };
-  };
-  rpc DeletePlan(Plan) returns (Plan) {
-    option (google.api.http) = {
-      delete : "/billing/plans/{uuid}"
+    rpc DeletePlan (Plan) returns (Plan) {
+        option (google.api.http) = {
+            delete: "/billing/plans/{uuid}"
+        };
     };
-  };
 
-  rpc CreateTransaction(Transaction) returns (Transaction) {
-    option (google.api.http) = {
-      put : "/billing/transactions"
-      body : "*"
+    rpc CreateTransaction (Transaction) returns (Transaction) {
+        option (google.api.http) = {
+            put: "/billing/transactions"
+            body: "*"
+        };
     };
-  };
-  rpc GetTransactions(GetTransactionsRequest) returns (Transactions) {
-    option (google.api.http) = {
-      get : "/billing/transactions"
+    rpc GetTransactions (GetTransactionsRequest) returns (Transactions) {
+        option (google.api.http) = {
+            get: "/billing/transactions"
+        };
     };
-  };
-  rpc GetTransactionsCount (GetTransactionsCountRequest) returns (GetTransactionsCountResponse) {
-    option (google.api.http) = {
-      get : "/billing/count/transactions"
+    rpc GetTransactionsCount (GetTransactionsCountRequest) returns (GetTransactionsCountResponse) {
+        option (google.api.http) = {
+            get: "/billing/count/transactions"
+        };
     };
-  };
-  rpc UpdateTransaction (Transaction) returns (UpdateTransactionResponse){
-    option (google.api.http) = {
-      patch : "/billing/transactions/{uuid}"
-      body : "*"
+    rpc UpdateTransaction (Transaction) returns (UpdateTransactionResponse) {
+        option (google.api.http) = {
+            patch: "/billing/transactions/{uuid}"
+            body: "*"
+        };
     };
-  };
-  rpc GetRecords(Transaction) returns (Records) {
-    option (google.api.http) = {
-      get : "/billing/transactions/{uuid}"
+    rpc GetRecords (Transaction) returns (Records) {
+        option (google.api.http) = {
+            get: "/billing/transactions/{uuid}"
+        };
     };
-  };
-  rpc GetInstancesReports(GetInstancesReportRequest) returns (GetInstancesReportResponse) {
-    option (google.api.http) = {
-      get : "/billing/base_reports"
+    rpc GetInstancesReports (GetInstancesReportRequest) returns (GetInstancesReportResponse) {
+        option (google.api.http) = {
+            get: "/billing/base_reports"
+        };
     };
-  };
-  rpc GetInstancesReportsCount(GetInstancesReportsCountRequest) returns (GetReportsCountResponse) {
-    option (google.api.http) = {
-      get : "/billing/count/base_reports"
+    rpc GetInstancesReportsCount (GetInstancesReportsCountRequest) returns (GetReportsCountResponse) {
+        option (google.api.http) = {
+            get: "/billing/count/base_reports"
+        };
     };
-  };
-  rpc GetRecordsReports(GetRecordsReportsRequest) returns (GetRecordsReportsResponse) {
-    option (google.api.http) = {
-      post : "/billing/reports"
-      body : "*"
+    rpc GetRecordsReports (GetRecordsReportsRequest) returns (GetRecordsReportsResponse) {
+        option (google.api.http) = {
+            post: "/billing/reports"
+            body: "*"
+        };
     };
-  };
-  rpc GetRecordsReportsCount(GetRecordsReportsCountRequest) returns (GetReportsCountResponse) {
-    option (google.api.http) = {
-      post : "/billing/count/reports"
-      body : "*"
+    rpc GetRecordsReportsCount (GetRecordsReportsCountRequest) returns (GetReportsCountResponse) {
+        option (google.api.http) = {
+            post: "/billing/count/reports"
+            body: "*"
+        };
     };
-  };
-  rpc Reprocess(ReprocessTransactionsRequest) returns (Transactions) {
-    option (google.api.http) = {
-      post : "/billing/account/{account}/reprocess"
+    rpc Reprocess (ReprocessTransactionsRequest) returns (Transactions) {
+        option (google.api.http) = {
+            post: "/billing/account/{account}/reprocess"
+        };
     };
-  };
 }
 
 enum Currency {
-  NCU = 0;
-  USD = 1;
-  EUR = 2;
-  BYN = 3;
-  PLN = 4;
+    NCU = 0;
+    USD = 1;
+    EUR = 2;
+    BYN = 3;
+    PLN = 4;
 }
 
 message CreateExchangeRateRequest {
-  Currency from = 1;
-  Currency to = 2;
-  double rate = 3;
+    Currency from = 1;
+    Currency to = 2;
+    double rate = 3;
 }
 message CreateExchangeRateResponse {}
 message UpdateExchangeRateRequest {
-  Currency from = 1;
-  Currency to = 2;
-  double rate = 3;
+    Currency from = 1;
+    Currency to = 2;
+    double rate = 3;
 }
 message UpdateExchangeRateResponse {}
 message DeleteExchangeRateRequest {
-  Currency from = 1;
-  Currency to = 2;
+    Currency from = 1;
+    Currency to = 2;
 }
 message DeleteExchangeRateResponse {}
 
@@ -408,70 +409,70 @@ message GetCurrenciesRequest {}
 message GetCurrenciesResponse {repeated Currency currencies = 1;}
 
 message GetExchangeRateRequest {
-  Currency from = 1;
-  Currency to = 2;
+    Currency from = 1;
+    Currency to = 2;
 }
 
 message GetExchangeRatesRequest {}
 
 message GetExchangeRateResponse {
-  Currency from = 1;
-  Currency to = 2;
-  double rate = 3;
+    Currency from = 1;
+    Currency to = 2;
+    double rate = 3;
 }
 
 message GetExchangeRatesResponse {repeated GetExchangeRateResponse rates = 1;}
 
 message ConversionRequest {
-  Currency from = 1;
-  Currency to = 2;
-  double amount = 3;
+    Currency from = 1;
+    Currency to = 2;
+    double amount = 3;
 }
 
 message ConversionResponse {double amount = 1;}
 
 service CurrencyService {
-  rpc GetCurrencies(GetCurrenciesRequest) returns (GetCurrenciesResponse) {
-    option (google.api.http) = {
-      get : "/billing/currencies"
+    rpc GetCurrencies (GetCurrenciesRequest) returns (GetCurrenciesResponse) {
+        option (google.api.http) = {
+            get: "/billing/currencies"
+        };
     };
-  };
-  rpc GetExchangeRate(GetExchangeRateRequest)
-      returns (GetExchangeRateResponse) {
-    option (google.api.http) = {
-      get : "/billing/currencies/rates/{from}/{to}"
+    rpc GetExchangeRate (GetExchangeRateRequest)
+            returns (GetExchangeRateResponse) {
+        option (google.api.http) = {
+            get: "/billing/currencies/rates/{from}/{to}"
+        };
     };
-  };
-  rpc GetExchangeRates(GetExchangeRatesRequest)
-      returns (GetExchangeRatesResponse) {
-    option (google.api.http) = {
-      get : "/billing/currencies/rates"
+    rpc GetExchangeRates (GetExchangeRatesRequest)
+            returns (GetExchangeRatesResponse) {
+        option (google.api.http) = {
+            get: "/billing/currencies/rates"
+        };
     };
-  };
-  rpc CreateExchangeRate(CreateExchangeRateRequest)
-      returns (CreateExchangeRateResponse) {
-    option (google.api.http) = {
-      post : "/billing/currencies/rates"
-      body : "*"
+    rpc CreateExchangeRate (CreateExchangeRateRequest)
+            returns (CreateExchangeRateResponse) {
+        option (google.api.http) = {
+            post: "/billing/currencies/rates"
+            body: "*"
+        };
     };
-  };
-  rpc UpdateExchangeRate(UpdateExchangeRateRequest)
-      returns (UpdateExchangeRateResponse) {
-    option (google.api.http) = {
-      put : "/billing/currencies/rates"
-      body : "*"
+    rpc UpdateExchangeRate (UpdateExchangeRateRequest)
+            returns (UpdateExchangeRateResponse) {
+        option (google.api.http) = {
+            put: "/billing/currencies/rates"
+            body: "*"
+        };
     };
-  };
-  rpc DeleteExchangeRate(DeleteExchangeRateRequest)
-      returns (DeleteExchangeRateResponse) {
-    option (google.api.http) = {
-      delete : "/billing/currencies/rates/{from}/{to}"
+    rpc DeleteExchangeRate (DeleteExchangeRateRequest)
+            returns (DeleteExchangeRateResponse) {
+        option (google.api.http) = {
+            delete: "/billing/currencies/rates/{from}/{to}"
+        };
     };
-  };
-  rpc Convert(ConversionRequest) returns (ConversionResponse) {
-    option (google.api.http) = {
-      post : "/billing/currencies/convert"
-      body : "*"
+    rpc Convert (ConversionRequest) returns (ConversionResponse) {
+        option (google.api.http) = {
+            post: "/billing/currencies/convert"
+            body: "*"
+        };
     };
-  };
 }

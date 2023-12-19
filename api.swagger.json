@@ -159,6 +159,38 @@
         ]
       }
     },
+    "/accounts/signup": {
+      "post": {
+        "operationId": "AccountsService_SignUp",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/registryaccountsCreateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/registryaccountsCreateRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AccountsService"
+        ]
+      }
+    },
     "/accounts/{account}/credentials": {
       "post": {
         "operationId": "AccountsService_SetCredentials",
@@ -320,6 +352,136 @@
                 },
                 "status": {
                   "$ref": "#/definitions/accountsAccountStatus"
+                },
+                "adminNotes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "$ref": "#/definitions/notesAdminNote"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "AccountsService"
+        ]
+      }
+    },
+    "/accounts/{uuid}/note": {
+      "delete": {
+        "operationId": "AccountsService_RemoveNote",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/notesNoteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "index",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "AccountsService"
+        ]
+      },
+      "post": {
+        "operationId": "AccountsService_AddNote",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/notesNoteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "AccountsService"
+        ]
+      },
+      "patch": {
+        "operationId": "AccountsService_PatchNote",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/notesNoteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "index": {
+                  "type": "string",
+                  "format": "uint64"
+                },
+                "msg": {
+                  "type": "string"
                 }
               }
             }
@@ -2684,6 +2846,129 @@
         ]
       }
     },
+    "/instances/{uuid}/note": {
+      "delete": {
+        "operationId": "InstancesService_RemoveNote",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/notesNoteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "index",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "InstancesService"
+        ]
+      },
+      "post": {
+        "operationId": "InstancesService_AddNote",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/notesNoteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "InstancesService"
+        ]
+      },
+      "patch": {
+        "operationId": "InstancesService_PatchNote",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/notesNoteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "index": {
+                  "type": "string",
+                  "format": "uint64"
+                },
+                "msg": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "InstancesService"
+        ]
+      }
+    },
     "/logging": {
       "post": {
         "operationId": "EventsLoggingService_GetEvents",
@@ -4647,6 +4932,13 @@
         },
         "status": {
           "$ref": "#/definitions/accountsAccountStatus"
+        },
+        "adminNotes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/notesAdminNote"
+          }
         }
       }
     },
@@ -5400,6 +5692,9 @@
         "meta": {
           "type": "object",
           "additionalProperties": {}
+        },
+        "public": {
+          "type": "boolean"
         }
       }
     },
@@ -6295,6 +6590,13 @@
             "$ref": "#/definitions/ansibleSoftware"
           },
           "title": "Must match contain all the software from the Billing Plan"
+        },
+        "adminNotes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/notesAdminNote"
+          }
         }
       }
     },
@@ -6432,6 +6734,40 @@
         }
       }
     },
+    "notesAdminNote": {
+      "type": "object",
+      "properties": {
+        "admin": {
+          "type": "string"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "notesNoteResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "boolean"
+        },
+        "adminNotes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/notesAdminNote"
+          }
+        }
+      }
+    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -6447,7 +6783,7 @@
         "NULL_VALUE"
       ],
       "default": "NULL_VALUE",
-      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\n The JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
+      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\nThe JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
     },
     "registryaccountsCreateRequest": {
       "type": "object",
