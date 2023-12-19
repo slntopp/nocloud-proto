@@ -4,6 +4,7 @@ managed:
 plugins:
   - name: php
     out: proto/php
-  # - name: php
-  #   out: proto/php
-  #   path: /usr/local/bin/grpc_php_plugin
+  - name: php
+    out: proto/php
+    # path: /usr/local/bin/grpc_php_plugin
+    path: /home/linuxbrew/.linuxbrew/bin/grpc_php_plugin
