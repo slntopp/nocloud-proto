@@ -1,0 +1,29 @@
+name: Generate Protobuf Client Libraries for PHP
+on:
+  push: 
+    branches: 
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Find and Replace swagger options
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "(    option \\(google\\.api\\.http\\) = \\{\n((.|\n)*?)    \\};)"
+          replace: ""
+          regex: true
+      - name: Find and Replace swagger imports
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "import \"google/api/annotations.proto\";"
+          replace: ""
+          regex: false
+      
+      - name: (debug) Check if swagger options are removed
+        run: |
+          echo "### dns.proto" >> $GITHUB_STEP_SUMMARY
+          echo "```protobuf" >> $GITHUB_STEP_SUMMARY
+          GITHUB_STEP_SUMMARY=$(cat dns/dns.proto)
+          echo "```" >> $GITHUB_STEP_SUMMARY
