@@ -34,6 +34,13 @@ jobs:
           php-version: '8.2'
           tools: composer, grpc_php_plugin
       
+      - name: (debug) Check grpc_php_plugin location
+        run: |
+          echo "### grpc_php_plugin location" >> $GITHUB_STEP_SUMMARY
+          echo "```" >> $GITHUB_STEP_SUMMARY
+          echo $(which grpc_php_plugin) >> $GITHUB_STEP_SUMMARY
+          echo "```" >> $GITHUB_STEP_SUMMARY
+      
       - name: Setup Buf Cli
         uses: bufbuild/buf-setup-action@v1
         with:
