@@ -12,13 +12,13 @@ jobs:
         uses: jacobtomlinson/gha-find-replace@v3
         with:
           find: "(    option \\(google\\.api\\.http\\) = \\{\n((.|\n)*?)    \\};)"
-          replace: ""
+          replace: "\n"
           regex: true
       - name: Find and Replace swagger imports
         uses: jacobtomlinson/gha-find-replace@v3
         with:
           find: "import \"google/api/annotations.proto\";"
-          replace: ""
+          replace: "\n"
           regex: false
       
       - name: (debug) Check if swagger options are removed
