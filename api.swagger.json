@@ -1301,6 +1301,48 @@
         ]
       }
     },
+    "/billing/count/invoices": {
+      "get": {
+        "operationId": "BillingService_GetInvoicesCount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingGetTransactionsCountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "account",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "service",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
     "/billing/count/reports": {
       "post": {
         "operationId": "BillingService_GetRecordsReportsCount",
@@ -1606,6 +1648,200 @@
         ],
         "tags": [
           "CurrencyService"
+        ]
+      }
+    },
+    "/billing/invoices": {
+      "get": {
+        "operationId": "BillingService_GetInvoices",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingGetInvoicesCountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "account",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "service",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "field",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "uuid",
+            "description": "Get a single Transaction (would embed records too)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "PAID",
+              "UNPAID",
+              "CANCELED",
+              "TERMINATED",
+              "DRAFT"
+            ],
+            "default": "PAID"
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      },
+      "put": {
+        "operationId": "BillingService_CreateInvoice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingInvoice"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingInvoice"
+            }
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
+    "/billing/invoices/{uuid}": {
+      "patch": {
+        "operationId": "BillingService_UpdateInvoice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingInvoice"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "exex": {
+                  "type": "string",
+                  "format": "int64"
+                },
+                "proc": {
+                  "type": "string",
+                  "format": "int64"
+                },
+                "processed": {
+                  "type": "boolean"
+                },
+                "status": {
+                  "$ref": "#/definitions/billingBillingStatus"
+                },
+                "account": {
+                  "type": "string"
+                },
+                "service": {
+                  "type": "string"
+                },
+                "transactions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "total": {
+                  "type": "number",
+                  "format": "double"
+                },
+                "meta": {
+                  "type": "object",
+                  "additionalProperties": {}
+                },
+                "currency": {
+                  "$ref": "#/definitions/billingCurrency"
+                },
+                "created": {
+                  "type": "string",
+                  "format": "int64"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "BillingService"
         ]
       }
     },
@@ -5706,6 +5942,17 @@
         }
       }
     },
+    "billingBillingStatus": {
+      "type": "string",
+      "enum": [
+        "PAID",
+        "UNPAID",
+        "CANCELED",
+        "TERMINATED",
+        "DRAFT"
+      ],
+      "default": "PAID"
+    },
     "billingConversionRequest": {
       "type": "object",
       "properties": {
@@ -5883,6 +6130,15 @@
         }
       }
     },
+    "billingGetInvoicesCountResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
+    },
     "billingGetRecordsReportsCountRequest": {
       "type": "object",
       "properties": {
@@ -5980,6 +6236,55 @@
         },
         "currency": {
           "$ref": "#/definitions/billingCurrency"
+        }
+      }
+    },
+    "billingInvoice": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "exex": {
+          "type": "string",
+          "format": "int64"
+        },
+        "proc": {
+          "type": "string",
+          "format": "int64"
+        },
+        "processed": {
+          "type": "boolean"
+        },
+        "status": {
+          "$ref": "#/definitions/billingBillingStatus"
+        },
+        "account": {
+          "type": "string"
+        },
+        "service": {
+          "type": "string"
+        },
+        "transactions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "total": {
+          "type": "number",
+          "format": "double"
+        },
+        "meta": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "currency": {
+          "$ref": "#/definitions/billingCurrency"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },

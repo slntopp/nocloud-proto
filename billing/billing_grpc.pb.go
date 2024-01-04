@@ -214,6 +214,10 @@ const (
 	BillingService_GetRecordsReports_FullMethodName        = "/nocloud.billing.BillingService/GetRecordsReports"
 	BillingService_GetRecordsReportsCount_FullMethodName   = "/nocloud.billing.BillingService/GetRecordsReportsCount"
 	BillingService_Reprocess_FullMethodName                = "/nocloud.billing.BillingService/Reprocess"
+	BillingService_CreateInvoice_FullMethodName            = "/nocloud.billing.BillingService/CreateInvoice"
+	BillingService_GetInvoices_FullMethodName              = "/nocloud.billing.BillingService/GetInvoices"
+	BillingService_GetInvoicesCount_FullMethodName         = "/nocloud.billing.BillingService/GetInvoicesCount"
+	BillingService_UpdateInvoice_FullMethodName            = "/nocloud.billing.BillingService/UpdateInvoice"
 )
 
 // BillingServiceClient is the client API for BillingService service.
@@ -236,6 +240,10 @@ type BillingServiceClient interface {
 	GetRecordsReports(ctx context.Context, in *GetRecordsReportsRequest, opts ...grpc.CallOption) (*GetRecordsReportsResponse, error)
 	GetRecordsReportsCount(ctx context.Context, in *GetRecordsReportsCountRequest, opts ...grpc.CallOption) (*GetReportsCountResponse, error)
 	Reprocess(ctx context.Context, in *ReprocessTransactionsRequest, opts ...grpc.CallOption) (*Transactions, error)
+	CreateInvoice(ctx context.Context, in *Invoice, opts ...grpc.CallOption) (*Invoice, error)
+	GetInvoices(ctx context.Context, in *GetInvoicesRequest, opts ...grpc.CallOption) (*GetInvoicesCountResponse, error)
+	GetInvoicesCount(ctx context.Context, in *GetTransactionsCountRequest, opts ...grpc.CallOption) (*GetTransactionsCountResponse, error)
+	UpdateInvoice(ctx context.Context, in *Invoice, opts ...grpc.CallOption) (*Invoice, error)
 }
 
 type billingServiceClient struct {
@@ -390,6 +398,42 @@ func (c *billingServiceClient) Reprocess(ctx context.Context, in *ReprocessTrans
 	return out, nil
 }
 
+func (c *billingServiceClient) CreateInvoice(ctx context.Context, in *Invoice, opts ...grpc.CallOption) (*Invoice, error) {
+	out := new(Invoice)
+	err := c.cc.Invoke(ctx, BillingService_CreateInvoice_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingServiceClient) GetInvoices(ctx context.Context, in *GetInvoicesRequest, opts ...grpc.CallOption) (*GetInvoicesCountResponse, error) {
+	out := new(GetInvoicesCountResponse)
+	err := c.cc.Invoke(ctx, BillingService_GetInvoices_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingServiceClient) GetInvoicesCount(ctx context.Context, in *GetTransactionsCountRequest, opts ...grpc.CallOption) (*GetTransactionsCountResponse, error) {
+	out := new(GetTransactionsCountResponse)
+	err := c.cc.Invoke(ctx, BillingService_GetInvoicesCount_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingServiceClient) UpdateInvoice(ctx context.Context, in *Invoice, opts ...grpc.CallOption) (*Invoice, error) {
+	out := new(Invoice)
+	err := c.cc.Invoke(ctx, BillingService_UpdateInvoice_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BillingServiceServer is the server API for BillingService service.
 // All implementations must embed UnimplementedBillingServiceServer
 // for forward compatibility
@@ -410,6 +454,10 @@ type BillingServiceServer interface {
 	GetRecordsReports(context.Context, *GetRecordsReportsRequest) (*GetRecordsReportsResponse, error)
 	GetRecordsReportsCount(context.Context, *GetRecordsReportsCountRequest) (*GetReportsCountResponse, error)
 	Reprocess(context.Context, *ReprocessTransactionsRequest) (*Transactions, error)
+	CreateInvoice(context.Context, *Invoice) (*Invoice, error)
+	GetInvoices(context.Context, *GetInvoicesRequest) (*GetInvoicesCountResponse, error)
+	GetInvoicesCount(context.Context, *GetTransactionsCountRequest) (*GetTransactionsCountResponse, error)
+	UpdateInvoice(context.Context, *Invoice) (*Invoice, error)
 	mustEmbedUnimplementedBillingServiceServer()
 }
 
@@ -464,6 +512,18 @@ func (UnimplementedBillingServiceServer) GetRecordsReportsCount(context.Context,
 }
 func (UnimplementedBillingServiceServer) Reprocess(context.Context, *ReprocessTransactionsRequest) (*Transactions, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Reprocess not implemented")
+}
+func (UnimplementedBillingServiceServer) CreateInvoice(context.Context, *Invoice) (*Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateInvoice not implemented")
+}
+func (UnimplementedBillingServiceServer) GetInvoices(context.Context, *GetInvoicesRequest) (*GetInvoicesCountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInvoices not implemented")
+}
+func (UnimplementedBillingServiceServer) GetInvoicesCount(context.Context, *GetTransactionsCountRequest) (*GetTransactionsCountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInvoicesCount not implemented")
+}
+func (UnimplementedBillingServiceServer) UpdateInvoice(context.Context, *Invoice) (*Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateInvoice not implemented")
 }
 func (UnimplementedBillingServiceServer) mustEmbedUnimplementedBillingServiceServer() {}
 
@@ -766,6 +826,78 @@ func _BillingService_Reprocess_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BillingService_CreateInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Invoice)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).CreateInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_CreateInvoice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).CreateInvoice(ctx, req.(*Invoice))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BillingService_GetInvoices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInvoicesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).GetInvoices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_GetInvoices_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).GetInvoices(ctx, req.(*GetInvoicesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BillingService_GetInvoicesCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTransactionsCountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).GetInvoicesCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_GetInvoicesCount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).GetInvoicesCount(ctx, req.(*GetTransactionsCountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BillingService_UpdateInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Invoice)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).UpdateInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_UpdateInvoice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).UpdateInvoice(ctx, req.(*Invoice))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BillingService_ServiceDesc is the grpc.ServiceDesc for BillingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -836,6 +968,22 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Reprocess",
 			Handler:    _BillingService_Reprocess_Handler,
+		},
+		{
+			MethodName: "CreateInvoice",
+			Handler:    _BillingService_CreateInvoice_Handler,
+		},
+		{
+			MethodName: "GetInvoices",
+			Handler:    _BillingService_GetInvoices_Handler,
+		},
+		{
+			MethodName: "GetInvoicesCount",
+			Handler:    _BillingService_GetInvoicesCount_Handler,
+		},
+		{
+			MethodName: "UpdateInvoice",
+			Handler:    _BillingService_UpdateInvoice_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

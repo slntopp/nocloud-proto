@@ -170,6 +170,29 @@ message Transaction {
     optional string previous = 14;
 }
 
+enum BillingStatus {
+    PAID = 0;
+    UNPAID = 1;
+    CANCELED = 2;
+    TERMINATED = 3;
+    DRAFT = 4;
+}
+
+message Invoice {
+    string uuid = 1;
+    int64 exex = 2;
+    int64 proc = 3;
+    bool processed = 4;
+    BillingStatus status = 5;
+    string account = 6;
+    string service = 7;
+    repeated string transactions = 8;
+    double total = 9;
+    map<string, google.protobuf.Value> meta = 10;
+    Currency currency = 11;
+    int64 created = 12;
+}
+
 message Transactions {repeated Transaction pool = 1;}
 
 message Record {
@@ -237,6 +260,27 @@ message GetTransactionsCountResponse {
 message UpdateTransactionRequest {
     string uuid = 1;
     int64 exec = 2;
+}
+
+message GetInvoicesCountRequest {
+    optional string account = 1;
+    optional string service = 2;
+    optional BillingStatus status = 3;
+}
+
+message GetInvoicesRequest {
+    optional string account = 1;
+    optional string service = 2;
+    optional uint64 page = 3;
+    optional uint64 limit = 4;
+    optional string field = 5;
+    optional string sort = 6;
+    optional string uuid = 7; // Get a single Transaction (would embed records too)
+    optional BillingStatus status = 8;
+}
+
+message GetInvoicesCountResponse {
+    uint64 total = 1;
 }
 
 message UpdateTransactionResponse {
@@ -393,6 +437,29 @@ service BillingService {
     rpc Reprocess (ReprocessTransactionsRequest) returns (Transactions) {
         option (google.api.http) = {
             post: "/billing/account/{account}/reprocess"
+        };
+    };
+
+    rpc CreateInvoice (Invoice) returns (Invoice) {
+        option (google.api.http) = {
+            put: "/billing/invoices"
+            body: "*"
+        };
+    };
+    rpc GetInvoices (GetInvoicesRequest) returns (GetInvoicesCountResponse) {
+        option (google.api.http) = {
+            get: "/billing/invoices"
+        };
+    };
+    rpc GetInvoicesCount (GetTransactionsCountRequest) returns (GetTransactionsCountResponse) {
+        option (google.api.http) = {
+            get: "/billing/count/invoices"
+        };
+    };
+    rpc UpdateInvoice (Invoice) returns (Invoice) {
+        option (google.api.http) = {
+            patch: "/billing/invoices/{uuid}"
+            body: "*"
         };
     };
 }
