@@ -67,6 +67,7 @@ message Plan {
     repeated nocloud.ansible.Software software = 10;
 
     statuses.NoCloudStatus status = 11;
+    repeated string addons = 12;
 }
 
 message ListRequest {
@@ -114,6 +115,7 @@ message ResourceConf {
     optional int32 min = 12;
     optional int32 max = 13;
     PeriodKind period_kind = 14;
+    string description_id = 15;
 }
 
 message Product {
@@ -130,6 +132,7 @@ message Product {
     bool public = 9;
     string group = 10;
     PeriodKind period_kind = 11;
+    string description_id = 12;
 }
 
 enum Priority {
@@ -165,6 +168,29 @@ message Transaction {
     int64 created = 12;
     optional string base = 13;
     optional string previous = 14;
+}
+
+enum BillingStatus {
+    PAID = 0;
+    UNPAID = 1;
+    CANCELED = 2;
+    TERMINATED = 3;
+    DRAFT = 4;
+}
+
+message Invoice {
+    string uuid = 1;
+    int64 exex = 2;
+    int64 proc = 3;
+    bool processed = 4;
+    BillingStatus status = 5;
+    string account = 6;
+    string service = 7;
+    repeated string transactions = 8;
+    double total = 9;
+    map<string, google.protobuf.Value> meta = 10;
+    Currency currency = 11;
+    int64 created = 12;
 }
 
 message Transactions {repeated Transaction pool = 1;}
@@ -234,6 +260,27 @@ message GetTransactionsCountResponse {
 message UpdateTransactionRequest {
     string uuid = 1;
     int64 exec = 2;
+}
+
+message GetInvoicesCountRequest {
+    optional string account = 1;
+    optional string service = 2;
+    optional BillingStatus status = 3;
+}
+
+message GetInvoicesRequest {
+    optional string account = 1;
+    optional string service = 2;
+    optional uint64 page = 3;
+    optional uint64 limit = 4;
+    optional string field = 5;
+    optional string sort = 6;
+    optional string uuid = 7; // Get a single Transaction (would embed records too)
+    optional BillingStatus status = 8;
+}
+
+message GetInvoicesCountResponse {
+    uint64 total = 1;
 }
 
 message UpdateTransactionResponse {
@@ -392,6 +439,29 @@ service BillingService {
             post: "/billing/account/{account}/reprocess"
         };
     };
+
+    rpc CreateInvoice (Invoice) returns (Invoice) {
+        option (google.api.http) = {
+            put: "/billing/invoices"
+            body: "*"
+        };
+    };
+    rpc GetInvoices (GetInvoicesRequest) returns (GetInvoicesCountResponse) {
+        option (google.api.http) = {
+            get: "/billing/invoices"
+        };
+    };
+    rpc GetInvoicesCount (GetInvoicesCountRequest) returns (GetInvoicesCountResponse) {
+        option (google.api.http) = {
+            get: "/billing/count/invoices"
+        };
+    };
+    rpc UpdateInvoice (Invoice) returns (Invoice) {
+        option (google.api.http) = {
+            patch: "/billing/invoices/{uuid}"
+            body: "*"
+        };
+    };
 }
 
 enum Currency {
@@ -488,6 +558,94 @@ service CurrencyService {
         option (google.api.http) = {
             post: "/billing/currencies/convert"
             body: "*"
+        };
+    };
+}
+
+message Addon {
+    string uuid = 1;
+    string title = 2;
+    bool public = 3;
+    string group = 4;
+    map<string, google.protobuf.Value> meta = 5;
+    string description_id = 6;
+}
+
+message Description {
+    string uuid = 1;
+    string text = 2;
+}
+
+message ListAddonsRequest {
+    optional string group = 1;
+}
+
+message ListAddonsResponse {
+    repeated Addon addons = 1;
+}
+
+message ListDescriptionsRequest {}
+
+message ListDescriptionsResponse {
+    repeated Description descriptions = 1;
+}
+
+service AddonsService {
+    rpc Create (Addon) returns (Addon) {
+        option (google.api.http) = {
+            put: "/addons"
+            body: "*"
+        };
+    };
+    rpc Update (Addon) returns (Addon) {
+        option (google.api.http) = {
+            patch: "/addons/{uuid}"
+            body: "*"
+        };
+    };
+    rpc Get (Addon) returns (Addon) {
+        option (google.api.http) = {
+            get: "/addons/{uuid}"
+        };
+    };
+    rpc List (ListAddonsRequest) returns (ListAddonsResponse) {
+        option (google.api.http) = {
+            get: "/addons"
+        };
+    };
+    rpc Delete (Addon) returns (Addon) {
+        option (google.api.http) = {
+            delete: "/addons/{uuid}"
+        };
+    };
+}
+
+service DescriptionsService {
+    rpc Create (Description) returns (Description) {
+        option (google.api.http) = {
+            put: "/descs"
+            body: "*"
+        };
+    };
+    rpc Update (Description) returns (Description) {
+        option (google.api.http) = {
+            patch: "/descs/{uuid}"
+            body: "*"
+        };
+    };
+    rpc Get (Description) returns (Description) {
+        option (google.api.http) = {
+            get: "/descs/{uuid}"
+        };
+    };
+    rpc List (ListDescriptionsRequest) returns (ListDescriptionsResponse) {
+        option (google.api.http) = {
+            get: "/descs"
+        };
+    };
+    rpc Delete (Description) returns (Description) {
+        option (google.api.http) = {
+            delete: "/descs/{uuid}"
         };
     };
 }
