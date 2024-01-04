@@ -26,6 +26,12 @@
       "name": "CurrencyService"
     },
     {
+      "name": "AddonsService"
+    },
+    {
+      "name": "DescriptionsService"
+    },
+    {
       "name": "ChatService"
     },
     {
@@ -549,6 +555,238 @@
         ],
         "tags": [
           "AccountsService"
+        ]
+      }
+    },
+    "/addons": {
+      "get": {
+        "operationId": "AddonsService_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingListAddonsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "group",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AddonsService"
+        ]
+      },
+      "put": {
+        "operationId": "AddonsService_Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingAddon"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingAddon"
+            }
+          }
+        ],
+        "tags": [
+          "AddonsService"
+        ]
+      }
+    },
+    "/addons/{uuid}": {
+      "get": {
+        "operationId": "AddonsService_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingAddon"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "public",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "group",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "meta",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "descriptionId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AddonsService"
+        ]
+      },
+      "delete": {
+        "operationId": "AddonsService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingAddon"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "public",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "group",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "meta",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "descriptionId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AddonsService"
+        ]
+      },
+      "patch": {
+        "operationId": "AddonsService_Update",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingAddon"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "public": {
+                  "type": "boolean"
+                },
+                "group": {
+                  "type": "string"
+                },
+                "meta": {
+                  "type": "object",
+                  "additionalProperties": {}
+                },
+                "descriptionId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "AddonsService"
         ]
       }
     },
@@ -1586,6 +1824,16 @@
               "DETACHED"
             ],
             "default": "UNSPECIFIED"
+          },
+          {
+            "name": "addons",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           }
         ],
         "tags": [
@@ -1704,6 +1952,16 @@
               "DETACHED"
             ],
             "default": "UNSPECIFIED"
+          },
+          {
+            "name": "addons",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           }
         ],
         "tags": [
@@ -1787,6 +2045,12 @@
                 },
                 "status": {
                   "$ref": "#/definitions/statusesNoCloudStatus"
+                },
+                "addons": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 }
               }
             }
@@ -2486,6 +2750,169 @@
         ],
         "tags": [
           "ChatService"
+        ]
+      }
+    },
+    "/descs": {
+      "get": {
+        "operationId": "DescriptionsService_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingListDescriptionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "DescriptionsService"
+        ]
+      },
+      "put": {
+        "operationId": "DescriptionsService_Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingDescription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingDescription"
+            }
+          }
+        ],
+        "tags": [
+          "DescriptionsService"
+        ]
+      }
+    },
+    "/descs/{uuid}": {
+      "get": {
+        "operationId": "DescriptionsService_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingDescription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "text",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DescriptionsService"
+        ]
+      },
+      "delete": {
+        "operationId": "DescriptionsService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingDescription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "text",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DescriptionsService"
+        ]
+      },
+      "patch": {
+        "operationId": "DescriptionsService_Update",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingDescription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "DescriptionsService"
         ]
       }
     },
@@ -5255,6 +5682,30 @@
         }
       }
     },
+    "billingAddon": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "public": {
+          "type": "boolean"
+        },
+        "group": {
+          "type": "string"
+        },
+        "meta": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "descriptionId": {
+          "type": "string"
+        }
+      }
+    },
     "billingConversionRequest": {
       "type": "object",
       "properties": {
@@ -5330,6 +5781,17 @@
     },
     "billingDeleteExchangeRateResponse": {
       "type": "object"
+    },
+    "billingDescription": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        }
+      }
     },
     "billingFee": {
       "type": "object",
@@ -5531,6 +5993,30 @@
       "default": "UNSPECIFIED",
       "title": "- UNSPECIFIED: Shall never be used, requests will be rejected\n - POSTPAID: Transaction must be processed based on End time\n - PREPAID: Transaction must be processed based on Start time"
     },
+    "billingListAddonsResponse": {
+      "type": "object",
+      "properties": {
+        "addons": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/billingAddon"
+          }
+        }
+      }
+    },
+    "billingListDescriptionsResponse": {
+      "type": "object",
+      "properties": {
+        "descriptions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/billingDescription"
+          }
+        }
+      }
+    },
     "billingListPlansInstancesResponse": {
       "type": "object",
       "properties": {
@@ -5602,6 +6088,12 @@
         },
         "status": {
           "$ref": "#/definitions/statusesNoCloudStatus"
+        },
+        "addons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -5669,6 +6161,9 @@
         },
         "periodKind": {
           "$ref": "#/definitions/billingPeriodKind"
+        },
+        "descriptionId": {
+          "type": "string"
         }
       }
     },
@@ -5739,6 +6234,9 @@
         },
         "periodKind": {
           "$ref": "#/definitions/billingPeriodKind"
+        },
+        "descriptionId": {
+          "type": "string"
         }
       }
     },
@@ -6839,7 +7337,7 @@
         "NULL_VALUE"
       ],
       "default": "NULL_VALUE",
-      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\nThe JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
+      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\n The JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
     },
     "registryaccountsCreateRequest": {
       "type": "object",

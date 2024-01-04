@@ -1153,3 +1153,479 @@ var CurrencyService_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "billing/billing.proto",
 }
+
+const (
+	AddonsService_Create_FullMethodName = "/nocloud.billing.AddonsService/Create"
+	AddonsService_Update_FullMethodName = "/nocloud.billing.AddonsService/Update"
+	AddonsService_Get_FullMethodName    = "/nocloud.billing.AddonsService/Get"
+	AddonsService_List_FullMethodName   = "/nocloud.billing.AddonsService/List"
+	AddonsService_Delete_FullMethodName = "/nocloud.billing.AddonsService/Delete"
+)
+
+// AddonsServiceClient is the client API for AddonsService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type AddonsServiceClient interface {
+	Create(ctx context.Context, in *Addon, opts ...grpc.CallOption) (*Addon, error)
+	Update(ctx context.Context, in *Addon, opts ...grpc.CallOption) (*Addon, error)
+	Get(ctx context.Context, in *Addon, opts ...grpc.CallOption) (*Addon, error)
+	List(ctx context.Context, in *ListAddonsRequest, opts ...grpc.CallOption) (*ListAddonsResponse, error)
+	Delete(ctx context.Context, in *Addon, opts ...grpc.CallOption) (*Addon, error)
+}
+
+type addonsServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewAddonsServiceClient(cc grpc.ClientConnInterface) AddonsServiceClient {
+	return &addonsServiceClient{cc}
+}
+
+func (c *addonsServiceClient) Create(ctx context.Context, in *Addon, opts ...grpc.CallOption) (*Addon, error) {
+	out := new(Addon)
+	err := c.cc.Invoke(ctx, AddonsService_Create_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *addonsServiceClient) Update(ctx context.Context, in *Addon, opts ...grpc.CallOption) (*Addon, error) {
+	out := new(Addon)
+	err := c.cc.Invoke(ctx, AddonsService_Update_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *addonsServiceClient) Get(ctx context.Context, in *Addon, opts ...grpc.CallOption) (*Addon, error) {
+	out := new(Addon)
+	err := c.cc.Invoke(ctx, AddonsService_Get_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *addonsServiceClient) List(ctx context.Context, in *ListAddonsRequest, opts ...grpc.CallOption) (*ListAddonsResponse, error) {
+	out := new(ListAddonsResponse)
+	err := c.cc.Invoke(ctx, AddonsService_List_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *addonsServiceClient) Delete(ctx context.Context, in *Addon, opts ...grpc.CallOption) (*Addon, error) {
+	out := new(Addon)
+	err := c.cc.Invoke(ctx, AddonsService_Delete_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AddonsServiceServer is the server API for AddonsService service.
+// All implementations must embed UnimplementedAddonsServiceServer
+// for forward compatibility
+type AddonsServiceServer interface {
+	Create(context.Context, *Addon) (*Addon, error)
+	Update(context.Context, *Addon) (*Addon, error)
+	Get(context.Context, *Addon) (*Addon, error)
+	List(context.Context, *ListAddonsRequest) (*ListAddonsResponse, error)
+	Delete(context.Context, *Addon) (*Addon, error)
+	mustEmbedUnimplementedAddonsServiceServer()
+}
+
+// UnimplementedAddonsServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedAddonsServiceServer struct {
+}
+
+func (UnimplementedAddonsServiceServer) Create(context.Context, *Addon) (*Addon, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (UnimplementedAddonsServiceServer) Update(context.Context, *Addon) (*Addon, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (UnimplementedAddonsServiceServer) Get(context.Context, *Addon) (*Addon, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedAddonsServiceServer) List(context.Context, *ListAddonsRequest) (*ListAddonsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedAddonsServiceServer) Delete(context.Context, *Addon) (*Addon, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedAddonsServiceServer) mustEmbedUnimplementedAddonsServiceServer() {}
+
+// UnsafeAddonsServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AddonsServiceServer will
+// result in compilation errors.
+type UnsafeAddonsServiceServer interface {
+	mustEmbedUnimplementedAddonsServiceServer()
+}
+
+func RegisterAddonsServiceServer(s grpc.ServiceRegistrar, srv AddonsServiceServer) {
+	s.RegisterService(&AddonsService_ServiceDesc, srv)
+}
+
+func _AddonsService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Addon)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AddonsServiceServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AddonsService_Create_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AddonsServiceServer).Create(ctx, req.(*Addon))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AddonsService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Addon)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AddonsServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AddonsService_Update_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AddonsServiceServer).Update(ctx, req.(*Addon))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AddonsService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Addon)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AddonsServiceServer).Get(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AddonsService_Get_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AddonsServiceServer).Get(ctx, req.(*Addon))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AddonsService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAddonsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AddonsServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AddonsService_List_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AddonsServiceServer).List(ctx, req.(*ListAddonsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AddonsService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Addon)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AddonsServiceServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AddonsService_Delete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AddonsServiceServer).Delete(ctx, req.(*Addon))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// AddonsService_ServiceDesc is the grpc.ServiceDesc for AddonsService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var AddonsService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "nocloud.billing.AddonsService",
+	HandlerType: (*AddonsServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Create",
+			Handler:    _AddonsService_Create_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _AddonsService_Update_Handler,
+		},
+		{
+			MethodName: "Get",
+			Handler:    _AddonsService_Get_Handler,
+		},
+		{
+			MethodName: "List",
+			Handler:    _AddonsService_List_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _AddonsService_Delete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "billing/billing.proto",
+}
+
+const (
+	DescriptionsService_Create_FullMethodName = "/nocloud.billing.DescriptionsService/Create"
+	DescriptionsService_Update_FullMethodName = "/nocloud.billing.DescriptionsService/Update"
+	DescriptionsService_Get_FullMethodName    = "/nocloud.billing.DescriptionsService/Get"
+	DescriptionsService_List_FullMethodName   = "/nocloud.billing.DescriptionsService/List"
+	DescriptionsService_Delete_FullMethodName = "/nocloud.billing.DescriptionsService/Delete"
+)
+
+// DescriptionsServiceClient is the client API for DescriptionsService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type DescriptionsServiceClient interface {
+	Create(ctx context.Context, in *Description, opts ...grpc.CallOption) (*Description, error)
+	Update(ctx context.Context, in *Description, opts ...grpc.CallOption) (*Description, error)
+	Get(ctx context.Context, in *Description, opts ...grpc.CallOption) (*Description, error)
+	List(ctx context.Context, in *ListDescriptionsRequest, opts ...grpc.CallOption) (*ListDescriptionsResponse, error)
+	Delete(ctx context.Context, in *Description, opts ...grpc.CallOption) (*Description, error)
+}
+
+type descriptionsServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewDescriptionsServiceClient(cc grpc.ClientConnInterface) DescriptionsServiceClient {
+	return &descriptionsServiceClient{cc}
+}
+
+func (c *descriptionsServiceClient) Create(ctx context.Context, in *Description, opts ...grpc.CallOption) (*Description, error) {
+	out := new(Description)
+	err := c.cc.Invoke(ctx, DescriptionsService_Create_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *descriptionsServiceClient) Update(ctx context.Context, in *Description, opts ...grpc.CallOption) (*Description, error) {
+	out := new(Description)
+	err := c.cc.Invoke(ctx, DescriptionsService_Update_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *descriptionsServiceClient) Get(ctx context.Context, in *Description, opts ...grpc.CallOption) (*Description, error) {
+	out := new(Description)
+	err := c.cc.Invoke(ctx, DescriptionsService_Get_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *descriptionsServiceClient) List(ctx context.Context, in *ListDescriptionsRequest, opts ...grpc.CallOption) (*ListDescriptionsResponse, error) {
+	out := new(ListDescriptionsResponse)
+	err := c.cc.Invoke(ctx, DescriptionsService_List_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *descriptionsServiceClient) Delete(ctx context.Context, in *Description, opts ...grpc.CallOption) (*Description, error) {
+	out := new(Description)
+	err := c.cc.Invoke(ctx, DescriptionsService_Delete_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// DescriptionsServiceServer is the server API for DescriptionsService service.
+// All implementations must embed UnimplementedDescriptionsServiceServer
+// for forward compatibility
+type DescriptionsServiceServer interface {
+	Create(context.Context, *Description) (*Description, error)
+	Update(context.Context, *Description) (*Description, error)
+	Get(context.Context, *Description) (*Description, error)
+	List(context.Context, *ListDescriptionsRequest) (*ListDescriptionsResponse, error)
+	Delete(context.Context, *Description) (*Description, error)
+	mustEmbedUnimplementedDescriptionsServiceServer()
+}
+
+// UnimplementedDescriptionsServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedDescriptionsServiceServer struct {
+}
+
+func (UnimplementedDescriptionsServiceServer) Create(context.Context, *Description) (*Description, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (UnimplementedDescriptionsServiceServer) Update(context.Context, *Description) (*Description, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (UnimplementedDescriptionsServiceServer) Get(context.Context, *Description) (*Description, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedDescriptionsServiceServer) List(context.Context, *ListDescriptionsRequest) (*ListDescriptionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedDescriptionsServiceServer) Delete(context.Context, *Description) (*Description, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedDescriptionsServiceServer) mustEmbedUnimplementedDescriptionsServiceServer() {}
+
+// UnsafeDescriptionsServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to DescriptionsServiceServer will
+// result in compilation errors.
+type UnsafeDescriptionsServiceServer interface {
+	mustEmbedUnimplementedDescriptionsServiceServer()
+}
+
+func RegisterDescriptionsServiceServer(s grpc.ServiceRegistrar, srv DescriptionsServiceServer) {
+	s.RegisterService(&DescriptionsService_ServiceDesc, srv)
+}
+
+func _DescriptionsService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Description)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DescriptionsServiceServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DescriptionsService_Create_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DescriptionsServiceServer).Create(ctx, req.(*Description))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DescriptionsService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Description)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DescriptionsServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DescriptionsService_Update_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DescriptionsServiceServer).Update(ctx, req.(*Description))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DescriptionsService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Description)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DescriptionsServiceServer).Get(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DescriptionsService_Get_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DescriptionsServiceServer).Get(ctx, req.(*Description))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DescriptionsService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListDescriptionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DescriptionsServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DescriptionsService_List_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DescriptionsServiceServer).List(ctx, req.(*ListDescriptionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DescriptionsService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Description)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DescriptionsServiceServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DescriptionsService_Delete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DescriptionsServiceServer).Delete(ctx, req.(*Description))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// DescriptionsService_ServiceDesc is the grpc.ServiceDesc for DescriptionsService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var DescriptionsService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "nocloud.billing.DescriptionsService",
+	HandlerType: (*DescriptionsServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Create",
+			Handler:    _DescriptionsService_Create_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _DescriptionsService_Update_Handler,
+		},
+		{
+			MethodName: "Get",
+			Handler:    _DescriptionsService_Get_Handler,
+		},
+		{
+			MethodName: "List",
+			Handler:    _DescriptionsService_List_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _DescriptionsService_Delete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "billing/billing.proto",
+}

@@ -67,6 +67,7 @@ message Plan {
     repeated nocloud.ansible.Software software = 10;
 
     statuses.NoCloudStatus status = 11;
+    repeated string addons = 12;
 }
 
 message ListRequest {
@@ -114,6 +115,7 @@ message ResourceConf {
     optional int32 min = 12;
     optional int32 max = 13;
     PeriodKind period_kind = 14;
+    string description_id = 15;
 }
 
 message Product {
@@ -130,6 +132,7 @@ message Product {
     bool public = 9;
     string group = 10;
     PeriodKind period_kind = 11;
+    string description_id = 12;
 }
 
 enum Priority {
@@ -488,6 +491,94 @@ service CurrencyService {
         option (google.api.http) = {
             post: "/billing/currencies/convert"
             body: "*"
+        };
+    };
+}
+
+message Addon {
+    string uuid = 1;
+    string title = 2;
+    bool public = 3;
+    string group = 4;
+    map<string, google.protobuf.Value> meta = 5;
+    string description_id = 6;
+}
+
+message Description {
+    string uuid = 1;
+    string text = 2;
+}
+
+message ListAddonsRequest {
+    optional string group = 1;
+}
+
+message ListAddonsResponse {
+    repeated Addon addons = 1;
+}
+
+message ListDescriptionsRequest {}
+
+message ListDescriptionsResponse {
+    repeated Description descriptions = 1;
+}
+
+service AddonsService {
+    rpc Create (Addon) returns (Addon) {
+        option (google.api.http) = {
+            put: "/addons"
+            body: "*"
+        };
+    };
+    rpc Update (Addon) returns (Addon) {
+        option (google.api.http) = {
+            patch: "/addons/{uuid}"
+            body: "*"
+        };
+    };
+    rpc Get (Addon) returns (Addon) {
+        option (google.api.http) = {
+            get: "/addons/{uuid}"
+        };
+    };
+    rpc List (ListAddonsRequest) returns (ListAddonsResponse) {
+        option (google.api.http) = {
+            get: "/addons"
+        };
+    };
+    rpc Delete (Addon) returns (Addon) {
+        option (google.api.http) = {
+            delete: "/addons/{uuid}"
+        };
+    };
+}
+
+service DescriptionsService {
+    rpc Create (Description) returns (Description) {
+        option (google.api.http) = {
+            put: "/descs"
+            body: "*"
+        };
+    };
+    rpc Update (Description) returns (Description) {
+        option (google.api.http) = {
+            patch: "/descs/{uuid}"
+            body: "*"
+        };
+    };
+    rpc Get (Description) returns (Description) {
+        option (google.api.http) = {
+            get: "/descs/{uuid}"
+        };
+    };
+    rpc List (ListDescriptionsRequest) returns (ListDescriptionsResponse) {
+        option (google.api.http) = {
+            get: "/descs"
+        };
+    };
+    rpc Delete (Description) returns (Description) {
+        option (google.api.http) = {
+            delete: "/descs/{uuid}"
         };
     };
 }
