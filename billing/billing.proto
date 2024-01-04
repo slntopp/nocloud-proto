@@ -451,7 +451,7 @@ service BillingService {
             get: "/billing/invoices"
         };
     };
-    rpc GetInvoicesCount (GetTransactionsCountRequest) returns (GetTransactionsCountResponse) {
+    rpc GetInvoicesCount (GetInvoicesCountRequest) returns (GetInvoicesCountResponse) {
         option (google.api.http) = {
             get: "/billing/count/invoices"
         };

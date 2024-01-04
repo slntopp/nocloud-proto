@@ -838,7 +838,7 @@ var (
 )
 
 func request_BillingService_GetInvoicesCount_0(ctx context.Context, marshaler runtime.Marshaler, client BillingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetTransactionsCountRequest
+	var protoReq GetInvoicesCountRequest
 	var metadata runtime.ServerMetadata
 
 	if err := req.ParseForm(); err != nil {
@@ -854,7 +854,7 @@ func request_BillingService_GetInvoicesCount_0(ctx context.Context, marshaler ru
 }
 
 func local_request_BillingService_GetInvoicesCount_0(ctx context.Context, marshaler runtime.Marshaler, server BillingServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetTransactionsCountRequest
+	var protoReq GetInvoicesCountRequest
 	var metadata runtime.ServerMetadata
 
 	if err := req.ParseForm(); err != nil {

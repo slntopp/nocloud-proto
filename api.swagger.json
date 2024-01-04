@@ -1308,7 +1308,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/billingGetTransactionsCountResponse"
+              "$ref": "#/definitions/billingGetInvoicesCountResponse"
             }
           },
           "default": {
@@ -1332,10 +1332,18 @@
             "type": "string"
           },
           {
-            "name": "type",
+            "name": "status",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "PAID",
+              "UNPAID",
+              "CANCELED",
+              "TERMINATED",
+              "DRAFT"
+            ],
+            "default": "PAID"
           }
         ],
         "tags": [
