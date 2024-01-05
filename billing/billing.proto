@@ -180,7 +180,7 @@ enum BillingStatus {
 
 message Invoice {
     string uuid = 1;
-    int64 exex = 2;
+    int64 exec = 2;
     int64 proc = 3;
     bool processed = 4;
     BillingStatus status = 5;

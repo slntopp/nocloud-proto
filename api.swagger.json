@@ -1803,7 +1803,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "exex": {
+                "exec": {
                   "type": "string",
                   "format": "int64"
                 },
@@ -6253,7 +6253,7 @@
         "uuid": {
           "type": "string"
         },
-        "exex": {
+        "exec": {
           "type": "string",
           "format": "int64"
         },
