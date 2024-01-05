@@ -193,6 +193,8 @@ message Invoice {
     int64 created = 12;
 }
 
+message Invoices {repeated Invoice pool = 1;}
+
 message Transactions {repeated Transaction pool = 1;}
 
 message Record {
@@ -446,7 +448,7 @@ service BillingService {
             body: "*"
         };
     };
-    rpc GetInvoices (GetInvoicesRequest) returns (GetInvoicesCountResponse) {
+    rpc GetInvoices (GetInvoicesRequest) returns (Invoices) {
         option (google.api.http) = {
             get: "/billing/invoices"
         };

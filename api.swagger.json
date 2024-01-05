@@ -1666,7 +1666,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/billingGetInvoicesCountResponse"
+              "$ref": "#/definitions/billingInvoices"
             }
           },
           "default": {
@@ -6293,6 +6293,18 @@
         "created": {
           "type": "string",
           "format": "int64"
+        }
+      }
+    },
+    "billingInvoices": {
+      "type": "object",
+      "properties": {
+        "pool": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/billingInvoice"
+          }
         }
       }
     },

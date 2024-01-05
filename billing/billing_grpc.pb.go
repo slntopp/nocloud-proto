@@ -241,7 +241,7 @@ type BillingServiceClient interface {
 	GetRecordsReportsCount(ctx context.Context, in *GetRecordsReportsCountRequest, opts ...grpc.CallOption) (*GetReportsCountResponse, error)
 	Reprocess(ctx context.Context, in *ReprocessTransactionsRequest, opts ...grpc.CallOption) (*Transactions, error)
 	CreateInvoice(ctx context.Context, in *Invoice, opts ...grpc.CallOption) (*Invoice, error)
-	GetInvoices(ctx context.Context, in *GetInvoicesRequest, opts ...grpc.CallOption) (*GetInvoicesCountResponse, error)
+	GetInvoices(ctx context.Context, in *GetInvoicesRequest, opts ...grpc.CallOption) (*Invoices, error)
 	GetInvoicesCount(ctx context.Context, in *GetInvoicesCountRequest, opts ...grpc.CallOption) (*GetInvoicesCountResponse, error)
 	UpdateInvoice(ctx context.Context, in *Invoice, opts ...grpc.CallOption) (*Invoice, error)
 }
@@ -407,8 +407,8 @@ func (c *billingServiceClient) CreateInvoice(ctx context.Context, in *Invoice, o
 	return out, nil
 }
 
-func (c *billingServiceClient) GetInvoices(ctx context.Context, in *GetInvoicesRequest, opts ...grpc.CallOption) (*GetInvoicesCountResponse, error) {
-	out := new(GetInvoicesCountResponse)
+func (c *billingServiceClient) GetInvoices(ctx context.Context, in *GetInvoicesRequest, opts ...grpc.CallOption) (*Invoices, error) {
+	out := new(Invoices)
 	err := c.cc.Invoke(ctx, BillingService_GetInvoices_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -455,7 +455,7 @@ type BillingServiceServer interface {
 	GetRecordsReportsCount(context.Context, *GetRecordsReportsCountRequest) (*GetReportsCountResponse, error)
 	Reprocess(context.Context, *ReprocessTransactionsRequest) (*Transactions, error)
 	CreateInvoice(context.Context, *Invoice) (*Invoice, error)
-	GetInvoices(context.Context, *GetInvoicesRequest) (*GetInvoicesCountResponse, error)
+	GetInvoices(context.Context, *GetInvoicesRequest) (*Invoices, error)
 	GetInvoicesCount(context.Context, *GetInvoicesCountRequest) (*GetInvoicesCountResponse, error)
 	UpdateInvoice(context.Context, *Invoice) (*Invoice, error)
 	mustEmbedUnimplementedBillingServiceServer()
@@ -516,7 +516,7 @@ func (UnimplementedBillingServiceServer) Reprocess(context.Context, *ReprocessTr
 func (UnimplementedBillingServiceServer) CreateInvoice(context.Context, *Invoice) (*Invoice, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateInvoice not implemented")
 }
-func (UnimplementedBillingServiceServer) GetInvoices(context.Context, *GetInvoicesRequest) (*GetInvoicesCountResponse, error) {
+func (UnimplementedBillingServiceServer) GetInvoices(context.Context, *GetInvoicesRequest) (*Invoices, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInvoices not implemented")
 }
 func (UnimplementedBillingServiceServer) GetInvoicesCount(context.Context, *GetInvoicesCountRequest) (*GetInvoicesCountResponse, error) {
