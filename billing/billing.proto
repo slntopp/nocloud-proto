@@ -228,6 +228,7 @@ message Record {
     string account = 15;
     optional string base = 16;
     optional string previous = 17;
+    double cost = 18;
 }
 
 message Records {repeated Record pool = 1;}
