@@ -24,6 +24,8 @@ import (
 	context "context"
 	errors "errors"
 	billing "github.com/slntopp/nocloud-proto/billing"
+	addons "github.com/slntopp/nocloud-proto/billing/addons"
+	descriptions "github.com/slntopp/nocloud-proto/billing/descriptions"
 	http "net/http"
 	strings "strings"
 )
@@ -1125,11 +1127,11 @@ func (UnimplementedCurrencyServiceHandler) Convert(context.Context, *connect.Req
 
 // AddonsServiceClient is a client for the nocloud.billing.AddonsService service.
 type AddonsServiceClient interface {
-	Create(context.Context, *connect.Request[billing.Addon]) (*connect.Response[billing.Addon], error)
-	Update(context.Context, *connect.Request[billing.Addon]) (*connect.Response[billing.Addon], error)
-	Get(context.Context, *connect.Request[billing.Addon]) (*connect.Response[billing.Addon], error)
-	List(context.Context, *connect.Request[billing.ListAddonsRequest]) (*connect.Response[billing.ListAddonsResponse], error)
-	Delete(context.Context, *connect.Request[billing.Addon]) (*connect.Response[billing.Addon], error)
+	Create(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error)
+	Update(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error)
+	Get(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error)
+	List(context.Context, *connect.Request[addons.ListAddonsRequest]) (*connect.Response[addons.ListAddonsResponse], error)
+	Delete(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error)
 }
 
 // NewAddonsServiceClient constructs a client for the nocloud.billing.AddonsService service. By
@@ -1142,31 +1144,31 @@ type AddonsServiceClient interface {
 func NewAddonsServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) AddonsServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
 	return &addonsServiceClient{
-		create: connect.NewClient[billing.Addon, billing.Addon](
+		create: connect.NewClient[addons.Addon, addons.Addon](
 			httpClient,
 			baseURL+AddonsServiceCreateProcedure,
 			connect.WithSchema(addonsServiceCreateMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
-		update: connect.NewClient[billing.Addon, billing.Addon](
+		update: connect.NewClient[addons.Addon, addons.Addon](
 			httpClient,
 			baseURL+AddonsServiceUpdateProcedure,
 			connect.WithSchema(addonsServiceUpdateMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
-		get: connect.NewClient[billing.Addon, billing.Addon](
+		get: connect.NewClient[addons.Addon, addons.Addon](
 			httpClient,
 			baseURL+AddonsServiceGetProcedure,
 			connect.WithSchema(addonsServiceGetMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
-		list: connect.NewClient[billing.ListAddonsRequest, billing.ListAddonsResponse](
+		list: connect.NewClient[addons.ListAddonsRequest, addons.ListAddonsResponse](
 			httpClient,
 			baseURL+AddonsServiceListProcedure,
 			connect.WithSchema(addonsServiceListMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
-		delete: connect.NewClient[billing.Addon, billing.Addon](
+		delete: connect.NewClient[addons.Addon, addons.Addon](
 			httpClient,
 			baseURL+AddonsServiceDeleteProcedure,
 			connect.WithSchema(addonsServiceDeleteMethodDescriptor),
@@ -1177,45 +1179,45 @@ func NewAddonsServiceClient(httpClient connect.HTTPClient, baseURL string, opts 
 
 // addonsServiceClient implements AddonsServiceClient.
 type addonsServiceClient struct {
-	create *connect.Client[billing.Addon, billing.Addon]
-	update *connect.Client[billing.Addon, billing.Addon]
-	get    *connect.Client[billing.Addon, billing.Addon]
-	list   *connect.Client[billing.ListAddonsRequest, billing.ListAddonsResponse]
-	delete *connect.Client[billing.Addon, billing.Addon]
+	create *connect.Client[addons.Addon, addons.Addon]
+	update *connect.Client[addons.Addon, addons.Addon]
+	get    *connect.Client[addons.Addon, addons.Addon]
+	list   *connect.Client[addons.ListAddonsRequest, addons.ListAddonsResponse]
+	delete *connect.Client[addons.Addon, addons.Addon]
 }
 
 // Create calls nocloud.billing.AddonsService.Create.
-func (c *addonsServiceClient) Create(ctx context.Context, req *connect.Request[billing.Addon]) (*connect.Response[billing.Addon], error) {
+func (c *addonsServiceClient) Create(ctx context.Context, req *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error) {
 	return c.create.CallUnary(ctx, req)
 }
 
 // Update calls nocloud.billing.AddonsService.Update.
-func (c *addonsServiceClient) Update(ctx context.Context, req *connect.Request[billing.Addon]) (*connect.Response[billing.Addon], error) {
+func (c *addonsServiceClient) Update(ctx context.Context, req *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error) {
 	return c.update.CallUnary(ctx, req)
 }
 
 // Get calls nocloud.billing.AddonsService.Get.
-func (c *addonsServiceClient) Get(ctx context.Context, req *connect.Request[billing.Addon]) (*connect.Response[billing.Addon], error) {
+func (c *addonsServiceClient) Get(ctx context.Context, req *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error) {
 	return c.get.CallUnary(ctx, req)
 }
 
 // List calls nocloud.billing.AddonsService.List.
-func (c *addonsServiceClient) List(ctx context.Context, req *connect.Request[billing.ListAddonsRequest]) (*connect.Response[billing.ListAddonsResponse], error) {
+func (c *addonsServiceClient) List(ctx context.Context, req *connect.Request[addons.ListAddonsRequest]) (*connect.Response[addons.ListAddonsResponse], error) {
 	return c.list.CallUnary(ctx, req)
 }
 
 // Delete calls nocloud.billing.AddonsService.Delete.
-func (c *addonsServiceClient) Delete(ctx context.Context, req *connect.Request[billing.Addon]) (*connect.Response[billing.Addon], error) {
+func (c *addonsServiceClient) Delete(ctx context.Context, req *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error) {
 	return c.delete.CallUnary(ctx, req)
 }
 
 // AddonsServiceHandler is an implementation of the nocloud.billing.AddonsService service.
 type AddonsServiceHandler interface {
-	Create(context.Context, *connect.Request[billing.Addon]) (*connect.Response[billing.Addon], error)
-	Update(context.Context, *connect.Request[billing.Addon]) (*connect.Response[billing.Addon], error)
-	Get(context.Context, *connect.Request[billing.Addon]) (*connect.Response[billing.Addon], error)
-	List(context.Context, *connect.Request[billing.ListAddonsRequest]) (*connect.Response[billing.ListAddonsResponse], error)
-	Delete(context.Context, *connect.Request[billing.Addon]) (*connect.Response[billing.Addon], error)
+	Create(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error)
+	Update(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error)
+	Get(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error)
+	List(context.Context, *connect.Request[addons.ListAddonsRequest]) (*connect.Response[addons.ListAddonsResponse], error)
+	Delete(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error)
 }
 
 // NewAddonsServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -1275,33 +1277,33 @@ func NewAddonsServiceHandler(svc AddonsServiceHandler, opts ...connect.HandlerOp
 // UnimplementedAddonsServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedAddonsServiceHandler struct{}
 
-func (UnimplementedAddonsServiceHandler) Create(context.Context, *connect.Request[billing.Addon]) (*connect.Response[billing.Addon], error) {
+func (UnimplementedAddonsServiceHandler) Create(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.AddonsService.Create is not implemented"))
 }
 
-func (UnimplementedAddonsServiceHandler) Update(context.Context, *connect.Request[billing.Addon]) (*connect.Response[billing.Addon], error) {
+func (UnimplementedAddonsServiceHandler) Update(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.AddonsService.Update is not implemented"))
 }
 
-func (UnimplementedAddonsServiceHandler) Get(context.Context, *connect.Request[billing.Addon]) (*connect.Response[billing.Addon], error) {
+func (UnimplementedAddonsServiceHandler) Get(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.AddonsService.Get is not implemented"))
 }
 
-func (UnimplementedAddonsServiceHandler) List(context.Context, *connect.Request[billing.ListAddonsRequest]) (*connect.Response[billing.ListAddonsResponse], error) {
+func (UnimplementedAddonsServiceHandler) List(context.Context, *connect.Request[addons.ListAddonsRequest]) (*connect.Response[addons.ListAddonsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.AddonsService.List is not implemented"))
 }
 
-func (UnimplementedAddonsServiceHandler) Delete(context.Context, *connect.Request[billing.Addon]) (*connect.Response[billing.Addon], error) {
+func (UnimplementedAddonsServiceHandler) Delete(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.AddonsService.Delete is not implemented"))
 }
 
 // DescriptionsServiceClient is a client for the nocloud.billing.DescriptionsService service.
 type DescriptionsServiceClient interface {
-	Create(context.Context, *connect.Request[billing.Description]) (*connect.Response[billing.Description], error)
-	Update(context.Context, *connect.Request[billing.Description]) (*connect.Response[billing.Description], error)
-	Get(context.Context, *connect.Request[billing.Description]) (*connect.Response[billing.Description], error)
-	List(context.Context, *connect.Request[billing.ListDescriptionsRequest]) (*connect.Response[billing.ListDescriptionsResponse], error)
-	Delete(context.Context, *connect.Request[billing.Description]) (*connect.Response[billing.Description], error)
+	Create(context.Context, *connect.Request[descriptions.Description]) (*connect.Response[descriptions.Description], error)
+	Update(context.Context, *connect.Request[descriptions.Description]) (*connect.Response[descriptions.Description], error)
+	Get(context.Context, *connect.Request[descriptions.Description]) (*connect.Response[descriptions.Description], error)
+	List(context.Context, *connect.Request[descriptions.ListDescriptionsRequest]) (*connect.Response[descriptions.ListDescriptionsResponse], error)
+	Delete(context.Context, *connect.Request[descriptions.Description]) (*connect.Response[descriptions.Description], error)
 }
 
 // NewDescriptionsServiceClient constructs a client for the nocloud.billing.DescriptionsService
@@ -1314,31 +1316,31 @@ type DescriptionsServiceClient interface {
 func NewDescriptionsServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) DescriptionsServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
 	return &descriptionsServiceClient{
-		create: connect.NewClient[billing.Description, billing.Description](
+		create: connect.NewClient[descriptions.Description, descriptions.Description](
 			httpClient,
 			baseURL+DescriptionsServiceCreateProcedure,
 			connect.WithSchema(descriptionsServiceCreateMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
-		update: connect.NewClient[billing.Description, billing.Description](
+		update: connect.NewClient[descriptions.Description, descriptions.Description](
 			httpClient,
 			baseURL+DescriptionsServiceUpdateProcedure,
 			connect.WithSchema(descriptionsServiceUpdateMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
-		get: connect.NewClient[billing.Description, billing.Description](
+		get: connect.NewClient[descriptions.Description, descriptions.Description](
 			httpClient,
 			baseURL+DescriptionsServiceGetProcedure,
 			connect.WithSchema(descriptionsServiceGetMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
-		list: connect.NewClient[billing.ListDescriptionsRequest, billing.ListDescriptionsResponse](
+		list: connect.NewClient[descriptions.ListDescriptionsRequest, descriptions.ListDescriptionsResponse](
 			httpClient,
 			baseURL+DescriptionsServiceListProcedure,
 			connect.WithSchema(descriptionsServiceListMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
-		delete: connect.NewClient[billing.Description, billing.Description](
+		delete: connect.NewClient[descriptions.Description, descriptions.Description](
 			httpClient,
 			baseURL+DescriptionsServiceDeleteProcedure,
 			connect.WithSchema(descriptionsServiceDeleteMethodDescriptor),
@@ -1349,46 +1351,46 @@ func NewDescriptionsServiceClient(httpClient connect.HTTPClient, baseURL string,
 
 // descriptionsServiceClient implements DescriptionsServiceClient.
 type descriptionsServiceClient struct {
-	create *connect.Client[billing.Description, billing.Description]
-	update *connect.Client[billing.Description, billing.Description]
-	get    *connect.Client[billing.Description, billing.Description]
-	list   *connect.Client[billing.ListDescriptionsRequest, billing.ListDescriptionsResponse]
-	delete *connect.Client[billing.Description, billing.Description]
+	create *connect.Client[descriptions.Description, descriptions.Description]
+	update *connect.Client[descriptions.Description, descriptions.Description]
+	get    *connect.Client[descriptions.Description, descriptions.Description]
+	list   *connect.Client[descriptions.ListDescriptionsRequest, descriptions.ListDescriptionsResponse]
+	delete *connect.Client[descriptions.Description, descriptions.Description]
 }
 
 // Create calls nocloud.billing.DescriptionsService.Create.
-func (c *descriptionsServiceClient) Create(ctx context.Context, req *connect.Request[billing.Description]) (*connect.Response[billing.Description], error) {
+func (c *descriptionsServiceClient) Create(ctx context.Context, req *connect.Request[descriptions.Description]) (*connect.Response[descriptions.Description], error) {
 	return c.create.CallUnary(ctx, req)
 }
 
 // Update calls nocloud.billing.DescriptionsService.Update.
-func (c *descriptionsServiceClient) Update(ctx context.Context, req *connect.Request[billing.Description]) (*connect.Response[billing.Description], error) {
+func (c *descriptionsServiceClient) Update(ctx context.Context, req *connect.Request[descriptions.Description]) (*connect.Response[descriptions.Description], error) {
 	return c.update.CallUnary(ctx, req)
 }
 
 // Get calls nocloud.billing.DescriptionsService.Get.
-func (c *descriptionsServiceClient) Get(ctx context.Context, req *connect.Request[billing.Description]) (*connect.Response[billing.Description], error) {
+func (c *descriptionsServiceClient) Get(ctx context.Context, req *connect.Request[descriptions.Description]) (*connect.Response[descriptions.Description], error) {
 	return c.get.CallUnary(ctx, req)
 }
 
 // List calls nocloud.billing.DescriptionsService.List.
-func (c *descriptionsServiceClient) List(ctx context.Context, req *connect.Request[billing.ListDescriptionsRequest]) (*connect.Response[billing.ListDescriptionsResponse], error) {
+func (c *descriptionsServiceClient) List(ctx context.Context, req *connect.Request[descriptions.ListDescriptionsRequest]) (*connect.Response[descriptions.ListDescriptionsResponse], error) {
 	return c.list.CallUnary(ctx, req)
 }
 
 // Delete calls nocloud.billing.DescriptionsService.Delete.
-func (c *descriptionsServiceClient) Delete(ctx context.Context, req *connect.Request[billing.Description]) (*connect.Response[billing.Description], error) {
+func (c *descriptionsServiceClient) Delete(ctx context.Context, req *connect.Request[descriptions.Description]) (*connect.Response[descriptions.Description], error) {
 	return c.delete.CallUnary(ctx, req)
 }
 
 // DescriptionsServiceHandler is an implementation of the nocloud.billing.DescriptionsService
 // service.
 type DescriptionsServiceHandler interface {
-	Create(context.Context, *connect.Request[billing.Description]) (*connect.Response[billing.Description], error)
-	Update(context.Context, *connect.Request[billing.Description]) (*connect.Response[billing.Description], error)
-	Get(context.Context, *connect.Request[billing.Description]) (*connect.Response[billing.Description], error)
-	List(context.Context, *connect.Request[billing.ListDescriptionsRequest]) (*connect.Response[billing.ListDescriptionsResponse], error)
-	Delete(context.Context, *connect.Request[billing.Description]) (*connect.Response[billing.Description], error)
+	Create(context.Context, *connect.Request[descriptions.Description]) (*connect.Response[descriptions.Description], error)
+	Update(context.Context, *connect.Request[descriptions.Description]) (*connect.Response[descriptions.Description], error)
+	Get(context.Context, *connect.Request[descriptions.Description]) (*connect.Response[descriptions.Description], error)
+	List(context.Context, *connect.Request[descriptions.ListDescriptionsRequest]) (*connect.Response[descriptions.ListDescriptionsResponse], error)
+	Delete(context.Context, *connect.Request[descriptions.Description]) (*connect.Response[descriptions.Description], error)
 }
 
 // NewDescriptionsServiceHandler builds an HTTP handler from the service implementation. It returns
@@ -1448,22 +1450,22 @@ func NewDescriptionsServiceHandler(svc DescriptionsServiceHandler, opts ...conne
 // UnimplementedDescriptionsServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedDescriptionsServiceHandler struct{}
 
-func (UnimplementedDescriptionsServiceHandler) Create(context.Context, *connect.Request[billing.Description]) (*connect.Response[billing.Description], error) {
+func (UnimplementedDescriptionsServiceHandler) Create(context.Context, *connect.Request[descriptions.Description]) (*connect.Response[descriptions.Description], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.DescriptionsService.Create is not implemented"))
 }
 
-func (UnimplementedDescriptionsServiceHandler) Update(context.Context, *connect.Request[billing.Description]) (*connect.Response[billing.Description], error) {
+func (UnimplementedDescriptionsServiceHandler) Update(context.Context, *connect.Request[descriptions.Description]) (*connect.Response[descriptions.Description], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.DescriptionsService.Update is not implemented"))
 }
 
-func (UnimplementedDescriptionsServiceHandler) Get(context.Context, *connect.Request[billing.Description]) (*connect.Response[billing.Description], error) {
+func (UnimplementedDescriptionsServiceHandler) Get(context.Context, *connect.Request[descriptions.Description]) (*connect.Response[descriptions.Description], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.DescriptionsService.Get is not implemented"))
 }
 
-func (UnimplementedDescriptionsServiceHandler) List(context.Context, *connect.Request[billing.ListDescriptionsRequest]) (*connect.Response[billing.ListDescriptionsResponse], error) {
+func (UnimplementedDescriptionsServiceHandler) List(context.Context, *connect.Request[descriptions.ListDescriptionsRequest]) (*connect.Response[descriptions.ListDescriptionsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.DescriptionsService.List is not implemented"))
 }
 
-func (UnimplementedDescriptionsServiceHandler) Delete(context.Context, *connect.Request[billing.Description]) (*connect.Response[billing.Description], error) {
+func (UnimplementedDescriptionsServiceHandler) Delete(context.Context, *connect.Request[descriptions.Description]) (*connect.Response[descriptions.Description], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.DescriptionsService.Delete is not implemented"))
 }

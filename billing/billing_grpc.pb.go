@@ -23,6 +23,8 @@ package billing
 
 import (
 	context "context"
+	addons "github.com/slntopp/nocloud-proto/billing/addons"
+	descriptions "github.com/slntopp/nocloud-proto/billing/descriptions"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -1314,11 +1316,11 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AddonsServiceClient interface {
-	Create(ctx context.Context, in *Addon, opts ...grpc.CallOption) (*Addon, error)
-	Update(ctx context.Context, in *Addon, opts ...grpc.CallOption) (*Addon, error)
-	Get(ctx context.Context, in *Addon, opts ...grpc.CallOption) (*Addon, error)
-	List(ctx context.Context, in *ListAddonsRequest, opts ...grpc.CallOption) (*ListAddonsResponse, error)
-	Delete(ctx context.Context, in *Addon, opts ...grpc.CallOption) (*Addon, error)
+	Create(ctx context.Context, in *addons.Addon, opts ...grpc.CallOption) (*addons.Addon, error)
+	Update(ctx context.Context, in *addons.Addon, opts ...grpc.CallOption) (*addons.Addon, error)
+	Get(ctx context.Context, in *addons.Addon, opts ...grpc.CallOption) (*addons.Addon, error)
+	List(ctx context.Context, in *addons.ListAddonsRequest, opts ...grpc.CallOption) (*addons.ListAddonsResponse, error)
+	Delete(ctx context.Context, in *addons.Addon, opts ...grpc.CallOption) (*addons.Addon, error)
 }
 
 type addonsServiceClient struct {
@@ -1329,8 +1331,8 @@ func NewAddonsServiceClient(cc grpc.ClientConnInterface) AddonsServiceClient {
 	return &addonsServiceClient{cc}
 }
 
-func (c *addonsServiceClient) Create(ctx context.Context, in *Addon, opts ...grpc.CallOption) (*Addon, error) {
-	out := new(Addon)
+func (c *addonsServiceClient) Create(ctx context.Context, in *addons.Addon, opts ...grpc.CallOption) (*addons.Addon, error) {
+	out := new(addons.Addon)
 	err := c.cc.Invoke(ctx, AddonsService_Create_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1338,8 +1340,8 @@ func (c *addonsServiceClient) Create(ctx context.Context, in *Addon, opts ...grp
 	return out, nil
 }
 
-func (c *addonsServiceClient) Update(ctx context.Context, in *Addon, opts ...grpc.CallOption) (*Addon, error) {
-	out := new(Addon)
+func (c *addonsServiceClient) Update(ctx context.Context, in *addons.Addon, opts ...grpc.CallOption) (*addons.Addon, error) {
+	out := new(addons.Addon)
 	err := c.cc.Invoke(ctx, AddonsService_Update_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1347,8 +1349,8 @@ func (c *addonsServiceClient) Update(ctx context.Context, in *Addon, opts ...grp
 	return out, nil
 }
 
-func (c *addonsServiceClient) Get(ctx context.Context, in *Addon, opts ...grpc.CallOption) (*Addon, error) {
-	out := new(Addon)
+func (c *addonsServiceClient) Get(ctx context.Context, in *addons.Addon, opts ...grpc.CallOption) (*addons.Addon, error) {
+	out := new(addons.Addon)
 	err := c.cc.Invoke(ctx, AddonsService_Get_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1356,8 +1358,8 @@ func (c *addonsServiceClient) Get(ctx context.Context, in *Addon, opts ...grpc.C
 	return out, nil
 }
 
-func (c *addonsServiceClient) List(ctx context.Context, in *ListAddonsRequest, opts ...grpc.CallOption) (*ListAddonsResponse, error) {
-	out := new(ListAddonsResponse)
+func (c *addonsServiceClient) List(ctx context.Context, in *addons.ListAddonsRequest, opts ...grpc.CallOption) (*addons.ListAddonsResponse, error) {
+	out := new(addons.ListAddonsResponse)
 	err := c.cc.Invoke(ctx, AddonsService_List_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1365,8 +1367,8 @@ func (c *addonsServiceClient) List(ctx context.Context, in *ListAddonsRequest, o
 	return out, nil
 }
 
-func (c *addonsServiceClient) Delete(ctx context.Context, in *Addon, opts ...grpc.CallOption) (*Addon, error) {
-	out := new(Addon)
+func (c *addonsServiceClient) Delete(ctx context.Context, in *addons.Addon, opts ...grpc.CallOption) (*addons.Addon, error) {
+	out := new(addons.Addon)
 	err := c.cc.Invoke(ctx, AddonsService_Delete_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1378,11 +1380,11 @@ func (c *addonsServiceClient) Delete(ctx context.Context, in *Addon, opts ...grp
 // All implementations must embed UnimplementedAddonsServiceServer
 // for forward compatibility
 type AddonsServiceServer interface {
-	Create(context.Context, *Addon) (*Addon, error)
-	Update(context.Context, *Addon) (*Addon, error)
-	Get(context.Context, *Addon) (*Addon, error)
-	List(context.Context, *ListAddonsRequest) (*ListAddonsResponse, error)
-	Delete(context.Context, *Addon) (*Addon, error)
+	Create(context.Context, *addons.Addon) (*addons.Addon, error)
+	Update(context.Context, *addons.Addon) (*addons.Addon, error)
+	Get(context.Context, *addons.Addon) (*addons.Addon, error)
+	List(context.Context, *addons.ListAddonsRequest) (*addons.ListAddonsResponse, error)
+	Delete(context.Context, *addons.Addon) (*addons.Addon, error)
 	mustEmbedUnimplementedAddonsServiceServer()
 }
 
@@ -1390,19 +1392,19 @@ type AddonsServiceServer interface {
 type UnimplementedAddonsServiceServer struct {
 }
 
-func (UnimplementedAddonsServiceServer) Create(context.Context, *Addon) (*Addon, error) {
+func (UnimplementedAddonsServiceServer) Create(context.Context, *addons.Addon) (*addons.Addon, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedAddonsServiceServer) Update(context.Context, *Addon) (*Addon, error) {
+func (UnimplementedAddonsServiceServer) Update(context.Context, *addons.Addon) (*addons.Addon, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedAddonsServiceServer) Get(context.Context, *Addon) (*Addon, error) {
+func (UnimplementedAddonsServiceServer) Get(context.Context, *addons.Addon) (*addons.Addon, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedAddonsServiceServer) List(context.Context, *ListAddonsRequest) (*ListAddonsResponse, error) {
+func (UnimplementedAddonsServiceServer) List(context.Context, *addons.ListAddonsRequest) (*addons.ListAddonsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
-func (UnimplementedAddonsServiceServer) Delete(context.Context, *Addon) (*Addon, error) {
+func (UnimplementedAddonsServiceServer) Delete(context.Context, *addons.Addon) (*addons.Addon, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedAddonsServiceServer) mustEmbedUnimplementedAddonsServiceServer() {}
@@ -1419,7 +1421,7 @@ func RegisterAddonsServiceServer(s grpc.ServiceRegistrar, srv AddonsServiceServe
 }
 
 func _AddonsService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Addon)
+	in := new(addons.Addon)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1431,13 +1433,13 @@ func _AddonsService_Create_Handler(srv interface{}, ctx context.Context, dec fun
 		FullMethod: AddonsService_Create_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AddonsServiceServer).Create(ctx, req.(*Addon))
+		return srv.(AddonsServiceServer).Create(ctx, req.(*addons.Addon))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _AddonsService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Addon)
+	in := new(addons.Addon)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1449,13 +1451,13 @@ func _AddonsService_Update_Handler(srv interface{}, ctx context.Context, dec fun
 		FullMethod: AddonsService_Update_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AddonsServiceServer).Update(ctx, req.(*Addon))
+		return srv.(AddonsServiceServer).Update(ctx, req.(*addons.Addon))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _AddonsService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Addon)
+	in := new(addons.Addon)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1467,13 +1469,13 @@ func _AddonsService_Get_Handler(srv interface{}, ctx context.Context, dec func(i
 		FullMethod: AddonsService_Get_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AddonsServiceServer).Get(ctx, req.(*Addon))
+		return srv.(AddonsServiceServer).Get(ctx, req.(*addons.Addon))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _AddonsService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListAddonsRequest)
+	in := new(addons.ListAddonsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1485,13 +1487,13 @@ func _AddonsService_List_Handler(srv interface{}, ctx context.Context, dec func(
 		FullMethod: AddonsService_List_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AddonsServiceServer).List(ctx, req.(*ListAddonsRequest))
+		return srv.(AddonsServiceServer).List(ctx, req.(*addons.ListAddonsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _AddonsService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Addon)
+	in := new(addons.Addon)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1503,7 +1505,7 @@ func _AddonsService_Delete_Handler(srv interface{}, ctx context.Context, dec fun
 		FullMethod: AddonsService_Delete_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AddonsServiceServer).Delete(ctx, req.(*Addon))
+		return srv.(AddonsServiceServer).Delete(ctx, req.(*addons.Addon))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1552,11 +1554,11 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DescriptionsServiceClient interface {
-	Create(ctx context.Context, in *Description, opts ...grpc.CallOption) (*Description, error)
-	Update(ctx context.Context, in *Description, opts ...grpc.CallOption) (*Description, error)
-	Get(ctx context.Context, in *Description, opts ...grpc.CallOption) (*Description, error)
-	List(ctx context.Context, in *ListDescriptionsRequest, opts ...grpc.CallOption) (*ListDescriptionsResponse, error)
-	Delete(ctx context.Context, in *Description, opts ...grpc.CallOption) (*Description, error)
+	Create(ctx context.Context, in *descriptions.Description, opts ...grpc.CallOption) (*descriptions.Description, error)
+	Update(ctx context.Context, in *descriptions.Description, opts ...grpc.CallOption) (*descriptions.Description, error)
+	Get(ctx context.Context, in *descriptions.Description, opts ...grpc.CallOption) (*descriptions.Description, error)
+	List(ctx context.Context, in *descriptions.ListDescriptionsRequest, opts ...grpc.CallOption) (*descriptions.ListDescriptionsResponse, error)
+	Delete(ctx context.Context, in *descriptions.Description, opts ...grpc.CallOption) (*descriptions.Description, error)
 }
 
 type descriptionsServiceClient struct {
@@ -1567,8 +1569,8 @@ func NewDescriptionsServiceClient(cc grpc.ClientConnInterface) DescriptionsServi
 	return &descriptionsServiceClient{cc}
 }
 
-func (c *descriptionsServiceClient) Create(ctx context.Context, in *Description, opts ...grpc.CallOption) (*Description, error) {
-	out := new(Description)
+func (c *descriptionsServiceClient) Create(ctx context.Context, in *descriptions.Description, opts ...grpc.CallOption) (*descriptions.Description, error) {
+	out := new(descriptions.Description)
 	err := c.cc.Invoke(ctx, DescriptionsService_Create_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1576,8 +1578,8 @@ func (c *descriptionsServiceClient) Create(ctx context.Context, in *Description,
 	return out, nil
 }
 
-func (c *descriptionsServiceClient) Update(ctx context.Context, in *Description, opts ...grpc.CallOption) (*Description, error) {
-	out := new(Description)
+func (c *descriptionsServiceClient) Update(ctx context.Context, in *descriptions.Description, opts ...grpc.CallOption) (*descriptions.Description, error) {
+	out := new(descriptions.Description)
 	err := c.cc.Invoke(ctx, DescriptionsService_Update_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1585,8 +1587,8 @@ func (c *descriptionsServiceClient) Update(ctx context.Context, in *Description,
 	return out, nil
 }
 
-func (c *descriptionsServiceClient) Get(ctx context.Context, in *Description, opts ...grpc.CallOption) (*Description, error) {
-	out := new(Description)
+func (c *descriptionsServiceClient) Get(ctx context.Context, in *descriptions.Description, opts ...grpc.CallOption) (*descriptions.Description, error) {
+	out := new(descriptions.Description)
 	err := c.cc.Invoke(ctx, DescriptionsService_Get_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1594,8 +1596,8 @@ func (c *descriptionsServiceClient) Get(ctx context.Context, in *Description, op
 	return out, nil
 }
 
-func (c *descriptionsServiceClient) List(ctx context.Context, in *ListDescriptionsRequest, opts ...grpc.CallOption) (*ListDescriptionsResponse, error) {
-	out := new(ListDescriptionsResponse)
+func (c *descriptionsServiceClient) List(ctx context.Context, in *descriptions.ListDescriptionsRequest, opts ...grpc.CallOption) (*descriptions.ListDescriptionsResponse, error) {
+	out := new(descriptions.ListDescriptionsResponse)
 	err := c.cc.Invoke(ctx, DescriptionsService_List_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1603,8 +1605,8 @@ func (c *descriptionsServiceClient) List(ctx context.Context, in *ListDescriptio
 	return out, nil
 }
 
-func (c *descriptionsServiceClient) Delete(ctx context.Context, in *Description, opts ...grpc.CallOption) (*Description, error) {
-	out := new(Description)
+func (c *descriptionsServiceClient) Delete(ctx context.Context, in *descriptions.Description, opts ...grpc.CallOption) (*descriptions.Description, error) {
+	out := new(descriptions.Description)
 	err := c.cc.Invoke(ctx, DescriptionsService_Delete_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1616,11 +1618,11 @@ func (c *descriptionsServiceClient) Delete(ctx context.Context, in *Description,
 // All implementations must embed UnimplementedDescriptionsServiceServer
 // for forward compatibility
 type DescriptionsServiceServer interface {
-	Create(context.Context, *Description) (*Description, error)
-	Update(context.Context, *Description) (*Description, error)
-	Get(context.Context, *Description) (*Description, error)
-	List(context.Context, *ListDescriptionsRequest) (*ListDescriptionsResponse, error)
-	Delete(context.Context, *Description) (*Description, error)
+	Create(context.Context, *descriptions.Description) (*descriptions.Description, error)
+	Update(context.Context, *descriptions.Description) (*descriptions.Description, error)
+	Get(context.Context, *descriptions.Description) (*descriptions.Description, error)
+	List(context.Context, *descriptions.ListDescriptionsRequest) (*descriptions.ListDescriptionsResponse, error)
+	Delete(context.Context, *descriptions.Description) (*descriptions.Description, error)
 	mustEmbedUnimplementedDescriptionsServiceServer()
 }
 
@@ -1628,19 +1630,19 @@ type DescriptionsServiceServer interface {
 type UnimplementedDescriptionsServiceServer struct {
 }
 
-func (UnimplementedDescriptionsServiceServer) Create(context.Context, *Description) (*Description, error) {
+func (UnimplementedDescriptionsServiceServer) Create(context.Context, *descriptions.Description) (*descriptions.Description, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedDescriptionsServiceServer) Update(context.Context, *Description) (*Description, error) {
+func (UnimplementedDescriptionsServiceServer) Update(context.Context, *descriptions.Description) (*descriptions.Description, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedDescriptionsServiceServer) Get(context.Context, *Description) (*Description, error) {
+func (UnimplementedDescriptionsServiceServer) Get(context.Context, *descriptions.Description) (*descriptions.Description, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedDescriptionsServiceServer) List(context.Context, *ListDescriptionsRequest) (*ListDescriptionsResponse, error) {
+func (UnimplementedDescriptionsServiceServer) List(context.Context, *descriptions.ListDescriptionsRequest) (*descriptions.ListDescriptionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
-func (UnimplementedDescriptionsServiceServer) Delete(context.Context, *Description) (*Description, error) {
+func (UnimplementedDescriptionsServiceServer) Delete(context.Context, *descriptions.Description) (*descriptions.Description, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedDescriptionsServiceServer) mustEmbedUnimplementedDescriptionsServiceServer() {}
@@ -1657,7 +1659,7 @@ func RegisterDescriptionsServiceServer(s grpc.ServiceRegistrar, srv Descriptions
 }
 
 func _DescriptionsService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Description)
+	in := new(descriptions.Description)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1669,13 +1671,13 @@ func _DescriptionsService_Create_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: DescriptionsService_Create_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DescriptionsServiceServer).Create(ctx, req.(*Description))
+		return srv.(DescriptionsServiceServer).Create(ctx, req.(*descriptions.Description))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _DescriptionsService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Description)
+	in := new(descriptions.Description)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1687,13 +1689,13 @@ func _DescriptionsService_Update_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: DescriptionsService_Update_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DescriptionsServiceServer).Update(ctx, req.(*Description))
+		return srv.(DescriptionsServiceServer).Update(ctx, req.(*descriptions.Description))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _DescriptionsService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Description)
+	in := new(descriptions.Description)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1705,13 +1707,13 @@ func _DescriptionsService_Get_Handler(srv interface{}, ctx context.Context, dec 
 		FullMethod: DescriptionsService_Get_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DescriptionsServiceServer).Get(ctx, req.(*Description))
+		return srv.(DescriptionsServiceServer).Get(ctx, req.(*descriptions.Description))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _DescriptionsService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListDescriptionsRequest)
+	in := new(descriptions.ListDescriptionsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1723,13 +1725,13 @@ func _DescriptionsService_List_Handler(srv interface{}, ctx context.Context, dec
 		FullMethod: DescriptionsService_List_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DescriptionsServiceServer).List(ctx, req.(*ListDescriptionsRequest))
+		return srv.(DescriptionsServiceServer).List(ctx, req.(*descriptions.ListDescriptionsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _DescriptionsService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Description)
+	in := new(descriptions.Description)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1741,7 +1743,7 @@ func _DescriptionsService_Delete_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: DescriptionsService_Delete_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DescriptionsServiceServer).Delete(ctx, req.(*Description))
+		return srv.(DescriptionsServiceServer).Delete(ctx, req.(*descriptions.Description))
 	}
 	return interceptor(ctx, in, info, handler)
 }

@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package nocloud.billing.addons;
+
+import "google/protobuf/struct.proto";
+
+message Addon {
+  string uuid = 1;
+  string title = 2;
+  bool public = 3;
+  string group = 4;
+  map<string, google.protobuf.Value> meta = 5;
+  string description_id = 6;
+}
+
+
+
+message ListAddonsRequest {
+  optional string group = 1;
+}
+
+message ListAddonsResponse {
+  repeated Addon addons = 1;
+}

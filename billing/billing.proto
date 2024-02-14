@@ -18,6 +18,8 @@ syntax = "proto3";
 package nocloud.billing;
 
 import "ansible/ansible.proto";
+import "billing/addons/addons.proto";
+import "billing/descriptions/descriptions.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
 import "states/states.proto";
@@ -564,91 +566,62 @@ service CurrencyService {
         };
     };
 }
-
-message Addon {
-    string uuid = 1;
-    string title = 2;
-    bool public = 3;
-    string group = 4;
-    map<string, google.protobuf.Value> meta = 5;
-    string description_id = 6;
-}
-
-message Description {
-    string uuid = 1;
-    string text = 2;
-}
-
-message ListAddonsRequest {
-    optional string group = 1;
-}
-
-message ListAddonsResponse {
-    repeated Addon addons = 1;
-}
-
-message ListDescriptionsRequest {}
-
-message ListDescriptionsResponse {
-    repeated Description descriptions = 1;
-}
-
 service AddonsService {
-    rpc Create (Addon) returns (Addon) {
+    rpc Create (addons.Addon) returns (addons.Addon) {
         option (google.api.http) = {
-            put: "/billing/addons"
+            put: "/addons"
             body: "*"
         };
     };
-    rpc Update (Addon) returns (Addon) {
+    rpc Update (addons.Addon) returns (addons.Addon) {
         option (google.api.http) = {
-            patch: "/billing/addons/{uuid}"
+            patch: "/addons/{uuid}"
             body: "*"
         };
     };
-    rpc Get (Addon) returns (Addon) {
+    rpc Get (addons.Addon) returns (addons.Addon) {
         option (google.api.http) = {
-            get: "/billing/addons/{uuid}"
+            get: "/addons/{uuid}"
         };
     };
-    rpc List (ListAddonsRequest) returns (ListAddonsResponse) {
+    rpc List (addons.ListAddonsRequest) returns (addons.ListAddonsResponse) {
         option (google.api.http) = {
-            get: "/billing/addons"
+            get: "/addons"
         };
     };
-    rpc Delete (Addon) returns (Addon) {
+    rpc Delete (addons.Addon) returns (addons.Addon) {
         option (google.api.http) = {
-            delete: "/billing/addons/{uuid}"
+            delete: "/addons/{uuid}"
         };
     };
 }
 
 service DescriptionsService {
-    rpc Create (Description) returns (Description) {
+    rpc Create (descriptions.Description) returns (descriptions.Description) {
         option (google.api.http) = {
-            put: "/billing/descs"
+            put: "/descs"
             body: "*"
         };
     };
-    rpc Update (Description) returns (Description) {
+    rpc Update (descriptions.Description) returns (descriptions.Description) {
         option (google.api.http) = {
-            patch: "/billing/descs/{uuid}"
+            patch: "/descs/{uuid}"
             body: "*"
         };
     };
-    rpc Get (Description) returns (Description) {
+    rpc Get (descriptions.Description) returns (descriptions.Description) {
         option (google.api.http) = {
-            get: "/billing/descs/{uuid}"
+            get: "/descs/{uuid}"
         };
     };
-    rpc List (ListDescriptionsRequest) returns (ListDescriptionsResponse) {
+    rpc List (descriptions.ListDescriptionsRequest) returns (descriptions.ListDescriptionsResponse) {
         option (google.api.http) = {
-            get: "/billing/descs"
+            get: "/descs"
         };
     };
-    rpc Delete (Description) returns (Description) {
+    rpc Delete (descriptions.Description) returns (descriptions.Description) {
         option (google.api.http) = {
-            delete: "/billing/descs/{uuid}"
+            delete: "/descs/{uuid}"
         };
     };
 }
