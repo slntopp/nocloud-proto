@@ -596,29 +596,29 @@ message ListDescriptionsResponse {
 service AddonsService {
     rpc Create (Addon) returns (Addon) {
         option (google.api.http) = {
-            put: "/addons"
+            put: "/billing/addons"
             body: "*"
         };
     };
     rpc Update (Addon) returns (Addon) {
         option (google.api.http) = {
-            patch: "/addons/{uuid}"
+            patch: "/billing/addons/{uuid}"
             body: "*"
         };
     };
     rpc Get (Addon) returns (Addon) {
         option (google.api.http) = {
-            get: "/addons/{uuid}"
+            get: "/billing/addons/{uuid}"
         };
     };
     rpc List (ListAddonsRequest) returns (ListAddonsResponse) {
         option (google.api.http) = {
-            get: "/addons"
+            get: "/billing/addons"
         };
     };
     rpc Delete (Addon) returns (Addon) {
         option (google.api.http) = {
-            delete: "/addons/{uuid}"
+            delete: "/billing/addons/{uuid}"
         };
     };
 }
@@ -626,29 +626,29 @@ service AddonsService {
 service DescriptionsService {
     rpc Create (Description) returns (Description) {
         option (google.api.http) = {
-            put: "/descs"
+            put: "/billing/descs"
             body: "*"
         };
     };
     rpc Update (Description) returns (Description) {
         option (google.api.http) = {
-            patch: "/descs/{uuid}"
+            patch: "/billing/descs/{uuid}"
             body: "*"
         };
     };
     rpc Get (Description) returns (Description) {
         option (google.api.http) = {
-            get: "/descs/{uuid}"
+            get: "/billing/descs/{uuid}"
         };
     };
     rpc List (ListDescriptionsRequest) returns (ListDescriptionsResponse) {
         option (google.api.http) = {
-            get: "/descs"
+            get: "/billing/descs"
         };
     };
     rpc Delete (Description) returns (Description) {
         option (google.api.http) = {
-            delete: "/descs/{uuid}"
+            delete: "/billing/descs/{uuid}"
         };
     };
 }

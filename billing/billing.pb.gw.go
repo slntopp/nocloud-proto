@@ -2484,7 +2484,7 @@ func RegisterAddonsServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.AddonsService/Create", runtime.WithHTTPPathPattern("/addons"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.AddonsService/Create", runtime.WithHTTPPathPattern("/billing/addons"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2509,7 +2509,7 @@ func RegisterAddonsServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.AddonsService/Update", runtime.WithHTTPPathPattern("/addons/{uuid}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.AddonsService/Update", runtime.WithHTTPPathPattern("/billing/addons/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2534,7 +2534,7 @@ func RegisterAddonsServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.AddonsService/Get", runtime.WithHTTPPathPattern("/addons/{uuid}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.AddonsService/Get", runtime.WithHTTPPathPattern("/billing/addons/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2559,7 +2559,7 @@ func RegisterAddonsServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.AddonsService/List", runtime.WithHTTPPathPattern("/addons"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.AddonsService/List", runtime.WithHTTPPathPattern("/billing/addons"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2584,7 +2584,7 @@ func RegisterAddonsServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.AddonsService/Delete", runtime.WithHTTPPathPattern("/addons/{uuid}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.AddonsService/Delete", runtime.WithHTTPPathPattern("/billing/addons/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2618,7 +2618,7 @@ func RegisterDescriptionsServiceHandlerServer(ctx context.Context, mux *runtime.
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.DescriptionsService/Create", runtime.WithHTTPPathPattern("/descs"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.DescriptionsService/Create", runtime.WithHTTPPathPattern("/billing/descs"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2643,7 +2643,7 @@ func RegisterDescriptionsServiceHandlerServer(ctx context.Context, mux *runtime.
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.DescriptionsService/Update", runtime.WithHTTPPathPattern("/descs/{uuid}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.DescriptionsService/Update", runtime.WithHTTPPathPattern("/billing/descs/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2668,7 +2668,7 @@ func RegisterDescriptionsServiceHandlerServer(ctx context.Context, mux *runtime.
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.DescriptionsService/Get", runtime.WithHTTPPathPattern("/descs/{uuid}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.DescriptionsService/Get", runtime.WithHTTPPathPattern("/billing/descs/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2693,7 +2693,7 @@ func RegisterDescriptionsServiceHandlerServer(ctx context.Context, mux *runtime.
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.DescriptionsService/List", runtime.WithHTTPPathPattern("/descs"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.DescriptionsService/List", runtime.WithHTTPPathPattern("/billing/descs"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2718,7 +2718,7 @@ func RegisterDescriptionsServiceHandlerServer(ctx context.Context, mux *runtime.
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.DescriptionsService/Delete", runtime.WithHTTPPathPattern("/descs/{uuid}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.DescriptionsService/Delete", runtime.WithHTTPPathPattern("/billing/descs/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3574,7 +3574,7 @@ func RegisterAddonsServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.AddonsService/Create", runtime.WithHTTPPathPattern("/addons"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.AddonsService/Create", runtime.WithHTTPPathPattern("/billing/addons"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3596,7 +3596,7 @@ func RegisterAddonsServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.AddonsService/Update", runtime.WithHTTPPathPattern("/addons/{uuid}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.AddonsService/Update", runtime.WithHTTPPathPattern("/billing/addons/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3618,7 +3618,7 @@ func RegisterAddonsServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.AddonsService/Get", runtime.WithHTTPPathPattern("/addons/{uuid}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.AddonsService/Get", runtime.WithHTTPPathPattern("/billing/addons/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3640,7 +3640,7 @@ func RegisterAddonsServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.AddonsService/List", runtime.WithHTTPPathPattern("/addons"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.AddonsService/List", runtime.WithHTTPPathPattern("/billing/addons"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3662,7 +3662,7 @@ func RegisterAddonsServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.AddonsService/Delete", runtime.WithHTTPPathPattern("/addons/{uuid}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.AddonsService/Delete", runtime.WithHTTPPathPattern("/billing/addons/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3682,15 +3682,15 @@ func RegisterAddonsServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 }
 
 var (
-	pattern_AddonsService_Create_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"addons"}, ""))
+	pattern_AddonsService_Create_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"billing", "addons"}, ""))
 
-	pattern_AddonsService_Update_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"addons", "uuid"}, ""))
+	pattern_AddonsService_Update_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"billing", "addons", "uuid"}, ""))
 
-	pattern_AddonsService_Get_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"addons", "uuid"}, ""))
+	pattern_AddonsService_Get_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"billing", "addons", "uuid"}, ""))
 
-	pattern_AddonsService_List_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"addons"}, ""))
+	pattern_AddonsService_List_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"billing", "addons"}, ""))
 
-	pattern_AddonsService_Delete_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"addons", "uuid"}, ""))
+	pattern_AddonsService_Delete_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"billing", "addons", "uuid"}, ""))
 )
 
 var (
@@ -3749,7 +3749,7 @@ func RegisterDescriptionsServiceHandlerClient(ctx context.Context, mux *runtime.
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.DescriptionsService/Create", runtime.WithHTTPPathPattern("/descs"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.DescriptionsService/Create", runtime.WithHTTPPathPattern("/billing/descs"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3771,7 +3771,7 @@ func RegisterDescriptionsServiceHandlerClient(ctx context.Context, mux *runtime.
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.DescriptionsService/Update", runtime.WithHTTPPathPattern("/descs/{uuid}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.DescriptionsService/Update", runtime.WithHTTPPathPattern("/billing/descs/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3793,7 +3793,7 @@ func RegisterDescriptionsServiceHandlerClient(ctx context.Context, mux *runtime.
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.DescriptionsService/Get", runtime.WithHTTPPathPattern("/descs/{uuid}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.DescriptionsService/Get", runtime.WithHTTPPathPattern("/billing/descs/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3815,7 +3815,7 @@ func RegisterDescriptionsServiceHandlerClient(ctx context.Context, mux *runtime.
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.DescriptionsService/List", runtime.WithHTTPPathPattern("/descs"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.DescriptionsService/List", runtime.WithHTTPPathPattern("/billing/descs"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3837,7 +3837,7 @@ func RegisterDescriptionsServiceHandlerClient(ctx context.Context, mux *runtime.
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.DescriptionsService/Delete", runtime.WithHTTPPathPattern("/descs/{uuid}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.DescriptionsService/Delete", runtime.WithHTTPPathPattern("/billing/descs/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3857,15 +3857,15 @@ func RegisterDescriptionsServiceHandlerClient(ctx context.Context, mux *runtime.
 }
 
 var (
-	pattern_DescriptionsService_Create_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"descs"}, ""))
+	pattern_DescriptionsService_Create_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"billing", "descs"}, ""))
 
-	pattern_DescriptionsService_Update_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"descs", "uuid"}, ""))
+	pattern_DescriptionsService_Update_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"billing", "descs", "uuid"}, ""))
 
-	pattern_DescriptionsService_Get_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"descs", "uuid"}, ""))
+	pattern_DescriptionsService_Get_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"billing", "descs", "uuid"}, ""))
 
-	pattern_DescriptionsService_List_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"descs"}, ""))
+	pattern_DescriptionsService_List_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"billing", "descs"}, ""))
 
-	pattern_DescriptionsService_Delete_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"descs", "uuid"}, ""))
+	pattern_DescriptionsService_Delete_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"billing", "descs", "uuid"}, ""))
 )
 
 var (
