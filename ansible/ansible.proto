@@ -60,6 +60,7 @@ message Run {
   int64 create_time = 9;
   int64 exec_time = 10;
   map<string, string> vars = 11;
+  optional Instance hop = 12;
 }
 message Runs { repeated Run pool = 1; }
 
