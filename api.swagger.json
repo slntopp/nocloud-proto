@@ -5910,6 +5910,9 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "hop": {
+          "$ref": "#/definitions/nocloudansibleInstance"
         }
       }
     },

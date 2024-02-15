@@ -66,6 +66,10 @@ class Run extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>map<string, string> vars = 11 [json_name = "vars"];</code>
      */
     private $vars;
+    /**
+     * Generated from protobuf field <code>optional .nocloud.ansible.Instance hop = 12 [json_name = "hop"];</code>
+     */
+    protected $hop = null;
 
     /**
      * Constructor.
@@ -89,6 +93,7 @@ class Run extends \Google\Protobuf\Internal\Message
      *     @type int|string $create_time
      *     @type int|string $exec_time
      *     @type array|\Google\Protobuf\Internal\MapField $vars
+     *     @type \Nocloud\Ansible\Instance $hop
      * }
      */
     public function __construct($data = NULL) {
@@ -372,6 +377,38 @@ class Run extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::STRING);
         $this->vars = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>optional .nocloud.ansible.Instance hop = 12 [json_name = "hop"];</code>
+     * @return \Nocloud\Ansible\Instance|null
+     */
+    public function getHop()
+    {
+        return $this->hop;
+    }
+
+    public function hasHop()
+    {
+        return isset($this->hop);
+    }
+
+    public function clearHop()
+    {
+        unset($this->hop);
+    }
+
+    /**
+     * Generated from protobuf field <code>optional .nocloud.ansible.Instance hop = 12 [json_name = "hop"];</code>
+     * @param \Nocloud\Ansible\Instance $var
+     * @return $this
+     */
+    public function setHop($var)
+    {
+        GPBUtil::checkMessage($var, \Nocloud\Ansible\Instance::class);
+        $this->hop = $var;
 
         return $this;
     }
