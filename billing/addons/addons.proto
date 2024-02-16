@@ -11,6 +11,8 @@ message Addon {
   string group = 4;
   map<string, google.protobuf.Value> meta = 5;
   string description_id = 6;
+  double price = 7; // Product price in NCU per period
+  int64 period = 8;
 }
 
 

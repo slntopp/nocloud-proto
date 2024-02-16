@@ -671,6 +671,21 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "price",
+            "description": "Product price in NCU per period",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -729,6 +744,21 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "price",
+            "description": "Product price in NCU per period",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -780,6 +810,15 @@
                 },
                 "descriptionId": {
                   "type": "string"
+                },
+                "price": {
+                  "type": "number",
+                  "format": "double",
+                  "title": "Product price in NCU per period"
+                },
+                "period": {
+                  "type": "string",
+                  "format": "int64"
                 }
               }
             }
@@ -5735,6 +5774,15 @@
         },
         "descriptionId": {
           "type": "string"
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "title": "Product price in NCU per period"
+        },
+        "period": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
