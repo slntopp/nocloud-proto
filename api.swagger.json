@@ -673,14 +673,6 @@
             "type": "string"
           },
           {
-            "name": "price",
-            "description": "Product price in NCU per period",
-            "in": "query",
-            "required": false,
-            "type": "number",
-            "format": "double"
-          },
-          {
             "name": "periods",
             "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
             "in": "query",
@@ -746,14 +738,6 @@
             "type": "string"
           },
           {
-            "name": "price",
-            "description": "Product price in NCU per period",
-            "in": "query",
-            "required": false,
-            "type": "number",
-            "format": "double"
-          },
-          {
             "name": "periods",
             "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
             "in": "query",
@@ -810,11 +794,6 @@
                 },
                 "descriptionId": {
                   "type": "string"
-                },
-                "price": {
-                  "type": "number",
-                  "format": "double",
-                  "title": "Product price in NCU per period"
                 },
                 "periods": {
                   "type": "object",
@@ -5777,11 +5756,6 @@
         },
         "descriptionId": {
           "type": "string"
-        },
-        "price": {
-          "type": "number",
-          "format": "double",
-          "title": "Product price in NCU per period"
         },
         "periods": {
           "type": "object",
