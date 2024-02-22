@@ -181,6 +181,11 @@ enum BillingStatus {
   DRAFT = 4;
 }
 
+message Item {
+  string title = 1;
+  int64 amount = 2;
+}
+
 message Invoice {
   string uuid = 1;
   int64 exec = 2;
@@ -195,6 +200,7 @@ message Invoice {
   Currency currency = 11;
   int64 created = 12;
   string instance = 13;
+  repeated Item items = 14;
 }
 
 message Invoices {repeated Invoice pool = 1;}

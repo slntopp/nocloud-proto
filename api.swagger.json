@@ -2260,6 +2260,13 @@
                 },
                 "instance": {
                   "type": "string"
+                },
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "$ref": "#/definitions/billingItem"
+                  }
                 }
               }
             }
@@ -6570,6 +6577,13 @@
         },
         "instance": {
           "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/billingItem"
+          }
         }
       }
     },
@@ -6582,6 +6596,18 @@
             "type": "object",
             "$ref": "#/definitions/billingInvoice"
           }
+        }
+      }
+    },
+    "billingItem": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
