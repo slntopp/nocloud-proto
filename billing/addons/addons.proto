@@ -16,6 +16,18 @@ message Addon {
 
 message ListAddonsRequest {
   optional string group = 1;
+  optional uint64 page = 2;
+  optional uint64 limit = 3;
+  optional string field = 4;
+  optional string sort = 5;
+}
+
+message CountAddonsRequest {
+  optional string group = 1;
+}
+
+message CountAddonsResponse {
+  int64 total = 1;
 }
 
 message ListAddonsResponse {

@@ -9,7 +9,23 @@ message Description {
   string text = 2;
 }
 
-message ListDescriptionsRequest {}
+message ListDescriptionsRequest {
+  optional uint64 page = 1;
+  optional uint64 limit = 2;
+  optional string field = 3;
+  optional string sort = 4;
+}
+
+message CountDescriptionsRequest {
+  optional uint64 page = 1;
+  optional uint64 limit = 2;
+  optional string field = 3;
+  optional string sort = 4;
+}
+
+message CountDescriptionsResponse {
+  int64 total = 1;
+}
 
 message ListDescriptionsResponse {
   repeated Description descriptions = 1;

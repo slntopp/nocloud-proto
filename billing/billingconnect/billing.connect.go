@@ -115,6 +115,9 @@ const (
 	// BillingServiceCreateInvoiceProcedure is the fully-qualified name of the BillingService's
 	// CreateInvoice RPC.
 	BillingServiceCreateInvoiceProcedure = "/nocloud.billing.BillingService/CreateInvoice"
+	// BillingServiceGetInvoiceProcedure is the fully-qualified name of the BillingService's GetInvoice
+	// RPC.
+	BillingServiceGetInvoiceProcedure = "/nocloud.billing.BillingService/GetInvoice"
 	// BillingServiceGetInvoicesProcedure is the fully-qualified name of the BillingService's
 	// GetInvoices RPC.
 	BillingServiceGetInvoicesProcedure = "/nocloud.billing.BillingService/GetInvoices"
@@ -152,6 +155,8 @@ const (
 	AddonsServiceGetProcedure = "/nocloud.billing.AddonsService/Get"
 	// AddonsServiceListProcedure is the fully-qualified name of the AddonsService's List RPC.
 	AddonsServiceListProcedure = "/nocloud.billing.AddonsService/List"
+	// AddonsServiceCountProcedure is the fully-qualified name of the AddonsService's Count RPC.
+	AddonsServiceCountProcedure = "/nocloud.billing.AddonsService/Count"
 	// AddonsServiceDeleteProcedure is the fully-qualified name of the AddonsService's Delete RPC.
 	AddonsServiceDeleteProcedure = "/nocloud.billing.AddonsService/Delete"
 	// DescriptionsServiceCreateProcedure is the fully-qualified name of the DescriptionsService's
@@ -165,6 +170,9 @@ const (
 	// DescriptionsServiceListProcedure is the fully-qualified name of the DescriptionsService's List
 	// RPC.
 	DescriptionsServiceListProcedure = "/nocloud.billing.DescriptionsService/List"
+	// DescriptionsServiceCountProcedure is the fully-qualified name of the DescriptionsService's Count
+	// RPC.
+	DescriptionsServiceCountProcedure = "/nocloud.billing.DescriptionsService/Count"
 	// DescriptionsServiceDeleteProcedure is the fully-qualified name of the DescriptionsService's
 	// Delete RPC.
 	DescriptionsServiceDeleteProcedure = "/nocloud.billing.DescriptionsService/Delete"
@@ -194,6 +202,7 @@ var (
 	billingServiceGetRecordsReportsCountMethodDescriptor   = billingServiceServiceDescriptor.Methods().ByName("GetRecordsReportsCount")
 	billingServiceReprocessMethodDescriptor                = billingServiceServiceDescriptor.Methods().ByName("Reprocess")
 	billingServiceCreateInvoiceMethodDescriptor            = billingServiceServiceDescriptor.Methods().ByName("CreateInvoice")
+	billingServiceGetInvoiceMethodDescriptor               = billingServiceServiceDescriptor.Methods().ByName("GetInvoice")
 	billingServiceGetInvoicesMethodDescriptor              = billingServiceServiceDescriptor.Methods().ByName("GetInvoices")
 	billingServiceGetInvoicesCountMethodDescriptor         = billingServiceServiceDescriptor.Methods().ByName("GetInvoicesCount")
 	billingServiceUpdateInvoiceMethodDescriptor            = billingServiceServiceDescriptor.Methods().ByName("UpdateInvoice")
@@ -210,12 +219,14 @@ var (
 	addonsServiceUpdateMethodDescriptor                    = addonsServiceServiceDescriptor.Methods().ByName("Update")
 	addonsServiceGetMethodDescriptor                       = addonsServiceServiceDescriptor.Methods().ByName("Get")
 	addonsServiceListMethodDescriptor                      = addonsServiceServiceDescriptor.Methods().ByName("List")
+	addonsServiceCountMethodDescriptor                     = addonsServiceServiceDescriptor.Methods().ByName("Count")
 	addonsServiceDeleteMethodDescriptor                    = addonsServiceServiceDescriptor.Methods().ByName("Delete")
 	descriptionsServiceServiceDescriptor                   = billing.File_billing_billing_proto.Services().ByName("DescriptionsService")
 	descriptionsServiceCreateMethodDescriptor              = descriptionsServiceServiceDescriptor.Methods().ByName("Create")
 	descriptionsServiceUpdateMethodDescriptor              = descriptionsServiceServiceDescriptor.Methods().ByName("Update")
 	descriptionsServiceGetMethodDescriptor                 = descriptionsServiceServiceDescriptor.Methods().ByName("Get")
 	descriptionsServiceListMethodDescriptor                = descriptionsServiceServiceDescriptor.Methods().ByName("List")
+	descriptionsServiceCountMethodDescriptor               = descriptionsServiceServiceDescriptor.Methods().ByName("Count")
 	descriptionsServiceDeleteMethodDescriptor              = descriptionsServiceServiceDescriptor.Methods().ByName("Delete")
 )
 
@@ -358,6 +369,7 @@ type BillingServiceClient interface {
 	GetRecordsReportsCount(context.Context, *connect.Request[billing.GetRecordsReportsCountRequest]) (*connect.Response[billing.GetReportsCountResponse], error)
 	Reprocess(context.Context, *connect.Request[billing.ReprocessTransactionsRequest]) (*connect.Response[billing.Transactions], error)
 	CreateInvoice(context.Context, *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error)
+	GetInvoice(context.Context, *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error)
 	GetInvoices(context.Context, *connect.Request[billing.GetInvoicesRequest]) (*connect.Response[billing.Invoices], error)
 	GetInvoicesCount(context.Context, *connect.Request[billing.GetInvoicesCountRequest]) (*connect.Response[billing.GetInvoicesCountResponse], error)
 	UpdateInvoice(context.Context, *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error)
@@ -475,6 +487,12 @@ func NewBillingServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(billingServiceCreateInvoiceMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		getInvoice: connect.NewClient[billing.Invoice, billing.Invoice](
+			httpClient,
+			baseURL+BillingServiceGetInvoiceProcedure,
+			connect.WithSchema(billingServiceGetInvoiceMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 		getInvoices: connect.NewClient[billing.GetInvoicesRequest, billing.Invoices](
 			httpClient,
 			baseURL+BillingServiceGetInvoicesProcedure,
@@ -515,6 +533,7 @@ type billingServiceClient struct {
 	getRecordsReportsCount   *connect.Client[billing.GetRecordsReportsCountRequest, billing.GetReportsCountResponse]
 	reprocess                *connect.Client[billing.ReprocessTransactionsRequest, billing.Transactions]
 	createInvoice            *connect.Client[billing.Invoice, billing.Invoice]
+	getInvoice               *connect.Client[billing.Invoice, billing.Invoice]
 	getInvoices              *connect.Client[billing.GetInvoicesRequest, billing.Invoices]
 	getInvoicesCount         *connect.Client[billing.GetInvoicesCountRequest, billing.GetInvoicesCountResponse]
 	updateInvoice            *connect.Client[billing.Invoice, billing.Invoice]
@@ -605,6 +624,11 @@ func (c *billingServiceClient) CreateInvoice(ctx context.Context, req *connect.R
 	return c.createInvoice.CallUnary(ctx, req)
 }
 
+// GetInvoice calls nocloud.billing.BillingService.GetInvoice.
+func (c *billingServiceClient) GetInvoice(ctx context.Context, req *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error) {
+	return c.getInvoice.CallUnary(ctx, req)
+}
+
 // GetInvoices calls nocloud.billing.BillingService.GetInvoices.
 func (c *billingServiceClient) GetInvoices(ctx context.Context, req *connect.Request[billing.GetInvoicesRequest]) (*connect.Response[billing.Invoices], error) {
 	return c.getInvoices.CallUnary(ctx, req)
@@ -639,6 +663,7 @@ type BillingServiceHandler interface {
 	GetRecordsReportsCount(context.Context, *connect.Request[billing.GetRecordsReportsCountRequest]) (*connect.Response[billing.GetReportsCountResponse], error)
 	Reprocess(context.Context, *connect.Request[billing.ReprocessTransactionsRequest]) (*connect.Response[billing.Transactions], error)
 	CreateInvoice(context.Context, *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error)
+	GetInvoice(context.Context, *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error)
 	GetInvoices(context.Context, *connect.Request[billing.GetInvoicesRequest]) (*connect.Response[billing.Invoices], error)
 	GetInvoicesCount(context.Context, *connect.Request[billing.GetInvoicesCountRequest]) (*connect.Response[billing.GetInvoicesCountResponse], error)
 	UpdateInvoice(context.Context, *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error)
@@ -752,6 +777,12 @@ func NewBillingServiceHandler(svc BillingServiceHandler, opts ...connect.Handler
 		connect.WithSchema(billingServiceCreateInvoiceMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	billingServiceGetInvoiceHandler := connect.NewUnaryHandler(
+		BillingServiceGetInvoiceProcedure,
+		svc.GetInvoice,
+		connect.WithSchema(billingServiceGetInvoiceMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	billingServiceGetInvoicesHandler := connect.NewUnaryHandler(
 		BillingServiceGetInvoicesProcedure,
 		svc.GetInvoices,
@@ -806,6 +837,8 @@ func NewBillingServiceHandler(svc BillingServiceHandler, opts ...connect.Handler
 			billingServiceReprocessHandler.ServeHTTP(w, r)
 		case BillingServiceCreateInvoiceProcedure:
 			billingServiceCreateInvoiceHandler.ServeHTTP(w, r)
+		case BillingServiceGetInvoiceProcedure:
+			billingServiceGetInvoiceHandler.ServeHTTP(w, r)
 		case BillingServiceGetInvoicesProcedure:
 			billingServiceGetInvoicesHandler.ServeHTTP(w, r)
 		case BillingServiceGetInvoicesCountProcedure:
@@ -887,6 +920,10 @@ func (UnimplementedBillingServiceHandler) Reprocess(context.Context, *connect.Re
 
 func (UnimplementedBillingServiceHandler) CreateInvoice(context.Context, *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.BillingService.CreateInvoice is not implemented"))
+}
+
+func (UnimplementedBillingServiceHandler) GetInvoice(context.Context, *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.BillingService.GetInvoice is not implemented"))
 }
 
 func (UnimplementedBillingServiceHandler) GetInvoices(context.Context, *connect.Request[billing.GetInvoicesRequest]) (*connect.Response[billing.Invoices], error) {
@@ -1131,6 +1168,7 @@ type AddonsServiceClient interface {
 	Update(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error)
 	Get(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error)
 	List(context.Context, *connect.Request[addons.ListAddonsRequest]) (*connect.Response[addons.ListAddonsResponse], error)
+	Count(context.Context, *connect.Request[addons.CountAddonsRequest]) (*connect.Response[addons.CountAddonsResponse], error)
 	Delete(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error)
 }
 
@@ -1168,6 +1206,12 @@ func NewAddonsServiceClient(httpClient connect.HTTPClient, baseURL string, opts 
 			connect.WithSchema(addonsServiceListMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		count: connect.NewClient[addons.CountAddonsRequest, addons.CountAddonsResponse](
+			httpClient,
+			baseURL+AddonsServiceCountProcedure,
+			connect.WithSchema(addonsServiceCountMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 		delete: connect.NewClient[addons.Addon, addons.Addon](
 			httpClient,
 			baseURL+AddonsServiceDeleteProcedure,
@@ -1183,6 +1227,7 @@ type addonsServiceClient struct {
 	update *connect.Client[addons.Addon, addons.Addon]
 	get    *connect.Client[addons.Addon, addons.Addon]
 	list   *connect.Client[addons.ListAddonsRequest, addons.ListAddonsResponse]
+	count  *connect.Client[addons.CountAddonsRequest, addons.CountAddonsResponse]
 	delete *connect.Client[addons.Addon, addons.Addon]
 }
 
@@ -1206,6 +1251,11 @@ func (c *addonsServiceClient) List(ctx context.Context, req *connect.Request[add
 	return c.list.CallUnary(ctx, req)
 }
 
+// Count calls nocloud.billing.AddonsService.Count.
+func (c *addonsServiceClient) Count(ctx context.Context, req *connect.Request[addons.CountAddonsRequest]) (*connect.Response[addons.CountAddonsResponse], error) {
+	return c.count.CallUnary(ctx, req)
+}
+
 // Delete calls nocloud.billing.AddonsService.Delete.
 func (c *addonsServiceClient) Delete(ctx context.Context, req *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error) {
 	return c.delete.CallUnary(ctx, req)
@@ -1217,6 +1267,7 @@ type AddonsServiceHandler interface {
 	Update(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error)
 	Get(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error)
 	List(context.Context, *connect.Request[addons.ListAddonsRequest]) (*connect.Response[addons.ListAddonsResponse], error)
+	Count(context.Context, *connect.Request[addons.CountAddonsRequest]) (*connect.Response[addons.CountAddonsResponse], error)
 	Delete(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error)
 }
 
@@ -1250,6 +1301,12 @@ func NewAddonsServiceHandler(svc AddonsServiceHandler, opts ...connect.HandlerOp
 		connect.WithSchema(addonsServiceListMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	addonsServiceCountHandler := connect.NewUnaryHandler(
+		AddonsServiceCountProcedure,
+		svc.Count,
+		connect.WithSchema(addonsServiceCountMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	addonsServiceDeleteHandler := connect.NewUnaryHandler(
 		AddonsServiceDeleteProcedure,
 		svc.Delete,
@@ -1266,6 +1323,8 @@ func NewAddonsServiceHandler(svc AddonsServiceHandler, opts ...connect.HandlerOp
 			addonsServiceGetHandler.ServeHTTP(w, r)
 		case AddonsServiceListProcedure:
 			addonsServiceListHandler.ServeHTTP(w, r)
+		case AddonsServiceCountProcedure:
+			addonsServiceCountHandler.ServeHTTP(w, r)
 		case AddonsServiceDeleteProcedure:
 			addonsServiceDeleteHandler.ServeHTTP(w, r)
 		default:
@@ -1293,6 +1352,10 @@ func (UnimplementedAddonsServiceHandler) List(context.Context, *connect.Request[
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.AddonsService.List is not implemented"))
 }
 
+func (UnimplementedAddonsServiceHandler) Count(context.Context, *connect.Request[addons.CountAddonsRequest]) (*connect.Response[addons.CountAddonsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.AddonsService.Count is not implemented"))
+}
+
 func (UnimplementedAddonsServiceHandler) Delete(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.AddonsService.Delete is not implemented"))
 }
@@ -1303,6 +1366,7 @@ type DescriptionsServiceClient interface {
 	Update(context.Context, *connect.Request[descriptions.Description]) (*connect.Response[descriptions.Description], error)
 	Get(context.Context, *connect.Request[descriptions.Description]) (*connect.Response[descriptions.Description], error)
 	List(context.Context, *connect.Request[descriptions.ListDescriptionsRequest]) (*connect.Response[descriptions.ListDescriptionsResponse], error)
+	Count(context.Context, *connect.Request[descriptions.CountDescriptionsRequest]) (*connect.Response[descriptions.CountDescriptionsResponse], error)
 	Delete(context.Context, *connect.Request[descriptions.Description]) (*connect.Response[descriptions.Description], error)
 }
 
@@ -1340,6 +1404,12 @@ func NewDescriptionsServiceClient(httpClient connect.HTTPClient, baseURL string,
 			connect.WithSchema(descriptionsServiceListMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		count: connect.NewClient[descriptions.CountDescriptionsRequest, descriptions.CountDescriptionsResponse](
+			httpClient,
+			baseURL+DescriptionsServiceCountProcedure,
+			connect.WithSchema(descriptionsServiceCountMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 		delete: connect.NewClient[descriptions.Description, descriptions.Description](
 			httpClient,
 			baseURL+DescriptionsServiceDeleteProcedure,
@@ -1355,6 +1425,7 @@ type descriptionsServiceClient struct {
 	update *connect.Client[descriptions.Description, descriptions.Description]
 	get    *connect.Client[descriptions.Description, descriptions.Description]
 	list   *connect.Client[descriptions.ListDescriptionsRequest, descriptions.ListDescriptionsResponse]
+	count  *connect.Client[descriptions.CountDescriptionsRequest, descriptions.CountDescriptionsResponse]
 	delete *connect.Client[descriptions.Description, descriptions.Description]
 }
 
@@ -1378,6 +1449,11 @@ func (c *descriptionsServiceClient) List(ctx context.Context, req *connect.Reque
 	return c.list.CallUnary(ctx, req)
 }
 
+// Count calls nocloud.billing.DescriptionsService.Count.
+func (c *descriptionsServiceClient) Count(ctx context.Context, req *connect.Request[descriptions.CountDescriptionsRequest]) (*connect.Response[descriptions.CountDescriptionsResponse], error) {
+	return c.count.CallUnary(ctx, req)
+}
+
 // Delete calls nocloud.billing.DescriptionsService.Delete.
 func (c *descriptionsServiceClient) Delete(ctx context.Context, req *connect.Request[descriptions.Description]) (*connect.Response[descriptions.Description], error) {
 	return c.delete.CallUnary(ctx, req)
@@ -1390,6 +1466,7 @@ type DescriptionsServiceHandler interface {
 	Update(context.Context, *connect.Request[descriptions.Description]) (*connect.Response[descriptions.Description], error)
 	Get(context.Context, *connect.Request[descriptions.Description]) (*connect.Response[descriptions.Description], error)
 	List(context.Context, *connect.Request[descriptions.ListDescriptionsRequest]) (*connect.Response[descriptions.ListDescriptionsResponse], error)
+	Count(context.Context, *connect.Request[descriptions.CountDescriptionsRequest]) (*connect.Response[descriptions.CountDescriptionsResponse], error)
 	Delete(context.Context, *connect.Request[descriptions.Description]) (*connect.Response[descriptions.Description], error)
 }
 
@@ -1423,6 +1500,12 @@ func NewDescriptionsServiceHandler(svc DescriptionsServiceHandler, opts ...conne
 		connect.WithSchema(descriptionsServiceListMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	descriptionsServiceCountHandler := connect.NewUnaryHandler(
+		DescriptionsServiceCountProcedure,
+		svc.Count,
+		connect.WithSchema(descriptionsServiceCountMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	descriptionsServiceDeleteHandler := connect.NewUnaryHandler(
 		DescriptionsServiceDeleteProcedure,
 		svc.Delete,
@@ -1439,6 +1522,8 @@ func NewDescriptionsServiceHandler(svc DescriptionsServiceHandler, opts ...conne
 			descriptionsServiceGetHandler.ServeHTTP(w, r)
 		case DescriptionsServiceListProcedure:
 			descriptionsServiceListHandler.ServeHTTP(w, r)
+		case DescriptionsServiceCountProcedure:
+			descriptionsServiceCountHandler.ServeHTTP(w, r)
 		case DescriptionsServiceDeleteProcedure:
 			descriptionsServiceDeleteHandler.ServeHTTP(w, r)
 		default:
@@ -1464,6 +1549,10 @@ func (UnimplementedDescriptionsServiceHandler) Get(context.Context, *connect.Req
 
 func (UnimplementedDescriptionsServiceHandler) List(context.Context, *connect.Request[descriptions.ListDescriptionsRequest]) (*connect.Response[descriptions.ListDescriptionsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.DescriptionsService.List is not implemented"))
+}
+
+func (UnimplementedDescriptionsServiceHandler) Count(context.Context, *connect.Request[descriptions.CountDescriptionsRequest]) (*connect.Response[descriptions.CountDescriptionsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.DescriptionsService.Count is not implemented"))
 }
 
 func (UnimplementedDescriptionsServiceHandler) Delete(context.Context, *connect.Request[descriptions.Description]) (*connect.Response[descriptions.Description], error) {

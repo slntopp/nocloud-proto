@@ -217,6 +217,7 @@ const (
 	BillingService_GetRecordsReportsCount_FullMethodName   = "/nocloud.billing.BillingService/GetRecordsReportsCount"
 	BillingService_Reprocess_FullMethodName                = "/nocloud.billing.BillingService/Reprocess"
 	BillingService_CreateInvoice_FullMethodName            = "/nocloud.billing.BillingService/CreateInvoice"
+	BillingService_GetInvoice_FullMethodName               = "/nocloud.billing.BillingService/GetInvoice"
 	BillingService_GetInvoices_FullMethodName              = "/nocloud.billing.BillingService/GetInvoices"
 	BillingService_GetInvoicesCount_FullMethodName         = "/nocloud.billing.BillingService/GetInvoicesCount"
 	BillingService_UpdateInvoice_FullMethodName            = "/nocloud.billing.BillingService/UpdateInvoice"
@@ -243,6 +244,7 @@ type BillingServiceClient interface {
 	GetRecordsReportsCount(ctx context.Context, in *GetRecordsReportsCountRequest, opts ...grpc.CallOption) (*GetReportsCountResponse, error)
 	Reprocess(ctx context.Context, in *ReprocessTransactionsRequest, opts ...grpc.CallOption) (*Transactions, error)
 	CreateInvoice(ctx context.Context, in *Invoice, opts ...grpc.CallOption) (*Invoice, error)
+	GetInvoice(ctx context.Context, in *Invoice, opts ...grpc.CallOption) (*Invoice, error)
 	GetInvoices(ctx context.Context, in *GetInvoicesRequest, opts ...grpc.CallOption) (*Invoices, error)
 	GetInvoicesCount(ctx context.Context, in *GetInvoicesCountRequest, opts ...grpc.CallOption) (*GetInvoicesCountResponse, error)
 	UpdateInvoice(ctx context.Context, in *Invoice, opts ...grpc.CallOption) (*Invoice, error)
@@ -409,6 +411,15 @@ func (c *billingServiceClient) CreateInvoice(ctx context.Context, in *Invoice, o
 	return out, nil
 }
 
+func (c *billingServiceClient) GetInvoice(ctx context.Context, in *Invoice, opts ...grpc.CallOption) (*Invoice, error) {
+	out := new(Invoice)
+	err := c.cc.Invoke(ctx, BillingService_GetInvoice_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *billingServiceClient) GetInvoices(ctx context.Context, in *GetInvoicesRequest, opts ...grpc.CallOption) (*Invoices, error) {
 	out := new(Invoices)
 	err := c.cc.Invoke(ctx, BillingService_GetInvoices_FullMethodName, in, out, opts...)
@@ -457,6 +468,7 @@ type BillingServiceServer interface {
 	GetRecordsReportsCount(context.Context, *GetRecordsReportsCountRequest) (*GetReportsCountResponse, error)
 	Reprocess(context.Context, *ReprocessTransactionsRequest) (*Transactions, error)
 	CreateInvoice(context.Context, *Invoice) (*Invoice, error)
+	GetInvoice(context.Context, *Invoice) (*Invoice, error)
 	GetInvoices(context.Context, *GetInvoicesRequest) (*Invoices, error)
 	GetInvoicesCount(context.Context, *GetInvoicesCountRequest) (*GetInvoicesCountResponse, error)
 	UpdateInvoice(context.Context, *Invoice) (*Invoice, error)
@@ -517,6 +529,9 @@ func (UnimplementedBillingServiceServer) Reprocess(context.Context, *ReprocessTr
 }
 func (UnimplementedBillingServiceServer) CreateInvoice(context.Context, *Invoice) (*Invoice, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateInvoice not implemented")
+}
+func (UnimplementedBillingServiceServer) GetInvoice(context.Context, *Invoice) (*Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInvoice not implemented")
 }
 func (UnimplementedBillingServiceServer) GetInvoices(context.Context, *GetInvoicesRequest) (*Invoices, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInvoices not implemented")
@@ -846,6 +861,24 @@ func _BillingService_CreateInvoice_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BillingService_GetInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Invoice)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).GetInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_GetInvoice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).GetInvoice(ctx, req.(*Invoice))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BillingService_GetInvoices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetInvoicesRequest)
 	if err := dec(in); err != nil {
@@ -974,6 +1007,10 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateInvoice",
 			Handler:    _BillingService_CreateInvoice_Handler,
+		},
+		{
+			MethodName: "GetInvoice",
+			Handler:    _BillingService_GetInvoice_Handler,
 		},
 		{
 			MethodName: "GetInvoices",
@@ -1309,6 +1346,7 @@ const (
 	AddonsService_Update_FullMethodName = "/nocloud.billing.AddonsService/Update"
 	AddonsService_Get_FullMethodName    = "/nocloud.billing.AddonsService/Get"
 	AddonsService_List_FullMethodName   = "/nocloud.billing.AddonsService/List"
+	AddonsService_Count_FullMethodName  = "/nocloud.billing.AddonsService/Count"
 	AddonsService_Delete_FullMethodName = "/nocloud.billing.AddonsService/Delete"
 )
 
@@ -1320,6 +1358,7 @@ type AddonsServiceClient interface {
 	Update(ctx context.Context, in *addons.Addon, opts ...grpc.CallOption) (*addons.Addon, error)
 	Get(ctx context.Context, in *addons.Addon, opts ...grpc.CallOption) (*addons.Addon, error)
 	List(ctx context.Context, in *addons.ListAddonsRequest, opts ...grpc.CallOption) (*addons.ListAddonsResponse, error)
+	Count(ctx context.Context, in *addons.CountAddonsRequest, opts ...grpc.CallOption) (*addons.CountAddonsResponse, error)
 	Delete(ctx context.Context, in *addons.Addon, opts ...grpc.CallOption) (*addons.Addon, error)
 }
 
@@ -1367,6 +1406,15 @@ func (c *addonsServiceClient) List(ctx context.Context, in *addons.ListAddonsReq
 	return out, nil
 }
 
+func (c *addonsServiceClient) Count(ctx context.Context, in *addons.CountAddonsRequest, opts ...grpc.CallOption) (*addons.CountAddonsResponse, error) {
+	out := new(addons.CountAddonsResponse)
+	err := c.cc.Invoke(ctx, AddonsService_Count_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *addonsServiceClient) Delete(ctx context.Context, in *addons.Addon, opts ...grpc.CallOption) (*addons.Addon, error) {
 	out := new(addons.Addon)
 	err := c.cc.Invoke(ctx, AddonsService_Delete_FullMethodName, in, out, opts...)
@@ -1384,6 +1432,7 @@ type AddonsServiceServer interface {
 	Update(context.Context, *addons.Addon) (*addons.Addon, error)
 	Get(context.Context, *addons.Addon) (*addons.Addon, error)
 	List(context.Context, *addons.ListAddonsRequest) (*addons.ListAddonsResponse, error)
+	Count(context.Context, *addons.CountAddonsRequest) (*addons.CountAddonsResponse, error)
 	Delete(context.Context, *addons.Addon) (*addons.Addon, error)
 	mustEmbedUnimplementedAddonsServiceServer()
 }
@@ -1403,6 +1452,9 @@ func (UnimplementedAddonsServiceServer) Get(context.Context, *addons.Addon) (*ad
 }
 func (UnimplementedAddonsServiceServer) List(context.Context, *addons.ListAddonsRequest) (*addons.ListAddonsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedAddonsServiceServer) Count(context.Context, *addons.CountAddonsRequest) (*addons.CountAddonsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Count not implemented")
 }
 func (UnimplementedAddonsServiceServer) Delete(context.Context, *addons.Addon) (*addons.Addon, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
@@ -1492,6 +1544,24 @@ func _AddonsService_List_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AddonsService_Count_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(addons.CountAddonsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AddonsServiceServer).Count(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AddonsService_Count_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AddonsServiceServer).Count(ctx, req.(*addons.CountAddonsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AddonsService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(addons.Addon)
 	if err := dec(in); err != nil {
@@ -1534,6 +1604,10 @@ var AddonsService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AddonsService_List_Handler,
 		},
 		{
+			MethodName: "Count",
+			Handler:    _AddonsService_Count_Handler,
+		},
+		{
 			MethodName: "Delete",
 			Handler:    _AddonsService_Delete_Handler,
 		},
@@ -1547,6 +1621,7 @@ const (
 	DescriptionsService_Update_FullMethodName = "/nocloud.billing.DescriptionsService/Update"
 	DescriptionsService_Get_FullMethodName    = "/nocloud.billing.DescriptionsService/Get"
 	DescriptionsService_List_FullMethodName   = "/nocloud.billing.DescriptionsService/List"
+	DescriptionsService_Count_FullMethodName  = "/nocloud.billing.DescriptionsService/Count"
 	DescriptionsService_Delete_FullMethodName = "/nocloud.billing.DescriptionsService/Delete"
 )
 
@@ -1558,6 +1633,7 @@ type DescriptionsServiceClient interface {
 	Update(ctx context.Context, in *descriptions.Description, opts ...grpc.CallOption) (*descriptions.Description, error)
 	Get(ctx context.Context, in *descriptions.Description, opts ...grpc.CallOption) (*descriptions.Description, error)
 	List(ctx context.Context, in *descriptions.ListDescriptionsRequest, opts ...grpc.CallOption) (*descriptions.ListDescriptionsResponse, error)
+	Count(ctx context.Context, in *descriptions.CountDescriptionsRequest, opts ...grpc.CallOption) (*descriptions.CountDescriptionsResponse, error)
 	Delete(ctx context.Context, in *descriptions.Description, opts ...grpc.CallOption) (*descriptions.Description, error)
 }
 
@@ -1605,6 +1681,15 @@ func (c *descriptionsServiceClient) List(ctx context.Context, in *descriptions.L
 	return out, nil
 }
 
+func (c *descriptionsServiceClient) Count(ctx context.Context, in *descriptions.CountDescriptionsRequest, opts ...grpc.CallOption) (*descriptions.CountDescriptionsResponse, error) {
+	out := new(descriptions.CountDescriptionsResponse)
+	err := c.cc.Invoke(ctx, DescriptionsService_Count_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *descriptionsServiceClient) Delete(ctx context.Context, in *descriptions.Description, opts ...grpc.CallOption) (*descriptions.Description, error) {
 	out := new(descriptions.Description)
 	err := c.cc.Invoke(ctx, DescriptionsService_Delete_FullMethodName, in, out, opts...)
@@ -1622,6 +1707,7 @@ type DescriptionsServiceServer interface {
 	Update(context.Context, *descriptions.Description) (*descriptions.Description, error)
 	Get(context.Context, *descriptions.Description) (*descriptions.Description, error)
 	List(context.Context, *descriptions.ListDescriptionsRequest) (*descriptions.ListDescriptionsResponse, error)
+	Count(context.Context, *descriptions.CountDescriptionsRequest) (*descriptions.CountDescriptionsResponse, error)
 	Delete(context.Context, *descriptions.Description) (*descriptions.Description, error)
 	mustEmbedUnimplementedDescriptionsServiceServer()
 }
@@ -1641,6 +1727,9 @@ func (UnimplementedDescriptionsServiceServer) Get(context.Context, *descriptions
 }
 func (UnimplementedDescriptionsServiceServer) List(context.Context, *descriptions.ListDescriptionsRequest) (*descriptions.ListDescriptionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedDescriptionsServiceServer) Count(context.Context, *descriptions.CountDescriptionsRequest) (*descriptions.CountDescriptionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Count not implemented")
 }
 func (UnimplementedDescriptionsServiceServer) Delete(context.Context, *descriptions.Description) (*descriptions.Description, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
@@ -1730,6 +1819,24 @@ func _DescriptionsService_List_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DescriptionsService_Count_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(descriptions.CountDescriptionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DescriptionsServiceServer).Count(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DescriptionsService_Count_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DescriptionsServiceServer).Count(ctx, req.(*descriptions.CountDescriptionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _DescriptionsService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(descriptions.Description)
 	if err := dec(in); err != nil {
@@ -1770,6 +1877,10 @@ var DescriptionsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "List",
 			Handler:    _DescriptionsService_List_Handler,
+		},
+		{
+			MethodName: "Count",
+			Handler:    _DescriptionsService_Count_Handler,
 		},
 		{
 			MethodName: "Delete",
