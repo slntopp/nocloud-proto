@@ -12,6 +12,7 @@ message Addon {
   map<string, google.protobuf.Value> meta = 5;
   string description_id = 6;
   map<int64, double> periods = 7;
+  int64 created = 8;
 }
 
 message ListAddonsRequest {

@@ -1105,6 +1105,13 @@
             "in": "query",
             "required": false,
             "type": "number"
+          },
+          {
+            "name": "created",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -1170,6 +1177,13 @@
             "in": "query",
             "required": false,
             "type": "number"
+          },
+          {
+            "name": "created",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -1228,6 +1242,10 @@
                     "type": "number",
                     "format": "double"
                   }
+                },
+                "created": {
+                  "type": "string",
+                  "format": "int64"
                 }
               }
             }
@@ -5993,6 +6011,10 @@
             "type": "number",
             "format": "double"
           }
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
