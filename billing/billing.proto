@@ -279,6 +279,8 @@ message GetInvoicesCountRequest {
   optional string account = 1;
   optional string service = 2;
   optional BillingStatus status = 3;
+
+  map<string, google.protobuf.Value> filters = 4;
 }
 
 message GetInvoicesRequest {
@@ -290,6 +292,7 @@ message GetInvoicesRequest {
   optional string sort = 6;
   optional string uuid = 7; // Get a single Transaction (would embed records too)
   optional BillingStatus status = 8;
+  map<string, google.protobuf.Value> filters = 9;
 }
 
 message GetInvoicesCountResponse {
