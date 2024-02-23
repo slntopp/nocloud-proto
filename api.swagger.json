@@ -984,7 +984,7 @@
       }
     },
     "/billing/addons": {
-      "get": {
+      "post": {
         "operationId": "AddonsService_List",
         "responses": {
           "200": {
@@ -1002,36 +1002,12 @@
         },
         "parameters": [
           {
-            "name": "group",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "uint64"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "uint64"
-          },
-          {
-            "name": "field",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "sort",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/addonsListAddonsRequest"
+            }
           }
         ],
         "tags": [
@@ -1327,7 +1303,7 @@
       }
     },
     "/billing/count/addons": {
-      "get": {
+      "post": {
         "operationId": "AddonsService_Count",
         "responses": {
           "200": {
@@ -1345,10 +1321,12 @@
         },
         "parameters": [
           {
-            "name": "group",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/addonsCountAddonsRequest"
+            }
           }
         ],
         "tags": [
@@ -6006,12 +5984,45 @@
         }
       }
     },
+    "addonsCountAddonsRequest": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
     "addonsCountAddonsResponse": {
       "type": "object",
       "properties": {
         "total": {
           "type": "string",
           "format": "int64"
+        },
+        "unique": {}
+      }
+    },
+    "addonsListAddonsRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "limit": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "field": {
+          "type": "string"
+        },
+        "sort": {
+          "type": "string"
+        },
+        "filters": {
+          "type": "object",
+          "additionalProperties": {}
         }
       }
     },

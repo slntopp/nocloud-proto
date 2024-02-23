@@ -15,19 +15,20 @@ message Addon {
 }
 
 message ListAddonsRequest {
-  optional string group = 1;
-  optional uint64 page = 2;
-  optional uint64 limit = 3;
-  optional string field = 4;
-  optional string sort = 5;
+  optional uint64 page = 1;
+  optional uint64 limit = 2;
+  optional string field = 3;
+  optional string sort = 4;
+  map<string, google.protobuf.Value> filters = 5;
 }
 
 message CountAddonsRequest {
-  optional string group = 1;
+  map<string, google.protobuf.Value> filters = 1;
 }
 
 message CountAddonsResponse {
   int64 total = 1;
+  google.protobuf.Value unique = 2;
 }
 
 message ListAddonsResponse {

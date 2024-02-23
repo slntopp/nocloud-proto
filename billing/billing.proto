@@ -599,12 +599,14 @@ service AddonsService {
   };
   rpc List (addons.ListAddonsRequest) returns (addons.ListAddonsResponse) {
     option (google.api.http) = {
-      get: "/billing/addons"
+      post: "/billing/addons"
+      body: "*"
     };
   };
   rpc Count (addons.CountAddonsRequest) returns (addons.CountAddonsResponse) {
     option (google.api.http) = {
-      get: "/billing/count/addons"
+      post: "/billing/count/addons"
+      body: "*"
     };
   };
   rpc Delete (addons.Addon) returns (addons.Addon) {
