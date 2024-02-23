@@ -1397,7 +1397,7 @@
       }
     },
     "/billing/count/invoices": {
-      "get": {
+      "post": {
         "operationId": "BillingService_GetInvoicesCount",
         "responses": {
           "200": {
@@ -1415,36 +1415,12 @@
         },
         "parameters": [
           {
-            "name": "account",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "service",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "PAID",
-              "UNPAID",
-              "CANCELED",
-              "TERMINATED",
-              "DRAFT"
-            ],
-            "default": "PAID"
-          },
-          {
-            "name": "filters",
-            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
-            "in": "query",
-            "required": false
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingGetInvoicesCountRequest"
+            }
           }
         ],
         "tags": [
@@ -1952,7 +1928,7 @@
       }
     },
     "/billing/invoices": {
-      "get": {
+      "post": {
         "operationId": "BillingService_GetInvoices",
         "responses": {
           "200": {
@@ -1970,69 +1946,12 @@
         },
         "parameters": [
           {
-            "name": "account",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "service",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "uint64"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "uint64"
-          },
-          {
-            "name": "field",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "sort",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "uuid",
-            "description": "Get a single Transaction (would embed records too)",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "PAID",
-              "UNPAID",
-              "CANCELED",
-              "TERMINATED",
-              "DRAFT"
-            ],
-            "default": "PAID"
-          },
-          {
-            "name": "filters",
-            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
-            "in": "query",
-            "required": false
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingGetInvoicesRequest"
+            }
           }
         ],
         "tags": [
@@ -6464,12 +6383,66 @@
         }
       }
     },
+    "billingGetInvoicesCountRequest": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "string"
+        },
+        "service": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/billingBillingStatus"
+        },
+        "filters": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
     "billingGetInvoicesCountResponse": {
       "type": "object",
       "properties": {
         "total": {
           "type": "string",
           "format": "uint64"
+        }
+      }
+    },
+    "billingGetInvoicesRequest": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "string"
+        },
+        "service": {
+          "type": "string"
+        },
+        "page": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "limit": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "field": {
+          "type": "string"
+        },
+        "sort": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string",
+          "title": "Get a single Transaction (would embed records too)"
+        },
+        "status": {
+          "$ref": "#/definitions/billingBillingStatus"
+        },
+        "filters": {
+          "type": "object",
+          "additionalProperties": {}
         }
       }
     },

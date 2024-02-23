@@ -469,12 +469,14 @@ service BillingService {
   };
   rpc GetInvoices (GetInvoicesRequest) returns (Invoices) {
     option (google.api.http) = {
-      get: "/billing/invoices"
+      post: "/billing/invoices"
+      body: "*"
     };
   };
   rpc GetInvoicesCount (GetInvoicesCountRequest) returns (GetInvoicesCountResponse) {
     option (google.api.http) = {
-      get: "/billing/count/invoices"
+      post: "/billing/count/invoices"
+      body: "*"
     };
   };
   rpc UpdateInvoice (Invoice) returns (Invoice) {
