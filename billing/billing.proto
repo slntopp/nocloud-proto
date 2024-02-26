@@ -184,6 +184,7 @@ enum BillingStatus {
 message Item {
   string title = 1;
   int64 amount = 2;
+  string instance = 3;
 }
 
 message Invoice {
@@ -199,8 +200,7 @@ message Invoice {
   map<string, google.protobuf.Value> meta = 10;
   Currency currency = 11;
   int64 created = 12;
-  string instance = 13;
-  repeated Item items = 14;
+  repeated Item items = 13;
 }
 
 message Invoices {repeated Invoice pool = 1;}

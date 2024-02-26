@@ -2102,12 +2102,6 @@
             "required": false,
             "type": "string",
             "format": "int64"
-          },
-          {
-            "name": "instance",
-            "in": "query",
-            "required": false,
-            "type": "string"
           }
         ],
         "tags": [
@@ -2184,9 +2178,6 @@
                 "created": {
                   "type": "string",
                   "format": "int64"
-                },
-                "instance": {
-                  "type": "string"
                 },
                 "items": {
                   "type": "array",
@@ -6593,9 +6584,6 @@
           "type": "string",
           "format": "int64"
         },
-        "instance": {
-          "type": "string"
-        },
         "items": {
           "type": "array",
           "items": {
@@ -6626,6 +6614,9 @@
         "amount": {
           "type": "string",
           "format": "int64"
+        },
+        "instance": {
+          "type": "string"
         }
       }
     },
