@@ -13,6 +13,7 @@ message Addon {
   string description_id = 6;
   map<int64, double> periods = 7;
   int64 created = 8;
+  bool system = 9;
 }
 
 message ListAddonsRequest {
