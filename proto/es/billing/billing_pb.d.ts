@@ -138,6 +138,36 @@ export declare enum Priority {
 }
 
 /**
+ * @generated from enum nocloud.billing.BillingStatus
+ */
+export declare enum BillingStatus {
+  /**
+   * @generated from enum value: PAID = 0;
+   */
+  PAID = 0,
+
+  /**
+   * @generated from enum value: UNPAID = 1;
+   */
+  UNPAID = 1,
+
+  /**
+   * @generated from enum value: CANCELED = 2;
+   */
+  CANCELED = 2,
+
+  /**
+   * @generated from enum value: TERMINATED = 3;
+   */
+  TERMINATED = 3,
+
+  /**
+   * @generated from enum value: DRAFT = 4;
+   */
+  DRAFT = 4,
+}
+
+/**
  * @generated from enum nocloud.billing.Currency
  */
 export declare enum Currency {
@@ -310,6 +340,11 @@ export declare class Plan extends Message<Plan> {
    * @generated from field: nocloud.statuses.NoCloudStatus status = 11;
    */
   status: NoCloudStatus;
+
+  /**
+   * @generated from field: repeated string addons = 12;
+   */
+  addons: string[];
 
   constructor(data?: PartialMessage<Plan>);
 
@@ -514,6 +549,11 @@ export declare class ResourceConf extends Message<ResourceConf> {
    */
   periodKind: PeriodKind;
 
+  /**
+   * @generated from field: string description_id = 15;
+   */
+  descriptionId: string;
+
   constructor(data?: PartialMessage<ResourceConf>);
 
   static readonly runtime: typeof proto3;
@@ -595,6 +635,16 @@ export declare class Product extends Message<Product> {
    * @generated from field: nocloud.billing.PeriodKind period_kind = 11;
    */
   periodKind: PeriodKind;
+
+  /**
+   * @generated from field: string description_id = 12;
+   */
+  descriptionId: string;
+
+  /**
+   * @generated from field: repeated string addons = 13;
+   */
+  addons: string[];
 
   constructor(data?: PartialMessage<Product>);
 
@@ -718,6 +768,148 @@ export declare class Transaction extends Message<Transaction> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Transaction;
 
   static equals(a: Transaction | PlainMessage<Transaction> | undefined, b: Transaction | PlainMessage<Transaction> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.Item
+ */
+export declare class Item extends Message<Item> {
+  /**
+   * @generated from field: string title = 1;
+   */
+  title: string;
+
+  /**
+   * @generated from field: int64 amount = 2;
+   */
+  amount: bigint;
+
+  /**
+   * @generated from field: string instance = 3;
+   */
+  instance: string;
+
+  constructor(data?: PartialMessage<Item>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.Item";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Item;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Item;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Item;
+
+  static equals(a: Item | PlainMessage<Item> | undefined, b: Item | PlainMessage<Item> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.Invoice
+ */
+export declare class Invoice extends Message<Invoice> {
+  /**
+   * @generated from field: string uuid = 1;
+   */
+  uuid: string;
+
+  /**
+   * @generated from field: int64 exec = 2;
+   */
+  exec: bigint;
+
+  /**
+   * @generated from field: int64 proc = 3;
+   */
+  proc: bigint;
+
+  /**
+   * @generated from field: bool processed = 4;
+   */
+  processed: boolean;
+
+  /**
+   * @generated from field: nocloud.billing.BillingStatus status = 5;
+   */
+  status: BillingStatus;
+
+  /**
+   * @generated from field: string account = 6;
+   */
+  account: string;
+
+  /**
+   * @generated from field: string service = 7;
+   */
+  service: string;
+
+  /**
+   * @generated from field: repeated string transactions = 8;
+   */
+  transactions: string[];
+
+  /**
+   * @generated from field: double total = 9;
+   */
+  total: number;
+
+  /**
+   * @generated from field: map<string, google.protobuf.Value> meta = 10;
+   */
+  meta: { [key: string]: Value };
+
+  /**
+   * @generated from field: nocloud.billing.Currency currency = 11;
+   */
+  currency: Currency;
+
+  /**
+   * @generated from field: int64 created = 12;
+   */
+  created: bigint;
+
+  /**
+   * @generated from field: repeated nocloud.billing.Item items = 13;
+   */
+  items: Item[];
+
+  constructor(data?: PartialMessage<Invoice>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.Invoice";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Invoice;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Invoice;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Invoice;
+
+  static equals(a: Invoice | PlainMessage<Invoice> | undefined, b: Invoice | PlainMessage<Invoice> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.Invoices
+ */
+export declare class Invoices extends Message<Invoices> {
+  /**
+   * @generated from field: repeated nocloud.billing.Invoice pool = 1;
+   */
+  pool: Invoice[];
+
+  constructor(data?: PartialMessage<Invoices>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.Invoices";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Invoices;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Invoices;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Invoices;
+
+  static equals(a: Invoices | PlainMessage<Invoices> | undefined, b: Invoices | PlainMessage<Invoices> | undefined): boolean;
 }
 
 /**
@@ -860,6 +1052,11 @@ export declare class Record extends Message<Record> {
    * @generated from field: optional string previous = 17;
    */
   previous?: string;
+
+  /**
+   * @generated from field: double cost = 18;
+   */
+  cost: number;
 
   constructor(data?: PartialMessage<Record>);
 
@@ -1096,6 +1293,135 @@ export declare class UpdateTransactionRequest extends Message<UpdateTransactionR
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateTransactionRequest;
 
   static equals(a: UpdateTransactionRequest | PlainMessage<UpdateTransactionRequest> | undefined, b: UpdateTransactionRequest | PlainMessage<UpdateTransactionRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.GetInvoicesCountRequest
+ */
+export declare class GetInvoicesCountRequest extends Message<GetInvoicesCountRequest> {
+  /**
+   * @generated from field: optional string account = 1;
+   */
+  account?: string;
+
+  /**
+   * @generated from field: optional string service = 2;
+   */
+  service?: string;
+
+  /**
+   * @generated from field: optional nocloud.billing.BillingStatus status = 3;
+   */
+  status?: BillingStatus;
+
+  /**
+   * @generated from field: map<string, google.protobuf.Value> filters = 4;
+   */
+  filters: { [key: string]: Value };
+
+  constructor(data?: PartialMessage<GetInvoicesCountRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.GetInvoicesCountRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetInvoicesCountRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetInvoicesCountRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetInvoicesCountRequest;
+
+  static equals(a: GetInvoicesCountRequest | PlainMessage<GetInvoicesCountRequest> | undefined, b: GetInvoicesCountRequest | PlainMessage<GetInvoicesCountRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.GetInvoicesRequest
+ */
+export declare class GetInvoicesRequest extends Message<GetInvoicesRequest> {
+  /**
+   * @generated from field: optional string account = 1;
+   */
+  account?: string;
+
+  /**
+   * @generated from field: optional string service = 2;
+   */
+  service?: string;
+
+  /**
+   * @generated from field: optional uint64 page = 3;
+   */
+  page?: bigint;
+
+  /**
+   * @generated from field: optional uint64 limit = 4;
+   */
+  limit?: bigint;
+
+  /**
+   * @generated from field: optional string field = 5;
+   */
+  field?: string;
+
+  /**
+   * @generated from field: optional string sort = 6;
+   */
+  sort?: string;
+
+  /**
+   * Get a single Transaction (would embed records too)
+   *
+   * @generated from field: optional string uuid = 7;
+   */
+  uuid?: string;
+
+  /**
+   * @generated from field: optional nocloud.billing.BillingStatus status = 8;
+   */
+  status?: BillingStatus;
+
+  /**
+   * @generated from field: map<string, google.protobuf.Value> filters = 9;
+   */
+  filters: { [key: string]: Value };
+
+  constructor(data?: PartialMessage<GetInvoicesRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.GetInvoicesRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetInvoicesRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetInvoicesRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetInvoicesRequest;
+
+  static equals(a: GetInvoicesRequest | PlainMessage<GetInvoicesRequest> | undefined, b: GetInvoicesRequest | PlainMessage<GetInvoicesRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.GetInvoicesCountResponse
+ */
+export declare class GetInvoicesCountResponse extends Message<GetInvoicesCountResponse> {
+  /**
+   * @generated from field: uint64 total = 1;
+   */
+  total: bigint;
+
+  constructor(data?: PartialMessage<GetInvoicesCountResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.GetInvoicesCountResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetInvoicesCountResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetInvoicesCountResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetInvoicesCountResponse;
+
+  static equals(a: GetInvoicesCountResponse | PlainMessage<GetInvoicesCountResponse> | undefined, b: GetInvoicesCountResponse | PlainMessage<GetInvoicesCountResponse> | undefined): boolean;
 }
 
 /**

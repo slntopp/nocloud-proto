@@ -85,6 +85,20 @@ export const Priority = proto3.makeEnum(
 );
 
 /**
+ * @generated from enum nocloud.billing.BillingStatus
+ */
+export const BillingStatus = proto3.makeEnum(
+  "nocloud.billing.BillingStatus",
+  [
+    {no: 0, name: "PAID"},
+    {no: 1, name: "UNPAID"},
+    {no: 2, name: "CANCELED"},
+    {no: 3, name: "TERMINATED"},
+    {no: 4, name: "DRAFT"},
+  ],
+);
+
+/**
  * @generated from enum nocloud.billing.Currency
  */
 export const Currency = proto3.makeEnum(
@@ -140,6 +154,7 @@ export const Plan = proto3.makeMessageType(
     { no: 9, name: "fee", kind: "message", T: Fee },
     { no: 10, name: "software", kind: "message", T: Software, repeated: true },
     { no: 11, name: "status", kind: "enum", T: proto3.getEnumType(NoCloudStatus) },
+    { no: 12, name: "addons", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
   ],
 );
 
@@ -205,6 +220,7 @@ export const ResourceConf = proto3.makeMessageType(
     { no: 12, name: "min", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
     { no: 13, name: "max", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
     { no: 14, name: "period_kind", kind: "enum", T: proto3.getEnumType(PeriodKind) },
+    { no: 15, name: "description_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -225,6 +241,8 @@ export const Product = proto3.makeMessageType(
     { no: 9, name: "public", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 10, name: "group", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 11, name: "period_kind", kind: "enum", T: proto3.getEnumType(PeriodKind) },
+    { no: 12, name: "description_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 13, name: "addons", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
   ],
 );
 
@@ -248,6 +266,50 @@ export const Transaction = proto3.makeMessageType(
     { no: 12, name: "created", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 13, name: "base", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 14, name: "previous", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.Item
+ */
+export const Item = proto3.makeMessageType(
+  "nocloud.billing.Item",
+  () => [
+    { no: 1, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "amount", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "instance", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.Invoice
+ */
+export const Invoice = proto3.makeMessageType(
+  "nocloud.billing.Invoice",
+  () => [
+    { no: 1, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "exec", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "proc", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 4, name: "processed", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 5, name: "status", kind: "enum", T: proto3.getEnumType(BillingStatus) },
+    { no: 6, name: "account", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 7, name: "service", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 8, name: "transactions", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 9, name: "total", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 10, name: "meta", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
+    { no: 11, name: "currency", kind: "enum", T: proto3.getEnumType(Currency) },
+    { no: 12, name: "created", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 13, name: "items", kind: "message", T: Item, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.Invoices
+ */
+export const Invoices = proto3.makeMessageType(
+  "nocloud.billing.Invoices",
+  () => [
+    { no: 1, name: "pool", kind: "message", T: Invoice, repeated: true },
   ],
 );
 
@@ -284,6 +346,7 @@ export const Record = proto3.makeMessageType(
     { no: 15, name: "account", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 16, name: "base", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 17, name: "previous", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 18, name: "cost", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
   ],
 );
 
@@ -364,6 +427,47 @@ export const UpdateTransactionRequest = proto3.makeMessageType(
   () => [
     { no: 1, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "exec", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.GetInvoicesCountRequest
+ */
+export const GetInvoicesCountRequest = proto3.makeMessageType(
+  "nocloud.billing.GetInvoicesCountRequest",
+  () => [
+    { no: 1, name: "account", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 2, name: "service", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 3, name: "status", kind: "enum", T: proto3.getEnumType(BillingStatus), opt: true },
+    { no: 4, name: "filters", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.GetInvoicesRequest
+ */
+export const GetInvoicesRequest = proto3.makeMessageType(
+  "nocloud.billing.GetInvoicesRequest",
+  () => [
+    { no: 1, name: "account", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 2, name: "service", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 3, name: "page", kind: "scalar", T: 4 /* ScalarType.UINT64 */, opt: true },
+    { no: 4, name: "limit", kind: "scalar", T: 4 /* ScalarType.UINT64 */, opt: true },
+    { no: 5, name: "field", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 6, name: "sort", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 7, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 8, name: "status", kind: "enum", T: proto3.getEnumType(BillingStatus), opt: true },
+    { no: 9, name: "filters", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.GetInvoicesCountResponse
+ */
+export const GetInvoicesCountResponse = proto3.makeMessageType(
+  "nocloud.billing.GetInvoicesCountResponse",
+  () => [
+    { no: 1, name: "total", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
   ],
 );
 

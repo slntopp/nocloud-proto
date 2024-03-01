@@ -1,6 +1,6 @@
 {
   "name": "nocloud-proto",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Buf generated Protobufs and API services for EcmaScript",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

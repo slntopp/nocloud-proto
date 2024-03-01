@@ -18,8 +18,10 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { ConversionRequest, ConversionResponse, CreateExchangeRateRequest, CreateExchangeRateResponse, DeleteExchangeRateRequest, DeleteExchangeRateResponse, GetActiveRequest, GetCurrenciesRequest, GetCurrenciesResponse, GetExchangeRateRequest, GetExchangeRateResponse, GetExchangeRatesRequest, GetExchangeRatesResponse, GetInstancesReportRequest, GetInstancesReportResponse, GetInstancesReportsCountRequest, GetRecordsReportsCountRequest, GetRecordsReportsRequest, GetRecordsReportsResponse, GetReportsCountResponse, GetTransactionsCountRequest, GetTransactionsCountResponse, GetTransactionsRequest, ListPlansInstancesRequest, ListPlansInstancesResponse, ListRequest, ListResponse, Plan, Records, ReprocessTransactionsRequest, Transaction, Transactions, UpdateExchangeRateRequest, UpdateExchangeRateResponse, UpdateTransactionResponse } from "./billing_pb.js";
+import { ConversionRequest, ConversionResponse, CreateExchangeRateRequest, CreateExchangeRateResponse, DeleteExchangeRateRequest, DeleteExchangeRateResponse, GetActiveRequest, GetCurrenciesRequest, GetCurrenciesResponse, GetExchangeRateRequest, GetExchangeRateResponse, GetExchangeRatesRequest, GetExchangeRatesResponse, GetInstancesReportRequest, GetInstancesReportResponse, GetInstancesReportsCountRequest, GetInvoicesCountRequest, GetInvoicesCountResponse, GetInvoicesRequest, GetRecordsReportsCountRequest, GetRecordsReportsRequest, GetRecordsReportsResponse, GetReportsCountResponse, GetTransactionsCountRequest, GetTransactionsCountResponse, GetTransactionsRequest, Invoice, Invoices, ListPlansInstancesRequest, ListPlansInstancesResponse, ListRequest, ListResponse, Plan, Records, ReprocessTransactionsRequest, Transaction, Transactions, UpdateExchangeRateRequest, UpdateExchangeRateResponse, UpdateTransactionResponse } from "./billing_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
+import { Addon, CountAddonsRequest, CountAddonsResponse, ListAddonsRequest, ListAddonsResponse } from "./addons/addons_pb.js";
+import { CountDescriptionsRequest, CountDescriptionsResponse, Description, ListDescriptionsRequest, ListDescriptionsResponse } from "./descriptions/descriptions_pb.js";
 
 /**
  * @generated from service nocloud.billing.RecordsService
@@ -207,6 +209,51 @@ export const BillingService = {
       O: Transactions,
       kind: MethodKind.Unary,
     },
+    /**
+     * @generated from rpc nocloud.billing.BillingService.CreateInvoice
+     */
+    createInvoice: {
+      name: "CreateInvoice",
+      I: Invoice,
+      O: Invoice,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.BillingService.GetInvoice
+     */
+    getInvoice: {
+      name: "GetInvoice",
+      I: Invoice,
+      O: Invoice,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.BillingService.GetInvoices
+     */
+    getInvoices: {
+      name: "GetInvoices",
+      I: GetInvoicesRequest,
+      O: Invoices,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.BillingService.GetInvoicesCount
+     */
+    getInvoicesCount: {
+      name: "GetInvoicesCount",
+      I: GetInvoicesCountRequest,
+      O: GetInvoicesCountResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.BillingService.UpdateInvoice
+     */
+    updateInvoice: {
+      name: "UpdateInvoice",
+      I: Invoice,
+      O: Invoice,
+      kind: MethodKind.Unary,
+    },
   }
 };
 
@@ -277,6 +324,132 @@ export const CurrencyService = {
       name: "Convert",
       I: ConversionRequest,
       O: ConversionResponse,
+      kind: MethodKind.Unary,
+    },
+  }
+};
+
+/**
+ * @generated from service nocloud.billing.AddonsService
+ */
+export const AddonsService = {
+  typeName: "nocloud.billing.AddonsService",
+  methods: {
+    /**
+     * @generated from rpc nocloud.billing.AddonsService.Create
+     */
+    create: {
+      name: "Create",
+      I: Addon,
+      O: Addon,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.AddonsService.Update
+     */
+    update: {
+      name: "Update",
+      I: Addon,
+      O: Addon,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.AddonsService.Get
+     */
+    get: {
+      name: "Get",
+      I: Addon,
+      O: Addon,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.AddonsService.List
+     */
+    list: {
+      name: "List",
+      I: ListAddonsRequest,
+      O: ListAddonsResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.AddonsService.Count
+     */
+    count: {
+      name: "Count",
+      I: CountAddonsRequest,
+      O: CountAddonsResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.AddonsService.Delete
+     */
+    delete: {
+      name: "Delete",
+      I: Addon,
+      O: Addon,
+      kind: MethodKind.Unary,
+    },
+  }
+};
+
+/**
+ * @generated from service nocloud.billing.DescriptionsService
+ */
+export const DescriptionsService = {
+  typeName: "nocloud.billing.DescriptionsService",
+  methods: {
+    /**
+     * @generated from rpc nocloud.billing.DescriptionsService.Create
+     */
+    create: {
+      name: "Create",
+      I: Description,
+      O: Description,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.DescriptionsService.Update
+     */
+    update: {
+      name: "Update",
+      I: Description,
+      O: Description,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.DescriptionsService.Get
+     */
+    get: {
+      name: "Get",
+      I: Description,
+      O: Description,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.DescriptionsService.List
+     */
+    list: {
+      name: "List",
+      I: ListDescriptionsRequest,
+      O: ListDescriptionsResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.DescriptionsService.Count
+     */
+    count: {
+      name: "Count",
+      I: CountDescriptionsRequest,
+      O: CountDescriptionsResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.DescriptionsService.Delete
+     */
+    delete: {
+      name: "Delete",
+      I: Description,
+      O: Description,
       kind: MethodKind.Unary,
     },
   }
