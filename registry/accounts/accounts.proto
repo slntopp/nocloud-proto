@@ -84,7 +84,10 @@ message ListRequest {
   map<string, google.protobuf.Value> filters = 7;
 }
 
-message ListResponse {repeated Account pool = 1;}
+message ListResponse {
+  repeated Account pool = 1;
+  int64 count = 2;
+}
 
 message SetCredentialsRequest {
   string account = 1;

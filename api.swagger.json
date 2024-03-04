@@ -6933,6 +6933,10 @@
             "type": "object",
             "$ref": "#/definitions/accountsAccount"
           }
+        },
+        "count": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
