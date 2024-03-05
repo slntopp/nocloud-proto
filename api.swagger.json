@@ -91,7 +91,7 @@
   ],
   "paths": {
     "/accounts": {
-      "get": {
+      "post": {
         "operationId": "AccountsService_List",
         "responses": {
           "200": {
@@ -109,51 +109,12 @@
         },
         "parameters": [
           {
-            "name": "namespace",
-            "description": "Namespace ID to seek account in",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "depth",
-            "description": "Depth",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "uint64"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "uint64"
-          },
-          {
-            "name": "field",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "sort",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "filters",
-            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
-            "in": "query",
-            "required": false
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/registryaccountsListRequest"
+            }
           }
         ],
         "tags": [
@@ -6921,6 +6882,38 @@
       "properties": {
         "result": {
           "type": "boolean"
+        }
+      }
+    },
+    "registryaccountsListRequest": {
+      "type": "object",
+      "properties": {
+        "namespace": {
+          "type": "string",
+          "title": "Namespace ID to seek account in"
+        },
+        "depth": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Depth"
+        },
+        "page": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "limit": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "field": {
+          "type": "string"
+        },
+        "sort": {
+          "type": "string"
+        },
+        "filters": {
+          "type": "object",
+          "additionalProperties": {}
         }
       }
     },
