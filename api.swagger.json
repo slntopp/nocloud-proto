@@ -219,12 +219,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "auth": {
-                  "$ref": "#/definitions/accountsCredentials"
-                }
-              }
+              "$ref": "#/definitions/AccountsServiceSetCredentialsBody"
             }
           }
         ],
@@ -324,42 +319,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "type": "string"
-                },
-                "data": {
-                  "type": "object"
-                },
-                "balance": {
-                  "type": "number",
-                  "format": "double"
-                },
-                "access": {
-                  "$ref": "#/definitions/accessAccess"
-                },
-                "suspendConf": {
-                  "$ref": "#/definitions/accountsSuspendConf"
-                },
-                "suspended": {
-                  "type": "boolean"
-                },
-                "currency": {
-                  "$ref": "#/definitions/billingCurrency",
-                  "title": "Account Balance Currency"
-                },
-                "status": {
-                  "$ref": "#/definitions/accountsAccountStatus"
-                },
-                "adminNotes": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "$ref": "#/definitions/notesAdminNote"
-                  }
-                }
-              }
+              "$ref": "#/definitions/registryAccountsServiceUpdateBody"
             }
           }
         ],
@@ -432,12 +392,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "msg": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/registryAccountsServiceAddNoteBody"
             }
           }
         ],
@@ -473,16 +428,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "index": {
-                  "type": "string",
-                  "format": "uint64"
-                },
-                "msg": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/registryAccountsServicePatchNoteBody"
             }
           }
         ],
@@ -632,37 +578,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "playbook": {
-                  "type": "object",
-                  "properties": {
-                    "logo": {
-                      "type": "string"
-                    },
-                    "title": {
-                      "type": "string",
-                      "title": "Url to or Base64 encoded Image to be used as Playbook logo in the\nMarketplace"
-                    },
-                    "description": {
-                      "type": "string",
-                      "title": "Filename for playbook yaml"
-                    },
-                    "content": {
-                      "type": "string",
-                      "description": "Ansible Playbook written in YAML",
-                      "title": "(optionally Markdown) long description Marketplace like"
-                    },
-                    "supportedOs": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      },
-                      "title": "List of supported platforms(OS) by this Playbook"
-                    }
-                  }
-                }
-              }
+              "$ref": "#/definitions/ansiblePlaybooksServiceUpdateBody"
             }
           }
         ],
@@ -868,7 +784,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/AnsibleServiceExecBody"
             }
           }
         ],
@@ -1223,39 +1139,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "type": "string"
-                },
-                "public": {
-                  "type": "boolean"
-                },
-                "group": {
-                  "type": "string"
-                },
-                "meta": {
-                  "type": "object",
-                  "additionalProperties": {}
-                },
-                "descriptionId": {
-                  "type": "string"
-                },
-                "periods": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "number",
-                    "format": "double"
-                  }
-                },
-                "created": {
-                  "type": "string",
-                  "format": "int64"
-                },
-                "system": {
-                  "type": "boolean"
-                }
-              }
+              "$ref": "#/definitions/billingAddonsServiceUpdateBody"
             }
           }
         ],
@@ -1921,12 +1805,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "text": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/billingDescriptionsServiceUpdateBody"
             }
           }
         ],
@@ -2144,57 +2023,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "exec": {
-                  "type": "string",
-                  "format": "int64"
-                },
-                "proc": {
-                  "type": "string",
-                  "format": "int64"
-                },
-                "processed": {
-                  "type": "boolean"
-                },
-                "status": {
-                  "$ref": "#/definitions/billingBillingStatus"
-                },
-                "account": {
-                  "type": "string"
-                },
-                "service": {
-                  "type": "string"
-                },
-                "transactions": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "total": {
-                  "type": "number",
-                  "format": "double"
-                },
-                "meta": {
-                  "type": "object",
-                  "additionalProperties": {}
-                },
-                "currency": {
-                  "$ref": "#/definitions/billingCurrency"
-                },
-                "created": {
-                  "type": "string",
-                  "format": "int64"
-                },
-                "items": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "$ref": "#/definitions/billingItem"
-                  }
-                }
-              }
+              "$ref": "#/definitions/BillingServiceUpdateInvoiceBody"
             }
           }
         ],
@@ -2590,63 +2419,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "type": "string"
-                },
-                "type": {
-                  "type": "string",
-                  "title": "Instance / InstanceGroup type supported by this plan"
-                },
-                "public": {
-                  "type": "boolean",
-                  "title": "if true, then this plan is available for all users"
-                },
-                "kind": {
-                  "$ref": "#/definitions/billingPlanKind",
-                  "title": "dynamic(based on resources) or static(based on products)"
-                },
-                "resources": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "$ref": "#/definitions/billingResourceConf"
-                  },
-                  "title": "Resources confs to make plan dynamic"
-                },
-                "products": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "$ref": "#/definitions/billingProduct"
-                  },
-                  "title": "Products to make plan pre defined(map key is product key like sm, lg"
-                },
-                "meta": {
-                  "type": "object",
-                  "additionalProperties": {},
-                  "title": "or whatever)"
-                },
-                "fee": {
-                  "$ref": "#/definitions/billingFee"
-                },
-                "software": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "$ref": "#/definitions/ansibleSoftware"
-                  }
-                },
-                "status": {
-                  "$ref": "#/definitions/statusesNoCloudStatus"
-                },
-                "addons": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
+              "$ref": "#/definitions/BillingServiceUpdatePlanBody"
             }
           }
         ],
@@ -2956,62 +2729,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "exec": {
-                  "type": "string",
-                  "format": "int64",
-                  "title": "Timestamp of Transaction planned execution time"
-                },
-                "proc": {
-                  "type": "string",
-                  "format": "int64",
-                  "title": "Timestamp of Transaction processing time"
-                },
-                "processed": {
-                  "type": "boolean",
-                  "title": "Wether Transaction has been processed(applied to"
-                },
-                "priority": {
-                  "$ref": "#/definitions/billingPriority"
-                },
-                "account": {
-                  "type": "string"
-                },
-                "service": {
-                  "type": "string"
-                },
-                "records": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "title": "list of records UUIDs"
-                },
-                "total": {
-                  "type": "number",
-                  "format": "double",
-                  "title": "Transaction total value in NCU"
-                },
-                "meta": {
-                  "type": "object",
-                  "additionalProperties": {},
-                  "title": "Transaction meta data, like\nmeta: {\ntotal: \u003cnumber\u003e // resource \"quantity\", e.g. CPU cores, RAM Mb, Drive\nMb, IP quantity price_atm: \u003cnumber\u003e // hourly price per quant of resouce at\nthe moment, e.g. 1 NCU [other keys]: \u003cany\u003e // for example Drive\nType(SSD/HDD/NVMe/etc)\n}"
-                },
-                "currency": {
-                  "$ref": "#/definitions/billingCurrency"
-                },
-                "created": {
-                  "type": "string",
-                  "format": "int64"
-                },
-                "base": {
-                  "type": "string"
-                },
-                "previous": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/BillingServiceUpdateTransactionBody"
             }
           }
         ],
@@ -3530,12 +3248,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "service": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/InstancesServiceTransferIGBody"
             }
           }
         ],
@@ -3661,12 +3374,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "ig": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/InstancesServiceTransferInstanceBody"
             }
           }
         ],
@@ -3704,16 +3412,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "method": {
-                  "type": "string"
-                },
-                "params": {
-                  "type": "object",
-                  "additionalProperties": {}
-                }
-              }
+              "$ref": "#/definitions/instancesInstancesServiceInvokeBody"
             }
           }
         ],
@@ -3786,12 +3485,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "msg": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/instancesInstancesServiceAddNoteBody"
             }
           }
         ],
@@ -3827,16 +3521,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "index": {
-                  "type": "string",
-                  "format": "uint64"
-                },
-                "msg": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/instancesInstancesServicePatchNoteBody"
             }
           }
         ],
@@ -4159,17 +3844,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "account": {
-                  "type": "string"
-                },
-                "access": {
-                  "type": "integer",
-                  "format": "int32",
-                  "title": "Account access level to namespace"
-                }
-              }
+              "$ref": "#/definitions/NamespacesServiceJoinBody"
             }
           }
         ],
@@ -4207,20 +3882,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "account": {
-                  "type": "string"
-                },
-                "access": {
-                  "type": "integer",
-                  "format": "int32",
-                  "title": "Account access level to namespace"
-                },
-                "role": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/NamespacesServiceLinkBody"
             }
           }
         ],
@@ -4286,12 +3948,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/NamespacesServicePatchBody"
             }
           }
         ],
@@ -4378,7 +4035,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/servicesService"
+              "$ref": "#/definitions/nocloudservicesService"
             }
           },
           "default": {
@@ -4410,7 +4067,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/servicesService"
+              "$ref": "#/definitions/nocloudservicesService"
             }
           },
           "default": {
@@ -4472,7 +4129,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/servicesService"
+              "$ref": "#/definitions/nocloudservicesService"
             }
           },
           "default": {
@@ -4494,35 +4151,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "version": {
-                  "type": "string"
-                },
-                "title": {
-                  "type": "string"
-                },
-                "status": {
-                  "$ref": "#/definitions/statusesNoCloudStatus"
-                },
-                "context": {
-                  "type": "object",
-                  "additionalProperties": {}
-                },
-                "instancesGroups": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "$ref": "#/definitions/instancesInstancesGroup"
-                  }
-                },
-                "hash": {
-                  "type": "string"
-                },
-                "access": {
-                  "$ref": "#/definitions/accessAccess"
-                }
-              }
+              "$ref": "#/definitions/servicesServicesServiceUpdateBody"
             }
           }
         ],
@@ -4560,7 +4189,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/servicesServicesServiceDownBody"
             }
           }
         ],
@@ -4637,7 +4266,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/servicesServicesServiceSuspendBody"
             }
           }
         ],
@@ -4675,7 +4304,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/servicesServicesServiceUnsuspendBody"
             }
           }
         ],
@@ -4713,7 +4342,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/servicesServicesServiceUpBody"
             }
           }
         ],
@@ -4990,18 +4619,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "value": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "public": {
-                  "type": "boolean"
-                }
-              }
+              "$ref": "#/definitions/settingsSettingsServicePutBody"
             }
           }
         ],
@@ -5161,40 +4779,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "type": "string"
-                },
-                "icon": {
-                  "type": "string"
-                },
-                "items": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "$ref": "#/definitions/services_providersShowcaseItem"
-                  }
-                },
-                "promo": {},
-                "primary": {
-                  "type": "boolean"
-                },
-                "public": {
-                  "type": "boolean"
-                },
-                "locations": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "$ref": "#/definitions/services_providersLocationConf"
-                  }
-                },
-                "sorter": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
+              "$ref": "#/definitions/services_providersShowcasesServiceUpdateBody"
             }
           }
         ],
@@ -5452,63 +5037,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string"
-                },
-                "title": {
-                  "type": "string"
-                },
-                "secrets": {
-                  "type": "object",
-                  "additionalProperties": {},
-                  "title": "json"
-                },
-                "vars": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "$ref": "#/definitions/services_providersVar"
-                  }
-                },
-                "extentions": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "object"
-                  }
-                },
-                "state": {
-                  "$ref": "#/definitions/statesState"
-                },
-                "publicData": {
-                  "type": "object",
-                  "additionalProperties": {}
-                },
-                "public": {
-                  "type": "boolean",
-                  "title": "If set to true, the provider will be visible to all users"
-                },
-                "proxy": {
-                  "$ref": "#/definitions/services_providersProxyConf"
-                },
-                "locations": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "$ref": "#/definitions/services_providersLocationConf"
-                  }
-                },
-                "access": {
-                  "$ref": "#/definitions/accessAccess"
-                },
-                "meta": {
-                  "type": "object",
-                  "additionalProperties": {}
-                },
-                "status": {
-                  "$ref": "#/definitions/statusesNoCloudStatus"
-                }
-              }
+              "$ref": "#/definitions/services_providersServicesProvidersServiceUpdateBody"
             }
           }
         ],
@@ -5546,15 +5075,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "plans": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
+              "$ref": "#/definitions/ServicesProvidersServiceBindPlanBody"
             }
           }
         ],
@@ -5592,16 +5113,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "method": {
-                  "type": "string"
-                },
-                "params": {
-                  "type": "object",
-                  "additionalProperties": {}
-                }
-              }
+              "$ref": "#/definitions/services_providersServicesProvidersServiceInvokeBody"
             }
           }
         ],
@@ -5639,15 +5151,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "plans": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
+              "$ref": "#/definitions/ServicesProvidersServiceUnbindPlanBody"
             }
           }
         ],
@@ -5690,6 +5194,203 @@
     }
   },
   "definitions": {
+    "AccountsServiceSetCredentialsBody": {
+      "type": "object",
+      "properties": {
+        "auth": {
+          "$ref": "#/definitions/accountsCredentials"
+        }
+      }
+    },
+    "AnsibleServiceExecBody": {
+      "type": "object"
+    },
+    "BillingServiceUpdateInvoiceBody": {
+      "type": "object",
+      "properties": {
+        "exec": {
+          "type": "string",
+          "format": "int64"
+        },
+        "proc": {
+          "type": "string",
+          "format": "int64"
+        },
+        "processed": {
+          "type": "boolean"
+        },
+        "status": {
+          "$ref": "#/definitions/billingBillingStatus"
+        },
+        "account": {
+          "type": "string"
+        },
+        "service": {
+          "type": "string"
+        },
+        "transactions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "total": {
+          "type": "number",
+          "format": "double"
+        },
+        "meta": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "currency": {
+          "$ref": "#/definitions/billingCurrency"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/billingItem"
+          }
+        }
+      }
+    },
+    "BillingServiceUpdatePlanBody": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "title": "Instance / InstanceGroup type supported by this plan"
+        },
+        "public": {
+          "type": "boolean",
+          "title": "if true, then this plan is available for all users"
+        },
+        "kind": {
+          "$ref": "#/definitions/billingPlanKind",
+          "title": "dynamic(based on resources) or static(based on products)"
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/billingResourceConf"
+          },
+          "title": "Resources confs to make plan dynamic"
+        },
+        "products": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/billingProduct"
+          },
+          "title": "Products to make plan pre defined(map key is product key like sm, lg"
+        },
+        "meta": {
+          "type": "object",
+          "additionalProperties": {},
+          "title": "or whatever)"
+        },
+        "fee": {
+          "$ref": "#/definitions/billingFee"
+        },
+        "software": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ansibleSoftware"
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/statusesNoCloudStatus"
+        },
+        "addons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "BillingServiceUpdateTransactionBody": {
+      "type": "object",
+      "properties": {
+        "exec": {
+          "type": "string",
+          "format": "int64",
+          "title": "Timestamp of Transaction planned execution time"
+        },
+        "proc": {
+          "type": "string",
+          "format": "int64",
+          "title": "Timestamp of Transaction processing time"
+        },
+        "processed": {
+          "type": "boolean",
+          "title": "Wether Transaction has been processed(applied to"
+        },
+        "priority": {
+          "$ref": "#/definitions/billingPriority"
+        },
+        "account": {
+          "type": "string"
+        },
+        "service": {
+          "type": "string"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "list of records UUIDs"
+        },
+        "total": {
+          "type": "number",
+          "format": "double",
+          "title": "Transaction total value in NCU"
+        },
+        "meta": {
+          "type": "object",
+          "additionalProperties": {},
+          "title": "Transaction meta data, like\nmeta: {\ntotal: \u003cnumber\u003e // resource \"quantity\", e.g. CPU cores, RAM Mb, Drive\nMb, IP quantity price_atm: \u003cnumber\u003e // hourly price per quant of resouce at\nthe moment, e.g. 1 NCU [other keys]: \u003cany\u003e // for example Drive\nType(SSD/HDD/NVMe/etc)\n}"
+        },
+        "currency": {
+          "$ref": "#/definitions/billingCurrency"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "base": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        }
+      }
+    },
+    "InstancesServiceTransferIGBody": {
+      "type": "object",
+      "properties": {
+        "service": {
+          "type": "string"
+        }
+      }
+    },
+    "InstancesServiceTransferInstanceBody": {
+      "type": "object",
+      "properties": {
+        "ig": {
+          "type": "string"
+        }
+      }
+    },
     "KeysResponseKey": {
       "type": "object",
       "properties": {
@@ -5701,6 +5402,43 @@
         },
         "public": {
           "type": "boolean"
+        }
+      }
+    },
+    "NamespacesServiceJoinBody": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "string"
+        },
+        "access": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Account access level to namespace"
+        }
+      }
+    },
+    "NamespacesServiceLinkBody": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "string"
+        },
+        "access": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Account access level to namespace"
+        },
+        "role": {
+          "type": "string"
+        }
+      }
+    },
+    "NamespacesServicePatchBody": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
         }
       }
     },
@@ -5749,6 +5487,28 @@
         "ttl": {
           "type": "integer",
           "format": "int32"
+        }
+      }
+    },
+    "ServicesProvidersServiceBindPlanBody": {
+      "type": "object",
+      "properties": {
+        "plans": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ServicesProvidersServiceUnbindPlanBody": {
+      "type": "object",
+      "properties": {
+        "plans": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -6101,6 +5861,39 @@
         }
       }
     },
+    "ansiblePlaybooksServiceUpdateBody": {
+      "type": "object",
+      "properties": {
+        "playbook": {
+          "type": "object",
+          "properties": {
+            "logo": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string",
+              "title": "Url to or Base64 encoded Image to be used as Playbook logo in the\nMarketplace"
+            },
+            "description": {
+              "type": "string",
+              "title": "Filename for playbook yaml"
+            },
+            "content": {
+              "type": "string",
+              "description": "Ansible Playbook written in YAML",
+              "title": "(optionally Markdown) long description Marketplace like"
+            },
+            "supportedOs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "title": "List of supported platforms(OS) by this Playbook"
+            }
+          }
+        }
+      }
+    },
     "ansibleRun": {
       "type": "object",
       "properties": {
@@ -6208,6 +6001,41 @@
         }
       }
     },
+    "billingAddonsServiceUpdateBody": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "public": {
+          "type": "boolean"
+        },
+        "group": {
+          "type": "string"
+        },
+        "meta": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "descriptionId": {
+          "type": "string"
+        },
+        "periods": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "system": {
+          "type": "boolean"
+        }
+      }
+    },
     "billingBillingStatus": {
       "type": "string",
       "enum": [
@@ -6294,6 +6122,14 @@
     },
     "billingDeleteExchangeRateResponse": {
       "type": "object"
+    },
+    "billingDescriptionsServiceUpdateBody": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        }
+      }
     },
     "billingFee": {
       "type": "object",
@@ -7370,6 +7206,38 @@
         }
       }
     },
+    "instancesInstancesServiceAddNoteBody": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "instancesInstancesServiceInvokeBody": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string"
+        },
+        "params": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "instancesInstancesServicePatchNoteBody": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
     "instancesTestInstancesGroupConfigError": {
       "type": "object",
       "properties": {
@@ -7836,7 +7704,7 @@
       "type": "object",
       "properties": {
         "service": {
-          "$ref": "#/definitions/servicesService"
+          "$ref": "#/definitions/nocloudservicesService"
         },
         "namespace": {
           "type": "string"
@@ -7856,6 +7724,40 @@
     },
     "nocloudservicesDownResponse": {
       "type": "object"
+    },
+    "nocloudservicesService": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/statusesNoCloudStatus"
+        },
+        "context": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "instancesGroups": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/instancesInstancesGroup"
+          }
+        },
+        "hash": {
+          "type": "string"
+        },
+        "access": {
+          "$ref": "#/definitions/accessAccess"
+        }
+      }
     },
     "nocloudservicesSuspendResponse": {
       "type": "object"
@@ -8005,6 +7907,64 @@
       "default": "NULL_VALUE",
       "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\nThe JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
     },
+    "registryAccountsServiceAddNoteBody": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "registryAccountsServicePatchNoteBody": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "registryAccountsServiceUpdateBody": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        },
+        "balance": {
+          "type": "number",
+          "format": "double"
+        },
+        "access": {
+          "$ref": "#/definitions/accessAccess"
+        },
+        "suspendConf": {
+          "$ref": "#/definitions/accountsSuspendConf"
+        },
+        "suspended": {
+          "type": "boolean"
+        },
+        "currency": {
+          "$ref": "#/definitions/billingCurrency",
+          "title": "Account Balance Currency"
+        },
+        "status": {
+          "$ref": "#/definitions/accountsAccountStatus"
+        },
+        "adminNotes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/notesAdminNote"
+          }
+        }
+      }
+    },
     "registryaccountsCreateRequest": {
       "type": "object",
       "properties": {
@@ -8153,12 +8113,33 @@
         }
       }
     },
-    "servicesService": {
+    "servicesServices": {
       "type": "object",
       "properties": {
-        "uuid": {
-          "type": "string"
-        },
+        "pool": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/nocloudservicesService"
+          }
+        }
+      }
+    },
+    "servicesServicesServiceDownBody": {
+      "type": "object"
+    },
+    "servicesServicesServiceSuspendBody": {
+      "type": "object"
+    },
+    "servicesServicesServiceUnsuspendBody": {
+      "type": "object"
+    },
+    "servicesServicesServiceUpBody": {
+      "type": "object"
+    },
+    "servicesServicesServiceUpdateBody": {
+      "type": "object",
+      "properties": {
         "version": {
           "type": "string"
         },
@@ -8184,18 +8165,6 @@
         },
         "access": {
           "$ref": "#/definitions/accessAccess"
-        }
-      }
-    },
-    "servicesServices": {
-      "type": "object",
-      "properties": {
-        "pool": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/servicesService"
-          }
         }
       }
     },
@@ -8374,6 +8343,77 @@
         }
       }
     },
+    "services_providersServicesProvidersServiceInvokeBody": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string"
+        },
+        "params": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "services_providersServicesProvidersServiceUpdateBody": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "secrets": {
+          "type": "object",
+          "additionalProperties": {},
+          "title": "json"
+        },
+        "vars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/services_providersVar"
+          }
+        },
+        "extentions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "state": {
+          "$ref": "#/definitions/statesState"
+        },
+        "publicData": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "public": {
+          "type": "boolean",
+          "title": "If set to true, the provider will be visible to all users"
+        },
+        "proxy": {
+          "$ref": "#/definitions/services_providersProxyConf"
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/services_providersLocationConf"
+          }
+        },
+        "access": {
+          "$ref": "#/definitions/accessAccess"
+        },
+        "meta": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "status": {
+          "$ref": "#/definitions/statusesNoCloudStatus"
+        }
+      }
+    },
     "services_providersShowcase": {
       "type": "object",
       "properties": {
@@ -8439,6 +8479,42 @@
             "type": "object",
             "$ref": "#/definitions/services_providersShowcase"
           }
+        }
+      }
+    },
+    "services_providersShowcasesServiceUpdateBody": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/services_providersShowcaseItem"
+          }
+        },
+        "promo": {},
+        "primary": {
+          "type": "boolean"
+        },
+        "public": {
+          "type": "boolean"
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/services_providersLocationConf"
+          }
+        },
+        "sorter": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -8528,6 +8604,20 @@
       "properties": {
         "key": {
           "type": "string"
+        }
+      }
+    },
+    "settingsSettingsServicePutBody": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "public": {
+          "type": "boolean"
         }
       }
     },
