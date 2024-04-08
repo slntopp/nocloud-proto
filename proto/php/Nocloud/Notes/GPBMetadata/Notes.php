@@ -15,30 +15,7 @@ class Notes
           return;
         }
         $pool->internalAddGeneratedFile(
-            '
-³
-notes/notes.protonocloud.notes"g
-	AdminNote
-admin (	Radmin
-msg (	Rmsg
-created (Rcreated
-updated (Rupdated"6
-AddNoteRequest
-uuid (	Ruuid
-msg (	Rmsg"N
-PatchNoteRequest
-uuid (	Ruuid
-index (Rindex
-msg (	Rmsg"=
-RemoveNoteRequest
-uuid (	Ruuid
-index (Rindex"a
-NoteResponse
-result (Rresult9
-admin_notes (2.nocloud.notes.AdminNoteR
-adminNotesBt
-com.nocloud.notesB
-NotesProtoP¢NNXªNocloud.NotesÊNocloud\\NotesâNocloud\\Notes\\GPBMetadataêNocloud::Notesbproto3'
+            "\x0A\xB3\x04\x0A\x11notes/notes.proto\x12\x0Dnocloud.notes\"g\x0A\x09AdminNote\x12\x14\x0A\x05admin\x18\x01 \x01(\x09R\x05admin\x12\x10\x0A\x03msg\x18\x02 \x01(\x09R\x03msg\x12\x18\x0A\x07created\x18\x03 \x01(\x03R\x07created\x12\x18\x0A\x07updated\x18\x04 \x01(\x03R\x07updated\"6\x0A\x0EAddNoteRequest\x12\x12\x0A\x04uuid\x18\x01 \x01(\x09R\x04uuid\x12\x10\x0A\x03msg\x18\x02 \x01(\x09R\x03msg\"N\x0A\x10PatchNoteRequest\x12\x12\x0A\x04uuid\x18\x01 \x01(\x09R\x04uuid\x12\x14\x0A\x05index\x18\x02 \x01(\x04R\x05index\x12\x10\x0A\x03msg\x18\x03 \x01(\x09R\x03msg\"=\x0A\x11RemoveNoteRequest\x12\x12\x0A\x04uuid\x18\x01 \x01(\x09R\x04uuid\x12\x14\x0A\x05index\x18\x02 \x01(\x04R\x05index\"a\x0A\x0CNoteResponse\x12\x16\x0A\x06result\x18\x01 \x01(\x08R\x06result\x129\x0A\x0Badmin_notes\x18\x02 \x03(\x0B2\x18.nocloud.notes.AdminNoteR\x0AadminNotesBt\x0A\x11com.nocloud.notesB\x0ANotesProtoP\x01\xA2\x02\x03NNX\xAA\x02\x0DNocloud.Notes\xCA\x02\x0DNocloud\\Notes\xE2\x02\x19Nocloud\\Notes\\GPBMetadata\xEA\x02\x0ENocloud::Notesb\x06proto3"
         , true);
 
         static::$is_initialized = true;
