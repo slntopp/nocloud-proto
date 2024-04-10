@@ -7359,6 +7359,12 @@
         "pass": {
           "type": "string",
           "title": "SSH Password"
+        },
+        "ansibleHost": {
+          "type": "string"
+        },
+        "python": {
+          "type": "string"
         }
       }
     },
