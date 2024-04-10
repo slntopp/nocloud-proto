@@ -16,11 +16,7 @@ class Api
         }
         \Grpc\Gateway\ProtocGenOpenapiv2\Options\GPBMetadata\Annotations::initOnce();
         $pool->internalAddGeneratedFile(
-            '
-»
-api/api.protonocloud.apiB”
-com.nocloud.apiBApiProtoP¢NAXªNocloud.ApiÊNocloud\\ApiâNocloud\\Api\\GPBMetadataêNocloud::Api’A¨I"@
-NoCloud"https://github.com/slntopp/nocloudinfo@slnt-opp.xyz20.0.0localhost:8000*2application/json2text/event-stream:application/json:text/event-streambproto3'
+            "\x0A\xBB\x02\x0A\x0Dapi/api.proto\x12\x0Bnocloud.apiB\x94\x02\x0A\x0Fcom.nocloud.apiB\x08ApiProtoP\x01\xA2\x02\x03NAX\xAA\x02\x0BNocloud.Api\xCA\x02\x0BNocloud\\Api\xE2\x02\x17Nocloud\\Api\\GPBMetadata\xEA\x02\x0CNocloud::Api\x92A\xA8\x01\x12I\"@\x0A\x07NoCloud\x12\"https://github.com/slntopp/nocloud\x1A\x11info@slnt-opp.xyz2\x050.0.0\x1A\x0Elocalhost:8000*\x01\x012\x10application/json2\x11text/event-stream:\x10application/json:\x11text/event-streamb\x06proto3"
         , true);
 
         static::$is_initialized = true;

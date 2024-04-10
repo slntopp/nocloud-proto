@@ -19,60 +19,7 @@ class Driver
         \Nocloud\ServicesProviders\GPBMetadata\ServicesProviders::initOnce();
         \GPBMetadata\Google\Protobuf\Struct::initOnce();
         $pool->internalAddGeneratedFile(
-            '
-“
-%drivers/instance/vanilla/driver.protonocloud.instance.driver.vanillainstances/instances.proto+services_providers/services_providers.protogoogle/protobuf/struct.proto"ž
- TestServiceProviderConfigRequestY
-services_provider (2,.nocloud.services_providers.ServicesProviderRservicesProvider
-syntax_only (R
-syntaxOnly"
-GetTypeRequest"%
-GetTypeResponse
-type (	Rtype"Ÿ
-	UpRequest7
-group (2!.nocloud.instances.InstancesGroupRgroupY
-services_provider (2,.nocloud.services_providers.ServicesProviderRservicesProvider"E
-
-UpResponse7
-group (2!.nocloud.instances.InstancesGroupRgroup"¡
-DownRequest7
-group (2!.nocloud.instances.InstancesGroupRgroupY
-services_provider (2,.nocloud.services_providers.ServicesProviderRservicesProvider"G
-DownResponse7
-group (2!.nocloud.instances.InstancesGroupRgroup"Ç
-MonitoringRequest9
-groups (2!.nocloud.instances.InstancesGroupRgroupsY
-services_provider (2,.nocloud.services_providers.ServicesProviderRservicesProvider
-	scheduled (R	scheduled"
-MonitoringResponse"â
-InvokeRequest7
-instance (2.nocloud.instances.InstanceRinstanceY
-services_provider (2,.nocloud.services_providers.ServicesProviderRservicesProvider
-method (	RmethodR
-params (2:.nocloud.instance.driver.vanilla.InvokeRequest.ParamsEntryRparamsQ
-ParamsEntry
-key (	Rkey,
-value (2.google.protobuf.ValueRvalue:8"­
-SpInvokeRequestY
-services_provider (2,.nocloud.services_providers.ServicesProviderRservicesProvider
-method (	RmethodT
-params (2<.nocloud.instance.driver.vanilla.SpInvokeRequest.ParamsEntryRparamsQ
-ParamsEntry
-key (	Rkey,
-value (2.google.protobuf.ValueRvalue:82à
-DriverServiceˆ
-TestServiceProviderConfigA.nocloud.instance.driver.vanilla.TestServiceProviderConfigRequest(.nocloud.services_providers.TestResponseƒ
-TestInstancesGroupConfig2.nocloud.instances.TestInstancesGroupConfigRequest3.nocloud.instances.TestInstancesGroupConfigResponsel
-GetType/.nocloud.instance.driver.vanilla.GetTypeRequest0.nocloud.instance.driver.vanilla.GetTypeResponse]
-Up*.nocloud.instance.driver.vanilla.UpRequest+.nocloud.instance.driver.vanilla.UpResponsec
-Down,.nocloud.instance.driver.vanilla.DownRequest-.nocloud.instance.driver.vanilla.DownResponseu
-
-Monitoring2.nocloud.instance.driver.vanilla.MonitoringRequest3.nocloud.instance.driver.vanilla.MonitoringResponse|
-SuspendMonitoring2.nocloud.instance.driver.vanilla.MonitoringRequest3.nocloud.instance.driver.vanilla.MonitoringResponse[
-Invoke..nocloud.instance.driver.vanilla.InvokeRequest!.nocloud.instances.InvokeResponseh
-SpInvoke0.nocloud.instance.driver.vanilla.SpInvokeRequest*.nocloud.services_providers.InvokeResponseP
-SpPrep".nocloud.services_providers.PrepSP".nocloud.services_providers.PrepSPBÒ
-#com.nocloud.instance.driver.vanillaBDriverProtoP¢NIDVªNocloud.Instance.Driver.VanillaÊNocloud\\Instance\\Driver\\Vanillaâ+Nocloud\\Instance\\Driver\\Vanilla\\GPBMetadataê"Nocloud::Instance::Driver::Vanillabproto3'
+            "\x0A\x93\x18\x0A%drivers/instance/vanilla/driver.proto\x12\x1Fnocloud.instance.driver.vanilla\x1A\x19instances/instances.proto\x1A+services_providers/services_providers.proto\x1A\x1Cgoogle/protobuf/struct.proto\"\x9E\x01\x0A TestServiceProviderConfigRequest\x12Y\x0A\x11services_provider\x18\x01 \x01(\x0B2,.nocloud.services_providers.ServicesProviderR\x10servicesProvider\x12\x1F\x0A\x0Bsyntax_only\x18\x02 \x01(\x08R\x0AsyntaxOnly\"\x10\x0A\x0EGetTypeRequest\"%\x0A\x0FGetTypeResponse\x12\x12\x0A\x04type\x18\x01 \x01(\x09R\x04type\"\x9F\x01\x0A\x09UpRequest\x127\x0A\x05group\x18\x01 \x01(\x0B2!.nocloud.instances.InstancesGroupR\x05group\x12Y\x0A\x11services_provider\x18\x02 \x01(\x0B2,.nocloud.services_providers.ServicesProviderR\x10servicesProvider\"E\x0A\x0AUpResponse\x127\x0A\x05group\x18\x01 \x01(\x0B2!.nocloud.instances.InstancesGroupR\x05group\"\xA1\x01\x0A\x0BDownRequest\x127\x0A\x05group\x18\x01 \x01(\x0B2!.nocloud.instances.InstancesGroupR\x05group\x12Y\x0A\x11services_provider\x18\x02 \x01(\x0B2,.nocloud.services_providers.ServicesProviderR\x10servicesProvider\"G\x0A\x0CDownResponse\x127\x0A\x05group\x18\x01 \x01(\x0B2!.nocloud.instances.InstancesGroupR\x05group\"\xC7\x01\x0A\x11MonitoringRequest\x129\x0A\x06groups\x18\x01 \x03(\x0B2!.nocloud.instances.InstancesGroupR\x06groups\x12Y\x0A\x11services_provider\x18\x02 \x01(\x0B2,.nocloud.services_providers.ServicesProviderR\x10servicesProvider\x12\x1C\x0A\x09scheduled\x18\x03 \x01(\x08R\x09scheduled\"\x14\x0A\x12MonitoringResponse\"\xE2\x02\x0A\x0DInvokeRequest\x127\x0A\x08instance\x18\x01 \x01(\x0B2\x1B.nocloud.instances.InstanceR\x08instance\x12Y\x0A\x11services_provider\x18\x02 \x01(\x0B2,.nocloud.services_providers.ServicesProviderR\x10servicesProvider\x12\x16\x0A\x06method\x18\x03 \x01(\x09R\x06method\x12R\x0A\x06params\x18\x04 \x03(\x0B2:.nocloud.instance.driver.vanilla.InvokeRequest.ParamsEntryR\x06params\x1AQ\x0A\x0BParamsEntry\x12\x10\x0A\x03key\x18\x01 \x01(\x09R\x03key\x12,\x0A\x05value\x18\x02 \x01(\x0B2\x16.google.protobuf.ValueR\x05value:\x028\x01\"\xAD\x02\x0A\x0FSpInvokeRequest\x12Y\x0A\x11services_provider\x18\x01 \x01(\x0B2,.nocloud.services_providers.ServicesProviderR\x10servicesProvider\x12\x16\x0A\x06method\x18\x02 \x01(\x09R\x06method\x12T\x0A\x06params\x18\x03 \x03(\x0B2<.nocloud.instance.driver.vanilla.SpInvokeRequest.ParamsEntryR\x06params\x1AQ\x0A\x0BParamsEntry\x12\x10\x0A\x03key\x18\x01 \x01(\x09R\x03key\x12,\x0A\x05value\x18\x02 \x01(\x0B2\x16.google.protobuf.ValueR\x05value:\x028\x012\xE0\x08\x0A\x0DDriverService\x12\x88\x01\x0A\x19TestServiceProviderConfig\x12A.nocloud.instance.driver.vanilla.TestServiceProviderConfigRequest\x1A(.nocloud.services_providers.TestResponse\x12\x83\x01\x0A\x18TestInstancesGroupConfig\x122.nocloud.instances.TestInstancesGroupConfigRequest\x1A3.nocloud.instances.TestInstancesGroupConfigResponse\x12l\x0A\x07GetType\x12/.nocloud.instance.driver.vanilla.GetTypeRequest\x1A0.nocloud.instance.driver.vanilla.GetTypeResponse\x12]\x0A\x02Up\x12*.nocloud.instance.driver.vanilla.UpRequest\x1A+.nocloud.instance.driver.vanilla.UpResponse\x12c\x0A\x04Down\x12,.nocloud.instance.driver.vanilla.DownRequest\x1A-.nocloud.instance.driver.vanilla.DownResponse\x12u\x0A\x0AMonitoring\x122.nocloud.instance.driver.vanilla.MonitoringRequest\x1A3.nocloud.instance.driver.vanilla.MonitoringResponse\x12|\x0A\x11SuspendMonitoring\x122.nocloud.instance.driver.vanilla.MonitoringRequest\x1A3.nocloud.instance.driver.vanilla.MonitoringResponse\x12[\x0A\x06Invoke\x12..nocloud.instance.driver.vanilla.InvokeRequest\x1A!.nocloud.instances.InvokeResponse\x12h\x0A\x08SpInvoke\x120.nocloud.instance.driver.vanilla.SpInvokeRequest\x1A*.nocloud.services_providers.InvokeResponse\x12P\x0A\x06SpPrep\x12\".nocloud.services_providers.PrepSP\x1A\".nocloud.services_providers.PrepSPB\xD2\x01\x0A#com.nocloud.instance.driver.vanillaB\x0BDriverProtoP\x01\xA2\x02\x04NIDV\xAA\x02\x1FNocloud.Instance.Driver.Vanilla\xCA\x02\x1FNocloud\\Instance\\Driver\\Vanilla\xE2\x02+Nocloud\\Instance\\Driver\\Vanilla\\GPBMetadata\xEA\x02\"Nocloud::Instance::Driver::Vanillab\x06proto3"
         , true);
 
         static::$is_initialized = true;
