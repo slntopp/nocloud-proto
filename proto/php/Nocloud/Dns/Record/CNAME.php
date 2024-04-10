@@ -83,6 +83,3 @@ class CNAME extends \Google\Protobuf\Internal\Message
 
 }
 
-// Adding a class alias for backwards compatibility with the previous class name.
-class_alias(CNAME::class, \Nocloud\Dns\Record_CNAME::class);
-

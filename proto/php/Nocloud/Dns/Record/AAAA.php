@@ -83,6 +83,3 @@ class AAAA extends \Google\Protobuf\Internal\Message
 
 }
 
-// Adding a class alias for backwards compatibility with the previous class name.
-class_alias(AAAA::class, \Nocloud\Dns\Record_AAAA::class);
-

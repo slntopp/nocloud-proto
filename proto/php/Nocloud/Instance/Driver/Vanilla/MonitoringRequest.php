@@ -25,6 +25,10 @@ class MonitoringRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>bool scheduled = 3 [json_name = "scheduled"];</code>
      */
     protected $scheduled = false;
+    /**
+     * Generated from protobuf field <code>map<string, double> balance = 4 [json_name = "balance"];</code>
+     */
+    private $balance;
 
     /**
      * Constructor.
@@ -35,6 +39,7 @@ class MonitoringRequest extends \Google\Protobuf\Internal\Message
      *     @type array<\Nocloud\Instances\InstancesGroup>|\Google\Protobuf\Internal\RepeatedField $groups
      *     @type \Nocloud\ServicesProviders\ServicesProvider $services_provider
      *     @type bool $scheduled
+     *     @type array|\Google\Protobuf\Internal\MapField $balance
      * }
      */
     public function __construct($data = NULL) {
@@ -114,6 +119,28 @@ class MonitoringRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkBool($var);
         $this->scheduled = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>map<string, double> balance = 4 [json_name = "balance"];</code>
+     * @return \Google\Protobuf\Internal\MapField
+     */
+    public function getBalance()
+    {
+        return $this->balance;
+    }
+
+    /**
+     * Generated from protobuf field <code>map<string, double> balance = 4 [json_name = "balance"];</code>
+     * @param array|\Google\Protobuf\Internal\MapField $var
+     * @return $this
+     */
+    public function setBalance($var)
+    {
+        $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::DOUBLE);
+        $this->balance = $arr;
 
         return $this;
     }

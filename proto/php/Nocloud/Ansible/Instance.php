@@ -43,6 +43,14 @@ class Instance extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>optional string pass = 5 [json_name = "pass"];</code>
      */
     protected $pass = null;
+    /**
+     * Generated from protobuf field <code>optional string ansible_host = 6 [json_name = "ansibleHost"];</code>
+     */
+    protected $ansible_host = null;
+    /**
+     * Generated from protobuf field <code>optional string python = 7 [json_name = "python"];</code>
+     */
+    protected $python = null;
 
     /**
      * Constructor.
@@ -60,6 +68,8 @@ class Instance extends \Google\Protobuf\Internal\Message
      *           SSH User
      *     @type string $pass
      *           SSH Password
+     *     @type string $ansible_host
+     *     @type string $python
      * }
      */
     public function __construct($data = NULL) {
@@ -223,6 +233,70 @@ class Instance extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->pass = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string ansible_host = 6 [json_name = "ansibleHost"];</code>
+     * @return string
+     */
+    public function getAnsibleHost()
+    {
+        return isset($this->ansible_host) ? $this->ansible_host : '';
+    }
+
+    public function hasAnsibleHost()
+    {
+        return isset($this->ansible_host);
+    }
+
+    public function clearAnsibleHost()
+    {
+        unset($this->ansible_host);
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string ansible_host = 6 [json_name = "ansibleHost"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setAnsibleHost($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->ansible_host = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string python = 7 [json_name = "python"];</code>
+     * @return string
+     */
+    public function getPython()
+    {
+        return isset($this->python) ? $this->python : '';
+    }
+
+    public function hasPython()
+    {
+        return isset($this->python);
+    }
+
+    public function clearPython()
+    {
+        unset($this->python);
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string python = 7 [json_name = "python"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setPython($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->python = $var;
 
         return $this;
     }
