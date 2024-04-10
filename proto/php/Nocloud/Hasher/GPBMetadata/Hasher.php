@@ -15,10 +15,7 @@ class Hasher
           return;
         }
         $pool->internalAddGeneratedFile(
-            '
-Å
-hasher/hasherpb/hasher.protonocloud.hasher google/protobuf/descriptor.protoB¶
-com.nocloud.hasherBHasherProtoPZ*github.com/slntopp/nocloud/hasher/hasherpb¢NHX™Nocloud.Hasher Nocloud\\Hasher‚Nocloud\\Hasher\\GPBMetadataÍNocloud::Hasherbproto3'
+            "\x0A\x81\x02\x0A\x1Chasher/hasherpb/hasher.proto\x12\x0Enocloud.hasher\x1A google/protobuf/descriptor.protoB\xA6\x01\x0A\x12com.nocloud.hasherB\x0BHasherProtoP\x01Z*github.com/slntopp/nocloud/hasher/hasherpb\xA2\x02\x03NHX\xAA\x02\x0ENocloud.Hasher\xCA\x02\x0ENocloud\\Hasher\xE2\x02\x1ANocloud\\Hasher\\GPBMetadata\xEA\x02\x0FNocloud::Hasherb\x06proto3"
         , true);
 
         static::$is_initialized = true;

@@ -16,18 +16,7 @@ class Edge
         }
         \Nocloud\States\GPBMetadata\States::initOnce();
         $pool->internalAddGeneratedFile(
-            '
-û
-edge/edge.protonocloud.edge"
-TestRequest"<
-TestResponse
-result (Rresult
-error (	Rerror"
-Empty2‹
-EdgeService=
-Test.nocloud.edge.TestRequest.nocloud.edge.TestResponse=
-	PostState.nocloud.states.ObjectState.nocloud.edge.EmptyBn
-com.nocloud.edgeB	EdgeProtoP¢NEXªNocloud.EdgeÊNocloud\\EdgeâNocloud\\Edge\\GPBMetadataêNocloud::Edgebproto3'
+            "\x0A\xFB\x02\x0A\x0Fedge/edge.proto\x12\x0Cnocloud.edge\"\x0D\x0A\x0BTestRequest\"<\x0A\x0CTestResponse\x12\x16\x0A\x06result\x18\x01 \x01(\x08R\x06result\x12\x14\x0A\x05error\x18\x02 \x01(\x09R\x05error\"\x07\x0A\x05Empty2\x8B\x01\x0A\x0BEdgeService\x12=\x0A\x04Test\x12\x19.nocloud.edge.TestRequest\x1A\x1A.nocloud.edge.TestResponse\x12=\x0A\x09PostState\x12\x1B.nocloud.states.ObjectState\x1A\x13.nocloud.edge.EmptyBn\x0A\x10com.nocloud.edgeB\x09EdgeProtoP\x01\xA2\x02\x03NEX\xAA\x02\x0CNocloud.Edge\xCA\x02\x0CNocloud\\Edge\xE2\x02\x18Nocloud\\Edge\\GPBMetadata\xEA\x02\x0DNocloud::Edgeb\x06proto3"
         , true);
 
         static::$is_initialized = true;
