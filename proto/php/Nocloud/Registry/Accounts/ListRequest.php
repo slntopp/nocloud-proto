@@ -25,6 +25,26 @@ class ListRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>optional int32 depth = 2 [json_name = "depth"];</code>
      */
     protected $depth = null;
+    /**
+     * Generated from protobuf field <code>optional uint64 page = 3 [json_name = "page"];</code>
+     */
+    protected $page = null;
+    /**
+     * Generated from protobuf field <code>optional uint64 limit = 4 [json_name = "limit"];</code>
+     */
+    protected $limit = null;
+    /**
+     * Generated from protobuf field <code>optional string field = 5 [json_name = "field"];</code>
+     */
+    protected $field = null;
+    /**
+     * Generated from protobuf field <code>optional string sort = 6 [json_name = "sort"];</code>
+     */
+    protected $sort = null;
+    /**
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> filters = 7 [json_name = "filters"];</code>
+     */
+    private $filters;
 
     /**
      * Constructor.
@@ -36,6 +56,11 @@ class ListRequest extends \Google\Protobuf\Internal\Message
      *           Namespace ID to seek account in
      *     @type int $depth
      *           Depth
+     *     @type int|string $page
+     *     @type int|string $limit
+     *     @type string $field
+     *     @type string $sort
+     *     @type array|\Google\Protobuf\Internal\MapField $filters
      * }
      */
     public function __construct($data = NULL) {
@@ -111,6 +136,156 @@ class ListRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt32($var);
         $this->depth = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>optional uint64 page = 3 [json_name = "page"];</code>
+     * @return int|string
+     */
+    public function getPage()
+    {
+        return isset($this->page) ? $this->page : 0;
+    }
+
+    public function hasPage()
+    {
+        return isset($this->page);
+    }
+
+    public function clearPage()
+    {
+        unset($this->page);
+    }
+
+    /**
+     * Generated from protobuf field <code>optional uint64 page = 3 [json_name = "page"];</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setPage($var)
+    {
+        GPBUtil::checkUint64($var);
+        $this->page = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>optional uint64 limit = 4 [json_name = "limit"];</code>
+     * @return int|string
+     */
+    public function getLimit()
+    {
+        return isset($this->limit) ? $this->limit : 0;
+    }
+
+    public function hasLimit()
+    {
+        return isset($this->limit);
+    }
+
+    public function clearLimit()
+    {
+        unset($this->limit);
+    }
+
+    /**
+     * Generated from protobuf field <code>optional uint64 limit = 4 [json_name = "limit"];</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setLimit($var)
+    {
+        GPBUtil::checkUint64($var);
+        $this->limit = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string field = 5 [json_name = "field"];</code>
+     * @return string
+     */
+    public function getField()
+    {
+        return isset($this->field) ? $this->field : '';
+    }
+
+    public function hasField()
+    {
+        return isset($this->field);
+    }
+
+    public function clearField()
+    {
+        unset($this->field);
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string field = 5 [json_name = "field"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setField($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->field = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string sort = 6 [json_name = "sort"];</code>
+     * @return string
+     */
+    public function getSort()
+    {
+        return isset($this->sort) ? $this->sort : '';
+    }
+
+    public function hasSort()
+    {
+        return isset($this->sort);
+    }
+
+    public function clearSort()
+    {
+        unset($this->sort);
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string sort = 6 [json_name = "sort"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setSort($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->sort = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> filters = 7 [json_name = "filters"];</code>
+     * @return \Google\Protobuf\Internal\MapField
+     */
+    public function getFilters()
+    {
+        return $this->filters;
+    }
+
+    /**
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> filters = 7 [json_name = "filters"];</code>
+     * @param array|\Google\Protobuf\Internal\MapField $var
+     * @return $this
+     */
+    public function setFilters($var)
+    {
+        $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::MESSAGE, \Google\Protobuf\Value::class);
+        $this->filters = $arr;
 
         return $this;
     }

@@ -23,78 +23,86 @@ import "google/protobuf/struct.proto";
 import "notes/notes.proto";
 
 message Credentials {
-    string type = 1;
-    repeated string data = 2;
+  string type = 1;
+  repeated string data = 2;
 }
 
 message CreateRequest {
-    string title = 1;          // New Account title
-    Credentials auth = 2;      // Credentials for New Account
-    string namespace = 3;      // Namespace to put Account under
-    optional int32 access = 4; // Account access level to parent namespace
-    nocloud.billing.Currency currency = 5; // Account Balance Currency
-    google.protobuf.Struct data = 6;
+  string title = 1;          // New Account title
+  Credentials auth = 2;      // Credentials for New Account
+  string namespace = 3;      // Namespace to put Account under
+  optional int32 access = 4; // Account access level to parent namespace
+  nocloud.billing.Currency currency = 5; // Account Balance Currency
+  google.protobuf.Struct data = 6;
 }
 
 message CreateResponse {
-    string uuid = 1;
-    string namespace = 2;
+  string uuid = 1;
+  string namespace = 2;
 }
 
 message GetRequest {
-    string uuid = 1;
-    bool public = 2;
+  string uuid = 1;
+  bool public = 2;
 }
 
 message SuspendConf {
-    optional bool immune = 1;
-    optional float limit = 2;
+  optional bool immune = 1;
+  optional float limit = 2;
 }
 
 enum AccountStatus {
-    ACTIVE = 0;
-    LOCK = 1;
-    PERMANENT_LOCK = 2;
+  ACTIVE = 0;
+  LOCK = 1;
+  PERMANENT_LOCK = 2;
 }
 
 message Account {
-    string uuid = 1;
-    string title = 2;
+  string uuid = 1;
+  string title = 2;
 
-    google.protobuf.Struct data = 3;
+  google.protobuf.Struct data = 3;
 
-    optional double balance = 4;
-    optional nocloud.access.Access access = 5;
-    optional SuspendConf suspend_conf = 6;
-    optional bool suspended = 7;
-    optional nocloud.billing.Currency currency = 8; // Account Balance Currency
-    AccountStatus status = 9;
-    repeated notes.AdminNote admin_notes = 10;
+  optional double balance = 4;
+  optional nocloud.access.Access access = 5;
+  optional SuspendConf suspend_conf = 6;
+  optional bool suspended = 7;
+  optional nocloud.billing.Currency currency = 8; // Account Balance Currency
+  AccountStatus status = 9;
+  repeated notes.AdminNote admin_notes = 10;
 }
 
 message UpdateResponse {bool result = 1;}
 
 message ListRequest {
-    optional string namespace = 1; // Namespace ID to seek account in
-    optional int32 depth = 2;      // Depth
+  optional string namespace = 1; // Namespace ID to seek account in
+  optional int32 depth = 2;      // Depth
+  optional uint64 page = 3;
+  optional uint64 limit = 4;
+  optional string field = 5;
+  optional string sort = 6;
+  map<string, google.protobuf.Value> filters = 7;
 }
 
-message ListResponse {repeated Account pool = 1;}
+message ListResponse {
+  repeated Account pool = 1;
+  int64 count = 2;
+}
 
 message SetCredentialsRequest {
-    string account = 1;
-    Credentials auth = 2;
+  string account = 1;
+  Credentials auth = 2;
 }
 
 message SetCredentialsResponse {bool result = 1;}
 
 message TokenRequest {
-    Credentials auth = 1;
-    int32 exp = 2;
-    bool root_claim = 3;
-    string sp_claim = 4;
-    string instance_claim = 5;
-    optional string uuid = 6;
+  Credentials auth = 1;
+  int32 exp = 2;
+  bool root_claim = 3;
+  string sp_claim = 4;
+  string instance_claim = 5;
+  optional string uuid = 6;
 }
 
 message TokenResponse {string token = 1;}
