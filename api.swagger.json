@@ -1561,16 +1561,18 @@
             "type": "string"
           },
           {
-            "name": "from.uuid",
+            "name": "from.id",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "format": "int64"
           },
           {
-            "name": "to.uuid",
+            "name": "to.id",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -1607,16 +1609,18 @@
             "type": "string"
           },
           {
-            "name": "from.uuid",
+            "name": "from.id",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "format": "int64"
           },
           {
-            "name": "to.uuid",
+            "name": "to.id",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -1966,10 +1970,11 @@
             "required": false
           },
           {
-            "name": "currency.uuid",
+            "name": "currency.id",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "format": "int64"
           },
           {
             "name": "currency.name",
@@ -2657,10 +2662,11 @@
             "required": false
           },
           {
-            "name": "currency.uuid",
+            "name": "currency.id",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "format": "int64"
           },
           {
             "name": "currency.name",
@@ -6104,8 +6110,9 @@
     "billingCurrency": {
       "type": "object",
       "properties": {
-        "uuid": {
-          "type": "string"
+        "id": {
+          "type": "string",
+          "format": "int64"
         },
         "name": {
           "type": "string"
