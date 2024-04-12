@@ -1030,6 +1030,7 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	CurrencyService_CreateCurrency_FullMethodName     = "/nocloud.billing.CurrencyService/CreateCurrency"
 	CurrencyService_GetCurrencies_FullMethodName      = "/nocloud.billing.CurrencyService/GetCurrencies"
 	CurrencyService_GetExchangeRate_FullMethodName    = "/nocloud.billing.CurrencyService/GetExchangeRate"
 	CurrencyService_GetExchangeRates_FullMethodName   = "/nocloud.billing.CurrencyService/GetExchangeRates"
@@ -1043,6 +1044,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CurrencyServiceClient interface {
+	CreateCurrency(ctx context.Context, in *CreateCurrencyRequest, opts ...grpc.CallOption) (*CreateCurrencyResponse, error)
 	GetCurrencies(ctx context.Context, in *GetCurrenciesRequest, opts ...grpc.CallOption) (*GetCurrenciesResponse, error)
 	GetExchangeRate(ctx context.Context, in *GetExchangeRateRequest, opts ...grpc.CallOption) (*GetExchangeRateResponse, error)
 	GetExchangeRates(ctx context.Context, in *GetExchangeRatesRequest, opts ...grpc.CallOption) (*GetExchangeRatesResponse, error)
@@ -1058,6 +1060,15 @@ type currencyServiceClient struct {
 
 func NewCurrencyServiceClient(cc grpc.ClientConnInterface) CurrencyServiceClient {
 	return &currencyServiceClient{cc}
+}
+
+func (c *currencyServiceClient) CreateCurrency(ctx context.Context, in *CreateCurrencyRequest, opts ...grpc.CallOption) (*CreateCurrencyResponse, error) {
+	out := new(CreateCurrencyResponse)
+	err := c.cc.Invoke(ctx, CurrencyService_CreateCurrency_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *currencyServiceClient) GetCurrencies(ctx context.Context, in *GetCurrenciesRequest, opts ...grpc.CallOption) (*GetCurrenciesResponse, error) {
@@ -1127,6 +1138,7 @@ func (c *currencyServiceClient) Convert(ctx context.Context, in *ConversionReque
 // All implementations must embed UnimplementedCurrencyServiceServer
 // for forward compatibility
 type CurrencyServiceServer interface {
+	CreateCurrency(context.Context, *CreateCurrencyRequest) (*CreateCurrencyResponse, error)
 	GetCurrencies(context.Context, *GetCurrenciesRequest) (*GetCurrenciesResponse, error)
 	GetExchangeRate(context.Context, *GetExchangeRateRequest) (*GetExchangeRateResponse, error)
 	GetExchangeRates(context.Context, *GetExchangeRatesRequest) (*GetExchangeRatesResponse, error)
@@ -1141,6 +1153,9 @@ type CurrencyServiceServer interface {
 type UnimplementedCurrencyServiceServer struct {
 }
 
+func (UnimplementedCurrencyServiceServer) CreateCurrency(context.Context, *CreateCurrencyRequest) (*CreateCurrencyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCurrency not implemented")
+}
 func (UnimplementedCurrencyServiceServer) GetCurrencies(context.Context, *GetCurrenciesRequest) (*GetCurrenciesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCurrencies not implemented")
 }
@@ -1173,6 +1188,24 @@ type UnsafeCurrencyServiceServer interface {
 
 func RegisterCurrencyServiceServer(s grpc.ServiceRegistrar, srv CurrencyServiceServer) {
 	s.RegisterService(&CurrencyService_ServiceDesc, srv)
+}
+
+func _CurrencyService_CreateCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCurrencyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyServiceServer).CreateCurrency(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CurrencyService_CreateCurrency_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyServiceServer).CreateCurrency(ctx, req.(*CreateCurrencyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _CurrencyService_GetCurrencies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -1308,6 +1341,10 @@ var CurrencyService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "nocloud.billing.CurrencyService",
 	HandlerType: (*CurrencyServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateCurrency",
+			Handler:    _CurrencyService_CreateCurrency_Handler,
+		},
 		{
 			MethodName: "GetCurrencies",
 			Handler:    _CurrencyService_GetCurrencies_Handler,

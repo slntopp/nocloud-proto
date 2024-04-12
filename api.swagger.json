@@ -1414,6 +1414,36 @@
         "tags": [
           "CurrencyService"
         ]
+      },
+      "post": {
+        "operationId": "CurrencyService_CreateCurrency",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingCreateCurrencyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingCreateCurrencyRequest"
+            }
+          }
+        ],
+        "tags": [
+          "CurrencyService"
+        ]
       }
     },
     "/billing/currencies/convert": {
@@ -6088,6 +6118,17 @@
           "format": "double"
         }
       }
+    },
+    "billingCreateCurrencyRequest": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "$ref": "#/definitions/billingCurrency"
+        }
+      }
+    },
+    "billingCreateCurrencyResponse": {
+      "type": "object"
     },
     "billingCreateExchangeRateRequest": {
       "type": "object",

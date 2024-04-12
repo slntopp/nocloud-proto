@@ -925,6 +925,32 @@ func local_request_BillingService_UpdateInvoice_0(ctx context.Context, marshaler
 
 }
 
+func request_CurrencyService_CreateCurrency_0(ctx context.Context, marshaler runtime.Marshaler, client CurrencyServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq CreateCurrencyRequest
+	var metadata runtime.ServerMetadata
+
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := client.CreateCurrency(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_CurrencyService_CreateCurrency_0(ctx context.Context, marshaler runtime.Marshaler, server CurrencyServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq CreateCurrencyRequest
+	var metadata runtime.ServerMetadata
+
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := server.CreateCurrency(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
 func request_CurrencyService_GetCurrencies_0(ctx context.Context, marshaler runtime.Marshaler, client CurrencyServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetCurrenciesRequest
 	var metadata runtime.ServerMetadata
@@ -2317,6 +2343,31 @@ func RegisterBillingServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterCurrencyServiceHandlerFromEndpoint instead.
 func RegisterCurrencyServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server CurrencyServiceServer) error {
 
+	mux.Handle("POST", pattern_CurrencyService_CreateCurrency_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.billing.CurrencyService/CreateCurrency", runtime.WithHTTPPathPattern("/billing/currencies"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_CurrencyService_CreateCurrency_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_CurrencyService_CreateCurrency_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
 	mux.Handle("GET", pattern_CurrencyService_GetCurrencies_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -3442,6 +3493,28 @@ func RegisterCurrencyServiceHandler(ctx context.Context, mux *runtime.ServeMux, 
 // "CurrencyServiceClient" to call the correct interceptors.
 func RegisterCurrencyServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client CurrencyServiceClient) error {
 
+	mux.Handle("POST", pattern_CurrencyService_CreateCurrency_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.CurrencyService/CreateCurrency", runtime.WithHTTPPathPattern("/billing/currencies"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_CurrencyService_CreateCurrency_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_CurrencyService_CreateCurrency_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
 	mux.Handle("GET", pattern_CurrencyService_GetCurrencies_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -3600,6 +3673,8 @@ func RegisterCurrencyServiceHandlerClient(ctx context.Context, mux *runtime.Serv
 }
 
 var (
+	pattern_CurrencyService_CreateCurrency_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"billing", "currencies"}, ""))
+
 	pattern_CurrencyService_GetCurrencies_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"billing", "currencies"}, ""))
 
 	pattern_CurrencyService_GetExchangeRate_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 1, 0, 4, 1, 5, 4}, []string{"billing", "currencies", "rates", "from.name", "to.name"}, ""))
@@ -3616,6 +3691,8 @@ var (
 )
 
 var (
+	forward_CurrencyService_CreateCurrency_0 = runtime.ForwardResponseMessage
+
 	forward_CurrencyService_GetCurrencies_0 = runtime.ForwardResponseMessage
 
 	forward_CurrencyService_GetExchangeRate_0 = runtime.ForwardResponseMessage

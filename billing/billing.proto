@@ -493,6 +493,11 @@ message Currency {
   string name = 2;
 }
 
+message CreateCurrencyRequest{
+  Currency currency = 1;
+}
+message CreateCurrencyResponse{}
+
 message CreateExchangeRateRequest {
   Currency from = 1;
   Currency to = 2;
@@ -538,6 +543,13 @@ message ConversionRequest {
 message ConversionResponse {double amount = 1;}
 
 service CurrencyService {
+  rpc CreateCurrency (CreateCurrencyRequest)
+      returns (CreateCurrencyResponse) {
+    option (google.api.http) = {
+      post: "/billing/currencies"
+      body: "*"
+    };
+  };
   rpc GetCurrencies (GetCurrenciesRequest) returns (GetCurrenciesResponse) {
     option (google.api.http) = {
       get: "/billing/currencies"
