@@ -148,12 +148,12 @@ type CreateRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Title     string           `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`                                      // New Account title
-	Auth      *Credentials     `protobuf:"bytes,2,opt,name=auth,proto3" json:"auth,omitempty"`                                        // Credentials for New Account
-	Namespace string           `protobuf:"bytes,3,opt,name=namespace,proto3" json:"namespace,omitempty"`                              // Namespace to put Account under
-	Access    *int32           `protobuf:"varint,4,opt,name=access,proto3,oneof" json:"access,omitempty"`                             // Account access level to parent namespace
-	Currency  billing.Currency `protobuf:"varint,5,opt,name=currency,proto3,enum=nocloud.billing.Currency" json:"currency,omitempty"` // Account Balance Currency
-	Data      *structpb.Struct `protobuf:"bytes,6,opt,name=data,proto3" json:"data,omitempty"`
+	Title     string            `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`          // New Account title
+	Auth      *Credentials      `protobuf:"bytes,2,opt,name=auth,proto3" json:"auth,omitempty"`            // Credentials for New Account
+	Namespace string            `protobuf:"bytes,3,opt,name=namespace,proto3" json:"namespace,omitempty"`  // Namespace to put Account under
+	Access    *int32            `protobuf:"varint,4,opt,name=access,proto3,oneof" json:"access,omitempty"` // Account access level to parent namespace
+	Currency  *billing.Currency `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`    // Account Balance Currency
+	Data      *structpb.Struct  `protobuf:"bytes,6,opt,name=data,proto3" json:"data,omitempty"`
 }
 
 func (x *CreateRequest) Reset() {
@@ -216,11 +216,11 @@ func (x *CreateRequest) GetAccess() int32 {
 	return 0
 }
 
-func (x *CreateRequest) GetCurrency() billing.Currency {
+func (x *CreateRequest) GetCurrency() *billing.Currency {
 	if x != nil {
 		return x.Currency
 	}
-	return billing.Currency(0)
+	return nil
 }
 
 func (x *CreateRequest) GetData() *structpb.Struct {
@@ -407,7 +407,7 @@ type Account struct {
 	Access      *access.Access     `protobuf:"bytes,5,opt,name=access,proto3,oneof" json:"access,omitempty"`
 	SuspendConf *SuspendConf       `protobuf:"bytes,6,opt,name=suspend_conf,json=suspendConf,proto3,oneof" json:"suspend_conf,omitempty"`
 	Suspended   *bool              `protobuf:"varint,7,opt,name=suspended,proto3,oneof" json:"suspended,omitempty"`
-	Currency    *billing.Currency  `protobuf:"varint,8,opt,name=currency,proto3,enum=nocloud.billing.Currency,oneof" json:"currency,omitempty"` // Account Balance Currency
+	Currency    *billing.Currency  `protobuf:"bytes,8,opt,name=currency,proto3,oneof" json:"currency,omitempty"` // Account Balance Currency
 	Status      AccountStatus      `protobuf:"varint,9,opt,name=status,proto3,enum=nocloud.registry.accounts.AccountStatus" json:"status,omitempty"`
 	AdminNotes  []*notes.AdminNote `protobuf:"bytes,10,rep,name=admin_notes,json=adminNotes,proto3" json:"admin_notes,omitempty"`
 }
@@ -493,11 +493,11 @@ func (x *Account) GetSuspended() bool {
 	return false
 }
 
-func (x *Account) GetCurrency() billing.Currency {
-	if x != nil && x.Currency != nil {
-		return *x.Currency
+func (x *Account) GetCurrency() *billing.Currency {
+	if x != nil {
+		return x.Currency
 	}
-	return billing.Currency(0)
+	return nil
 }
 
 func (x *Account) GetStatus() AccountStatus {
@@ -1256,7 +1256,7 @@ var file_registry_accounts_accounts_proto_rawDesc = []byte{
 	0x61, 0x63, 0x65, 0x12, 0x1b, 0x0a, 0x06, 0x61, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x04, 0x20,
 	0x01, 0x28, 0x05, 0x48, 0x00, 0x52, 0x06, 0x61, 0x63, 0x63, 0x65, 0x73, 0x73, 0x88, 0x01, 0x01,
 	0x12, 0x35, 0x0a, 0x08, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x18, 0x05, 0x20, 0x01,
-	0x28, 0x0e, 0x32, 0x19, 0x2e, 0x6e, 0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x62, 0x69, 0x6c,
+	0x28, 0x0b, 0x32, 0x19, 0x2e, 0x6e, 0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x62, 0x69, 0x6c,
 	0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x43, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x52, 0x08, 0x63,
 	0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x12, 0x2b, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18,
 	0x06, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70,
@@ -1295,7 +1295,7 @@ var file_registry_accounts_accounts_proto_rawDesc = []byte{
 	0x12, 0x21, 0x0a, 0x09, 0x73, 0x75, 0x73, 0x70, 0x65, 0x6e, 0x64, 0x65, 0x64, 0x18, 0x07, 0x20,
 	0x01, 0x28, 0x08, 0x48, 0x03, 0x52, 0x09, 0x73, 0x75, 0x73, 0x70, 0x65, 0x6e, 0x64, 0x65, 0x64,
 	0x88, 0x01, 0x01, 0x12, 0x3a, 0x0a, 0x08, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x18,
-	0x08, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x19, 0x2e, 0x6e, 0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e,
+	0x08, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x6e, 0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e,
 	0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x43, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79,
 	0x48, 0x04, 0x52, 0x08, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x88, 0x01, 0x01, 0x12,
 	0x40, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x09, 0x20, 0x01, 0x28, 0x0e, 0x32,
@@ -1443,7 +1443,7 @@ var file_registry_accounts_accounts_proto_goTypes = []interface{}{
 	(*UnsuspendRequest)(nil),       // 18: nocloud.registry.accounts.UnsuspendRequest
 	(*UnsuspendResponse)(nil),      // 19: nocloud.registry.accounts.UnsuspendResponse
 	nil,                            // 20: nocloud.registry.accounts.ListRequest.FiltersEntry
-	(billing.Currency)(0),          // 21: nocloud.billing.Currency
+	(*billing.Currency)(nil),       // 21: nocloud.billing.Currency
 	(*structpb.Struct)(nil),        // 22: google.protobuf.Struct
 	(*access.Access)(nil),          // 23: nocloud.access.Access
 	(*notes.AdminNote)(nil),        // 24: nocloud.notes.AdminNote

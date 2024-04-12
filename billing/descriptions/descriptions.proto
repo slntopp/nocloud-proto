@@ -15,9 +15,7 @@ message ListDescriptionsRequest {
   optional string field = 3;
   optional string sort = 4;
 }
-
-message CountDescriptionsRequest {
-}
+message CountDescriptionsRequest {}
 
 message CountDescriptionsResponse {
   int64 total = 1;

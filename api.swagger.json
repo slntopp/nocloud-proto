@@ -1530,7 +1530,7 @@
         ]
       }
     },
-    "/billing/currencies/rates/{from}/{to}": {
+    "/billing/currencies/rates/{from.name}/{to.name}": {
       "get": {
         "operationId": "CurrencyService_GetExchangeRate",
         "responses": {
@@ -1549,30 +1549,28 @@
         },
         "parameters": [
           {
-            "name": "from",
+            "name": "from.name",
             "in": "path",
             "required": true,
-            "type": "string",
-            "enum": [
-              "NCU",
-              "USD",
-              "EUR",
-              "BYN",
-              "PLN"
-            ]
+            "type": "string"
           },
           {
-            "name": "to",
+            "name": "to.name",
             "in": "path",
             "required": true,
-            "type": "string",
-            "enum": [
-              "NCU",
-              "USD",
-              "EUR",
-              "BYN",
-              "PLN"
-            ]
+            "type": "string"
+          },
+          {
+            "name": "from.uuid",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "to.uuid",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -1597,30 +1595,28 @@
         },
         "parameters": [
           {
-            "name": "from",
+            "name": "from.name",
             "in": "path",
             "required": true,
-            "type": "string",
-            "enum": [
-              "NCU",
-              "USD",
-              "EUR",
-              "BYN",
-              "PLN"
-            ]
+            "type": "string"
           },
           {
-            "name": "to",
+            "name": "to.name",
             "in": "path",
             "required": true,
-            "type": "string",
-            "enum": [
-              "NCU",
-              "USD",
-              "EUR",
-              "BYN",
-              "PLN"
-            ]
+            "type": "string"
+          },
+          {
+            "name": "from.uuid",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "to.uuid",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -1970,18 +1966,16 @@
             "required": false
           },
           {
-            "name": "currency",
+            "name": "currency.uuid",
             "in": "query",
             "required": false,
-            "type": "string",
-            "enum": [
-              "NCU",
-              "USD",
-              "EUR",
-              "BYN",
-              "PLN"
-            ],
-            "default": "NCU"
+            "type": "string"
+          },
+          {
+            "name": "currency.name",
+            "in": "query",
+            "required": false,
+            "type": "string"
           },
           {
             "name": "created",
@@ -2663,18 +2657,16 @@
             "required": false
           },
           {
-            "name": "currency",
+            "name": "currency.uuid",
             "in": "query",
             "required": false,
-            "type": "string",
-            "enum": [
-              "NCU",
-              "USD",
-              "EUR",
-              "BYN",
-              "PLN"
-            ],
-            "default": "NCU"
+            "type": "string"
+          },
+          {
+            "name": "currency.name",
+            "in": "query",
+            "required": false,
+            "type": "string"
           },
           {
             "name": "created",
@@ -6110,15 +6102,15 @@
       "type": "object"
     },
     "billingCurrency": {
-      "type": "string",
-      "enum": [
-        "NCU",
-        "USD",
-        "EUR",
-        "BYN",
-        "PLN"
-      ],
-      "default": "NCU"
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
     },
     "billingDeleteExchangeRateResponse": {
       "type": "object"
@@ -6177,6 +6169,7 @@
         "currencies": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/billingCurrency"
           }
         }
