@@ -1414,6 +1414,36 @@
         "tags": [
           "CurrencyService"
         ]
+      },
+      "post": {
+        "operationId": "CurrencyService_CreateCurrency",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingCreateCurrencyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingCreateCurrencyRequest"
+            }
+          }
+        ],
+        "tags": [
+          "CurrencyService"
+        ]
       }
     },
     "/billing/currencies/convert": {
@@ -1530,7 +1560,7 @@
         ]
       }
     },
-    "/billing/currencies/rates/{from}/{to}": {
+    "/billing/currencies/rates/{from.name}/{to.name}": {
       "get": {
         "operationId": "CurrencyService_GetExchangeRate",
         "responses": {
@@ -1549,30 +1579,30 @@
         },
         "parameters": [
           {
-            "name": "from",
+            "name": "from.name",
             "in": "path",
             "required": true,
-            "type": "string",
-            "enum": [
-              "NCU",
-              "USD",
-              "EUR",
-              "BYN",
-              "PLN"
-            ]
+            "type": "string"
           },
           {
-            "name": "to",
+            "name": "to.name",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "from.id",
+            "in": "query",
+            "required": false,
             "type": "string",
-            "enum": [
-              "NCU",
-              "USD",
-              "EUR",
-              "BYN",
-              "PLN"
-            ]
+            "format": "int64"
+          },
+          {
+            "name": "to.id",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -1597,30 +1627,30 @@
         },
         "parameters": [
           {
-            "name": "from",
+            "name": "from.name",
             "in": "path",
             "required": true,
-            "type": "string",
-            "enum": [
-              "NCU",
-              "USD",
-              "EUR",
-              "BYN",
-              "PLN"
-            ]
+            "type": "string"
           },
           {
-            "name": "to",
+            "name": "to.name",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "from.id",
+            "in": "query",
+            "required": false,
             "type": "string",
-            "enum": [
-              "NCU",
-              "USD",
-              "EUR",
-              "BYN",
-              "PLN"
-            ]
+            "format": "int64"
+          },
+          {
+            "name": "to.id",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -1970,18 +2000,17 @@
             "required": false
           },
           {
-            "name": "currency",
+            "name": "currency.id",
             "in": "query",
             "required": false,
             "type": "string",
-            "enum": [
-              "NCU",
-              "USD",
-              "EUR",
-              "BYN",
-              "PLN"
-            ],
-            "default": "NCU"
+            "format": "int64"
+          },
+          {
+            "name": "currency.name",
+            "in": "query",
+            "required": false,
+            "type": "string"
           },
           {
             "name": "created",
@@ -2663,18 +2692,17 @@
             "required": false
           },
           {
-            "name": "currency",
+            "name": "currency.id",
             "in": "query",
             "required": false,
             "type": "string",
-            "enum": [
-              "NCU",
-              "USD",
-              "EUR",
-              "BYN",
-              "PLN"
-            ],
-            "default": "NCU"
+            "format": "int64"
+          },
+          {
+            "name": "currency.name",
+            "in": "query",
+            "required": false,
+            "type": "string"
           },
           {
             "name": "created",
@@ -6091,6 +6119,17 @@
         }
       }
     },
+    "billingCreateCurrencyRequest": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "$ref": "#/definitions/billingCurrency"
+        }
+      }
+    },
+    "billingCreateCurrencyResponse": {
+      "type": "object"
+    },
     "billingCreateExchangeRateRequest": {
       "type": "object",
       "properties": {
@@ -6110,15 +6149,16 @@
       "type": "object"
     },
     "billingCurrency": {
-      "type": "string",
-      "enum": [
-        "NCU",
-        "USD",
-        "EUR",
-        "BYN",
-        "PLN"
-      ],
-      "default": "NCU"
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
     },
     "billingDeleteExchangeRateResponse": {
       "type": "object"
@@ -6177,6 +6217,7 @@
         "currencies": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/billingCurrency"
           }
         }

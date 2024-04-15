@@ -127,6 +127,9 @@ const (
 	// BillingServiceUpdateInvoiceProcedure is the fully-qualified name of the BillingService's
 	// UpdateInvoice RPC.
 	BillingServiceUpdateInvoiceProcedure = "/nocloud.billing.BillingService/UpdateInvoice"
+	// CurrencyServiceCreateCurrencyProcedure is the fully-qualified name of the CurrencyService's
+	// CreateCurrency RPC.
+	CurrencyServiceCreateCurrencyProcedure = "/nocloud.billing.CurrencyService/CreateCurrency"
 	// CurrencyServiceGetCurrenciesProcedure is the fully-qualified name of the CurrencyService's
 	// GetCurrencies RPC.
 	CurrencyServiceGetCurrenciesProcedure = "/nocloud.billing.CurrencyService/GetCurrencies"
@@ -207,6 +210,7 @@ var (
 	billingServiceGetInvoicesCountMethodDescriptor         = billingServiceServiceDescriptor.Methods().ByName("GetInvoicesCount")
 	billingServiceUpdateInvoiceMethodDescriptor            = billingServiceServiceDescriptor.Methods().ByName("UpdateInvoice")
 	currencyServiceServiceDescriptor                       = billing.File_billing_billing_proto.Services().ByName("CurrencyService")
+	currencyServiceCreateCurrencyMethodDescriptor          = currencyServiceServiceDescriptor.Methods().ByName("CreateCurrency")
 	currencyServiceGetCurrenciesMethodDescriptor           = currencyServiceServiceDescriptor.Methods().ByName("GetCurrencies")
 	currencyServiceGetExchangeRateMethodDescriptor         = currencyServiceServiceDescriptor.Methods().ByName("GetExchangeRate")
 	currencyServiceGetExchangeRatesMethodDescriptor        = currencyServiceServiceDescriptor.Methods().ByName("GetExchangeRates")
@@ -940,6 +944,7 @@ func (UnimplementedBillingServiceHandler) UpdateInvoice(context.Context, *connec
 
 // CurrencyServiceClient is a client for the nocloud.billing.CurrencyService service.
 type CurrencyServiceClient interface {
+	CreateCurrency(context.Context, *connect.Request[billing.CreateCurrencyRequest]) (*connect.Response[billing.CreateCurrencyResponse], error)
 	GetCurrencies(context.Context, *connect.Request[billing.GetCurrenciesRequest]) (*connect.Response[billing.GetCurrenciesResponse], error)
 	GetExchangeRate(context.Context, *connect.Request[billing.GetExchangeRateRequest]) (*connect.Response[billing.GetExchangeRateResponse], error)
 	GetExchangeRates(context.Context, *connect.Request[billing.GetExchangeRatesRequest]) (*connect.Response[billing.GetExchangeRatesResponse], error)
@@ -959,6 +964,12 @@ type CurrencyServiceClient interface {
 func NewCurrencyServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) CurrencyServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
 	return &currencyServiceClient{
+		createCurrency: connect.NewClient[billing.CreateCurrencyRequest, billing.CreateCurrencyResponse](
+			httpClient,
+			baseURL+CurrencyServiceCreateCurrencyProcedure,
+			connect.WithSchema(currencyServiceCreateCurrencyMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 		getCurrencies: connect.NewClient[billing.GetCurrenciesRequest, billing.GetCurrenciesResponse](
 			httpClient,
 			baseURL+CurrencyServiceGetCurrenciesProcedure,
@@ -1006,6 +1017,7 @@ func NewCurrencyServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 
 // currencyServiceClient implements CurrencyServiceClient.
 type currencyServiceClient struct {
+	createCurrency     *connect.Client[billing.CreateCurrencyRequest, billing.CreateCurrencyResponse]
 	getCurrencies      *connect.Client[billing.GetCurrenciesRequest, billing.GetCurrenciesResponse]
 	getExchangeRate    *connect.Client[billing.GetExchangeRateRequest, billing.GetExchangeRateResponse]
 	getExchangeRates   *connect.Client[billing.GetExchangeRatesRequest, billing.GetExchangeRatesResponse]
@@ -1013,6 +1025,11 @@ type currencyServiceClient struct {
 	updateExchangeRate *connect.Client[billing.UpdateExchangeRateRequest, billing.UpdateExchangeRateResponse]
 	deleteExchangeRate *connect.Client[billing.DeleteExchangeRateRequest, billing.DeleteExchangeRateResponse]
 	convert            *connect.Client[billing.ConversionRequest, billing.ConversionResponse]
+}
+
+// CreateCurrency calls nocloud.billing.CurrencyService.CreateCurrency.
+func (c *currencyServiceClient) CreateCurrency(ctx context.Context, req *connect.Request[billing.CreateCurrencyRequest]) (*connect.Response[billing.CreateCurrencyResponse], error) {
+	return c.createCurrency.CallUnary(ctx, req)
 }
 
 // GetCurrencies calls nocloud.billing.CurrencyService.GetCurrencies.
@@ -1052,6 +1069,7 @@ func (c *currencyServiceClient) Convert(ctx context.Context, req *connect.Reques
 
 // CurrencyServiceHandler is an implementation of the nocloud.billing.CurrencyService service.
 type CurrencyServiceHandler interface {
+	CreateCurrency(context.Context, *connect.Request[billing.CreateCurrencyRequest]) (*connect.Response[billing.CreateCurrencyResponse], error)
 	GetCurrencies(context.Context, *connect.Request[billing.GetCurrenciesRequest]) (*connect.Response[billing.GetCurrenciesResponse], error)
 	GetExchangeRate(context.Context, *connect.Request[billing.GetExchangeRateRequest]) (*connect.Response[billing.GetExchangeRateResponse], error)
 	GetExchangeRates(context.Context, *connect.Request[billing.GetExchangeRatesRequest]) (*connect.Response[billing.GetExchangeRatesResponse], error)
@@ -1067,6 +1085,12 @@ type CurrencyServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewCurrencyServiceHandler(svc CurrencyServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	currencyServiceCreateCurrencyHandler := connect.NewUnaryHandler(
+		CurrencyServiceCreateCurrencyProcedure,
+		svc.CreateCurrency,
+		connect.WithSchema(currencyServiceCreateCurrencyMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	currencyServiceGetCurrenciesHandler := connect.NewUnaryHandler(
 		CurrencyServiceGetCurrenciesProcedure,
 		svc.GetCurrencies,
@@ -1111,6 +1135,8 @@ func NewCurrencyServiceHandler(svc CurrencyServiceHandler, opts ...connect.Handl
 	)
 	return "/nocloud.billing.CurrencyService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
+		case CurrencyServiceCreateCurrencyProcedure:
+			currencyServiceCreateCurrencyHandler.ServeHTTP(w, r)
 		case CurrencyServiceGetCurrenciesProcedure:
 			currencyServiceGetCurrenciesHandler.ServeHTTP(w, r)
 		case CurrencyServiceGetExchangeRateProcedure:
@@ -1133,6 +1159,10 @@ func NewCurrencyServiceHandler(svc CurrencyServiceHandler, opts ...connect.Handl
 
 // UnimplementedCurrencyServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedCurrencyServiceHandler struct{}
+
+func (UnimplementedCurrencyServiceHandler) CreateCurrency(context.Context, *connect.Request[billing.CreateCurrencyRequest]) (*connect.Response[billing.CreateCurrencyResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.CurrencyService.CreateCurrency is not implemented"))
+}
 
 func (UnimplementedCurrencyServiceHandler) GetCurrencies(context.Context, *connect.Request[billing.GetCurrenciesRequest]) (*connect.Response[billing.GetCurrenciesResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.CurrencyService.GetCurrencies is not implemented"))

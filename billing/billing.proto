@@ -157,6 +157,7 @@ message Transaction {
   string service = 7;
   repeated string records = 8; // list of records UUIDs
 
+
   double total = 9; // Transaction total value in NCU
   /* Transaction meta data, like
       meta: {
@@ -487,13 +488,15 @@ service BillingService {
   };
 }
 
-enum Currency {
-  NCU = 0;
-  USD = 1;
-  EUR = 2;
-  BYN = 3;
-  PLN = 4;
+message Currency {
+  int64 id = 1;
+  string name = 2;
 }
+
+message CreateCurrencyRequest{
+  Currency currency = 1;
+}
+message CreateCurrencyResponse{}
 
 message CreateExchangeRateRequest {
   Currency from = 1;
@@ -540,6 +543,13 @@ message ConversionRequest {
 message ConversionResponse {double amount = 1;}
 
 service CurrencyService {
+  rpc CreateCurrency (CreateCurrencyRequest)
+      returns (CreateCurrencyResponse) {
+    option (google.api.http) = {
+      post: "/billing/currencies"
+      body: "*"
+    };
+  };
   rpc GetCurrencies (GetCurrenciesRequest) returns (GetCurrenciesResponse) {
     option (google.api.http) = {
       get: "/billing/currencies"
@@ -548,7 +558,7 @@ service CurrencyService {
   rpc GetExchangeRate (GetExchangeRateRequest)
       returns (GetExchangeRateResponse) {
     option (google.api.http) = {
-      get: "/billing/currencies/rates/{from}/{to}"
+      get: "/billing/currencies/rates/{from.name}/{to.name}"
     };
   };
   rpc GetExchangeRates (GetExchangeRatesRequest)
@@ -574,7 +584,7 @@ service CurrencyService {
   rpc DeleteExchangeRate (DeleteExchangeRateRequest)
       returns (DeleteExchangeRateResponse) {
     option (google.api.http) = {
-      delete: "/billing/currencies/rates/{from}/{to}"
+      delete: "/billing/currencies/rates/{from.name}/{to.name}"
     };
   };
   rpc Convert (ConversionRequest) returns (ConversionResponse) {
