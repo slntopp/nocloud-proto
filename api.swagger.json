@@ -1560,7 +1560,7 @@
         ]
       }
     },
-    "/billing/currencies/rates/{from.name}/{to.name}": {
+    "/billing/currencies/rates/rate": {
       "get": {
         "operationId": "CurrencyService_GetExchangeRate",
         "responses": {
@@ -1579,18 +1579,6 @@
         },
         "parameters": [
           {
-            "name": "from.name",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "to.name",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "from.id",
             "in": "query",
             "required": false,
@@ -1598,11 +1586,23 @@
             "format": "int64"
           },
           {
+            "name": "from.title",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "to.id",
             "in": "query",
             "required": false,
             "type": "string",
             "format": "int64"
+          },
+          {
+            "name": "to.title",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -1627,18 +1627,6 @@
         },
         "parameters": [
           {
-            "name": "from.name",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "to.name",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "from.id",
             "in": "query",
             "required": false,
@@ -1646,11 +1634,23 @@
             "format": "int64"
           },
           {
+            "name": "from.title",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "to.id",
             "in": "query",
             "required": false,
             "type": "string",
             "format": "int64"
+          },
+          {
+            "name": "to.title",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -2007,7 +2007,7 @@
             "format": "int64"
           },
           {
-            "name": "currency.name",
+            "name": "currency.title",
             "in": "query",
             "required": false,
             "type": "string"
@@ -2699,7 +2699,7 @@
             "format": "int64"
           },
           {
-            "name": "currency.name",
+            "name": "currency.title",
             "in": "query",
             "required": false,
             "type": "string"
@@ -6155,7 +6155,7 @@
           "type": "string",
           "format": "int64"
         },
-        "name": {
+        "title": {
           "type": "string"
         }
       }
