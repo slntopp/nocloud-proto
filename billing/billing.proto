@@ -490,7 +490,7 @@ service BillingService {
 
 message Currency {
   int64 id = 1;
-  string name = 2;
+  string title = 2;
 }
 
 message CreateCurrencyRequest{
@@ -558,7 +558,7 @@ service CurrencyService {
   rpc GetExchangeRate (GetExchangeRateRequest)
       returns (GetExchangeRateResponse) {
     option (google.api.http) = {
-      get: "/billing/currencies/rates/{from.name}/{to.name}"
+      get: "/billing/currencies/rates/rate"
     };
   };
   rpc GetExchangeRates (GetExchangeRatesRequest)
@@ -584,7 +584,7 @@ service CurrencyService {
   rpc DeleteExchangeRate (DeleteExchangeRateRequest)
       returns (DeleteExchangeRateResponse) {
     option (google.api.http) = {
-      delete: "/billing/currencies/rates/{from.name}/{to.name}"
+      delete: "/billing/currencies/rates/rate"
     };
   };
   rpc Convert (ConversionRequest) returns (ConversionResponse) {
