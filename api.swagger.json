@@ -1582,8 +1582,8 @@
             "name": "from.id",
             "in": "query",
             "required": false,
-            "type": "string",
-            "format": "int64"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "from.title",
@@ -1595,8 +1595,8 @@
             "name": "to.id",
             "in": "query",
             "required": false,
-            "type": "string",
-            "format": "int64"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "to.title",
@@ -1630,8 +1630,8 @@
             "name": "from.id",
             "in": "query",
             "required": false,
-            "type": "string",
-            "format": "int64"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "from.title",
@@ -1643,8 +1643,8 @@
             "name": "to.id",
             "in": "query",
             "required": false,
-            "type": "string",
-            "format": "int64"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "to.title",
@@ -2003,8 +2003,8 @@
             "name": "currency.id",
             "in": "query",
             "required": false,
-            "type": "string",
-            "format": "int64"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "currency.title",
@@ -2695,8 +2695,8 @@
             "name": "currency.id",
             "in": "query",
             "required": false,
-            "type": "string",
-            "format": "int64"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "currency.title",
@@ -6152,8 +6152,8 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string",
-          "format": "int64"
+          "type": "integer",
+          "format": "int32"
         },
         "title": {
           "type": "string"
