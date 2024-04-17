@@ -1742,9 +1742,9 @@ export declare class GetReportsCountResponse extends Message<GetReportsCountResp
  */
 export declare class Currency extends Message<Currency> {
   /**
-   * @generated from field: int64 id = 1;
+   * @generated from field: int32 id = 1;
    */
-  id: bigint;
+  id: number;
 
   /**
    * @generated from field: string title = 2;

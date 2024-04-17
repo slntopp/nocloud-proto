@@ -589,7 +589,7 @@ export const GetReportsCountResponse = proto3.makeMessageType(
 export const Currency = proto3.makeMessageType(
   "nocloud.billing.Currency",
   () => [
-    { no: 1, name: "id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 1, name: "id", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
     { no: 2, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
