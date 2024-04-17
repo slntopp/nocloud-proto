@@ -18,7 +18,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { proto3, Struct } from "@bufbuild/protobuf";
+import { proto3, Struct, Value } from "@bufbuild/protobuf";
 import { Currency } from "../../billing/billing_pb.js";
 import { Access } from "../../access/access_pb.js";
 import { AdminNote } from "../../notes/notes_pb.js";
@@ -56,7 +56,7 @@ export const CreateRequest = proto3.makeMessageType(
     { no: 2, name: "auth", kind: "message", T: Credentials },
     { no: 3, name: "namespace", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "access", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
-    { no: 5, name: "currency", kind: "enum", T: proto3.getEnumType(Currency) },
+    { no: 5, name: "currency", kind: "message", T: Currency },
     { no: 6, name: "data", kind: "message", T: Struct },
   ],
 );
@@ -107,7 +107,7 @@ export const Account = proto3.makeMessageType(
     { no: 5, name: "access", kind: "message", T: Access, opt: true },
     { no: 6, name: "suspend_conf", kind: "message", T: SuspendConf, opt: true },
     { no: 7, name: "suspended", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
-    { no: 8, name: "currency", kind: "enum", T: proto3.getEnumType(Currency), opt: true },
+    { no: 8, name: "currency", kind: "message", T: Currency, opt: true },
     { no: 9, name: "status", kind: "enum", T: proto3.getEnumType(AccountStatus) },
     { no: 10, name: "admin_notes", kind: "message", T: AdminNote, repeated: true },
   ],
@@ -131,6 +131,11 @@ export const ListRequest = proto3.makeMessageType(
   () => [
     { no: 1, name: "namespace", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 2, name: "depth", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
+    { no: 3, name: "page", kind: "scalar", T: 4 /* ScalarType.UINT64 */, opt: true },
+    { no: 4, name: "limit", kind: "scalar", T: 4 /* ScalarType.UINT64 */, opt: true },
+    { no: 5, name: "field", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 6, name: "sort", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 7, name: "filters", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
   ],
 );
 
@@ -141,6 +146,7 @@ export const ListResponse = proto3.makeMessageType(
   "nocloud.registry.accounts.ListResponse",
   () => [
     { no: 1, name: "pool", kind: "message", T: Account, repeated: true },
+    { no: 2, name: "count", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ],
 );
 
