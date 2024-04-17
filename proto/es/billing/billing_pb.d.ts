@@ -168,36 +168,6 @@ export declare enum BillingStatus {
 }
 
 /**
- * @generated from enum nocloud.billing.Currency
- */
-export declare enum Currency {
-  /**
-   * @generated from enum value: NCU = 0;
-   */
-  NCU = 0,
-
-  /**
-   * @generated from enum value: USD = 1;
-   */
-  USD = 1,
-
-  /**
-   * @generated from enum value: EUR = 2;
-   */
-  EUR = 2,
-
-  /**
-   * @generated from enum value: BYN = 3;
-   */
-  BYN = 3,
-
-  /**
-   * @generated from enum value: PLN = 4;
-   */
-  PLN = 4,
-}
-
-/**
  * @generated from message nocloud.billing.FeeRange
  */
 export declare class FeeRange extends Message<FeeRange> {
@@ -738,7 +708,7 @@ export declare class Transaction extends Message<Transaction> {
   /**
    * @generated from field: nocloud.billing.Currency currency = 11;
    */
-  currency: Currency;
+  currency?: Currency;
 
   /**
    * @generated from field: int64 created = 12;
@@ -861,7 +831,7 @@ export declare class Invoice extends Message<Invoice> {
   /**
    * @generated from field: nocloud.billing.Currency currency = 11;
    */
-  currency: Currency;
+  currency?: Currency;
 
   /**
    * @generated from field: int64 created = 12;
@@ -1031,7 +1001,7 @@ export declare class Record extends Message<Record> {
   /**
    * @generated from field: nocloud.billing.Currency currency = 13;
    */
-  currency: Currency;
+  currency?: Currency;
 
   /**
    * @generated from field: string service = 14;
@@ -1550,7 +1520,7 @@ export declare class InstanceReport extends Message<InstanceReport> {
   /**
    * @generated from field: nocloud.billing.Currency currency = 3;
    */
-  currency: Currency;
+  currency?: Currency;
 
   constructor(data?: PartialMessage<InstanceReport>);
 
@@ -1768,18 +1738,90 @@ export declare class GetReportsCountResponse extends Message<GetReportsCountResp
 }
 
 /**
+ * @generated from message nocloud.billing.Currency
+ */
+export declare class Currency extends Message<Currency> {
+  /**
+   * @generated from field: int64 id = 1;
+   */
+  id: bigint;
+
+  /**
+   * @generated from field: string title = 2;
+   */
+  title: string;
+
+  constructor(data?: PartialMessage<Currency>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.Currency";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Currency;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Currency;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Currency;
+
+  static equals(a: Currency | PlainMessage<Currency> | undefined, b: Currency | PlainMessage<Currency> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.CreateCurrencyRequest
+ */
+export declare class CreateCurrencyRequest extends Message<CreateCurrencyRequest> {
+  /**
+   * @generated from field: nocloud.billing.Currency currency = 1;
+   */
+  currency?: Currency;
+
+  constructor(data?: PartialMessage<CreateCurrencyRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.CreateCurrencyRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateCurrencyRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateCurrencyRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateCurrencyRequest;
+
+  static equals(a: CreateCurrencyRequest | PlainMessage<CreateCurrencyRequest> | undefined, b: CreateCurrencyRequest | PlainMessage<CreateCurrencyRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.CreateCurrencyResponse
+ */
+export declare class CreateCurrencyResponse extends Message<CreateCurrencyResponse> {
+  constructor(data?: PartialMessage<CreateCurrencyResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.CreateCurrencyResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateCurrencyResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateCurrencyResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateCurrencyResponse;
+
+  static equals(a: CreateCurrencyResponse | PlainMessage<CreateCurrencyResponse> | undefined, b: CreateCurrencyResponse | PlainMessage<CreateCurrencyResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.billing.CreateExchangeRateRequest
  */
 export declare class CreateExchangeRateRequest extends Message<CreateExchangeRateRequest> {
   /**
    * @generated from field: nocloud.billing.Currency from = 1;
    */
-  from: Currency;
+  from?: Currency;
 
   /**
    * @generated from field: nocloud.billing.Currency to = 2;
    */
-  to: Currency;
+  to?: Currency;
 
   /**
    * @generated from field: double rate = 3;
@@ -1827,12 +1869,12 @@ export declare class UpdateExchangeRateRequest extends Message<UpdateExchangeRat
   /**
    * @generated from field: nocloud.billing.Currency from = 1;
    */
-  from: Currency;
+  from?: Currency;
 
   /**
    * @generated from field: nocloud.billing.Currency to = 2;
    */
-  to: Currency;
+  to?: Currency;
 
   /**
    * @generated from field: double rate = 3;
@@ -1880,12 +1922,12 @@ export declare class DeleteExchangeRateRequest extends Message<DeleteExchangeRat
   /**
    * @generated from field: nocloud.billing.Currency from = 1;
    */
-  from: Currency;
+  from?: Currency;
 
   /**
    * @generated from field: nocloud.billing.Currency to = 2;
    */
-  to: Currency;
+  to?: Currency;
 
   constructor(data?: PartialMessage<DeleteExchangeRateRequest>);
 
@@ -1971,12 +2013,12 @@ export declare class GetExchangeRateRequest extends Message<GetExchangeRateReque
   /**
    * @generated from field: nocloud.billing.Currency from = 1;
    */
-  from: Currency;
+  from?: Currency;
 
   /**
    * @generated from field: nocloud.billing.Currency to = 2;
    */
-  to: Currency;
+  to?: Currency;
 
   constructor(data?: PartialMessage<GetExchangeRateRequest>);
 
@@ -2019,12 +2061,12 @@ export declare class GetExchangeRateResponse extends Message<GetExchangeRateResp
   /**
    * @generated from field: nocloud.billing.Currency from = 1;
    */
-  from: Currency;
+  from?: Currency;
 
   /**
    * @generated from field: nocloud.billing.Currency to = 2;
    */
-  to: Currency;
+  to?: Currency;
 
   /**
    * @generated from field: double rate = 3;
@@ -2077,12 +2119,12 @@ export declare class ConversionRequest extends Message<ConversionRequest> {
   /**
    * @generated from field: nocloud.billing.Currency from = 1;
    */
-  from: Currency;
+  from?: Currency;
 
   /**
    * @generated from field: nocloud.billing.Currency to = 2;
    */
-  to: Currency;
+  to?: Currency;
 
   /**
    * @generated from field: double amount = 3;

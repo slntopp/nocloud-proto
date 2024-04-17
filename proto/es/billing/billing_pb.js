@@ -99,20 +99,6 @@ export const BillingStatus = proto3.makeEnum(
 );
 
 /**
- * @generated from enum nocloud.billing.Currency
- */
-export const Currency = proto3.makeEnum(
-  "nocloud.billing.Currency",
-  [
-    {no: 0, name: "NCU"},
-    {no: 1, name: "USD"},
-    {no: 2, name: "EUR"},
-    {no: 3, name: "BYN"},
-    {no: 4, name: "PLN"},
-  ],
-);
-
-/**
  * @generated from message nocloud.billing.FeeRange
  */
 export const FeeRange = proto3.makeMessageType(
@@ -262,7 +248,7 @@ export const Transaction = proto3.makeMessageType(
     { no: 8, name: "records", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 9, name: "total", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
     { no: 10, name: "meta", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
-    { no: 11, name: "currency", kind: "enum", T: proto3.getEnumType(Currency) },
+    { no: 11, name: "currency", kind: "message", T: Currency },
     { no: 12, name: "created", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 13, name: "base", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 14, name: "previous", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
@@ -297,7 +283,7 @@ export const Invoice = proto3.makeMessageType(
     { no: 8, name: "transactions", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 9, name: "total", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
     { no: 10, name: "meta", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
-    { no: 11, name: "currency", kind: "enum", T: proto3.getEnumType(Currency) },
+    { no: 11, name: "currency", kind: "message", T: Currency },
     { no: 12, name: "created", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 13, name: "items", kind: "message", T: Item, repeated: true },
   ],
@@ -341,7 +327,7 @@ export const Record = proto3.makeMessageType(
     { no: 10, name: "product", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 11, name: "total", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
     { no: 12, name: "meta", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
-    { no: 13, name: "currency", kind: "enum", T: proto3.getEnumType(Currency) },
+    { no: 13, name: "currency", kind: "message", T: Currency },
     { no: 14, name: "service", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 15, name: "account", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 16, name: "base", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
@@ -518,7 +504,7 @@ export const InstanceReport = proto3.makeMessageType(
   () => [
     { no: 1, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "total", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
-    { no: 3, name: "currency", kind: "enum", T: proto3.getEnumType(Currency) },
+    { no: 3, name: "currency", kind: "message", T: Currency },
   ],
 );
 
@@ -598,13 +584,42 @@ export const GetReportsCountResponse = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message nocloud.billing.Currency
+ */
+export const Currency = proto3.makeMessageType(
+  "nocloud.billing.Currency",
+  () => [
+    { no: 1, name: "id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.CreateCurrencyRequest
+ */
+export const CreateCurrencyRequest = proto3.makeMessageType(
+  "nocloud.billing.CreateCurrencyRequest",
+  () => [
+    { no: 1, name: "currency", kind: "message", T: Currency },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.CreateCurrencyResponse
+ */
+export const CreateCurrencyResponse = proto3.makeMessageType(
+  "nocloud.billing.CreateCurrencyResponse",
+  [],
+);
+
+/**
  * @generated from message nocloud.billing.CreateExchangeRateRequest
  */
 export const CreateExchangeRateRequest = proto3.makeMessageType(
   "nocloud.billing.CreateExchangeRateRequest",
   () => [
-    { no: 1, name: "from", kind: "enum", T: proto3.getEnumType(Currency) },
-    { no: 2, name: "to", kind: "enum", T: proto3.getEnumType(Currency) },
+    { no: 1, name: "from", kind: "message", T: Currency },
+    { no: 2, name: "to", kind: "message", T: Currency },
     { no: 3, name: "rate", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
   ],
 );
@@ -623,8 +638,8 @@ export const CreateExchangeRateResponse = proto3.makeMessageType(
 export const UpdateExchangeRateRequest = proto3.makeMessageType(
   "nocloud.billing.UpdateExchangeRateRequest",
   () => [
-    { no: 1, name: "from", kind: "enum", T: proto3.getEnumType(Currency) },
-    { no: 2, name: "to", kind: "enum", T: proto3.getEnumType(Currency) },
+    { no: 1, name: "from", kind: "message", T: Currency },
+    { no: 2, name: "to", kind: "message", T: Currency },
     { no: 3, name: "rate", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
   ],
 );
@@ -643,8 +658,8 @@ export const UpdateExchangeRateResponse = proto3.makeMessageType(
 export const DeleteExchangeRateRequest = proto3.makeMessageType(
   "nocloud.billing.DeleteExchangeRateRequest",
   () => [
-    { no: 1, name: "from", kind: "enum", T: proto3.getEnumType(Currency) },
-    { no: 2, name: "to", kind: "enum", T: proto3.getEnumType(Currency) },
+    { no: 1, name: "from", kind: "message", T: Currency },
+    { no: 2, name: "to", kind: "message", T: Currency },
   ],
 );
 
@@ -670,7 +685,7 @@ export const GetCurrenciesRequest = proto3.makeMessageType(
 export const GetCurrenciesResponse = proto3.makeMessageType(
   "nocloud.billing.GetCurrenciesResponse",
   () => [
-    { no: 1, name: "currencies", kind: "enum", T: proto3.getEnumType(Currency), repeated: true },
+    { no: 1, name: "currencies", kind: "message", T: Currency, repeated: true },
   ],
 );
 
@@ -680,8 +695,8 @@ export const GetCurrenciesResponse = proto3.makeMessageType(
 export const GetExchangeRateRequest = proto3.makeMessageType(
   "nocloud.billing.GetExchangeRateRequest",
   () => [
-    { no: 1, name: "from", kind: "enum", T: proto3.getEnumType(Currency) },
-    { no: 2, name: "to", kind: "enum", T: proto3.getEnumType(Currency) },
+    { no: 1, name: "from", kind: "message", T: Currency },
+    { no: 2, name: "to", kind: "message", T: Currency },
   ],
 );
 
@@ -699,8 +714,8 @@ export const GetExchangeRatesRequest = proto3.makeMessageType(
 export const GetExchangeRateResponse = proto3.makeMessageType(
   "nocloud.billing.GetExchangeRateResponse",
   () => [
-    { no: 1, name: "from", kind: "enum", T: proto3.getEnumType(Currency) },
-    { no: 2, name: "to", kind: "enum", T: proto3.getEnumType(Currency) },
+    { no: 1, name: "from", kind: "message", T: Currency },
+    { no: 2, name: "to", kind: "message", T: Currency },
     { no: 3, name: "rate", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
   ],
 );
@@ -721,8 +736,8 @@ export const GetExchangeRatesResponse = proto3.makeMessageType(
 export const ConversionRequest = proto3.makeMessageType(
   "nocloud.billing.ConversionRequest",
   () => [
-    { no: 1, name: "from", kind: "enum", T: proto3.getEnumType(Currency) },
-    { no: 2, name: "to", kind: "enum", T: proto3.getEnumType(Currency) },
+    { no: 1, name: "from", kind: "message", T: Currency },
+    { no: 2, name: "to", kind: "message", T: Currency },
     { no: 3, name: "amount", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
   ],
 );

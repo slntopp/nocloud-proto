@@ -102,6 +102,7 @@ export const MonitoringRequest = proto3.makeMessageType(
     { no: 1, name: "groups", kind: "message", T: InstancesGroup, repeated: true },
     { no: 2, name: "services_provider", kind: "message", T: ServicesProvider },
     { no: 3, name: "scheduled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 4, name: "balance", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "scalar", T: 1 /* ScalarType.DOUBLE */} },
   ],
 );
 

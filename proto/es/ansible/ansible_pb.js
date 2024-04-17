@@ -105,6 +105,8 @@ export const Instance = proto3.makeMessageType(
     { no: 3, name: "port", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 4, name: "user", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 5, name: "pass", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 6, name: "ansible_host", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 7, name: "python", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
   ],
 );
 
