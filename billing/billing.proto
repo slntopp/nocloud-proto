@@ -489,7 +489,7 @@ service BillingService {
 }
 
 message Currency {
-  int64 id = 1;
+  int32 id = 1;
   string title = 2;
 }
 
