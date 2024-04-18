@@ -49,9 +49,18 @@ message LinkResponse {bool result = 1;}
 
 message ListRequest {
   optional int32 depth = 1; // Depth
+  optional int64 page = 2;
+  optional int64 limit = 3;
+  optional string field = 4;
+  optional string sort = 5;
+
+  map<string, google.protobuf.Value> filters = 6;
 }
 
-message ListResponse {repeated Namespace pool = 1;}
+message ListResponse {
+  repeated Namespace pool = 1;
+  int64 count = 2;
+}
 
 message DeleteRequest {string uuid = 1;}
 
