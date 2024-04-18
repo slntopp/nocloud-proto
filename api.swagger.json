@@ -6940,11 +6940,11 @@
         },
         "page": {
           "type": "string",
-          "format": "int64"
+          "format": "uint64"
         },
         "limit": {
           "type": "string",
-          "format": "int64"
+          "format": "uint64"
         },
         "field": {
           "type": "string"
