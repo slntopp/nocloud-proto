@@ -6976,6 +6976,10 @@
             "type": "object",
             "$ref": "#/definitions/nocloudservicesService"
           }
+        },
+        "count": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
