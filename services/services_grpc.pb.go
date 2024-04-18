@@ -35,24 +35,29 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	ServicesService_TestConfig_FullMethodName = "/nocloud.services.ServicesService/TestConfig"
-	ServicesService_Create_FullMethodName     = "/nocloud.services.ServicesService/Create"
-	ServicesService_Update_FullMethodName     = "/nocloud.services.ServicesService/Update"
-	ServicesService_Delete_FullMethodName     = "/nocloud.services.ServicesService/Delete"
-	ServicesService_Get_FullMethodName        = "/nocloud.services.ServicesService/Get"
-	ServicesService_List_FullMethodName       = "/nocloud.services.ServicesService/List"
-	ServicesService_Up_FullMethodName         = "/nocloud.services.ServicesService/Up"
-	ServicesService_Down_FullMethodName       = "/nocloud.services.ServicesService/Down"
-	ServicesService_Suspend_FullMethodName    = "/nocloud.services.ServicesService/Suspend"
-	ServicesService_Unsuspend_FullMethodName  = "/nocloud.services.ServicesService/Unsuspend"
-	ServicesService_Stream_FullMethodName     = "/nocloud.services.ServicesService/Stream"
+	ServicesService_Create_FullMethodName    = "/nocloud.services.ServicesService/Create"
+	ServicesService_Update_FullMethodName    = "/nocloud.services.ServicesService/Update"
+	ServicesService_Delete_FullMethodName    = "/nocloud.services.ServicesService/Delete"
+	ServicesService_Get_FullMethodName       = "/nocloud.services.ServicesService/Get"
+	ServicesService_List_FullMethodName      = "/nocloud.services.ServicesService/List"
+	ServicesService_Up_FullMethodName        = "/nocloud.services.ServicesService/Up"
+	ServicesService_Down_FullMethodName      = "/nocloud.services.ServicesService/Down"
+	ServicesService_Suspend_FullMethodName   = "/nocloud.services.ServicesService/Suspend"
+	ServicesService_Unsuspend_FullMethodName = "/nocloud.services.ServicesService/Unsuspend"
+	ServicesService_Stream_FullMethodName    = "/nocloud.services.ServicesService/Stream"
 )
 
 // ServicesServiceClient is the client API for ServicesService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ServicesServiceClient interface {
-	TestConfig(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*TestConfigResponse, error)
+	// rpc TestConfig(nocloud.services.CreateRequest)
+	// returns (nocloud.services.TestConfigResponse) {
+	// option (google.api.http) = {
+	// post : "/services"
+	// body : "*"
+	// };
+	// };
 	Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*Service, error)
 	Update(ctx context.Context, in *Service, opts ...grpc.CallOption) (*Service, error)
 	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
@@ -71,15 +76,6 @@ type servicesServiceClient struct {
 
 func NewServicesServiceClient(cc grpc.ClientConnInterface) ServicesServiceClient {
 	return &servicesServiceClient{cc}
-}
-
-func (c *servicesServiceClient) TestConfig(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*TestConfigResponse, error) {
-	out := new(TestConfigResponse)
-	err := c.cc.Invoke(ctx, ServicesService_TestConfig_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *servicesServiceClient) Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*Service, error) {
@@ -199,7 +195,13 @@ func (x *servicesServiceStreamClient) Recv() (*states.ObjectState, error) {
 // All implementations must embed UnimplementedServicesServiceServer
 // for forward compatibility
 type ServicesServiceServer interface {
-	TestConfig(context.Context, *CreateRequest) (*TestConfigResponse, error)
+	// rpc TestConfig(nocloud.services.CreateRequest)
+	// returns (nocloud.services.TestConfigResponse) {
+	// option (google.api.http) = {
+	// post : "/services"
+	// body : "*"
+	// };
+	// };
 	Create(context.Context, *CreateRequest) (*Service, error)
 	Update(context.Context, *Service) (*Service, error)
 	Delete(context.Context, *DeleteRequest) (*DeleteResponse, error)
@@ -217,9 +219,6 @@ type ServicesServiceServer interface {
 type UnimplementedServicesServiceServer struct {
 }
 
-func (UnimplementedServicesServiceServer) TestConfig(context.Context, *CreateRequest) (*TestConfigResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method TestConfig not implemented")
-}
 func (UnimplementedServicesServiceServer) Create(context.Context, *CreateRequest) (*Service, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
@@ -261,24 +260,6 @@ type UnsafeServicesServiceServer interface {
 
 func RegisterServicesServiceServer(s grpc.ServiceRegistrar, srv ServicesServiceServer) {
 	s.RegisterService(&ServicesService_ServiceDesc, srv)
-}
-
-func _ServicesService_TestConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ServicesServiceServer).TestConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ServicesService_TestConfig_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServicesServiceServer).TestConfig(ctx, req.(*CreateRequest))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _ServicesService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -471,10 +452,6 @@ var ServicesService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "nocloud.services.ServicesService",
 	HandlerType: (*ServicesServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "TestConfig",
-			Handler:    _ServicesService_TestConfig_Handler,
-		},
 		{
 			MethodName: "Create",
 			Handler:    _ServicesService_Create_Handler,

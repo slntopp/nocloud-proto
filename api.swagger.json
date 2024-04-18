@@ -3986,7 +3986,7 @@
       }
     },
     "/services": {
-      "get": {
+      "post": {
         "operationId": "ServicesService_List",
         "responses": {
           "200": {
@@ -4004,52 +4004,11 @@
         },
         "parameters": [
           {
-            "name": "showDeleted",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "namespace",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "depth",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "tags": [
-          "ServicesService"
-        ]
-      },
-      "post": {
-        "operationId": "ServicesService_TestConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/servicesTestConfigResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/nocloudservicesCreateRequest"
+              "$ref": "#/definitions/nocloudservicesListRequest"
             }
           }
         ],
@@ -4058,6 +4017,7 @@
         ]
       },
       "put": {
+        "summary": "rpc TestConfig(nocloud.services.CreateRequest)\nreturns (nocloud.services.TestConfigResponse) {\noption (google.api.http) = {\npost : \"/services\"\nbody : \"*\"\n};\n};",
         "operationId": "ServicesService_Create",
         "responses": {
           "200": {
@@ -7778,6 +7738,39 @@
     "nocloudservicesDownResponse": {
       "type": "object"
     },
+    "nocloudservicesListRequest": {
+      "type": "object",
+      "properties": {
+        "showDeleted": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "depth": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "page": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "limit": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "field": {
+          "type": "string"
+        },
+        "sort": {
+          "type": "string"
+        },
+        "filters": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
     "nocloudservicesService": {
       "type": "object",
       "properties": {
@@ -8164,11 +8157,11 @@
         },
         "page": {
           "type": "string",
-          "format": "int64"
+          "format": "uint64"
         },
         "limit": {
           "type": "string",
-          "format": "int64"
+          "format": "uint64"
         },
         "field": {
           "type": "string"
@@ -8207,6 +8200,10 @@
             "type": "object",
             "$ref": "#/definitions/nocloudservicesService"
           }
+        },
+        "count": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -8250,35 +8247,6 @@
         },
         "access": {
           "$ref": "#/definitions/accessAccess"
-        }
-      }
-    },
-    "servicesTestConfigError": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "type": "string"
-        },
-        "instanceGroup": {
-          "type": "string"
-        },
-        "instance": {
-          "type": "string"
-        }
-      }
-    },
-    "servicesTestConfigResponse": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "type": "boolean"
-        },
-        "errors": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/servicesTestConfigError"
-          }
         }
       }
     },

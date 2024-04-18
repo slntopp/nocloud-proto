@@ -49,9 +49,6 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// ServicesServiceTestConfigProcedure is the fully-qualified name of the ServicesService's
-	// TestConfig RPC.
-	ServicesServiceTestConfigProcedure = "/nocloud.services.ServicesService/TestConfig"
 	// ServicesServiceCreateProcedure is the fully-qualified name of the ServicesService's Create RPC.
 	ServicesServiceCreateProcedure = "/nocloud.services.ServicesService/Create"
 	// ServicesServiceUpdateProcedure is the fully-qualified name of the ServicesService's Update RPC.
@@ -77,23 +74,28 @@ const (
 
 // These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
 var (
-	servicesServiceServiceDescriptor          = services.File_services_services_proto.Services().ByName("ServicesService")
-	servicesServiceTestConfigMethodDescriptor = servicesServiceServiceDescriptor.Methods().ByName("TestConfig")
-	servicesServiceCreateMethodDescriptor     = servicesServiceServiceDescriptor.Methods().ByName("Create")
-	servicesServiceUpdateMethodDescriptor     = servicesServiceServiceDescriptor.Methods().ByName("Update")
-	servicesServiceDeleteMethodDescriptor     = servicesServiceServiceDescriptor.Methods().ByName("Delete")
-	servicesServiceGetMethodDescriptor        = servicesServiceServiceDescriptor.Methods().ByName("Get")
-	servicesServiceListMethodDescriptor       = servicesServiceServiceDescriptor.Methods().ByName("List")
-	servicesServiceUpMethodDescriptor         = servicesServiceServiceDescriptor.Methods().ByName("Up")
-	servicesServiceDownMethodDescriptor       = servicesServiceServiceDescriptor.Methods().ByName("Down")
-	servicesServiceSuspendMethodDescriptor    = servicesServiceServiceDescriptor.Methods().ByName("Suspend")
-	servicesServiceUnsuspendMethodDescriptor  = servicesServiceServiceDescriptor.Methods().ByName("Unsuspend")
-	servicesServiceStreamMethodDescriptor     = servicesServiceServiceDescriptor.Methods().ByName("Stream")
+	servicesServiceServiceDescriptor         = services.File_services_services_proto.Services().ByName("ServicesService")
+	servicesServiceCreateMethodDescriptor    = servicesServiceServiceDescriptor.Methods().ByName("Create")
+	servicesServiceUpdateMethodDescriptor    = servicesServiceServiceDescriptor.Methods().ByName("Update")
+	servicesServiceDeleteMethodDescriptor    = servicesServiceServiceDescriptor.Methods().ByName("Delete")
+	servicesServiceGetMethodDescriptor       = servicesServiceServiceDescriptor.Methods().ByName("Get")
+	servicesServiceListMethodDescriptor      = servicesServiceServiceDescriptor.Methods().ByName("List")
+	servicesServiceUpMethodDescriptor        = servicesServiceServiceDescriptor.Methods().ByName("Up")
+	servicesServiceDownMethodDescriptor      = servicesServiceServiceDescriptor.Methods().ByName("Down")
+	servicesServiceSuspendMethodDescriptor   = servicesServiceServiceDescriptor.Methods().ByName("Suspend")
+	servicesServiceUnsuspendMethodDescriptor = servicesServiceServiceDescriptor.Methods().ByName("Unsuspend")
+	servicesServiceStreamMethodDescriptor    = servicesServiceServiceDescriptor.Methods().ByName("Stream")
 )
 
 // ServicesServiceClient is a client for the nocloud.services.ServicesService service.
 type ServicesServiceClient interface {
-	TestConfig(context.Context, *connect.Request[services.CreateRequest]) (*connect.Response[services.TestConfigResponse], error)
+	// rpc TestConfig(nocloud.services.CreateRequest)
+	// returns (nocloud.services.TestConfigResponse) {
+	// option (google.api.http) = {
+	// post : "/services"
+	// body : "*"
+	// };
+	// };
 	Create(context.Context, *connect.Request[services.CreateRequest]) (*connect.Response[services.Service], error)
 	Update(context.Context, *connect.Request[services.Service]) (*connect.Response[services.Service], error)
 	Delete(context.Context, *connect.Request[services.DeleteRequest]) (*connect.Response[services.DeleteResponse], error)
@@ -116,12 +118,6 @@ type ServicesServiceClient interface {
 func NewServicesServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) ServicesServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
 	return &servicesServiceClient{
-		testConfig: connect.NewClient[services.CreateRequest, services.TestConfigResponse](
-			httpClient,
-			baseURL+ServicesServiceTestConfigProcedure,
-			connect.WithSchema(servicesServiceTestConfigMethodDescriptor),
-			connect.WithClientOptions(opts...),
-		),
 		create: connect.NewClient[services.CreateRequest, services.Service](
 			httpClient,
 			baseURL+ServicesServiceCreateProcedure,
@@ -187,22 +183,16 @@ func NewServicesServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 
 // servicesServiceClient implements ServicesServiceClient.
 type servicesServiceClient struct {
-	testConfig *connect.Client[services.CreateRequest, services.TestConfigResponse]
-	create     *connect.Client[services.CreateRequest, services.Service]
-	update     *connect.Client[services.Service, services.Service]
-	delete     *connect.Client[services.DeleteRequest, services.DeleteResponse]
-	get        *connect.Client[services.GetRequest, services.Service]
-	list       *connect.Client[services.ListRequest, services.Services]
-	up         *connect.Client[services.UpRequest, services.UpResponse]
-	down       *connect.Client[services.DownRequest, services.DownResponse]
-	suspend    *connect.Client[services.SuspendRequest, services.SuspendResponse]
-	unsuspend  *connect.Client[services.UnsuspendRequest, services.UnsuspendResponse]
-	stream     *connect.Client[services.StreamRequest, states.ObjectState]
-}
-
-// TestConfig calls nocloud.services.ServicesService.TestConfig.
-func (c *servicesServiceClient) TestConfig(ctx context.Context, req *connect.Request[services.CreateRequest]) (*connect.Response[services.TestConfigResponse], error) {
-	return c.testConfig.CallUnary(ctx, req)
+	create    *connect.Client[services.CreateRequest, services.Service]
+	update    *connect.Client[services.Service, services.Service]
+	delete    *connect.Client[services.DeleteRequest, services.DeleteResponse]
+	get       *connect.Client[services.GetRequest, services.Service]
+	list      *connect.Client[services.ListRequest, services.Services]
+	up        *connect.Client[services.UpRequest, services.UpResponse]
+	down      *connect.Client[services.DownRequest, services.DownResponse]
+	suspend   *connect.Client[services.SuspendRequest, services.SuspendResponse]
+	unsuspend *connect.Client[services.UnsuspendRequest, services.UnsuspendResponse]
+	stream    *connect.Client[services.StreamRequest, states.ObjectState]
 }
 
 // Create calls nocloud.services.ServicesService.Create.
@@ -257,7 +247,13 @@ func (c *servicesServiceClient) Stream(ctx context.Context, req *connect.Request
 
 // ServicesServiceHandler is an implementation of the nocloud.services.ServicesService service.
 type ServicesServiceHandler interface {
-	TestConfig(context.Context, *connect.Request[services.CreateRequest]) (*connect.Response[services.TestConfigResponse], error)
+	// rpc TestConfig(nocloud.services.CreateRequest)
+	// returns (nocloud.services.TestConfigResponse) {
+	// option (google.api.http) = {
+	// post : "/services"
+	// body : "*"
+	// };
+	// };
 	Create(context.Context, *connect.Request[services.CreateRequest]) (*connect.Response[services.Service], error)
 	Update(context.Context, *connect.Request[services.Service]) (*connect.Response[services.Service], error)
 	Delete(context.Context, *connect.Request[services.DeleteRequest]) (*connect.Response[services.DeleteResponse], error)
@@ -276,12 +272,6 @@ type ServicesServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewServicesServiceHandler(svc ServicesServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	servicesServiceTestConfigHandler := connect.NewUnaryHandler(
-		ServicesServiceTestConfigProcedure,
-		svc.TestConfig,
-		connect.WithSchema(servicesServiceTestConfigMethodDescriptor),
-		connect.WithHandlerOptions(opts...),
-	)
 	servicesServiceCreateHandler := connect.NewUnaryHandler(
 		ServicesServiceCreateProcedure,
 		svc.Create,
@@ -344,8 +334,6 @@ func NewServicesServiceHandler(svc ServicesServiceHandler, opts ...connect.Handl
 	)
 	return "/nocloud.services.ServicesService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
-		case ServicesServiceTestConfigProcedure:
-			servicesServiceTestConfigHandler.ServeHTTP(w, r)
 		case ServicesServiceCreateProcedure:
 			servicesServiceCreateHandler.ServeHTTP(w, r)
 		case ServicesServiceUpdateProcedure:
@@ -374,10 +362,6 @@ func NewServicesServiceHandler(svc ServicesServiceHandler, opts ...connect.Handl
 
 // UnimplementedServicesServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedServicesServiceHandler struct{}
-
-func (UnimplementedServicesServiceHandler) TestConfig(context.Context, *connect.Request[services.CreateRequest]) (*connect.Response[services.TestConfigResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.services.ServicesService.TestConfig is not implemented"))
-}
 
 func (UnimplementedServicesServiceHandler) Create(context.Context, *connect.Request[services.CreateRequest]) (*connect.Response[services.Service], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.services.ServicesService.Create is not implemented"))
