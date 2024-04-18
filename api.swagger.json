@@ -2982,7 +2982,7 @@
       }
     },
     "/namespaces": {
-      "get": {
+      "post": {
         "operationId": "NamespacesService_List",
         "responses": {
           "200": {
@@ -3000,12 +3000,12 @@
         },
         "parameters": [
           {
-            "name": "depth",
-            "description": "Depth",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/registrynamespacesListRequest"
+            }
           }
         ],
         "tags": [
@@ -6930,6 +6930,34 @@
         }
       }
     },
+    "registrynamespacesListRequest": {
+      "type": "object",
+      "properties": {
+        "depth": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Depth"
+        },
+        "page": {
+          "type": "string",
+          "format": "int64"
+        },
+        "limit": {
+          "type": "string",
+          "format": "int64"
+        },
+        "field": {
+          "type": "string"
+        },
+        "sort": {
+          "type": "string"
+        },
+        "filters": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
     "registrynamespacesListResponse": {
       "type": "object",
       "properties": {
@@ -6939,6 +6967,10 @@
             "type": "object",
             "$ref": "#/definitions/namespacesNamespace"
           }
+        },
+        "count": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
