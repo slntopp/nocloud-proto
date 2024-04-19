@@ -7742,7 +7742,7 @@
       "type": "object",
       "properties": {
         "showDeleted": {
-          "type": "string"
+          "type": "boolean"
         },
         "namespace": {
           "type": "string"

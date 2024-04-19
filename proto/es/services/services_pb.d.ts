@@ -377,9 +377,9 @@ export declare class DownResponse extends Message<DownResponse> {
  */
 export declare class ListRequest extends Message<ListRequest> {
   /**
-   * @generated from field: optional string show_deleted = 1;
+   * @generated from field: optional bool show_deleted = 1;
    */
-  showDeleted?: string;
+  showDeleted?: boolean;
 
   /**
    * @generated from field: optional string namespace = 2;
