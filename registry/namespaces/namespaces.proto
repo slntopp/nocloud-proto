@@ -72,3 +72,7 @@ message PatchRequest {
 }
 
 message PatchResponse {bool result = 1;}
+
+message GetRequest {
+  string uuid = 1;
+}

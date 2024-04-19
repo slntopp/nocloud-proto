@@ -415,3 +415,27 @@ export declare class PatchResponse extends Message<PatchResponse> {
   static equals(a: PatchResponse | PlainMessage<PatchResponse> | undefined, b: PatchResponse | PlainMessage<PatchResponse> | undefined): boolean;
 }
 
+/**
+ * @generated from message nocloud.registry.namespaces.GetRequest
+ */
+export declare class GetRequest extends Message<GetRequest> {
+  /**
+   * @generated from field: string uuid = 1;
+   */
+  uuid: string;
+
+  constructor(data?: PartialMessage<GetRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.namespaces.GetRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetRequest;
+
+  static equals(a: GetRequest | PlainMessage<GetRequest> | undefined, b: GetRequest | PlainMessage<GetRequest> | undefined): boolean;
+}
+
