@@ -332,6 +332,16 @@ export declare class Instance extends Message<Instance> {
    */
   pass?: string;
 
+  /**
+   * @generated from field: optional string ansible_host = 6;
+   */
+  ansibleHost?: string;
+
+  /**
+   * @generated from field: optional string python = 7;
+   */
+  python?: string;
+
   constructor(data?: PartialMessage<Instance>);
 
   static readonly runtime: typeof proto3;

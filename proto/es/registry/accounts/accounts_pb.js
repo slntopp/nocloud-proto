@@ -18,7 +18,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { proto3, Struct } from "@bufbuild/protobuf";
+import { proto3, Struct, Value } from "@bufbuild/protobuf";
 import { Currency } from "../../billing/billing_pb.js";
 import { Access } from "../../access/access_pb.js";
 import { AdminNote } from "../../notes/notes_pb.js";
@@ -131,6 +131,11 @@ export const ListRequest = proto3.makeMessageType(
   () => [
     { no: 1, name: "namespace", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 2, name: "depth", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
+    { no: 3, name: "page", kind: "scalar", T: 4 /* ScalarType.UINT64 */, opt: true },
+    { no: 4, name: "limit", kind: "scalar", T: 4 /* ScalarType.UINT64 */, opt: true },
+    { no: 5, name: "field", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 6, name: "sort", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 7, name: "filters", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
   ],
 );
 
@@ -141,6 +146,7 @@ export const ListResponse = proto3.makeMessageType(
   "nocloud.registry.accounts.ListResponse",
   () => [
     { no: 1, name: "pool", kind: "message", T: Account, repeated: true },
+    { no: 2, name: "count", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ],
 );
 

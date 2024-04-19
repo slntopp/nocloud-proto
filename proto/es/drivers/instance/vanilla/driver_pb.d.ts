@@ -220,6 +220,11 @@ export declare class MonitoringRequest extends Message<MonitoringRequest> {
    */
   scheduled: boolean;
 
+  /**
+   * @generated from field: map<string, double> balance = 4;
+   */
+  balance: { [key: string]: number };
+
   constructor(data?: PartialMessage<MonitoringRequest>);
 
   static readonly runtime: typeof proto3;

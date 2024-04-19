@@ -18,7 +18,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage, Struct } from "@bufbuild/protobuf";
+import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage, Struct, Value } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 import type { Currency } from "../../billing/billing_pb.js";
 import type { Access } from "../../access/access_pb.js";
@@ -332,6 +332,31 @@ export declare class ListRequest extends Message<ListRequest> {
    */
   depth?: number;
 
+  /**
+   * @generated from field: optional uint64 page = 3;
+   */
+  page?: bigint;
+
+  /**
+   * @generated from field: optional uint64 limit = 4;
+   */
+  limit?: bigint;
+
+  /**
+   * @generated from field: optional string field = 5;
+   */
+  field?: string;
+
+  /**
+   * @generated from field: optional string sort = 6;
+   */
+  sort?: string;
+
+  /**
+   * @generated from field: map<string, google.protobuf.Value> filters = 7;
+   */
+  filters: { [key: string]: Value };
+
   constructor(data?: PartialMessage<ListRequest>);
 
   static readonly runtime: typeof proto3;
@@ -355,6 +380,11 @@ export declare class ListResponse extends Message<ListResponse> {
    * @generated from field: repeated nocloud.registry.accounts.Account pool = 1;
    */
   pool: Account[];
+
+  /**
+   * @generated from field: int64 count = 2;
+   */
+  count: bigint;
 
   constructor(data?: PartialMessage<ListResponse>);
 
