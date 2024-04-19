@@ -106,6 +106,11 @@ export const ListRequest = proto3.makeMessageType(
   "nocloud.registry.namespaces.ListRequest",
   () => [
     { no: 1, name: "depth", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
+    { no: 2, name: "page", kind: "scalar", T: 4 /* ScalarType.UINT64 */, opt: true },
+    { no: 3, name: "limit", kind: "scalar", T: 4 /* ScalarType.UINT64 */, opt: true },
+    { no: 4, name: "field", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 5, name: "sort", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 6, name: "filters", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
   ],
 );
 
@@ -116,6 +121,7 @@ export const ListResponse = proto3.makeMessageType(
   "nocloud.registry.namespaces.ListResponse",
   () => [
     { no: 1, name: "pool", kind: "message", T: Namespace, repeated: true },
+    { no: 2, name: "count", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ],
 );
 

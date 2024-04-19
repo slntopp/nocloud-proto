@@ -18,7 +18,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { CreateRequest, DeleteRequest, DeleteResponse, DownRequest, DownResponse, GetRequest, ListRequest, Service, Services, StreamRequest, SuspendRequest, SuspendResponse, TestConfigResponse, UnsuspendRequest, UnsuspendResponse, UpRequest, UpResponse } from "./services_pb.js";
+import { CreateRequest, DeleteRequest, DeleteResponse, DownRequest, DownResponse, GetRequest, ListRequest, Service, Services, StreamRequest, SuspendRequest, SuspendResponse, UnsuspendRequest, UnsuspendResponse, UpRequest, UpResponse } from "./services_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 import { ObjectState } from "../states/states_pb.js";
 
@@ -29,15 +29,15 @@ export const ServicesService = {
   typeName: "nocloud.services.ServicesService",
   methods: {
     /**
-     * @generated from rpc nocloud.services.ServicesService.TestConfig
-     */
-    testConfig: {
-      name: "TestConfig",
-      I: CreateRequest,
-      O: TestConfigResponse,
-      kind: MethodKind.Unary,
-    },
-    /**
+     *
+     * rpc TestConfig(nocloud.services.CreateRequest)
+     * returns (nocloud.services.TestConfigResponse) {
+     * option (google.api.http) = {
+     * post : "/services"
+     * body : "*"
+     * };
+     * };
+     *
      * @generated from rpc nocloud.services.ServicesService.Create
      */
     create: {

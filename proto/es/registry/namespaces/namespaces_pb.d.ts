@@ -245,6 +245,31 @@ export declare class ListRequest extends Message<ListRequest> {
    */
   depth?: number;
 
+  /**
+   * @generated from field: optional uint64 page = 2;
+   */
+  page?: bigint;
+
+  /**
+   * @generated from field: optional uint64 limit = 3;
+   */
+  limit?: bigint;
+
+  /**
+   * @generated from field: optional string field = 4;
+   */
+  field?: string;
+
+  /**
+   * @generated from field: optional string sort = 5;
+   */
+  sort?: string;
+
+  /**
+   * @generated from field: map<string, google.protobuf.Value> filters = 6;
+   */
+  filters: { [key: string]: Value };
+
   constructor(data?: PartialMessage<ListRequest>);
 
   static readonly runtime: typeof proto3;
@@ -268,6 +293,11 @@ export declare class ListResponse extends Message<ListResponse> {
    * @generated from field: repeated nocloud.registry.namespaces.Namespace pool = 1;
    */
   pool: Namespace[];
+
+  /**
+   * @generated from field: int64 count = 2;
+   */
+  count: bigint;
 
   constructor(data?: PartialMessage<ListResponse>);
 

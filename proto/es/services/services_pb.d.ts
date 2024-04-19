@@ -92,6 +92,11 @@ export declare class Services extends Message<Services> {
    */
   pool: Service[];
 
+  /**
+   * @generated from field: int64 count = 2;
+   */
+  count: bigint;
+
   constructor(data?: PartialMessage<Services>);
 
   static readonly runtime: typeof proto3;
@@ -385,6 +390,31 @@ export declare class ListRequest extends Message<ListRequest> {
    * @generated from field: optional int32 depth = 3;
    */
   depth?: number;
+
+  /**
+   * @generated from field: optional uint64 page = 4;
+   */
+  page?: bigint;
+
+  /**
+   * @generated from field: optional uint64 limit = 5;
+   */
+  limit?: bigint;
+
+  /**
+   * @generated from field: optional string field = 6;
+   */
+  field?: string;
+
+  /**
+   * @generated from field: optional string sort = 7;
+   */
+  sort?: string;
+
+  /**
+   * @generated from field: map<string, google.protobuf.Value> filters = 8;
+   */
+  filters: { [key: string]: Value };
 
   constructor(data?: PartialMessage<ListRequest>);
 
