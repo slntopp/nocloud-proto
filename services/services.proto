@@ -74,7 +74,7 @@ message DownRequest {string uuid = 1;}
 message DownResponse {}
 
 message ListRequest {
-  optional string show_deleted = 1;
+  optional bool show_deleted = 1;
   optional string namespace = 2;
   optional int32 depth = 3;
   optional uint64 page = 4;

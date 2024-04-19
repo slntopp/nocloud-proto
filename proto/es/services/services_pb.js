@@ -160,7 +160,7 @@ export const DownResponse = proto3.makeMessageType(
 export const ListRequest = proto3.makeMessageType(
   "nocloud.services.ListRequest",
   () => [
-    { no: 1, name: "show_deleted", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 1, name: "show_deleted", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
     { no: 2, name: "namespace", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 3, name: "depth", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
     { no: 4, name: "page", kind: "scalar", T: 4 /* ScalarType.UINT64 */, opt: true },
