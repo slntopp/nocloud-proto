@@ -126,6 +126,12 @@ service NamespacesService {
       body: "*"
     };
   };
+  rpc Get (nocloud.registry.namespaces.GetRequest)
+      returns (nocloud.registry.namespaces.Namespace) {
+    option (google.api.http) = {
+      get: "/namespaces/{uuid}"
+    };
+  };
   rpc Join (nocloud.registry.namespaces.JoinRequest)
       returns (nocloud.registry.namespaces.JoinResponse) {
     option (google.api.http) = {

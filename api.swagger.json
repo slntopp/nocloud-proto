@@ -3120,6 +3120,34 @@
       }
     },
     "/namespaces/{uuid}": {
+      "get": {
+        "operationId": "NamespacesService_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/namespacesNamespace"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "NamespacesService"
+        ]
+      },
       "delete": {
         "operationId": "NamespacesService_Delete",
         "responses": {

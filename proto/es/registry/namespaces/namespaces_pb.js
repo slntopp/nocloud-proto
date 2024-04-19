@@ -166,3 +166,13 @@ export const PatchResponse = proto3.makeMessageType(
   ],
 );
 
+/**
+ * @generated from message nocloud.registry.namespaces.GetRequest
+ */
+export const GetRequest = proto3.makeMessageType(
+  "nocloud.registry.namespaces.GetRequest",
+  () => [
+    { no: 1, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
