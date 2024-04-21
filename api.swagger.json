@@ -1027,6 +1027,19 @@
             "in": "query",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "kind",
+            "description": " - UNSPECIFIED: Shall never be used, requests will be rejected\n - POSTPAID: Transaction must be processed based on End time\n - PREPAID: Transaction must be processed based on Start time",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNSPECIFIED",
+              "POSTPAID",
+              "PREPAID"
+            ],
+            "default": "UNSPECIFIED"
           }
         ],
         "tags": [
@@ -1105,6 +1118,19 @@
             "in": "query",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "kind",
+            "description": " - UNSPECIFIED: Shall never be used, requests will be rejected\n - POSTPAID: Transaction must be processed based on End time\n - PREPAID: Transaction must be processed based on Start time",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNSPECIFIED",
+              "POSTPAID",
+              "PREPAID"
+            ],
+            "default": "UNSPECIFIED"
           }
         ],
         "tags": [
@@ -5712,6 +5738,9 @@
         },
         "system": {
           "type": "boolean"
+        },
+        "kind": {
+          "$ref": "#/definitions/billingaddonsKind"
         }
       }
     },
@@ -6049,6 +6078,9 @@
         },
         "system": {
           "type": "boolean"
+        },
+        "kind": {
+          "$ref": "#/definitions/billingaddonsKind"
         }
       }
     },
@@ -6496,16 +6528,6 @@
         }
       }
     },
-    "billingKind": {
-      "type": "string",
-      "enum": [
-        "UNSPECIFIED",
-        "POSTPAID",
-        "PREPAID"
-      ],
-      "default": "UNSPECIFIED",
-      "title": "- UNSPECIFIED: Shall never be used, requests will be rejected\n - POSTPAID: Transaction must be processed based on End time\n - PREPAID: Transaction must be processed based on Start time"
-    },
     "billingListPlansInstancesResponse": {
       "type": "object",
       "properties": {
@@ -6609,7 +6631,7 @@
       "type": "object",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/billingKind"
+          "$ref": "#/definitions/nocloudbillingKind"
         },
         "title": {
           "type": "string",
@@ -6681,7 +6703,7 @@
           "type": "string"
         },
         "kind": {
-          "$ref": "#/definitions/billingKind"
+          "$ref": "#/definitions/nocloudbillingKind"
         },
         "price": {
           "type": "number",
@@ -6844,6 +6866,16 @@
           "type": "boolean"
         }
       }
+    },
+    "billingaddonsKind": {
+      "type": "string",
+      "enum": [
+        "UNSPECIFIED",
+        "POSTPAID",
+        "PREPAID"
+      ],
+      "default": "UNSPECIFIED",
+      "title": "- UNSPECIFIED: Shall never be used, requests will be rejected\n - POSTPAID: Transaction must be processed based on End time\n - PREPAID: Transaction must be processed based on Start time"
     },
     "ccChat": {
       "type": "object",
@@ -7396,6 +7428,16 @@
           "type": "string"
         }
       }
+    },
+    "nocloudbillingKind": {
+      "type": "string",
+      "enum": [
+        "UNSPECIFIED",
+        "POSTPAID",
+        "PREPAID"
+      ],
+      "default": "UNSPECIFIED",
+      "title": "- UNSPECIFIED: Shall never be used, requests will be rejected\n - POSTPAID: Transaction must be processed based on End time\n - PREPAID: Transaction must be processed based on Start time"
     },
     "nocloudbillingListResponse": {
       "type": "object",

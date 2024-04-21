@@ -88,6 +88,8 @@ const (
 	NamespacesServiceCreateProcedure = "/nocloud.registry.NamespacesService/Create"
 	// NamespacesServiceListProcedure is the fully-qualified name of the NamespacesService's List RPC.
 	NamespacesServiceListProcedure = "/nocloud.registry.NamespacesService/List"
+	// NamespacesServiceGetProcedure is the fully-qualified name of the NamespacesService's Get RPC.
+	NamespacesServiceGetProcedure = "/nocloud.registry.NamespacesService/Get"
 	// NamespacesServiceJoinProcedure is the fully-qualified name of the NamespacesService's Join RPC.
 	NamespacesServiceJoinProcedure = "/nocloud.registry.NamespacesService/Join"
 	// NamespacesServiceLinkProcedure is the fully-qualified name of the NamespacesService's Link RPC.
@@ -118,6 +120,7 @@ var (
 	namespacesServiceServiceDescriptor            = registry.File_registry_registry_proto.Services().ByName("NamespacesService")
 	namespacesServiceCreateMethodDescriptor       = namespacesServiceServiceDescriptor.Methods().ByName("Create")
 	namespacesServiceListMethodDescriptor         = namespacesServiceServiceDescriptor.Methods().ByName("List")
+	namespacesServiceGetMethodDescriptor          = namespacesServiceServiceDescriptor.Methods().ByName("Get")
 	namespacesServiceJoinMethodDescriptor         = namespacesServiceServiceDescriptor.Methods().ByName("Join")
 	namespacesServiceLinkMethodDescriptor         = namespacesServiceServiceDescriptor.Methods().ByName("Link")
 	namespacesServiceDeleteMethodDescriptor       = namespacesServiceServiceDescriptor.Methods().ByName("Delete")
@@ -508,6 +511,7 @@ func (UnimplementedAccountsServiceHandler) Unsuspend(context.Context, *connect.R
 type NamespacesServiceClient interface {
 	Create(context.Context, *connect.Request[namespaces.CreateRequest]) (*connect.Response[namespaces.CreateResponse], error)
 	List(context.Context, *connect.Request[namespaces.ListRequest]) (*connect.Response[namespaces.ListResponse], error)
+	Get(context.Context, *connect.Request[namespaces.GetRequest]) (*connect.Response[namespaces.Namespace], error)
 	Join(context.Context, *connect.Request[namespaces.JoinRequest]) (*connect.Response[namespaces.JoinResponse], error)
 	Link(context.Context, *connect.Request[namespaces.LinkRequest]) (*connect.Response[namespaces.LinkResponse], error)
 	Delete(context.Context, *connect.Request[namespaces.DeleteRequest]) (*connect.Response[namespaces.DeleteResponse], error)
@@ -534,6 +538,12 @@ func NewNamespacesServiceClient(httpClient connect.HTTPClient, baseURL string, o
 			httpClient,
 			baseURL+NamespacesServiceListProcedure,
 			connect.WithSchema(namespacesServiceListMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		get: connect.NewClient[namespaces.GetRequest, namespaces.Namespace](
+			httpClient,
+			baseURL+NamespacesServiceGetProcedure,
+			connect.WithSchema(namespacesServiceGetMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		join: connect.NewClient[namespaces.JoinRequest, namespaces.JoinResponse](
@@ -567,6 +577,7 @@ func NewNamespacesServiceClient(httpClient connect.HTTPClient, baseURL string, o
 type namespacesServiceClient struct {
 	create *connect.Client[namespaces.CreateRequest, namespaces.CreateResponse]
 	list   *connect.Client[namespaces.ListRequest, namespaces.ListResponse]
+	get    *connect.Client[namespaces.GetRequest, namespaces.Namespace]
 	join   *connect.Client[namespaces.JoinRequest, namespaces.JoinResponse]
 	link   *connect.Client[namespaces.LinkRequest, namespaces.LinkResponse]
 	delete *connect.Client[namespaces.DeleteRequest, namespaces.DeleteResponse]
@@ -581,6 +592,11 @@ func (c *namespacesServiceClient) Create(ctx context.Context, req *connect.Reque
 // List calls nocloud.registry.NamespacesService.List.
 func (c *namespacesServiceClient) List(ctx context.Context, req *connect.Request[namespaces.ListRequest]) (*connect.Response[namespaces.ListResponse], error) {
 	return c.list.CallUnary(ctx, req)
+}
+
+// Get calls nocloud.registry.NamespacesService.Get.
+func (c *namespacesServiceClient) Get(ctx context.Context, req *connect.Request[namespaces.GetRequest]) (*connect.Response[namespaces.Namespace], error) {
+	return c.get.CallUnary(ctx, req)
 }
 
 // Join calls nocloud.registry.NamespacesService.Join.
@@ -607,6 +623,7 @@ func (c *namespacesServiceClient) Patch(ctx context.Context, req *connect.Reques
 type NamespacesServiceHandler interface {
 	Create(context.Context, *connect.Request[namespaces.CreateRequest]) (*connect.Response[namespaces.CreateResponse], error)
 	List(context.Context, *connect.Request[namespaces.ListRequest]) (*connect.Response[namespaces.ListResponse], error)
+	Get(context.Context, *connect.Request[namespaces.GetRequest]) (*connect.Response[namespaces.Namespace], error)
 	Join(context.Context, *connect.Request[namespaces.JoinRequest]) (*connect.Response[namespaces.JoinResponse], error)
 	Link(context.Context, *connect.Request[namespaces.LinkRequest]) (*connect.Response[namespaces.LinkResponse], error)
 	Delete(context.Context, *connect.Request[namespaces.DeleteRequest]) (*connect.Response[namespaces.DeleteResponse], error)
@@ -629,6 +646,12 @@ func NewNamespacesServiceHandler(svc NamespacesServiceHandler, opts ...connect.H
 		NamespacesServiceListProcedure,
 		svc.List,
 		connect.WithSchema(namespacesServiceListMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	namespacesServiceGetHandler := connect.NewUnaryHandler(
+		NamespacesServiceGetProcedure,
+		svc.Get,
+		connect.WithSchema(namespacesServiceGetMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	namespacesServiceJoinHandler := connect.NewUnaryHandler(
@@ -661,6 +684,8 @@ func NewNamespacesServiceHandler(svc NamespacesServiceHandler, opts ...connect.H
 			namespacesServiceCreateHandler.ServeHTTP(w, r)
 		case NamespacesServiceListProcedure:
 			namespacesServiceListHandler.ServeHTTP(w, r)
+		case NamespacesServiceGetProcedure:
+			namespacesServiceGetHandler.ServeHTTP(w, r)
 		case NamespacesServiceJoinProcedure:
 			namespacesServiceJoinHandler.ServeHTTP(w, r)
 		case NamespacesServiceLinkProcedure:
@@ -684,6 +709,10 @@ func (UnimplementedNamespacesServiceHandler) Create(context.Context, *connect.Re
 
 func (UnimplementedNamespacesServiceHandler) List(context.Context, *connect.Request[namespaces.ListRequest]) (*connect.Response[namespaces.ListResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.registry.NamespacesService.List is not implemented"))
+}
+
+func (UnimplementedNamespacesServiceHandler) Get(context.Context, *connect.Request[namespaces.GetRequest]) (*connect.Response[namespaces.Namespace], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.registry.NamespacesService.Get is not implemented"))
 }
 
 func (UnimplementedNamespacesServiceHandler) Join(context.Context, *connect.Request[namespaces.JoinRequest]) (*connect.Response[namespaces.JoinResponse], error) {
