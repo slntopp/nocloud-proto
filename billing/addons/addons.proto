@@ -4,6 +4,12 @@ package nocloud.billing.addons;
 
 import "google/protobuf/struct.proto";
 
+enum Kind {
+  UNSPECIFIED = 0; // Shall never be used, requests will be rejected
+  POSTPAID = 1;    // Transaction must be processed based on End time
+  PREPAID = 2;     // Transaction must be processed based on Start time
+}
+
 message Addon {
   string uuid = 1;
   string title = 2;
@@ -14,6 +20,7 @@ message Addon {
   map<int64, double> periods = 7;
   int64 created = 8;
   bool system = 9;
+  Kind kind = 10;
 }
 
 message ListAddonsRequest {

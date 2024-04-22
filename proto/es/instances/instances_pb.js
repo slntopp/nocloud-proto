@@ -47,6 +47,7 @@ export const Instance = proto3.makeMessageType(
     { no: 12, name: "created", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 13, name: "software", kind: "message", T: Software, repeated: true },
     { no: 14, name: "admin_notes", kind: "message", T: AdminNote, repeated: true },
+    { no: 15, name: "addons", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
   ],
 );
 

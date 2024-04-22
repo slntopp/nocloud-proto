@@ -6,6 +6,18 @@
 import { proto3, Value } from "@bufbuild/protobuf";
 
 /**
+ * @generated from enum nocloud.billing.addons.Kind
+ */
+export const Kind = proto3.makeEnum(
+  "nocloud.billing.addons.Kind",
+  [
+    {no: 0, name: "UNSPECIFIED"},
+    {no: 1, name: "POSTPAID"},
+    {no: 2, name: "PREPAID"},
+  ],
+);
+
+/**
  * @generated from message nocloud.billing.addons.Addon
  */
 export const Addon = proto3.makeMessageType(
@@ -20,6 +32,7 @@ export const Addon = proto3.makeMessageType(
     { no: 7, name: "periods", kind: "map", K: 3 /* ScalarType.INT64 */, V: {kind: "scalar", T: 1 /* ScalarType.DOUBLE */} },
     { no: 8, name: "created", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 9, name: "system", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 10, name: "kind", kind: "enum", T: proto3.getEnumType(Kind) },
   ],
 );
 

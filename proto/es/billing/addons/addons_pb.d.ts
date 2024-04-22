@@ -7,6 +7,32 @@ import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialM
 import { Message, proto3 } from "@bufbuild/protobuf";
 
 /**
+ * @generated from enum nocloud.billing.addons.Kind
+ */
+export declare enum Kind {
+  /**
+   * Shall never be used, requests will be rejected
+   *
+   * @generated from enum value: UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Transaction must be processed based on End time
+   *
+   * @generated from enum value: POSTPAID = 1;
+   */
+  POSTPAID = 1,
+
+  /**
+   * Transaction must be processed based on Start time
+   *
+   * @generated from enum value: PREPAID = 2;
+   */
+  PREPAID = 2,
+}
+
+/**
  * @generated from message nocloud.billing.addons.Addon
  */
 export declare class Addon extends Message<Addon> {
@@ -54,6 +80,11 @@ export declare class Addon extends Message<Addon> {
    * @generated from field: bool system = 9;
    */
   system: boolean;
+
+  /**
+   * @generated from field: nocloud.billing.addons.Kind kind = 10;
+   */
+  kind: Kind;
 
   constructor(data?: PartialMessage<Addon>);
 
