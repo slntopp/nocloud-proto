@@ -104,6 +104,11 @@ export declare class Instance extends Message<Instance> {
    */
   adminNotes: AdminNote[];
 
+  /**
+   * @generated from field: repeated string addons = 15;
+   */
+  addons: string[];
+
   constructor(data?: PartialMessage<Instance>);
 
   static readonly runtime: typeof proto3;
