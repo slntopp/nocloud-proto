@@ -2044,6 +2044,19 @@
             "required": false,
             "type": "string",
             "format": "int64"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "NO_ACTION",
+              "INSTANCE_CREATION",
+              "INSTANCE_RENEWAL",
+              "BALANCE"
+            ],
+            "default": "NO_ACTION"
           }
         ],
         "tags": [
@@ -5297,6 +5310,9 @@
             "type": "object",
             "$ref": "#/definitions/billingItem"
           }
+        },
+        "type": {
+          "$ref": "#/definitions/billingActionType"
         }
       }
     },
@@ -6046,6 +6062,16 @@
         }
       }
     },
+    "billingActionType": {
+      "type": "string",
+      "enum": [
+        "NO_ACTION",
+        "INSTANCE_CREATION",
+        "INSTANCE_RENEWAL",
+        "BALANCE"
+      ],
+      "default": "NO_ACTION"
+    },
     "billingAddonsServiceUpdateBody": {
       "type": "object",
       "properties": {
@@ -6498,6 +6524,9 @@
             "type": "object",
             "$ref": "#/definitions/billingItem"
           }
+        },
+        "type": {
+          "$ref": "#/definitions/billingActionType"
         }
       }
     },
@@ -6526,7 +6555,8 @@
         "instance": {
           "type": "string"
         }
-      }
+      },
+      "title": "Position. Instance must be specified to connect action with instance"
     },
     "billingListPlansInstancesResponse": {
       "type": "object",
