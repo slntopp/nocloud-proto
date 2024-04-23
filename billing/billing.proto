@@ -182,6 +182,14 @@ enum BillingStatus {
   DRAFT = 4;
 }
 
+enum ActionType {
+  NO_ACTION = 0;
+  INSTANCE_CREATION = 1;
+  INSTANCE_RENEWAL = 2;
+  BALANCE = 3;
+}
+
+// Position. Instance must be specified to connect action with instance
 message Item {
   string title = 1;
   int64 amount = 2;
@@ -202,6 +210,7 @@ message Invoice {
   Currency currency = 11;
   int64 created = 12;
   repeated Item items = 13;
+  ActionType type = 14;
 }
 
 message Invoices {repeated Invoice pool = 1;}
