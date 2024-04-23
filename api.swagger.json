@@ -2100,6 +2100,44 @@
         ]
       }
     },
+    "/billing/invoices/{uuid}/status": {
+      "patch": {
+        "operationId": "BillingService_UpdateInvoiceStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingInvoice"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingServiceUpdateInvoiceStatusBody"
+            }
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
     "/billing/plans": {
       "get": {
         "operationId": "BillingService_ListPlans",
@@ -5261,6 +5299,62 @@
       "type": "object"
     },
     "BillingServiceUpdateInvoiceBody": {
+      "type": "object",
+      "properties": {
+        "exec": {
+          "type": "string",
+          "format": "int64"
+        },
+        "proc": {
+          "type": "string",
+          "format": "int64"
+        },
+        "processed": {
+          "type": "boolean"
+        },
+        "status": {
+          "$ref": "#/definitions/billingBillingStatus"
+        },
+        "account": {
+          "type": "string"
+        },
+        "service": {
+          "type": "string"
+        },
+        "transactions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "total": {
+          "type": "number",
+          "format": "double"
+        },
+        "meta": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "currency": {
+          "$ref": "#/definitions/billingCurrency"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/billingItem"
+          }
+        },
+        "type": {
+          "$ref": "#/definitions/billingActionType"
+        }
+      }
+    },
+    "BillingServiceUpdateInvoiceStatusBody": {
       "type": "object",
       "properties": {
         "exec": {
