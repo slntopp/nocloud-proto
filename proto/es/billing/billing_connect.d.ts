@@ -254,6 +254,15 @@ export declare const BillingService: {
       readonly O: typeof Invoice,
       readonly kind: MethodKind.Unary,
     },
+    /**
+     * @generated from rpc nocloud.billing.BillingService.UpdateInvoiceStatus
+     */
+    readonly updateInvoiceStatus: {
+      readonly name: "UpdateInvoiceStatus",
+      readonly I: typeof Invoice,
+      readonly O: typeof Invoice,
+      readonly kind: MethodKind.Unary,
+    },
   }
 };
 

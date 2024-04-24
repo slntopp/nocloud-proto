@@ -168,6 +168,31 @@ export declare enum BillingStatus {
 }
 
 /**
+ * @generated from enum nocloud.billing.ActionType
+ */
+export declare enum ActionType {
+  /**
+   * @generated from enum value: NO_ACTION = 0;
+   */
+  NO_ACTION = 0,
+
+  /**
+   * @generated from enum value: INSTANCE_CREATION = 1;
+   */
+  INSTANCE_CREATION = 1,
+
+  /**
+   * @generated from enum value: INSTANCE_RENEWAL = 2;
+   */
+  INSTANCE_RENEWAL = 2,
+
+  /**
+   * @generated from enum value: BALANCE = 3;
+   */
+  BALANCE = 3,
+}
+
+/**
  * @generated from message nocloud.billing.FeeRange
  */
 export declare class FeeRange extends Message<FeeRange> {
@@ -741,6 +766,8 @@ export declare class Transaction extends Message<Transaction> {
 }
 
 /**
+ * Position. Instance must be specified to connect action with instance
+ *
  * @generated from message nocloud.billing.Item
  */
 export declare class Item extends Message<Item> {
@@ -842,6 +869,11 @@ export declare class Invoice extends Message<Invoice> {
    * @generated from field: repeated nocloud.billing.Item items = 13;
    */
   items: Item[];
+
+  /**
+   * @generated from field: nocloud.billing.ActionType type = 14;
+   */
+  type: ActionType;
 
   constructor(data?: PartialMessage<Invoice>);
 

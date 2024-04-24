@@ -99,6 +99,19 @@ export const BillingStatus = proto3.makeEnum(
 );
 
 /**
+ * @generated from enum nocloud.billing.ActionType
+ */
+export const ActionType = proto3.makeEnum(
+  "nocloud.billing.ActionType",
+  [
+    {no: 0, name: "NO_ACTION"},
+    {no: 1, name: "INSTANCE_CREATION"},
+    {no: 2, name: "INSTANCE_RENEWAL"},
+    {no: 3, name: "BALANCE"},
+  ],
+);
+
+/**
  * @generated from message nocloud.billing.FeeRange
  */
 export const FeeRange = proto3.makeMessageType(
@@ -256,6 +269,8 @@ export const Transaction = proto3.makeMessageType(
 );
 
 /**
+ * Position. Instance must be specified to connect action with instance
+ *
  * @generated from message nocloud.billing.Item
  */
 export const Item = proto3.makeMessageType(
@@ -286,6 +301,7 @@ export const Invoice = proto3.makeMessageType(
     { no: 11, name: "currency", kind: "message", T: Currency },
     { no: 12, name: "created", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 13, name: "items", kind: "message", T: Item, repeated: true },
+    { no: 14, name: "type", kind: "enum", T: proto3.getEnumType(ActionType) },
   ],
 );
 

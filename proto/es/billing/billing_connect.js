@@ -254,6 +254,15 @@ export const BillingService = {
       O: Invoice,
       kind: MethodKind.Unary,
     },
+    /**
+     * @generated from rpc nocloud.billing.BillingService.UpdateInvoiceStatus
+     */
+    updateInvoiceStatus: {
+      name: "UpdateInvoiceStatus",
+      I: Invoice,
+      O: Invoice,
+      kind: MethodKind.Unary,
+    },
   }
 };
 
