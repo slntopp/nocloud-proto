@@ -2485,6 +2485,38 @@
         ]
       }
     },
+    "/instances": {
+      "post": {
+        "operationId": "InstancesService_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/instancesListInstancesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/instancesListInstancesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "InstancesService"
+        ]
+      }
+    },
     "/instances/attach/{uuid}": {
       "delete": {
         "operationId": "InstancesService_Attach",
@@ -6049,6 +6081,62 @@
           "format": "uint64"
         },
         "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "instancesListInstancesRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "limit": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "field": {
+          "type": "string"
+        },
+        "sort": {
+          "type": "string"
+        },
+        "filters": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "instancesListInstancesResponse": {
+      "type": "object",
+      "properties": {
+        "pool": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/instancesResponseInstance"
+          }
+        },
+        "count": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "instancesResponseInstance": {
+      "type": "object",
+      "properties": {
+        "instance": {
+          "$ref": "#/definitions/nocloudinstancesInstance"
+        },
+        "service": {
+          "type": "string"
+        },
+        "sp": {
+          "type": "string"
+        },
+        "type": {
           "type": "string"
         }
       }
