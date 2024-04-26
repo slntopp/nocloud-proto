@@ -127,6 +127,9 @@ const (
 	// BillingServiceUpdateInvoiceProcedure is the fully-qualified name of the BillingService's
 	// UpdateInvoice RPC.
 	BillingServiceUpdateInvoiceProcedure = "/nocloud.billing.BillingService/UpdateInvoice"
+	// BillingServiceUpdateInvoiceStatusProcedure is the fully-qualified name of the BillingService's
+	// UpdateInvoiceStatus RPC.
+	BillingServiceUpdateInvoiceStatusProcedure = "/nocloud.billing.BillingService/UpdateInvoiceStatus"
 	// CurrencyServiceCreateCurrencyProcedure is the fully-qualified name of the CurrencyService's
 	// CreateCurrency RPC.
 	CurrencyServiceCreateCurrencyProcedure = "/nocloud.billing.CurrencyService/CreateCurrency"
@@ -209,6 +212,7 @@ var (
 	billingServiceGetInvoicesMethodDescriptor              = billingServiceServiceDescriptor.Methods().ByName("GetInvoices")
 	billingServiceGetInvoicesCountMethodDescriptor         = billingServiceServiceDescriptor.Methods().ByName("GetInvoicesCount")
 	billingServiceUpdateInvoiceMethodDescriptor            = billingServiceServiceDescriptor.Methods().ByName("UpdateInvoice")
+	billingServiceUpdateInvoiceStatusMethodDescriptor      = billingServiceServiceDescriptor.Methods().ByName("UpdateInvoiceStatus")
 	currencyServiceServiceDescriptor                       = billing.File_billing_billing_proto.Services().ByName("CurrencyService")
 	currencyServiceCreateCurrencyMethodDescriptor          = currencyServiceServiceDescriptor.Methods().ByName("CreateCurrency")
 	currencyServiceGetCurrenciesMethodDescriptor           = currencyServiceServiceDescriptor.Methods().ByName("GetCurrencies")
@@ -377,6 +381,7 @@ type BillingServiceClient interface {
 	GetInvoices(context.Context, *connect.Request[billing.GetInvoicesRequest]) (*connect.Response[billing.Invoices], error)
 	GetInvoicesCount(context.Context, *connect.Request[billing.GetInvoicesCountRequest]) (*connect.Response[billing.GetInvoicesCountResponse], error)
 	UpdateInvoice(context.Context, *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error)
+	UpdateInvoiceStatus(context.Context, *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error)
 }
 
 // NewBillingServiceClient constructs a client for the nocloud.billing.BillingService service. By
@@ -515,6 +520,12 @@ func NewBillingServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(billingServiceUpdateInvoiceMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		updateInvoiceStatus: connect.NewClient[billing.Invoice, billing.Invoice](
+			httpClient,
+			baseURL+BillingServiceUpdateInvoiceStatusProcedure,
+			connect.WithSchema(billingServiceUpdateInvoiceStatusMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -541,6 +552,7 @@ type billingServiceClient struct {
 	getInvoices              *connect.Client[billing.GetInvoicesRequest, billing.Invoices]
 	getInvoicesCount         *connect.Client[billing.GetInvoicesCountRequest, billing.GetInvoicesCountResponse]
 	updateInvoice            *connect.Client[billing.Invoice, billing.Invoice]
+	updateInvoiceStatus      *connect.Client[billing.Invoice, billing.Invoice]
 }
 
 // CreatePlan calls nocloud.billing.BillingService.CreatePlan.
@@ -648,6 +660,11 @@ func (c *billingServiceClient) UpdateInvoice(ctx context.Context, req *connect.R
 	return c.updateInvoice.CallUnary(ctx, req)
 }
 
+// UpdateInvoiceStatus calls nocloud.billing.BillingService.UpdateInvoiceStatus.
+func (c *billingServiceClient) UpdateInvoiceStatus(ctx context.Context, req *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error) {
+	return c.updateInvoiceStatus.CallUnary(ctx, req)
+}
+
 // BillingServiceHandler is an implementation of the nocloud.billing.BillingService service.
 type BillingServiceHandler interface {
 	CreatePlan(context.Context, *connect.Request[billing.Plan]) (*connect.Response[billing.Plan], error)
@@ -671,6 +688,7 @@ type BillingServiceHandler interface {
 	GetInvoices(context.Context, *connect.Request[billing.GetInvoicesRequest]) (*connect.Response[billing.Invoices], error)
 	GetInvoicesCount(context.Context, *connect.Request[billing.GetInvoicesCountRequest]) (*connect.Response[billing.GetInvoicesCountResponse], error)
 	UpdateInvoice(context.Context, *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error)
+	UpdateInvoiceStatus(context.Context, *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error)
 }
 
 // NewBillingServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -805,6 +823,12 @@ func NewBillingServiceHandler(svc BillingServiceHandler, opts ...connect.Handler
 		connect.WithSchema(billingServiceUpdateInvoiceMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	billingServiceUpdateInvoiceStatusHandler := connect.NewUnaryHandler(
+		BillingServiceUpdateInvoiceStatusProcedure,
+		svc.UpdateInvoiceStatus,
+		connect.WithSchema(billingServiceUpdateInvoiceStatusMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/nocloud.billing.BillingService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case BillingServiceCreatePlanProcedure:
@@ -849,6 +873,8 @@ func NewBillingServiceHandler(svc BillingServiceHandler, opts ...connect.Handler
 			billingServiceGetInvoicesCountHandler.ServeHTTP(w, r)
 		case BillingServiceUpdateInvoiceProcedure:
 			billingServiceUpdateInvoiceHandler.ServeHTTP(w, r)
+		case BillingServiceUpdateInvoiceStatusProcedure:
+			billingServiceUpdateInvoiceStatusHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -940,6 +966,10 @@ func (UnimplementedBillingServiceHandler) GetInvoicesCount(context.Context, *con
 
 func (UnimplementedBillingServiceHandler) UpdateInvoice(context.Context, *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.BillingService.UpdateInvoice is not implemented"))
+}
+
+func (UnimplementedBillingServiceHandler) UpdateInvoiceStatus(context.Context, *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.BillingService.UpdateInvoiceStatus is not implemented"))
 }
 
 // CurrencyServiceClient is a client for the nocloud.billing.CurrencyService service.

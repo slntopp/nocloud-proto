@@ -221,6 +221,7 @@ const (
 	BillingService_GetInvoices_FullMethodName              = "/nocloud.billing.BillingService/GetInvoices"
 	BillingService_GetInvoicesCount_FullMethodName         = "/nocloud.billing.BillingService/GetInvoicesCount"
 	BillingService_UpdateInvoice_FullMethodName            = "/nocloud.billing.BillingService/UpdateInvoice"
+	BillingService_UpdateInvoiceStatus_FullMethodName      = "/nocloud.billing.BillingService/UpdateInvoiceStatus"
 )
 
 // BillingServiceClient is the client API for BillingService service.
@@ -248,6 +249,7 @@ type BillingServiceClient interface {
 	GetInvoices(ctx context.Context, in *GetInvoicesRequest, opts ...grpc.CallOption) (*Invoices, error)
 	GetInvoicesCount(ctx context.Context, in *GetInvoicesCountRequest, opts ...grpc.CallOption) (*GetInvoicesCountResponse, error)
 	UpdateInvoice(ctx context.Context, in *Invoice, opts ...grpc.CallOption) (*Invoice, error)
+	UpdateInvoiceStatus(ctx context.Context, in *Invoice, opts ...grpc.CallOption) (*Invoice, error)
 }
 
 type billingServiceClient struct {
@@ -447,6 +449,15 @@ func (c *billingServiceClient) UpdateInvoice(ctx context.Context, in *Invoice, o
 	return out, nil
 }
 
+func (c *billingServiceClient) UpdateInvoiceStatus(ctx context.Context, in *Invoice, opts ...grpc.CallOption) (*Invoice, error) {
+	out := new(Invoice)
+	err := c.cc.Invoke(ctx, BillingService_UpdateInvoiceStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BillingServiceServer is the server API for BillingService service.
 // All implementations must embed UnimplementedBillingServiceServer
 // for forward compatibility
@@ -472,6 +483,7 @@ type BillingServiceServer interface {
 	GetInvoices(context.Context, *GetInvoicesRequest) (*Invoices, error)
 	GetInvoicesCount(context.Context, *GetInvoicesCountRequest) (*GetInvoicesCountResponse, error)
 	UpdateInvoice(context.Context, *Invoice) (*Invoice, error)
+	UpdateInvoiceStatus(context.Context, *Invoice) (*Invoice, error)
 	mustEmbedUnimplementedBillingServiceServer()
 }
 
@@ -541,6 +553,9 @@ func (UnimplementedBillingServiceServer) GetInvoicesCount(context.Context, *GetI
 }
 func (UnimplementedBillingServiceServer) UpdateInvoice(context.Context, *Invoice) (*Invoice, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateInvoice not implemented")
+}
+func (UnimplementedBillingServiceServer) UpdateInvoiceStatus(context.Context, *Invoice) (*Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateInvoiceStatus not implemented")
 }
 func (UnimplementedBillingServiceServer) mustEmbedUnimplementedBillingServiceServer() {}
 
@@ -933,6 +948,24 @@ func _BillingService_UpdateInvoice_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BillingService_UpdateInvoiceStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Invoice)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).UpdateInvoiceStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_UpdateInvoiceStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).UpdateInvoiceStatus(ctx, req.(*Invoice))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BillingService_ServiceDesc is the grpc.ServiceDesc for BillingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1023,6 +1056,10 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateInvoice",
 			Handler:    _BillingService_UpdateInvoice_Handler,
+		},
+		{
+			MethodName: "UpdateInvoiceStatus",
+			Handler:    _BillingService_UpdateInvoiceStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
