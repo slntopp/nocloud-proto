@@ -782,9 +782,9 @@ export declare class Item extends Message<Item> {
   title: string;
 
   /**
-   * @generated from field: int64 amount = 2;
+   * @generated from field: float amount = 2;
    */
-  amount: bigint;
+  amount: number;
 
   /**
    * @generated from field: string instance = 3;

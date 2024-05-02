@@ -6700,8 +6700,8 @@
           "type": "string"
         },
         "amount": {
-          "type": "string",
-          "format": "int64"
+          "type": "number",
+          "format": "float"
         },
         "instance": {
           "type": "string"
