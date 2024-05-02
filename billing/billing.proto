@@ -180,11 +180,12 @@ enum BillingStatus {
   CANCELED = 2;
   TERMINATED = 3;
   DRAFT = 4;
+  RETURNED = 5;
 }
 
 enum ActionType {
   NO_ACTION = 0;
-  INSTANCE_CREATION = 1;
+  INSTANCE_START = 1;
   INSTANCE_RENEWAL = 2;
   BALANCE = 3;
 }
@@ -199,8 +200,8 @@ message Item {
 message Invoice {
   string uuid = 1;
   int64 exec = 2;
-  int64 proc = 3;
-  bool processed = 4;
+  int64 processed = 3;
+  int64 deadline = 4;
   BillingStatus status = 5;
   string account = 6;
   string service = 7;
@@ -211,6 +212,7 @@ message Invoice {
   int64 created = 12;
   repeated Item items = 13;
   ActionType type = 14;
+  int64 terminated = 15;
 }
 
 message Invoices {repeated Invoice pool = 1;}

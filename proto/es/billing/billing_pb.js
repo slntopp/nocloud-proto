@@ -95,6 +95,7 @@ export const BillingStatus = proto3.makeEnum(
     {no: 2, name: "CANCELED"},
     {no: 3, name: "TERMINATED"},
     {no: 4, name: "DRAFT"},
+    {no: 5, name: "RETURNED"},
   ],
 );
 
@@ -105,7 +106,7 @@ export const ActionType = proto3.makeEnum(
   "nocloud.billing.ActionType",
   [
     {no: 0, name: "NO_ACTION"},
-    {no: 1, name: "INSTANCE_CREATION"},
+    {no: 1, name: "INSTANCE_START"},
     {no: 2, name: "INSTANCE_RENEWAL"},
     {no: 3, name: "BALANCE"},
   ],
@@ -290,8 +291,8 @@ export const Invoice = proto3.makeMessageType(
   () => [
     { no: 1, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "exec", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 3, name: "proc", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 4, name: "processed", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 3, name: "processed", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 4, name: "deadline", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 5, name: "status", kind: "enum", T: proto3.getEnumType(BillingStatus) },
     { no: 6, name: "account", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 7, name: "service", kind: "scalar", T: 9 /* ScalarType.STRING */ },
@@ -302,6 +303,7 @@ export const Invoice = proto3.makeMessageType(
     { no: 12, name: "created", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 13, name: "items", kind: "message", T: Item, repeated: true },
     { no: 14, name: "type", kind: "enum", T: proto3.getEnumType(ActionType) },
+    { no: 15, name: "terminated", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ],
 );
 
