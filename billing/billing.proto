@@ -193,7 +193,7 @@ enum ActionType {
 // Position. Instance must be specified to connect action with instance
 message Item {
   string title = 1;
-  float amount = 2;
+  double amount = 2;
   string instance = 3;
 }
 
@@ -283,6 +283,11 @@ message GetTransactionsCountResponse {
 message UpdateTransactionRequest {
   string uuid = 1;
   int64 exec = 2;
+}
+
+message UpdateInvoiceStatusRequest{
+  string uuid = 1;
+  BillingStatus status = 2;
 }
 
 message GetInvoicesCountRequest {
@@ -495,7 +500,7 @@ service BillingService {
       body: "*"
     };
   };
-  rpc UpdateInvoiceStatus (Invoice) returns (Invoice) {
+  rpc UpdateInvoiceStatus (UpdateInvoiceStatusRequest) returns (Invoice) {
     option (google.api.http) = {
       patch: "/billing/invoices/{uuid}/status"
       body: "*"

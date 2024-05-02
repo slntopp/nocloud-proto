@@ -278,7 +278,7 @@ export const Item = proto3.makeMessageType(
   "nocloud.billing.Item",
   () => [
     { no: 1, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "amount", kind: "scalar", T: 2 /* ScalarType.FLOAT */ },
+    { no: 2, name: "amount", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
     { no: 3, name: "instance", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
@@ -429,6 +429,17 @@ export const UpdateTransactionRequest = proto3.makeMessageType(
   () => [
     { no: 1, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "exec", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.UpdateInvoiceStatusRequest
+ */
+export const UpdateInvoiceStatusRequest = proto3.makeMessageType(
+  "nocloud.billing.UpdateInvoiceStatusRequest",
+  () => [
+    { no: 1, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "status", kind: "enum", T: proto3.getEnumType(BillingStatus) },
   ],
 );
 

@@ -782,7 +782,7 @@ export declare class Item extends Message<Item> {
   title: string;
 
   /**
-   * @generated from field: float amount = 2;
+   * @generated from field: double amount = 2;
    */
   amount: number;
 
@@ -1295,6 +1295,35 @@ export declare class UpdateTransactionRequest extends Message<UpdateTransactionR
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateTransactionRequest;
 
   static equals(a: UpdateTransactionRequest | PlainMessage<UpdateTransactionRequest> | undefined, b: UpdateTransactionRequest | PlainMessage<UpdateTransactionRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.UpdateInvoiceStatusRequest
+ */
+export declare class UpdateInvoiceStatusRequest extends Message<UpdateInvoiceStatusRequest> {
+  /**
+   * @generated from field: string uuid = 1;
+   */
+  uuid: string;
+
+  /**
+   * @generated from field: nocloud.billing.BillingStatus status = 2;
+   */
+  status: BillingStatus;
+
+  constructor(data?: PartialMessage<UpdateInvoiceStatusRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.UpdateInvoiceStatusRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateInvoiceStatusRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateInvoiceStatusRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateInvoiceStatusRequest;
+
+  static equals(a: UpdateInvoiceStatusRequest | PlainMessage<UpdateInvoiceStatusRequest> | undefined, b: UpdateInvoiceStatusRequest | PlainMessage<UpdateInvoiceStatusRequest> | undefined): boolean;
 }
 
 /**
