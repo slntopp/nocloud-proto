@@ -278,7 +278,7 @@ export const Item = proto3.makeMessageType(
   "nocloud.billing.Item",
   () => [
     { no: 1, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "amount", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "amount", kind: "scalar", T: 2 /* ScalarType.FLOAT */ },
     { no: 3, name: "instance", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
