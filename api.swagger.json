@@ -5351,54 +5351,8 @@
     "BillingServiceUpdateInvoiceStatusBody": {
       "type": "object",
       "properties": {
-        "exec": {
-          "type": "string",
-          "format": "int64"
-        },
-        "processed": {
-          "type": "string",
-          "format": "int64"
-        },
-        "deadline": {
-          "type": "string",
-          "format": "int64"
-        },
         "status": {
           "$ref": "#/definitions/billingBillingStatus"
-        },
-        "account": {
-          "type": "string"
-        },
-        "transactions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "total": {
-          "type": "number",
-          "format": "double"
-        },
-        "meta": {
-          "type": "object",
-          "additionalProperties": {}
-        },
-        "currency": {
-          "$ref": "#/definitions/billingCurrency"
-        },
-        "created": {
-          "type": "string",
-          "format": "int64"
-        },
-        "items": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/billingItem"
-          }
-        },
-        "type": {
-          "$ref": "#/definitions/billingActionType"
         }
       }
     },
@@ -6635,7 +6589,7 @@
         },
         "amount": {
           "type": "number",
-          "format": "float"
+          "format": "double"
         },
         "instance": {
           "type": "string"
