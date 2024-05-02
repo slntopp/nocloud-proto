@@ -1964,17 +1964,18 @@
             "format": "int64"
           },
           {
-            "name": "proc",
+            "name": "processed",
             "in": "query",
             "required": false,
             "type": "string",
             "format": "int64"
           },
           {
-            "name": "processed",
+            "name": "deadline",
             "in": "query",
             "required": false,
-            "type": "boolean"
+            "type": "string",
+            "format": "int64"
           },
           {
             "name": "status",
@@ -1986,7 +1987,8 @@
               "UNPAID",
               "CANCELED",
               "TERMINATED",
-              "DRAFT"
+              "DRAFT",
+              "RETURNED"
             ],
             "default": "PAID"
           },
@@ -2052,11 +2054,18 @@
             "type": "string",
             "enum": [
               "NO_ACTION",
-              "INSTANCE_CREATION",
+              "INSTANCE_START",
               "INSTANCE_RENEWAL",
               "BALANCE"
             ],
             "default": "NO_ACTION"
+          },
+          {
+            "name": "terminated",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -5337,12 +5346,13 @@
           "type": "string",
           "format": "int64"
         },
-        "proc": {
+        "processed": {
           "type": "string",
           "format": "int64"
         },
-        "processed": {
-          "type": "boolean"
+        "deadline": {
+          "type": "string",
+          "format": "int64"
         },
         "status": {
           "$ref": "#/definitions/billingBillingStatus"
@@ -5383,6 +5393,10 @@
         },
         "type": {
           "$ref": "#/definitions/billingActionType"
+        },
+        "terminated": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -5393,12 +5407,13 @@
           "type": "string",
           "format": "int64"
         },
-        "proc": {
+        "processed": {
           "type": "string",
           "format": "int64"
         },
-        "processed": {
-          "type": "boolean"
+        "deadline": {
+          "type": "string",
+          "format": "int64"
         },
         "status": {
           "$ref": "#/definitions/billingBillingStatus"
@@ -5439,6 +5454,10 @@
         },
         "type": {
           "$ref": "#/definitions/billingActionType"
+        },
+        "terminated": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -6192,7 +6211,7 @@
       "type": "string",
       "enum": [
         "NO_ACTION",
-        "INSTANCE_CREATION",
+        "INSTANCE_START",
         "INSTANCE_RENEWAL",
         "BALANCE"
       ],
@@ -6243,7 +6262,8 @@
         "UNPAID",
         "CANCELED",
         "TERMINATED",
-        "DRAFT"
+        "DRAFT",
+        "RETURNED"
       ],
       "default": "PAID"
     },
@@ -6607,12 +6627,13 @@
           "type": "string",
           "format": "int64"
         },
-        "proc": {
+        "processed": {
           "type": "string",
           "format": "int64"
         },
-        "processed": {
-          "type": "boolean"
+        "deadline": {
+          "type": "string",
+          "format": "int64"
         },
         "status": {
           "$ref": "#/definitions/billingBillingStatus"
@@ -6653,6 +6674,10 @@
         },
         "type": {
           "$ref": "#/definitions/billingActionType"
+        },
+        "terminated": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },

@@ -165,6 +165,11 @@ export declare enum BillingStatus {
    * @generated from enum value: DRAFT = 4;
    */
   DRAFT = 4,
+
+  /**
+   * @generated from enum value: RETURNED = 5;
+   */
+  RETURNED = 5,
 }
 
 /**
@@ -177,9 +182,9 @@ export declare enum ActionType {
   NO_ACTION = 0,
 
   /**
-   * @generated from enum value: INSTANCE_CREATION = 1;
+   * @generated from enum value: INSTANCE_START = 1;
    */
-  INSTANCE_CREATION = 1,
+  INSTANCE_START = 1,
 
   /**
    * @generated from enum value: INSTANCE_RENEWAL = 2;
@@ -816,14 +821,14 @@ export declare class Invoice extends Message<Invoice> {
   exec: bigint;
 
   /**
-   * @generated from field: int64 proc = 3;
+   * @generated from field: int64 processed = 3;
    */
-  proc: bigint;
+  processed: bigint;
 
   /**
-   * @generated from field: bool processed = 4;
+   * @generated from field: int64 deadline = 4;
    */
-  processed: boolean;
+  deadline: bigint;
 
   /**
    * @generated from field: nocloud.billing.BillingStatus status = 5;
@@ -874,6 +879,11 @@ export declare class Invoice extends Message<Invoice> {
    * @generated from field: nocloud.billing.ActionType type = 14;
    */
   type: ActionType;
+
+  /**
+   * @generated from field: int64 terminated = 15;
+   */
+  terminated: bigint;
 
   constructor(data?: PartialMessage<Invoice>);
 
