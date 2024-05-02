@@ -841,11 +841,6 @@ export declare class Invoice extends Message<Invoice> {
   account: string;
 
   /**
-   * @generated from field: string service = 7;
-   */
-  service: string;
-
-  /**
    * @generated from field: repeated string transactions = 8;
    */
   transactions: string[];
@@ -879,11 +874,6 @@ export declare class Invoice extends Message<Invoice> {
    * @generated from field: nocloud.billing.ActionType type = 14;
    */
   type: ActionType;
-
-  /**
-   * @generated from field: int64 terminated = 15;
-   */
-  terminated: bigint;
 
   constructor(data?: PartialMessage<Invoice>);
 
