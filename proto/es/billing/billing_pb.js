@@ -295,7 +295,6 @@ export const Invoice = proto3.makeMessageType(
     { no: 4, name: "deadline", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 5, name: "status", kind: "enum", T: proto3.getEnumType(BillingStatus) },
     { no: 6, name: "account", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 7, name: "service", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 8, name: "transactions", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 9, name: "total", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
     { no: 10, name: "meta", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
@@ -303,7 +302,6 @@ export const Invoice = proto3.makeMessageType(
     { no: 12, name: "created", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 13, name: "items", kind: "message", T: Item, repeated: true },
     { no: 14, name: "type", kind: "enum", T: proto3.getEnumType(ActionType) },
-    { no: 15, name: "terminated", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ],
 );
 

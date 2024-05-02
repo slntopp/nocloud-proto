@@ -1999,12 +1999,6 @@
             "type": "string"
           },
           {
-            "name": "service",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "transactions",
             "in": "query",
             "required": false,
@@ -2059,13 +2053,6 @@
               "BALANCE"
             ],
             "default": "NO_ACTION"
-          },
-          {
-            "name": "terminated",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "int64"
           }
         ],
         "tags": [
@@ -5360,9 +5347,6 @@
         "account": {
           "type": "string"
         },
-        "service": {
-          "type": "string"
-        },
         "transactions": {
           "type": "array",
           "items": {
@@ -5393,10 +5377,6 @@
         },
         "type": {
           "$ref": "#/definitions/billingActionType"
-        },
-        "terminated": {
-          "type": "string",
-          "format": "int64"
         }
       }
     },
@@ -5421,9 +5401,6 @@
         "account": {
           "type": "string"
         },
-        "service": {
-          "type": "string"
-        },
         "transactions": {
           "type": "array",
           "items": {
@@ -5454,10 +5431,6 @@
         },
         "type": {
           "$ref": "#/definitions/billingActionType"
-        },
-        "terminated": {
-          "type": "string",
-          "format": "int64"
         }
       }
     },
@@ -6641,9 +6614,6 @@
         "account": {
           "type": "string"
         },
-        "service": {
-          "type": "string"
-        },
         "transactions": {
           "type": "array",
           "items": {
@@ -6674,10 +6644,6 @@
         },
         "type": {
           "$ref": "#/definitions/billingActionType"
-        },
-        "terminated": {
-          "type": "string",
-          "format": "int64"
         }
       }
     },

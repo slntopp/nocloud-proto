@@ -204,7 +204,6 @@ message Invoice {
   int64 deadline = 4;
   BillingStatus status = 5;
   string account = 6;
-  string service = 7;
   repeated string transactions = 8;
   double total = 9;
   map<string, google.protobuf.Value> meta = 10;
@@ -212,7 +211,6 @@ message Invoice {
   int64 created = 12;
   repeated Item items = 13;
   ActionType type = 14;
-  int64 terminated = 15;
 }
 
 message Invoices {repeated Invoice pool = 1;}
