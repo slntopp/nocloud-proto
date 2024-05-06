@@ -90,12 +90,13 @@ export const Priority = proto3.makeEnum(
 export const BillingStatus = proto3.makeEnum(
   "nocloud.billing.BillingStatus",
   [
-    {no: 0, name: "PAID"},
-    {no: 1, name: "UNPAID"},
-    {no: 2, name: "CANCELED"},
-    {no: 3, name: "TERMINATED"},
-    {no: 4, name: "DRAFT"},
-    {no: 5, name: "RETURNED"},
+    {no: 0, name: "BILLING_STATUS_UNKNOWN"},
+    {no: 1, name: "PAID"},
+    {no: 2, name: "UNPAID"},
+    {no: 3, name: "CANCELED"},
+    {no: 4, name: "TERMINATED"},
+    {no: 5, name: "DRAFT"},
+    {no: 6, name: "RETURNED"},
   ],
 );
 
@@ -105,10 +106,11 @@ export const BillingStatus = proto3.makeEnum(
 export const ActionType = proto3.makeEnum(
   "nocloud.billing.ActionType",
   [
-    {no: 0, name: "NO_ACTION"},
-    {no: 1, name: "INSTANCE_START"},
-    {no: 2, name: "INSTANCE_RENEWAL"},
-    {no: 3, name: "BALANCE"},
+    {no: 0, name: "ACTION_TYPE_UNKNOWN"},
+    {no: 1, name: "NO_ACTION"},
+    {no: 2, name: "INSTANCE_START"},
+    {no: 3, name: "INSTANCE_RENEWAL"},
+    {no: 4, name: "BALANCE"},
   ],
 );
 

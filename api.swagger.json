@@ -1989,10 +1989,12 @@
           },
           {
             "name": "status",
+            "description": " - BILLING_STATUS_UNKNOWN: Dont use.",
             "in": "query",
             "required": false,
             "type": "string",
             "enum": [
+              "BILLING_STATUS_UNKNOWN",
               "PAID",
               "UNPAID",
               "CANCELED",
@@ -2000,7 +2002,7 @@
               "DRAFT",
               "RETURNED"
             ],
-            "default": "PAID"
+            "default": "BILLING_STATUS_UNKNOWN"
           },
           {
             "name": "account",
@@ -2053,16 +2055,18 @@
           },
           {
             "name": "type",
+            "description": " - ACTION_TYPE_UNKNOWN: Dont use.",
             "in": "query",
             "required": false,
             "type": "string",
             "enum": [
+              "ACTION_TYPE_UNKNOWN",
               "NO_ACTION",
               "INSTANCE_START",
               "INSTANCE_RENEWAL",
               "BALANCE"
             ],
-            "default": "NO_ACTION"
+            "default": "ACTION_TYPE_UNKNOWN"
           }
         ],
         "tags": [
@@ -6122,12 +6126,14 @@
     "billingActionType": {
       "type": "string",
       "enum": [
+        "ACTION_TYPE_UNKNOWN",
         "NO_ACTION",
         "INSTANCE_START",
         "INSTANCE_RENEWAL",
         "BALANCE"
       ],
-      "default": "NO_ACTION"
+      "default": "ACTION_TYPE_UNKNOWN",
+      "description": " - ACTION_TYPE_UNKNOWN: Dont use."
     },
     "billingAddonsServiceUpdateBody": {
       "type": "object",
@@ -6170,6 +6176,7 @@
     "billingBillingStatus": {
       "type": "string",
       "enum": [
+        "BILLING_STATUS_UNKNOWN",
         "PAID",
         "UNPAID",
         "CANCELED",
@@ -6177,7 +6184,8 @@
         "DRAFT",
         "RETURNED"
       ],
-      "default": "PAID"
+      "default": "BILLING_STATUS_UNKNOWN",
+      "description": " - BILLING_STATUS_UNKNOWN: Dont use."
     },
     "billingConversionRequest": {
       "type": "object",
