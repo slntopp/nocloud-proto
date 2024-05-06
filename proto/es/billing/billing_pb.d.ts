@@ -841,37 +841,37 @@ export declare class Invoice extends Message<Invoice> {
   account: string;
 
   /**
-   * @generated from field: repeated string transactions = 8;
+   * @generated from field: repeated string transactions = 7;
    */
   transactions: string[];
 
   /**
-   * @generated from field: double total = 9;
+   * @generated from field: double total = 8;
    */
   total: number;
 
   /**
-   * @generated from field: map<string, google.protobuf.Value> meta = 10;
+   * @generated from field: map<string, google.protobuf.Value> meta = 9;
    */
   meta: { [key: string]: Value };
 
   /**
-   * @generated from field: nocloud.billing.Currency currency = 11;
+   * @generated from field: nocloud.billing.Currency currency = 10;
    */
   currency?: Currency;
 
   /**
-   * @generated from field: int64 created = 12;
+   * @generated from field: int64 created = 11;
    */
   created: bigint;
 
   /**
-   * @generated from field: repeated nocloud.billing.Item items = 13;
+   * @generated from field: repeated nocloud.billing.Item items = 12;
    */
   items: Item[];
 
   /**
-   * @generated from field: nocloud.billing.ActionType type = 14;
+   * @generated from field: nocloud.billing.ActionType type = 13;
    */
   type: ActionType;
 
