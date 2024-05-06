@@ -816,62 +816,73 @@ export declare class Invoice extends Message<Invoice> {
   uuid: string;
 
   /**
-   * @generated from field: int64 exec = 2;
+   * Payment date timestamp
+   *
+   * @generated from field: int64 payment = 2;
    */
-  exec: bigint;
+  payment: bigint;
 
   /**
+   * Processed date timestamp(when actions applied)(only for payment flow)
+   *
    * @generated from field: int64 processed = 3;
    */
   processed: bigint;
 
   /**
-   * @generated from field: int64 deadline = 4;
+   * Returned date timestamp(not 0 if invoice has returned status)
+   *
+   * @generated from field: int64 returned = 4;
+   */
+  returned: bigint;
+
+  /**
+   * @generated from field: int64 deadline = 5;
    */
   deadline: bigint;
 
   /**
-   * @generated from field: nocloud.billing.BillingStatus status = 5;
+   * @generated from field: nocloud.billing.BillingStatus status = 6;
    */
   status: BillingStatus;
 
   /**
-   * @generated from field: string account = 6;
+   * @generated from field: string account = 7;
    */
   account: string;
 
   /**
-   * @generated from field: repeated string transactions = 7;
+   * @generated from field: repeated string transactions = 8;
    */
   transactions: string[];
 
   /**
-   * @generated from field: double total = 8;
+   * @generated from field: double total = 9;
    */
   total: number;
 
   /**
-   * @generated from field: map<string, google.protobuf.Value> meta = 9;
+   * @generated from field: map<string, google.protobuf.Value> meta = 10;
    */
   meta: { [key: string]: Value };
 
   /**
-   * @generated from field: nocloud.billing.Currency currency = 10;
+   * @generated from field: nocloud.billing.Currency currency = 11;
    */
   currency?: Currency;
 
   /**
-   * @generated from field: int64 created = 11;
+   * @generated from field: int64 created = 12;
    */
   created: bigint;
 
   /**
-   * @generated from field: repeated nocloud.billing.Item items = 12;
+   * @generated from field: repeated nocloud.billing.Item items = 13;
    */
   items: Item[];
 
   /**
-   * @generated from field: nocloud.billing.ActionType type = 13;
+   * @generated from field: nocloud.billing.ActionType type = 14;
    */
   type: ActionType;
 
