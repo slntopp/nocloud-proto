@@ -6590,6 +6590,10 @@
             "type": "object",
             "$ref": "#/definitions/notesAdminNote"
           }
+        },
+        "deleted": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
