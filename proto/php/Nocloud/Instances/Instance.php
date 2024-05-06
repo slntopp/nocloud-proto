@@ -71,6 +71,10 @@ class Instance extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>repeated .nocloud.notes.AdminNote admin_notes = 14 [json_name = "adminNotes"];</code>
      */
     private $admin_notes;
+    /**
+     * Generated from protobuf field <code>int64 deleted = 15 [json_name = "deleted"];</code>
+     */
+    protected $deleted = 0;
 
     /**
      * Constructor.
@@ -93,6 +97,7 @@ class Instance extends \Google\Protobuf\Internal\Message
      *     @type array<\Nocloud\Ansible\Software>|\Google\Protobuf\Internal\RepeatedField $software
      *           Must match contain all the software from the Billing Plan
      *     @type array<\Nocloud\Notes\AdminNote>|\Google\Protobuf\Internal\RepeatedField $admin_notes
+     *     @type int|string $deleted
      * }
      */
     public function __construct($data = NULL) {
@@ -448,6 +453,28 @@ class Instance extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Nocloud\Notes\AdminNote::class);
         $this->admin_notes = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>int64 deleted = 15 [json_name = "deleted"];</code>
+     * @return int|string
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
+    }
+
+    /**
+     * Generated from protobuf field <code>int64 deleted = 15 [json_name = "deleted"];</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setDeleted($var)
+    {
+        GPBUtil::checkInt64($var);
+        $this->deleted = $var;
 
         return $this;
     }
