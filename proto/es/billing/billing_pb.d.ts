@@ -142,34 +142,41 @@ export declare enum Priority {
  */
 export declare enum BillingStatus {
   /**
-   * @generated from enum value: PAID = 0;
+   * Dont use.
+   *
+   * @generated from enum value: BILLING_STATUS_UNKNOWN = 0;
    */
-  PAID = 0,
+  BILLING_STATUS_UNKNOWN = 0,
 
   /**
-   * @generated from enum value: UNPAID = 1;
+   * @generated from enum value: PAID = 1;
    */
-  UNPAID = 1,
+  PAID = 1,
 
   /**
-   * @generated from enum value: CANCELED = 2;
+   * @generated from enum value: UNPAID = 2;
    */
-  CANCELED = 2,
+  UNPAID = 2,
 
   /**
-   * @generated from enum value: TERMINATED = 3;
+   * @generated from enum value: CANCELED = 3;
    */
-  TERMINATED = 3,
+  CANCELED = 3,
 
   /**
-   * @generated from enum value: DRAFT = 4;
+   * @generated from enum value: TERMINATED = 4;
    */
-  DRAFT = 4,
+  TERMINATED = 4,
 
   /**
-   * @generated from enum value: RETURNED = 5;
+   * @generated from enum value: DRAFT = 5;
    */
-  RETURNED = 5,
+  DRAFT = 5,
+
+  /**
+   * @generated from enum value: RETURNED = 6;
+   */
+  RETURNED = 6,
 }
 
 /**
@@ -177,24 +184,31 @@ export declare enum BillingStatus {
  */
 export declare enum ActionType {
   /**
-   * @generated from enum value: NO_ACTION = 0;
+   * Dont use.
+   *
+   * @generated from enum value: ACTION_TYPE_UNKNOWN = 0;
    */
-  NO_ACTION = 0,
+  ACTION_TYPE_UNKNOWN = 0,
 
   /**
-   * @generated from enum value: INSTANCE_START = 1;
+   * @generated from enum value: NO_ACTION = 1;
    */
-  INSTANCE_START = 1,
+  NO_ACTION = 1,
 
   /**
-   * @generated from enum value: INSTANCE_RENEWAL = 2;
+   * @generated from enum value: INSTANCE_START = 2;
    */
-  INSTANCE_RENEWAL = 2,
+  INSTANCE_START = 2,
 
   /**
-   * @generated from enum value: BALANCE = 3;
+   * @generated from enum value: INSTANCE_RENEWAL = 3;
    */
-  BALANCE = 3,
+  INSTANCE_RENEWAL = 3,
+
+  /**
+   * @generated from enum value: BALANCE = 4;
+   */
+  BALANCE = 4,
 }
 
 /**

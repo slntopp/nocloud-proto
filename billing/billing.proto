@@ -175,19 +175,21 @@ message Transaction {
 }
 
 enum BillingStatus {
-  PAID = 0;
-  UNPAID = 1;
-  CANCELED = 2;
-  TERMINATED = 3;
-  DRAFT = 4;
-  RETURNED = 5;
+  BILLING_STATUS_UNKNOWN = 0; // Dont use.
+  PAID = 1;
+  UNPAID = 2;
+  CANCELED = 3;
+  TERMINATED = 4;
+  DRAFT = 5;
+  RETURNED = 6;
 }
 
 enum ActionType {
-  NO_ACTION = 0;
-  INSTANCE_START = 1;
-  INSTANCE_RENEWAL = 2;
-  BALANCE = 3;
+  ACTION_TYPE_UNKNOWN = 0; // Dont use.
+  NO_ACTION = 1;
+  INSTANCE_START = 2;
+  INSTANCE_RENEWAL = 3;
+  BALANCE = 4;
 }
 
 // Position. Instance must be specified to connect action with instance
