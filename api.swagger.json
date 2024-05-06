@@ -1957,7 +1957,8 @@
             "type": "string"
           },
           {
-            "name": "exec",
+            "name": "payment",
+            "description": "Payment date timestamp",
             "in": "query",
             "required": false,
             "type": "string",
@@ -1965,6 +1966,15 @@
           },
           {
             "name": "processed",
+            "description": "Processed date timestamp(when actions applied)(only for payment flow)",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "returned",
+            "description": "Returned date timestamp(not 0 if invoice has returned status)",
             "in": "query",
             "required": false,
             "type": "string",
@@ -5297,13 +5307,20 @@
     "BillingServiceUpdateInvoiceBody": {
       "type": "object",
       "properties": {
-        "exec": {
+        "payment": {
           "type": "string",
-          "format": "int64"
+          "format": "int64",
+          "title": "Payment date timestamp"
         },
         "processed": {
           "type": "string",
-          "format": "int64"
+          "format": "int64",
+          "title": "Processed date timestamp(when actions applied)(only for payment flow)"
+        },
+        "returned": {
+          "type": "string",
+          "format": "int64",
+          "title": "Returned date timestamp(not 0 if invoice has returned status)"
         },
         "deadline": {
           "type": "string",
@@ -6518,13 +6535,20 @@
         "uuid": {
           "type": "string"
         },
-        "exec": {
+        "payment": {
           "type": "string",
-          "format": "int64"
+          "format": "int64",
+          "title": "Payment date timestamp"
         },
         "processed": {
           "type": "string",
-          "format": "int64"
+          "format": "int64",
+          "title": "Processed date timestamp(when actions applied)(only for payment flow)"
+        },
+        "returned": {
+          "type": "string",
+          "format": "int64",
+          "title": "Returned date timestamp(not 0 if invoice has returned status)"
         },
         "deadline": {
           "type": "string",

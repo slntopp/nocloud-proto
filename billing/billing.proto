@@ -199,18 +199,19 @@ message Item {
 
 message Invoice {
   string uuid = 1;
-  int64 exec = 2;
-  int64 processed = 3;
-  int64 deadline = 4;
-  BillingStatus status = 5;
-  string account = 6;
-  repeated string transactions = 7;
-  double total = 8;
-  map<string, google.protobuf.Value> meta = 9;
-  Currency currency = 10;
-  int64 created = 11;
-  repeated Item items = 12;
-  ActionType type = 13;
+  int64 payment = 2;    // Payment date timestamp
+  int64 processed = 3;  // Processed date timestamp(when actions applied)(only for payment flow)
+  int64 returned = 4;   // Returned date timestamp(not 0 if invoice has returned status)
+  int64 deadline = 5;
+  BillingStatus status = 6;
+  string account = 7;
+  repeated string transactions = 8;
+  double total = 9;
+  map<string, google.protobuf.Value> meta = 10;
+  Currency currency = 11;
+  int64 created = 12;
+  repeated Item items = 13;
+  ActionType type = 14;
 }
 
 message Invoices {repeated Invoice pool = 1;}
