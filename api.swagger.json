@@ -6620,6 +6620,13 @@
           "type": "string"
         },
         "amount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "price": {
           "type": "number",
           "format": "double"
         },
