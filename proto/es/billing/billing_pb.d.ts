@@ -796,12 +796,22 @@ export declare class Item extends Message<Item> {
   title: string;
 
   /**
-   * @generated from field: double amount = 2;
+   * @generated from field: int32 amount = 2;
    */
   amount: number;
 
   /**
-   * @generated from field: string instance = 3;
+   * @generated from field: string unit = 3;
+   */
+  unit: string;
+
+  /**
+   * @generated from field: double price = 4;
+   */
+  price: number;
+
+  /**
+   * @generated from field: string instance = 5;
    */
   instance: string;
 

@@ -195,8 +195,10 @@ enum ActionType {
 // Position. Instance must be specified to connect action with instance
 message Item {
   string title = 1;
-  double amount = 2;
-  string instance = 3;
+  int32 amount = 2;
+  string unit = 3;
+  double price = 4;
+  string instance = 5;
 }
 
 message Invoice {
