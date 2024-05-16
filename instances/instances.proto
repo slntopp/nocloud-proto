@@ -71,8 +71,9 @@ message InstancesGroup {
 }
 
 message Context {
-    Instance instance = 1;
-    nocloud.services_providers.ServicesProvider sp = 2;
+    string instance = 1;
+    string sp = 2;
+    string event = 3;
 }
 
 message TestInstancesGroupConfigRequest {
