@@ -70,6 +70,11 @@ message InstancesGroup {
     optional nocloud.access.Access access = 11;
 }
 
+message Context {
+    Instance instance = 1;
+    nocloud.services_providers.ServicesProvider sp = 2;
+}
+
 message TestInstancesGroupConfigRequest {
     InstancesGroup group = 1;
     nocloud.services_providers.ServicesProvider sp = 2;
