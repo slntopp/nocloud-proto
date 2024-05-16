@@ -14,13 +14,17 @@ use Google\Protobuf\Internal\GPBUtil;
 class Context extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>.nocloud.instances.Instance instance = 1 [json_name = "instance"];</code>
+     * Generated from protobuf field <code>string instance = 1 [json_name = "instance"];</code>
      */
-    protected $instance = null;
+    protected $instance = '';
     /**
-     * Generated from protobuf field <code>.nocloud.services_providers.ServicesProvider sp = 2 [json_name = "sp"];</code>
+     * Generated from protobuf field <code>string sp = 2 [json_name = "sp"];</code>
      */
-    protected $sp = null;
+    protected $sp = '';
+    /**
+     * Generated from protobuf field <code>string event = 3 [json_name = "event"];</code>
+     */
+    protected $event = '';
 
     /**
      * Constructor.
@@ -28,8 +32,9 @@ class Context extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Nocloud\Instances\Instance $instance
-     *     @type \Nocloud\ServicesProviders\ServicesProvider $sp
+     *     @type string $instance
+     *     @type string $sp
+     *     @type string $event
      * }
      */
     public function __construct($data = NULL) {
@@ -38,65 +43,67 @@ class Context extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.nocloud.instances.Instance instance = 1 [json_name = "instance"];</code>
-     * @return \Nocloud\Instances\Instance|null
+     * Generated from protobuf field <code>string instance = 1 [json_name = "instance"];</code>
+     * @return string
      */
     public function getInstance()
     {
         return $this->instance;
     }
 
-    public function hasInstance()
-    {
-        return isset($this->instance);
-    }
-
-    public function clearInstance()
-    {
-        unset($this->instance);
-    }
-
     /**
-     * Generated from protobuf field <code>.nocloud.instances.Instance instance = 1 [json_name = "instance"];</code>
-     * @param \Nocloud\Instances\Instance $var
+     * Generated from protobuf field <code>string instance = 1 [json_name = "instance"];</code>
+     * @param string $var
      * @return $this
      */
     public function setInstance($var)
     {
-        GPBUtil::checkMessage($var, \Nocloud\Instances\Instance::class);
+        GPBUtil::checkString($var, True);
         $this->instance = $var;
 
         return $this;
     }
 
     /**
-     * Generated from protobuf field <code>.nocloud.services_providers.ServicesProvider sp = 2 [json_name = "sp"];</code>
-     * @return \Nocloud\ServicesProviders\ServicesProvider|null
+     * Generated from protobuf field <code>string sp = 2 [json_name = "sp"];</code>
+     * @return string
      */
     public function getSp()
     {
         return $this->sp;
     }
 
-    public function hasSp()
-    {
-        return isset($this->sp);
-    }
-
-    public function clearSp()
-    {
-        unset($this->sp);
-    }
-
     /**
-     * Generated from protobuf field <code>.nocloud.services_providers.ServicesProvider sp = 2 [json_name = "sp"];</code>
-     * @param \Nocloud\ServicesProviders\ServicesProvider $var
+     * Generated from protobuf field <code>string sp = 2 [json_name = "sp"];</code>
+     * @param string $var
      * @return $this
      */
     public function setSp($var)
     {
-        GPBUtil::checkMessage($var, \Nocloud\ServicesProviders\ServicesProvider::class);
+        GPBUtil::checkString($var, True);
         $this->sp = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string event = 3 [json_name = "event"];</code>
+     * @return string
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    /**
+     * Generated from protobuf field <code>string event = 3 [json_name = "event"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setEvent($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->event = $var;
 
         return $this;
     }
