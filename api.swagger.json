@@ -2485,6 +2485,38 @@
         ]
       }
     },
+    "/instances": {
+      "post": {
+        "operationId": "InstancesService_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/instancesListInstancesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/instancesListInstancesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "InstancesService"
+        ]
+      }
+    },
     "/instances/attach/{uuid}": {
       "delete": {
         "operationId": "InstancesService_Attach",
@@ -2982,7 +3014,7 @@
       }
     },
     "/namespaces": {
-      "get": {
+      "post": {
         "operationId": "NamespacesService_List",
         "responses": {
           "200": {
@@ -3000,12 +3032,12 @@
         },
         "parameters": [
           {
-            "name": "depth",
-            "description": "Depth",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/registrynamespacesListRequest"
+            }
           }
         ],
         "tags": [
@@ -3120,6 +3152,34 @@
       }
     },
     "/namespaces/{uuid}": {
+      "get": {
+        "operationId": "NamespacesService_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/namespacesNamespace"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "NamespacesService"
+        ]
+      },
       "delete": {
         "operationId": "NamespacesService_Delete",
         "responses": {
@@ -3186,7 +3246,7 @@
       }
     },
     "/services": {
-      "get": {
+      "post": {
         "operationId": "ServicesService_List",
         "responses": {
           "200": {
@@ -3204,52 +3264,11 @@
         },
         "parameters": [
           {
-            "name": "showDeleted",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "namespace",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "depth",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "tags": [
-          "ServicesService"
-        ]
-      },
-      "post": {
-        "operationId": "ServicesService_TestConfig",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/servicesTestConfigResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/nocloudservicesCreateRequest"
+              "$ref": "#/definitions/nocloudservicesListRequest"
             }
           }
         ],
@@ -3258,6 +3277,7 @@
         ]
       },
       "put": {
+        "summary": "rpc TestConfig(nocloud.services.CreateRequest)\nreturns (nocloud.services.TestConfigResponse) {\noption (google.api.http) = {\npost : \"/services\"\nbody : \"*\"\n};\n};",
         "operationId": "ServicesService_Create",
         "responses": {
           "200": {
@@ -6065,6 +6085,62 @@
         }
       }
     },
+    "instancesListInstancesRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "limit": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "field": {
+          "type": "string"
+        },
+        "sort": {
+          "type": "string"
+        },
+        "filters": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "instancesListInstancesResponse": {
+      "type": "object",
+      "properties": {
+        "pool": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/instancesResponseInstance"
+          }
+        },
+        "count": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "instancesResponseInstance": {
+      "type": "object",
+      "properties": {
+        "instance": {
+          "$ref": "#/definitions/nocloudinstancesInstance"
+        },
+        "service": {
+          "type": "string"
+        },
+        "sp": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
     "instancesTestInstancesGroupConfigError": {
       "type": "object",
       "properties": {
@@ -6514,6 +6590,10 @@
             "type": "object",
             "$ref": "#/definitions/notesAdminNote"
           }
+        },
+        "deleted": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -6553,6 +6633,39 @@
     },
     "nocloudservicesDownResponse": {
       "type": "object"
+    },
+    "nocloudservicesListRequest": {
+      "type": "object",
+      "properties": {
+        "showDeleted": {
+          "type": "boolean"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "depth": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "page": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "limit": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "field": {
+          "type": "string"
+        },
+        "sort": {
+          "type": "string"
+        },
+        "filters": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
     },
     "nocloudservicesService": {
       "type": "object",
@@ -6930,6 +7043,34 @@
         }
       }
     },
+    "registrynamespacesListRequest": {
+      "type": "object",
+      "properties": {
+        "depth": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Depth"
+        },
+        "page": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "limit": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "field": {
+          "type": "string"
+        },
+        "sort": {
+          "type": "string"
+        },
+        "filters": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
     "registrynamespacesListResponse": {
       "type": "object",
       "properties": {
@@ -6939,6 +7080,10 @@
             "type": "object",
             "$ref": "#/definitions/namespacesNamespace"
           }
+        },
+        "count": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -6951,6 +7096,10 @@
             "type": "object",
             "$ref": "#/definitions/nocloudservicesService"
           }
+        },
+        "count": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -6994,35 +7143,6 @@
         },
         "access": {
           "$ref": "#/definitions/accessAccess"
-        }
-      }
-    },
-    "servicesTestConfigError": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "type": "string"
-        },
-        "instanceGroup": {
-          "type": "string"
-        },
-        "instance": {
-          "type": "string"
-        }
-      }
-    },
-    "servicesTestConfigResponse": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "type": "boolean"
-        },
-        "errors": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/servicesTestConfigError"
-          }
         }
       }
     },

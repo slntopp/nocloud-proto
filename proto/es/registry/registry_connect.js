@@ -21,7 +21,7 @@
 import { Account, CreateRequest, CreateResponse, DeleteRequest, DeleteResponse, GetRequest, ListRequest, ListResponse, SetCredentialsRequest, SetCredentialsResponse, SuspendRequest, SuspendResponse, TokenRequest, TokenResponse, UnsuspendRequest, UnsuspendResponse, UpdateResponse } from "./accounts/accounts_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 import { AddNoteRequest, NoteResponse, PatchNoteRequest, RemoveNoteRequest } from "../notes/notes_pb.js";
-import { CreateRequest as CreateRequest$1, CreateResponse as CreateResponse$1, DeleteRequest as DeleteRequest$1, DeleteResponse as DeleteResponse$1, JoinRequest, JoinResponse, LinkRequest, LinkResponse, ListRequest as ListRequest$1, ListResponse as ListResponse$1, PatchRequest, PatchResponse } from "./namespaces/namespaces_pb.js";
+import { CreateRequest as CreateRequest$1, CreateResponse as CreateResponse$1, DeleteRequest as DeleteRequest$1, DeleteResponse as DeleteResponse$1, GetRequest as GetRequest$1, JoinRequest, JoinResponse, LinkRequest, LinkResponse, ListRequest as ListRequest$1, ListResponse as ListResponse$1, Namespace, PatchRequest, PatchResponse } from "./namespaces/namespaces_pb.js";
 
 /**
  * @generated from service nocloud.registry.AccountsService
@@ -171,6 +171,15 @@ export const NamespacesService = {
       name: "List",
       I: ListRequest$1,
       O: ListResponse$1,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.registry.NamespacesService.Get
+     */
+    get: {
+      name: "Get",
+      I: GetRequest$1,
+      O: Namespace,
       kind: MethodKind.Unary,
     },
     /**

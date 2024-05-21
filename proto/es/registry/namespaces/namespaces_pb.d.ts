@@ -245,6 +245,31 @@ export declare class ListRequest extends Message<ListRequest> {
    */
   depth?: number;
 
+  /**
+   * @generated from field: optional uint64 page = 2;
+   */
+  page?: bigint;
+
+  /**
+   * @generated from field: optional uint64 limit = 3;
+   */
+  limit?: bigint;
+
+  /**
+   * @generated from field: optional string field = 4;
+   */
+  field?: string;
+
+  /**
+   * @generated from field: optional string sort = 5;
+   */
+  sort?: string;
+
+  /**
+   * @generated from field: map<string, google.protobuf.Value> filters = 6;
+   */
+  filters: { [key: string]: Value };
+
   constructor(data?: PartialMessage<ListRequest>);
 
   static readonly runtime: typeof proto3;
@@ -268,6 +293,11 @@ export declare class ListResponse extends Message<ListResponse> {
    * @generated from field: repeated nocloud.registry.namespaces.Namespace pool = 1;
    */
   pool: Namespace[];
+
+  /**
+   * @generated from field: int64 count = 2;
+   */
+  count: bigint;
 
   constructor(data?: PartialMessage<ListResponse>);
 
@@ -383,5 +413,29 @@ export declare class PatchResponse extends Message<PatchResponse> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PatchResponse;
 
   static equals(a: PatchResponse | PlainMessage<PatchResponse> | undefined, b: PatchResponse | PlainMessage<PatchResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.registry.namespaces.GetRequest
+ */
+export declare class GetRequest extends Message<GetRequest> {
+  /**
+   * @generated from field: string uuid = 1;
+   */
+  uuid: string;
+
+  constructor(data?: PartialMessage<GetRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.namespaces.GetRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetRequest;
+
+  static equals(a: GetRequest | PlainMessage<GetRequest> | undefined, b: GetRequest | PlainMessage<GetRequest> | undefined): boolean;
 }
 

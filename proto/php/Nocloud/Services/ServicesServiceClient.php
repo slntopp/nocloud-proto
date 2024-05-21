@@ -32,20 +32,12 @@ class ServicesServiceClient extends \Grpc\BaseStub {
     }
 
     /**
-     * @param \Nocloud\Services\CreateRequest $argument input argument
-     * @param array $metadata metadata
-     * @param array $options call options
-     * @return \Grpc\UnaryCall
-     */
-    public function TestConfig(\Nocloud\Services\CreateRequest $argument,
-      $metadata = [], $options = []) {
-        return $this->_simpleRequest('/nocloud.services.ServicesService/TestConfig',
-        $argument,
-        ['\Nocloud\Services\TestConfigResponse', 'decode'],
-        $metadata, $options);
-    }
-
-    /**
+     *
+     * rpc TestConfig(nocloud.services.CreateRequest)
+     * returns (nocloud.services.TestConfigResponse) {
+     *
+     *
+     * };
      * @param \Nocloud\Services\CreateRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options

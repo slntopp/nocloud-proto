@@ -42,6 +42,7 @@ const (
 	InstancesService_RemoveNote_FullMethodName       = "/nocloud.instances.InstancesService/RemoveNote"
 	InstancesService_Detach_FullMethodName           = "/nocloud.instances.InstancesService/Detach"
 	InstancesService_Attach_FullMethodName           = "/nocloud.instances.InstancesService/Attach"
+	InstancesService_List_FullMethodName             = "/nocloud.instances.InstancesService/List"
 	InstancesService_TransferIG_FullMethodName       = "/nocloud.instances.InstancesService/TransferIG"
 	InstancesService_TransferInstance_FullMethodName = "/nocloud.instances.InstancesService/TransferInstance"
 )
@@ -57,6 +58,7 @@ type InstancesServiceClient interface {
 	RemoveNote(ctx context.Context, in *notes.RemoveNoteRequest, opts ...grpc.CallOption) (*notes.NoteResponse, error)
 	Detach(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
 	Attach(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
+	List(ctx context.Context, in *ListInstancesRequest, opts ...grpc.CallOption) (*ListInstancesResponse, error)
 	TransferIG(ctx context.Context, in *TransferIGRequest, opts ...grpc.CallOption) (*TransferIGResponse, error)
 	TransferInstance(ctx context.Context, in *TransferInstanceRequest, opts ...grpc.CallOption) (*TransferInstanceResponse, error)
 }
@@ -132,6 +134,15 @@ func (c *instancesServiceClient) Attach(ctx context.Context, in *DeleteRequest, 
 	return out, nil
 }
 
+func (c *instancesServiceClient) List(ctx context.Context, in *ListInstancesRequest, opts ...grpc.CallOption) (*ListInstancesResponse, error) {
+	out := new(ListInstancesResponse)
+	err := c.cc.Invoke(ctx, InstancesService_List_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *instancesServiceClient) TransferIG(ctx context.Context, in *TransferIGRequest, opts ...grpc.CallOption) (*TransferIGResponse, error) {
 	out := new(TransferIGResponse)
 	err := c.cc.Invoke(ctx, InstancesService_TransferIG_FullMethodName, in, out, opts...)
@@ -161,6 +172,7 @@ type InstancesServiceServer interface {
 	RemoveNote(context.Context, *notes.RemoveNoteRequest) (*notes.NoteResponse, error)
 	Detach(context.Context, *DeleteRequest) (*DeleteResponse, error)
 	Attach(context.Context, *DeleteRequest) (*DeleteResponse, error)
+	List(context.Context, *ListInstancesRequest) (*ListInstancesResponse, error)
 	TransferIG(context.Context, *TransferIGRequest) (*TransferIGResponse, error)
 	TransferInstance(context.Context, *TransferInstanceRequest) (*TransferInstanceResponse, error)
 	mustEmbedUnimplementedInstancesServiceServer()
@@ -190,6 +202,9 @@ func (UnimplementedInstancesServiceServer) Detach(context.Context, *DeleteReques
 }
 func (UnimplementedInstancesServiceServer) Attach(context.Context, *DeleteRequest) (*DeleteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Attach not implemented")
+}
+func (UnimplementedInstancesServiceServer) List(context.Context, *ListInstancesRequest) (*ListInstancesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
 func (UnimplementedInstancesServiceServer) TransferIG(context.Context, *TransferIGRequest) (*TransferIGResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TransferIG not implemented")
@@ -336,6 +351,24 @@ func _InstancesService_Attach_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _InstancesService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListInstancesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstancesServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstancesService_List_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstancesServiceServer).List(ctx, req.(*ListInstancesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _InstancesService_TransferIG_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TransferIGRequest)
 	if err := dec(in); err != nil {
@@ -406,6 +439,10 @@ var InstancesService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Attach",
 			Handler:    _InstancesService_Attach_Handler,
+		},
+		{
+			MethodName: "List",
+			Handler:    _InstancesService_List_Handler,
 		},
 		{
 			MethodName: "TransferIG",

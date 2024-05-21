@@ -51,6 +51,7 @@ message Instance {
 
     repeated nocloud.ansible.Software software = 13; // Must match contain all the software from the Billing Plan
     repeated notes.AdminNote admin_notes = 14;
+    int64 deleted = 15;
 }
 
 message InstancesGroup {
@@ -67,6 +68,12 @@ message InstancesGroup {
     string hash = 9 [(nocloud.hasher.hash) = true];
     optional string sp = 10;
     optional nocloud.access.Access access = 11;
+}
+
+message Context {
+    string instance = 1;
+    string sp = 2;
+    string event = 3;
 }
 
 message TestInstancesGroupConfigRequest {
@@ -134,6 +141,27 @@ message ObjectData {
     map<string, google.protobuf.Value> data = 2;
 }
 
+message ListInstancesRequest {
+    optional uint64 page = 1;
+    optional uint64 limit = 2;
+    optional string field = 3;
+    optional string sort = 4;
+  
+    map<string, google.protobuf.Value> filters = 5;
+}
+
+message ResponseInstance {
+    Instance instance = 1;
+    string service = 2;
+    string sp = 3;
+    string type = 4;
+}
+
+message ListInstancesResponse {
+  repeated ResponseInstance pool = 1;
+  int64 count = 2;
+}
+
 service InstancesService {
     rpc Invoke (nocloud.instances.InvokeRequest)
             returns (nocloud.instances.InvokeResponse) {
@@ -178,6 +206,13 @@ service InstancesService {
             returns (nocloud.instances.DeleteResponse) {
         option (google.api.http) = {
             delete: "/instances/attach/{uuid}"
+        };
+    };
+    rpc List (nocloud.instances.ListInstancesRequest)
+            returns (nocloud.instances.ListInstancesResponse) {
+        option (google.api.http) = {
+            post: "/instances"
+            body: "*"
         };
     };
     rpc TransferIG (nocloud.instances.TransferIGRequest)

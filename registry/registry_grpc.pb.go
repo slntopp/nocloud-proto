@@ -573,6 +573,7 @@ var AccountsService_ServiceDesc = grpc.ServiceDesc{
 const (
 	NamespacesService_Create_FullMethodName = "/nocloud.registry.NamespacesService/Create"
 	NamespacesService_List_FullMethodName   = "/nocloud.registry.NamespacesService/List"
+	NamespacesService_Get_FullMethodName    = "/nocloud.registry.NamespacesService/Get"
 	NamespacesService_Join_FullMethodName   = "/nocloud.registry.NamespacesService/Join"
 	NamespacesService_Link_FullMethodName   = "/nocloud.registry.NamespacesService/Link"
 	NamespacesService_Delete_FullMethodName = "/nocloud.registry.NamespacesService/Delete"
@@ -585,6 +586,7 @@ const (
 type NamespacesServiceClient interface {
 	Create(ctx context.Context, in *namespaces.CreateRequest, opts ...grpc.CallOption) (*namespaces.CreateResponse, error)
 	List(ctx context.Context, in *namespaces.ListRequest, opts ...grpc.CallOption) (*namespaces.ListResponse, error)
+	Get(ctx context.Context, in *namespaces.GetRequest, opts ...grpc.CallOption) (*namespaces.Namespace, error)
 	Join(ctx context.Context, in *namespaces.JoinRequest, opts ...grpc.CallOption) (*namespaces.JoinResponse, error)
 	Link(ctx context.Context, in *namespaces.LinkRequest, opts ...grpc.CallOption) (*namespaces.LinkResponse, error)
 	Delete(ctx context.Context, in *namespaces.DeleteRequest, opts ...grpc.CallOption) (*namespaces.DeleteResponse, error)
@@ -611,6 +613,15 @@ func (c *namespacesServiceClient) Create(ctx context.Context, in *namespaces.Cre
 func (c *namespacesServiceClient) List(ctx context.Context, in *namespaces.ListRequest, opts ...grpc.CallOption) (*namespaces.ListResponse, error) {
 	out := new(namespaces.ListResponse)
 	err := c.cc.Invoke(ctx, NamespacesService_List_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *namespacesServiceClient) Get(ctx context.Context, in *namespaces.GetRequest, opts ...grpc.CallOption) (*namespaces.Namespace, error) {
+	out := new(namespaces.Namespace)
+	err := c.cc.Invoke(ctx, NamespacesService_Get_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -659,6 +670,7 @@ func (c *namespacesServiceClient) Patch(ctx context.Context, in *namespaces.Patc
 type NamespacesServiceServer interface {
 	Create(context.Context, *namespaces.CreateRequest) (*namespaces.CreateResponse, error)
 	List(context.Context, *namespaces.ListRequest) (*namespaces.ListResponse, error)
+	Get(context.Context, *namespaces.GetRequest) (*namespaces.Namespace, error)
 	Join(context.Context, *namespaces.JoinRequest) (*namespaces.JoinResponse, error)
 	Link(context.Context, *namespaces.LinkRequest) (*namespaces.LinkResponse, error)
 	Delete(context.Context, *namespaces.DeleteRequest) (*namespaces.DeleteResponse, error)
@@ -675,6 +687,9 @@ func (UnimplementedNamespacesServiceServer) Create(context.Context, *namespaces.
 }
 func (UnimplementedNamespacesServiceServer) List(context.Context, *namespaces.ListRequest) (*namespaces.ListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedNamespacesServiceServer) Get(context.Context, *namespaces.GetRequest) (*namespaces.Namespace, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
 func (UnimplementedNamespacesServiceServer) Join(context.Context, *namespaces.JoinRequest) (*namespaces.JoinResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Join not implemented")
@@ -733,6 +748,24 @@ func _NamespacesService_List_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(NamespacesServiceServer).List(ctx, req.(*namespaces.ListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NamespacesService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(namespaces.GetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NamespacesServiceServer).Get(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NamespacesService_Get_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NamespacesServiceServer).Get(ctx, req.(*namespaces.GetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -823,6 +856,10 @@ var NamespacesService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "List",
 			Handler:    _NamespacesService_List_Handler,
+		},
+		{
+			MethodName: "Get",
+			Handler:    _NamespacesService_Get_Handler,
 		},
 		{
 			MethodName: "Join",
