@@ -70,6 +70,7 @@ message Account {
   optional nocloud.billing.Currency currency = 8; // Account Balance Currency
   AccountStatus status = 9;
   repeated notes.AdminNote admin_notes = 10;
+  bool active = 11;
 }
 
 message UpdateResponse {bool result = 1;}

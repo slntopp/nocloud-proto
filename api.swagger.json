@@ -5726,6 +5726,9 @@
             "type": "object",
             "$ref": "#/definitions/notesAdminNote"
           }
+        },
+        "active": {
+          "type": "boolean"
         }
       }
     },
@@ -7964,6 +7967,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "deleted": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -8274,6 +8281,9 @@
             "type": "object",
             "$ref": "#/definitions/notesAdminNote"
           }
+        },
+        "active": {
+          "type": "boolean"
         }
       }
     },

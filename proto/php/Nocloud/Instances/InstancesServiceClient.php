@@ -130,6 +130,20 @@ class InstancesServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * @param \Nocloud\Instances\ListInstancesRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function List(\Nocloud\Instances\ListInstancesRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.instances.InstancesService/List',
+        $argument,
+        ['\Nocloud\Instances\ListInstancesResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * @param \Nocloud\Instances\TransferIGRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options

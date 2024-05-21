@@ -60,6 +60,20 @@ class NamespacesServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * @param \Nocloud\Registry\Namespaces\GetRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function Get(\Nocloud\Registry\Namespaces\GetRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.registry.NamespacesService/Get',
+        $argument,
+        ['\Nocloud\Registry\Namespaces\PBNamespace', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * @param \Nocloud\Registry\Namespaces\JoinRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options

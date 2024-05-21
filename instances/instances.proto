@@ -52,6 +52,7 @@ message Instance {
     repeated nocloud.ansible.Software software = 13; // Must match contain all the software from the Billing Plan
     repeated notes.AdminNote admin_notes = 14;
     repeated string addons = 15;
+    int64 deleted = 16;
 }
 
 message InstancesGroup {
@@ -68,6 +69,12 @@ message InstancesGroup {
     string hash = 9 [(nocloud.hasher.hash) = true];
     optional string sp = 10;
     optional nocloud.access.Access access = 11;
+}
+
+message Context {
+    string instance = 1;
+    string sp = 2;
+    string event = 3;
 }
 
 message TestInstancesGroupConfigRequest {
