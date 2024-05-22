@@ -47,6 +47,9 @@ export const Instance = proto3.makeMessageType(
     { no: 12, name: "created", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 13, name: "software", kind: "message", T: Software, repeated: true },
     { no: 14, name: "admin_notes", kind: "message", T: AdminNote, repeated: true },
+    { no: 15, name: "deleted", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 16, name: "period", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 17, name: "estimate", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
   ],
 );
 
@@ -67,6 +70,18 @@ export const InstancesGroup = proto3.makeMessageType(
     { no: 9, name: "hash", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 10, name: "sp", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 11, name: "access", kind: "message", T: Access, opt: true },
+  ],
+);
+
+/**
+ * @generated from message nocloud.instances.Context
+ */
+export const Context = proto3.makeMessageType(
+  "nocloud.instances.Context",
+  () => [
+    { no: 1, name: "instance", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "sp", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "event", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -212,6 +227,44 @@ export const ObjectData = proto3.makeMessageType(
   () => [
     { no: 1, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "data", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
+  ],
+);
+
+/**
+ * @generated from message nocloud.instances.ListInstancesRequest
+ */
+export const ListInstancesRequest = proto3.makeMessageType(
+  "nocloud.instances.ListInstancesRequest",
+  () => [
+    { no: 1, name: "page", kind: "scalar", T: 4 /* ScalarType.UINT64 */, opt: true },
+    { no: 2, name: "limit", kind: "scalar", T: 4 /* ScalarType.UINT64 */, opt: true },
+    { no: 3, name: "field", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 4, name: "sort", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 5, name: "filters", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
+  ],
+);
+
+/**
+ * @generated from message nocloud.instances.ResponseInstance
+ */
+export const ResponseInstance = proto3.makeMessageType(
+  "nocloud.instances.ResponseInstance",
+  () => [
+    { no: 1, name: "instance", kind: "message", T: Instance },
+    { no: 2, name: "service", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "sp", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "type", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.instances.ListInstancesResponse
+ */
+export const ListInstancesResponse = proto3.makeMessageType(
+  "nocloud.instances.ListInstancesResponse",
+  () => [
+    { no: 1, name: "pool", kind: "message", T: ResponseInstance, repeated: true },
+    { no: 2, name: "count", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ],
 );
 

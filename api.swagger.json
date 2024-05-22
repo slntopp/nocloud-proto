@@ -6594,6 +6594,14 @@
         "deleted": {
           "type": "string",
           "format": "int64"
+        },
+        "period": {
+          "type": "string",
+          "format": "int64"
+        },
+        "estimate": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
