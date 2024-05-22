@@ -18,7 +18,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { DeleteRequest, DeleteResponse, InvokeRequest, InvokeResponse, TransferIGRequest, TransferIGResponse, TransferInstanceRequest, TransferInstanceResponse } from "./instances_pb.js";
+import { DeleteRequest, DeleteResponse, InvokeRequest, InvokeResponse, ListInstancesRequest, ListInstancesResponse, TransferIGRequest, TransferIGResponse, TransferInstanceRequest, TransferInstanceResponse } from "./instances_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 import { AddNoteRequest, NoteResponse, PatchNoteRequest, RemoveNoteRequest } from "../notes/notes_pb.js";
 
@@ -89,6 +89,15 @@ export const InstancesService = {
       name: "Attach",
       I: DeleteRequest,
       O: DeleteResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.instances.InstancesService.List
+     */
+    list: {
+      name: "List",
+      I: ListInstancesRequest,
+      O: ListInstancesResponse,
       kind: MethodKind.Unary,
     },
     /**

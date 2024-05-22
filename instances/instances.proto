@@ -53,6 +53,9 @@ message Instance {
     repeated notes.AdminNote admin_notes = 14;
     repeated string addons = 15;
     int64 deleted = 16;
+
+    int64 period = 17;
+    double estimate = 18;
 }
 
 message InstancesGroup {
