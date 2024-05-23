@@ -275,6 +275,11 @@ export declare class Account extends Message<Account> {
    */
   adminNotes: AdminNote[];
 
+  /**
+   * @generated from field: bool active = 11;
+   */
+  active: boolean;
+
   constructor(data?: PartialMessage<Account>);
 
   static readonly runtime: typeof proto3;
@@ -385,6 +390,11 @@ export declare class ListResponse extends Message<ListResponse> {
    * @generated from field: int64 count = 2;
    */
   count: bigint;
+
+  /**
+   * @generated from field: int64 active = 3;
+   */
+  active: bigint;
 
   constructor(data?: PartialMessage<ListResponse>);
 
