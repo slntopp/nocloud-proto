@@ -21,6 +21,10 @@ class ListResponse extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>int64 count = 2 [json_name = "count"];</code>
      */
     protected $count = 0;
+    /**
+     * Generated from protobuf field <code>int64 active = 3 [json_name = "active"];</code>
+     */
+    protected $active = 0;
 
     /**
      * Constructor.
@@ -30,6 +34,7 @@ class ListResponse extends \Google\Protobuf\Internal\Message
      *
      *     @type array<\Nocloud\Registry\Accounts\Account>|\Google\Protobuf\Internal\RepeatedField $pool
      *     @type int|string $count
+     *     @type int|string $active
      * }
      */
     public function __construct($data = NULL) {
@@ -77,6 +82,28 @@ class ListResponse extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt64($var);
         $this->count = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>int64 active = 3 [json_name = "active"];</code>
+     * @return int|string
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * Generated from protobuf field <code>int64 active = 3 [json_name = "active"];</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setActive($var)
+    {
+        GPBUtil::checkInt64($var);
+        $this->active = $var;
 
         return $this;
     }

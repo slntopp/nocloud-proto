@@ -5157,6 +5157,10 @@
         "rate": {
           "type": "number",
           "format": "double"
+        },
+        "commission": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
@@ -5238,6 +5242,10 @@
           "$ref": "#/definitions/billingCurrency"
         },
         "rate": {
+          "type": "number",
+          "format": "double"
+        },
+        "commission": {
           "type": "number",
           "format": "double"
         }
@@ -5682,6 +5690,10 @@
           "$ref": "#/definitions/billingCurrency"
         },
         "rate": {
+          "type": "number",
+          "format": "double"
+        },
+        "commission": {
           "type": "number",
           "format": "double"
         }
@@ -6597,6 +6609,14 @@
         "deleted": {
           "type": "string",
           "format": "int64"
+        },
+        "period": {
+          "type": "string",
+          "format": "int64"
+        },
+        "estimate": {
+          "type": "number",
+          "format": "double"
         }
       }
     },

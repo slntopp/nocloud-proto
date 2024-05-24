@@ -104,6 +104,21 @@ export declare class Instance extends Message<Instance> {
    */
   adminNotes: AdminNote[];
 
+  /**
+   * @generated from field: int64 deleted = 15;
+   */
+  deleted: bigint;
+
+  /**
+   * @generated from field: int64 period = 16;
+   */
+  period: bigint;
+
+  /**
+   * @generated from field: double estimate = 17;
+   */
+  estimate: number;
+
   constructor(data?: PartialMessage<Instance>);
 
   static readonly runtime: typeof proto3;
@@ -191,6 +206,40 @@ export declare class InstancesGroup extends Message<InstancesGroup> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): InstancesGroup;
 
   static equals(a: InstancesGroup | PlainMessage<InstancesGroup> | undefined, b: InstancesGroup | PlainMessage<InstancesGroup> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.instances.Context
+ */
+export declare class Context extends Message<Context> {
+  /**
+   * @generated from field: string instance = 1;
+   */
+  instance: string;
+
+  /**
+   * @generated from field: string sp = 2;
+   */
+  sp: string;
+
+  /**
+   * @generated from field: string event = 3;
+   */
+  event: string;
+
+  constructor(data?: PartialMessage<Context>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.instances.Context";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Context;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Context;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Context;
+
+  static equals(a: Context | PlainMessage<Context> | undefined, b: Context | PlainMessage<Context> | undefined): boolean;
 }
 
 /**
@@ -580,5 +629,117 @@ export declare class ObjectData extends Message<ObjectData> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ObjectData;
 
   static equals(a: ObjectData | PlainMessage<ObjectData> | undefined, b: ObjectData | PlainMessage<ObjectData> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.instances.ListInstancesRequest
+ */
+export declare class ListInstancesRequest extends Message<ListInstancesRequest> {
+  /**
+   * @generated from field: optional uint64 page = 1;
+   */
+  page?: bigint;
+
+  /**
+   * @generated from field: optional uint64 limit = 2;
+   */
+  limit?: bigint;
+
+  /**
+   * @generated from field: optional string field = 3;
+   */
+  field?: string;
+
+  /**
+   * @generated from field: optional string sort = 4;
+   */
+  sort?: string;
+
+  /**
+   * @generated from field: map<string, google.protobuf.Value> filters = 5;
+   */
+  filters: { [key: string]: Value };
+
+  constructor(data?: PartialMessage<ListInstancesRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.instances.ListInstancesRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListInstancesRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListInstancesRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListInstancesRequest;
+
+  static equals(a: ListInstancesRequest | PlainMessage<ListInstancesRequest> | undefined, b: ListInstancesRequest | PlainMessage<ListInstancesRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.instances.ResponseInstance
+ */
+export declare class ResponseInstance extends Message<ResponseInstance> {
+  /**
+   * @generated from field: nocloud.instances.Instance instance = 1;
+   */
+  instance?: Instance;
+
+  /**
+   * @generated from field: string service = 2;
+   */
+  service: string;
+
+  /**
+   * @generated from field: string sp = 3;
+   */
+  sp: string;
+
+  /**
+   * @generated from field: string type = 4;
+   */
+  type: string;
+
+  constructor(data?: PartialMessage<ResponseInstance>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.instances.ResponseInstance";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ResponseInstance;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ResponseInstance;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ResponseInstance;
+
+  static equals(a: ResponseInstance | PlainMessage<ResponseInstance> | undefined, b: ResponseInstance | PlainMessage<ResponseInstance> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.instances.ListInstancesResponse
+ */
+export declare class ListInstancesResponse extends Message<ListInstancesResponse> {
+  /**
+   * @generated from field: repeated nocloud.instances.ResponseInstance pool = 1;
+   */
+  pool: ResponseInstance[];
+
+  /**
+   * @generated from field: int64 count = 2;
+   */
+  count: bigint;
+
+  constructor(data?: PartialMessage<ListInstancesResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.instances.ListInstancesResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListInstancesResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListInstancesResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListInstancesResponse;
+
+  static equals(a: ListInstancesResponse | PlainMessage<ListInstancesResponse> | undefined, b: ListInstancesResponse | PlainMessage<ListInstancesResponse> | undefined): boolean;
 }
 
