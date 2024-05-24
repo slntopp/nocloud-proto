@@ -25,6 +25,10 @@ class CreateExchangeRateRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>double rate = 3 [json_name = "rate"];</code>
      */
     protected $rate = 0.0;
+    /**
+     * Generated from protobuf field <code>double commission = 4 [json_name = "commission"];</code>
+     */
+    protected $commission = 0.0;
 
     /**
      * Constructor.
@@ -35,6 +39,7 @@ class CreateExchangeRateRequest extends \Google\Protobuf\Internal\Message
      *     @type int $from
      *     @type int $to
      *     @type float $rate
+     *     @type float $commission
      * }
      */
     public function __construct($data = NULL) {
@@ -104,6 +109,28 @@ class CreateExchangeRateRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkDouble($var);
         $this->rate = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>double commission = 4 [json_name = "commission"];</code>
+     * @return float
+     */
+    public function getCommission()
+    {
+        return $this->commission;
+    }
+
+    /**
+     * Generated from protobuf field <code>double commission = 4 [json_name = "commission"];</code>
+     * @param float $var
+     * @return $this
+     */
+    public function setCommission($var)
+    {
+        GPBUtil::checkDouble($var);
+        $this->commission = $var;
 
         return $this;
     }
