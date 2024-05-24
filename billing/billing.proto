@@ -524,15 +524,17 @@ message CreateCurrencyRequest{
 message CreateCurrencyResponse{}
 
 message CreateExchangeRateRequest {
-  Currency from = 1;
-  Currency to = 2;
-  double rate = 3;
+    Currency from = 1;
+    Currency to = 2;
+    double rate = 3;
+    double commission = 4;
 }
 message CreateExchangeRateResponse {}
 message UpdateExchangeRateRequest {
-  Currency from = 1;
-  Currency to = 2;
-  double rate = 3;
+    Currency from = 1;
+    Currency to = 2;
+    double rate = 3;
+    double commission = 4;
 }
 message UpdateExchangeRateResponse {}
 message DeleteExchangeRateRequest {
@@ -552,9 +554,10 @@ message GetExchangeRateRequest {
 message GetExchangeRatesRequest {}
 
 message GetExchangeRateResponse {
-  Currency from = 1;
-  Currency to = 2;
-  double rate = 3;
+    Currency from = 1;
+    Currency to = 2;
+    double rate = 3;
+    double commission = 4;
 }
 
 message GetExchangeRatesResponse {repeated GetExchangeRateResponse rates = 1;}

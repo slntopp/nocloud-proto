@@ -75,6 +75,14 @@ class Instance extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>int64 deleted = 15 [json_name = "deleted"];</code>
      */
     protected $deleted = 0;
+    /**
+     * Generated from protobuf field <code>int64 period = 16 [json_name = "period"];</code>
+     */
+    protected $period = 0;
+    /**
+     * Generated from protobuf field <code>double estimate = 17 [json_name = "estimate"];</code>
+     */
+    protected $estimate = 0.0;
 
     /**
      * Constructor.
@@ -98,6 +106,8 @@ class Instance extends \Google\Protobuf\Internal\Message
      *           Must match contain all the software from the Billing Plan
      *     @type array<\Nocloud\Notes\AdminNote>|\Google\Protobuf\Internal\RepeatedField $admin_notes
      *     @type int|string $deleted
+     *     @type int|string $period
+     *     @type float $estimate
      * }
      */
     public function __construct($data = NULL) {
@@ -475,6 +485,50 @@ class Instance extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt64($var);
         $this->deleted = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>int64 period = 16 [json_name = "period"];</code>
+     * @return int|string
+     */
+    public function getPeriod()
+    {
+        return $this->period;
+    }
+
+    /**
+     * Generated from protobuf field <code>int64 period = 16 [json_name = "period"];</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setPeriod($var)
+    {
+        GPBUtil::checkInt64($var);
+        $this->period = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>double estimate = 17 [json_name = "estimate"];</code>
+     * @return float
+     */
+    public function getEstimate()
+    {
+        return $this->estimate;
+    }
+
+    /**
+     * Generated from protobuf field <code>double estimate = 17 [json_name = "estimate"];</code>
+     * @param float $var
+     * @return $this
+     */
+    public function setEstimate($var)
+    {
+        GPBUtil::checkDouble($var);
+        $this->estimate = $var;
 
         return $this;
     }

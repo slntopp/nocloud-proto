@@ -653,6 +653,7 @@ export const CreateExchangeRateRequest = proto3.makeMessageType(
     { no: 1, name: "from", kind: "message", T: Currency },
     { no: 2, name: "to", kind: "message", T: Currency },
     { no: 3, name: "rate", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 4, name: "commission", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
   ],
 );
 
@@ -673,6 +674,7 @@ export const UpdateExchangeRateRequest = proto3.makeMessageType(
     { no: 1, name: "from", kind: "message", T: Currency },
     { no: 2, name: "to", kind: "message", T: Currency },
     { no: 3, name: "rate", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 4, name: "commission", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
   ],
 );
 
@@ -749,6 +751,7 @@ export const GetExchangeRateResponse = proto3.makeMessageType(
     { no: 1, name: "from", kind: "message", T: Currency },
     { no: 2, name: "to", kind: "message", T: Currency },
     { no: 3, name: "rate", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 4, name: "commission", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
   ],
 );
 
