@@ -4764,6 +4764,9 @@
             "type": "object",
             "$ref": "#/definitions/notesAdminNote"
           }
+        },
+        "active": {
+          "type": "boolean"
         }
       }
     },
@@ -6904,6 +6907,9 @@
             "type": "object",
             "$ref": "#/definitions/notesAdminNote"
           }
+        },
+        "active": {
+          "type": "boolean"
         }
       }
     },
@@ -6998,6 +7004,10 @@
           }
         },
         "count": {
+          "type": "string",
+          "format": "int64"
+        },
+        "active": {
           "type": "string",
           "format": "int64"
         }
