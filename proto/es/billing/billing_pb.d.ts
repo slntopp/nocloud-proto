@@ -1460,6 +1460,11 @@ export declare class CreateExchangeRateRequest extends Message<CreateExchangeRat
    */
   rate: number;
 
+  /**
+   * @generated from field: double commission = 4;
+   */
+  commission: number;
+
   constructor(data?: PartialMessage<CreateExchangeRateRequest>);
 
   static readonly runtime: typeof proto3;
@@ -1512,6 +1517,11 @@ export declare class UpdateExchangeRateRequest extends Message<UpdateExchangeRat
    * @generated from field: double rate = 3;
    */
   rate: number;
+
+  /**
+   * @generated from field: double commission = 4;
+   */
+  commission: number;
 
   constructor(data?: PartialMessage<UpdateExchangeRateRequest>);
 
@@ -1704,6 +1714,11 @@ export declare class GetExchangeRateResponse extends Message<GetExchangeRateResp
    * @generated from field: double rate = 3;
    */
   rate: number;
+
+  /**
+   * @generated from field: double commission = 4;
+   */
+  commission: number;
 
   constructor(data?: PartialMessage<GetExchangeRateResponse>);
 
