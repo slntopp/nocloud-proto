@@ -55,6 +55,10 @@ class Account extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>repeated .nocloud.notes.AdminNote admin_notes = 10 [json_name = "adminNotes"];</code>
      */
     private $admin_notes;
+    /**
+     * Generated from protobuf field <code>bool active = 11 [json_name = "active"];</code>
+     */
+    protected $active = false;
 
     /**
      * Constructor.
@@ -73,6 +77,7 @@ class Account extends \Google\Protobuf\Internal\Message
      *           Account Balance Currency
      *     @type int $status
      *     @type array<\Nocloud\Notes\AdminNote>|\Google\Protobuf\Internal\RepeatedField $admin_notes
+     *     @type bool $active
      * }
      */
     public function __construct($data = NULL) {
@@ -360,6 +365,28 @@ class Account extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Nocloud\Notes\AdminNote::class);
         $this->admin_notes = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool active = 11 [json_name = "active"];</code>
+     * @return bool
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool active = 11 [json_name = "active"];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setActive($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->active = $var;
 
         return $this;
     }
