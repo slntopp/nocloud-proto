@@ -629,9 +629,21 @@ service AddonsService {
       body: "*"
     };
   };
+  rpc CreateBulk (addons.BulkAddons) returns (addons.BulkAddons) {
+    option (google.api.http) = {
+      put: "/billing/bulk/addons"
+      body: "*"
+    };
+  };
   rpc Update (addons.Addon) returns (addons.Addon) {
     option (google.api.http) = {
       patch: "/billing/addons/{uuid}"
+      body: "*"
+    };
+  };
+  rpc UpdateBulk (addons.BulkAddons) returns (addons.BulkAddons) {
+    option (google.api.http) = {
+      patch: "/billing/bulk/addons"
       body: "*"
     };
   };

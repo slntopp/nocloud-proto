@@ -1449,12 +1449,14 @@ var CurrencyService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	AddonsService_Create_FullMethodName = "/nocloud.billing.AddonsService/Create"
-	AddonsService_Update_FullMethodName = "/nocloud.billing.AddonsService/Update"
-	AddonsService_Get_FullMethodName    = "/nocloud.billing.AddonsService/Get"
-	AddonsService_List_FullMethodName   = "/nocloud.billing.AddonsService/List"
-	AddonsService_Count_FullMethodName  = "/nocloud.billing.AddonsService/Count"
-	AddonsService_Delete_FullMethodName = "/nocloud.billing.AddonsService/Delete"
+	AddonsService_Create_FullMethodName     = "/nocloud.billing.AddonsService/Create"
+	AddonsService_CreateBulk_FullMethodName = "/nocloud.billing.AddonsService/CreateBulk"
+	AddonsService_Update_FullMethodName     = "/nocloud.billing.AddonsService/Update"
+	AddonsService_UpdateBulk_FullMethodName = "/nocloud.billing.AddonsService/UpdateBulk"
+	AddonsService_Get_FullMethodName        = "/nocloud.billing.AddonsService/Get"
+	AddonsService_List_FullMethodName       = "/nocloud.billing.AddonsService/List"
+	AddonsService_Count_FullMethodName      = "/nocloud.billing.AddonsService/Count"
+	AddonsService_Delete_FullMethodName     = "/nocloud.billing.AddonsService/Delete"
 )
 
 // AddonsServiceClient is the client API for AddonsService service.
@@ -1462,7 +1464,9 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AddonsServiceClient interface {
 	Create(ctx context.Context, in *addons.Addon, opts ...grpc.CallOption) (*addons.Addon, error)
+	CreateBulk(ctx context.Context, in *addons.BulkAddons, opts ...grpc.CallOption) (*addons.BulkAddons, error)
 	Update(ctx context.Context, in *addons.Addon, opts ...grpc.CallOption) (*addons.Addon, error)
+	UpdateBulk(ctx context.Context, in *addons.BulkAddons, opts ...grpc.CallOption) (*addons.BulkAddons, error)
 	Get(ctx context.Context, in *addons.Addon, opts ...grpc.CallOption) (*addons.Addon, error)
 	List(ctx context.Context, in *addons.ListAddonsRequest, opts ...grpc.CallOption) (*addons.ListAddonsResponse, error)
 	Count(ctx context.Context, in *addons.CountAddonsRequest, opts ...grpc.CallOption) (*addons.CountAddonsResponse, error)
@@ -1487,10 +1491,30 @@ func (c *addonsServiceClient) Create(ctx context.Context, in *addons.Addon, opts
 	return out, nil
 }
 
+func (c *addonsServiceClient) CreateBulk(ctx context.Context, in *addons.BulkAddons, opts ...grpc.CallOption) (*addons.BulkAddons, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(addons.BulkAddons)
+	err := c.cc.Invoke(ctx, AddonsService_CreateBulk_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *addonsServiceClient) Update(ctx context.Context, in *addons.Addon, opts ...grpc.CallOption) (*addons.Addon, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(addons.Addon)
 	err := c.cc.Invoke(ctx, AddonsService_Update_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *addonsServiceClient) UpdateBulk(ctx context.Context, in *addons.BulkAddons, opts ...grpc.CallOption) (*addons.BulkAddons, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(addons.BulkAddons)
+	err := c.cc.Invoke(ctx, AddonsService_UpdateBulk_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1542,7 +1566,9 @@ func (c *addonsServiceClient) Delete(ctx context.Context, in *addons.Addon, opts
 // for forward compatibility
 type AddonsServiceServer interface {
 	Create(context.Context, *addons.Addon) (*addons.Addon, error)
+	CreateBulk(context.Context, *addons.BulkAddons) (*addons.BulkAddons, error)
 	Update(context.Context, *addons.Addon) (*addons.Addon, error)
+	UpdateBulk(context.Context, *addons.BulkAddons) (*addons.BulkAddons, error)
 	Get(context.Context, *addons.Addon) (*addons.Addon, error)
 	List(context.Context, *addons.ListAddonsRequest) (*addons.ListAddonsResponse, error)
 	Count(context.Context, *addons.CountAddonsRequest) (*addons.CountAddonsResponse, error)
@@ -1557,8 +1583,14 @@ type UnimplementedAddonsServiceServer struct {
 func (UnimplementedAddonsServiceServer) Create(context.Context, *addons.Addon) (*addons.Addon, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
+func (UnimplementedAddonsServiceServer) CreateBulk(context.Context, *addons.BulkAddons) (*addons.BulkAddons, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateBulk not implemented")
+}
 func (UnimplementedAddonsServiceServer) Update(context.Context, *addons.Addon) (*addons.Addon, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (UnimplementedAddonsServiceServer) UpdateBulk(context.Context, *addons.BulkAddons) (*addons.BulkAddons, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateBulk not implemented")
 }
 func (UnimplementedAddonsServiceServer) Get(context.Context, *addons.Addon) (*addons.Addon, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
@@ -1603,6 +1635,24 @@ func _AddonsService_Create_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AddonsService_CreateBulk_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(addons.BulkAddons)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AddonsServiceServer).CreateBulk(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AddonsService_CreateBulk_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AddonsServiceServer).CreateBulk(ctx, req.(*addons.BulkAddons))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AddonsService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(addons.Addon)
 	if err := dec(in); err != nil {
@@ -1617,6 +1667,24 @@ func _AddonsService_Update_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AddonsServiceServer).Update(ctx, req.(*addons.Addon))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AddonsService_UpdateBulk_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(addons.BulkAddons)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AddonsServiceServer).UpdateBulk(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AddonsService_UpdateBulk_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AddonsServiceServer).UpdateBulk(ctx, req.(*addons.BulkAddons))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1705,8 +1773,16 @@ var AddonsService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AddonsService_Create_Handler,
 		},
 		{
+			MethodName: "CreateBulk",
+			Handler:    _AddonsService_CreateBulk_Handler,
+		},
+		{
 			MethodName: "Update",
 			Handler:    _AddonsService_Update_Handler,
+		},
+		{
+			MethodName: "UpdateBulk",
+			Handler:    _AddonsService_UpdateBulk_Handler,
 		},
 		{
 			MethodName: "Get",

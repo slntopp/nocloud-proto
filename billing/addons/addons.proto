@@ -23,6 +23,10 @@ message Addon {
   Kind kind = 10;
 }
 
+message BulkAddons {
+  repeated Addon addons = 1;
+}
+
 message ListAddonsRequest {
   optional uint64 page = 1;
   optional uint64 limit = 2;

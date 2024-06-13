@@ -1238,6 +1238,68 @@
         ]
       }
     },
+    "/billing/bulk/addons": {
+      "put": {
+        "operationId": "AddonsService_CreateBulk",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/addonsBulkAddons"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/addonsBulkAddons"
+            }
+          }
+        ],
+        "tags": [
+          "AddonsService"
+        ]
+      },
+      "patch": {
+        "operationId": "AddonsService_UpdateBulk",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/addonsBulkAddons"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/addonsBulkAddons"
+            }
+          }
+        ],
+        "tags": [
+          "AddonsService"
+        ]
+      }
+    },
     "/billing/count/addons": {
       "post": {
         "operationId": "AddonsService_Count",
@@ -2774,7 +2836,7 @@
           },
           {
             "name": "meta",
-            "description": "Transaction meta data, like\r\nmeta: {\r\ntotal: \u003cnumber\u003e // resource \"quantity\", e.g. CPU cores, RAM Mb, Drive\r\nMb, IP quantity price_atm: \u003cnumber\u003e // hourly price per quant of resouce at\r\nthe moment, e.g. 1 NCU [other keys]: \u003cany\u003e // for example Drive\r\nType(SSD/HDD/NVMe/etc)\r\n}\n\nThis is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "description": "Transaction meta data, like\nmeta: {\ntotal: \u003cnumber\u003e // resource \"quantity\", e.g. CPU cores, RAM Mb, Drive\nMb, IP quantity price_atm: \u003cnumber\u003e // hourly price per quant of resouce at\nthe moment, e.g. 1 NCU [other keys]: \u003cany\u003e // for example Drive\nType(SSD/HDD/NVMe/etc)\n}\n\nThis is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
             "in": "query",
             "required": false
           },
@@ -4164,7 +4226,7 @@
         ]
       },
       "put": {
-        "summary": "rpc TestConfig(nocloud.services.CreateRequest)\r\nreturns (nocloud.services.TestConfigResponse) {\r\noption (google.api.http) = {\r\npost : \"/services\"\r\nbody : \"*\"\r\n};\r\n};",
+        "summary": "rpc TestConfig(nocloud.services.CreateRequest)\nreturns (nocloud.services.TestConfigResponse) {\noption (google.api.http) = {\npost : \"/services\"\nbody : \"*\"\n};\n};",
         "operationId": "ServicesService_Create",
         "responses": {
           "200": {
@@ -5509,7 +5571,7 @@
         "meta": {
           "type": "object",
           "additionalProperties": {},
-          "title": "Transaction meta data, like\r\nmeta: {\r\ntotal: \u003cnumber\u003e // resource \"quantity\", e.g. CPU cores, RAM Mb, Drive\r\nMb, IP quantity price_atm: \u003cnumber\u003e // hourly price per quant of resouce at\r\nthe moment, e.g. 1 NCU [other keys]: \u003cany\u003e // for example Drive\r\nType(SSD/HDD/NVMe/etc)\r\n}"
+          "title": "Transaction meta data, like\nmeta: {\ntotal: \u003cnumber\u003e // resource \"quantity\", e.g. CPU cores, RAM Mb, Drive\nMb, IP quantity price_atm: \u003cnumber\u003e // hourly price per quant of resouce at\nthe moment, e.g. 1 NCU [other keys]: \u003cany\u003e // for example Drive\nType(SSD/HDD/NVMe/etc)\n}"
         },
         "currency": {
           "$ref": "#/definitions/billingCurrency"
@@ -5856,6 +5918,18 @@
         }
       }
     },
+    "addonsBulkAddons": {
+      "type": "object",
+      "properties": {
+        "addons": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/addonsAddon"
+          }
+        }
+      }
+    },
     "addonsCountAddonsRequest": {
       "type": "object",
       "properties": {
@@ -5998,7 +6072,7 @@
         },
         "title": {
           "type": "string",
-          "title": "Url to or Base64 encoded Image to be used as Playbook logo in the\r\nMarketplace"
+          "title": "Url to or Base64 encoded Image to be used as Playbook logo in the\nMarketplace"
         },
         "description": {
           "type": "string",
@@ -6029,7 +6103,7 @@
             },
             "title": {
               "type": "string",
-              "title": "Url to or Base64 encoded Image to be used as Playbook logo in the\r\nMarketplace"
+              "title": "Url to or Base64 encoded Image to be used as Playbook logo in the\nMarketplace"
             },
             "description": {
               "type": "string",
@@ -6085,7 +6159,7 @@
         },
         "sshKey": {
           "type": "string",
-          "title": "Use custom Private Key for SSH (applied to all Instances, can be\r\noverriden only with login/pass)"
+          "title": "Use custom Private Key for SSH (applied to all Instances, can be\noverriden only with login/pass)"
         },
         "access": {
           "$ref": "#/definitions/accessAccess"
@@ -6868,7 +6942,7 @@
         },
         "except": {
           "type": "boolean",
-          "title": "If except set to true then transaction will be created if Instance is in\r\none of the states listed in on If except set to false then transaction will\r\nbe created if Instance is NOT in one of the states listed in on"
+          "title": "If except set to true then transaction will be created if Instance is in\none of the states listed in on If except set to false then transaction will\nbe created if Instance is NOT in one of the states listed in on"
         },
         "on": {
           "type": "array",
@@ -6963,7 +7037,7 @@
         "meta": {
           "type": "object",
           "additionalProperties": {},
-          "title": "Transaction meta data, like\r\nmeta: {\r\ntotal: \u003cnumber\u003e // resource \"quantity\", e.g. CPU cores, RAM Mb, Drive\r\nMb, IP quantity price_atm: \u003cnumber\u003e // hourly price per quant of resouce at\r\nthe moment, e.g. 1 NCU [other keys]: \u003cany\u003e // for example Drive\r\nType(SSD/HDD/NVMe/etc)\r\n}"
+          "title": "Transaction meta data, like\nmeta: {\ntotal: \u003cnumber\u003e // resource \"quantity\", e.g. CPU cores, RAM Mb, Drive\nMb, IP quantity price_atm: \u003cnumber\u003e // hourly price per quant of resouce at\nthe moment, e.g. 1 NCU [other keys]: \u003cany\u003e // for example Drive\nType(SSD/HDD/NVMe/etc)\n}"
         },
         "currency": {
           "$ref": "#/definitions/billingCurrency"
@@ -7715,7 +7789,7 @@
         "meta": {
           "type": "object",
           "additionalProperties": {},
-          "title": "Record meta data, like\r\nmeta: {\r\ntotal: \u003cnumber\u003e // resource \"quantity\", e.g. CPU cores, RAM Mb, Drive\r\nMb, IP quantity price_atm: \u003cnumber\u003e // hourly price per quant of resouce at\r\nthe moment, e.g. 1 NCU [other keys]: \u003cany\u003e // for example Drive\r\nType(SSD/HDD/NVMe/etc)\r\n}"
+          "title": "Record meta data, like\nmeta: {\ntotal: \u003cnumber\u003e // resource \"quantity\", e.g. CPU cores, RAM Mb, Drive\nMb, IP quantity price_atm: \u003cnumber\u003e // hourly price per quant of resouce at\nthe moment, e.g. 1 NCU [other keys]: \u003cany\u003e // for example Drive\nType(SSD/HDD/NVMe/etc)\n}"
         },
         "currency": {
           "$ref": "#/definitions/billingCurrency"

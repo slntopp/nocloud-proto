@@ -155,8 +155,14 @@ const (
 	CurrencyServiceConvertProcedure = "/nocloud.billing.CurrencyService/Convert"
 	// AddonsServiceCreateProcedure is the fully-qualified name of the AddonsService's Create RPC.
 	AddonsServiceCreateProcedure = "/nocloud.billing.AddonsService/Create"
+	// AddonsServiceCreateBulkProcedure is the fully-qualified name of the AddonsService's CreateBulk
+	// RPC.
+	AddonsServiceCreateBulkProcedure = "/nocloud.billing.AddonsService/CreateBulk"
 	// AddonsServiceUpdateProcedure is the fully-qualified name of the AddonsService's Update RPC.
 	AddonsServiceUpdateProcedure = "/nocloud.billing.AddonsService/Update"
+	// AddonsServiceUpdateBulkProcedure is the fully-qualified name of the AddonsService's UpdateBulk
+	// RPC.
+	AddonsServiceUpdateBulkProcedure = "/nocloud.billing.AddonsService/UpdateBulk"
 	// AddonsServiceGetProcedure is the fully-qualified name of the AddonsService's Get RPC.
 	AddonsServiceGetProcedure = "/nocloud.billing.AddonsService/Get"
 	// AddonsServiceListProcedure is the fully-qualified name of the AddonsService's List RPC.
@@ -224,7 +230,9 @@ var (
 	currencyServiceConvertMethodDescriptor                 = currencyServiceServiceDescriptor.Methods().ByName("Convert")
 	addonsServiceServiceDescriptor                         = billing.File_billing_billing_proto.Services().ByName("AddonsService")
 	addonsServiceCreateMethodDescriptor                    = addonsServiceServiceDescriptor.Methods().ByName("Create")
+	addonsServiceCreateBulkMethodDescriptor                = addonsServiceServiceDescriptor.Methods().ByName("CreateBulk")
 	addonsServiceUpdateMethodDescriptor                    = addonsServiceServiceDescriptor.Methods().ByName("Update")
+	addonsServiceUpdateBulkMethodDescriptor                = addonsServiceServiceDescriptor.Methods().ByName("UpdateBulk")
 	addonsServiceGetMethodDescriptor                       = addonsServiceServiceDescriptor.Methods().ByName("Get")
 	addonsServiceListMethodDescriptor                      = addonsServiceServiceDescriptor.Methods().ByName("List")
 	addonsServiceCountMethodDescriptor                     = addonsServiceServiceDescriptor.Methods().ByName("Count")
@@ -1225,7 +1233,9 @@ func (UnimplementedCurrencyServiceHandler) Convert(context.Context, *connect.Req
 // AddonsServiceClient is a client for the nocloud.billing.AddonsService service.
 type AddonsServiceClient interface {
 	Create(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error)
+	CreateBulk(context.Context, *connect.Request[addons.BulkAddons]) (*connect.Response[addons.BulkAddons], error)
 	Update(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error)
+	UpdateBulk(context.Context, *connect.Request[addons.BulkAddons]) (*connect.Response[addons.BulkAddons], error)
 	Get(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error)
 	List(context.Context, *connect.Request[addons.ListAddonsRequest]) (*connect.Response[addons.ListAddonsResponse], error)
 	Count(context.Context, *connect.Request[addons.CountAddonsRequest]) (*connect.Response[addons.CountAddonsResponse], error)
@@ -1248,10 +1258,22 @@ func NewAddonsServiceClient(httpClient connect.HTTPClient, baseURL string, opts 
 			connect.WithSchema(addonsServiceCreateMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		createBulk: connect.NewClient[addons.BulkAddons, addons.BulkAddons](
+			httpClient,
+			baseURL+AddonsServiceCreateBulkProcedure,
+			connect.WithSchema(addonsServiceCreateBulkMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 		update: connect.NewClient[addons.Addon, addons.Addon](
 			httpClient,
 			baseURL+AddonsServiceUpdateProcedure,
 			connect.WithSchema(addonsServiceUpdateMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		updateBulk: connect.NewClient[addons.BulkAddons, addons.BulkAddons](
+			httpClient,
+			baseURL+AddonsServiceUpdateBulkProcedure,
+			connect.WithSchema(addonsServiceUpdateBulkMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		get: connect.NewClient[addons.Addon, addons.Addon](
@@ -1283,12 +1305,14 @@ func NewAddonsServiceClient(httpClient connect.HTTPClient, baseURL string, opts 
 
 // addonsServiceClient implements AddonsServiceClient.
 type addonsServiceClient struct {
-	create *connect.Client[addons.Addon, addons.Addon]
-	update *connect.Client[addons.Addon, addons.Addon]
-	get    *connect.Client[addons.Addon, addons.Addon]
-	list   *connect.Client[addons.ListAddonsRequest, addons.ListAddonsResponse]
-	count  *connect.Client[addons.CountAddonsRequest, addons.CountAddonsResponse]
-	delete *connect.Client[addons.Addon, addons.Addon]
+	create     *connect.Client[addons.Addon, addons.Addon]
+	createBulk *connect.Client[addons.BulkAddons, addons.BulkAddons]
+	update     *connect.Client[addons.Addon, addons.Addon]
+	updateBulk *connect.Client[addons.BulkAddons, addons.BulkAddons]
+	get        *connect.Client[addons.Addon, addons.Addon]
+	list       *connect.Client[addons.ListAddonsRequest, addons.ListAddonsResponse]
+	count      *connect.Client[addons.CountAddonsRequest, addons.CountAddonsResponse]
+	delete     *connect.Client[addons.Addon, addons.Addon]
 }
 
 // Create calls nocloud.billing.AddonsService.Create.
@@ -1296,9 +1320,19 @@ func (c *addonsServiceClient) Create(ctx context.Context, req *connect.Request[a
 	return c.create.CallUnary(ctx, req)
 }
 
+// CreateBulk calls nocloud.billing.AddonsService.CreateBulk.
+func (c *addonsServiceClient) CreateBulk(ctx context.Context, req *connect.Request[addons.BulkAddons]) (*connect.Response[addons.BulkAddons], error) {
+	return c.createBulk.CallUnary(ctx, req)
+}
+
 // Update calls nocloud.billing.AddonsService.Update.
 func (c *addonsServiceClient) Update(ctx context.Context, req *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error) {
 	return c.update.CallUnary(ctx, req)
+}
+
+// UpdateBulk calls nocloud.billing.AddonsService.UpdateBulk.
+func (c *addonsServiceClient) UpdateBulk(ctx context.Context, req *connect.Request[addons.BulkAddons]) (*connect.Response[addons.BulkAddons], error) {
+	return c.updateBulk.CallUnary(ctx, req)
 }
 
 // Get calls nocloud.billing.AddonsService.Get.
@@ -1324,7 +1358,9 @@ func (c *addonsServiceClient) Delete(ctx context.Context, req *connect.Request[a
 // AddonsServiceHandler is an implementation of the nocloud.billing.AddonsService service.
 type AddonsServiceHandler interface {
 	Create(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error)
+	CreateBulk(context.Context, *connect.Request[addons.BulkAddons]) (*connect.Response[addons.BulkAddons], error)
 	Update(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error)
+	UpdateBulk(context.Context, *connect.Request[addons.BulkAddons]) (*connect.Response[addons.BulkAddons], error)
 	Get(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error)
 	List(context.Context, *connect.Request[addons.ListAddonsRequest]) (*connect.Response[addons.ListAddonsResponse], error)
 	Count(context.Context, *connect.Request[addons.CountAddonsRequest]) (*connect.Response[addons.CountAddonsResponse], error)
@@ -1343,10 +1379,22 @@ func NewAddonsServiceHandler(svc AddonsServiceHandler, opts ...connect.HandlerOp
 		connect.WithSchema(addonsServiceCreateMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	addonsServiceCreateBulkHandler := connect.NewUnaryHandler(
+		AddonsServiceCreateBulkProcedure,
+		svc.CreateBulk,
+		connect.WithSchema(addonsServiceCreateBulkMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	addonsServiceUpdateHandler := connect.NewUnaryHandler(
 		AddonsServiceUpdateProcedure,
 		svc.Update,
 		connect.WithSchema(addonsServiceUpdateMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	addonsServiceUpdateBulkHandler := connect.NewUnaryHandler(
+		AddonsServiceUpdateBulkProcedure,
+		svc.UpdateBulk,
+		connect.WithSchema(addonsServiceUpdateBulkMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	addonsServiceGetHandler := connect.NewUnaryHandler(
@@ -1377,8 +1425,12 @@ func NewAddonsServiceHandler(svc AddonsServiceHandler, opts ...connect.HandlerOp
 		switch r.URL.Path {
 		case AddonsServiceCreateProcedure:
 			addonsServiceCreateHandler.ServeHTTP(w, r)
+		case AddonsServiceCreateBulkProcedure:
+			addonsServiceCreateBulkHandler.ServeHTTP(w, r)
 		case AddonsServiceUpdateProcedure:
 			addonsServiceUpdateHandler.ServeHTTP(w, r)
+		case AddonsServiceUpdateBulkProcedure:
+			addonsServiceUpdateBulkHandler.ServeHTTP(w, r)
 		case AddonsServiceGetProcedure:
 			addonsServiceGetHandler.ServeHTTP(w, r)
 		case AddonsServiceListProcedure:
@@ -1400,8 +1452,16 @@ func (UnimplementedAddonsServiceHandler) Create(context.Context, *connect.Reques
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.AddonsService.Create is not implemented"))
 }
 
+func (UnimplementedAddonsServiceHandler) CreateBulk(context.Context, *connect.Request[addons.BulkAddons]) (*connect.Response[addons.BulkAddons], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.AddonsService.CreateBulk is not implemented"))
+}
+
 func (UnimplementedAddonsServiceHandler) Update(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.AddonsService.Update is not implemented"))
+}
+
+func (UnimplementedAddonsServiceHandler) UpdateBulk(context.Context, *connect.Request[addons.BulkAddons]) (*connect.Response[addons.BulkAddons], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.AddonsService.UpdateBulk is not implemented"))
 }
 
 func (UnimplementedAddonsServiceHandler) Get(context.Context, *connect.Request[addons.Addon]) (*connect.Response[addons.Addon], error) {
