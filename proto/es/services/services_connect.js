@@ -29,7 +29,7 @@ export const ServicesService = {
   typeName: "nocloud.services.ServicesService",
   methods: {
     /**
-     *
+     * 
      * rpc TestConfig(nocloud.services.CreateRequest)
      * returns (nocloud.services.TestConfigResponse) {
      * option (google.api.http) = {

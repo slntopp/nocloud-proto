@@ -29,7 +29,7 @@ export declare const ServicesService: {
   readonly typeName: "nocloud.services.ServicesService",
   readonly methods: {
     /**
-     *
+     * 
      * rpc TestConfig(nocloud.services.CreateRequest)
      * returns (nocloud.services.TestConfigResponse) {
      * option (google.api.http) = {
