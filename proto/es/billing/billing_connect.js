@@ -20,7 +20,7 @@
 
 import { ConversionRequest, ConversionResponse, CreateCurrencyRequest, CreateCurrencyResponse, CreateExchangeRateRequest, CreateExchangeRateResponse, DeleteExchangeRateRequest, DeleteExchangeRateResponse, GetActiveRequest, GetCurrenciesRequest, GetCurrenciesResponse, GetExchangeRateRequest, GetExchangeRateResponse, GetExchangeRatesRequest, GetExchangeRatesResponse, GetInstancesReportRequest, GetInstancesReportResponse, GetInstancesReportsCountRequest, GetInvoicesCountRequest, GetInvoicesCountResponse, GetInvoicesRequest, GetRecordsReportsCountRequest, GetRecordsReportsRequest, GetRecordsReportsResponse, GetReportsCountResponse, GetTransactionsCountRequest, GetTransactionsCountResponse, GetTransactionsRequest, Invoice, Invoices, ListPlansInstancesRequest, ListPlansInstancesResponse, ListRequest, ListResponse, Plan, Records, ReprocessTransactionsRequest, Transaction, Transactions, UpdateExchangeRateRequest, UpdateExchangeRateResponse, UpdateInvoiceStatusRequest, UpdateTransactionResponse } from "./billing_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
-import { Addon, CountAddonsRequest, CountAddonsResponse, ListAddonsRequest, ListAddonsResponse } from "./addons/addons_pb.js";
+import { Addon, BulkAddons, CountAddonsRequest, CountAddonsResponse, ListAddonsRequest, ListAddonsResponse } from "./addons/addons_pb.js";
 import { CountDescriptionsRequest, CountDescriptionsResponse, Description, ListDescriptionsRequest, ListDescriptionsResponse } from "./descriptions/descriptions_pb.js";
 
 /**
@@ -363,12 +363,30 @@ export const AddonsService = {
       kind: MethodKind.Unary,
     },
     /**
+     * @generated from rpc nocloud.billing.AddonsService.CreateBulk
+     */
+    createBulk: {
+      name: "CreateBulk",
+      I: BulkAddons,
+      O: BulkAddons,
+      kind: MethodKind.Unary,
+    },
+    /**
      * @generated from rpc nocloud.billing.AddonsService.Update
      */
     update: {
       name: "Update",
       I: Addon,
       O: Addon,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.AddonsService.UpdateBulk
+     */
+    updateBulk: {
+      name: "UpdateBulk",
+      I: BulkAddons,
+      O: BulkAddons,
       kind: MethodKind.Unary,
     },
     /**

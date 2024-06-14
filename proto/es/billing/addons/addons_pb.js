@@ -37,6 +37,16 @@ export const Addon = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message nocloud.billing.addons.BulkAddons
+ */
+export const BulkAddons = proto3.makeMessageType(
+  "nocloud.billing.addons.BulkAddons",
+  () => [
+    { no: 1, name: "addons", kind: "message", T: Addon, repeated: true },
+  ],
+);
+
+/**
  * @generated from message nocloud.billing.addons.ListAddonsRequest
  */
 export const ListAddonsRequest = proto3.makeMessageType(

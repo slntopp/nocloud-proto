@@ -102,6 +102,30 @@ export declare class Addon extends Message<Addon> {
 }
 
 /**
+ * @generated from message nocloud.billing.addons.BulkAddons
+ */
+export declare class BulkAddons extends Message<BulkAddons> {
+  /**
+   * @generated from field: repeated nocloud.billing.addons.Addon addons = 1;
+   */
+  addons: Addon[];
+
+  constructor(data?: PartialMessage<BulkAddons>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.addons.BulkAddons";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): BulkAddons;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): BulkAddons;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): BulkAddons;
+
+  static equals(a: BulkAddons | PlainMessage<BulkAddons> | undefined, b: BulkAddons | PlainMessage<BulkAddons> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.billing.addons.ListAddonsRequest
  */
 export declare class ListAddonsRequest extends Message<ListAddonsRequest> {
