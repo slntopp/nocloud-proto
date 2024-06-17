@@ -199,6 +199,7 @@ message Item {
   string unit = 3;
   double price = 4;
   string instance = 5;
+  string description = 6;
 }
 
 message Invoice {
