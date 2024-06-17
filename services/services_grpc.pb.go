@@ -51,13 +51,14 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ServicesServiceClient interface {
-	// rpc TestConfig(nocloud.services.CreateRequest)
-	// returns (nocloud.services.TestConfigResponse) {
-	// option (google.api.http) = {
-	// post : "/services"
-	// body : "*"
-	// };
-	// };
+	//
+	//rpc TestConfig(nocloud.services.CreateRequest)
+	//returns (nocloud.services.TestConfigResponse) {
+	//option (google.api.http) = {
+	//post : "/services"
+	//body : "*"
+	//};
+	//};
 	Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*Service, error)
 	Update(ctx context.Context, in *Service, opts ...grpc.CallOption) (*Service, error)
 	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
@@ -205,13 +206,14 @@ func (x *servicesServiceStreamClient) Recv() (*states.ObjectState, error) {
 // All implementations must embed UnimplementedServicesServiceServer
 // for forward compatibility
 type ServicesServiceServer interface {
-	// rpc TestConfig(nocloud.services.CreateRequest)
-	// returns (nocloud.services.TestConfigResponse) {
-	// option (google.api.http) = {
-	// post : "/services"
-	// body : "*"
-	// };
-	// };
+	//
+	//rpc TestConfig(nocloud.services.CreateRequest)
+	//returns (nocloud.services.TestConfigResponse) {
+	//option (google.api.http) = {
+	//post : "/services"
+	//body : "*"
+	//};
+	//};
 	Create(context.Context, *CreateRequest) (*Service, error)
 	Update(context.Context, *Service) (*Service, error)
 	Delete(context.Context, *DeleteRequest) (*DeleteResponse, error)

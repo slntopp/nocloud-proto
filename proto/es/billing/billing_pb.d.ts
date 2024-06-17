@@ -815,6 +815,11 @@ export declare class Item extends Message<Item> {
    */
   instance: string;
 
+  /**
+   * @generated from field: string description = 6;
+   */
+  description: string;
+
   constructor(data?: PartialMessage<Item>);
 
   static readonly runtime: typeof proto3;
