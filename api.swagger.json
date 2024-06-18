@@ -1985,7 +1985,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/billingInvoice"
+              "$ref": "#/definitions/billingCreateInvoiceRequest"
             }
           }
         ],
@@ -6375,6 +6375,17 @@
     },
     "billingCreateExchangeRateResponse": {
       "type": "object"
+    },
+    "billingCreateInvoiceRequest": {
+      "type": "object",
+      "properties": {
+        "invoice": {
+          "$ref": "#/definitions/billingInvoice"
+        },
+        "isSendEmail": {
+          "type": "boolean"
+        }
+      }
     },
     "billingCurrency": {
       "type": "object",

@@ -483,7 +483,7 @@ service BillingService {
     };
   };
 
-  rpc CreateInvoice (Invoice) returns (Invoice) {
+  rpc CreateInvoice (CreateInvoiceRequest) returns (Invoice) {
     option (google.api.http) = {
       put: "/billing/invoices"
       body: "*"

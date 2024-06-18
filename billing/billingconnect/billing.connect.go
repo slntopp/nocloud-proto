@@ -384,7 +384,7 @@ type BillingServiceClient interface {
 	GetRecordsReports(context.Context, *connect.Request[billing.GetRecordsReportsRequest]) (*connect.Response[billing.GetRecordsReportsResponse], error)
 	GetRecordsReportsCount(context.Context, *connect.Request[billing.GetRecordsReportsCountRequest]) (*connect.Response[billing.GetReportsCountResponse], error)
 	Reprocess(context.Context, *connect.Request[billing.ReprocessTransactionsRequest]) (*connect.Response[billing.Transactions], error)
-	CreateInvoice(context.Context, *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error)
+	CreateInvoice(context.Context, *connect.Request[billing.CreateInvoiceRequest]) (*connect.Response[billing.Invoice], error)
 	GetInvoice(context.Context, *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error)
 	GetInvoices(context.Context, *connect.Request[billing.GetInvoicesRequest]) (*connect.Response[billing.Invoices], error)
 	GetInvoicesCount(context.Context, *connect.Request[billing.GetInvoicesCountRequest]) (*connect.Response[billing.GetInvoicesCountResponse], error)
@@ -498,7 +498,7 @@ func NewBillingServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(billingServiceReprocessMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
-		createInvoice: connect.NewClient[billing.Invoice, billing.Invoice](
+		createInvoice: connect.NewClient[billing.CreateInvoiceRequest, billing.Invoice](
 			httpClient,
 			baseURL+BillingServiceCreateInvoiceProcedure,
 			connect.WithSchema(billingServiceCreateInvoiceMethodDescriptor),
@@ -555,7 +555,7 @@ type billingServiceClient struct {
 	getRecordsReports        *connect.Client[billing.GetRecordsReportsRequest, billing.GetRecordsReportsResponse]
 	getRecordsReportsCount   *connect.Client[billing.GetRecordsReportsCountRequest, billing.GetReportsCountResponse]
 	reprocess                *connect.Client[billing.ReprocessTransactionsRequest, billing.Transactions]
-	createInvoice            *connect.Client[billing.Invoice, billing.Invoice]
+	createInvoice            *connect.Client[billing.CreateInvoiceRequest, billing.Invoice]
 	getInvoice               *connect.Client[billing.Invoice, billing.Invoice]
 	getInvoices              *connect.Client[billing.GetInvoicesRequest, billing.Invoices]
 	getInvoicesCount         *connect.Client[billing.GetInvoicesCountRequest, billing.GetInvoicesCountResponse]
@@ -644,7 +644,7 @@ func (c *billingServiceClient) Reprocess(ctx context.Context, req *connect.Reque
 }
 
 // CreateInvoice calls nocloud.billing.BillingService.CreateInvoice.
-func (c *billingServiceClient) CreateInvoice(ctx context.Context, req *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error) {
+func (c *billingServiceClient) CreateInvoice(ctx context.Context, req *connect.Request[billing.CreateInvoiceRequest]) (*connect.Response[billing.Invoice], error) {
 	return c.createInvoice.CallUnary(ctx, req)
 }
 
@@ -691,7 +691,7 @@ type BillingServiceHandler interface {
 	GetRecordsReports(context.Context, *connect.Request[billing.GetRecordsReportsRequest]) (*connect.Response[billing.GetRecordsReportsResponse], error)
 	GetRecordsReportsCount(context.Context, *connect.Request[billing.GetRecordsReportsCountRequest]) (*connect.Response[billing.GetReportsCountResponse], error)
 	Reprocess(context.Context, *connect.Request[billing.ReprocessTransactionsRequest]) (*connect.Response[billing.Transactions], error)
-	CreateInvoice(context.Context, *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error)
+	CreateInvoice(context.Context, *connect.Request[billing.CreateInvoiceRequest]) (*connect.Response[billing.Invoice], error)
 	GetInvoice(context.Context, *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error)
 	GetInvoices(context.Context, *connect.Request[billing.GetInvoicesRequest]) (*connect.Response[billing.Invoices], error)
 	GetInvoicesCount(context.Context, *connect.Request[billing.GetInvoicesCountRequest]) (*connect.Response[billing.GetInvoicesCountResponse], error)
@@ -956,7 +956,7 @@ func (UnimplementedBillingServiceHandler) Reprocess(context.Context, *connect.Re
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.BillingService.Reprocess is not implemented"))
 }
 
-func (UnimplementedBillingServiceHandler) CreateInvoice(context.Context, *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error) {
+func (UnimplementedBillingServiceHandler) CreateInvoice(context.Context, *connect.Request[billing.CreateInvoiceRequest]) (*connect.Response[billing.Invoice], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.BillingService.CreateInvoice is not implemented"))
 }
 

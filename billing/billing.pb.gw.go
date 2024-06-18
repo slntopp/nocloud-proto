@@ -718,7 +718,7 @@ func local_request_BillingService_Reprocess_0(ctx context.Context, marshaler run
 }
 
 func request_BillingService_CreateInvoice_0(ctx context.Context, marshaler runtime.Marshaler, client BillingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq Invoice
+	var protoReq CreateInvoiceRequest
 	var metadata runtime.ServerMetadata
 
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
@@ -731,7 +731,7 @@ func request_BillingService_CreateInvoice_0(ctx context.Context, marshaler runti
 }
 
 func local_request_BillingService_CreateInvoice_0(ctx context.Context, marshaler runtime.Marshaler, server BillingServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq Invoice
+	var protoReq CreateInvoiceRequest
 	var metadata runtime.ServerMetadata
 
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {

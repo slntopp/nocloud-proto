@@ -247,7 +247,7 @@ type BillingServiceClient interface {
 	GetRecordsReports(ctx context.Context, in *GetRecordsReportsRequest, opts ...grpc.CallOption) (*GetRecordsReportsResponse, error)
 	GetRecordsReportsCount(ctx context.Context, in *GetRecordsReportsCountRequest, opts ...grpc.CallOption) (*GetReportsCountResponse, error)
 	Reprocess(ctx context.Context, in *ReprocessTransactionsRequest, opts ...grpc.CallOption) (*Transactions, error)
-	CreateInvoice(ctx context.Context, in *Invoice, opts ...grpc.CallOption) (*Invoice, error)
+	CreateInvoice(ctx context.Context, in *CreateInvoiceRequest, opts ...grpc.CallOption) (*Invoice, error)
 	GetInvoice(ctx context.Context, in *Invoice, opts ...grpc.CallOption) (*Invoice, error)
 	GetInvoices(ctx context.Context, in *GetInvoicesRequest, opts ...grpc.CallOption) (*Invoices, error)
 	GetInvoicesCount(ctx context.Context, in *GetInvoicesCountRequest, opts ...grpc.CallOption) (*GetInvoicesCountResponse, error)
@@ -423,7 +423,7 @@ func (c *billingServiceClient) Reprocess(ctx context.Context, in *ReprocessTrans
 	return out, nil
 }
 
-func (c *billingServiceClient) CreateInvoice(ctx context.Context, in *Invoice, opts ...grpc.CallOption) (*Invoice, error) {
+func (c *billingServiceClient) CreateInvoice(ctx context.Context, in *CreateInvoiceRequest, opts ...grpc.CallOption) (*Invoice, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Invoice)
 	err := c.cc.Invoke(ctx, BillingService_CreateInvoice_FullMethodName, in, out, cOpts...)
@@ -503,7 +503,7 @@ type BillingServiceServer interface {
 	GetRecordsReports(context.Context, *GetRecordsReportsRequest) (*GetRecordsReportsResponse, error)
 	GetRecordsReportsCount(context.Context, *GetRecordsReportsCountRequest) (*GetReportsCountResponse, error)
 	Reprocess(context.Context, *ReprocessTransactionsRequest) (*Transactions, error)
-	CreateInvoice(context.Context, *Invoice) (*Invoice, error)
+	CreateInvoice(context.Context, *CreateInvoiceRequest) (*Invoice, error)
 	GetInvoice(context.Context, *Invoice) (*Invoice, error)
 	GetInvoices(context.Context, *GetInvoicesRequest) (*Invoices, error)
 	GetInvoicesCount(context.Context, *GetInvoicesCountRequest) (*GetInvoicesCountResponse, error)
@@ -564,7 +564,7 @@ func (UnimplementedBillingServiceServer) GetRecordsReportsCount(context.Context,
 func (UnimplementedBillingServiceServer) Reprocess(context.Context, *ReprocessTransactionsRequest) (*Transactions, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Reprocess not implemented")
 }
-func (UnimplementedBillingServiceServer) CreateInvoice(context.Context, *Invoice) (*Invoice, error) {
+func (UnimplementedBillingServiceServer) CreateInvoice(context.Context, *CreateInvoiceRequest) (*Invoice, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateInvoice not implemented")
 }
 func (UnimplementedBillingServiceServer) GetInvoice(context.Context, *Invoice) (*Invoice, error) {
@@ -884,7 +884,7 @@ func _BillingService_Reprocess_Handler(srv interface{}, ctx context.Context, dec
 }
 
 func _BillingService_CreateInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Invoice)
+	in := new(CreateInvoiceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -896,7 +896,7 @@ func _BillingService_CreateInvoice_Handler(srv interface{}, ctx context.Context,
 		FullMethod: BillingService_CreateInvoice_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BillingServiceServer).CreateInvoice(ctx, req.(*Invoice))
+		return srv.(BillingServiceServer).CreateInvoice(ctx, req.(*CreateInvoiceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
