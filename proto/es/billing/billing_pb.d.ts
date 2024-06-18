@@ -1335,6 +1335,35 @@ export declare class UpdateTransactionRequest extends Message<UpdateTransactionR
 }
 
 /**
+ * @generated from message nocloud.billing.CreateInvoiceRequest
+ */
+export declare class CreateInvoiceRequest extends Message<CreateInvoiceRequest> {
+  /**
+   * @generated from field: nocloud.billing.Invoice invoice = 1;
+   */
+  invoice?: Invoice;
+
+  /**
+   * @generated from field: bool is_send_email = 2;
+   */
+  isSendEmail: boolean;
+
+  constructor(data?: PartialMessage<CreateInvoiceRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.CreateInvoiceRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateInvoiceRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateInvoiceRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateInvoiceRequest;
+
+  static equals(a: CreateInvoiceRequest | PlainMessage<CreateInvoiceRequest> | undefined, b: CreateInvoiceRequest | PlainMessage<CreateInvoiceRequest> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.billing.UpdateInvoiceStatusRequest
  */
 export declare class UpdateInvoiceStatusRequest extends Message<UpdateInvoiceStatusRequest> {
@@ -1347,6 +1376,11 @@ export declare class UpdateInvoiceStatusRequest extends Message<UpdateInvoiceSta
    * @generated from field: nocloud.billing.BillingStatus status = 2;
    */
   status: BillingStatus;
+
+  /**
+   * @generated from field: bool is_send_email = 3;
+   */
+  isSendEmail: boolean;
 
   constructor(data?: PartialMessage<UpdateInvoiceStatusRequest>);
 

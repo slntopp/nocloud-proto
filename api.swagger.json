@@ -5468,6 +5468,9 @@
       "properties": {
         "status": {
           "$ref": "#/definitions/billingBillingStatus"
+        },
+        "isSendEmail": {
+          "type": "boolean"
         }
       }
     },

@@ -438,6 +438,17 @@ export const UpdateTransactionRequest = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message nocloud.billing.CreateInvoiceRequest
+ */
+export const CreateInvoiceRequest = proto3.makeMessageType(
+  "nocloud.billing.CreateInvoiceRequest",
+  () => [
+    { no: 1, name: "invoice", kind: "message", T: Invoice },
+    { no: 2, name: "is_send_email", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
  * @generated from message nocloud.billing.UpdateInvoiceStatusRequest
  */
 export const UpdateInvoiceStatusRequest = proto3.makeMessageType(
@@ -445,6 +456,7 @@ export const UpdateInvoiceStatusRequest = proto3.makeMessageType(
   () => [
     { no: 1, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "status", kind: "enum", T: proto3.getEnumType(BillingStatus) },
+    { no: 3, name: "is_send_email", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 

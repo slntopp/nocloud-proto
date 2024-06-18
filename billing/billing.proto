@@ -291,9 +291,15 @@ message UpdateTransactionRequest {
   int64 exec = 2;
 }
 
+message CreateInvoiceRequest{
+  Invoice invoice = 1;
+  bool is_send_email = 2;
+}
+
 message UpdateInvoiceStatusRequest{
   string uuid = 1;
   BillingStatus status = 2;
+  bool is_send_email = 3;
 }
 
 message GetInvoicesCountRequest {
