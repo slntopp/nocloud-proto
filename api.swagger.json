@@ -1210,7 +1210,9 @@
               "USD",
               "EUR",
               "BYN",
-              "PLN"
+              "PLN",
+              "EUR_COLO",
+              "EUR_TECH"
             ]
           },
           {
@@ -1223,7 +1225,9 @@
               "USD",
               "EUR",
               "BYN",
-              "PLN"
+              "PLN",
+              "EUR_COLO",
+              "EUR_TECH"
             ]
           }
         ],
@@ -1258,7 +1262,9 @@
               "USD",
               "EUR",
               "BYN",
-              "PLN"
+              "PLN",
+              "EUR_COLO",
+              "EUR_TECH"
             ]
           },
           {
@@ -1271,7 +1277,9 @@
               "USD",
               "EUR",
               "BYN",
-              "PLN"
+              "PLN",
+              "EUR_COLO",
+              "EUR_TECH"
             ]
           }
         ],
@@ -1900,7 +1908,9 @@
               "USD",
               "EUR",
               "BYN",
-              "PLN"
+              "PLN",
+              "EUR_COLO",
+              "EUR_TECH"
             ],
             "default": "NCU"
           },
@@ -5182,7 +5192,9 @@
         "USD",
         "EUR",
         "BYN",
-        "PLN"
+        "PLN",
+        "EUR_COLO",
+        "EUR_TECH"
       ],
       "default": "NCU"
     },

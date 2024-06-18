@@ -400,6 +400,8 @@ enum Currency {
     EUR = 2;
     BYN = 3;
     PLN = 4;
+    EUR_COLO = 5;
+    EUR_TECH = 6;
 }
 
 message CreateExchangeRateRequest {
