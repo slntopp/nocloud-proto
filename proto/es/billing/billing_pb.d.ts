@@ -791,11 +791,8 @@ export declare class Transaction extends Message<Transaction> {
  */
 export declare class Item extends Message<Item> {
   /**
-   * @generated from field: string title = 1;
-   */
-  title: string;
-
-  /**
+   * string title = 1; removed
+   *
    * @generated from field: int32 amount = 2;
    */
   amount: number;

@@ -6733,12 +6733,10 @@
     "billingItem": {
       "type": "object",
       "properties": {
-        "title": {
-          "type": "string"
-        },
         "amount": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "title": "string title = 1; removed"
         },
         "unit": {
           "type": "string"
