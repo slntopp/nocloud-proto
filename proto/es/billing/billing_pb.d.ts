@@ -1378,9 +1378,9 @@ export declare class UpdateInvoiceStatusRequest extends Message<UpdateInvoiceSta
   status: BillingStatus;
 
   /**
-   * @generated from field: bool is_send_email = 3;
+   * @generated from field: nocloud.billing.UpdateInvoiceStatusRequest.Params params = 3;
    */
-  isSendEmail: boolean;
+  params?: UpdateInvoiceStatusRequest_Params;
 
   constructor(data?: PartialMessage<UpdateInvoiceStatusRequest>);
 
@@ -1395,6 +1395,35 @@ export declare class UpdateInvoiceStatusRequest extends Message<UpdateInvoiceSta
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateInvoiceStatusRequest;
 
   static equals(a: UpdateInvoiceStatusRequest | PlainMessage<UpdateInvoiceStatusRequest> | undefined, b: UpdateInvoiceStatusRequest | PlainMessage<UpdateInvoiceStatusRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.UpdateInvoiceStatusRequest.Params
+ */
+export declare class UpdateInvoiceStatusRequest_Params extends Message<UpdateInvoiceStatusRequest_Params> {
+  /**
+   * @generated from field: int64 payment_date = 1;
+   */
+  paymentDate: bigint;
+
+  /**
+   * @generated from field: bool is_send_email = 2;
+   */
+  isSendEmail: boolean;
+
+  constructor(data?: PartialMessage<UpdateInvoiceStatusRequest_Params>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.UpdateInvoiceStatusRequest.Params";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateInvoiceStatusRequest_Params;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateInvoiceStatusRequest_Params;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateInvoiceStatusRequest_Params;
+
+  static equals(a: UpdateInvoiceStatusRequest_Params | PlainMessage<UpdateInvoiceStatusRequest_Params> | undefined, b: UpdateInvoiceStatusRequest_Params | PlainMessage<UpdateInvoiceStatusRequest_Params> | undefined): boolean;
 }
 
 /**

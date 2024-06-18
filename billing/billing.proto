@@ -297,9 +297,14 @@ message CreateInvoiceRequest{
 }
 
 message UpdateInvoiceStatusRequest{
+  message Params{
+    int64 payment_date = 1;
+    bool is_send_email = 2;
+  }
+
   string uuid = 1;
   BillingStatus status = 2;
-  bool is_send_email = 3;
+  Params params = 3;
 }
 
 message GetInvoicesCountRequest {

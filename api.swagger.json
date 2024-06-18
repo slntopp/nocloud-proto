@@ -5469,8 +5469,8 @@
         "status": {
           "$ref": "#/definitions/billingBillingStatus"
         },
-        "isSendEmail": {
-          "type": "boolean"
+        "params": {
+          "$ref": "#/definitions/UpdateInvoiceStatusRequestParams"
         }
       }
     },
@@ -5725,6 +5725,18 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "UpdateInvoiceStatusRequestParams": {
+      "type": "object",
+      "properties": {
+        "paymentDate": {
+          "type": "string",
+          "format": "int64"
+        },
+        "isSendEmail": {
+          "type": "boolean"
         }
       }
     },
