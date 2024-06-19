@@ -251,7 +251,7 @@ type BillingServiceClient interface {
 	GetInvoice(ctx context.Context, in *Invoice, opts ...grpc.CallOption) (*Invoice, error)
 	GetInvoices(ctx context.Context, in *GetInvoicesRequest, opts ...grpc.CallOption) (*Invoices, error)
 	GetInvoicesCount(ctx context.Context, in *GetInvoicesCountRequest, opts ...grpc.CallOption) (*GetInvoicesCountResponse, error)
-	UpdateInvoice(ctx context.Context, in *Invoice, opts ...grpc.CallOption) (*Invoice, error)
+	UpdateInvoice(ctx context.Context, in *UpdateInvoiceRequest, opts ...grpc.CallOption) (*Invoice, error)
 	UpdateInvoiceStatus(ctx context.Context, in *UpdateInvoiceStatusRequest, opts ...grpc.CallOption) (*Invoice, error)
 }
 
@@ -463,7 +463,7 @@ func (c *billingServiceClient) GetInvoicesCount(ctx context.Context, in *GetInvo
 	return out, nil
 }
 
-func (c *billingServiceClient) UpdateInvoice(ctx context.Context, in *Invoice, opts ...grpc.CallOption) (*Invoice, error) {
+func (c *billingServiceClient) UpdateInvoice(ctx context.Context, in *UpdateInvoiceRequest, opts ...grpc.CallOption) (*Invoice, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Invoice)
 	err := c.cc.Invoke(ctx, BillingService_UpdateInvoice_FullMethodName, in, out, cOpts...)
@@ -507,7 +507,7 @@ type BillingServiceServer interface {
 	GetInvoice(context.Context, *Invoice) (*Invoice, error)
 	GetInvoices(context.Context, *GetInvoicesRequest) (*Invoices, error)
 	GetInvoicesCount(context.Context, *GetInvoicesCountRequest) (*GetInvoicesCountResponse, error)
-	UpdateInvoice(context.Context, *Invoice) (*Invoice, error)
+	UpdateInvoice(context.Context, *UpdateInvoiceRequest) (*Invoice, error)
 	UpdateInvoiceStatus(context.Context, *UpdateInvoiceStatusRequest) (*Invoice, error)
 	mustEmbedUnimplementedBillingServiceServer()
 }
@@ -576,7 +576,7 @@ func (UnimplementedBillingServiceServer) GetInvoices(context.Context, *GetInvoic
 func (UnimplementedBillingServiceServer) GetInvoicesCount(context.Context, *GetInvoicesCountRequest) (*GetInvoicesCountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInvoicesCount not implemented")
 }
-func (UnimplementedBillingServiceServer) UpdateInvoice(context.Context, *Invoice) (*Invoice, error) {
+func (UnimplementedBillingServiceServer) UpdateInvoice(context.Context, *UpdateInvoiceRequest) (*Invoice, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateInvoice not implemented")
 }
 func (UnimplementedBillingServiceServer) UpdateInvoiceStatus(context.Context, *UpdateInvoiceStatusRequest) (*Invoice, error) {
@@ -956,7 +956,7 @@ func _BillingService_GetInvoicesCount_Handler(srv interface{}, ctx context.Conte
 }
 
 func _BillingService_UpdateInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Invoice)
+	in := new(UpdateInvoiceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -968,7 +968,7 @@ func _BillingService_UpdateInvoice_Handler(srv interface{}, ctx context.Context,
 		FullMethod: BillingService_UpdateInvoice_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BillingServiceServer).UpdateInvoice(ctx, req.(*Invoice))
+		return srv.(BillingServiceServer).UpdateInvoice(ctx, req.(*UpdateInvoiceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

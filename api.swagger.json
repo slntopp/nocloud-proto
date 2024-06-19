@@ -1992,6 +1992,36 @@
         "tags": [
           "BillingService"
         ]
+      },
+      "patch": {
+        "operationId": "BillingService_UpdateInvoice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingInvoice"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingUpdateInvoiceRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
       }
     },
     "/billing/invoices/{uuid}": {
@@ -2129,42 +2159,6 @@
               "BALANCE"
             ],
             "default": "ACTION_TYPE_UNKNOWN"
-          }
-        ],
-        "tags": [
-          "BillingService"
-        ]
-      },
-      "patch": {
-        "operationId": "BillingService_UpdateInvoice",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/billingInvoice"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "uuid",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BillingServiceUpdateInvoiceBody"
-            }
           }
         ],
         "tags": [
@@ -5402,67 +5396,6 @@
     "AnsibleServiceExecBody": {
       "type": "object"
     },
-    "BillingServiceUpdateInvoiceBody": {
-      "type": "object",
-      "properties": {
-        "payment": {
-          "type": "string",
-          "format": "int64",
-          "title": "Payment date timestamp"
-        },
-        "processed": {
-          "type": "string",
-          "format": "int64",
-          "title": "Processed date timestamp(when actions applied)(only for payment flow)"
-        },
-        "returned": {
-          "type": "string",
-          "format": "int64",
-          "title": "Returned date timestamp(not 0 if invoice has returned status)"
-        },
-        "deadline": {
-          "type": "string",
-          "format": "int64"
-        },
-        "status": {
-          "$ref": "#/definitions/billingBillingStatus"
-        },
-        "account": {
-          "type": "string"
-        },
-        "transactions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "total": {
-          "type": "number",
-          "format": "double"
-        },
-        "meta": {
-          "type": "object",
-          "additionalProperties": {}
-        },
-        "currency": {
-          "$ref": "#/definitions/billingCurrency"
-        },
-        "created": {
-          "type": "string",
-          "format": "int64"
-        },
-        "items": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/billingItem"
-          }
-        },
-        "type": {
-          "$ref": "#/definitions/billingActionType"
-        }
-      }
-    },
     "BillingServiceUpdateInvoiceStatusBody": {
       "type": "object",
       "properties": {
@@ -7113,6 +7046,17 @@
     },
     "billingUpdateExchangeRateResponse": {
       "type": "object"
+    },
+    "billingUpdateInvoiceRequest": {
+      "type": "object",
+      "properties": {
+        "invoice": {
+          "$ref": "#/definitions/billingInvoice"
+        },
+        "isSendEmail": {
+          "type": "boolean"
+        }
+      }
     },
     "billingUpdateTransactionResponse": {
       "type": "object",

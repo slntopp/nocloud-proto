@@ -449,6 +449,17 @@ export const CreateInvoiceRequest = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message nocloud.billing.UpdateInvoiceRequest
+ */
+export const UpdateInvoiceRequest = proto3.makeMessageType(
+  "nocloud.billing.UpdateInvoiceRequest",
+  () => [
+    { no: 1, name: "invoice", kind: "message", T: Invoice },
+    { no: 2, name: "is_send_email", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
  * @generated from message nocloud.billing.UpdateInvoiceStatusRequest
  */
 export const UpdateInvoiceStatusRequest = proto3.makeMessageType(

@@ -388,7 +388,7 @@ type BillingServiceClient interface {
 	GetInvoice(context.Context, *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error)
 	GetInvoices(context.Context, *connect.Request[billing.GetInvoicesRequest]) (*connect.Response[billing.Invoices], error)
 	GetInvoicesCount(context.Context, *connect.Request[billing.GetInvoicesCountRequest]) (*connect.Response[billing.GetInvoicesCountResponse], error)
-	UpdateInvoice(context.Context, *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error)
+	UpdateInvoice(context.Context, *connect.Request[billing.UpdateInvoiceRequest]) (*connect.Response[billing.Invoice], error)
 	UpdateInvoiceStatus(context.Context, *connect.Request[billing.UpdateInvoiceStatusRequest]) (*connect.Response[billing.Invoice], error)
 }
 
@@ -522,7 +522,7 @@ func NewBillingServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(billingServiceGetInvoicesCountMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
-		updateInvoice: connect.NewClient[billing.Invoice, billing.Invoice](
+		updateInvoice: connect.NewClient[billing.UpdateInvoiceRequest, billing.Invoice](
 			httpClient,
 			baseURL+BillingServiceUpdateInvoiceProcedure,
 			connect.WithSchema(billingServiceUpdateInvoiceMethodDescriptor),
@@ -559,7 +559,7 @@ type billingServiceClient struct {
 	getInvoice               *connect.Client[billing.Invoice, billing.Invoice]
 	getInvoices              *connect.Client[billing.GetInvoicesRequest, billing.Invoices]
 	getInvoicesCount         *connect.Client[billing.GetInvoicesCountRequest, billing.GetInvoicesCountResponse]
-	updateInvoice            *connect.Client[billing.Invoice, billing.Invoice]
+	updateInvoice            *connect.Client[billing.UpdateInvoiceRequest, billing.Invoice]
 	updateInvoiceStatus      *connect.Client[billing.UpdateInvoiceStatusRequest, billing.Invoice]
 }
 
@@ -664,7 +664,7 @@ func (c *billingServiceClient) GetInvoicesCount(ctx context.Context, req *connec
 }
 
 // UpdateInvoice calls nocloud.billing.BillingService.UpdateInvoice.
-func (c *billingServiceClient) UpdateInvoice(ctx context.Context, req *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error) {
+func (c *billingServiceClient) UpdateInvoice(ctx context.Context, req *connect.Request[billing.UpdateInvoiceRequest]) (*connect.Response[billing.Invoice], error) {
 	return c.updateInvoice.CallUnary(ctx, req)
 }
 
@@ -695,7 +695,7 @@ type BillingServiceHandler interface {
 	GetInvoice(context.Context, *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error)
 	GetInvoices(context.Context, *connect.Request[billing.GetInvoicesRequest]) (*connect.Response[billing.Invoices], error)
 	GetInvoicesCount(context.Context, *connect.Request[billing.GetInvoicesCountRequest]) (*connect.Response[billing.GetInvoicesCountResponse], error)
-	UpdateInvoice(context.Context, *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error)
+	UpdateInvoice(context.Context, *connect.Request[billing.UpdateInvoiceRequest]) (*connect.Response[billing.Invoice], error)
 	UpdateInvoiceStatus(context.Context, *connect.Request[billing.UpdateInvoiceStatusRequest]) (*connect.Response[billing.Invoice], error)
 }
 
@@ -972,7 +972,7 @@ func (UnimplementedBillingServiceHandler) GetInvoicesCount(context.Context, *con
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.BillingService.GetInvoicesCount is not implemented"))
 }
 
-func (UnimplementedBillingServiceHandler) UpdateInvoice(context.Context, *connect.Request[billing.Invoice]) (*connect.Response[billing.Invoice], error) {
+func (UnimplementedBillingServiceHandler) UpdateInvoice(context.Context, *connect.Request[billing.UpdateInvoiceRequest]) (*connect.Response[billing.Invoice], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.BillingService.UpdateInvoice is not implemented"))
 }
 
