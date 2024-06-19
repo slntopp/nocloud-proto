@@ -294,6 +294,11 @@ message CreateInvoiceRequest{
   bool is_send_email = 2;
 }
 
+message UpdateInvoiceRequest{
+  Invoice invoice = 1;
+  bool is_send_email = 2;
+}
+
 message UpdateInvoiceStatusRequest{
   message Params{
     int64 payment_date = 1;
@@ -509,7 +514,7 @@ service BillingService {
       body: "*"
     };
   };
-  rpc UpdateInvoice (Invoice) returns (Invoice) {
+  rpc UpdateInvoice (UpdateInvoiceRequest) returns (Invoice) {
     option (google.api.http) = {
       patch: "/billing/invoices/{uuid}"
       body: "*"
