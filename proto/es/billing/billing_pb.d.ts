@@ -791,29 +791,27 @@ export declare class Transaction extends Message<Transaction> {
  */
 export declare class Item extends Message<Item> {
   /**
-   * string title = 1; removed
-   *
-   * @generated from field: int32 amount = 2;
+   * @generated from field: int32 amount = 1;
    */
   amount: number;
 
   /**
-   * @generated from field: string unit = 3;
+   * @generated from field: string unit = 2;
    */
   unit: string;
 
   /**
-   * @generated from field: double price = 4;
+   * @generated from field: double price = 3;
    */
   price: number;
 
   /**
-   * @generated from field: string instance = 5;
+   * @generated from field: string instance = 4;
    */
   instance: string;
 
   /**
-   * @generated from field: string description = 6;
+   * @generated from field: string description = 5;
    */
   description: string;
 

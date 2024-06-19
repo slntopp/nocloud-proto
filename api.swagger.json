@@ -6761,8 +6761,7 @@
       "properties": {
         "amount": {
           "type": "integer",
-          "format": "int32",
-          "title": "string title = 1; removed"
+          "format": "int32"
         },
         "unit": {
           "type": "string"
