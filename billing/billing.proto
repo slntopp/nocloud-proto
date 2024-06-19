@@ -516,7 +516,7 @@ service BillingService {
   };
   rpc UpdateInvoice (UpdateInvoiceRequest) returns (Invoice) {
     option (google.api.http) = {
-      patch: "/billing/invoices/{uuid}"
+      patch: "/billing/invoices"
       body: "*"
     };
   };
