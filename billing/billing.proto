@@ -194,12 +194,11 @@ enum ActionType {
 
 // Position. Instance must be specified to connect action with instance
 message Item {
-  //string title = 1; removed
-  int32 amount = 2;
-  string unit = 3;
-  double price = 4;
-  string instance = 5;
-  string description = 6;
+  int32 amount = 1;
+  string unit = 2;
+  double price = 3;
+  string instance = 4;
+  string description = 5;
 }
 
 message Invoice {
@@ -229,8 +228,7 @@ message Record {
   int64 end = 3;   // Timestamp of Record coverage frame end
   int64 exec = 4;  // Time when Record must be processed
 
-  bool processed =
-      5; // Wether Record has been processed(converted to Transaction)
+  bool processed = 5; // Wether Record has been processed(converted to Transaction)
 
   Priority priority = 6;
   string instance = 7;                   // Instance UUID
