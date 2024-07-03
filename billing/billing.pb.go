@@ -1200,12 +1200,12 @@ type Transaction struct {
 	Records   []string `protobuf:"bytes,8,rep,name=records,proto3" json:"records,omitempty"` // list of records UUIDs
 	Total     float64  `protobuf:"fixed64,9,opt,name=total,proto3" json:"total,omitempty"`   // Transaction total value in NCU
 	// Transaction meta data, like
-	//meta: {
-	//total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
-	//Mb, IP quantity price_atm: <number> // hourly price per quant of resouce at
-	//the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
-	//Type(SSD/HDD/NVMe/etc)
-	//}
+	// meta: {
+	// total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
+	// Mb, IP quantity price_atm: <number> // hourly price per quant of resouce at
+	// the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
+	// Type(SSD/HDD/NVMe/etc)
+	// }
 	Meta     map[string]*structpb.Value `protobuf:"bytes,10,rep,name=meta,proto3" json:"meta,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	Currency *Currency                  `protobuf:"bytes,11,opt,name=currency,proto3" json:"currency,omitempty"`
 	Created  int64                      `protobuf:"varint,12,opt,name=created,proto3" json:"created,omitempty"`
@@ -1685,12 +1685,12 @@ type Record struct {
 	Product   string              `protobuf:"bytes,10,opt,name=product,proto3" json:"product,omitempty"`                              // Product key
 	Total     float64             `protobuf:"fixed64,11,opt,name=total,proto3" json:"total,omitempty"`                                // Record total value in NCU
 	// Record meta data, like
-	//meta: {
-	//total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
-	//Mb, IP quantity price_atm: <number> // hourly price per quant of resouce at
-	//the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
-	//Type(SSD/HDD/NVMe/etc)
-	//}
+	// meta: {
+	// total: <number> // resource "quantity", e.g. CPU cores, RAM Mb, Drive
+	// Mb, IP quantity price_atm: <number> // hourly price per quant of resouce at
+	// the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
+	// Type(SSD/HDD/NVMe/etc)
+	// }
 	Meta     map[string]*structpb.Value `protobuf:"bytes,12,rep,name=meta,proto3" json:"meta,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	Currency *Currency                  `protobuf:"bytes,13,opt,name=currency,proto3" json:"currency,omitempty"`
 	Service  string                     `protobuf:"bytes,14,opt,name=service,proto3" json:"service,omitempty"`

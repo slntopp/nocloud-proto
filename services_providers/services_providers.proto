@@ -36,6 +36,11 @@ message LocationConf {
   string type = 6;
 }
 
+message Hook{
+  string playbook = 1;
+  map<string, string> vars = 2;
+}
+
 message ServicesProvider {
   string uuid = 1;
   string type = 2;
@@ -53,6 +58,7 @@ message ServicesProvider {
   map<string, google.protobuf.Value> meta = 13;
 
   statuses.NoCloudStatus status = 14;
+  map<string, Hook> hooks = 15;
 }
 
 message TestResponse {

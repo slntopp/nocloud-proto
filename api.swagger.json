@@ -2830,7 +2830,7 @@
           },
           {
             "name": "meta",
-            "description": "Transaction meta data, like\r\nmeta: {\r\ntotal: \u003cnumber\u003e // resource \"quantity\", e.g. CPU cores, RAM Mb, Drive\r\nMb, IP quantity price_atm: \u003cnumber\u003e // hourly price per quant of resouce at\r\nthe moment, e.g. 1 NCU [other keys]: \u003cany\u003e // for example Drive\r\nType(SSD/HDD/NVMe/etc)\r\n}\n\nThis is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "description": "Transaction meta data, like\nmeta: {\ntotal: \u003cnumber\u003e // resource \"quantity\", e.g. CPU cores, RAM Mb, Drive\nMb, IP quantity price_atm: \u003cnumber\u003e // hourly price per quant of resouce at\nthe moment, e.g. 1 NCU [other keys]: \u003cany\u003e // for example Drive\nType(SSD/HDD/NVMe/etc)\n}\n\nThis is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
             "in": "query",
             "required": false
           },
@@ -3521,6 +3521,290 @@
       }
     },
     "/instances/{uuid}": {
+      "get": {
+        "operationId": "InstancesService_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/nocloudinstancesInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNSPECIFIED",
+              "INIT",
+              "MODIFIED",
+              "UP",
+              "DOWN",
+              "DEL",
+              "PROC",
+              "SUS",
+              "DETACHED"
+            ],
+            "default": "UNSPECIFIED"
+          },
+          {
+            "name": "config",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "resources",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "data",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "state.state",
+            "description": "NoCloud Instance State",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "INIT",
+              "UNKNOWN",
+              "STOPPED",
+              "RUNNING",
+              "FAILURE",
+              "DELETED",
+              "SUSPENDED",
+              "OPERATION",
+              "PENDING"
+            ],
+            "default": "INIT"
+          },
+          {
+            "name": "state.meta",
+            "description": "Driver(Provider/Hypervisor) State data\n\nThis is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "state.ts",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "hash",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "billingPlan.uuid",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "billingPlan.title",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "billingPlan.type",
+            "description": "Instance / InstanceGroup type supported by this plan",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "billingPlan.public",
+            "description": "if true, then this plan is available for all users",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "billingPlan.kind",
+            "description": "dynamic(based on resources) or static(based on products)\n\n - UNKNOWN: Default value; should never be used but will be treated as DYNAMIC",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "DYNAMIC",
+              "STATIC"
+            ],
+            "default": "UNKNOWN"
+          },
+          {
+            "name": "billingPlan.products",
+            "description": "Products to make plan pre defined(map key is product key like sm, lg\n\nThis is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "billingPlan.meta",
+            "description": "or whatever)\n\nThis is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "billingPlan.fee.precision",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "billingPlan.fee.round",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "NONE",
+              "FLOOR",
+              "ROUND",
+              "CEIL"
+            ],
+            "default": "NONE"
+          },
+          {
+            "name": "billingPlan.fee.default",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "billingPlan.status",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNSPECIFIED",
+              "INIT",
+              "MODIFIED",
+              "UP",
+              "DOWN",
+              "DEL",
+              "PROC",
+              "SUS",
+              "DETACHED"
+            ],
+            "default": "UNSPECIFIED"
+          },
+          {
+            "name": "billingPlan.addons",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "product",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "access.level",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "NONE",
+              "READ",
+              "MGMT",
+              "ADMIN",
+              "ROOT"
+            ],
+            "default": "NONE"
+          },
+          {
+            "name": "access.role",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "access.namespace",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "created",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "addons",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "deleted",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "estimate",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          }
+        ],
+        "tags": [
+          "InstancesService"
+        ]
+      },
       "delete": {
         "operationId": "InstancesService_Delete",
         "responses": {
@@ -4220,7 +4504,7 @@
         ]
       },
       "put": {
-        "summary": "rpc TestConfig(nocloud.services.CreateRequest)\r\nreturns (nocloud.services.TestConfigResponse) {\r\noption (google.api.http) = {\r\npost : \"/services\"\r\nbody : \"*\"\r\n};\r\n};",
+        "summary": "rpc TestConfig(nocloud.services.CreateRequest)\nreturns (nocloud.services.TestConfigResponse) {\noption (google.api.http) = {\npost : \"/services\"\nbody : \"*\"\n};\n};",
         "operationId": "ServicesService_Create",
         "responses": {
           "200": {
@@ -5507,7 +5791,7 @@
         "meta": {
           "type": "object",
           "additionalProperties": {},
-          "title": "Transaction meta data, like\r\nmeta: {\r\ntotal: \u003cnumber\u003e // resource \"quantity\", e.g. CPU cores, RAM Mb, Drive\r\nMb, IP quantity price_atm: \u003cnumber\u003e // hourly price per quant of resouce at\r\nthe moment, e.g. 1 NCU [other keys]: \u003cany\u003e // for example Drive\r\nType(SSD/HDD/NVMe/etc)\r\n}"
+          "title": "Transaction meta data, like\nmeta: {\ntotal: \u003cnumber\u003e // resource \"quantity\", e.g. CPU cores, RAM Mb, Drive\nMb, IP quantity price_atm: \u003cnumber\u003e // hourly price per quant of resouce at\nthe moment, e.g. 1 NCU [other keys]: \u003cany\u003e // for example Drive\nType(SSD/HDD/NVMe/etc)\n}"
         },
         "currency": {
           "$ref": "#/definitions/billingCurrency"
@@ -6020,7 +6304,7 @@
         },
         "title": {
           "type": "string",
-          "title": "Url to or Base64 encoded Image to be used as Playbook logo in the\r\nMarketplace"
+          "title": "Url to or Base64 encoded Image to be used as Playbook logo in the\nMarketplace"
         },
         "description": {
           "type": "string",
@@ -6051,7 +6335,7 @@
             },
             "title": {
               "type": "string",
-              "title": "Url to or Base64 encoded Image to be used as Playbook logo in the\r\nMarketplace"
+              "title": "Url to or Base64 encoded Image to be used as Playbook logo in the\nMarketplace"
             },
             "description": {
               "type": "string",
@@ -6107,7 +6391,7 @@
         },
         "sshKey": {
           "type": "string",
-          "title": "Use custom Private Key for SSH (applied to all Instances, can be\r\noverriden only with login/pass)"
+          "title": "Use custom Private Key for SSH (applied to all Instances, can be\noverriden only with login/pass)"
         },
         "access": {
           "$ref": "#/definitions/accessAccess"
@@ -6901,7 +7185,7 @@
         },
         "except": {
           "type": "boolean",
-          "title": "If except set to true then transaction will be created if Instance is in\r\none of the states listed in on If except set to false then transaction will\r\nbe created if Instance is NOT in one of the states listed in on"
+          "title": "If except set to true then transaction will be created if Instance is in\none of the states listed in on If except set to false then transaction will\nbe created if Instance is NOT in one of the states listed in on"
         },
         "on": {
           "type": "array",
@@ -6996,7 +7280,7 @@
         "meta": {
           "type": "object",
           "additionalProperties": {},
-          "title": "Transaction meta data, like\r\nmeta: {\r\ntotal: \u003cnumber\u003e // resource \"quantity\", e.g. CPU cores, RAM Mb, Drive\r\nMb, IP quantity price_atm: \u003cnumber\u003e // hourly price per quant of resouce at\r\nthe moment, e.g. 1 NCU [other keys]: \u003cany\u003e // for example Drive\r\nType(SSD/HDD/NVMe/etc)\r\n}"
+          "title": "Transaction meta data, like\nmeta: {\ntotal: \u003cnumber\u003e // resource \"quantity\", e.g. CPU cores, RAM Mb, Drive\nMb, IP quantity price_atm: \u003cnumber\u003e // hourly price per quant of resouce at\nthe moment, e.g. 1 NCU [other keys]: \u003cany\u003e // for example Drive\nType(SSD/HDD/NVMe/etc)\n}"
         },
         "currency": {
           "$ref": "#/definitions/billingCurrency"
@@ -7759,7 +8043,7 @@
         "meta": {
           "type": "object",
           "additionalProperties": {},
-          "title": "Record meta data, like\r\nmeta: {\r\ntotal: \u003cnumber\u003e // resource \"quantity\", e.g. CPU cores, RAM Mb, Drive\r\nMb, IP quantity price_atm: \u003cnumber\u003e // hourly price per quant of resouce at\r\nthe moment, e.g. 1 NCU [other keys]: \u003cany\u003e // for example Drive\r\nType(SSD/HDD/NVMe/etc)\r\n}"
+          "title": "Record meta data, like\nmeta: {\ntotal: \u003cnumber\u003e // resource \"quantity\", e.g. CPU cores, RAM Mb, Drive\nMb, IP quantity price_atm: \u003cnumber\u003e // hourly price per quant of resouce at\nthe moment, e.g. 1 NCU [other keys]: \u003cany\u003e // for example Drive\nType(SSD/HDD/NVMe/etc)\n}"
         },
         "currency": {
           "$ref": "#/definitions/billingCurrency"
@@ -8619,6 +8903,20 @@
         }
       }
     },
+    "services_providersHook": {
+      "type": "object",
+      "properties": {
+        "playbook": {
+          "type": "string"
+        },
+        "vars": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "services_providersListExtentionsResponse": {
       "type": "object",
       "properties": {
@@ -8737,6 +9035,12 @@
         },
         "status": {
           "$ref": "#/definitions/statusesNoCloudStatus"
+        },
+        "hooks": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/services_providersHook"
+          }
         }
       }
     },
@@ -8808,6 +9112,12 @@
         },
         "status": {
           "$ref": "#/definitions/statusesNoCloudStatus"
+        },
+        "hooks": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/services_providersHook"
+          }
         }
       }
     },
