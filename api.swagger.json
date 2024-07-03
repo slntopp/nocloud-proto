@@ -7485,6 +7485,20 @@
         }
       }
     },
+    "services_providersHook": {
+      "type": "object",
+      "properties": {
+        "playbook": {
+          "type": "string"
+        },
+        "vars": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "services_providersListExtentionsResponse": {
       "type": "object",
       "properties": {
@@ -7603,6 +7617,12 @@
         },
         "status": {
           "$ref": "#/definitions/statusesNoCloudStatus"
+        },
+        "hooks": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/services_providersHook"
+          }
         }
       }
     },
@@ -7674,6 +7694,12 @@
         },
         "status": {
           "$ref": "#/definitions/statusesNoCloudStatus"
+        },
+        "hooks": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/services_providersHook"
+          }
         }
       }
     },
