@@ -218,6 +218,12 @@ service InstancesService {
             body: "*"
         };
     };
+    rpc Get (nocloud.instances.Instance)
+            returns (nocloud.instances.Instance) {
+        option (google.api.http) = {
+            get: "/instances/{uuid}"
+        };
+    };
     rpc TransferIG (nocloud.instances.TransferIGRequest)
             returns (nocloud.instances.TransferIGResponse) {
         option (google.api.http) = {
