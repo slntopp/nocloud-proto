@@ -59,6 +59,17 @@ export const LocationConf = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message nocloud.services_providers.Hook
+ */
+export const Hook = proto3.makeMessageType(
+  "nocloud.services_providers.Hook",
+  () => [
+    { no: 1, name: "playbook", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "vars", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "scalar", T: 9 /* ScalarType.STRING */} },
+  ],
+);
+
+/**
  * @generated from message nocloud.services_providers.ServicesProvider
  */
 export const ServicesProvider = proto3.makeMessageType(
@@ -78,6 +89,7 @@ export const ServicesProvider = proto3.makeMessageType(
     { no: 12, name: "access", kind: "message", T: Access, opt: true },
     { no: 13, name: "meta", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
     { no: 14, name: "status", kind: "enum", T: proto3.getEnumType(NoCloudStatus) },
+    { no: 15, name: "hooks", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Hook} },
   ],
 );
 
