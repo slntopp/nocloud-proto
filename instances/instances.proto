@@ -27,6 +27,7 @@ import "notes/notes.proto";
 import "services_providers/services_providers.proto";
 import "states/states.proto";
 import "statuses/statuses.proto";
+import "registry/accounts/accounts.proto";
 
 message Instance {
     string uuid = 1;
@@ -159,6 +160,16 @@ message ResponseInstance {
     string service = 2;
     string sp = 3;
     string type = 4;
+    string account = 5;
+}
+
+message GetCountRequest {
+    map<string, google.protobuf.Value> filters = 5;
+}
+
+message GetCountResponse {
+    uint64 total = 1;
+    google.protobuf.Value unique = 2;
 }
 
 message ListInstancesResponse {
@@ -220,9 +231,15 @@ service InstancesService {
         };
     };
     rpc Get (nocloud.instances.Instance)
-            returns (nocloud.instances.Instance) {
+            returns (nocloud.instances.ResponseInstance) {
         option (google.api.http) = {
             get: "/instances/{uuid}"
+        };
+    };
+    rpc GetCount (nocloud.instances.GetCountRequest)
+            returns (nocloud.instances.GetCountResponse) {
+        option (google.api.http) = {
+            get: "/instances/{uuid}/count"
         };
     };
     rpc TransferIG (nocloud.instances.TransferIGRequest)
