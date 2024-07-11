@@ -3490,6 +3490,36 @@
         ]
       }
     },
+    "/instances/count": {
+      "get": {
+        "operationId": "InstancesService_GetCount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/instancesGetCountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filters",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          }
+        ],
+        "tags": [
+          "InstancesService"
+        ]
+      }
+    },
     "/instances/detach/{uuid}": {
       "delete": {
         "operationId": "InstancesService_Detach",
@@ -3527,7 +3557,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/nocloudinstancesInstance"
+              "$ref": "#/definitions/instancesResponseInstance"
             }
           },
           "default": {
@@ -7694,6 +7724,16 @@
         }
       }
     },
+    "instancesGetCountResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "unique": {}
+      }
+    },
     "instancesInstanceCostEstimation": {
       "type": "object",
       "properties": {
@@ -7834,6 +7874,9 @@
           "type": "string"
         },
         "type": {
+          "type": "string"
+        },
+        "account": {
           "type": "string"
         }
       }

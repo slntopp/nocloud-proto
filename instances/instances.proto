@@ -239,7 +239,7 @@ service InstancesService {
     rpc GetCount (nocloud.instances.GetCountRequest)
             returns (nocloud.instances.GetCountResponse) {
         option (google.api.http) = {
-            get: "/instances/{uuid}/count"
+            get: "/instances/count"
         };
     };
     rpc TransferIG (nocloud.instances.TransferIGRequest)

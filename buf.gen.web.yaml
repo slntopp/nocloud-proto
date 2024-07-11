@@ -1,8 +1,8 @@
 version: v1
 plugins:
-  - plugin: es
+  - plugin: buf.build/bufbuild/es
     out: proto/es
     opt: target=js+dts
-  - plugin: connect-es
+  - plugin: buf.build/bufbuild/connect-es
     out: proto/es
     opt: target=js+dts

@@ -2779,7 +2779,7 @@ func (x *CostEstimation) GetTotal() float64 {
 	return 0
 }
 
-// -------------------------------------
+//-------------------------------------
 type GetInstancesReportRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2977,7 +2977,7 @@ func (x *GetInstancesReportResponse) GetReports() []*InstanceReport {
 	return nil
 }
 
-// -------------------------------------
+//-------------------------------------
 type GetRecordsReportsRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3136,7 +3136,7 @@ func (x *GetRecordsReportsResponse) GetCount() int64 {
 	return 0
 }
 
-// -------------------------------------
+//-------------------------------------
 type GetInstancesReportsCountRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3175,7 +3175,7 @@ func (*GetInstancesReportsCountRequest) Descriptor() ([]byte, []int) {
 	return file_billing_billing_proto_rawDescGZIP(), []int{35}
 }
 
-// -------------------------------------
+//-------------------------------------
 type GetRecordsReportsCountRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

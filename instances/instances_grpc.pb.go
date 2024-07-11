@@ -44,6 +44,7 @@ const (
 	InstancesService_Attach_FullMethodName           = "/nocloud.instances.InstancesService/Attach"
 	InstancesService_List_FullMethodName             = "/nocloud.instances.InstancesService/List"
 	InstancesService_Get_FullMethodName              = "/nocloud.instances.InstancesService/Get"
+	InstancesService_GetCount_FullMethodName         = "/nocloud.instances.InstancesService/GetCount"
 	InstancesService_TransferIG_FullMethodName       = "/nocloud.instances.InstancesService/TransferIG"
 	InstancesService_TransferInstance_FullMethodName = "/nocloud.instances.InstancesService/TransferInstance"
 )
@@ -60,7 +61,8 @@ type InstancesServiceClient interface {
 	Detach(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
 	Attach(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
 	List(ctx context.Context, in *ListInstancesRequest, opts ...grpc.CallOption) (*ListInstancesResponse, error)
-	Get(ctx context.Context, in *Instance, opts ...grpc.CallOption) (*Instance, error)
+	Get(ctx context.Context, in *Instance, opts ...grpc.CallOption) (*ResponseInstance, error)
+	GetCount(ctx context.Context, in *GetCountRequest, opts ...grpc.CallOption) (*GetCountResponse, error)
 	TransferIG(ctx context.Context, in *TransferIGRequest, opts ...grpc.CallOption) (*TransferIGResponse, error)
 	TransferInstance(ctx context.Context, in *TransferInstanceRequest, opts ...grpc.CallOption) (*TransferInstanceResponse, error)
 }
@@ -153,10 +155,20 @@ func (c *instancesServiceClient) List(ctx context.Context, in *ListInstancesRequ
 	return out, nil
 }
 
-func (c *instancesServiceClient) Get(ctx context.Context, in *Instance, opts ...grpc.CallOption) (*Instance, error) {
+func (c *instancesServiceClient) Get(ctx context.Context, in *Instance, opts ...grpc.CallOption) (*ResponseInstance, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Instance)
+	out := new(ResponseInstance)
 	err := c.cc.Invoke(ctx, InstancesService_Get_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *instancesServiceClient) GetCount(ctx context.Context, in *GetCountRequest, opts ...grpc.CallOption) (*GetCountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCountResponse)
+	err := c.cc.Invoke(ctx, InstancesService_GetCount_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -195,7 +207,8 @@ type InstancesServiceServer interface {
 	Detach(context.Context, *DeleteRequest) (*DeleteResponse, error)
 	Attach(context.Context, *DeleteRequest) (*DeleteResponse, error)
 	List(context.Context, *ListInstancesRequest) (*ListInstancesResponse, error)
-	Get(context.Context, *Instance) (*Instance, error)
+	Get(context.Context, *Instance) (*ResponseInstance, error)
+	GetCount(context.Context, *GetCountRequest) (*GetCountResponse, error)
 	TransferIG(context.Context, *TransferIGRequest) (*TransferIGResponse, error)
 	TransferInstance(context.Context, *TransferInstanceRequest) (*TransferInstanceResponse, error)
 	mustEmbedUnimplementedInstancesServiceServer()
@@ -229,8 +242,11 @@ func (UnimplementedInstancesServiceServer) Attach(context.Context, *DeleteReques
 func (UnimplementedInstancesServiceServer) List(context.Context, *ListInstancesRequest) (*ListInstancesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
-func (UnimplementedInstancesServiceServer) Get(context.Context, *Instance) (*Instance, error) {
+func (UnimplementedInstancesServiceServer) Get(context.Context, *Instance) (*ResponseInstance, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedInstancesServiceServer) GetCount(context.Context, *GetCountRequest) (*GetCountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCount not implemented")
 }
 func (UnimplementedInstancesServiceServer) TransferIG(context.Context, *TransferIGRequest) (*TransferIGResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TransferIG not implemented")
@@ -413,6 +429,24 @@ func _InstancesService_Get_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _InstancesService_GetCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstancesServiceServer).GetCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstancesService_GetCount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstancesServiceServer).GetCount(ctx, req.(*GetCountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _InstancesService_TransferIG_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TransferIGRequest)
 	if err := dec(in); err != nil {
@@ -491,6 +525,10 @@ var InstancesService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Get",
 			Handler:    _InstancesService_Get_Handler,
+		},
+		{
+			MethodName: "GetCount",
+			Handler:    _InstancesService_GetCount_Handler,
 		},
 		{
 			MethodName: "TransferIG",

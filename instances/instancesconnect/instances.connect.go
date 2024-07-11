@@ -70,6 +70,9 @@ const (
 	InstancesServiceListProcedure = "/nocloud.instances.InstancesService/List"
 	// InstancesServiceGetProcedure is the fully-qualified name of the InstancesService's Get RPC.
 	InstancesServiceGetProcedure = "/nocloud.instances.InstancesService/Get"
+	// InstancesServiceGetCountProcedure is the fully-qualified name of the InstancesService's GetCount
+	// RPC.
+	InstancesServiceGetCountProcedure = "/nocloud.instances.InstancesService/GetCount"
 	// InstancesServiceTransferIGProcedure is the fully-qualified name of the InstancesService's
 	// TransferIG RPC.
 	InstancesServiceTransferIGProcedure = "/nocloud.instances.InstancesService/TransferIG"
@@ -90,6 +93,7 @@ var (
 	instancesServiceAttachMethodDescriptor           = instancesServiceServiceDescriptor.Methods().ByName("Attach")
 	instancesServiceListMethodDescriptor             = instancesServiceServiceDescriptor.Methods().ByName("List")
 	instancesServiceGetMethodDescriptor              = instancesServiceServiceDescriptor.Methods().ByName("Get")
+	instancesServiceGetCountMethodDescriptor         = instancesServiceServiceDescriptor.Methods().ByName("GetCount")
 	instancesServiceTransferIGMethodDescriptor       = instancesServiceServiceDescriptor.Methods().ByName("TransferIG")
 	instancesServiceTransferInstanceMethodDescriptor = instancesServiceServiceDescriptor.Methods().ByName("TransferInstance")
 )
@@ -104,7 +108,8 @@ type InstancesServiceClient interface {
 	Detach(context.Context, *connect.Request[instances.DeleteRequest]) (*connect.Response[instances.DeleteResponse], error)
 	Attach(context.Context, *connect.Request[instances.DeleteRequest]) (*connect.Response[instances.DeleteResponse], error)
 	List(context.Context, *connect.Request[instances.ListInstancesRequest]) (*connect.Response[instances.ListInstancesResponse], error)
-	Get(context.Context, *connect.Request[instances.Instance]) (*connect.Response[instances.Instance], error)
+	Get(context.Context, *connect.Request[instances.Instance]) (*connect.Response[instances.ResponseInstance], error)
+	GetCount(context.Context, *connect.Request[instances.GetCountRequest]) (*connect.Response[instances.GetCountResponse], error)
 	TransferIG(context.Context, *connect.Request[instances.TransferIGRequest]) (*connect.Response[instances.TransferIGResponse], error)
 	TransferInstance(context.Context, *connect.Request[instances.TransferInstanceRequest]) (*connect.Response[instances.TransferInstanceResponse], error)
 }
@@ -167,10 +172,16 @@ func NewInstancesServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(instancesServiceListMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
-		get: connect.NewClient[instances.Instance, instances.Instance](
+		get: connect.NewClient[instances.Instance, instances.ResponseInstance](
 			httpClient,
 			baseURL+InstancesServiceGetProcedure,
 			connect.WithSchema(instancesServiceGetMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		getCount: connect.NewClient[instances.GetCountRequest, instances.GetCountResponse](
+			httpClient,
+			baseURL+InstancesServiceGetCountProcedure,
+			connect.WithSchema(instancesServiceGetCountMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		transferIG: connect.NewClient[instances.TransferIGRequest, instances.TransferIGResponse](
@@ -198,7 +209,8 @@ type instancesServiceClient struct {
 	detach           *connect.Client[instances.DeleteRequest, instances.DeleteResponse]
 	attach           *connect.Client[instances.DeleteRequest, instances.DeleteResponse]
 	list             *connect.Client[instances.ListInstancesRequest, instances.ListInstancesResponse]
-	get              *connect.Client[instances.Instance, instances.Instance]
+	get              *connect.Client[instances.Instance, instances.ResponseInstance]
+	getCount         *connect.Client[instances.GetCountRequest, instances.GetCountResponse]
 	transferIG       *connect.Client[instances.TransferIGRequest, instances.TransferIGResponse]
 	transferInstance *connect.Client[instances.TransferInstanceRequest, instances.TransferInstanceResponse]
 }
@@ -244,8 +256,13 @@ func (c *instancesServiceClient) List(ctx context.Context, req *connect.Request[
 }
 
 // Get calls nocloud.instances.InstancesService.Get.
-func (c *instancesServiceClient) Get(ctx context.Context, req *connect.Request[instances.Instance]) (*connect.Response[instances.Instance], error) {
+func (c *instancesServiceClient) Get(ctx context.Context, req *connect.Request[instances.Instance]) (*connect.Response[instances.ResponseInstance], error) {
 	return c.get.CallUnary(ctx, req)
+}
+
+// GetCount calls nocloud.instances.InstancesService.GetCount.
+func (c *instancesServiceClient) GetCount(ctx context.Context, req *connect.Request[instances.GetCountRequest]) (*connect.Response[instances.GetCountResponse], error) {
+	return c.getCount.CallUnary(ctx, req)
 }
 
 // TransferIG calls nocloud.instances.InstancesService.TransferIG.
@@ -268,7 +285,8 @@ type InstancesServiceHandler interface {
 	Detach(context.Context, *connect.Request[instances.DeleteRequest]) (*connect.Response[instances.DeleteResponse], error)
 	Attach(context.Context, *connect.Request[instances.DeleteRequest]) (*connect.Response[instances.DeleteResponse], error)
 	List(context.Context, *connect.Request[instances.ListInstancesRequest]) (*connect.Response[instances.ListInstancesResponse], error)
-	Get(context.Context, *connect.Request[instances.Instance]) (*connect.Response[instances.Instance], error)
+	Get(context.Context, *connect.Request[instances.Instance]) (*connect.Response[instances.ResponseInstance], error)
+	GetCount(context.Context, *connect.Request[instances.GetCountRequest]) (*connect.Response[instances.GetCountResponse], error)
 	TransferIG(context.Context, *connect.Request[instances.TransferIGRequest]) (*connect.Response[instances.TransferIGResponse], error)
 	TransferInstance(context.Context, *connect.Request[instances.TransferInstanceRequest]) (*connect.Response[instances.TransferInstanceResponse], error)
 }
@@ -333,6 +351,12 @@ func NewInstancesServiceHandler(svc InstancesServiceHandler, opts ...connect.Han
 		connect.WithSchema(instancesServiceGetMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	instancesServiceGetCountHandler := connect.NewUnaryHandler(
+		InstancesServiceGetCountProcedure,
+		svc.GetCount,
+		connect.WithSchema(instancesServiceGetCountMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	instancesServiceTransferIGHandler := connect.NewUnaryHandler(
 		InstancesServiceTransferIGProcedure,
 		svc.TransferIG,
@@ -365,6 +389,8 @@ func NewInstancesServiceHandler(svc InstancesServiceHandler, opts ...connect.Han
 			instancesServiceListHandler.ServeHTTP(w, r)
 		case InstancesServiceGetProcedure:
 			instancesServiceGetHandler.ServeHTTP(w, r)
+		case InstancesServiceGetCountProcedure:
+			instancesServiceGetCountHandler.ServeHTTP(w, r)
 		case InstancesServiceTransferIGProcedure:
 			instancesServiceTransferIGHandler.ServeHTTP(w, r)
 		case InstancesServiceTransferInstanceProcedure:
@@ -410,8 +436,12 @@ func (UnimplementedInstancesServiceHandler) List(context.Context, *connect.Reque
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.instances.InstancesService.List is not implemented"))
 }
 
-func (UnimplementedInstancesServiceHandler) Get(context.Context, *connect.Request[instances.Instance]) (*connect.Response[instances.Instance], error) {
+func (UnimplementedInstancesServiceHandler) Get(context.Context, *connect.Request[instances.Instance]) (*connect.Response[instances.ResponseInstance], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.instances.InstancesService.Get is not implemented"))
+}
+
+func (UnimplementedInstancesServiceHandler) GetCount(context.Context, *connect.Request[instances.GetCountRequest]) (*connect.Response[instances.GetCountResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.instances.InstancesService.GetCount is not implemented"))
 }
 
 func (UnimplementedInstancesServiceHandler) TransferIG(context.Context, *connect.Request[instances.TransferIGRequest]) (*connect.Response[instances.TransferIGResponse], error) {
