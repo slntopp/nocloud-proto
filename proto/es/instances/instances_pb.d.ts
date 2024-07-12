@@ -725,33 +725,33 @@ export declare class ResponseInstance extends Message<ResponseInstance> {
 }
 
 /**
- * @generated from message nocloud.instances.GetCountRequest
+ * @generated from message nocloud.instances.GetUniqueRequest
  */
-export declare class GetCountRequest extends Message<GetCountRequest> {
+export declare class GetUniqueRequest extends Message<GetUniqueRequest> {
   /**
    * @generated from field: map<string, google.protobuf.Value> filters = 5;
    */
   filters: { [key: string]: Value };
 
-  constructor(data?: PartialMessage<GetCountRequest>);
+  constructor(data?: PartialMessage<GetUniqueRequest>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "nocloud.instances.GetCountRequest";
+  static readonly typeName = "nocloud.instances.GetUniqueRequest";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetCountRequest;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetUniqueRequest;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetCountRequest;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetUniqueRequest;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetCountRequest;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetUniqueRequest;
 
-  static equals(a: GetCountRequest | PlainMessage<GetCountRequest> | undefined, b: GetCountRequest | PlainMessage<GetCountRequest> | undefined): boolean;
+  static equals(a: GetUniqueRequest | PlainMessage<GetUniqueRequest> | undefined, b: GetUniqueRequest | PlainMessage<GetUniqueRequest> | undefined): boolean;
 }
 
 /**
- * @generated from message nocloud.instances.GetCountResponse
+ * @generated from message nocloud.instances.GetUniqueResponse
  */
-export declare class GetCountResponse extends Message<GetCountResponse> {
+export declare class GetUniqueResponse extends Message<GetUniqueResponse> {
   /**
    * @generated from field: uint64 total = 1;
    */
@@ -762,19 +762,19 @@ export declare class GetCountResponse extends Message<GetCountResponse> {
    */
   unique?: Value;
 
-  constructor(data?: PartialMessage<GetCountResponse>);
+  constructor(data?: PartialMessage<GetUniqueResponse>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "nocloud.instances.GetCountResponse";
+  static readonly typeName = "nocloud.instances.GetUniqueResponse";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetCountResponse;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetUniqueResponse;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetCountResponse;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetUniqueResponse;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetCountResponse;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetUniqueResponse;
 
-  static equals(a: GetCountResponse | PlainMessage<GetCountResponse> | undefined, b: GetCountResponse | PlainMessage<GetCountResponse> | undefined): boolean;
+  static equals(a: GetUniqueResponse | PlainMessage<GetUniqueResponse> | undefined, b: GetUniqueResponse | PlainMessage<GetUniqueResponse> | undefined): boolean;
 }
 
 /**

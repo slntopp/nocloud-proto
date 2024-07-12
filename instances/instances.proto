@@ -163,11 +163,11 @@ message ResponseInstance {
     string account = 5;
 }
 
-message GetCountRequest {
+message GetUniqueRequest {
     map<string, google.protobuf.Value> filters = 5;
 }
 
-message GetCountResponse {
+message GetUniqueResponse {
     uint64 total = 1;
     google.protobuf.Value unique = 2;
 }
@@ -236,10 +236,10 @@ service InstancesService {
             get: "/instances/{uuid}"
         };
     };
-    rpc GetCount (nocloud.instances.GetCountRequest)
-            returns (nocloud.instances.GetCountResponse) {
+    rpc GetUnique (nocloud.instances.GetUniqueRequest)
+            returns (nocloud.instances.GetUniqueResponse) {
         option (google.api.http) = {
-            get: "/instances/count"
+            get: "/instances/unique"
         };
     };
     rpc TransferIG (nocloud.instances.TransferIGRequest)

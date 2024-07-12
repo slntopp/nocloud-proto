@@ -260,20 +260,20 @@ export const ResponseInstance = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
- * @generated from message nocloud.instances.GetCountRequest
+ * @generated from message nocloud.instances.GetUniqueRequest
  */
-export const GetCountRequest = /*@__PURE__*/ proto3.makeMessageType(
-  "nocloud.instances.GetCountRequest",
+export const GetUniqueRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.instances.GetUniqueRequest",
   () => [
     { no: 5, name: "filters", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
   ],
 );
 
 /**
- * @generated from message nocloud.instances.GetCountResponse
+ * @generated from message nocloud.instances.GetUniqueResponse
  */
-export const GetCountResponse = /*@__PURE__*/ proto3.makeMessageType(
-  "nocloud.instances.GetCountResponse",
+export const GetUniqueResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.instances.GetUniqueResponse",
   () => [
     { no: 1, name: "total", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
     { no: 2, name: "unique", kind: "message", T: Value },
