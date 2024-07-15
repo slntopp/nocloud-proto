@@ -242,6 +242,7 @@ export const ListInstancesRequest = /*@__PURE__*/ proto3.makeMessageType(
     { no: 3, name: "field", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 4, name: "sort", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 5, name: "filters", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
+    { no: 6, name: "custom_order", kind: "message", T: Value, opt: true },
   ],
 );
 

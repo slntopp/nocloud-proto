@@ -651,11 +651,15 @@ export declare class ListInstancesRequest extends Message<ListInstancesRequest> 
   limit?: bigint;
 
   /**
+   * Sort field
+   *
    * @generated from field: optional string field = 3;
    */
   field?: string;
 
   /**
+   * Sort direction
+   *
    * @generated from field: optional string sort = 4;
    */
   sort?: string;
@@ -664,6 +668,13 @@ export declare class ListInstancesRequest extends Message<ListInstancesRequest> 
    * @generated from field: map<string, google.protobuf.Value> filters = 5;
    */
   filters: { [key: string]: Value };
+
+  /**
+   * Sort custom order
+   *
+   * @generated from field: optional google.protobuf.Value custom_order = 6;
+   */
+  customOrder?: Value;
 
   constructor(data?: PartialMessage<ListInstancesRequest>);
 

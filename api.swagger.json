@@ -7834,14 +7834,19 @@
           "format": "uint64"
         },
         "field": {
-          "type": "string"
+          "type": "string",
+          "title": "Sort field"
         },
         "sort": {
-          "type": "string"
+          "type": "string",
+          "title": "Sort direction"
         },
         "filters": {
           "type": "object",
           "additionalProperties": {}
+        },
+        "customOrder": {
+          "title": "Sort custom order"
         }
       }
     },
