@@ -266,7 +266,7 @@ service InstancesService {
     rpc Update (nocloud.instances.UpdateRequest)
         returns (nocloud.instances.UpdateResponse) {
         option (google.api.http) = {
-            put: "/instances"
+            post: "/instances/update"
             body: "*"
         };
     };

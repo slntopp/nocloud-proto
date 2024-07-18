@@ -998,7 +998,7 @@ func RegisterInstancesServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 
 	})
 
-	mux.Handle("PUT", pattern_InstancesService_Update_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_InstancesService_Update_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -1006,7 +1006,7 @@ func RegisterInstancesServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.instances.InstancesService/Update", runtime.WithHTTPPathPattern("/instances"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/nocloud.instances.InstancesService/Update", runtime.WithHTTPPathPattern("/instances/update"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1359,13 +1359,13 @@ func RegisterInstancesServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 
 	})
 
-	mux.Handle("PUT", pattern_InstancesService_Update_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_InstancesService_Update_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.instances.InstancesService/Update", runtime.WithHTTPPathPattern("/instances"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.instances.InstancesService/Update", runtime.WithHTTPPathPattern("/instances/update"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1471,7 +1471,7 @@ var (
 
 	pattern_InstancesService_Create_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"instances", "create"}, ""))
 
-	pattern_InstancesService_Update_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"instances"}, ""))
+	pattern_InstancesService_Update_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"instances", "update"}, ""))
 
 	pattern_InstancesService_GetUnique_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"instances", "unique"}, ""))
 

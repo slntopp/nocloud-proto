@@ -3458,36 +3458,6 @@
         "tags": [
           "InstancesService"
         ]
-      },
-      "put": {
-        "operationId": "InstancesService_Update",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/nocloudinstancesUpdateResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/instancesUpdateRequest"
-            }
-          }
-        ],
-        "tags": [
-          "InstancesService"
-        ]
       }
     },
     "/instances/attach/{uuid}": {
@@ -3605,6 +3575,38 @@
             "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
             "in": "query",
             "required": false
+          }
+        ],
+        "tags": [
+          "InstancesService"
+        ]
+      }
+    },
+    "/instances/update": {
+      "post": {
+        "operationId": "InstancesService_Update",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/nocloudinstancesUpdateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/instancesUpdateRequest"
+            }
           }
         ],
         "tags": [
