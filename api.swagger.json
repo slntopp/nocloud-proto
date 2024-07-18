@@ -2159,6 +2159,12 @@
               "BALANCE"
             ],
             "default": "ACTION_TYPE_UNKNOWN"
+          },
+          {
+            "name": "number",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -7044,6 +7050,9 @@
         },
         "type": {
           "$ref": "#/definitions/billingActionType"
+        },
+        "number": {
+          "type": "string"
         }
       }
     },

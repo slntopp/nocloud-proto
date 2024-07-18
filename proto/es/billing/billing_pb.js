@@ -307,6 +307,7 @@ export const Invoice = /*@__PURE__*/ proto3.makeMessageType(
     { no: 12, name: "created", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 13, name: "items", kind: "message", T: Item, repeated: true },
     { no: 14, name: "type", kind: "enum", T: proto3.getEnumType(ActionType) },
+    { no: 15, name: "number", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

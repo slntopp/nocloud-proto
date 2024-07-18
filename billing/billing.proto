@@ -216,6 +216,7 @@ message Invoice {
   int64 created = 12;
   repeated Item items = 13;
   ActionType type = 14;
+  string number = 15;
 }
 
 message Invoices {repeated Invoice pool = 1;}

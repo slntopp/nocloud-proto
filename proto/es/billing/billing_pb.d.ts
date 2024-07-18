@@ -910,6 +910,11 @@ export declare class Invoice extends Message<Invoice> {
    */
   type: ActionType;
 
+  /**
+   * @generated from field: string number = 15;
+   */
+  number: string;
+
   constructor(data?: PartialMessage<Invoice>);
 
   static readonly runtime: typeof proto3;
