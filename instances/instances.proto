@@ -179,6 +179,24 @@ message ListInstancesResponse {
   int64 count = 2;
 }
 
+message CreateRequest{
+    string ig = 1;
+    Instance instance = 2;
+}
+
+message CreateResponse{
+    bool result = 1;
+    string id = 2;
+}
+
+message UpdateRequest{
+    Instance instance = 1;
+}
+
+message UpdateResponse{
+    bool result = 1;
+}
+
 service InstancesService {
     rpc Invoke (nocloud.instances.InvokeRequest)
             returns (nocloud.instances.InvokeResponse) {
@@ -236,6 +254,20 @@ service InstancesService {
             returns (nocloud.instances.ResponseInstance) {
         option (google.api.http) = {
             get: "/instances/{uuid}"
+        };
+    };
+    rpc Create (nocloud.instances.CreateRequest)
+        returns (nocloud.instances.CreateResponse) {
+        option (google.api.http) = {
+            post: "/instances/create"
+            body: "*"
+        };
+    };
+    rpc Update (nocloud.instances.UpdateRequest)
+        returns (nocloud.instances.UpdateResponse) {
+        option (google.api.http) = {
+            put: "/instances"
+            body: "*"
         };
     };
     rpc GetUnique (nocloud.instances.GetUniqueRequest)

@@ -297,7 +297,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/accountsUpdateResponse"
+              "$ref": "#/definitions/registryaccountsUpdateResponse"
             }
           },
           "default": {
@@ -3458,6 +3458,36 @@
         "tags": [
           "InstancesService"
         ]
+      },
+      "put": {
+        "operationId": "InstancesService_Update",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/nocloudinstancesUpdateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/instancesUpdateRequest"
+            }
+          }
+        ],
+        "tags": [
+          "InstancesService"
+        ]
       }
     },
     "/instances/attach/{uuid}": {
@@ -3483,6 +3513,38 @@
             "in": "path",
             "required": true,
             "type": "string"
+          }
+        ],
+        "tags": [
+          "InstancesService"
+        ]
+      }
+    },
+    "/instances/create": {
+      "post": {
+        "operationId": "InstancesService_Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/nocloudinstancesCreateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/nocloudinstancesCreateRequest"
+            }
           }
         ],
         "tags": [
@@ -6131,14 +6193,6 @@
         }
       }
     },
-    "accountsUpdateResponse": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "type": "boolean"
-        }
-      }
-    },
     "addonsAddon": {
       "type": "object",
       "properties": {
@@ -7942,6 +7996,14 @@
         }
       }
     },
+    "instancesUpdateRequest": {
+      "type": "object",
+      "properties": {
+        "instance": {
+          "$ref": "#/definitions/nocloudinstancesInstance"
+        }
+      }
+    },
     "namespacesJoinResponse": {
       "type": "object",
       "properties": {
@@ -8280,6 +8342,28 @@
       "default": "UNKNOWN",
       "title": "- SERVING: Service is up and running\n - OFFLINE: Service is offline(down)\n - RUNNING: Routine is running\n - STOPPED: Routine is stopped\n - INTERNAL: Internal error while making status\n - HASERRS: Check has errors\n - NOEXIST: Service has no Routines"
     },
+    "nocloudinstancesCreateRequest": {
+      "type": "object",
+      "properties": {
+        "ig": {
+          "type": "string"
+        },
+        "instance": {
+          "$ref": "#/definitions/nocloudinstancesInstance"
+        }
+      }
+    },
+    "nocloudinstancesCreateResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "boolean"
+        },
+        "id": {
+          "type": "string"
+        }
+      }
+    },
     "nocloudinstancesDeleteResponse": {
       "type": "object",
       "properties": {
@@ -8379,6 +8463,14 @@
         "meta": {
           "type": "object",
           "additionalProperties": {}
+        }
+      }
+    },
+    "nocloudinstancesUpdateResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "boolean"
         }
       }
     },
@@ -8792,6 +8884,14 @@
       }
     },
     "registryaccountsUnsuspendResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "boolean"
+        }
+      }
+    },
+    "registryaccountsUpdateResponse": {
       "type": "object",
       "properties": {
         "result": {

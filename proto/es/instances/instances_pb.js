@@ -292,3 +292,45 @@ export const ListInstancesResponse = /*@__PURE__*/ proto3.makeMessageType(
   ],
 );
 
+/**
+ * @generated from message nocloud.instances.CreateRequest
+ */
+export const CreateRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.instances.CreateRequest",
+  () => [
+    { no: 1, name: "ig", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "instance", kind: "message", T: Instance },
+  ],
+);
+
+/**
+ * @generated from message nocloud.instances.CreateResponse
+ */
+export const CreateResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.instances.CreateResponse",
+  () => [
+    { no: 1, name: "result", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 2, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.instances.UpdateRequest
+ */
+export const UpdateRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.instances.UpdateRequest",
+  () => [
+    { no: 1, name: "instance", kind: "message", T: Instance },
+  ],
+);
+
+/**
+ * @generated from message nocloud.instances.UpdateResponse
+ */
+export const UpdateResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.instances.UpdateResponse",
+  () => [
+    { no: 1, name: "result", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+

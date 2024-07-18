@@ -817,3 +817,109 @@ export declare class ListInstancesResponse extends Message<ListInstancesResponse
   static equals(a: ListInstancesResponse | PlainMessage<ListInstancesResponse> | undefined, b: ListInstancesResponse | PlainMessage<ListInstancesResponse> | undefined): boolean;
 }
 
+/**
+ * @generated from message nocloud.instances.CreateRequest
+ */
+export declare class CreateRequest extends Message<CreateRequest> {
+  /**
+   * @generated from field: string ig = 1;
+   */
+  ig: string;
+
+  /**
+   * @generated from field: nocloud.instances.Instance instance = 2;
+   */
+  instance?: Instance;
+
+  constructor(data?: PartialMessage<CreateRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.instances.CreateRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateRequest;
+
+  static equals(a: CreateRequest | PlainMessage<CreateRequest> | undefined, b: CreateRequest | PlainMessage<CreateRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.instances.CreateResponse
+ */
+export declare class CreateResponse extends Message<CreateResponse> {
+  /**
+   * @generated from field: bool result = 1;
+   */
+  result: boolean;
+
+  /**
+   * @generated from field: string id = 2;
+   */
+  id: string;
+
+  constructor(data?: PartialMessage<CreateResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.instances.CreateResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateResponse;
+
+  static equals(a: CreateResponse | PlainMessage<CreateResponse> | undefined, b: CreateResponse | PlainMessage<CreateResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.instances.UpdateRequest
+ */
+export declare class UpdateRequest extends Message<UpdateRequest> {
+  /**
+   * @generated from field: nocloud.instances.Instance instance = 1;
+   */
+  instance?: Instance;
+
+  constructor(data?: PartialMessage<UpdateRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.instances.UpdateRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateRequest;
+
+  static equals(a: UpdateRequest | PlainMessage<UpdateRequest> | undefined, b: UpdateRequest | PlainMessage<UpdateRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.instances.UpdateResponse
+ */
+export declare class UpdateResponse extends Message<UpdateResponse> {
+  /**
+   * @generated from field: bool result = 1;
+   */
+  result: boolean;
+
+  constructor(data?: PartialMessage<UpdateResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.instances.UpdateResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateResponse;
+
+  static equals(a: UpdateResponse | PlainMessage<UpdateResponse> | undefined, b: UpdateResponse | PlainMessage<UpdateResponse> | undefined): boolean;
+}
+
