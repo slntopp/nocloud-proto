@@ -55,7 +55,7 @@ message Instance {
     repeated string addons = 15;
     int64 deleted = 16;
 
-    int64 period = 17;
+    optional int64 period = 17;
     double estimate = 18;
 }
 

@@ -49,7 +49,7 @@ export const Instance = /*@__PURE__*/ proto3.makeMessageType(
     { no: 14, name: "admin_notes", kind: "message", T: AdminNote, repeated: true },
     { no: 15, name: "addons", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 16, name: "deleted", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 17, name: "period", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 17, name: "period", kind: "scalar", T: 3 /* ScalarType.INT64 */, opt: true },
     { no: 18, name: "estimate", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
   ],
 );

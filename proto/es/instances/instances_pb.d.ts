@@ -115,9 +115,9 @@ export declare class Instance extends Message<Instance> {
   deleted: bigint;
 
   /**
-   * @generated from field: int64 period = 17;
+   * @generated from field: optional int64 period = 17;
    */
-  period: bigint;
+  period?: bigint;
 
   /**
    * @generated from field: double estimate = 18;
