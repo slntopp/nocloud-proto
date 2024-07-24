@@ -254,6 +254,8 @@ message Record {
   optional string base = 16;
   optional string previous = 17;
   double cost = 18;
+
+  string addon = 19; // Addon key
 }
 
 message Records {repeated Record pool = 1;}

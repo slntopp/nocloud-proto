@@ -8184,6 +8184,10 @@
         "cost": {
           "type": "number",
           "format": "double"
+        },
+        "addon": {
+          "type": "string",
+          "title": "Addon key"
         }
       }
     },

@@ -1100,6 +1100,13 @@ export declare class Record extends Message<Record> {
    */
   cost: number;
 
+  /**
+   * Addon key
+   *
+   * @generated from field: string addon = 19;
+   */
+  addon: string;
+
   constructor(data?: PartialMessage<Record>);
 
   static readonly runtime: typeof proto3;
