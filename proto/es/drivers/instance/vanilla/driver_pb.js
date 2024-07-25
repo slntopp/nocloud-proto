@@ -21,6 +21,7 @@
 import { proto3, Value } from "@bufbuild/protobuf";
 import { ServicesProvider } from "../../../services_providers/services_providers_pb.js";
 import { Instance, InstancesGroup } from "../../../instances/instances_pb.js";
+import { Addon } from "../../../billing/addons/addons_pb.js";
 
 /**
  * @generated from message nocloud.instance.driver.vanilla.TestServiceProviderConfigRequest
@@ -103,6 +104,7 @@ export const MonitoringRequest = /*@__PURE__*/ proto3.makeMessageType(
     { no: 2, name: "services_provider", kind: "message", T: ServicesProvider },
     { no: 3, name: "scheduled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 4, name: "balance", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "scalar", T: 1 /* ScalarType.DOUBLE */} },
+    { no: 5, name: "addons", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Addon} },
   ],
 );
 

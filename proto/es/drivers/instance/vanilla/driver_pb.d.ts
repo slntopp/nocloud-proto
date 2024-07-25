@@ -22,6 +22,7 @@ import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialM
 import { Message, proto3 } from "@bufbuild/protobuf";
 import type { ServicesProvider } from "../../../services_providers/services_providers_pb.js";
 import type { Instance, InstancesGroup } from "../../../instances/instances_pb.js";
+import type { Addon } from "../../../billing/addons/addons_pb.js";
 
 /**
  * @generated from message nocloud.instance.driver.vanilla.TestServiceProviderConfigRequest
@@ -224,6 +225,11 @@ export declare class MonitoringRequest extends Message<MonitoringRequest> {
    * @generated from field: map<string, double> balance = 4;
    */
   balance: { [key: string]: number };
+
+  /**
+   * @generated from field: map<string, nocloud.billing.addons.Addon> addons = 5;
+   */
+  addons: { [key: string]: Addon };
 
   constructor(data?: PartialMessage<MonitoringRequest>);
 
