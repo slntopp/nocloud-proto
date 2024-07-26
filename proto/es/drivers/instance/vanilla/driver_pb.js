@@ -141,3 +141,37 @@ export const SpInvokeRequest = /*@__PURE__*/ proto3.makeMessageType(
   ],
 );
 
+/**
+ * @generated from message nocloud.instance.driver.vanilla.ExpirationRecord
+ */
+export const ExpirationRecord = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.instance.driver.vanilla.ExpirationRecord",
+  () => [
+    { no: 1, name: "expires", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "product", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "resource", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "addon", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.instance.driver.vanilla.GetExpirationRequest
+ */
+export const GetExpirationRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.instance.driver.vanilla.GetExpirationRequest",
+  () => [
+    { no: 1, name: "instance", kind: "message", T: Instance },
+    { no: 2, name: "services_provider", kind: "message", T: ServicesProvider },
+  ],
+);
+
+/**
+ * @generated from message nocloud.instance.driver.vanilla.GetExpirationResponse
+ */
+export const GetExpirationResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.instance.driver.vanilla.GetExpirationResponse",
+  () => [
+    { no: 1, name: "records", kind: "message", T: ExpirationRecord, repeated: true },
+  ],
+);
+

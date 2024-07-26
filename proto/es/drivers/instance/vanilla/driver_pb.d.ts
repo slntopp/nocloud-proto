@@ -338,3 +338,95 @@ export declare class SpInvokeRequest extends Message<SpInvokeRequest> {
   static equals(a: SpInvokeRequest | PlainMessage<SpInvokeRequest> | undefined, b: SpInvokeRequest | PlainMessage<SpInvokeRequest> | undefined): boolean;
 }
 
+/**
+ * @generated from message nocloud.instance.driver.vanilla.ExpirationRecord
+ */
+export declare class ExpirationRecord extends Message<ExpirationRecord> {
+  /**
+   * @generated from field: int64 expires = 1;
+   */
+  expires: bigint;
+
+  /**
+   * @generated from field: string product = 2;
+   */
+  product: string;
+
+  /**
+   * @generated from field: string resource = 3;
+   */
+  resource: string;
+
+  /**
+   * @generated from field: string addon = 4;
+   */
+  addon: string;
+
+  constructor(data?: PartialMessage<ExpirationRecord>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.instance.driver.vanilla.ExpirationRecord";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ExpirationRecord;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ExpirationRecord;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ExpirationRecord;
+
+  static equals(a: ExpirationRecord | PlainMessage<ExpirationRecord> | undefined, b: ExpirationRecord | PlainMessage<ExpirationRecord> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.instance.driver.vanilla.GetExpirationRequest
+ */
+export declare class GetExpirationRequest extends Message<GetExpirationRequest> {
+  /**
+   * @generated from field: nocloud.instances.Instance instance = 1;
+   */
+  instance?: Instance;
+
+  /**
+   * @generated from field: nocloud.services_providers.ServicesProvider services_provider = 2;
+   */
+  servicesProvider?: ServicesProvider;
+
+  constructor(data?: PartialMessage<GetExpirationRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.instance.driver.vanilla.GetExpirationRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetExpirationRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetExpirationRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetExpirationRequest;
+
+  static equals(a: GetExpirationRequest | PlainMessage<GetExpirationRequest> | undefined, b: GetExpirationRequest | PlainMessage<GetExpirationRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.instance.driver.vanilla.GetExpirationResponse
+ */
+export declare class GetExpirationResponse extends Message<GetExpirationResponse> {
+  /**
+   * @generated from field: repeated nocloud.instance.driver.vanilla.ExpirationRecord records = 1;
+   */
+  records: ExpirationRecord[];
+
+  constructor(data?: PartialMessage<GetExpirationResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.instance.driver.vanilla.GetExpirationResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetExpirationResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetExpirationResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetExpirationResponse;
+
+  static equals(a: GetExpirationResponse | PlainMessage<GetExpirationResponse> | undefined, b: GetExpirationResponse | PlainMessage<GetExpirationResponse> | undefined): boolean;
+}
+

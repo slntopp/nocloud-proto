@@ -46,6 +46,7 @@ const (
 	DriverService_Invoke_FullMethodName                    = "/nocloud.instance.driver.vanilla.DriverService/Invoke"
 	DriverService_SpInvoke_FullMethodName                  = "/nocloud.instance.driver.vanilla.DriverService/SpInvoke"
 	DriverService_SpPrep_FullMethodName                    = "/nocloud.instance.driver.vanilla.DriverService/SpPrep"
+	DriverService_GetExpiration_FullMethodName             = "/nocloud.instance.driver.vanilla.DriverService/GetExpiration"
 )
 
 // DriverServiceClient is the client API for DriverService service.
@@ -62,6 +63,7 @@ type DriverServiceClient interface {
 	Invoke(ctx context.Context, in *InvokeRequest, opts ...grpc.CallOption) (*instances.InvokeResponse, error)
 	SpInvoke(ctx context.Context, in *SpInvokeRequest, opts ...grpc.CallOption) (*services_providers.InvokeResponse, error)
 	SpPrep(ctx context.Context, in *services_providers.PrepSP, opts ...grpc.CallOption) (*services_providers.PrepSP, error)
+	GetExpiration(ctx context.Context, in *GetExpirationRequest, opts ...grpc.CallOption) (*GetExpirationResponse, error)
 }
 
 type driverServiceClient struct {
@@ -172,6 +174,16 @@ func (c *driverServiceClient) SpPrep(ctx context.Context, in *services_providers
 	return out, nil
 }
 
+func (c *driverServiceClient) GetExpiration(ctx context.Context, in *GetExpirationRequest, opts ...grpc.CallOption) (*GetExpirationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetExpirationResponse)
+	err := c.cc.Invoke(ctx, DriverService_GetExpiration_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DriverServiceServer is the server API for DriverService service.
 // All implementations must embed UnimplementedDriverServiceServer
 // for forward compatibility
@@ -186,6 +198,7 @@ type DriverServiceServer interface {
 	Invoke(context.Context, *InvokeRequest) (*instances.InvokeResponse, error)
 	SpInvoke(context.Context, *SpInvokeRequest) (*services_providers.InvokeResponse, error)
 	SpPrep(context.Context, *services_providers.PrepSP) (*services_providers.PrepSP, error)
+	GetExpiration(context.Context, *GetExpirationRequest) (*GetExpirationResponse, error)
 	mustEmbedUnimplementedDriverServiceServer()
 }
 
@@ -222,6 +235,9 @@ func (UnimplementedDriverServiceServer) SpInvoke(context.Context, *SpInvokeReque
 }
 func (UnimplementedDriverServiceServer) SpPrep(context.Context, *services_providers.PrepSP) (*services_providers.PrepSP, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SpPrep not implemented")
+}
+func (UnimplementedDriverServiceServer) GetExpiration(context.Context, *GetExpirationRequest) (*GetExpirationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetExpiration not implemented")
 }
 func (UnimplementedDriverServiceServer) mustEmbedUnimplementedDriverServiceServer() {}
 
@@ -416,6 +432,24 @@ func _DriverService_SpPrep_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DriverService_GetExpiration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetExpirationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DriverServiceServer).GetExpiration(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DriverService_GetExpiration_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DriverServiceServer).GetExpiration(ctx, req.(*GetExpirationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DriverService_ServiceDesc is the grpc.ServiceDesc for DriverService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -462,6 +496,10 @@ var DriverService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SpPrep",
 			Handler:    _DriverService_SpPrep_Handler,
+		},
+		{
+			MethodName: "GetExpiration",
+			Handler:    _DriverService_GetExpiration_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

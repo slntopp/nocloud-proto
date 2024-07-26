@@ -18,7 +18,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { DownRequest, DownResponse, GetTypeRequest, GetTypeResponse, InvokeRequest, MonitoringRequest, MonitoringResponse, SpInvokeRequest, TestServiceProviderConfigRequest, UpRequest, UpResponse } from "./driver_pb.js";
+import { DownRequest, DownResponse, GetExpirationRequest, GetExpirationResponse, GetTypeRequest, GetTypeResponse, InvokeRequest, MonitoringRequest, MonitoringResponse, SpInvokeRequest, TestServiceProviderConfigRequest, UpRequest, UpResponse } from "./driver_pb.js";
 import { InvokeResponse as InvokeResponse$1, PrepSP, TestResponse } from "../../../services_providers/services_providers_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 import { InvokeResponse, TestInstancesGroupConfigRequest, TestInstancesGroupConfigResponse } from "../../../instances/instances_pb.js";
@@ -117,6 +117,15 @@ export const DriverService = {
       name: "SpPrep",
       I: PrepSP,
       O: PrepSP,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.instance.driver.vanilla.DriverService.GetExpiration
+     */
+    getExpiration: {
+      name: "GetExpiration",
+      I: GetExpirationRequest,
+      O: GetExpirationResponse,
       kind: MethodKind.Unary,
     },
   }

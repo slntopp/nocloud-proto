@@ -9580,6 +9580,36 @@
       ],
       "default": "UNSPECIFIED"
     },
+    "vanillaExpirationRecord": {
+      "type": "object",
+      "properties": {
+        "expires": {
+          "type": "string",
+          "format": "int64"
+        },
+        "product": {
+          "type": "string"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "addon": {
+          "type": "string"
+        }
+      }
+    },
+    "vanillaGetExpirationResponse": {
+      "type": "object",
+      "properties": {
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/vanillaExpirationRecord"
+          }
+        }
+      }
+    },
     "vanillaMonitoringResponse": {
       "type": "object"
     }

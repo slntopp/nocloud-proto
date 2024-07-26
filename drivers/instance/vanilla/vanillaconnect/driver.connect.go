@@ -74,6 +74,9 @@ const (
 	DriverServiceSpInvokeProcedure = "/nocloud.instance.driver.vanilla.DriverService/SpInvoke"
 	// DriverServiceSpPrepProcedure is the fully-qualified name of the DriverService's SpPrep RPC.
 	DriverServiceSpPrepProcedure = "/nocloud.instance.driver.vanilla.DriverService/SpPrep"
+	// DriverServiceGetExpirationProcedure is the fully-qualified name of the DriverService's
+	// GetExpiration RPC.
+	DriverServiceGetExpirationProcedure = "/nocloud.instance.driver.vanilla.DriverService/GetExpiration"
 )
 
 // These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
@@ -89,6 +92,7 @@ var (
 	driverServiceInvokeMethodDescriptor                    = driverServiceServiceDescriptor.Methods().ByName("Invoke")
 	driverServiceSpInvokeMethodDescriptor                  = driverServiceServiceDescriptor.Methods().ByName("SpInvoke")
 	driverServiceSpPrepMethodDescriptor                    = driverServiceServiceDescriptor.Methods().ByName("SpPrep")
+	driverServiceGetExpirationMethodDescriptor             = driverServiceServiceDescriptor.Methods().ByName("GetExpiration")
 )
 
 // DriverServiceClient is a client for the nocloud.instance.driver.vanilla.DriverService service.
@@ -103,6 +107,7 @@ type DriverServiceClient interface {
 	Invoke(context.Context, *connect.Request[vanilla.InvokeRequest]) (*connect.Response[instances.InvokeResponse], error)
 	SpInvoke(context.Context, *connect.Request[vanilla.SpInvokeRequest]) (*connect.Response[services_providers.InvokeResponse], error)
 	SpPrep(context.Context, *connect.Request[services_providers.PrepSP]) (*connect.Response[services_providers.PrepSP], error)
+	GetExpiration(context.Context, *connect.Request[vanilla.GetExpirationRequest]) (*connect.Response[vanilla.GetExpirationResponse], error)
 }
 
 // NewDriverServiceClient constructs a client for the nocloud.instance.driver.vanilla.DriverService
@@ -175,6 +180,12 @@ func NewDriverServiceClient(httpClient connect.HTTPClient, baseURL string, opts 
 			connect.WithSchema(driverServiceSpPrepMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		getExpiration: connect.NewClient[vanilla.GetExpirationRequest, vanilla.GetExpirationResponse](
+			httpClient,
+			baseURL+DriverServiceGetExpirationProcedure,
+			connect.WithSchema(driverServiceGetExpirationMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -190,6 +201,7 @@ type driverServiceClient struct {
 	invoke                    *connect.Client[vanilla.InvokeRequest, instances.InvokeResponse]
 	spInvoke                  *connect.Client[vanilla.SpInvokeRequest, services_providers.InvokeResponse]
 	spPrep                    *connect.Client[services_providers.PrepSP, services_providers.PrepSP]
+	getExpiration             *connect.Client[vanilla.GetExpirationRequest, vanilla.GetExpirationResponse]
 }
 
 // TestServiceProviderConfig calls
@@ -244,6 +256,11 @@ func (c *driverServiceClient) SpPrep(ctx context.Context, req *connect.Request[s
 	return c.spPrep.CallUnary(ctx, req)
 }
 
+// GetExpiration calls nocloud.instance.driver.vanilla.DriverService.GetExpiration.
+func (c *driverServiceClient) GetExpiration(ctx context.Context, req *connect.Request[vanilla.GetExpirationRequest]) (*connect.Response[vanilla.GetExpirationResponse], error) {
+	return c.getExpiration.CallUnary(ctx, req)
+}
+
 // DriverServiceHandler is an implementation of the nocloud.instance.driver.vanilla.DriverService
 // service.
 type DriverServiceHandler interface {
@@ -257,6 +274,7 @@ type DriverServiceHandler interface {
 	Invoke(context.Context, *connect.Request[vanilla.InvokeRequest]) (*connect.Response[instances.InvokeResponse], error)
 	SpInvoke(context.Context, *connect.Request[vanilla.SpInvokeRequest]) (*connect.Response[services_providers.InvokeResponse], error)
 	SpPrep(context.Context, *connect.Request[services_providers.PrepSP]) (*connect.Response[services_providers.PrepSP], error)
+	GetExpiration(context.Context, *connect.Request[vanilla.GetExpirationRequest]) (*connect.Response[vanilla.GetExpirationResponse], error)
 }
 
 // NewDriverServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -325,6 +343,12 @@ func NewDriverServiceHandler(svc DriverServiceHandler, opts ...connect.HandlerOp
 		connect.WithSchema(driverServiceSpPrepMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	driverServiceGetExpirationHandler := connect.NewUnaryHandler(
+		DriverServiceGetExpirationProcedure,
+		svc.GetExpiration,
+		connect.WithSchema(driverServiceGetExpirationMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/nocloud.instance.driver.vanilla.DriverService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case DriverServiceTestServiceProviderConfigProcedure:
@@ -347,6 +371,8 @@ func NewDriverServiceHandler(svc DriverServiceHandler, opts ...connect.HandlerOp
 			driverServiceSpInvokeHandler.ServeHTTP(w, r)
 		case DriverServiceSpPrepProcedure:
 			driverServiceSpPrepHandler.ServeHTTP(w, r)
+		case DriverServiceGetExpirationProcedure:
+			driverServiceGetExpirationHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -394,4 +420,8 @@ func (UnimplementedDriverServiceHandler) SpInvoke(context.Context, *connect.Requ
 
 func (UnimplementedDriverServiceHandler) SpPrep(context.Context, *connect.Request[services_providers.PrepSP]) (*connect.Response[services_providers.PrepSP], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.instance.driver.vanilla.DriverService.SpPrep is not implemented"))
+}
+
+func (UnimplementedDriverServiceHandler) GetExpiration(context.Context, *connect.Request[vanilla.GetExpirationRequest]) (*connect.Response[vanilla.GetExpirationResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.instance.driver.vanilla.DriverService.GetExpiration is not implemented"))
 }

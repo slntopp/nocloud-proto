@@ -67,6 +67,22 @@ message SpInvokeRequest {
   map<string, google.protobuf.Value> params = 3;
 }
 
+message ExpirationRecord{
+  int64 expires = 1;
+  string product = 2;
+  string resource = 3;
+  string addon = 4;
+}
+
+message GetExpirationRequest {
+  nocloud.instances.Instance instance = 1;
+  nocloud.services_providers.ServicesProvider services_provider = 2;
+}
+
+message GetExpirationResponse {
+  repeated ExpirationRecord records = 1;
+}
+
 service DriverService {
   rpc TestServiceProviderConfig(
       nocloud.instance.driver.vanilla.TestServiceProviderConfigRequest)
@@ -91,4 +107,7 @@ service DriverService {
 
   rpc SpPrep(nocloud.services_providers.PrepSP)
       returns (nocloud.services_providers.PrepSP);
+
+  rpc GetExpiration(GetExpirationRequest)
+      returns (GetExpirationResponse);
 }
