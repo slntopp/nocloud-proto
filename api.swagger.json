@@ -9595,6 +9595,10 @@
         },
         "addon": {
           "type": "string"
+        },
+        "period": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },

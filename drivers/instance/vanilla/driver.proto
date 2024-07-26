@@ -72,6 +72,7 @@ message ExpirationRecord{
   string product = 2;
   string resource = 3;
   string addon = 4;
+  int64 period = 5;
 }
 
 message GetExpirationRequest {

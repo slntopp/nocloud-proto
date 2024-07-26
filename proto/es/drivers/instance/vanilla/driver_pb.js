@@ -151,6 +151,7 @@ export const ExpirationRecord = /*@__PURE__*/ proto3.makeMessageType(
     { no: 2, name: "product", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "resource", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "addon", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "period", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ],
 );
 

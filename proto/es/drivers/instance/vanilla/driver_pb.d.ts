@@ -362,6 +362,11 @@ export declare class ExpirationRecord extends Message<ExpirationRecord> {
    */
   addon: string;
 
+  /**
+   * @generated from field: int64 period = 5;
+   */
+  period: bigint;
+
   constructor(data?: PartialMessage<ExpirationRecord>);
 
   static readonly runtime: typeof proto3;
