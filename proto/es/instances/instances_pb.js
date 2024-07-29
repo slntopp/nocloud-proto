@@ -257,6 +257,7 @@ export const ResponseInstance = /*@__PURE__*/ proto3.makeMessageType(
     { no: 3, name: "sp", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "type", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "account", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 6, name: "namespace", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

@@ -720,6 +720,11 @@ export declare class ResponseInstance extends Message<ResponseInstance> {
    */
   account: string;
 
+  /**
+   * @generated from field: string namespace = 6;
+   */
+  namespace: string;
+
   constructor(data?: PartialMessage<ResponseInstance>);
 
   static readonly runtime: typeof proto3;

@@ -163,6 +163,7 @@ message ResponseInstance {
     string sp = 3;
     string type = 4;
     string account = 5;
+    string namespace = 6;
 }
 
 message GetUniqueRequest {
