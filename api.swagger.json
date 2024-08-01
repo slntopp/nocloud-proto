@@ -2041,6 +2041,40 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "template",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "newTemplate",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "startWithNumber",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "resetCounterMode",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "issueRenewalInvoiceAfter",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          }
+        ],
         "tags": [
           "BillingService"
         ]
@@ -6851,7 +6885,13 @@
     "billingGetInvoiceSettingsTemplateExampleResponse": {
       "type": "object",
       "properties": {
-        "example": {
+        "templateExample": {
+          "type": "string"
+        },
+        "newTemplateExample": {
+          "type": "string"
+        },
+        "issueRenewalInvoiceAfterExample": {
           "type": "string"
         }
       }

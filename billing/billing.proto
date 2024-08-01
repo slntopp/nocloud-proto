@@ -405,9 +405,17 @@ message GetReportsCountResponse {
   google.protobuf.Value unique = 2;
 }
 
-message GetInvoiceSettingsTemplateExampleRequest {}
+message GetInvoiceSettingsTemplateExampleRequest {
+  string template = 1;
+  string new_template = 2;
+  int32 start_with_number = 3;
+  string reset_counter_mode = 4;
+  double issue_renewal_invoice_after = 5;
+}
 message GetInvoiceSettingsTemplateExampleResponse {
-  string example = 1;
+  string template_example = 1;
+  string new_template_example = 2;
+  string issue_renewal_invoice_after_example = 3;
 }
 
 service BillingService {

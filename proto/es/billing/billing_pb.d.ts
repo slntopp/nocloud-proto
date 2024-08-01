@@ -1450,6 +1450,30 @@ export declare const GetReportsCountResponseSchema: GenMessage<GetReportsCountRe
  * @generated from message nocloud.billing.GetInvoiceSettingsTemplateExampleRequest
  */
 export declare type GetInvoiceSettingsTemplateExampleRequest = Message<"nocloud.billing.GetInvoiceSettingsTemplateExampleRequest"> & {
+  /**
+   * @generated from field: string template = 1;
+   */
+  template: string;
+
+  /**
+   * @generated from field: string new_template = 2;
+   */
+  newTemplate: string;
+
+  /**
+   * @generated from field: int32 start_with_number = 3;
+   */
+  startWithNumber: number;
+
+  /**
+   * @generated from field: string reset_counter_mode = 4;
+   */
+  resetCounterMode: string;
+
+  /**
+   * @generated from field: double issue_renewal_invoice_after = 5;
+   */
+  issueRenewalInvoiceAfter: number;
 };
 
 /**
@@ -1463,9 +1487,19 @@ export declare const GetInvoiceSettingsTemplateExampleRequestSchema: GenMessage<
  */
 export declare type GetInvoiceSettingsTemplateExampleResponse = Message<"nocloud.billing.GetInvoiceSettingsTemplateExampleResponse"> & {
   /**
-   * @generated from field: string example = 1;
+   * @generated from field: string template_example = 1;
    */
-  example: string;
+  templateExample: string;
+
+  /**
+   * @generated from field: string new_template_example = 2;
+   */
+  newTemplateExample: string;
+
+  /**
+   * @generated from field: string issue_renewal_invoice_after_example = 3;
+   */
+  issueRenewalInvoiceAfterExample: string;
 };
 
 /**
