@@ -405,6 +405,11 @@ message GetReportsCountResponse {
   google.protobuf.Value unique = 2;
 }
 
+message GetInvoiceSettingsTemplateExampleRequest {}
+message GetInvoiceSettingsTemplateExampleResponse {
+  string example = 1;
+}
+
 service BillingService {
   rpc CreatePlan (Plan) returns (Plan) {
     option (google.api.http) = {
@@ -527,6 +532,12 @@ service BillingService {
     option (google.api.http) = {
       patch: "/billing/invoices/{uuid}/status"
       body: "*"
+    };
+  };
+  rpc GetInvoiceSettingsTemplateExample(GetInvoiceSettingsTemplateExampleRequest)
+      returns (GetInvoiceSettingsTemplateExampleResponse) {
+    option (google.api.http) = {
+      get: "/billing/invoices/templateexample"
     };
   };
 }

@@ -130,6 +130,9 @@ const (
 	// BillingServiceUpdateInvoiceStatusProcedure is the fully-qualified name of the BillingService's
 	// UpdateInvoiceStatus RPC.
 	BillingServiceUpdateInvoiceStatusProcedure = "/nocloud.billing.BillingService/UpdateInvoiceStatus"
+	// BillingServiceGetInvoiceSettingsTemplateExampleProcedure is the fully-qualified name of the
+	// BillingService's GetInvoiceSettingsTemplateExample RPC.
+	BillingServiceGetInvoiceSettingsTemplateExampleProcedure = "/nocloud.billing.BillingService/GetInvoiceSettingsTemplateExample"
 	// CurrencyServiceCreateCurrencyProcedure is the fully-qualified name of the CurrencyService's
 	// CreateCurrency RPC.
 	CurrencyServiceCreateCurrencyProcedure = "/nocloud.billing.CurrencyService/CreateCurrency"
@@ -192,58 +195,59 @@ const (
 
 // These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
 var (
-	recordsServiceServiceDescriptor                        = billing.File_billing_billing_proto.Services().ByName("RecordsService")
-	recordsServiceGetActiveMethodDescriptor                = recordsServiceServiceDescriptor.Methods().ByName("GetActive")
-	recordsServiceCreateMethodDescriptor                   = recordsServiceServiceDescriptor.Methods().ByName("Create")
-	recordsServiceUpdateMethodDescriptor                   = recordsServiceServiceDescriptor.Methods().ByName("Update")
-	billingServiceServiceDescriptor                        = billing.File_billing_billing_proto.Services().ByName("BillingService")
-	billingServiceCreatePlanMethodDescriptor               = billingServiceServiceDescriptor.Methods().ByName("CreatePlan")
-	billingServiceUpdatePlanMethodDescriptor               = billingServiceServiceDescriptor.Methods().ByName("UpdatePlan")
-	billingServiceGetPlanMethodDescriptor                  = billingServiceServiceDescriptor.Methods().ByName("GetPlan")
-	billingServiceListPlansMethodDescriptor                = billingServiceServiceDescriptor.Methods().ByName("ListPlans")
-	billingServiceListPlansInstancesMethodDescriptor       = billingServiceServiceDescriptor.Methods().ByName("ListPlansInstances")
-	billingServiceDeletePlanMethodDescriptor               = billingServiceServiceDescriptor.Methods().ByName("DeletePlan")
-	billingServiceCreateTransactionMethodDescriptor        = billingServiceServiceDescriptor.Methods().ByName("CreateTransaction")
-	billingServiceGetTransactionsMethodDescriptor          = billingServiceServiceDescriptor.Methods().ByName("GetTransactions")
-	billingServiceGetTransactionsCountMethodDescriptor     = billingServiceServiceDescriptor.Methods().ByName("GetTransactionsCount")
-	billingServiceUpdateTransactionMethodDescriptor        = billingServiceServiceDescriptor.Methods().ByName("UpdateTransaction")
-	billingServiceGetRecordsMethodDescriptor               = billingServiceServiceDescriptor.Methods().ByName("GetRecords")
-	billingServiceGetInstancesReportsMethodDescriptor      = billingServiceServiceDescriptor.Methods().ByName("GetInstancesReports")
-	billingServiceGetInstancesReportsCountMethodDescriptor = billingServiceServiceDescriptor.Methods().ByName("GetInstancesReportsCount")
-	billingServiceGetRecordsReportsMethodDescriptor        = billingServiceServiceDescriptor.Methods().ByName("GetRecordsReports")
-	billingServiceGetRecordsReportsCountMethodDescriptor   = billingServiceServiceDescriptor.Methods().ByName("GetRecordsReportsCount")
-	billingServiceReprocessMethodDescriptor                = billingServiceServiceDescriptor.Methods().ByName("Reprocess")
-	billingServiceCreateInvoiceMethodDescriptor            = billingServiceServiceDescriptor.Methods().ByName("CreateInvoice")
-	billingServiceGetInvoiceMethodDescriptor               = billingServiceServiceDescriptor.Methods().ByName("GetInvoice")
-	billingServiceGetInvoicesMethodDescriptor              = billingServiceServiceDescriptor.Methods().ByName("GetInvoices")
-	billingServiceGetInvoicesCountMethodDescriptor         = billingServiceServiceDescriptor.Methods().ByName("GetInvoicesCount")
-	billingServiceUpdateInvoiceMethodDescriptor            = billingServiceServiceDescriptor.Methods().ByName("UpdateInvoice")
-	billingServiceUpdateInvoiceStatusMethodDescriptor      = billingServiceServiceDescriptor.Methods().ByName("UpdateInvoiceStatus")
-	currencyServiceServiceDescriptor                       = billing.File_billing_billing_proto.Services().ByName("CurrencyService")
-	currencyServiceCreateCurrencyMethodDescriptor          = currencyServiceServiceDescriptor.Methods().ByName("CreateCurrency")
-	currencyServiceGetCurrenciesMethodDescriptor           = currencyServiceServiceDescriptor.Methods().ByName("GetCurrencies")
-	currencyServiceGetExchangeRateMethodDescriptor         = currencyServiceServiceDescriptor.Methods().ByName("GetExchangeRate")
-	currencyServiceGetExchangeRatesMethodDescriptor        = currencyServiceServiceDescriptor.Methods().ByName("GetExchangeRates")
-	currencyServiceCreateExchangeRateMethodDescriptor      = currencyServiceServiceDescriptor.Methods().ByName("CreateExchangeRate")
-	currencyServiceUpdateExchangeRateMethodDescriptor      = currencyServiceServiceDescriptor.Methods().ByName("UpdateExchangeRate")
-	currencyServiceDeleteExchangeRateMethodDescriptor      = currencyServiceServiceDescriptor.Methods().ByName("DeleteExchangeRate")
-	currencyServiceConvertMethodDescriptor                 = currencyServiceServiceDescriptor.Methods().ByName("Convert")
-	addonsServiceServiceDescriptor                         = billing.File_billing_billing_proto.Services().ByName("AddonsService")
-	addonsServiceCreateMethodDescriptor                    = addonsServiceServiceDescriptor.Methods().ByName("Create")
-	addonsServiceCreateBulkMethodDescriptor                = addonsServiceServiceDescriptor.Methods().ByName("CreateBulk")
-	addonsServiceUpdateMethodDescriptor                    = addonsServiceServiceDescriptor.Methods().ByName("Update")
-	addonsServiceUpdateBulkMethodDescriptor                = addonsServiceServiceDescriptor.Methods().ByName("UpdateBulk")
-	addonsServiceGetMethodDescriptor                       = addonsServiceServiceDescriptor.Methods().ByName("Get")
-	addonsServiceListMethodDescriptor                      = addonsServiceServiceDescriptor.Methods().ByName("List")
-	addonsServiceCountMethodDescriptor                     = addonsServiceServiceDescriptor.Methods().ByName("Count")
-	addonsServiceDeleteMethodDescriptor                    = addonsServiceServiceDescriptor.Methods().ByName("Delete")
-	descriptionsServiceServiceDescriptor                   = billing.File_billing_billing_proto.Services().ByName("DescriptionsService")
-	descriptionsServiceCreateMethodDescriptor              = descriptionsServiceServiceDescriptor.Methods().ByName("Create")
-	descriptionsServiceUpdateMethodDescriptor              = descriptionsServiceServiceDescriptor.Methods().ByName("Update")
-	descriptionsServiceGetMethodDescriptor                 = descriptionsServiceServiceDescriptor.Methods().ByName("Get")
-	descriptionsServiceListMethodDescriptor                = descriptionsServiceServiceDescriptor.Methods().ByName("List")
-	descriptionsServiceCountMethodDescriptor               = descriptionsServiceServiceDescriptor.Methods().ByName("Count")
-	descriptionsServiceDeleteMethodDescriptor              = descriptionsServiceServiceDescriptor.Methods().ByName("Delete")
+	recordsServiceServiceDescriptor                                 = billing.File_billing_billing_proto.Services().ByName("RecordsService")
+	recordsServiceGetActiveMethodDescriptor                         = recordsServiceServiceDescriptor.Methods().ByName("GetActive")
+	recordsServiceCreateMethodDescriptor                            = recordsServiceServiceDescriptor.Methods().ByName("Create")
+	recordsServiceUpdateMethodDescriptor                            = recordsServiceServiceDescriptor.Methods().ByName("Update")
+	billingServiceServiceDescriptor                                 = billing.File_billing_billing_proto.Services().ByName("BillingService")
+	billingServiceCreatePlanMethodDescriptor                        = billingServiceServiceDescriptor.Methods().ByName("CreatePlan")
+	billingServiceUpdatePlanMethodDescriptor                        = billingServiceServiceDescriptor.Methods().ByName("UpdatePlan")
+	billingServiceGetPlanMethodDescriptor                           = billingServiceServiceDescriptor.Methods().ByName("GetPlan")
+	billingServiceListPlansMethodDescriptor                         = billingServiceServiceDescriptor.Methods().ByName("ListPlans")
+	billingServiceListPlansInstancesMethodDescriptor                = billingServiceServiceDescriptor.Methods().ByName("ListPlansInstances")
+	billingServiceDeletePlanMethodDescriptor                        = billingServiceServiceDescriptor.Methods().ByName("DeletePlan")
+	billingServiceCreateTransactionMethodDescriptor                 = billingServiceServiceDescriptor.Methods().ByName("CreateTransaction")
+	billingServiceGetTransactionsMethodDescriptor                   = billingServiceServiceDescriptor.Methods().ByName("GetTransactions")
+	billingServiceGetTransactionsCountMethodDescriptor              = billingServiceServiceDescriptor.Methods().ByName("GetTransactionsCount")
+	billingServiceUpdateTransactionMethodDescriptor                 = billingServiceServiceDescriptor.Methods().ByName("UpdateTransaction")
+	billingServiceGetRecordsMethodDescriptor                        = billingServiceServiceDescriptor.Methods().ByName("GetRecords")
+	billingServiceGetInstancesReportsMethodDescriptor               = billingServiceServiceDescriptor.Methods().ByName("GetInstancesReports")
+	billingServiceGetInstancesReportsCountMethodDescriptor          = billingServiceServiceDescriptor.Methods().ByName("GetInstancesReportsCount")
+	billingServiceGetRecordsReportsMethodDescriptor                 = billingServiceServiceDescriptor.Methods().ByName("GetRecordsReports")
+	billingServiceGetRecordsReportsCountMethodDescriptor            = billingServiceServiceDescriptor.Methods().ByName("GetRecordsReportsCount")
+	billingServiceReprocessMethodDescriptor                         = billingServiceServiceDescriptor.Methods().ByName("Reprocess")
+	billingServiceCreateInvoiceMethodDescriptor                     = billingServiceServiceDescriptor.Methods().ByName("CreateInvoice")
+	billingServiceGetInvoiceMethodDescriptor                        = billingServiceServiceDescriptor.Methods().ByName("GetInvoice")
+	billingServiceGetInvoicesMethodDescriptor                       = billingServiceServiceDescriptor.Methods().ByName("GetInvoices")
+	billingServiceGetInvoicesCountMethodDescriptor                  = billingServiceServiceDescriptor.Methods().ByName("GetInvoicesCount")
+	billingServiceUpdateInvoiceMethodDescriptor                     = billingServiceServiceDescriptor.Methods().ByName("UpdateInvoice")
+	billingServiceUpdateInvoiceStatusMethodDescriptor               = billingServiceServiceDescriptor.Methods().ByName("UpdateInvoiceStatus")
+	billingServiceGetInvoiceSettingsTemplateExampleMethodDescriptor = billingServiceServiceDescriptor.Methods().ByName("GetInvoiceSettingsTemplateExample")
+	currencyServiceServiceDescriptor                                = billing.File_billing_billing_proto.Services().ByName("CurrencyService")
+	currencyServiceCreateCurrencyMethodDescriptor                   = currencyServiceServiceDescriptor.Methods().ByName("CreateCurrency")
+	currencyServiceGetCurrenciesMethodDescriptor                    = currencyServiceServiceDescriptor.Methods().ByName("GetCurrencies")
+	currencyServiceGetExchangeRateMethodDescriptor                  = currencyServiceServiceDescriptor.Methods().ByName("GetExchangeRate")
+	currencyServiceGetExchangeRatesMethodDescriptor                 = currencyServiceServiceDescriptor.Methods().ByName("GetExchangeRates")
+	currencyServiceCreateExchangeRateMethodDescriptor               = currencyServiceServiceDescriptor.Methods().ByName("CreateExchangeRate")
+	currencyServiceUpdateExchangeRateMethodDescriptor               = currencyServiceServiceDescriptor.Methods().ByName("UpdateExchangeRate")
+	currencyServiceDeleteExchangeRateMethodDescriptor               = currencyServiceServiceDescriptor.Methods().ByName("DeleteExchangeRate")
+	currencyServiceConvertMethodDescriptor                          = currencyServiceServiceDescriptor.Methods().ByName("Convert")
+	addonsServiceServiceDescriptor                                  = billing.File_billing_billing_proto.Services().ByName("AddonsService")
+	addonsServiceCreateMethodDescriptor                             = addonsServiceServiceDescriptor.Methods().ByName("Create")
+	addonsServiceCreateBulkMethodDescriptor                         = addonsServiceServiceDescriptor.Methods().ByName("CreateBulk")
+	addonsServiceUpdateMethodDescriptor                             = addonsServiceServiceDescriptor.Methods().ByName("Update")
+	addonsServiceUpdateBulkMethodDescriptor                         = addonsServiceServiceDescriptor.Methods().ByName("UpdateBulk")
+	addonsServiceGetMethodDescriptor                                = addonsServiceServiceDescriptor.Methods().ByName("Get")
+	addonsServiceListMethodDescriptor                               = addonsServiceServiceDescriptor.Methods().ByName("List")
+	addonsServiceCountMethodDescriptor                              = addonsServiceServiceDescriptor.Methods().ByName("Count")
+	addonsServiceDeleteMethodDescriptor                             = addonsServiceServiceDescriptor.Methods().ByName("Delete")
+	descriptionsServiceServiceDescriptor                            = billing.File_billing_billing_proto.Services().ByName("DescriptionsService")
+	descriptionsServiceCreateMethodDescriptor                       = descriptionsServiceServiceDescriptor.Methods().ByName("Create")
+	descriptionsServiceUpdateMethodDescriptor                       = descriptionsServiceServiceDescriptor.Methods().ByName("Update")
+	descriptionsServiceGetMethodDescriptor                          = descriptionsServiceServiceDescriptor.Methods().ByName("Get")
+	descriptionsServiceListMethodDescriptor                         = descriptionsServiceServiceDescriptor.Methods().ByName("List")
+	descriptionsServiceCountMethodDescriptor                        = descriptionsServiceServiceDescriptor.Methods().ByName("Count")
+	descriptionsServiceDeleteMethodDescriptor                       = descriptionsServiceServiceDescriptor.Methods().ByName("Delete")
 )
 
 // RecordsServiceClient is a client for the nocloud.billing.RecordsService service.
@@ -390,6 +394,7 @@ type BillingServiceClient interface {
 	GetInvoicesCount(context.Context, *connect.Request[billing.GetInvoicesCountRequest]) (*connect.Response[billing.GetInvoicesCountResponse], error)
 	UpdateInvoice(context.Context, *connect.Request[billing.UpdateInvoiceRequest]) (*connect.Response[billing.Invoice], error)
 	UpdateInvoiceStatus(context.Context, *connect.Request[billing.UpdateInvoiceStatusRequest]) (*connect.Response[billing.Invoice], error)
+	GetInvoiceSettingsTemplateExample(context.Context, *connect.Request[billing.GetInvoiceSettingsTemplateExampleRequest]) (*connect.Response[billing.GetInvoiceSettingsTemplateExampleResponse], error)
 }
 
 // NewBillingServiceClient constructs a client for the nocloud.billing.BillingService service. By
@@ -534,33 +539,40 @@ func NewBillingServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(billingServiceUpdateInvoiceStatusMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		getInvoiceSettingsTemplateExample: connect.NewClient[billing.GetInvoiceSettingsTemplateExampleRequest, billing.GetInvoiceSettingsTemplateExampleResponse](
+			httpClient,
+			baseURL+BillingServiceGetInvoiceSettingsTemplateExampleProcedure,
+			connect.WithSchema(billingServiceGetInvoiceSettingsTemplateExampleMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // billingServiceClient implements BillingServiceClient.
 type billingServiceClient struct {
-	createPlan               *connect.Client[billing.Plan, billing.Plan]
-	updatePlan               *connect.Client[billing.Plan, billing.Plan]
-	getPlan                  *connect.Client[billing.Plan, billing.Plan]
-	listPlans                *connect.Client[billing.ListRequest, billing.ListResponse]
-	listPlansInstances       *connect.Client[billing.ListPlansInstancesRequest, billing.ListPlansInstancesResponse]
-	deletePlan               *connect.Client[billing.Plan, billing.Plan]
-	createTransaction        *connect.Client[billing.Transaction, billing.Transaction]
-	getTransactions          *connect.Client[billing.GetTransactionsRequest, billing.Transactions]
-	getTransactionsCount     *connect.Client[billing.GetTransactionsCountRequest, billing.GetTransactionsCountResponse]
-	updateTransaction        *connect.Client[billing.Transaction, billing.UpdateTransactionResponse]
-	getRecords               *connect.Client[billing.Transaction, billing.Records]
-	getInstancesReports      *connect.Client[billing.GetInstancesReportRequest, billing.GetInstancesReportResponse]
-	getInstancesReportsCount *connect.Client[billing.GetInstancesReportsCountRequest, billing.GetReportsCountResponse]
-	getRecordsReports        *connect.Client[billing.GetRecordsReportsRequest, billing.GetRecordsReportsResponse]
-	getRecordsReportsCount   *connect.Client[billing.GetRecordsReportsCountRequest, billing.GetReportsCountResponse]
-	reprocess                *connect.Client[billing.ReprocessTransactionsRequest, billing.Transactions]
-	createInvoice            *connect.Client[billing.CreateInvoiceRequest, billing.Invoice]
-	getInvoice               *connect.Client[billing.Invoice, billing.Invoice]
-	getInvoices              *connect.Client[billing.GetInvoicesRequest, billing.Invoices]
-	getInvoicesCount         *connect.Client[billing.GetInvoicesCountRequest, billing.GetInvoicesCountResponse]
-	updateInvoice            *connect.Client[billing.UpdateInvoiceRequest, billing.Invoice]
-	updateInvoiceStatus      *connect.Client[billing.UpdateInvoiceStatusRequest, billing.Invoice]
+	createPlan                        *connect.Client[billing.Plan, billing.Plan]
+	updatePlan                        *connect.Client[billing.Plan, billing.Plan]
+	getPlan                           *connect.Client[billing.Plan, billing.Plan]
+	listPlans                         *connect.Client[billing.ListRequest, billing.ListResponse]
+	listPlansInstances                *connect.Client[billing.ListPlansInstancesRequest, billing.ListPlansInstancesResponse]
+	deletePlan                        *connect.Client[billing.Plan, billing.Plan]
+	createTransaction                 *connect.Client[billing.Transaction, billing.Transaction]
+	getTransactions                   *connect.Client[billing.GetTransactionsRequest, billing.Transactions]
+	getTransactionsCount              *connect.Client[billing.GetTransactionsCountRequest, billing.GetTransactionsCountResponse]
+	updateTransaction                 *connect.Client[billing.Transaction, billing.UpdateTransactionResponse]
+	getRecords                        *connect.Client[billing.Transaction, billing.Records]
+	getInstancesReports               *connect.Client[billing.GetInstancesReportRequest, billing.GetInstancesReportResponse]
+	getInstancesReportsCount          *connect.Client[billing.GetInstancesReportsCountRequest, billing.GetReportsCountResponse]
+	getRecordsReports                 *connect.Client[billing.GetRecordsReportsRequest, billing.GetRecordsReportsResponse]
+	getRecordsReportsCount            *connect.Client[billing.GetRecordsReportsCountRequest, billing.GetReportsCountResponse]
+	reprocess                         *connect.Client[billing.ReprocessTransactionsRequest, billing.Transactions]
+	createInvoice                     *connect.Client[billing.CreateInvoiceRequest, billing.Invoice]
+	getInvoice                        *connect.Client[billing.Invoice, billing.Invoice]
+	getInvoices                       *connect.Client[billing.GetInvoicesRequest, billing.Invoices]
+	getInvoicesCount                  *connect.Client[billing.GetInvoicesCountRequest, billing.GetInvoicesCountResponse]
+	updateInvoice                     *connect.Client[billing.UpdateInvoiceRequest, billing.Invoice]
+	updateInvoiceStatus               *connect.Client[billing.UpdateInvoiceStatusRequest, billing.Invoice]
+	getInvoiceSettingsTemplateExample *connect.Client[billing.GetInvoiceSettingsTemplateExampleRequest, billing.GetInvoiceSettingsTemplateExampleResponse]
 }
 
 // CreatePlan calls nocloud.billing.BillingService.CreatePlan.
@@ -673,6 +685,12 @@ func (c *billingServiceClient) UpdateInvoiceStatus(ctx context.Context, req *con
 	return c.updateInvoiceStatus.CallUnary(ctx, req)
 }
 
+// GetInvoiceSettingsTemplateExample calls
+// nocloud.billing.BillingService.GetInvoiceSettingsTemplateExample.
+func (c *billingServiceClient) GetInvoiceSettingsTemplateExample(ctx context.Context, req *connect.Request[billing.GetInvoiceSettingsTemplateExampleRequest]) (*connect.Response[billing.GetInvoiceSettingsTemplateExampleResponse], error) {
+	return c.getInvoiceSettingsTemplateExample.CallUnary(ctx, req)
+}
+
 // BillingServiceHandler is an implementation of the nocloud.billing.BillingService service.
 type BillingServiceHandler interface {
 	CreatePlan(context.Context, *connect.Request[billing.Plan]) (*connect.Response[billing.Plan], error)
@@ -697,6 +715,7 @@ type BillingServiceHandler interface {
 	GetInvoicesCount(context.Context, *connect.Request[billing.GetInvoicesCountRequest]) (*connect.Response[billing.GetInvoicesCountResponse], error)
 	UpdateInvoice(context.Context, *connect.Request[billing.UpdateInvoiceRequest]) (*connect.Response[billing.Invoice], error)
 	UpdateInvoiceStatus(context.Context, *connect.Request[billing.UpdateInvoiceStatusRequest]) (*connect.Response[billing.Invoice], error)
+	GetInvoiceSettingsTemplateExample(context.Context, *connect.Request[billing.GetInvoiceSettingsTemplateExampleRequest]) (*connect.Response[billing.GetInvoiceSettingsTemplateExampleResponse], error)
 }
 
 // NewBillingServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -837,6 +856,12 @@ func NewBillingServiceHandler(svc BillingServiceHandler, opts ...connect.Handler
 		connect.WithSchema(billingServiceUpdateInvoiceStatusMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	billingServiceGetInvoiceSettingsTemplateExampleHandler := connect.NewUnaryHandler(
+		BillingServiceGetInvoiceSettingsTemplateExampleProcedure,
+		svc.GetInvoiceSettingsTemplateExample,
+		connect.WithSchema(billingServiceGetInvoiceSettingsTemplateExampleMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/nocloud.billing.BillingService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case BillingServiceCreatePlanProcedure:
@@ -883,6 +908,8 @@ func NewBillingServiceHandler(svc BillingServiceHandler, opts ...connect.Handler
 			billingServiceUpdateInvoiceHandler.ServeHTTP(w, r)
 		case BillingServiceUpdateInvoiceStatusProcedure:
 			billingServiceUpdateInvoiceStatusHandler.ServeHTTP(w, r)
+		case BillingServiceGetInvoiceSettingsTemplateExampleProcedure:
+			billingServiceGetInvoiceSettingsTemplateExampleHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -978,6 +1005,10 @@ func (UnimplementedBillingServiceHandler) UpdateInvoice(context.Context, *connec
 
 func (UnimplementedBillingServiceHandler) UpdateInvoiceStatus(context.Context, *connect.Request[billing.UpdateInvoiceStatusRequest]) (*connect.Response[billing.Invoice], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.BillingService.UpdateInvoiceStatus is not implemented"))
+}
+
+func (UnimplementedBillingServiceHandler) GetInvoiceSettingsTemplateExample(context.Context, *connect.Request[billing.GetInvoiceSettingsTemplateExampleRequest]) (*connect.Response[billing.GetInvoiceSettingsTemplateExampleResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.BillingService.GetInvoiceSettingsTemplateExample is not implemented"))
 }
 
 // CurrencyServiceClient is a client for the nocloud.billing.CurrencyService service.

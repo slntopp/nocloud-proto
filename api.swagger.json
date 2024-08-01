@@ -2024,6 +2024,28 @@
         ]
       }
     },
+    "/billing/invoices/templateexample": {
+      "get": {
+        "operationId": "BillingService_GetInvoiceSettingsTemplateExample",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingGetInvoiceSettingsTemplateExampleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
     "/billing/invoices/{uuid}": {
       "get": {
         "operationId": "BillingService_GetInvoice",
@@ -6823,6 +6845,14 @@
             "type": "object",
             "$ref": "#/definitions/billingInstanceReport"
           }
+        }
+      }
+    },
+    "billingGetInvoiceSettingsTemplateExampleResponse": {
+      "type": "object",
+      "properties": {
+        "example": {
+          "type": "string"
         }
       }
     },
