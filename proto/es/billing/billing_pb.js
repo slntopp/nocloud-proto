@@ -169,6 +169,12 @@ export const ListRequest = /*@__PURE__*/ proto3.makeMessageType(
     { no: 1, name: "sp_uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "anonymously", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 3, name: "show_deleted", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 4, name: "page", kind: "scalar", T: 4 /* ScalarType.UINT64 */, opt: true },
+    { no: 5, name: "limit", kind: "scalar", T: 4 /* ScalarType.UINT64 */, opt: true },
+    { no: 6, name: "field", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 7, name: "sort", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 8, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 10, name: "filters", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
   ],
 );
 
@@ -179,6 +185,7 @@ export const ListResponse = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.billing.ListResponse",
   () => [
     { no: 1, name: "pool", kind: "message", T: Plan, repeated: true },
+    { no: 2, name: "total", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
   ],
 );
 

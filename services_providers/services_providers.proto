@@ -23,6 +23,8 @@ import "access/access.proto";
 import "statuses/statuses.proto";
 
 
+
+
 message Var {map<string, google.protobuf.Value> value = 1;}
 
 message ProxyConf {optional string socket = 1;}

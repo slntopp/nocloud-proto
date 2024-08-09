@@ -76,8 +76,17 @@ message ListRequest {
   string sp_uuid = 1;
   bool anonymously = 2;
   bool show_deleted = 3;
+  optional uint64 page = 4;
+  optional uint64 limit = 5;
+  optional string field = 6;
+  optional string sort = 7;
+  optional string uuid = 8;
+  map<string, google.protobuf.Value> filters = 10;
 }
-message ListResponse {repeated Plan pool = 1;}
+message ListResponse {
+  repeated Plan pool = 1;
+  uint64 total = 2;
+}
 
 message ListPlansInstancesRequest {
   bool anonymously = 1;

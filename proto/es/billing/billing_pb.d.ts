@@ -394,6 +394,36 @@ export declare class ListRequest extends Message<ListRequest> {
    */
   showDeleted: boolean;
 
+  /**
+   * @generated from field: optional uint64 page = 4;
+   */
+  page?: bigint;
+
+  /**
+   * @generated from field: optional uint64 limit = 5;
+   */
+  limit?: bigint;
+
+  /**
+   * @generated from field: optional string field = 6;
+   */
+  field?: string;
+
+  /**
+   * @generated from field: optional string sort = 7;
+   */
+  sort?: string;
+
+  /**
+   * @generated from field: optional string uuid = 8;
+   */
+  uuid?: string;
+
+  /**
+   * @generated from field: map<string, google.protobuf.Value> filters = 10;
+   */
+  filters: { [key: string]: Value };
+
   constructor(data?: PartialMessage<ListRequest>);
 
   static readonly runtime: typeof proto3;
@@ -417,6 +447,11 @@ export declare class ListResponse extends Message<ListResponse> {
    * @generated from field: repeated nocloud.billing.Plan pool = 1;
    */
   pool: Plan[];
+
+  /**
+   * @generated from field: uint64 total = 2;
+   */
+  total: bigint;
 
   constructor(data?: PartialMessage<ListResponse>);
 
