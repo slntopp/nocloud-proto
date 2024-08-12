@@ -477,6 +477,11 @@ export declare class ListPlansInstancesRequest extends Message<ListPlansInstance
    */
   anonymously: boolean;
 
+  /**
+   * @generated from field: repeated string uuids = 2;
+   */
+  uuids: string[];
+
   constructor(data?: PartialMessage<ListPlansInstancesRequest>);
 
   static readonly runtime: typeof proto3;
@@ -514,6 +519,59 @@ export declare class ListPlansInstancesResponse extends Message<ListPlansInstanc
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListPlansInstancesResponse;
 
   static equals(a: ListPlansInstancesResponse | PlainMessage<ListPlansInstancesResponse> | undefined, b: ListPlansInstancesResponse | PlainMessage<ListPlansInstancesResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.PlansUniqueRequest
+ */
+export declare class PlansUniqueRequest extends Message<PlansUniqueRequest> {
+  /**
+   * @generated from field: map<string, google.protobuf.Value> filters = 1;
+   */
+  filters: { [key: string]: Value };
+
+  constructor(data?: PartialMessage<PlansUniqueRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.PlansUniqueRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PlansUniqueRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PlansUniqueRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PlansUniqueRequest;
+
+  static equals(a: PlansUniqueRequest | PlainMessage<PlansUniqueRequest> | undefined, b: PlansUniqueRequest | PlainMessage<PlansUniqueRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.PlansUniqueResponse
+ */
+export declare class PlansUniqueResponse extends Message<PlansUniqueResponse> {
+  /**
+   * @generated from field: uint64 total = 1;
+   */
+  total: bigint;
+
+  /**
+   * @generated from field: google.protobuf.Value unique = 2;
+   */
+  unique?: Value;
+
+  constructor(data?: PartialMessage<PlansUniqueResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.PlansUniqueResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PlansUniqueResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PlansUniqueResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PlansUniqueResponse;
+
+  static equals(a: PlansUniqueResponse | PlainMessage<PlansUniqueResponse> | undefined, b: PlansUniqueResponse | PlainMessage<PlansUniqueResponse> | undefined): boolean;
 }
 
 /**

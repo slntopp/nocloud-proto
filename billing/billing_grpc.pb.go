@@ -219,6 +219,7 @@ const (
 	BillingService_GetPlan_FullMethodName                           = "/nocloud.billing.BillingService/GetPlan"
 	BillingService_ListPlans_FullMethodName                         = "/nocloud.billing.BillingService/ListPlans"
 	BillingService_ListPlansInstances_FullMethodName                = "/nocloud.billing.BillingService/ListPlansInstances"
+	BillingService_PlansUnique_FullMethodName                       = "/nocloud.billing.BillingService/PlansUnique"
 	BillingService_DeletePlan_FullMethodName                        = "/nocloud.billing.BillingService/DeletePlan"
 	BillingService_CreateTransaction_FullMethodName                 = "/nocloud.billing.BillingService/CreateTransaction"
 	BillingService_GetTransactions_FullMethodName                   = "/nocloud.billing.BillingService/GetTransactions"
@@ -248,6 +249,7 @@ type BillingServiceClient interface {
 	GetPlan(ctx context.Context, in *Plan, opts ...grpc.CallOption) (*Plan, error)
 	ListPlans(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListResponse, error)
 	ListPlansInstances(ctx context.Context, in *ListPlansInstancesRequest, opts ...grpc.CallOption) (*ListPlansInstancesResponse, error)
+	PlansUnique(ctx context.Context, in *PlansUniqueRequest, opts ...grpc.CallOption) (*PlansUniqueResponse, error)
 	DeletePlan(ctx context.Context, in *Plan, opts ...grpc.CallOption) (*Plan, error)
 	CreateTransaction(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*Transaction, error)
 	GetTransactions(ctx context.Context, in *GetTransactionsRequest, opts ...grpc.CallOption) (*Transactions, error)
@@ -320,6 +322,16 @@ func (c *billingServiceClient) ListPlansInstances(ctx context.Context, in *ListP
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListPlansInstancesResponse)
 	err := c.cc.Invoke(ctx, BillingService_ListPlansInstances_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingServiceClient) PlansUnique(ctx context.Context, in *PlansUniqueRequest, opts ...grpc.CallOption) (*PlansUniqueResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PlansUniqueResponse)
+	err := c.cc.Invoke(ctx, BillingService_PlansUnique_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -515,6 +527,7 @@ type BillingServiceServer interface {
 	GetPlan(context.Context, *Plan) (*Plan, error)
 	ListPlans(context.Context, *ListRequest) (*ListResponse, error)
 	ListPlansInstances(context.Context, *ListPlansInstancesRequest) (*ListPlansInstancesResponse, error)
+	PlansUnique(context.Context, *PlansUniqueRequest) (*PlansUniqueResponse, error)
 	DeletePlan(context.Context, *Plan) (*Plan, error)
 	CreateTransaction(context.Context, *Transaction) (*Transaction, error)
 	GetTransactions(context.Context, *GetTransactionsRequest) (*Transactions, error)
@@ -557,6 +570,9 @@ func (UnimplementedBillingServiceServer) ListPlans(context.Context, *ListRequest
 }
 func (UnimplementedBillingServiceServer) ListPlansInstances(context.Context, *ListPlansInstancesRequest) (*ListPlansInstancesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPlansInstances not implemented")
+}
+func (UnimplementedBillingServiceServer) PlansUnique(context.Context, *PlansUniqueRequest) (*PlansUniqueResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PlansUnique not implemented")
 }
 func (UnimplementedBillingServiceServer) DeletePlan(context.Context, *Plan) (*Plan, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeletePlan not implemented")
@@ -719,6 +735,24 @@ func _BillingService_ListPlansInstances_Handler(srv interface{}, ctx context.Con
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BillingServiceServer).ListPlansInstances(ctx, req.(*ListPlansInstancesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BillingService_PlansUnique_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PlansUniqueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).PlansUnique(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_PlansUnique_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).PlansUnique(ctx, req.(*PlansUniqueRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1073,6 +1107,10 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListPlansInstances",
 			Handler:    _BillingService_ListPlansInstances_Handler,
+		},
+		{
+			MethodName: "PlansUnique",
+			Handler:    _BillingService_PlansUnique_Handler,
 		},
 		{
 			MethodName: "DeletePlan",

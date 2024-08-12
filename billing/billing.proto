@@ -90,10 +90,19 @@ message ListResponse {
 
 message ListPlansInstancesRequest {
   bool anonymously = 1;
+  repeated string uuids = 2;
 }
 
 message ListPlansInstancesResponse {
   map<string, google.protobuf.Value> plans = 1;
+}
+
+message PlansUniqueRequest {
+  map<string, google.protobuf.Value> filters = 1;
+}
+message PlansUniqueResponse {
+  uint64 total = 1;
+  google.protobuf.Value unique = 2;
 }
 
 enum Kind {
@@ -453,6 +462,11 @@ service BillingService {
   rpc ListPlansInstances (ListPlansInstancesRequest) returns (ListPlansInstancesResponse) {
     option (google.api.http) = {
       get: "/billing/plans/instances"
+    };
+  };
+  rpc PlansUnique (PlansUniqueRequest) returns (PlansUniqueResponse) {
+    option (google.api.http) = {
+      get: "/billing/plans/unique"
     };
   };
   rpc DeletePlan (Plan) returns (Plan) {

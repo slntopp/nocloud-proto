@@ -196,6 +196,7 @@ export const ListPlansInstancesRequest = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.billing.ListPlansInstancesRequest",
   () => [
     { no: 1, name: "anonymously", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 2, name: "uuids", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
   ],
 );
 
@@ -206,6 +207,27 @@ export const ListPlansInstancesResponse = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.billing.ListPlansInstancesResponse",
   () => [
     { no: 1, name: "plans", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.PlansUniqueRequest
+ */
+export const PlansUniqueRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.PlansUniqueRequest",
+  () => [
+    { no: 1, name: "filters", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.PlansUniqueResponse
+ */
+export const PlansUniqueResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.PlansUniqueResponse",
+  () => [
+    { no: 1, name: "total", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 2, name: "unique", kind: "message", T: Value },
   ],
 );
 

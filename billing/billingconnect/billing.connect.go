@@ -79,6 +79,9 @@ const (
 	// BillingServiceListPlansInstancesProcedure is the fully-qualified name of the BillingService's
 	// ListPlansInstances RPC.
 	BillingServiceListPlansInstancesProcedure = "/nocloud.billing.BillingService/ListPlansInstances"
+	// BillingServicePlansUniqueProcedure is the fully-qualified name of the BillingService's
+	// PlansUnique RPC.
+	BillingServicePlansUniqueProcedure = "/nocloud.billing.BillingService/PlansUnique"
 	// BillingServiceDeletePlanProcedure is the fully-qualified name of the BillingService's DeletePlan
 	// RPC.
 	BillingServiceDeletePlanProcedure = "/nocloud.billing.BillingService/DeletePlan"
@@ -205,6 +208,7 @@ var (
 	billingServiceGetPlanMethodDescriptor                           = billingServiceServiceDescriptor.Methods().ByName("GetPlan")
 	billingServiceListPlansMethodDescriptor                         = billingServiceServiceDescriptor.Methods().ByName("ListPlans")
 	billingServiceListPlansInstancesMethodDescriptor                = billingServiceServiceDescriptor.Methods().ByName("ListPlansInstances")
+	billingServicePlansUniqueMethodDescriptor                       = billingServiceServiceDescriptor.Methods().ByName("PlansUnique")
 	billingServiceDeletePlanMethodDescriptor                        = billingServiceServiceDescriptor.Methods().ByName("DeletePlan")
 	billingServiceCreateTransactionMethodDescriptor                 = billingServiceServiceDescriptor.Methods().ByName("CreateTransaction")
 	billingServiceGetTransactionsMethodDescriptor                   = billingServiceServiceDescriptor.Methods().ByName("GetTransactions")
@@ -377,6 +381,7 @@ type BillingServiceClient interface {
 	GetPlan(context.Context, *connect.Request[billing.Plan]) (*connect.Response[billing.Plan], error)
 	ListPlans(context.Context, *connect.Request[billing.ListRequest]) (*connect.Response[billing.ListResponse], error)
 	ListPlansInstances(context.Context, *connect.Request[billing.ListPlansInstancesRequest]) (*connect.Response[billing.ListPlansInstancesResponse], error)
+	PlansUnique(context.Context, *connect.Request[billing.PlansUniqueRequest]) (*connect.Response[billing.PlansUniqueResponse], error)
 	DeletePlan(context.Context, *connect.Request[billing.Plan]) (*connect.Response[billing.Plan], error)
 	CreateTransaction(context.Context, *connect.Request[billing.Transaction]) (*connect.Response[billing.Transaction], error)
 	GetTransactions(context.Context, *connect.Request[billing.GetTransactionsRequest]) (*connect.Response[billing.Transactions], error)
@@ -435,6 +440,12 @@ func NewBillingServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			httpClient,
 			baseURL+BillingServiceListPlansInstancesProcedure,
 			connect.WithSchema(billingServiceListPlansInstancesMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		plansUnique: connect.NewClient[billing.PlansUniqueRequest, billing.PlansUniqueResponse](
+			httpClient,
+			baseURL+BillingServicePlansUniqueProcedure,
+			connect.WithSchema(billingServicePlansUniqueMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		deletePlan: connect.NewClient[billing.Plan, billing.Plan](
@@ -555,6 +566,7 @@ type billingServiceClient struct {
 	getPlan                           *connect.Client[billing.Plan, billing.Plan]
 	listPlans                         *connect.Client[billing.ListRequest, billing.ListResponse]
 	listPlansInstances                *connect.Client[billing.ListPlansInstancesRequest, billing.ListPlansInstancesResponse]
+	plansUnique                       *connect.Client[billing.PlansUniqueRequest, billing.PlansUniqueResponse]
 	deletePlan                        *connect.Client[billing.Plan, billing.Plan]
 	createTransaction                 *connect.Client[billing.Transaction, billing.Transaction]
 	getTransactions                   *connect.Client[billing.GetTransactionsRequest, billing.Transactions]
@@ -598,6 +610,11 @@ func (c *billingServiceClient) ListPlans(ctx context.Context, req *connect.Reque
 // ListPlansInstances calls nocloud.billing.BillingService.ListPlansInstances.
 func (c *billingServiceClient) ListPlansInstances(ctx context.Context, req *connect.Request[billing.ListPlansInstancesRequest]) (*connect.Response[billing.ListPlansInstancesResponse], error) {
 	return c.listPlansInstances.CallUnary(ctx, req)
+}
+
+// PlansUnique calls nocloud.billing.BillingService.PlansUnique.
+func (c *billingServiceClient) PlansUnique(ctx context.Context, req *connect.Request[billing.PlansUniqueRequest]) (*connect.Response[billing.PlansUniqueResponse], error) {
+	return c.plansUnique.CallUnary(ctx, req)
 }
 
 // DeletePlan calls nocloud.billing.BillingService.DeletePlan.
@@ -698,6 +715,7 @@ type BillingServiceHandler interface {
 	GetPlan(context.Context, *connect.Request[billing.Plan]) (*connect.Response[billing.Plan], error)
 	ListPlans(context.Context, *connect.Request[billing.ListRequest]) (*connect.Response[billing.ListResponse], error)
 	ListPlansInstances(context.Context, *connect.Request[billing.ListPlansInstancesRequest]) (*connect.Response[billing.ListPlansInstancesResponse], error)
+	PlansUnique(context.Context, *connect.Request[billing.PlansUniqueRequest]) (*connect.Response[billing.PlansUniqueResponse], error)
 	DeletePlan(context.Context, *connect.Request[billing.Plan]) (*connect.Response[billing.Plan], error)
 	CreateTransaction(context.Context, *connect.Request[billing.Transaction]) (*connect.Response[billing.Transaction], error)
 	GetTransactions(context.Context, *connect.Request[billing.GetTransactionsRequest]) (*connect.Response[billing.Transactions], error)
@@ -752,6 +770,12 @@ func NewBillingServiceHandler(svc BillingServiceHandler, opts ...connect.Handler
 		BillingServiceListPlansInstancesProcedure,
 		svc.ListPlansInstances,
 		connect.WithSchema(billingServiceListPlansInstancesMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	billingServicePlansUniqueHandler := connect.NewUnaryHandler(
+		BillingServicePlansUniqueProcedure,
+		svc.PlansUnique,
+		connect.WithSchema(billingServicePlansUniqueMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceDeletePlanHandler := connect.NewUnaryHandler(
@@ -874,6 +898,8 @@ func NewBillingServiceHandler(svc BillingServiceHandler, opts ...connect.Handler
 			billingServiceListPlansHandler.ServeHTTP(w, r)
 		case BillingServiceListPlansInstancesProcedure:
 			billingServiceListPlansInstancesHandler.ServeHTTP(w, r)
+		case BillingServicePlansUniqueProcedure:
+			billingServicePlansUniqueHandler.ServeHTTP(w, r)
 		case BillingServiceDeletePlanProcedure:
 			billingServiceDeletePlanHandler.ServeHTTP(w, r)
 		case BillingServiceCreateTransactionProcedure:
@@ -937,6 +963,10 @@ func (UnimplementedBillingServiceHandler) ListPlans(context.Context, *connect.Re
 
 func (UnimplementedBillingServiceHandler) ListPlansInstances(context.Context, *connect.Request[billing.ListPlansInstancesRequest]) (*connect.Response[billing.ListPlansInstancesResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.BillingService.ListPlansInstances is not implemented"))
+}
+
+func (UnimplementedBillingServiceHandler) PlansUnique(context.Context, *connect.Request[billing.PlansUniqueRequest]) (*connect.Response[billing.PlansUniqueResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.BillingService.PlansUnique is not implemented"))
 }
 
 func (UnimplementedBillingServiceHandler) DeletePlan(context.Context, *connect.Request[billing.Plan]) (*connect.Response[billing.Plan], error) {

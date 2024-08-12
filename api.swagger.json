@@ -2399,6 +2399,46 @@
             "in": "query",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "uuids",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
+    "/billing/plans/unique": {
+      "get": {
+        "operationId": "BillingService_PlansUnique",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingPlansUniqueResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filters",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
           }
         ],
         "tags": [
@@ -7288,6 +7328,16 @@
       ],
       "default": "UNKNOWN",
       "title": "- UNKNOWN: Default value; should never be used but will be treated as DYNAMIC"
+    },
+    "billingPlansUniqueResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "unique": {}
+      }
     },
     "billingPriority": {
       "type": "string",
