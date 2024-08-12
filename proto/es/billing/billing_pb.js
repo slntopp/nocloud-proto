@@ -216,7 +216,10 @@ export const ListPlansInstancesResponse = /*@__PURE__*/ proto3.makeMessageType(
 export const PlansUniqueRequest = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.billing.PlansUniqueRequest",
   () => [
-    { no: 1, name: "filters", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
+    { no: 1, name: "sp_uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "anonymously", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 3, name: "show_deleted", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 4, name: "filters", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
   ],
 );
 

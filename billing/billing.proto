@@ -98,7 +98,10 @@ message ListPlansInstancesResponse {
 }
 
 message PlansUniqueRequest {
-  map<string, google.protobuf.Value> filters = 1;
+  string sp_uuid = 1;
+  bool anonymously = 2;
+  bool show_deleted = 3;
+  map<string, google.protobuf.Value> filters = 4;
 }
 message PlansUniqueResponse {
   uint64 total = 1;

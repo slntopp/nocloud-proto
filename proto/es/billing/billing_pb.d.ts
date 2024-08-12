@@ -526,7 +526,22 @@ export declare class ListPlansInstancesResponse extends Message<ListPlansInstanc
  */
 export declare class PlansUniqueRequest extends Message<PlansUniqueRequest> {
   /**
-   * @generated from field: map<string, google.protobuf.Value> filters = 1;
+   * @generated from field: string sp_uuid = 1;
+   */
+  spUuid: string;
+
+  /**
+   * @generated from field: bool anonymously = 2;
+   */
+  anonymously: boolean;
+
+  /**
+   * @generated from field: bool show_deleted = 3;
+   */
+  showDeleted: boolean;
+
+  /**
+   * @generated from field: map<string, google.protobuf.Value> filters = 4;
    */
   filters: { [key: string]: Value };
 
