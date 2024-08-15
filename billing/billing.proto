@@ -82,6 +82,7 @@ message ListRequest {
   optional string sort = 7;
   optional string uuid = 8;
   map<string, google.protobuf.Value> filters = 10;
+  repeated string exclude_uuids = 11;
 }
 message ListResponse {
   repeated Plan pool = 1;

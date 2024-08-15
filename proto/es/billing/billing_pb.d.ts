@@ -424,6 +424,11 @@ export declare class ListRequest extends Message<ListRequest> {
    */
   filters: { [key: string]: Value };
 
+  /**
+   * @generated from field: repeated string exclude_uuids = 11;
+   */
+  excludeUuids: string[];
+
   constructor(data?: PartialMessage<ListRequest>);
 
   static readonly runtime: typeof proto3;
