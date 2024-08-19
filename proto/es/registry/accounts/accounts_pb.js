@@ -58,6 +58,7 @@ export const CreateRequest = /*@__PURE__*/ proto3.makeMessageType(
     { no: 4, name: "access", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
     { no: 5, name: "currency", kind: "message", T: Currency },
     { no: 6, name: "data", kind: "message", T: Struct },
+    { no: 7, name: "account_owner", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -111,6 +112,8 @@ export const Account = /*@__PURE__*/ proto3.makeMessageType(
     { no: 9, name: "status", kind: "enum", T: proto3.getEnumType(AccountStatus) },
     { no: 10, name: "admin_notes", kind: "message", T: AdminNote, repeated: true },
     { no: 11, name: "active", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 12, name: "subaccounts", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 13, name: "account_owner", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

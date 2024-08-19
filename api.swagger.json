@@ -6285,6 +6285,17 @@
         },
         "active": {
           "type": "boolean"
+        },
+        "subaccounts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "List of UUID's of sub-accounts of this account"
+        },
+        "accountOwner": {
+          "type": "string",
+          "title": "Mother account of this account. If != \"\" - then this account is subaccount"
         }
       }
     },
@@ -8980,6 +8991,17 @@
         },
         "active": {
           "type": "boolean"
+        },
+        "subaccounts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "List of UUID's of sub-accounts of this account"
+        },
+        "accountOwner": {
+          "type": "string",
+          "title": "Mother account of this account. If != \"\" - then this account is subaccount"
         }
       }
     },
@@ -9009,6 +9031,10 @@
         },
         "data": {
           "type": "object"
+        },
+        "accountOwner": {
+          "type": "string",
+          "title": "Mother account of this account. If != \"\" - then this account is gonna be subaccount"
         }
       }
     },

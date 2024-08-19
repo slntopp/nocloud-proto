@@ -117,6 +117,13 @@ export declare class CreateRequest extends Message<CreateRequest> {
    */
   data?: Struct;
 
+  /**
+   * Mother account of this account. If != "" - then this account is gonna be subaccount
+   *
+   * @generated from field: string account_owner = 7;
+   */
+  accountOwner: string;
+
   constructor(data?: PartialMessage<CreateRequest>);
 
   static readonly runtime: typeof proto3;
@@ -279,6 +286,20 @@ export declare class Account extends Message<Account> {
    * @generated from field: bool active = 11;
    */
   active: boolean;
+
+  /**
+   * List of UUID's of sub-accounts of this account
+   *
+   * @generated from field: repeated string subaccounts = 12;
+   */
+  subaccounts: string[];
+
+  /**
+   * Mother account of this account. If != "" - then this account is subaccount
+   *
+   * @generated from field: string account_owner = 13;
+   */
+  accountOwner: string;
 
   constructor(data?: PartialMessage<Account>);
 
