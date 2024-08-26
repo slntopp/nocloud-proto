@@ -46,6 +46,7 @@ export const Event = /*@__PURE__*/ proto3.makeMessageType(
     { no: 7, name: "requestor", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 8, name: "ts", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 9, name: "snapshot", kind: "message", T: Snapshot, opt: true },
+    { no: 10, name: "priority", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
   ],
 );
 
