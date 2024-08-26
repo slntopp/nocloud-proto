@@ -2,9 +2,8 @@ version: v1
 managed:
   enabled: true
 plugins:
-  - name: php
+  - plugin: buf.build/grpc/php:v1.66.0
     out: proto/php
-  - name: php
+  # dependencies
+  - plugin: buf.build/protocolbuffers/php:v27.3
     out: proto/php
-    # path: /usr/local/bin/grpc_php_plugin
-    path: /home/linuxbrew/.linuxbrew/bin/grpc_php_plugin
