@@ -26,6 +26,7 @@ message Event {
   string key = 4;
   map<string, google.protobuf.Value> data = 5;
   int64 ts = 6;
+  int32 priority = 7; // 0 - unspecified priority(lowest one), 1 - highest priority
 }
 
 message Events {repeated Event events = 1;}

@@ -59,6 +59,13 @@ export declare class Event extends Message<Event> {
    */
   ts: bigint;
 
+  /**
+   * 0 - unspecified priority(lowest one), 1 - highest priority
+   *
+   * @generated from field: int32 priority = 7;
+   */
+  priority: number;
+
   constructor(data?: PartialMessage<Event>);
 
   static readonly runtime: typeof proto3;

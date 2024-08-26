@@ -8477,6 +8477,11 @@
         "ts": {
           "type": "string",
           "format": "int64"
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "title": "0 - unspecified priority(lowest one), 1 - highest priority"
         }
       }
     },

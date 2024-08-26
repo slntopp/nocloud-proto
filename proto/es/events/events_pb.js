@@ -32,6 +32,7 @@ export const Event = /*@__PURE__*/ proto3.makeMessageType(
     { no: 4, name: "key", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "data", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
     { no: 6, name: "ts", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 7, name: "priority", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
   ],
 );
 
