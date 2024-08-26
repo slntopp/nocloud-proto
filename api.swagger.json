@@ -6507,6 +6507,11 @@
         },
         "snapshot": {
           "$ref": "#/definitions/events_loggingSnapshot"
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "title": "0 - unspecified, 1 - highest"
         }
       }
     },

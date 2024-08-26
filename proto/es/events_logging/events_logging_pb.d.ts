@@ -99,6 +99,13 @@ export declare class Event extends Message<Event> {
    */
   snapshot?: Snapshot;
 
+  /**
+   * 0 - unspecified, 1 - highest
+   *
+   * @generated from field: int32 priority = 10;
+   */
+  priority: number;
+
   constructor(data?: PartialMessage<Event>);
 
   static readonly runtime: typeof proto3;
