@@ -42,6 +42,12 @@ class Event extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>int64 ts = 6 [json_name = "ts"];</code>
      */
     protected $ts = 0;
+    /**
+     * 0 - unspecified, 1 - highest
+     *
+     * Generated from protobuf field <code>int32 priority = 7 [json_name = "priority"];</code>
+     */
+    protected $priority = 0;
 
     /**
      * Constructor.
@@ -57,6 +63,8 @@ class Event extends \Google\Protobuf\Internal\Message
      *     @type string $key
      *     @type array|\Google\Protobuf\Internal\MapField $data
      *     @type int|string $ts
+     *     @type int $priority
+     *           0 - unspecified, 1 - highest
      * }
      */
     public function __construct($data = NULL) {
@@ -200,6 +208,32 @@ class Event extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt64($var);
         $this->ts = $var;
+
+        return $this;
+    }
+
+    /**
+     * 0 - unspecified, 1 - highest
+     *
+     * Generated from protobuf field <code>int32 priority = 7 [json_name = "priority"];</code>
+     * @return int
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
+
+    /**
+     * 0 - unspecified, 1 - highest
+     *
+     * Generated from protobuf field <code>int32 priority = 7 [json_name = "priority"];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setPriority($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->priority = $var;
 
         return $this;
     }
