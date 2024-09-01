@@ -81,7 +81,7 @@ message Instance {
 
   optional string user = 4; // SSH User
   optional string pass = 5; // SSH Password
-  optional string ansible_host = 6;
+  optional string ansible_host = 6; // Ansible Jump Host
   optional string python = 7;
 }
 
