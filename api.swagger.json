@@ -6586,6 +6586,10 @@
             "type": "string"
           },
           "title": "List of supported platforms(OS) by this Playbook"
+        },
+        "private": {
+          "type": "boolean",
+          "title": "Whether this Playbook is private or not"
         }
       }
     },
@@ -6617,6 +6621,10 @@
                 "type": "string"
               },
               "title": "List of supported platforms(OS) by this Playbook"
+            },
+            "private": {
+              "type": "boolean",
+              "title": "Whether this Playbook is private or not"
             }
           }
         }

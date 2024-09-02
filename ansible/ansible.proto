@@ -42,6 +42,9 @@ message Playbook {
 
   repeated string supported_os = 6;
   // List of supported platforms(OS) by this Playbook
+
+  bool private = 7;
+  // Whether this Playbook is private or not
 }
 
 message Run {
