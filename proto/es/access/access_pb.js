@@ -40,6 +40,7 @@ export const Access = /*@__PURE__*/ proto3.makeMessageType(
     { no: 1, name: "level", kind: "enum", T: proto3.getEnumType(Level) },
     { no: 2, name: "role", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "namespace", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 4, name: "username", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

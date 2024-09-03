@@ -25,6 +25,7 @@ message Access {
   Level level = 1;
   string role = 2;
   optional string namespace = 3;
+  string username = 4;
 }
 
 message Node {

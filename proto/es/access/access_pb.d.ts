@@ -67,6 +67,11 @@ export declare class Access extends Message<Access> {
    */
   namespace?: string;
 
+  /**
+   * @generated from field: string username = 4;
+   */
+  username: string;
+
   constructor(data?: PartialMessage<Access>);
 
   static readonly runtime: typeof proto3;

@@ -4025,6 +4025,12 @@
             "type": "string"
           },
           {
+            "name": "access.username",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "created",
             "in": "query",
             "required": false,
@@ -6229,6 +6235,9 @@
           "type": "string"
         },
         "namespace": {
+          "type": "string"
+        },
+        "username": {
           "type": "string"
         }
       }
