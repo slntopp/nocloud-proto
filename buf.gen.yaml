@@ -10,7 +10,7 @@ plugins:
   - name: go
     out: .
     opt: paths=source_relative
-  - name: go-grpc
+  - plugin: buf.build/grpc/go
     out: .
     opt:
       - paths=source_relative

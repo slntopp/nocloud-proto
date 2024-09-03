@@ -110,6 +110,7 @@ export const Account = proto3.makeMessageType(
     { no: 8, name: "currency", kind: "enum", T: proto3.getEnumType(Currency), opt: true },
     { no: 9, name: "status", kind: "enum", T: proto3.getEnumType(AccountStatus) },
     { no: 10, name: "admin_notes", kind: "message", T: AdminNote, repeated: true },
+    { no: 11, name: "active", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
@@ -147,6 +148,7 @@ export const ListResponse = proto3.makeMessageType(
   () => [
     { no: 1, name: "pool", kind: "message", T: Account, repeated: true },
     { no: 2, name: "count", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "active", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ],
 );
 

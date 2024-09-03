@@ -46,6 +46,7 @@ export const Playbook = proto3.makeMessageType(
     { no: 4, name: "description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "content", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 6, name: "supported_os", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 7, name: "private", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 

@@ -120,6 +120,13 @@ export declare class Playbook extends Message<Playbook> {
    */
   supportedOs: string[];
 
+  /**
+   * Is this Playbook visible only for root or not
+   *
+   * @generated from field: bool private = 7;
+   */
+  private: boolean;
+
   constructor(data?: PartialMessage<Playbook>);
 
   static readonly runtime: typeof proto3;
