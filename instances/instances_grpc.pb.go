@@ -162,6 +162,15 @@ func (c *instancesServiceClient) Get(ctx context.Context, in *Instance, opts ...
 	return out, nil
 }
 
+func (c *instancesServiceClient) Get(ctx context.Context, in *Instance, opts ...grpc.CallOption) (*Instance, error) {
+	out := new(Instance)
+	err := c.cc.Invoke(ctx, InstancesService_Get_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *instancesServiceClient) TransferIG(ctx context.Context, in *TransferIGRequest, opts ...grpc.CallOption) (*TransferIGResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(TransferIGResponse)
