@@ -6563,7 +6563,8 @@
           "title": "SSH Password"
         },
         "ansibleHost": {
-          "type": "string"
+          "type": "string",
+          "title": "Ansible Jump Host"
         },
         "python": {
           "type": "string"

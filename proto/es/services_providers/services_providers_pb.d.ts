@@ -122,6 +122,35 @@ export declare class LocationConf extends Message<LocationConf> {
 }
 
 /**
+ * @generated from message nocloud.services_providers.Hook
+ */
+export declare class Hook extends Message<Hook> {
+  /**
+   * @generated from field: string playbook = 1;
+   */
+  playbook: string;
+
+  /**
+   * @generated from field: map<string, string> vars = 2;
+   */
+  vars: { [key: string]: string };
+
+  constructor(data?: PartialMessage<Hook>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.services_providers.Hook";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Hook;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Hook;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Hook;
+
+  static equals(a: Hook | PlainMessage<Hook> | undefined, b: Hook | PlainMessage<Hook> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.services_providers.ServicesProvider
  */
 export declare class ServicesProvider extends Message<ServicesProvider> {
@@ -198,6 +227,11 @@ export declare class ServicesProvider extends Message<ServicesProvider> {
    * @generated from field: nocloud.statuses.NoCloudStatus status = 14;
    */
   status: NoCloudStatus;
+
+  /**
+   * @generated from field: map<string, nocloud.services_providers.Hook> hooks = 15;
+   */
+  hooks: { [key: string]: Hook };
 
   constructor(data?: PartialMessage<ServicesProvider>);
 

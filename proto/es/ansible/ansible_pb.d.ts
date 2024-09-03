@@ -340,6 +340,8 @@ export declare class Instance extends Message<Instance> {
   pass?: string;
 
   /**
+   * Ansible Jump Host
+   *
    * @generated from field: optional string ansible_host = 6;
    */
   ansibleHost?: string;

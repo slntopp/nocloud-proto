@@ -18,7 +18,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { DeleteRequest, DeleteResponse, InvokeRequest, InvokeResponse, ListInstancesRequest, ListInstancesResponse, TransferIGRequest, TransferIGResponse, TransferInstanceRequest, TransferInstanceResponse } from "./instances_pb.js";
+import { DeleteRequest, DeleteResponse, Instance, InvokeRequest, InvokeResponse, ListInstancesRequest, ListInstancesResponse, TransferIGRequest, TransferIGResponse, TransferInstanceRequest, TransferInstanceResponse } from "./instances_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 import { AddNoteRequest, NoteResponse, PatchNoteRequest, RemoveNoteRequest } from "../notes/notes_pb.js";
 
@@ -98,6 +98,15 @@ export declare const InstancesService: {
       readonly name: "List",
       readonly I: typeof ListInstancesRequest,
       readonly O: typeof ListInstancesResponse,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.instances.InstancesService.Get
+     */
+    readonly get: {
+      readonly name: "Get",
+      readonly I: typeof Instance,
+      readonly O: typeof Instance,
       readonly kind: MethodKind.Unary,
     },
     /**

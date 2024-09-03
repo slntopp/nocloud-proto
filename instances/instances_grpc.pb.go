@@ -154,17 +154,9 @@ func (c *instancesServiceClient) List(ctx context.Context, in *ListInstancesRequ
 }
 
 func (c *instancesServiceClient) Get(ctx context.Context, in *Instance, opts ...grpc.CallOption) (*Instance, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Instance)
-	err := c.cc.Invoke(ctx, InstancesService_Get_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *instancesServiceClient) Get(ctx context.Context, in *Instance, opts ...grpc.CallOption) (*Instance, error) {
-	out := new(Instance)
-	err := c.cc.Invoke(ctx, InstancesService_Get_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, InstancesService_Get_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
