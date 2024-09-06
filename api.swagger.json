@@ -1210,7 +1210,9 @@
               "USD",
               "EUR",
               "BYN",
-              "PLN"
+              "PLN",
+              "EUR_COLO",
+              "EUR_TECH"
             ]
           },
           {
@@ -1223,7 +1225,9 @@
               "USD",
               "EUR",
               "BYN",
-              "PLN"
+              "PLN",
+              "EUR_COLO",
+              "EUR_TECH"
             ]
           }
         ],
@@ -1258,7 +1262,9 @@
               "USD",
               "EUR",
               "BYN",
-              "PLN"
+              "PLN",
+              "EUR_COLO",
+              "EUR_TECH"
             ]
           },
           {
@@ -1271,7 +1277,9 @@
               "USD",
               "EUR",
               "BYN",
-              "PLN"
+              "PLN",
+              "EUR_COLO",
+              "EUR_TECH"
             ]
           }
         ],
@@ -1900,7 +1908,9 @@
               "USD",
               "EUR",
               "BYN",
-              "PLN"
+              "PLN",
+              "EUR_COLO",
+              "EUR_TECH"
             ],
             "default": "NCU"
           },
@@ -2578,6 +2588,270 @@
       }
     },
     "/instances/{uuid}": {
+      "get": {
+        "operationId": "InstancesService_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/nocloudinstancesInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNSPECIFIED",
+              "INIT",
+              "MODIFIED",
+              "UP",
+              "DOWN",
+              "DEL",
+              "PROC",
+              "SUS",
+              "DETACHED"
+            ],
+            "default": "UNSPECIFIED"
+          },
+          {
+            "name": "config",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "resources",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "data",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "state.state",
+            "description": "NoCloud Instance State",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "INIT",
+              "UNKNOWN",
+              "STOPPED",
+              "RUNNING",
+              "FAILURE",
+              "DELETED",
+              "SUSPENDED",
+              "OPERATION",
+              "PENDING"
+            ],
+            "default": "INIT"
+          },
+          {
+            "name": "state.meta",
+            "description": "Driver(Provider/Hypervisor) State data\n\nThis is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "state.ts",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "hash",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "billingPlan.uuid",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "billingPlan.title",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "billingPlan.type",
+            "description": "Instance / InstanceGroup type supported by this plan",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "billingPlan.public",
+            "description": "if true, then this plan is available for all users",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "billingPlan.kind",
+            "description": "dynamic(based on resources) or static(based on products)\n\n - UNKNOWN: Default value; should never be used but will be treated as DYNAMIC",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "DYNAMIC",
+              "STATIC"
+            ],
+            "default": "UNKNOWN"
+          },
+          {
+            "name": "billingPlan.products",
+            "description": "Products to make plan pre defined(map key is product key like sm, lg\n\nThis is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "billingPlan.meta",
+            "description": "or whatever)\n\nThis is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "billingPlan.fee.precision",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "billingPlan.fee.round",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "NONE",
+              "FLOOR",
+              "ROUND",
+              "CEIL"
+            ],
+            "default": "NONE"
+          },
+          {
+            "name": "billingPlan.fee.default",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "billingPlan.status",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNSPECIFIED",
+              "INIT",
+              "MODIFIED",
+              "UP",
+              "DOWN",
+              "DEL",
+              "PROC",
+              "SUS",
+              "DETACHED"
+            ],
+            "default": "UNSPECIFIED"
+          },
+          {
+            "name": "product",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "access.level",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "NONE",
+              "READ",
+              "MGMT",
+              "ADMIN",
+              "ROOT"
+            ],
+            "default": "NONE"
+          },
+          {
+            "name": "access.role",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "access.namespace",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "created",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "deleted",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "estimate",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          }
+        ],
+        "tags": [
+          "InstancesService"
+        ]
+      },
       "delete": {
         "operationId": "InstancesService_Delete",
         "responses": {
@@ -4503,6 +4777,13 @@
         },
         "status": {
           "$ref": "#/definitions/statusesNoCloudStatus"
+        },
+        "customEvents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/billingCustomEvent"
+          }
         }
       }
     },
@@ -5182,9 +5463,22 @@
         "USD",
         "EUR",
         "BYN",
-        "PLN"
+        "PLN",
+        "EUR_COLO",
+        "EUR_TECH"
       ],
       "default": "NCU"
+    },
+    "billingCustomEvent": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "override": {
+          "type": "string"
+        }
+      }
     },
     "billingDeleteExchangeRateResponse": {
       "type": "object"
@@ -5464,6 +5758,13 @@
         },
         "status": {
           "$ref": "#/definitions/statusesNoCloudStatus"
+        },
+        "customEvents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/billingCustomEvent"
+          }
         }
       }
     },
@@ -6287,7 +6588,8 @@
           "title": "SSH Password"
         },
         "ansibleHost": {
-          "type": "string"
+          "type": "string",
+          "title": "Ansible Jump Host"
         },
         "python": {
           "type": "string"
@@ -6460,6 +6762,11 @@
         "ts": {
           "type": "string",
           "format": "int64"
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "title": "0 - unspecified, 1 - highest"
         }
       }
     },
@@ -6510,6 +6817,11 @@
         },
         "snapshot": {
           "$ref": "#/definitions/events_loggingSnapshot"
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "title": "0 - unspecified, 1 - highest"
         }
       }
     },
@@ -7209,6 +7521,20 @@
         }
       }
     },
+    "services_providersHook": {
+      "type": "object",
+      "properties": {
+        "playbook": {
+          "type": "string"
+        },
+        "vars": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "services_providersListExtentionsResponse": {
       "type": "object",
       "properties": {
@@ -7327,6 +7653,12 @@
         },
         "status": {
           "$ref": "#/definitions/statusesNoCloudStatus"
+        },
+        "hooks": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/services_providersHook"
+          }
         }
       }
     },
@@ -7398,6 +7730,12 @@
         },
         "status": {
           "$ref": "#/definitions/statusesNoCloudStatus"
+        },
+        "hooks": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/services_providersHook"
+          }
         }
       }
     },
