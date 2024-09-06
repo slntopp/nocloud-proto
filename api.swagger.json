@@ -4777,6 +4777,13 @@
         },
         "status": {
           "$ref": "#/definitions/statusesNoCloudStatus"
+        },
+        "customEvents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/billingCustomEvent"
+          }
         }
       }
     },
@@ -5462,6 +5469,17 @@
       ],
       "default": "NCU"
     },
+    "billingCustomEvent": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "override": {
+          "type": "string"
+        }
+      }
+    },
     "billingDeleteExchangeRateResponse": {
       "type": "object"
     },
@@ -5740,6 +5758,13 @@
         },
         "status": {
           "$ref": "#/definitions/statusesNoCloudStatus"
+        },
+        "customEvents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/billingCustomEvent"
+          }
         }
       }
     },

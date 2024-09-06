@@ -483,6 +483,61 @@ func (x *Fee) GetRanges() []*FeeRange {
 	return nil
 }
 
+type CustomEvent struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Key      string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	Override string `protobuf:"bytes,2,opt,name=override,proto3" json:"override,omitempty"`
+}
+
+func (x *CustomEvent) Reset() {
+	*x = CustomEvent{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_billing_billing_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CustomEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CustomEvent) ProtoMessage() {}
+
+func (x *CustomEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_billing_billing_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CustomEvent.ProtoReflect.Descriptor instead.
+func (*CustomEvent) Descriptor() ([]byte, []int) {
+	return file_billing_billing_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *CustomEvent) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
+func (x *CustomEvent) GetOverride() string {
+	if x != nil {
+		return x.Override
+	}
+	return ""
+}
+
 type Plan struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -496,16 +551,17 @@ type Plan struct {
 	Resources []*ResourceConf     `protobuf:"bytes,6,rep,name=resources,proto3" json:"resources,omitempty"`                                                                                       // Resources confs to make plan dynamic
 	Products  map[string]*Product `protobuf:"bytes,7,rep,name=products,proto3" json:"products,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"` // Products to make plan pre defined(map key is product key like sm, lg
 	// or whatever)
-	Meta     map[string]*structpb.Value `protobuf:"bytes,8,rep,name=meta,proto3" json:"meta,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Fee      *Fee                       `protobuf:"bytes,9,opt,name=fee,proto3" json:"fee,omitempty"`
-	Software []*ansible.Software        `protobuf:"bytes,10,rep,name=software,proto3" json:"software,omitempty"`
-	Status   statuses.NoCloudStatus     `protobuf:"varint,11,opt,name=status,proto3,enum=nocloud.statuses.NoCloudStatus" json:"status,omitempty"`
+	Meta         map[string]*structpb.Value `protobuf:"bytes,8,rep,name=meta,proto3" json:"meta,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Fee          *Fee                       `protobuf:"bytes,9,opt,name=fee,proto3" json:"fee,omitempty"`
+	Software     []*ansible.Software        `protobuf:"bytes,10,rep,name=software,proto3" json:"software,omitempty"`
+	Status       statuses.NoCloudStatus     `protobuf:"varint,11,opt,name=status,proto3,enum=nocloud.statuses.NoCloudStatus" json:"status,omitempty"`
+	CustomEvents []*CustomEvent             `protobuf:"bytes,12,rep,name=custom_events,json=customEvents,proto3" json:"custom_events,omitempty"`
 }
 
 func (x *Plan) Reset() {
 	*x = Plan{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[2]
+		mi := &file_billing_billing_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -518,7 +574,7 @@ func (x *Plan) String() string {
 func (*Plan) ProtoMessage() {}
 
 func (x *Plan) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[2]
+	mi := &file_billing_billing_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -531,7 +587,7 @@ func (x *Plan) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Plan.ProtoReflect.Descriptor instead.
 func (*Plan) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{2}
+	return file_billing_billing_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *Plan) GetUuid() string {
@@ -611,6 +667,13 @@ func (x *Plan) GetStatus() statuses.NoCloudStatus {
 	return statuses.NoCloudStatus(0)
 }
 
+func (x *Plan) GetCustomEvents() []*CustomEvent {
+	if x != nil {
+		return x.CustomEvents
+	}
+	return nil
+}
+
 type ListRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -624,7 +687,7 @@ type ListRequest struct {
 func (x *ListRequest) Reset() {
 	*x = ListRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[3]
+		mi := &file_billing_billing_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -637,7 +700,7 @@ func (x *ListRequest) String() string {
 func (*ListRequest) ProtoMessage() {}
 
 func (x *ListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[3]
+	mi := &file_billing_billing_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -650,7 +713,7 @@ func (x *ListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListRequest.ProtoReflect.Descriptor instead.
 func (*ListRequest) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{3}
+	return file_billing_billing_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *ListRequest) GetSpUuid() string {
@@ -685,7 +748,7 @@ type ListResponse struct {
 func (x *ListResponse) Reset() {
 	*x = ListResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[4]
+		mi := &file_billing_billing_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -698,7 +761,7 @@ func (x *ListResponse) String() string {
 func (*ListResponse) ProtoMessage() {}
 
 func (x *ListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[4]
+	mi := &file_billing_billing_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -711,7 +774,7 @@ func (x *ListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListResponse.ProtoReflect.Descriptor instead.
 func (*ListResponse) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{4}
+	return file_billing_billing_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ListResponse) GetPool() []*Plan {
@@ -732,7 +795,7 @@ type ListPlansInstancesRequest struct {
 func (x *ListPlansInstancesRequest) Reset() {
 	*x = ListPlansInstancesRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[5]
+		mi := &file_billing_billing_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -745,7 +808,7 @@ func (x *ListPlansInstancesRequest) String() string {
 func (*ListPlansInstancesRequest) ProtoMessage() {}
 
 func (x *ListPlansInstancesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[5]
+	mi := &file_billing_billing_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -758,7 +821,7 @@ func (x *ListPlansInstancesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListPlansInstancesRequest.ProtoReflect.Descriptor instead.
 func (*ListPlansInstancesRequest) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{5}
+	return file_billing_billing_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *ListPlansInstancesRequest) GetAnonymously() bool {
@@ -779,7 +842,7 @@ type ListPlansInstancesResponse struct {
 func (x *ListPlansInstancesResponse) Reset() {
 	*x = ListPlansInstancesResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[6]
+		mi := &file_billing_billing_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -792,7 +855,7 @@ func (x *ListPlansInstancesResponse) String() string {
 func (*ListPlansInstancesResponse) ProtoMessage() {}
 
 func (x *ListPlansInstancesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[6]
+	mi := &file_billing_billing_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -805,7 +868,7 @@ func (x *ListPlansInstancesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListPlansInstancesResponse.ProtoReflect.Descriptor instead.
 func (*ListPlansInstancesResponse) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{6}
+	return file_billing_billing_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ListPlansInstancesResponse) GetPlans() map[string]*structpb.Value {
@@ -842,7 +905,7 @@ type ResourceConf struct {
 func (x *ResourceConf) Reset() {
 	*x = ResourceConf{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[7]
+		mi := &file_billing_billing_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -855,7 +918,7 @@ func (x *ResourceConf) String() string {
 func (*ResourceConf) ProtoMessage() {}
 
 func (x *ResourceConf) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[7]
+	mi := &file_billing_billing_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -868,7 +931,7 @@ func (x *ResourceConf) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResourceConf.ProtoReflect.Descriptor instead.
 func (*ResourceConf) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{7}
+	return file_billing_billing_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ResourceConf) GetKey() string {
@@ -990,7 +1053,7 @@ type Product struct {
 func (x *Product) Reset() {
 	*x = Product{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[8]
+		mi := &file_billing_billing_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1003,7 +1066,7 @@ func (x *Product) String() string {
 func (*Product) ProtoMessage() {}
 
 func (x *Product) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[8]
+	mi := &file_billing_billing_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1016,7 +1079,7 @@ func (x *Product) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Product.ProtoReflect.Descriptor instead.
 func (*Product) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{8}
+	return file_billing_billing_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *Product) GetKind() Kind {
@@ -1127,7 +1190,7 @@ type Transaction struct {
 func (x *Transaction) Reset() {
 	*x = Transaction{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[9]
+		mi := &file_billing_billing_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1140,7 +1203,7 @@ func (x *Transaction) String() string {
 func (*Transaction) ProtoMessage() {}
 
 func (x *Transaction) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[9]
+	mi := &file_billing_billing_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1153,7 +1216,7 @@ func (x *Transaction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Transaction.ProtoReflect.Descriptor instead.
 func (*Transaction) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{9}
+	return file_billing_billing_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *Transaction) GetUuid() string {
@@ -1265,7 +1328,7 @@ type Transactions struct {
 func (x *Transactions) Reset() {
 	*x = Transactions{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[10]
+		mi := &file_billing_billing_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1278,7 +1341,7 @@ func (x *Transactions) String() string {
 func (*Transactions) ProtoMessage() {}
 
 func (x *Transactions) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[10]
+	mi := &file_billing_billing_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1291,7 +1354,7 @@ func (x *Transactions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Transactions.ProtoReflect.Descriptor instead.
 func (*Transactions) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{10}
+	return file_billing_billing_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *Transactions) GetPool() []*Transaction {
@@ -1335,7 +1398,7 @@ type Record struct {
 func (x *Record) Reset() {
 	*x = Record{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[11]
+		mi := &file_billing_billing_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1348,7 +1411,7 @@ func (x *Record) String() string {
 func (*Record) ProtoMessage() {}
 
 func (x *Record) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[11]
+	mi := &file_billing_billing_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1361,7 +1424,7 @@ func (x *Record) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Record.ProtoReflect.Descriptor instead.
 func (*Record) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{11}
+	return file_billing_billing_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *Record) GetUuid() string {
@@ -1494,7 +1557,7 @@ type Records struct {
 func (x *Records) Reset() {
 	*x = Records{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[12]
+		mi := &file_billing_billing_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1507,7 +1570,7 @@ func (x *Records) String() string {
 func (*Records) ProtoMessage() {}
 
 func (x *Records) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[12]
+	mi := &file_billing_billing_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1520,7 +1583,7 @@ func (x *Records) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Records.ProtoReflect.Descriptor instead.
 func (*Records) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{12}
+	return file_billing_billing_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *Records) GetPool() []*Record {
@@ -1541,7 +1604,7 @@ type GetActiveRequest struct {
 func (x *GetActiveRequest) Reset() {
 	*x = GetActiveRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[13]
+		mi := &file_billing_billing_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1554,7 +1617,7 @@ func (x *GetActiveRequest) String() string {
 func (*GetActiveRequest) ProtoMessage() {}
 
 func (x *GetActiveRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[13]
+	mi := &file_billing_billing_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1567,7 +1630,7 @@ func (x *GetActiveRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetActiveRequest.ProtoReflect.Descriptor instead.
 func (*GetActiveRequest) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{13}
+	return file_billing_billing_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *GetActiveRequest) GetUuid() string {
@@ -1595,7 +1658,7 @@ type GetTransactionsRequest struct {
 func (x *GetTransactionsRequest) Reset() {
 	*x = GetTransactionsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[14]
+		mi := &file_billing_billing_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1608,7 +1671,7 @@ func (x *GetTransactionsRequest) String() string {
 func (*GetTransactionsRequest) ProtoMessage() {}
 
 func (x *GetTransactionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[14]
+	mi := &file_billing_billing_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1621,7 +1684,7 @@ func (x *GetTransactionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTransactionsRequest.ProtoReflect.Descriptor instead.
 func (*GetTransactionsRequest) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{14}
+	return file_billing_billing_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *GetTransactionsRequest) GetAccount() string {
@@ -1691,7 +1754,7 @@ type ReprocessTransactionsRequest struct {
 func (x *ReprocessTransactionsRequest) Reset() {
 	*x = ReprocessTransactionsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[15]
+		mi := &file_billing_billing_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1704,7 +1767,7 @@ func (x *ReprocessTransactionsRequest) String() string {
 func (*ReprocessTransactionsRequest) ProtoMessage() {}
 
 func (x *ReprocessTransactionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[15]
+	mi := &file_billing_billing_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1717,7 +1780,7 @@ func (x *ReprocessTransactionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReprocessTransactionsRequest.ProtoReflect.Descriptor instead.
 func (*ReprocessTransactionsRequest) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{15}
+	return file_billing_billing_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ReprocessTransactionsRequest) GetAccount() string {
@@ -1740,7 +1803,7 @@ type GetTransactionsCountRequest struct {
 func (x *GetTransactionsCountRequest) Reset() {
 	*x = GetTransactionsCountRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[16]
+		mi := &file_billing_billing_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1753,7 +1816,7 @@ func (x *GetTransactionsCountRequest) String() string {
 func (*GetTransactionsCountRequest) ProtoMessage() {}
 
 func (x *GetTransactionsCountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[16]
+	mi := &file_billing_billing_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1766,7 +1829,7 @@ func (x *GetTransactionsCountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTransactionsCountRequest.ProtoReflect.Descriptor instead.
 func (*GetTransactionsCountRequest) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{16}
+	return file_billing_billing_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *GetTransactionsCountRequest) GetAccount() string {
@@ -1801,7 +1864,7 @@ type GetTransactionsCountResponse struct {
 func (x *GetTransactionsCountResponse) Reset() {
 	*x = GetTransactionsCountResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[17]
+		mi := &file_billing_billing_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1814,7 +1877,7 @@ func (x *GetTransactionsCountResponse) String() string {
 func (*GetTransactionsCountResponse) ProtoMessage() {}
 
 func (x *GetTransactionsCountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[17]
+	mi := &file_billing_billing_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1827,7 +1890,7 @@ func (x *GetTransactionsCountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTransactionsCountResponse.ProtoReflect.Descriptor instead.
 func (*GetTransactionsCountResponse) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{17}
+	return file_billing_billing_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *GetTransactionsCountResponse) GetTotal() uint64 {
@@ -1849,7 +1912,7 @@ type UpdateTransactionRequest struct {
 func (x *UpdateTransactionRequest) Reset() {
 	*x = UpdateTransactionRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[18]
+		mi := &file_billing_billing_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1862,7 +1925,7 @@ func (x *UpdateTransactionRequest) String() string {
 func (*UpdateTransactionRequest) ProtoMessage() {}
 
 func (x *UpdateTransactionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[18]
+	mi := &file_billing_billing_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1875,7 +1938,7 @@ func (x *UpdateTransactionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateTransactionRequest.ProtoReflect.Descriptor instead.
 func (*UpdateTransactionRequest) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{18}
+	return file_billing_billing_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *UpdateTransactionRequest) GetUuid() string {
@@ -1903,7 +1966,7 @@ type UpdateTransactionResponse struct {
 func (x *UpdateTransactionResponse) Reset() {
 	*x = UpdateTransactionResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[19]
+		mi := &file_billing_billing_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1916,7 +1979,7 @@ func (x *UpdateTransactionResponse) String() string {
 func (*UpdateTransactionResponse) ProtoMessage() {}
 
 func (x *UpdateTransactionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[19]
+	mi := &file_billing_billing_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1929,7 +1992,7 @@ func (x *UpdateTransactionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateTransactionResponse.ProtoReflect.Descriptor instead.
 func (*UpdateTransactionResponse) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{19}
+	return file_billing_billing_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *UpdateTransactionResponse) GetResult() bool {
@@ -1952,7 +2015,7 @@ type CostEstimation struct {
 func (x *CostEstimation) Reset() {
 	*x = CostEstimation{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[20]
+		mi := &file_billing_billing_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1965,7 +2028,7 @@ func (x *CostEstimation) String() string {
 func (*CostEstimation) ProtoMessage() {}
 
 func (x *CostEstimation) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[20]
+	mi := &file_billing_billing_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1978,7 +2041,7 @@ func (x *CostEstimation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CostEstimation.ProtoReflect.Descriptor instead.
 func (*CostEstimation) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{20}
+	return file_billing_billing_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *CostEstimation) GetResources() map[string]float64 {
@@ -2019,7 +2082,7 @@ type GetInstancesReportRequest struct {
 func (x *GetInstancesReportRequest) Reset() {
 	*x = GetInstancesReportRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[21]
+		mi := &file_billing_billing_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2032,7 +2095,7 @@ func (x *GetInstancesReportRequest) String() string {
 func (*GetInstancesReportRequest) ProtoMessage() {}
 
 func (x *GetInstancesReportRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[21]
+	mi := &file_billing_billing_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2045,7 +2108,7 @@ func (x *GetInstancesReportRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetInstancesReportRequest.ProtoReflect.Descriptor instead.
 func (*GetInstancesReportRequest) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{21}
+	return file_billing_billing_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *GetInstancesReportRequest) GetFrom() int64 {
@@ -2103,7 +2166,7 @@ type InstanceReport struct {
 func (x *InstanceReport) Reset() {
 	*x = InstanceReport{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[22]
+		mi := &file_billing_billing_proto_msgTypes[23]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2116,7 +2179,7 @@ func (x *InstanceReport) String() string {
 func (*InstanceReport) ProtoMessage() {}
 
 func (x *InstanceReport) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[22]
+	mi := &file_billing_billing_proto_msgTypes[23]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2129,7 +2192,7 @@ func (x *InstanceReport) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InstanceReport.ProtoReflect.Descriptor instead.
 func (*InstanceReport) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{22}
+	return file_billing_billing_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *InstanceReport) GetUuid() string {
@@ -2164,7 +2227,7 @@ type GetInstancesReportResponse struct {
 func (x *GetInstancesReportResponse) Reset() {
 	*x = GetInstancesReportResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[23]
+		mi := &file_billing_billing_proto_msgTypes[24]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2177,7 +2240,7 @@ func (x *GetInstancesReportResponse) String() string {
 func (*GetInstancesReportResponse) ProtoMessage() {}
 
 func (x *GetInstancesReportResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[23]
+	mi := &file_billing_billing_proto_msgTypes[24]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2190,7 +2253,7 @@ func (x *GetInstancesReportResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetInstancesReportResponse.ProtoReflect.Descriptor instead.
 func (*GetInstancesReportResponse) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{23}
+	return file_billing_billing_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *GetInstancesReportResponse) GetReports() []*InstanceReport {
@@ -2218,7 +2281,7 @@ type GetRecordsReportsRequest struct {
 func (x *GetRecordsReportsRequest) Reset() {
 	*x = GetRecordsReportsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[24]
+		mi := &file_billing_billing_proto_msgTypes[25]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2231,7 +2294,7 @@ func (x *GetRecordsReportsRequest) String() string {
 func (*GetRecordsReportsRequest) ProtoMessage() {}
 
 func (x *GetRecordsReportsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[24]
+	mi := &file_billing_billing_proto_msgTypes[25]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2244,7 +2307,7 @@ func (x *GetRecordsReportsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRecordsReportsRequest.ProtoReflect.Descriptor instead.
 func (*GetRecordsReportsRequest) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{24}
+	return file_billing_billing_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *GetRecordsReportsRequest) GetPage() int64 {
@@ -2309,7 +2372,7 @@ type GetRecordsReportsResponse struct {
 func (x *GetRecordsReportsResponse) Reset() {
 	*x = GetRecordsReportsResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[25]
+		mi := &file_billing_billing_proto_msgTypes[26]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2322,7 +2385,7 @@ func (x *GetRecordsReportsResponse) String() string {
 func (*GetRecordsReportsResponse) ProtoMessage() {}
 
 func (x *GetRecordsReportsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[25]
+	mi := &file_billing_billing_proto_msgTypes[26]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2335,7 +2398,7 @@ func (x *GetRecordsReportsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRecordsReportsResponse.ProtoReflect.Descriptor instead.
 func (*GetRecordsReportsResponse) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{25}
+	return file_billing_billing_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *GetRecordsReportsResponse) GetRecords() []*Record {
@@ -2369,7 +2432,7 @@ type GetInstancesReportsCountRequest struct {
 func (x *GetInstancesReportsCountRequest) Reset() {
 	*x = GetInstancesReportsCountRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[26]
+		mi := &file_billing_billing_proto_msgTypes[27]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2382,7 +2445,7 @@ func (x *GetInstancesReportsCountRequest) String() string {
 func (*GetInstancesReportsCountRequest) ProtoMessage() {}
 
 func (x *GetInstancesReportsCountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[26]
+	mi := &file_billing_billing_proto_msgTypes[27]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2395,7 +2458,7 @@ func (x *GetInstancesReportsCountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetInstancesReportsCountRequest.ProtoReflect.Descriptor instead.
 func (*GetInstancesReportsCountRequest) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{26}
+	return file_billing_billing_proto_rawDescGZIP(), []int{27}
 }
 
 // -------------------------------------
@@ -2412,7 +2475,7 @@ type GetRecordsReportsCountRequest struct {
 func (x *GetRecordsReportsCountRequest) Reset() {
 	*x = GetRecordsReportsCountRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[27]
+		mi := &file_billing_billing_proto_msgTypes[28]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2425,7 +2488,7 @@ func (x *GetRecordsReportsCountRequest) String() string {
 func (*GetRecordsReportsCountRequest) ProtoMessage() {}
 
 func (x *GetRecordsReportsCountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[27]
+	mi := &file_billing_billing_proto_msgTypes[28]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2438,7 +2501,7 @@ func (x *GetRecordsReportsCountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRecordsReportsCountRequest.ProtoReflect.Descriptor instead.
 func (*GetRecordsReportsCountRequest) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{27}
+	return file_billing_billing_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *GetRecordsReportsCountRequest) GetFilters() map[string]*structpb.Value {
@@ -2474,7 +2537,7 @@ type GetReportsCountResponse struct {
 func (x *GetReportsCountResponse) Reset() {
 	*x = GetReportsCountResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[28]
+		mi := &file_billing_billing_proto_msgTypes[29]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2487,7 +2550,7 @@ func (x *GetReportsCountResponse) String() string {
 func (*GetReportsCountResponse) ProtoMessage() {}
 
 func (x *GetReportsCountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[28]
+	mi := &file_billing_billing_proto_msgTypes[29]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2500,7 +2563,7 @@ func (x *GetReportsCountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetReportsCountResponse.ProtoReflect.Descriptor instead.
 func (*GetReportsCountResponse) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{28}
+	return file_billing_billing_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *GetReportsCountResponse) GetTotal() int64 {
@@ -2531,7 +2594,7 @@ type CreateExchangeRateRequest struct {
 func (x *CreateExchangeRateRequest) Reset() {
 	*x = CreateExchangeRateRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[29]
+		mi := &file_billing_billing_proto_msgTypes[30]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2544,7 +2607,7 @@ func (x *CreateExchangeRateRequest) String() string {
 func (*CreateExchangeRateRequest) ProtoMessage() {}
 
 func (x *CreateExchangeRateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[29]
+	mi := &file_billing_billing_proto_msgTypes[30]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2557,7 +2620,7 @@ func (x *CreateExchangeRateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateExchangeRateRequest.ProtoReflect.Descriptor instead.
 func (*CreateExchangeRateRequest) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{29}
+	return file_billing_billing_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *CreateExchangeRateRequest) GetFrom() Currency {
@@ -2597,7 +2660,7 @@ type CreateExchangeRateResponse struct {
 func (x *CreateExchangeRateResponse) Reset() {
 	*x = CreateExchangeRateResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[30]
+		mi := &file_billing_billing_proto_msgTypes[31]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2610,7 +2673,7 @@ func (x *CreateExchangeRateResponse) String() string {
 func (*CreateExchangeRateResponse) ProtoMessage() {}
 
 func (x *CreateExchangeRateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[30]
+	mi := &file_billing_billing_proto_msgTypes[31]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2623,7 +2686,7 @@ func (x *CreateExchangeRateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateExchangeRateResponse.ProtoReflect.Descriptor instead.
 func (*CreateExchangeRateResponse) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{30}
+	return file_billing_billing_proto_rawDescGZIP(), []int{31}
 }
 
 type UpdateExchangeRateRequest struct {
@@ -2640,7 +2703,7 @@ type UpdateExchangeRateRequest struct {
 func (x *UpdateExchangeRateRequest) Reset() {
 	*x = UpdateExchangeRateRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[31]
+		mi := &file_billing_billing_proto_msgTypes[32]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2653,7 +2716,7 @@ func (x *UpdateExchangeRateRequest) String() string {
 func (*UpdateExchangeRateRequest) ProtoMessage() {}
 
 func (x *UpdateExchangeRateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[31]
+	mi := &file_billing_billing_proto_msgTypes[32]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2666,7 +2729,7 @@ func (x *UpdateExchangeRateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateExchangeRateRequest.ProtoReflect.Descriptor instead.
 func (*UpdateExchangeRateRequest) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{31}
+	return file_billing_billing_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *UpdateExchangeRateRequest) GetFrom() Currency {
@@ -2706,7 +2769,7 @@ type UpdateExchangeRateResponse struct {
 func (x *UpdateExchangeRateResponse) Reset() {
 	*x = UpdateExchangeRateResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[32]
+		mi := &file_billing_billing_proto_msgTypes[33]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2719,7 +2782,7 @@ func (x *UpdateExchangeRateResponse) String() string {
 func (*UpdateExchangeRateResponse) ProtoMessage() {}
 
 func (x *UpdateExchangeRateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[32]
+	mi := &file_billing_billing_proto_msgTypes[33]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2732,7 +2795,7 @@ func (x *UpdateExchangeRateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateExchangeRateResponse.ProtoReflect.Descriptor instead.
 func (*UpdateExchangeRateResponse) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{32}
+	return file_billing_billing_proto_rawDescGZIP(), []int{33}
 }
 
 type DeleteExchangeRateRequest struct {
@@ -2747,7 +2810,7 @@ type DeleteExchangeRateRequest struct {
 func (x *DeleteExchangeRateRequest) Reset() {
 	*x = DeleteExchangeRateRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[33]
+		mi := &file_billing_billing_proto_msgTypes[34]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2760,7 +2823,7 @@ func (x *DeleteExchangeRateRequest) String() string {
 func (*DeleteExchangeRateRequest) ProtoMessage() {}
 
 func (x *DeleteExchangeRateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[33]
+	mi := &file_billing_billing_proto_msgTypes[34]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2773,7 +2836,7 @@ func (x *DeleteExchangeRateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteExchangeRateRequest.ProtoReflect.Descriptor instead.
 func (*DeleteExchangeRateRequest) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{33}
+	return file_billing_billing_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *DeleteExchangeRateRequest) GetFrom() Currency {
@@ -2799,7 +2862,7 @@ type DeleteExchangeRateResponse struct {
 func (x *DeleteExchangeRateResponse) Reset() {
 	*x = DeleteExchangeRateResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[34]
+		mi := &file_billing_billing_proto_msgTypes[35]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2812,7 +2875,7 @@ func (x *DeleteExchangeRateResponse) String() string {
 func (*DeleteExchangeRateResponse) ProtoMessage() {}
 
 func (x *DeleteExchangeRateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[34]
+	mi := &file_billing_billing_proto_msgTypes[35]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2825,7 +2888,7 @@ func (x *DeleteExchangeRateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteExchangeRateResponse.ProtoReflect.Descriptor instead.
 func (*DeleteExchangeRateResponse) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{34}
+	return file_billing_billing_proto_rawDescGZIP(), []int{35}
 }
 
 type GetCurrenciesRequest struct {
@@ -2837,7 +2900,7 @@ type GetCurrenciesRequest struct {
 func (x *GetCurrenciesRequest) Reset() {
 	*x = GetCurrenciesRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[35]
+		mi := &file_billing_billing_proto_msgTypes[36]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2850,7 +2913,7 @@ func (x *GetCurrenciesRequest) String() string {
 func (*GetCurrenciesRequest) ProtoMessage() {}
 
 func (x *GetCurrenciesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[35]
+	mi := &file_billing_billing_proto_msgTypes[36]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2863,7 +2926,7 @@ func (x *GetCurrenciesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCurrenciesRequest.ProtoReflect.Descriptor instead.
 func (*GetCurrenciesRequest) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{35}
+	return file_billing_billing_proto_rawDescGZIP(), []int{36}
 }
 
 type GetCurrenciesResponse struct {
@@ -2877,7 +2940,7 @@ type GetCurrenciesResponse struct {
 func (x *GetCurrenciesResponse) Reset() {
 	*x = GetCurrenciesResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[36]
+		mi := &file_billing_billing_proto_msgTypes[37]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2890,7 +2953,7 @@ func (x *GetCurrenciesResponse) String() string {
 func (*GetCurrenciesResponse) ProtoMessage() {}
 
 func (x *GetCurrenciesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[36]
+	mi := &file_billing_billing_proto_msgTypes[37]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2903,7 +2966,7 @@ func (x *GetCurrenciesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCurrenciesResponse.ProtoReflect.Descriptor instead.
 func (*GetCurrenciesResponse) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{36}
+	return file_billing_billing_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *GetCurrenciesResponse) GetCurrencies() []Currency {
@@ -2925,7 +2988,7 @@ type GetExchangeRateRequest struct {
 func (x *GetExchangeRateRequest) Reset() {
 	*x = GetExchangeRateRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[37]
+		mi := &file_billing_billing_proto_msgTypes[38]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2938,7 +3001,7 @@ func (x *GetExchangeRateRequest) String() string {
 func (*GetExchangeRateRequest) ProtoMessage() {}
 
 func (x *GetExchangeRateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[37]
+	mi := &file_billing_billing_proto_msgTypes[38]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2951,7 +3014,7 @@ func (x *GetExchangeRateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetExchangeRateRequest.ProtoReflect.Descriptor instead.
 func (*GetExchangeRateRequest) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{37}
+	return file_billing_billing_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *GetExchangeRateRequest) GetFrom() Currency {
@@ -2977,7 +3040,7 @@ type GetExchangeRatesRequest struct {
 func (x *GetExchangeRatesRequest) Reset() {
 	*x = GetExchangeRatesRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[38]
+		mi := &file_billing_billing_proto_msgTypes[39]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2990,7 +3053,7 @@ func (x *GetExchangeRatesRequest) String() string {
 func (*GetExchangeRatesRequest) ProtoMessage() {}
 
 func (x *GetExchangeRatesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[38]
+	mi := &file_billing_billing_proto_msgTypes[39]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3003,7 +3066,7 @@ func (x *GetExchangeRatesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetExchangeRatesRequest.ProtoReflect.Descriptor instead.
 func (*GetExchangeRatesRequest) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{38}
+	return file_billing_billing_proto_rawDescGZIP(), []int{39}
 }
 
 type GetExchangeRateResponse struct {
@@ -3020,7 +3083,7 @@ type GetExchangeRateResponse struct {
 func (x *GetExchangeRateResponse) Reset() {
 	*x = GetExchangeRateResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[39]
+		mi := &file_billing_billing_proto_msgTypes[40]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3033,7 +3096,7 @@ func (x *GetExchangeRateResponse) String() string {
 func (*GetExchangeRateResponse) ProtoMessage() {}
 
 func (x *GetExchangeRateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[39]
+	mi := &file_billing_billing_proto_msgTypes[40]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3046,7 +3109,7 @@ func (x *GetExchangeRateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetExchangeRateResponse.ProtoReflect.Descriptor instead.
 func (*GetExchangeRateResponse) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{39}
+	return file_billing_billing_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *GetExchangeRateResponse) GetFrom() Currency {
@@ -3088,7 +3151,7 @@ type GetExchangeRatesResponse struct {
 func (x *GetExchangeRatesResponse) Reset() {
 	*x = GetExchangeRatesResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[40]
+		mi := &file_billing_billing_proto_msgTypes[41]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3101,7 +3164,7 @@ func (x *GetExchangeRatesResponse) String() string {
 func (*GetExchangeRatesResponse) ProtoMessage() {}
 
 func (x *GetExchangeRatesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[40]
+	mi := &file_billing_billing_proto_msgTypes[41]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3114,7 +3177,7 @@ func (x *GetExchangeRatesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetExchangeRatesResponse.ProtoReflect.Descriptor instead.
 func (*GetExchangeRatesResponse) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{40}
+	return file_billing_billing_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *GetExchangeRatesResponse) GetRates() []*GetExchangeRateResponse {
@@ -3137,7 +3200,7 @@ type ConversionRequest struct {
 func (x *ConversionRequest) Reset() {
 	*x = ConversionRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[41]
+		mi := &file_billing_billing_proto_msgTypes[42]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3150,7 +3213,7 @@ func (x *ConversionRequest) String() string {
 func (*ConversionRequest) ProtoMessage() {}
 
 func (x *ConversionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[41]
+	mi := &file_billing_billing_proto_msgTypes[42]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3163,7 +3226,7 @@ func (x *ConversionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConversionRequest.ProtoReflect.Descriptor instead.
 func (*ConversionRequest) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{41}
+	return file_billing_billing_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *ConversionRequest) GetFrom() Currency {
@@ -3198,7 +3261,7 @@ type ConversionResponse struct {
 func (x *ConversionResponse) Reset() {
 	*x = ConversionResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[42]
+		mi := &file_billing_billing_proto_msgTypes[43]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3211,7 +3274,7 @@ func (x *ConversionResponse) String() string {
 func (*ConversionResponse) ProtoMessage() {}
 
 func (x *ConversionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[42]
+	mi := &file_billing_billing_proto_msgTypes[43]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3224,7 +3287,7 @@ func (x *ConversionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConversionResponse.ProtoReflect.Descriptor instead.
 func (*ConversionResponse) Descriptor() ([]byte, []int) {
-	return file_billing_billing_proto_rawDescGZIP(), []int{42}
+	return file_billing_billing_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *ConversionResponse) GetAmount() float64 {
@@ -3262,36 +3325,44 @@ var file_billing_billing_proto_rawDesc = []byte{
 	0x31, 0x0a, 0x06, 0x72, 0x61, 0x6e, 0x67, 0x65, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32,
 	0x19, 0x2e, 0x6e, 0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e,
 	0x67, 0x2e, 0x46, 0x65, 0x65, 0x52, 0x61, 0x6e, 0x67, 0x65, 0x52, 0x06, 0x72, 0x61, 0x6e, 0x67,
-	0x65, 0x73, 0x22, 0xfe, 0x04, 0x0a, 0x04, 0x50, 0x6c, 0x61, 0x6e, 0x12, 0x12, 0x0a, 0x04, 0x75,
-	0x75, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x75, 0x75, 0x69, 0x64, 0x12,
-	0x14, 0x0a, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05,
-	0x74, 0x69, 0x74, 0x6c, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x03, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x70, 0x75, 0x62,
-	0x6c, 0x69, 0x63, 0x18, 0x04, 0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x70, 0x75, 0x62, 0x6c, 0x69,
-	0x63, 0x12, 0x2d, 0x0a, 0x04, 0x6b, 0x69, 0x6e, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0e, 0x32,
-	0x19, 0x2e, 0x6e, 0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e,
-	0x67, 0x2e, 0x50, 0x6c, 0x61, 0x6e, 0x4b, 0x69, 0x6e, 0x64, 0x52, 0x04, 0x6b, 0x69, 0x6e, 0x64,
-	0x12, 0x3b, 0x0a, 0x09, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x73, 0x18, 0x06, 0x20,
-	0x03, 0x28, 0x0b, 0x32, 0x1d, 0x2e, 0x6e, 0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x62, 0x69,
-	0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x43, 0x6f,
-	0x6e, 0x66, 0x52, 0x09, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x73, 0x12, 0x3f, 0x0a,
-	0x08, 0x70, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x73, 0x18, 0x07, 0x20, 0x03, 0x28, 0x0b, 0x32,
-	0x23, 0x2e, 0x6e, 0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e,
-	0x67, 0x2e, 0x50, 0x6c, 0x61, 0x6e, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x73, 0x45,
-	0x6e, 0x74, 0x72, 0x79, 0x52, 0x08, 0x70, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x73, 0x12, 0x33,
-	0x0a, 0x04, 0x6d, 0x65, 0x74, 0x61, 0x18, 0x08, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x6e,
+	0x65, 0x73, 0x22, 0x3b, 0x0a, 0x0b, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x45, 0x76, 0x65, 0x6e,
+	0x74, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03,
+	0x6b, 0x65, 0x79, 0x12, 0x1a, 0x0a, 0x08, 0x6f, 0x76, 0x65, 0x72, 0x72, 0x69, 0x64, 0x65, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x6f, 0x76, 0x65, 0x72, 0x72, 0x69, 0x64, 0x65, 0x22,
+	0xc1, 0x05, 0x0a, 0x04, 0x50, 0x6c, 0x61, 0x6e, 0x12, 0x12, 0x0a, 0x04, 0x75, 0x75, 0x69, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x75, 0x75, 0x69, 0x64, 0x12, 0x14, 0x0a, 0x05,
+	0x74, 0x69, 0x74, 0x6c, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x69, 0x74,
+	0x6c, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x63,
+	0x18, 0x04, 0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x63, 0x12, 0x2d,
+	0x0a, 0x04, 0x6b, 0x69, 0x6e, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x19, 0x2e, 0x6e,
 	0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x50,
-	0x6c, 0x61, 0x6e, 0x2e, 0x4d, 0x65, 0x74, 0x61, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x04, 0x6d,
-	0x65, 0x74, 0x61, 0x12, 0x26, 0x0a, 0x03, 0x66, 0x65, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x0b,
-	0x32, 0x14, 0x2e, 0x6e, 0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69,
-	0x6e, 0x67, 0x2e, 0x46, 0x65, 0x65, 0x52, 0x03, 0x66, 0x65, 0x65, 0x12, 0x35, 0x0a, 0x08, 0x73,
-	0x6f, 0x66, 0x74, 0x77, 0x61, 0x72, 0x65, 0x18, 0x0a, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x19, 0x2e,
-	0x6e, 0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x6e, 0x73, 0x69, 0x62, 0x6c, 0x65, 0x2e,
-	0x53, 0x6f, 0x66, 0x74, 0x77, 0x61, 0x72, 0x65, 0x52, 0x08, 0x73, 0x6f, 0x66, 0x74, 0x77, 0x61,
-	0x72, 0x65, 0x12, 0x37, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x0b, 0x20, 0x01,
-	0x28, 0x0e, 0x32, 0x1f, 0x2e, 0x6e, 0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x73, 0x74, 0x61,
-	0x74, 0x75, 0x73, 0x65, 0x73, 0x2e, 0x4e, 0x6f, 0x43, 0x6c, 0x6f, 0x75, 0x64, 0x53, 0x74, 0x61,
-	0x74, 0x75, 0x73, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x1a, 0x55, 0x0a, 0x0d, 0x50,
+	0x6c, 0x61, 0x6e, 0x4b, 0x69, 0x6e, 0x64, 0x52, 0x04, 0x6b, 0x69, 0x6e, 0x64, 0x12, 0x3b, 0x0a,
+	0x09, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x73, 0x18, 0x06, 0x20, 0x03, 0x28, 0x0b,
+	0x32, 0x1d, 0x2e, 0x6e, 0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69,
+	0x6e, 0x67, 0x2e, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x43, 0x6f, 0x6e, 0x66, 0x52,
+	0x09, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x73, 0x12, 0x3f, 0x0a, 0x08, 0x70, 0x72,
+	0x6f, 0x64, 0x75, 0x63, 0x74, 0x73, 0x18, 0x07, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x23, 0x2e, 0x6e,
+	0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x50,
+	0x6c, 0x61, 0x6e, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x73, 0x45, 0x6e, 0x74, 0x72,
+	0x79, 0x52, 0x08, 0x70, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x73, 0x12, 0x33, 0x0a, 0x04, 0x6d,
+	0x65, 0x74, 0x61, 0x18, 0x08, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x6e, 0x6f, 0x63, 0x6c,
+	0x6f, 0x75, 0x64, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x50, 0x6c, 0x61, 0x6e,
+	0x2e, 0x4d, 0x65, 0x74, 0x61, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x04, 0x6d, 0x65, 0x74, 0x61,
+	0x12, 0x26, 0x0a, 0x03, 0x66, 0x65, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e,
+	0x6e, 0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e,
+	0x46, 0x65, 0x65, 0x52, 0x03, 0x66, 0x65, 0x65, 0x12, 0x35, 0x0a, 0x08, 0x73, 0x6f, 0x66, 0x74,
+	0x77, 0x61, 0x72, 0x65, 0x18, 0x0a, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x6e, 0x6f, 0x63,
+	0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x6e, 0x73, 0x69, 0x62, 0x6c, 0x65, 0x2e, 0x53, 0x6f, 0x66,
+	0x74, 0x77, 0x61, 0x72, 0x65, 0x52, 0x08, 0x73, 0x6f, 0x66, 0x74, 0x77, 0x61, 0x72, 0x65, 0x12,
+	0x37, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x0e, 0x32,
+	0x1f, 0x2e, 0x6e, 0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73,
+	0x65, 0x73, 0x2e, 0x4e, 0x6f, 0x43, 0x6c, 0x6f, 0x75, 0x64, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73,
+	0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x41, 0x0a, 0x0d, 0x63, 0x75, 0x73, 0x74,
+	0x6f, 0x6d, 0x5f, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x18, 0x0c, 0x20, 0x03, 0x28, 0x0b, 0x32,
+	0x1c, 0x2e, 0x6e, 0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e,
+	0x67, 0x2e, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x52, 0x0c, 0x63,
+	0x75, 0x73, 0x74, 0x6f, 0x6d, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x1a, 0x55, 0x0a, 0x0d, 0x50,
 	0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03,
 	0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x2e,
 	0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e,
@@ -3964,7 +4035,7 @@ func file_billing_billing_proto_rawDescGZIP() []byte {
 }
 
 var file_billing_billing_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
-var file_billing_billing_proto_msgTypes = make([]protoimpl.MessageInfo, 54)
+var file_billing_billing_proto_msgTypes = make([]protoimpl.MessageInfo, 55)
 var file_billing_billing_proto_goTypes = []any{
 	(PlanKind)(0),                           // 0: nocloud.billing.PlanKind
 	(Round)(0),                              // 1: nocloud.billing.Round
@@ -3974,181 +4045,183 @@ var file_billing_billing_proto_goTypes = []any{
 	(Currency)(0),                           // 5: nocloud.billing.Currency
 	(*FeeRange)(nil),                        // 6: nocloud.billing.FeeRange
 	(*Fee)(nil),                             // 7: nocloud.billing.Fee
-	(*Plan)(nil),                            // 8: nocloud.billing.Plan
-	(*ListRequest)(nil),                     // 9: nocloud.billing.ListRequest
-	(*ListResponse)(nil),                    // 10: nocloud.billing.ListResponse
-	(*ListPlansInstancesRequest)(nil),       // 11: nocloud.billing.ListPlansInstancesRequest
-	(*ListPlansInstancesResponse)(nil),      // 12: nocloud.billing.ListPlansInstancesResponse
-	(*ResourceConf)(nil),                    // 13: nocloud.billing.ResourceConf
-	(*Product)(nil),                         // 14: nocloud.billing.Product
-	(*Transaction)(nil),                     // 15: nocloud.billing.Transaction
-	(*Transactions)(nil),                    // 16: nocloud.billing.Transactions
-	(*Record)(nil),                          // 17: nocloud.billing.Record
-	(*Records)(nil),                         // 18: nocloud.billing.Records
-	(*GetActiveRequest)(nil),                // 19: nocloud.billing.GetActiveRequest
-	(*GetTransactionsRequest)(nil),          // 20: nocloud.billing.GetTransactionsRequest
-	(*ReprocessTransactionsRequest)(nil),    // 21: nocloud.billing.ReprocessTransactionsRequest
-	(*GetTransactionsCountRequest)(nil),     // 22: nocloud.billing.GetTransactionsCountRequest
-	(*GetTransactionsCountResponse)(nil),    // 23: nocloud.billing.GetTransactionsCountResponse
-	(*UpdateTransactionRequest)(nil),        // 24: nocloud.billing.UpdateTransactionRequest
-	(*UpdateTransactionResponse)(nil),       // 25: nocloud.billing.UpdateTransactionResponse
-	(*CostEstimation)(nil),                  // 26: nocloud.billing.CostEstimation
-	(*GetInstancesReportRequest)(nil),       // 27: nocloud.billing.GetInstancesReportRequest
-	(*InstanceReport)(nil),                  // 28: nocloud.billing.InstanceReport
-	(*GetInstancesReportResponse)(nil),      // 29: nocloud.billing.GetInstancesReportResponse
-	(*GetRecordsReportsRequest)(nil),        // 30: nocloud.billing.GetRecordsReportsRequest
-	(*GetRecordsReportsResponse)(nil),       // 31: nocloud.billing.GetRecordsReportsResponse
-	(*GetInstancesReportsCountRequest)(nil), // 32: nocloud.billing.GetInstancesReportsCountRequest
-	(*GetRecordsReportsCountRequest)(nil),   // 33: nocloud.billing.GetRecordsReportsCountRequest
-	(*GetReportsCountResponse)(nil),         // 34: nocloud.billing.GetReportsCountResponse
-	(*CreateExchangeRateRequest)(nil),       // 35: nocloud.billing.CreateExchangeRateRequest
-	(*CreateExchangeRateResponse)(nil),      // 36: nocloud.billing.CreateExchangeRateResponse
-	(*UpdateExchangeRateRequest)(nil),       // 37: nocloud.billing.UpdateExchangeRateRequest
-	(*UpdateExchangeRateResponse)(nil),      // 38: nocloud.billing.UpdateExchangeRateResponse
-	(*DeleteExchangeRateRequest)(nil),       // 39: nocloud.billing.DeleteExchangeRateRequest
-	(*DeleteExchangeRateResponse)(nil),      // 40: nocloud.billing.DeleteExchangeRateResponse
-	(*GetCurrenciesRequest)(nil),            // 41: nocloud.billing.GetCurrenciesRequest
-	(*GetCurrenciesResponse)(nil),           // 42: nocloud.billing.GetCurrenciesResponse
-	(*GetExchangeRateRequest)(nil),          // 43: nocloud.billing.GetExchangeRateRequest
-	(*GetExchangeRatesRequest)(nil),         // 44: nocloud.billing.GetExchangeRatesRequest
-	(*GetExchangeRateResponse)(nil),         // 45: nocloud.billing.GetExchangeRateResponse
-	(*GetExchangeRatesResponse)(nil),        // 46: nocloud.billing.GetExchangeRatesResponse
-	(*ConversionRequest)(nil),               // 47: nocloud.billing.ConversionRequest
-	(*ConversionResponse)(nil),              // 48: nocloud.billing.ConversionResponse
-	nil,                                     // 49: nocloud.billing.Plan.ProductsEntry
-	nil,                                     // 50: nocloud.billing.Plan.MetaEntry
-	nil,                                     // 51: nocloud.billing.ListPlansInstancesResponse.PlansEntry
-	nil,                                     // 52: nocloud.billing.ResourceConf.MetaEntry
-	nil,                                     // 53: nocloud.billing.Product.ResourcesEntry
-	nil,                                     // 54: nocloud.billing.Product.MetaEntry
-	nil,                                     // 55: nocloud.billing.Transaction.MetaEntry
-	nil,                                     // 56: nocloud.billing.Record.MetaEntry
-	nil,                                     // 57: nocloud.billing.CostEstimation.ResourcesEntry
-	nil,                                     // 58: nocloud.billing.GetRecordsReportsRequest.FiltersEntry
-	nil,                                     // 59: nocloud.billing.GetRecordsReportsCountRequest.FiltersEntry
-	(*ansible.Software)(nil),                // 60: nocloud.ansible.Software
-	(statuses.NoCloudStatus)(0),             // 61: nocloud.statuses.NoCloudStatus
-	(states.NoCloudState)(0),                // 62: nocloud.states.NoCloudState
-	(*structpb.Value)(nil),                  // 63: google.protobuf.Value
+	(*CustomEvent)(nil),                     // 8: nocloud.billing.CustomEvent
+	(*Plan)(nil),                            // 9: nocloud.billing.Plan
+	(*ListRequest)(nil),                     // 10: nocloud.billing.ListRequest
+	(*ListResponse)(nil),                    // 11: nocloud.billing.ListResponse
+	(*ListPlansInstancesRequest)(nil),       // 12: nocloud.billing.ListPlansInstancesRequest
+	(*ListPlansInstancesResponse)(nil),      // 13: nocloud.billing.ListPlansInstancesResponse
+	(*ResourceConf)(nil),                    // 14: nocloud.billing.ResourceConf
+	(*Product)(nil),                         // 15: nocloud.billing.Product
+	(*Transaction)(nil),                     // 16: nocloud.billing.Transaction
+	(*Transactions)(nil),                    // 17: nocloud.billing.Transactions
+	(*Record)(nil),                          // 18: nocloud.billing.Record
+	(*Records)(nil),                         // 19: nocloud.billing.Records
+	(*GetActiveRequest)(nil),                // 20: nocloud.billing.GetActiveRequest
+	(*GetTransactionsRequest)(nil),          // 21: nocloud.billing.GetTransactionsRequest
+	(*ReprocessTransactionsRequest)(nil),    // 22: nocloud.billing.ReprocessTransactionsRequest
+	(*GetTransactionsCountRequest)(nil),     // 23: nocloud.billing.GetTransactionsCountRequest
+	(*GetTransactionsCountResponse)(nil),    // 24: nocloud.billing.GetTransactionsCountResponse
+	(*UpdateTransactionRequest)(nil),        // 25: nocloud.billing.UpdateTransactionRequest
+	(*UpdateTransactionResponse)(nil),       // 26: nocloud.billing.UpdateTransactionResponse
+	(*CostEstimation)(nil),                  // 27: nocloud.billing.CostEstimation
+	(*GetInstancesReportRequest)(nil),       // 28: nocloud.billing.GetInstancesReportRequest
+	(*InstanceReport)(nil),                  // 29: nocloud.billing.InstanceReport
+	(*GetInstancesReportResponse)(nil),      // 30: nocloud.billing.GetInstancesReportResponse
+	(*GetRecordsReportsRequest)(nil),        // 31: nocloud.billing.GetRecordsReportsRequest
+	(*GetRecordsReportsResponse)(nil),       // 32: nocloud.billing.GetRecordsReportsResponse
+	(*GetInstancesReportsCountRequest)(nil), // 33: nocloud.billing.GetInstancesReportsCountRequest
+	(*GetRecordsReportsCountRequest)(nil),   // 34: nocloud.billing.GetRecordsReportsCountRequest
+	(*GetReportsCountResponse)(nil),         // 35: nocloud.billing.GetReportsCountResponse
+	(*CreateExchangeRateRequest)(nil),       // 36: nocloud.billing.CreateExchangeRateRequest
+	(*CreateExchangeRateResponse)(nil),      // 37: nocloud.billing.CreateExchangeRateResponse
+	(*UpdateExchangeRateRequest)(nil),       // 38: nocloud.billing.UpdateExchangeRateRequest
+	(*UpdateExchangeRateResponse)(nil),      // 39: nocloud.billing.UpdateExchangeRateResponse
+	(*DeleteExchangeRateRequest)(nil),       // 40: nocloud.billing.DeleteExchangeRateRequest
+	(*DeleteExchangeRateResponse)(nil),      // 41: nocloud.billing.DeleteExchangeRateResponse
+	(*GetCurrenciesRequest)(nil),            // 42: nocloud.billing.GetCurrenciesRequest
+	(*GetCurrenciesResponse)(nil),           // 43: nocloud.billing.GetCurrenciesResponse
+	(*GetExchangeRateRequest)(nil),          // 44: nocloud.billing.GetExchangeRateRequest
+	(*GetExchangeRatesRequest)(nil),         // 45: nocloud.billing.GetExchangeRatesRequest
+	(*GetExchangeRateResponse)(nil),         // 46: nocloud.billing.GetExchangeRateResponse
+	(*GetExchangeRatesResponse)(nil),        // 47: nocloud.billing.GetExchangeRatesResponse
+	(*ConversionRequest)(nil),               // 48: nocloud.billing.ConversionRequest
+	(*ConversionResponse)(nil),              // 49: nocloud.billing.ConversionResponse
+	nil,                                     // 50: nocloud.billing.Plan.ProductsEntry
+	nil,                                     // 51: nocloud.billing.Plan.MetaEntry
+	nil,                                     // 52: nocloud.billing.ListPlansInstancesResponse.PlansEntry
+	nil,                                     // 53: nocloud.billing.ResourceConf.MetaEntry
+	nil,                                     // 54: nocloud.billing.Product.ResourcesEntry
+	nil,                                     // 55: nocloud.billing.Product.MetaEntry
+	nil,                                     // 56: nocloud.billing.Transaction.MetaEntry
+	nil,                                     // 57: nocloud.billing.Record.MetaEntry
+	nil,                                     // 58: nocloud.billing.CostEstimation.ResourcesEntry
+	nil,                                     // 59: nocloud.billing.GetRecordsReportsRequest.FiltersEntry
+	nil,                                     // 60: nocloud.billing.GetRecordsReportsCountRequest.FiltersEntry
+	(*ansible.Software)(nil),                // 61: nocloud.ansible.Software
+	(statuses.NoCloudStatus)(0),             // 62: nocloud.statuses.NoCloudStatus
+	(states.NoCloudState)(0),                // 63: nocloud.states.NoCloudState
+	(*structpb.Value)(nil),                  // 64: google.protobuf.Value
 }
 var file_billing_billing_proto_depIdxs = []int32{
 	1,  // 0: nocloud.billing.Fee.round:type_name -> nocloud.billing.Round
 	6,  // 1: nocloud.billing.Fee.ranges:type_name -> nocloud.billing.FeeRange
 	0,  // 2: nocloud.billing.Plan.kind:type_name -> nocloud.billing.PlanKind
-	13, // 3: nocloud.billing.Plan.resources:type_name -> nocloud.billing.ResourceConf
-	49, // 4: nocloud.billing.Plan.products:type_name -> nocloud.billing.Plan.ProductsEntry
-	50, // 5: nocloud.billing.Plan.meta:type_name -> nocloud.billing.Plan.MetaEntry
+	14, // 3: nocloud.billing.Plan.resources:type_name -> nocloud.billing.ResourceConf
+	50, // 4: nocloud.billing.Plan.products:type_name -> nocloud.billing.Plan.ProductsEntry
+	51, // 5: nocloud.billing.Plan.meta:type_name -> nocloud.billing.Plan.MetaEntry
 	7,  // 6: nocloud.billing.Plan.fee:type_name -> nocloud.billing.Fee
-	60, // 7: nocloud.billing.Plan.software:type_name -> nocloud.ansible.Software
-	61, // 8: nocloud.billing.Plan.status:type_name -> nocloud.statuses.NoCloudStatus
-	8,  // 9: nocloud.billing.ListResponse.pool:type_name -> nocloud.billing.Plan
-	51, // 10: nocloud.billing.ListPlansInstancesResponse.plans:type_name -> nocloud.billing.ListPlansInstancesResponse.PlansEntry
-	2,  // 11: nocloud.billing.ResourceConf.kind:type_name -> nocloud.billing.Kind
-	62, // 12: nocloud.billing.ResourceConf.on:type_name -> nocloud.states.NoCloudState
-	7,  // 13: nocloud.billing.ResourceConf.fee:type_name -> nocloud.billing.Fee
-	52, // 14: nocloud.billing.ResourceConf.meta:type_name -> nocloud.billing.ResourceConf.MetaEntry
-	3,  // 15: nocloud.billing.ResourceConf.period_kind:type_name -> nocloud.billing.PeriodKind
-	2,  // 16: nocloud.billing.Product.kind:type_name -> nocloud.billing.Kind
-	53, // 17: nocloud.billing.Product.resources:type_name -> nocloud.billing.Product.ResourcesEntry
-	54, // 18: nocloud.billing.Product.meta:type_name -> nocloud.billing.Product.MetaEntry
-	3,  // 19: nocloud.billing.Product.period_kind:type_name -> nocloud.billing.PeriodKind
-	4,  // 20: nocloud.billing.Transaction.priority:type_name -> nocloud.billing.Priority
-	55, // 21: nocloud.billing.Transaction.meta:type_name -> nocloud.billing.Transaction.MetaEntry
-	5,  // 22: nocloud.billing.Transaction.currency:type_name -> nocloud.billing.Currency
-	15, // 23: nocloud.billing.Transactions.pool:type_name -> nocloud.billing.Transaction
-	4,  // 24: nocloud.billing.Record.priority:type_name -> nocloud.billing.Priority
-	62, // 25: nocloud.billing.Record.state:type_name -> nocloud.states.NoCloudState
-	56, // 26: nocloud.billing.Record.meta:type_name -> nocloud.billing.Record.MetaEntry
-	5,  // 27: nocloud.billing.Record.currency:type_name -> nocloud.billing.Currency
-	17, // 28: nocloud.billing.Records.pool:type_name -> nocloud.billing.Record
-	57, // 29: nocloud.billing.CostEstimation.resources:type_name -> nocloud.billing.CostEstimation.ResourcesEntry
-	5,  // 30: nocloud.billing.InstanceReport.currency:type_name -> nocloud.billing.Currency
-	28, // 31: nocloud.billing.GetInstancesReportResponse.reports:type_name -> nocloud.billing.InstanceReport
-	58, // 32: nocloud.billing.GetRecordsReportsRequest.filters:type_name -> nocloud.billing.GetRecordsReportsRequest.FiltersEntry
-	17, // 33: nocloud.billing.GetRecordsReportsResponse.records:type_name -> nocloud.billing.Record
-	59, // 34: nocloud.billing.GetRecordsReportsCountRequest.filters:type_name -> nocloud.billing.GetRecordsReportsCountRequest.FiltersEntry
-	63, // 35: nocloud.billing.GetReportsCountResponse.unique:type_name -> google.protobuf.Value
-	5,  // 36: nocloud.billing.CreateExchangeRateRequest.from:type_name -> nocloud.billing.Currency
-	5,  // 37: nocloud.billing.CreateExchangeRateRequest.to:type_name -> nocloud.billing.Currency
-	5,  // 38: nocloud.billing.UpdateExchangeRateRequest.from:type_name -> nocloud.billing.Currency
-	5,  // 39: nocloud.billing.UpdateExchangeRateRequest.to:type_name -> nocloud.billing.Currency
-	5,  // 40: nocloud.billing.DeleteExchangeRateRequest.from:type_name -> nocloud.billing.Currency
-	5,  // 41: nocloud.billing.DeleteExchangeRateRequest.to:type_name -> nocloud.billing.Currency
-	5,  // 42: nocloud.billing.GetCurrenciesResponse.currencies:type_name -> nocloud.billing.Currency
-	5,  // 43: nocloud.billing.GetExchangeRateRequest.from:type_name -> nocloud.billing.Currency
-	5,  // 44: nocloud.billing.GetExchangeRateRequest.to:type_name -> nocloud.billing.Currency
-	5,  // 45: nocloud.billing.GetExchangeRateResponse.from:type_name -> nocloud.billing.Currency
-	5,  // 46: nocloud.billing.GetExchangeRateResponse.to:type_name -> nocloud.billing.Currency
-	45, // 47: nocloud.billing.GetExchangeRatesResponse.rates:type_name -> nocloud.billing.GetExchangeRateResponse
-	5,  // 48: nocloud.billing.ConversionRequest.from:type_name -> nocloud.billing.Currency
-	5,  // 49: nocloud.billing.ConversionRequest.to:type_name -> nocloud.billing.Currency
-	14, // 50: nocloud.billing.Plan.ProductsEntry.value:type_name -> nocloud.billing.Product
-	63, // 51: nocloud.billing.Plan.MetaEntry.value:type_name -> google.protobuf.Value
-	63, // 52: nocloud.billing.ListPlansInstancesResponse.PlansEntry.value:type_name -> google.protobuf.Value
-	63, // 53: nocloud.billing.ResourceConf.MetaEntry.value:type_name -> google.protobuf.Value
-	63, // 54: nocloud.billing.Product.ResourcesEntry.value:type_name -> google.protobuf.Value
-	63, // 55: nocloud.billing.Product.MetaEntry.value:type_name -> google.protobuf.Value
-	63, // 56: nocloud.billing.Transaction.MetaEntry.value:type_name -> google.protobuf.Value
-	63, // 57: nocloud.billing.Record.MetaEntry.value:type_name -> google.protobuf.Value
-	63, // 58: nocloud.billing.GetRecordsReportsRequest.FiltersEntry.value:type_name -> google.protobuf.Value
-	63, // 59: nocloud.billing.GetRecordsReportsCountRequest.FiltersEntry.value:type_name -> google.protobuf.Value
-	19, // 60: nocloud.billing.RecordsService.GetActive:input_type -> nocloud.billing.GetActiveRequest
-	18, // 61: nocloud.billing.RecordsService.Create:input_type -> nocloud.billing.Records
-	18, // 62: nocloud.billing.RecordsService.Update:input_type -> nocloud.billing.Records
-	8,  // 63: nocloud.billing.BillingService.CreatePlan:input_type -> nocloud.billing.Plan
-	8,  // 64: nocloud.billing.BillingService.UpdatePlan:input_type -> nocloud.billing.Plan
-	8,  // 65: nocloud.billing.BillingService.GetPlan:input_type -> nocloud.billing.Plan
-	9,  // 66: nocloud.billing.BillingService.ListPlans:input_type -> nocloud.billing.ListRequest
-	11, // 67: nocloud.billing.BillingService.ListPlansInstances:input_type -> nocloud.billing.ListPlansInstancesRequest
-	8,  // 68: nocloud.billing.BillingService.DeletePlan:input_type -> nocloud.billing.Plan
-	15, // 69: nocloud.billing.BillingService.CreateTransaction:input_type -> nocloud.billing.Transaction
-	20, // 70: nocloud.billing.BillingService.GetTransactions:input_type -> nocloud.billing.GetTransactionsRequest
-	22, // 71: nocloud.billing.BillingService.GetTransactionsCount:input_type -> nocloud.billing.GetTransactionsCountRequest
-	15, // 72: nocloud.billing.BillingService.UpdateTransaction:input_type -> nocloud.billing.Transaction
-	15, // 73: nocloud.billing.BillingService.GetRecords:input_type -> nocloud.billing.Transaction
-	27, // 74: nocloud.billing.BillingService.GetInstancesReports:input_type -> nocloud.billing.GetInstancesReportRequest
-	32, // 75: nocloud.billing.BillingService.GetInstancesReportsCount:input_type -> nocloud.billing.GetInstancesReportsCountRequest
-	30, // 76: nocloud.billing.BillingService.GetRecordsReports:input_type -> nocloud.billing.GetRecordsReportsRequest
-	33, // 77: nocloud.billing.BillingService.GetRecordsReportsCount:input_type -> nocloud.billing.GetRecordsReportsCountRequest
-	21, // 78: nocloud.billing.BillingService.Reprocess:input_type -> nocloud.billing.ReprocessTransactionsRequest
-	41, // 79: nocloud.billing.CurrencyService.GetCurrencies:input_type -> nocloud.billing.GetCurrenciesRequest
-	43, // 80: nocloud.billing.CurrencyService.GetExchangeRate:input_type -> nocloud.billing.GetExchangeRateRequest
-	44, // 81: nocloud.billing.CurrencyService.GetExchangeRates:input_type -> nocloud.billing.GetExchangeRatesRequest
-	35, // 82: nocloud.billing.CurrencyService.CreateExchangeRate:input_type -> nocloud.billing.CreateExchangeRateRequest
-	37, // 83: nocloud.billing.CurrencyService.UpdateExchangeRate:input_type -> nocloud.billing.UpdateExchangeRateRequest
-	39, // 84: nocloud.billing.CurrencyService.DeleteExchangeRate:input_type -> nocloud.billing.DeleteExchangeRateRequest
-	47, // 85: nocloud.billing.CurrencyService.Convert:input_type -> nocloud.billing.ConversionRequest
-	18, // 86: nocloud.billing.RecordsService.GetActive:output_type -> nocloud.billing.Records
-	18, // 87: nocloud.billing.RecordsService.Create:output_type -> nocloud.billing.Records
-	18, // 88: nocloud.billing.RecordsService.Update:output_type -> nocloud.billing.Records
-	8,  // 89: nocloud.billing.BillingService.CreatePlan:output_type -> nocloud.billing.Plan
-	8,  // 90: nocloud.billing.BillingService.UpdatePlan:output_type -> nocloud.billing.Plan
-	8,  // 91: nocloud.billing.BillingService.GetPlan:output_type -> nocloud.billing.Plan
-	10, // 92: nocloud.billing.BillingService.ListPlans:output_type -> nocloud.billing.ListResponse
-	12, // 93: nocloud.billing.BillingService.ListPlansInstances:output_type -> nocloud.billing.ListPlansInstancesResponse
-	8,  // 94: nocloud.billing.BillingService.DeletePlan:output_type -> nocloud.billing.Plan
-	15, // 95: nocloud.billing.BillingService.CreateTransaction:output_type -> nocloud.billing.Transaction
-	16, // 96: nocloud.billing.BillingService.GetTransactions:output_type -> nocloud.billing.Transactions
-	23, // 97: nocloud.billing.BillingService.GetTransactionsCount:output_type -> nocloud.billing.GetTransactionsCountResponse
-	25, // 98: nocloud.billing.BillingService.UpdateTransaction:output_type -> nocloud.billing.UpdateTransactionResponse
-	18, // 99: nocloud.billing.BillingService.GetRecords:output_type -> nocloud.billing.Records
-	29, // 100: nocloud.billing.BillingService.GetInstancesReports:output_type -> nocloud.billing.GetInstancesReportResponse
-	34, // 101: nocloud.billing.BillingService.GetInstancesReportsCount:output_type -> nocloud.billing.GetReportsCountResponse
-	31, // 102: nocloud.billing.BillingService.GetRecordsReports:output_type -> nocloud.billing.GetRecordsReportsResponse
-	34, // 103: nocloud.billing.BillingService.GetRecordsReportsCount:output_type -> nocloud.billing.GetReportsCountResponse
-	16, // 104: nocloud.billing.BillingService.Reprocess:output_type -> nocloud.billing.Transactions
-	42, // 105: nocloud.billing.CurrencyService.GetCurrencies:output_type -> nocloud.billing.GetCurrenciesResponse
-	45, // 106: nocloud.billing.CurrencyService.GetExchangeRate:output_type -> nocloud.billing.GetExchangeRateResponse
-	46, // 107: nocloud.billing.CurrencyService.GetExchangeRates:output_type -> nocloud.billing.GetExchangeRatesResponse
-	36, // 108: nocloud.billing.CurrencyService.CreateExchangeRate:output_type -> nocloud.billing.CreateExchangeRateResponse
-	38, // 109: nocloud.billing.CurrencyService.UpdateExchangeRate:output_type -> nocloud.billing.UpdateExchangeRateResponse
-	40, // 110: nocloud.billing.CurrencyService.DeleteExchangeRate:output_type -> nocloud.billing.DeleteExchangeRateResponse
-	48, // 111: nocloud.billing.CurrencyService.Convert:output_type -> nocloud.billing.ConversionResponse
-	86, // [86:112] is the sub-list for method output_type
-	60, // [60:86] is the sub-list for method input_type
-	60, // [60:60] is the sub-list for extension type_name
-	60, // [60:60] is the sub-list for extension extendee
-	0,  // [0:60] is the sub-list for field type_name
+	61, // 7: nocloud.billing.Plan.software:type_name -> nocloud.ansible.Software
+	62, // 8: nocloud.billing.Plan.status:type_name -> nocloud.statuses.NoCloudStatus
+	8,  // 9: nocloud.billing.Plan.custom_events:type_name -> nocloud.billing.CustomEvent
+	9,  // 10: nocloud.billing.ListResponse.pool:type_name -> nocloud.billing.Plan
+	52, // 11: nocloud.billing.ListPlansInstancesResponse.plans:type_name -> nocloud.billing.ListPlansInstancesResponse.PlansEntry
+	2,  // 12: nocloud.billing.ResourceConf.kind:type_name -> nocloud.billing.Kind
+	63, // 13: nocloud.billing.ResourceConf.on:type_name -> nocloud.states.NoCloudState
+	7,  // 14: nocloud.billing.ResourceConf.fee:type_name -> nocloud.billing.Fee
+	53, // 15: nocloud.billing.ResourceConf.meta:type_name -> nocloud.billing.ResourceConf.MetaEntry
+	3,  // 16: nocloud.billing.ResourceConf.period_kind:type_name -> nocloud.billing.PeriodKind
+	2,  // 17: nocloud.billing.Product.kind:type_name -> nocloud.billing.Kind
+	54, // 18: nocloud.billing.Product.resources:type_name -> nocloud.billing.Product.ResourcesEntry
+	55, // 19: nocloud.billing.Product.meta:type_name -> nocloud.billing.Product.MetaEntry
+	3,  // 20: nocloud.billing.Product.period_kind:type_name -> nocloud.billing.PeriodKind
+	4,  // 21: nocloud.billing.Transaction.priority:type_name -> nocloud.billing.Priority
+	56, // 22: nocloud.billing.Transaction.meta:type_name -> nocloud.billing.Transaction.MetaEntry
+	5,  // 23: nocloud.billing.Transaction.currency:type_name -> nocloud.billing.Currency
+	16, // 24: nocloud.billing.Transactions.pool:type_name -> nocloud.billing.Transaction
+	4,  // 25: nocloud.billing.Record.priority:type_name -> nocloud.billing.Priority
+	63, // 26: nocloud.billing.Record.state:type_name -> nocloud.states.NoCloudState
+	57, // 27: nocloud.billing.Record.meta:type_name -> nocloud.billing.Record.MetaEntry
+	5,  // 28: nocloud.billing.Record.currency:type_name -> nocloud.billing.Currency
+	18, // 29: nocloud.billing.Records.pool:type_name -> nocloud.billing.Record
+	58, // 30: nocloud.billing.CostEstimation.resources:type_name -> nocloud.billing.CostEstimation.ResourcesEntry
+	5,  // 31: nocloud.billing.InstanceReport.currency:type_name -> nocloud.billing.Currency
+	29, // 32: nocloud.billing.GetInstancesReportResponse.reports:type_name -> nocloud.billing.InstanceReport
+	59, // 33: nocloud.billing.GetRecordsReportsRequest.filters:type_name -> nocloud.billing.GetRecordsReportsRequest.FiltersEntry
+	18, // 34: nocloud.billing.GetRecordsReportsResponse.records:type_name -> nocloud.billing.Record
+	60, // 35: nocloud.billing.GetRecordsReportsCountRequest.filters:type_name -> nocloud.billing.GetRecordsReportsCountRequest.FiltersEntry
+	64, // 36: nocloud.billing.GetReportsCountResponse.unique:type_name -> google.protobuf.Value
+	5,  // 37: nocloud.billing.CreateExchangeRateRequest.from:type_name -> nocloud.billing.Currency
+	5,  // 38: nocloud.billing.CreateExchangeRateRequest.to:type_name -> nocloud.billing.Currency
+	5,  // 39: nocloud.billing.UpdateExchangeRateRequest.from:type_name -> nocloud.billing.Currency
+	5,  // 40: nocloud.billing.UpdateExchangeRateRequest.to:type_name -> nocloud.billing.Currency
+	5,  // 41: nocloud.billing.DeleteExchangeRateRequest.from:type_name -> nocloud.billing.Currency
+	5,  // 42: nocloud.billing.DeleteExchangeRateRequest.to:type_name -> nocloud.billing.Currency
+	5,  // 43: nocloud.billing.GetCurrenciesResponse.currencies:type_name -> nocloud.billing.Currency
+	5,  // 44: nocloud.billing.GetExchangeRateRequest.from:type_name -> nocloud.billing.Currency
+	5,  // 45: nocloud.billing.GetExchangeRateRequest.to:type_name -> nocloud.billing.Currency
+	5,  // 46: nocloud.billing.GetExchangeRateResponse.from:type_name -> nocloud.billing.Currency
+	5,  // 47: nocloud.billing.GetExchangeRateResponse.to:type_name -> nocloud.billing.Currency
+	46, // 48: nocloud.billing.GetExchangeRatesResponse.rates:type_name -> nocloud.billing.GetExchangeRateResponse
+	5,  // 49: nocloud.billing.ConversionRequest.from:type_name -> nocloud.billing.Currency
+	5,  // 50: nocloud.billing.ConversionRequest.to:type_name -> nocloud.billing.Currency
+	15, // 51: nocloud.billing.Plan.ProductsEntry.value:type_name -> nocloud.billing.Product
+	64, // 52: nocloud.billing.Plan.MetaEntry.value:type_name -> google.protobuf.Value
+	64, // 53: nocloud.billing.ListPlansInstancesResponse.PlansEntry.value:type_name -> google.protobuf.Value
+	64, // 54: nocloud.billing.ResourceConf.MetaEntry.value:type_name -> google.protobuf.Value
+	64, // 55: nocloud.billing.Product.ResourcesEntry.value:type_name -> google.protobuf.Value
+	64, // 56: nocloud.billing.Product.MetaEntry.value:type_name -> google.protobuf.Value
+	64, // 57: nocloud.billing.Transaction.MetaEntry.value:type_name -> google.protobuf.Value
+	64, // 58: nocloud.billing.Record.MetaEntry.value:type_name -> google.protobuf.Value
+	64, // 59: nocloud.billing.GetRecordsReportsRequest.FiltersEntry.value:type_name -> google.protobuf.Value
+	64, // 60: nocloud.billing.GetRecordsReportsCountRequest.FiltersEntry.value:type_name -> google.protobuf.Value
+	20, // 61: nocloud.billing.RecordsService.GetActive:input_type -> nocloud.billing.GetActiveRequest
+	19, // 62: nocloud.billing.RecordsService.Create:input_type -> nocloud.billing.Records
+	19, // 63: nocloud.billing.RecordsService.Update:input_type -> nocloud.billing.Records
+	9,  // 64: nocloud.billing.BillingService.CreatePlan:input_type -> nocloud.billing.Plan
+	9,  // 65: nocloud.billing.BillingService.UpdatePlan:input_type -> nocloud.billing.Plan
+	9,  // 66: nocloud.billing.BillingService.GetPlan:input_type -> nocloud.billing.Plan
+	10, // 67: nocloud.billing.BillingService.ListPlans:input_type -> nocloud.billing.ListRequest
+	12, // 68: nocloud.billing.BillingService.ListPlansInstances:input_type -> nocloud.billing.ListPlansInstancesRequest
+	9,  // 69: nocloud.billing.BillingService.DeletePlan:input_type -> nocloud.billing.Plan
+	16, // 70: nocloud.billing.BillingService.CreateTransaction:input_type -> nocloud.billing.Transaction
+	21, // 71: nocloud.billing.BillingService.GetTransactions:input_type -> nocloud.billing.GetTransactionsRequest
+	23, // 72: nocloud.billing.BillingService.GetTransactionsCount:input_type -> nocloud.billing.GetTransactionsCountRequest
+	16, // 73: nocloud.billing.BillingService.UpdateTransaction:input_type -> nocloud.billing.Transaction
+	16, // 74: nocloud.billing.BillingService.GetRecords:input_type -> nocloud.billing.Transaction
+	28, // 75: nocloud.billing.BillingService.GetInstancesReports:input_type -> nocloud.billing.GetInstancesReportRequest
+	33, // 76: nocloud.billing.BillingService.GetInstancesReportsCount:input_type -> nocloud.billing.GetInstancesReportsCountRequest
+	31, // 77: nocloud.billing.BillingService.GetRecordsReports:input_type -> nocloud.billing.GetRecordsReportsRequest
+	34, // 78: nocloud.billing.BillingService.GetRecordsReportsCount:input_type -> nocloud.billing.GetRecordsReportsCountRequest
+	22, // 79: nocloud.billing.BillingService.Reprocess:input_type -> nocloud.billing.ReprocessTransactionsRequest
+	42, // 80: nocloud.billing.CurrencyService.GetCurrencies:input_type -> nocloud.billing.GetCurrenciesRequest
+	44, // 81: nocloud.billing.CurrencyService.GetExchangeRate:input_type -> nocloud.billing.GetExchangeRateRequest
+	45, // 82: nocloud.billing.CurrencyService.GetExchangeRates:input_type -> nocloud.billing.GetExchangeRatesRequest
+	36, // 83: nocloud.billing.CurrencyService.CreateExchangeRate:input_type -> nocloud.billing.CreateExchangeRateRequest
+	38, // 84: nocloud.billing.CurrencyService.UpdateExchangeRate:input_type -> nocloud.billing.UpdateExchangeRateRequest
+	40, // 85: nocloud.billing.CurrencyService.DeleteExchangeRate:input_type -> nocloud.billing.DeleteExchangeRateRequest
+	48, // 86: nocloud.billing.CurrencyService.Convert:input_type -> nocloud.billing.ConversionRequest
+	19, // 87: nocloud.billing.RecordsService.GetActive:output_type -> nocloud.billing.Records
+	19, // 88: nocloud.billing.RecordsService.Create:output_type -> nocloud.billing.Records
+	19, // 89: nocloud.billing.RecordsService.Update:output_type -> nocloud.billing.Records
+	9,  // 90: nocloud.billing.BillingService.CreatePlan:output_type -> nocloud.billing.Plan
+	9,  // 91: nocloud.billing.BillingService.UpdatePlan:output_type -> nocloud.billing.Plan
+	9,  // 92: nocloud.billing.BillingService.GetPlan:output_type -> nocloud.billing.Plan
+	11, // 93: nocloud.billing.BillingService.ListPlans:output_type -> nocloud.billing.ListResponse
+	13, // 94: nocloud.billing.BillingService.ListPlansInstances:output_type -> nocloud.billing.ListPlansInstancesResponse
+	9,  // 95: nocloud.billing.BillingService.DeletePlan:output_type -> nocloud.billing.Plan
+	16, // 96: nocloud.billing.BillingService.CreateTransaction:output_type -> nocloud.billing.Transaction
+	17, // 97: nocloud.billing.BillingService.GetTransactions:output_type -> nocloud.billing.Transactions
+	24, // 98: nocloud.billing.BillingService.GetTransactionsCount:output_type -> nocloud.billing.GetTransactionsCountResponse
+	26, // 99: nocloud.billing.BillingService.UpdateTransaction:output_type -> nocloud.billing.UpdateTransactionResponse
+	19, // 100: nocloud.billing.BillingService.GetRecords:output_type -> nocloud.billing.Records
+	30, // 101: nocloud.billing.BillingService.GetInstancesReports:output_type -> nocloud.billing.GetInstancesReportResponse
+	35, // 102: nocloud.billing.BillingService.GetInstancesReportsCount:output_type -> nocloud.billing.GetReportsCountResponse
+	32, // 103: nocloud.billing.BillingService.GetRecordsReports:output_type -> nocloud.billing.GetRecordsReportsResponse
+	35, // 104: nocloud.billing.BillingService.GetRecordsReportsCount:output_type -> nocloud.billing.GetReportsCountResponse
+	17, // 105: nocloud.billing.BillingService.Reprocess:output_type -> nocloud.billing.Transactions
+	43, // 106: nocloud.billing.CurrencyService.GetCurrencies:output_type -> nocloud.billing.GetCurrenciesResponse
+	46, // 107: nocloud.billing.CurrencyService.GetExchangeRate:output_type -> nocloud.billing.GetExchangeRateResponse
+	47, // 108: nocloud.billing.CurrencyService.GetExchangeRates:output_type -> nocloud.billing.GetExchangeRatesResponse
+	37, // 109: nocloud.billing.CurrencyService.CreateExchangeRate:output_type -> nocloud.billing.CreateExchangeRateResponse
+	39, // 110: nocloud.billing.CurrencyService.UpdateExchangeRate:output_type -> nocloud.billing.UpdateExchangeRateResponse
+	41, // 111: nocloud.billing.CurrencyService.DeleteExchangeRate:output_type -> nocloud.billing.DeleteExchangeRateResponse
+	49, // 112: nocloud.billing.CurrencyService.Convert:output_type -> nocloud.billing.ConversionResponse
+	87, // [87:113] is the sub-list for method output_type
+	61, // [61:87] is the sub-list for method input_type
+	61, // [61:61] is the sub-list for extension type_name
+	61, // [61:61] is the sub-list for extension extendee
+	0,  // [0:61] is the sub-list for field type_name
 }
 
 func init() { file_billing_billing_proto_init() }
@@ -4182,7 +4255,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[2].Exporter = func(v any, i int) any {
-			switch v := v.(*Plan); i {
+			switch v := v.(*CustomEvent); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4194,7 +4267,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[3].Exporter = func(v any, i int) any {
-			switch v := v.(*ListRequest); i {
+			switch v := v.(*Plan); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4206,7 +4279,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[4].Exporter = func(v any, i int) any {
-			switch v := v.(*ListResponse); i {
+			switch v := v.(*ListRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4218,7 +4291,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[5].Exporter = func(v any, i int) any {
-			switch v := v.(*ListPlansInstancesRequest); i {
+			switch v := v.(*ListResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4230,7 +4303,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[6].Exporter = func(v any, i int) any {
-			switch v := v.(*ListPlansInstancesResponse); i {
+			switch v := v.(*ListPlansInstancesRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4242,7 +4315,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[7].Exporter = func(v any, i int) any {
-			switch v := v.(*ResourceConf); i {
+			switch v := v.(*ListPlansInstancesResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4254,7 +4327,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[8].Exporter = func(v any, i int) any {
-			switch v := v.(*Product); i {
+			switch v := v.(*ResourceConf); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4266,7 +4339,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[9].Exporter = func(v any, i int) any {
-			switch v := v.(*Transaction); i {
+			switch v := v.(*Product); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4278,7 +4351,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[10].Exporter = func(v any, i int) any {
-			switch v := v.(*Transactions); i {
+			switch v := v.(*Transaction); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4290,7 +4363,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[11].Exporter = func(v any, i int) any {
-			switch v := v.(*Record); i {
+			switch v := v.(*Transactions); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4302,7 +4375,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[12].Exporter = func(v any, i int) any {
-			switch v := v.(*Records); i {
+			switch v := v.(*Record); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4314,7 +4387,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[13].Exporter = func(v any, i int) any {
-			switch v := v.(*GetActiveRequest); i {
+			switch v := v.(*Records); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4326,7 +4399,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[14].Exporter = func(v any, i int) any {
-			switch v := v.(*GetTransactionsRequest); i {
+			switch v := v.(*GetActiveRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4338,7 +4411,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[15].Exporter = func(v any, i int) any {
-			switch v := v.(*ReprocessTransactionsRequest); i {
+			switch v := v.(*GetTransactionsRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4350,7 +4423,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[16].Exporter = func(v any, i int) any {
-			switch v := v.(*GetTransactionsCountRequest); i {
+			switch v := v.(*ReprocessTransactionsRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4362,7 +4435,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[17].Exporter = func(v any, i int) any {
-			switch v := v.(*GetTransactionsCountResponse); i {
+			switch v := v.(*GetTransactionsCountRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4374,7 +4447,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[18].Exporter = func(v any, i int) any {
-			switch v := v.(*UpdateTransactionRequest); i {
+			switch v := v.(*GetTransactionsCountResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4386,7 +4459,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[19].Exporter = func(v any, i int) any {
-			switch v := v.(*UpdateTransactionResponse); i {
+			switch v := v.(*UpdateTransactionRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4398,7 +4471,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[20].Exporter = func(v any, i int) any {
-			switch v := v.(*CostEstimation); i {
+			switch v := v.(*UpdateTransactionResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4410,7 +4483,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[21].Exporter = func(v any, i int) any {
-			switch v := v.(*GetInstancesReportRequest); i {
+			switch v := v.(*CostEstimation); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4422,7 +4495,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[22].Exporter = func(v any, i int) any {
-			switch v := v.(*InstanceReport); i {
+			switch v := v.(*GetInstancesReportRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4434,7 +4507,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[23].Exporter = func(v any, i int) any {
-			switch v := v.(*GetInstancesReportResponse); i {
+			switch v := v.(*InstanceReport); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4446,7 +4519,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[24].Exporter = func(v any, i int) any {
-			switch v := v.(*GetRecordsReportsRequest); i {
+			switch v := v.(*GetInstancesReportResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4458,7 +4531,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[25].Exporter = func(v any, i int) any {
-			switch v := v.(*GetRecordsReportsResponse); i {
+			switch v := v.(*GetRecordsReportsRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4470,7 +4543,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[26].Exporter = func(v any, i int) any {
-			switch v := v.(*GetInstancesReportsCountRequest); i {
+			switch v := v.(*GetRecordsReportsResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4482,7 +4555,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[27].Exporter = func(v any, i int) any {
-			switch v := v.(*GetRecordsReportsCountRequest); i {
+			switch v := v.(*GetInstancesReportsCountRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4494,7 +4567,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[28].Exporter = func(v any, i int) any {
-			switch v := v.(*GetReportsCountResponse); i {
+			switch v := v.(*GetRecordsReportsCountRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4506,7 +4579,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[29].Exporter = func(v any, i int) any {
-			switch v := v.(*CreateExchangeRateRequest); i {
+			switch v := v.(*GetReportsCountResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4518,7 +4591,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[30].Exporter = func(v any, i int) any {
-			switch v := v.(*CreateExchangeRateResponse); i {
+			switch v := v.(*CreateExchangeRateRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4530,7 +4603,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[31].Exporter = func(v any, i int) any {
-			switch v := v.(*UpdateExchangeRateRequest); i {
+			switch v := v.(*CreateExchangeRateResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4542,7 +4615,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[32].Exporter = func(v any, i int) any {
-			switch v := v.(*UpdateExchangeRateResponse); i {
+			switch v := v.(*UpdateExchangeRateRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4554,7 +4627,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[33].Exporter = func(v any, i int) any {
-			switch v := v.(*DeleteExchangeRateRequest); i {
+			switch v := v.(*UpdateExchangeRateResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4566,7 +4639,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[34].Exporter = func(v any, i int) any {
-			switch v := v.(*DeleteExchangeRateResponse); i {
+			switch v := v.(*DeleteExchangeRateRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4578,7 +4651,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[35].Exporter = func(v any, i int) any {
-			switch v := v.(*GetCurrenciesRequest); i {
+			switch v := v.(*DeleteExchangeRateResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4590,7 +4663,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[36].Exporter = func(v any, i int) any {
-			switch v := v.(*GetCurrenciesResponse); i {
+			switch v := v.(*GetCurrenciesRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4602,7 +4675,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[37].Exporter = func(v any, i int) any {
-			switch v := v.(*GetExchangeRateRequest); i {
+			switch v := v.(*GetCurrenciesResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4614,7 +4687,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[38].Exporter = func(v any, i int) any {
-			switch v := v.(*GetExchangeRatesRequest); i {
+			switch v := v.(*GetExchangeRateRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4626,7 +4699,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[39].Exporter = func(v any, i int) any {
-			switch v := v.(*GetExchangeRateResponse); i {
+			switch v := v.(*GetExchangeRatesRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4638,7 +4711,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[40].Exporter = func(v any, i int) any {
-			switch v := v.(*GetExchangeRatesResponse); i {
+			switch v := v.(*GetExchangeRateResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4650,7 +4723,7 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[41].Exporter = func(v any, i int) any {
-			switch v := v.(*ConversionRequest); i {
+			switch v := v.(*GetExchangeRatesResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4662,6 +4735,18 @@ func file_billing_billing_proto_init() {
 			}
 		}
 		file_billing_billing_proto_msgTypes[42].Exporter = func(v any, i int) any {
+			switch v := v.(*ConversionRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_billing_billing_proto_msgTypes[43].Exporter = func(v any, i int) any {
 			switch v := v.(*ConversionResponse); i {
 			case 0:
 				return &v.state
@@ -4674,22 +4759,22 @@ func file_billing_billing_proto_init() {
 			}
 		}
 	}
-	file_billing_billing_proto_msgTypes[7].OneofWrappers = []any{}
 	file_billing_billing_proto_msgTypes[8].OneofWrappers = []any{}
 	file_billing_billing_proto_msgTypes[9].OneofWrappers = []any{}
-	file_billing_billing_proto_msgTypes[11].OneofWrappers = []any{}
-	file_billing_billing_proto_msgTypes[14].OneofWrappers = []any{}
-	file_billing_billing_proto_msgTypes[16].OneofWrappers = []any{}
-	file_billing_billing_proto_msgTypes[21].OneofWrappers = []any{}
-	file_billing_billing_proto_msgTypes[24].OneofWrappers = []any{}
-	file_billing_billing_proto_msgTypes[27].OneofWrappers = []any{}
+	file_billing_billing_proto_msgTypes[10].OneofWrappers = []any{}
+	file_billing_billing_proto_msgTypes[12].OneofWrappers = []any{}
+	file_billing_billing_proto_msgTypes[15].OneofWrappers = []any{}
+	file_billing_billing_proto_msgTypes[17].OneofWrappers = []any{}
+	file_billing_billing_proto_msgTypes[22].OneofWrappers = []any{}
+	file_billing_billing_proto_msgTypes[25].OneofWrappers = []any{}
+	file_billing_billing_proto_msgTypes[28].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_billing_billing_proto_rawDesc,
 			NumEnums:      6,
-			NumMessages:   54,
+			NumMessages:   55,
 			NumExtensions: 0,
 			NumServices:   3,
 		},

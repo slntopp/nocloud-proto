@@ -50,6 +50,11 @@ message Fee {
     repeated FeeRange ranges = 4;
 }
 
+message CustomEvent {
+    string key = 1;
+    string override = 2;
+}
+
 message Plan {
     string uuid = 1;
     string title = 2;
@@ -67,6 +72,8 @@ message Plan {
     repeated nocloud.ansible.Software software = 10;
 
     statuses.NoCloudStatus status = 11;
+
+    repeated CustomEvent custom_events = 12;
 }
 
 message ListRequest {

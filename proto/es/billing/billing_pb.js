@@ -126,6 +126,17 @@ export const Fee = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message nocloud.billing.CustomEvent
+ */
+export const CustomEvent = proto3.makeMessageType(
+  "nocloud.billing.CustomEvent",
+  () => [
+    { no: 1, name: "key", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "override", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
  * @generated from message nocloud.billing.Plan
  */
 export const Plan = proto3.makeMessageType(
@@ -142,6 +153,7 @@ export const Plan = proto3.makeMessageType(
     { no: 9, name: "fee", kind: "message", T: Fee },
     { no: 10, name: "software", kind: "message", T: Software, repeated: true },
     { no: 11, name: "status", kind: "enum", T: proto3.getEnumType(NoCloudStatus) },
+    { no: 12, name: "custom_events", kind: "message", T: CustomEvent, repeated: true },
   ],
 );
 
