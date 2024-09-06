@@ -50,6 +50,12 @@ class Event extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>optional .nocloud.events_logging.Snapshot snapshot = 9 [json_name = "snapshot"];</code>
      */
     protected $snapshot = null;
+    /**
+     * 0 - unspecified, 1 - highest
+     *
+     * Generated from protobuf field <code>int32 priority = 10 [json_name = "priority"];</code>
+     */
+    protected $priority = 0;
 
     /**
      * Constructor.
@@ -66,6 +72,8 @@ class Event extends \Google\Protobuf\Internal\Message
      *     @type string $requestor
      *     @type int|string $ts
      *     @type \Nocloud\EventsLogging\Snapshot $snapshot
+     *     @type int $priority
+     *           0 - unspecified, 1 - highest
      * }
      */
     public function __construct($data = NULL) {
@@ -277,6 +285,32 @@ class Event extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Nocloud\EventsLogging\Snapshot::class);
         $this->snapshot = $var;
+
+        return $this;
+    }
+
+    /**
+     * 0 - unspecified, 1 - highest
+     *
+     * Generated from protobuf field <code>int32 priority = 10 [json_name = "priority"];</code>
+     * @return int
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
+
+    /**
+     * 0 - unspecified, 1 - highest
+     *
+     * Generated from protobuf field <code>int32 priority = 10 [json_name = "priority"];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setPriority($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->priority = $var;
 
         return $this;
     }
