@@ -61,7 +61,7 @@ export const LocationConf = /*@__PURE__*/ proto3.makeMessageType(
 /**
  * @generated from message nocloud.services_providers.Hook
  */
-export const Hook = proto3.makeMessageType(
+export const Hook = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.services_providers.Hook",
   () => [
     { no: 1, name: "playbook", kind: "scalar", T: 9 /* ScalarType.STRING */ },

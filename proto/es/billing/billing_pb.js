@@ -128,7 +128,7 @@ export const Fee = /*@__PURE__*/ proto3.makeMessageType(
 /**
  * @generated from message nocloud.billing.CustomEvent
  */
-export const CustomEvent = proto3.makeMessageType(
+export const CustomEvent = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.billing.CustomEvent",
   () => [
     { no: 1, name: "key", kind: "scalar", T: 9 /* ScalarType.STRING */ },
