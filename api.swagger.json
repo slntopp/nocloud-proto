@@ -6305,6 +6305,9 @@
         "accountOwner": {
           "type": "string",
           "title": "Mother account of this account. If != \"\" - then this account is subaccount"
+        },
+        "paymentsGateway": {
+          "type": "string"
         }
       }
     },
@@ -9029,6 +9032,9 @@
         "accountOwner": {
           "type": "string",
           "title": "Mother account of this account. If != \"\" - then this account is subaccount"
+        },
+        "paymentsGateway": {
+          "type": "string"
         }
       }
     },

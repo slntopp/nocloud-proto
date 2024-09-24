@@ -75,6 +75,8 @@ message Account {
 
   repeated string subaccounts = 12; // List of UUID's of sub-accounts of this account
   string account_owner = 13;        // Mother account of this account. If != "" - then this account is subaccount
+
+  string paymentsGateway = 14;
 }
 
 message UpdateResponse {bool result = 1;}

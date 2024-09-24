@@ -301,6 +301,11 @@ export declare class Account extends Message<Account> {
    */
   accountOwner: string;
 
+  /**
+   * @generated from field: string paymentsGateway = 14;
+   */
+  paymentsGateway: string;
+
   constructor(data?: PartialMessage<Account>);
 
   static readonly runtime: typeof proto3;
