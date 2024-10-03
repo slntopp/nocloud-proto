@@ -570,6 +570,26 @@ export const UpdateTransactionResponse = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * @generated from message nocloud.billing.PayRequest
+ */
+export const PayRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.PayRequest",
+  () => [
+    { no: 1, name: "invoice_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.PayResponse
+ */
+export const PayResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.PayResponse",
+  () => [
+    { no: 1, name: "payment_link", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
  * @generated from message nocloud.billing.CostEstimation
  */
 export const CostEstimation = /*@__PURE__*/ proto3.makeMessageType(

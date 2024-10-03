@@ -1732,6 +1732,54 @@ export declare class UpdateTransactionResponse extends Message<UpdateTransaction
 }
 
 /**
+ * @generated from message nocloud.billing.PayRequest
+ */
+export declare class PayRequest extends Message<PayRequest> {
+  /**
+   * @generated from field: string invoice_id = 1;
+   */
+  invoiceId: string;
+
+  constructor(data?: PartialMessage<PayRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.PayRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PayRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PayRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PayRequest;
+
+  static equals(a: PayRequest | PlainMessage<PayRequest> | undefined, b: PayRequest | PlainMessage<PayRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.PayResponse
+ */
+export declare class PayResponse extends Message<PayResponse> {
+  /**
+   * @generated from field: string payment_link = 1;
+   */
+  paymentLink: string;
+
+  constructor(data?: PartialMessage<PayResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.PayResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PayResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PayResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PayResponse;
+
+  static equals(a: PayResponse | PlainMessage<PayResponse> | undefined, b: PayResponse | PlainMessage<PayResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.billing.CostEstimation
  */
 export declare class CostEstimation extends Message<CostEstimation> {

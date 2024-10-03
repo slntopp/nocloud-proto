@@ -2080,6 +2080,44 @@
         ]
       }
     },
+    "/billing/invoices/{invoiceId}/pay": {
+      "post": {
+        "operationId": "BillingService_Pay",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingPayResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "invoiceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingServicePayBody"
+            }
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
     "/billing/invoices/{uuid}": {
       "get": {
         "operationId": "BillingService_GetInvoice",
@@ -5948,6 +5986,9 @@
     "AnsibleServiceExecBody": {
       "type": "object"
     },
+    "BillingServicePayBody": {
+      "type": "object"
+    },
     "BillingServiceUpdateInvoiceStatusBody": {
       "type": "object",
       "properties": {
@@ -7304,6 +7345,14 @@
         "plans": {
           "type": "object",
           "additionalProperties": {}
+        }
+      }
+    },
+    "billingPayResponse": {
+      "type": "object",
+      "properties": {
+        "paymentLink": {
+          "type": "string"
         }
       }
     },

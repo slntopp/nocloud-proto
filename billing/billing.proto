@@ -363,6 +363,14 @@ message UpdateTransactionResponse {
   bool result = 1;
 }
 
+message PayRequest{
+  string invoice_id = 1;
+}
+
+message PayResponse{
+  string payment_link = 1;
+}
+
 message CostEstimation {
   map<string, double> resources = 1;
   double product = 2;
@@ -560,6 +568,12 @@ service BillingService {
   rpc UpdateInvoice (UpdateInvoiceRequest) returns (Invoice) {
     option (google.api.http) = {
       patch: "/billing/invoices"
+      body: "*"
+    };
+  };
+  rpc Pay(PayRequest) returns (PayResponse) {
+    option (google.api.http) = {
+      post: "/billing/invoices/{invoice_id}/pay"
       body: "*"
     };
   };
