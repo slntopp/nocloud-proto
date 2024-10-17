@@ -22,6 +22,7 @@ import { ConversionRequest, ConversionResponse, CreateCurrencyRequest, CreateCur
 import { MethodKind } from "@bufbuild/protobuf";
 import { Addon, BulkAddons, CountAddonsRequest, CountAddonsResponse, ListAddonsRequest, ListAddonsResponse } from "./addons/addons_pb.js";
 import { CountDescriptionsRequest, CountDescriptionsResponse, Description, ListDescriptionsRequest, ListDescriptionsResponse } from "./descriptions/descriptions_pb.js";
+import { CountPromocodesRequest, CountPromocodesResponse, GetPromocodeByCodeRequest, ListPromocodesRequest, ListPromocodesResponse, Promocode } from "./promocodes/promocodes_pb.js";
 
 /**
  * @generated from service nocloud.billing.RecordsService
@@ -513,6 +514,78 @@ export declare const DescriptionsService: {
       readonly name: "Delete",
       readonly I: typeof Description,
       readonly O: typeof Description,
+      readonly kind: MethodKind.Unary,
+    },
+  }
+};
+
+/**
+ * @generated from service nocloud.billing.PromocodesService
+ */
+export declare const PromocodesService: {
+  readonly typeName: "nocloud.billing.PromocodesService",
+  readonly methods: {
+    /**
+     * @generated from rpc nocloud.billing.PromocodesService.Create
+     */
+    readonly create: {
+      readonly name: "Create",
+      readonly I: typeof Promocode,
+      readonly O: typeof Promocode,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.PromocodesService.Update
+     */
+    readonly update: {
+      readonly name: "Update",
+      readonly I: typeof Promocode,
+      readonly O: typeof Promocode,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.PromocodesService.Get
+     */
+    readonly get: {
+      readonly name: "Get",
+      readonly I: typeof Promocode,
+      readonly O: typeof Promocode,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.PromocodesService.GetByCode
+     */
+    readonly getByCode: {
+      readonly name: "GetByCode",
+      readonly I: typeof GetPromocodeByCodeRequest,
+      readonly O: typeof Promocode,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.PromocodesService.List
+     */
+    readonly list: {
+      readonly name: "List",
+      readonly I: typeof ListPromocodesRequest,
+      readonly O: typeof ListPromocodesResponse,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.PromocodesService.Count
+     */
+    readonly count: {
+      readonly name: "Count",
+      readonly I: typeof CountPromocodesRequest,
+      readonly O: typeof CountPromocodesResponse,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.PromocodesService.Delete
+     */
+    readonly delete: {
+      readonly name: "Delete",
+      readonly I: typeof Promocode,
+      readonly O: typeof Promocode,
       readonly kind: MethodKind.Unary,
     },
   }

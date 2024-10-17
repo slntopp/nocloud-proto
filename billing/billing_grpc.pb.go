@@ -25,6 +25,7 @@ import (
 	context "context"
 	addons "github.com/slntopp/nocloud-proto/billing/addons"
 	descriptions "github.com/slntopp/nocloud-proto/billing/descriptions"
+	promocodes "github.com/slntopp/nocloud-proto/billing/promocodes"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -2249,6 +2250,336 @@ var DescriptionsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _DescriptionsService_Delete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "billing/billing.proto",
+}
+
+const (
+	PromocodesService_Create_FullMethodName    = "/nocloud.billing.PromocodesService/Create"
+	PromocodesService_Update_FullMethodName    = "/nocloud.billing.PromocodesService/Update"
+	PromocodesService_Get_FullMethodName       = "/nocloud.billing.PromocodesService/Get"
+	PromocodesService_GetByCode_FullMethodName = "/nocloud.billing.PromocodesService/GetByCode"
+	PromocodesService_List_FullMethodName      = "/nocloud.billing.PromocodesService/List"
+	PromocodesService_Count_FullMethodName     = "/nocloud.billing.PromocodesService/Count"
+	PromocodesService_Delete_FullMethodName    = "/nocloud.billing.PromocodesService/Delete"
+)
+
+// PromocodesServiceClient is the client API for PromocodesService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type PromocodesServiceClient interface {
+	Create(ctx context.Context, in *promocodes.Promocode, opts ...grpc.CallOption) (*promocodes.Promocode, error)
+	Update(ctx context.Context, in *promocodes.Promocode, opts ...grpc.CallOption) (*promocodes.Promocode, error)
+	Get(ctx context.Context, in *promocodes.Promocode, opts ...grpc.CallOption) (*promocodes.Promocode, error)
+	GetByCode(ctx context.Context, in *promocodes.GetPromocodeByCodeRequest, opts ...grpc.CallOption) (*promocodes.Promocode, error)
+	List(ctx context.Context, in *promocodes.ListPromocodesRequest, opts ...grpc.CallOption) (*promocodes.ListPromocodesResponse, error)
+	Count(ctx context.Context, in *promocodes.CountPromocodesRequest, opts ...grpc.CallOption) (*promocodes.CountPromocodesResponse, error)
+	Delete(ctx context.Context, in *promocodes.Promocode, opts ...grpc.CallOption) (*promocodes.Promocode, error)
+}
+
+type promocodesServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewPromocodesServiceClient(cc grpc.ClientConnInterface) PromocodesServiceClient {
+	return &promocodesServiceClient{cc}
+}
+
+func (c *promocodesServiceClient) Create(ctx context.Context, in *promocodes.Promocode, opts ...grpc.CallOption) (*promocodes.Promocode, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(promocodes.Promocode)
+	err := c.cc.Invoke(ctx, PromocodesService_Create_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *promocodesServiceClient) Update(ctx context.Context, in *promocodes.Promocode, opts ...grpc.CallOption) (*promocodes.Promocode, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(promocodes.Promocode)
+	err := c.cc.Invoke(ctx, PromocodesService_Update_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *promocodesServiceClient) Get(ctx context.Context, in *promocodes.Promocode, opts ...grpc.CallOption) (*promocodes.Promocode, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(promocodes.Promocode)
+	err := c.cc.Invoke(ctx, PromocodesService_Get_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *promocodesServiceClient) GetByCode(ctx context.Context, in *promocodes.GetPromocodeByCodeRequest, opts ...grpc.CallOption) (*promocodes.Promocode, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(promocodes.Promocode)
+	err := c.cc.Invoke(ctx, PromocodesService_GetByCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *promocodesServiceClient) List(ctx context.Context, in *promocodes.ListPromocodesRequest, opts ...grpc.CallOption) (*promocodes.ListPromocodesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(promocodes.ListPromocodesResponse)
+	err := c.cc.Invoke(ctx, PromocodesService_List_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *promocodesServiceClient) Count(ctx context.Context, in *promocodes.CountPromocodesRequest, opts ...grpc.CallOption) (*promocodes.CountPromocodesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(promocodes.CountPromocodesResponse)
+	err := c.cc.Invoke(ctx, PromocodesService_Count_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *promocodesServiceClient) Delete(ctx context.Context, in *promocodes.Promocode, opts ...grpc.CallOption) (*promocodes.Promocode, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(promocodes.Promocode)
+	err := c.cc.Invoke(ctx, PromocodesService_Delete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// PromocodesServiceServer is the server API for PromocodesService service.
+// All implementations must embed UnimplementedPromocodesServiceServer
+// for forward compatibility.
+type PromocodesServiceServer interface {
+	Create(context.Context, *promocodes.Promocode) (*promocodes.Promocode, error)
+	Update(context.Context, *promocodes.Promocode) (*promocodes.Promocode, error)
+	Get(context.Context, *promocodes.Promocode) (*promocodes.Promocode, error)
+	GetByCode(context.Context, *promocodes.GetPromocodeByCodeRequest) (*promocodes.Promocode, error)
+	List(context.Context, *promocodes.ListPromocodesRequest) (*promocodes.ListPromocodesResponse, error)
+	Count(context.Context, *promocodes.CountPromocodesRequest) (*promocodes.CountPromocodesResponse, error)
+	Delete(context.Context, *promocodes.Promocode) (*promocodes.Promocode, error)
+	mustEmbedUnimplementedPromocodesServiceServer()
+}
+
+// UnimplementedPromocodesServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedPromocodesServiceServer struct{}
+
+func (UnimplementedPromocodesServiceServer) Create(context.Context, *promocodes.Promocode) (*promocodes.Promocode, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (UnimplementedPromocodesServiceServer) Update(context.Context, *promocodes.Promocode) (*promocodes.Promocode, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (UnimplementedPromocodesServiceServer) Get(context.Context, *promocodes.Promocode) (*promocodes.Promocode, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedPromocodesServiceServer) GetByCode(context.Context, *promocodes.GetPromocodeByCodeRequest) (*promocodes.Promocode, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetByCode not implemented")
+}
+func (UnimplementedPromocodesServiceServer) List(context.Context, *promocodes.ListPromocodesRequest) (*promocodes.ListPromocodesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedPromocodesServiceServer) Count(context.Context, *promocodes.CountPromocodesRequest) (*promocodes.CountPromocodesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Count not implemented")
+}
+func (UnimplementedPromocodesServiceServer) Delete(context.Context, *promocodes.Promocode) (*promocodes.Promocode, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedPromocodesServiceServer) mustEmbedUnimplementedPromocodesServiceServer() {}
+func (UnimplementedPromocodesServiceServer) testEmbeddedByValue()                           {}
+
+// UnsafePromocodesServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to PromocodesServiceServer will
+// result in compilation errors.
+type UnsafePromocodesServiceServer interface {
+	mustEmbedUnimplementedPromocodesServiceServer()
+}
+
+func RegisterPromocodesServiceServer(s grpc.ServiceRegistrar, srv PromocodesServiceServer) {
+	// If the following call pancis, it indicates UnimplementedPromocodesServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&PromocodesService_ServiceDesc, srv)
+}
+
+func _PromocodesService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(promocodes.Promocode)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PromocodesServiceServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PromocodesService_Create_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PromocodesServiceServer).Create(ctx, req.(*promocodes.Promocode))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PromocodesService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(promocodes.Promocode)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PromocodesServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PromocodesService_Update_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PromocodesServiceServer).Update(ctx, req.(*promocodes.Promocode))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PromocodesService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(promocodes.Promocode)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PromocodesServiceServer).Get(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PromocodesService_Get_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PromocodesServiceServer).Get(ctx, req.(*promocodes.Promocode))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PromocodesService_GetByCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(promocodes.GetPromocodeByCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PromocodesServiceServer).GetByCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PromocodesService_GetByCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PromocodesServiceServer).GetByCode(ctx, req.(*promocodes.GetPromocodeByCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PromocodesService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(promocodes.ListPromocodesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PromocodesServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PromocodesService_List_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PromocodesServiceServer).List(ctx, req.(*promocodes.ListPromocodesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PromocodesService_Count_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(promocodes.CountPromocodesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PromocodesServiceServer).Count(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PromocodesService_Count_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PromocodesServiceServer).Count(ctx, req.(*promocodes.CountPromocodesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PromocodesService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(promocodes.Promocode)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PromocodesServiceServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PromocodesService_Delete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PromocodesServiceServer).Delete(ctx, req.(*promocodes.Promocode))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// PromocodesService_ServiceDesc is the grpc.ServiceDesc for PromocodesService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var PromocodesService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "nocloud.billing.PromocodesService",
+	HandlerType: (*PromocodesServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Create",
+			Handler:    _PromocodesService_Create_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _PromocodesService_Update_Handler,
+		},
+		{
+			MethodName: "Get",
+			Handler:    _PromocodesService_Get_Handler,
+		},
+		{
+			MethodName: "GetByCode",
+			Handler:    _PromocodesService_GetByCode_Handler,
+		},
+		{
+			MethodName: "List",
+			Handler:    _PromocodesService_List_Handler,
+		},
+		{
+			MethodName: "Count",
+			Handler:    _PromocodesService_Count_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _PromocodesService_Delete_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

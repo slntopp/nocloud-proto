@@ -22,6 +22,7 @@ import { ConversionRequest, ConversionResponse, CreateCurrencyRequest, CreateCur
 import { MethodKind } from "@bufbuild/protobuf";
 import { Addon, BulkAddons, CountAddonsRequest, CountAddonsResponse, ListAddonsRequest, ListAddonsResponse } from "./addons/addons_pb.js";
 import { CountDescriptionsRequest, CountDescriptionsResponse, Description, ListDescriptionsRequest, ListDescriptionsResponse } from "./descriptions/descriptions_pb.js";
+import { CountPromocodesRequest, CountPromocodesResponse, GetPromocodeByCodeRequest, ListPromocodesRequest, ListPromocodesResponse, Promocode } from "./promocodes/promocodes_pb.js";
 
 /**
  * @generated from service nocloud.billing.RecordsService
@@ -513,6 +514,78 @@ export const DescriptionsService = {
       name: "Delete",
       I: Description,
       O: Description,
+      kind: MethodKind.Unary,
+    },
+  }
+};
+
+/**
+ * @generated from service nocloud.billing.PromocodesService
+ */
+export const PromocodesService = {
+  typeName: "nocloud.billing.PromocodesService",
+  methods: {
+    /**
+     * @generated from rpc nocloud.billing.PromocodesService.Create
+     */
+    create: {
+      name: "Create",
+      I: Promocode,
+      O: Promocode,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.PromocodesService.Update
+     */
+    update: {
+      name: "Update",
+      I: Promocode,
+      O: Promocode,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.PromocodesService.Get
+     */
+    get: {
+      name: "Get",
+      I: Promocode,
+      O: Promocode,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.PromocodesService.GetByCode
+     */
+    getByCode: {
+      name: "GetByCode",
+      I: GetPromocodeByCodeRequest,
+      O: Promocode,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.PromocodesService.List
+     */
+    list: {
+      name: "List",
+      I: ListPromocodesRequest,
+      O: ListPromocodesResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.PromocodesService.Count
+     */
+    count: {
+      name: "Count",
+      I: CountPromocodesRequest,
+      O: CountPromocodesResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.PromocodesService.Delete
+     */
+    delete: {
+      name: "Delete",
+      I: Promocode,
+      O: Promocode,
       kind: MethodKind.Unary,
     },
   }

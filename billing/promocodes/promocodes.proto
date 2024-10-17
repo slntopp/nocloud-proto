@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+package nocloud.billing.promocodes;
+
+import "google/protobuf/struct.proto";
+
+enum PromocodeStatus {
+  UNKNOWN = 0;
+  ACTIVE = 1;
+  SUSPENDED = 2;    // Temporary inactive
+  DELETED = 3;
+  EXPIRED = 4;
+  ALL_TAKEN = 5;    // All available promocodes are taken
+  USED = 6;         // Already used by this user maximum times
+}
+
+message Promocode {
+  string uuid = 1;
+  string title = 2;
+  string description = 3;
+  string code = 4;         // Unique code, which user must enter as promocode
+  PromocodeStatus status = 5;
+  int64 due_date = 6;      // 0 - unlimited.
+  int64 limit = 7;         // how many times this promocode can be used globally. 0 - unlimited
+  int64 uses_per_user = 8; // how many times this promocode can be used per one user. 0 - unlimited
+
+  repeated string linked_instances = 9; // Instances affected by this promocode
+
+  map<string, google.protobuf.Value> meta = 10;
+  int64 created = 11;
+
+  repeated PromoItem promo_items = 12;
+}
+
+// At least 1 optional item must be specified
+message PromoItem {
+    PromoSchema schema = 1;
+    optional BillingPlanPromo plan_promo = 2;
+    optional AddonPromo addon_promo = 3;
+}
+
+// At least 1 must be specified
+message PromoSchema {
+  optional double discount_percent = 1; // [0, 1]; Highest priority when specified more than 1
+  optional int64 discount_amount = 2;
+  optional int64 fixed_price = 3;
+}
+
+// billing_plan must be not empty string
+// If optional fields are not specified, then applied to ALL billing plan items.
+// If at least 1 optional item specified, then applied only to specified items
+message BillingPlanPromo{
+    string billing_plan = 1;
+    optional string resource = 2;
+    optional string product = 3;
+    optional string addon = 4;
+}
+
+// addon must be not empty string
+message AddonPromo{
+    string addon = 1;
+}
+
+// API
+message ListPromocodesRequest {
+  optional uint64 page = 1;
+  optional uint64 limit = 2;
+  optional string field = 3;
+  optional string sort = 4;
+}
+message CountPromocodesRequest {}
+message GetPromocodeByCodeRequest {
+  string code = 1;
+}
+
+message CountPromocodesResponse {
+  int64 total = 1;
+}
+
+message ListPromocodesResponse {
+  repeated Promocode promocodes = 1;
+}

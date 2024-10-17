@@ -26,6 +26,7 @@ import (
 	billing "github.com/slntopp/nocloud-proto/billing"
 	addons "github.com/slntopp/nocloud-proto/billing/addons"
 	descriptions "github.com/slntopp/nocloud-proto/billing/descriptions"
+	promocodes "github.com/slntopp/nocloud-proto/billing/promocodes"
 	http "net/http"
 	strings "strings"
 )
@@ -48,6 +49,8 @@ const (
 	AddonsServiceName = "nocloud.billing.AddonsService"
 	// DescriptionsServiceName is the fully-qualified name of the DescriptionsService service.
 	DescriptionsServiceName = "nocloud.billing.DescriptionsService"
+	// PromocodesServiceName is the fully-qualified name of the PromocodesService service.
+	PromocodesServiceName = "nocloud.billing.PromocodesService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -196,6 +199,24 @@ const (
 	// DescriptionsServiceDeleteProcedure is the fully-qualified name of the DescriptionsService's
 	// Delete RPC.
 	DescriptionsServiceDeleteProcedure = "/nocloud.billing.DescriptionsService/Delete"
+	// PromocodesServiceCreateProcedure is the fully-qualified name of the PromocodesService's Create
+	// RPC.
+	PromocodesServiceCreateProcedure = "/nocloud.billing.PromocodesService/Create"
+	// PromocodesServiceUpdateProcedure is the fully-qualified name of the PromocodesService's Update
+	// RPC.
+	PromocodesServiceUpdateProcedure = "/nocloud.billing.PromocodesService/Update"
+	// PromocodesServiceGetProcedure is the fully-qualified name of the PromocodesService's Get RPC.
+	PromocodesServiceGetProcedure = "/nocloud.billing.PromocodesService/Get"
+	// PromocodesServiceGetByCodeProcedure is the fully-qualified name of the PromocodesService's
+	// GetByCode RPC.
+	PromocodesServiceGetByCodeProcedure = "/nocloud.billing.PromocodesService/GetByCode"
+	// PromocodesServiceListProcedure is the fully-qualified name of the PromocodesService's List RPC.
+	PromocodesServiceListProcedure = "/nocloud.billing.PromocodesService/List"
+	// PromocodesServiceCountProcedure is the fully-qualified name of the PromocodesService's Count RPC.
+	PromocodesServiceCountProcedure = "/nocloud.billing.PromocodesService/Count"
+	// PromocodesServiceDeleteProcedure is the fully-qualified name of the PromocodesService's Delete
+	// RPC.
+	PromocodesServiceDeleteProcedure = "/nocloud.billing.PromocodesService/Delete"
 )
 
 // These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
@@ -255,6 +276,14 @@ var (
 	descriptionsServiceListMethodDescriptor                         = descriptionsServiceServiceDescriptor.Methods().ByName("List")
 	descriptionsServiceCountMethodDescriptor                        = descriptionsServiceServiceDescriptor.Methods().ByName("Count")
 	descriptionsServiceDeleteMethodDescriptor                       = descriptionsServiceServiceDescriptor.Methods().ByName("Delete")
+	promocodesServiceServiceDescriptor                              = billing.File_billing_billing_proto.Services().ByName("PromocodesService")
+	promocodesServiceCreateMethodDescriptor                         = promocodesServiceServiceDescriptor.Methods().ByName("Create")
+	promocodesServiceUpdateMethodDescriptor                         = promocodesServiceServiceDescriptor.Methods().ByName("Update")
+	promocodesServiceGetMethodDescriptor                            = promocodesServiceServiceDescriptor.Methods().ByName("Get")
+	promocodesServiceGetByCodeMethodDescriptor                      = promocodesServiceServiceDescriptor.Methods().ByName("GetByCode")
+	promocodesServiceListMethodDescriptor                           = promocodesServiceServiceDescriptor.Methods().ByName("List")
+	promocodesServiceCountMethodDescriptor                          = promocodesServiceServiceDescriptor.Methods().ByName("Count")
+	promocodesServiceDeleteMethodDescriptor                         = promocodesServiceServiceDescriptor.Methods().ByName("Delete")
 )
 
 // RecordsServiceClient is a client for the nocloud.billing.RecordsService service.
@@ -1767,4 +1796,228 @@ func (UnimplementedDescriptionsServiceHandler) Count(context.Context, *connect.R
 
 func (UnimplementedDescriptionsServiceHandler) Delete(context.Context, *connect.Request[descriptions.Description]) (*connect.Response[descriptions.Description], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.DescriptionsService.Delete is not implemented"))
+}
+
+// PromocodesServiceClient is a client for the nocloud.billing.PromocodesService service.
+type PromocodesServiceClient interface {
+	Create(context.Context, *connect.Request[promocodes.Promocode]) (*connect.Response[promocodes.Promocode], error)
+	Update(context.Context, *connect.Request[promocodes.Promocode]) (*connect.Response[promocodes.Promocode], error)
+	Get(context.Context, *connect.Request[promocodes.Promocode]) (*connect.Response[promocodes.Promocode], error)
+	GetByCode(context.Context, *connect.Request[promocodes.GetPromocodeByCodeRequest]) (*connect.Response[promocodes.Promocode], error)
+	List(context.Context, *connect.Request[promocodes.ListPromocodesRequest]) (*connect.Response[promocodes.ListPromocodesResponse], error)
+	Count(context.Context, *connect.Request[promocodes.CountPromocodesRequest]) (*connect.Response[promocodes.CountPromocodesResponse], error)
+	Delete(context.Context, *connect.Request[promocodes.Promocode]) (*connect.Response[promocodes.Promocode], error)
+}
+
+// NewPromocodesServiceClient constructs a client for the nocloud.billing.PromocodesService service.
+// By default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped
+// responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
+// connect.WithGRPC() or connect.WithGRPCWeb() options.
+//
+// The URL supplied here should be the base URL for the Connect or gRPC server (for example,
+// http://api.acme.com or https://acme.com/grpc).
+func NewPromocodesServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) PromocodesServiceClient {
+	baseURL = strings.TrimRight(baseURL, "/")
+	return &promocodesServiceClient{
+		create: connect.NewClient[promocodes.Promocode, promocodes.Promocode](
+			httpClient,
+			baseURL+PromocodesServiceCreateProcedure,
+			connect.WithSchema(promocodesServiceCreateMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		update: connect.NewClient[promocodes.Promocode, promocodes.Promocode](
+			httpClient,
+			baseURL+PromocodesServiceUpdateProcedure,
+			connect.WithSchema(promocodesServiceUpdateMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		get: connect.NewClient[promocodes.Promocode, promocodes.Promocode](
+			httpClient,
+			baseURL+PromocodesServiceGetProcedure,
+			connect.WithSchema(promocodesServiceGetMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		getByCode: connect.NewClient[promocodes.GetPromocodeByCodeRequest, promocodes.Promocode](
+			httpClient,
+			baseURL+PromocodesServiceGetByCodeProcedure,
+			connect.WithSchema(promocodesServiceGetByCodeMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		list: connect.NewClient[promocodes.ListPromocodesRequest, promocodes.ListPromocodesResponse](
+			httpClient,
+			baseURL+PromocodesServiceListProcedure,
+			connect.WithSchema(promocodesServiceListMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		count: connect.NewClient[promocodes.CountPromocodesRequest, promocodes.CountPromocodesResponse](
+			httpClient,
+			baseURL+PromocodesServiceCountProcedure,
+			connect.WithSchema(promocodesServiceCountMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		delete: connect.NewClient[promocodes.Promocode, promocodes.Promocode](
+			httpClient,
+			baseURL+PromocodesServiceDeleteProcedure,
+			connect.WithSchema(promocodesServiceDeleteMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+	}
+}
+
+// promocodesServiceClient implements PromocodesServiceClient.
+type promocodesServiceClient struct {
+	create    *connect.Client[promocodes.Promocode, promocodes.Promocode]
+	update    *connect.Client[promocodes.Promocode, promocodes.Promocode]
+	get       *connect.Client[promocodes.Promocode, promocodes.Promocode]
+	getByCode *connect.Client[promocodes.GetPromocodeByCodeRequest, promocodes.Promocode]
+	list      *connect.Client[promocodes.ListPromocodesRequest, promocodes.ListPromocodesResponse]
+	count     *connect.Client[promocodes.CountPromocodesRequest, promocodes.CountPromocodesResponse]
+	delete    *connect.Client[promocodes.Promocode, promocodes.Promocode]
+}
+
+// Create calls nocloud.billing.PromocodesService.Create.
+func (c *promocodesServiceClient) Create(ctx context.Context, req *connect.Request[promocodes.Promocode]) (*connect.Response[promocodes.Promocode], error) {
+	return c.create.CallUnary(ctx, req)
+}
+
+// Update calls nocloud.billing.PromocodesService.Update.
+func (c *promocodesServiceClient) Update(ctx context.Context, req *connect.Request[promocodes.Promocode]) (*connect.Response[promocodes.Promocode], error) {
+	return c.update.CallUnary(ctx, req)
+}
+
+// Get calls nocloud.billing.PromocodesService.Get.
+func (c *promocodesServiceClient) Get(ctx context.Context, req *connect.Request[promocodes.Promocode]) (*connect.Response[promocodes.Promocode], error) {
+	return c.get.CallUnary(ctx, req)
+}
+
+// GetByCode calls nocloud.billing.PromocodesService.GetByCode.
+func (c *promocodesServiceClient) GetByCode(ctx context.Context, req *connect.Request[promocodes.GetPromocodeByCodeRequest]) (*connect.Response[promocodes.Promocode], error) {
+	return c.getByCode.CallUnary(ctx, req)
+}
+
+// List calls nocloud.billing.PromocodesService.List.
+func (c *promocodesServiceClient) List(ctx context.Context, req *connect.Request[promocodes.ListPromocodesRequest]) (*connect.Response[promocodes.ListPromocodesResponse], error) {
+	return c.list.CallUnary(ctx, req)
+}
+
+// Count calls nocloud.billing.PromocodesService.Count.
+func (c *promocodesServiceClient) Count(ctx context.Context, req *connect.Request[promocodes.CountPromocodesRequest]) (*connect.Response[promocodes.CountPromocodesResponse], error) {
+	return c.count.CallUnary(ctx, req)
+}
+
+// Delete calls nocloud.billing.PromocodesService.Delete.
+func (c *promocodesServiceClient) Delete(ctx context.Context, req *connect.Request[promocodes.Promocode]) (*connect.Response[promocodes.Promocode], error) {
+	return c.delete.CallUnary(ctx, req)
+}
+
+// PromocodesServiceHandler is an implementation of the nocloud.billing.PromocodesService service.
+type PromocodesServiceHandler interface {
+	Create(context.Context, *connect.Request[promocodes.Promocode]) (*connect.Response[promocodes.Promocode], error)
+	Update(context.Context, *connect.Request[promocodes.Promocode]) (*connect.Response[promocodes.Promocode], error)
+	Get(context.Context, *connect.Request[promocodes.Promocode]) (*connect.Response[promocodes.Promocode], error)
+	GetByCode(context.Context, *connect.Request[promocodes.GetPromocodeByCodeRequest]) (*connect.Response[promocodes.Promocode], error)
+	List(context.Context, *connect.Request[promocodes.ListPromocodesRequest]) (*connect.Response[promocodes.ListPromocodesResponse], error)
+	Count(context.Context, *connect.Request[promocodes.CountPromocodesRequest]) (*connect.Response[promocodes.CountPromocodesResponse], error)
+	Delete(context.Context, *connect.Request[promocodes.Promocode]) (*connect.Response[promocodes.Promocode], error)
+}
+
+// NewPromocodesServiceHandler builds an HTTP handler from the service implementation. It returns
+// the path on which to mount the handler and the handler itself.
+//
+// By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
+// and JSON codecs. They also support gzip compression.
+func NewPromocodesServiceHandler(svc PromocodesServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	promocodesServiceCreateHandler := connect.NewUnaryHandler(
+		PromocodesServiceCreateProcedure,
+		svc.Create,
+		connect.WithSchema(promocodesServiceCreateMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	promocodesServiceUpdateHandler := connect.NewUnaryHandler(
+		PromocodesServiceUpdateProcedure,
+		svc.Update,
+		connect.WithSchema(promocodesServiceUpdateMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	promocodesServiceGetHandler := connect.NewUnaryHandler(
+		PromocodesServiceGetProcedure,
+		svc.Get,
+		connect.WithSchema(promocodesServiceGetMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	promocodesServiceGetByCodeHandler := connect.NewUnaryHandler(
+		PromocodesServiceGetByCodeProcedure,
+		svc.GetByCode,
+		connect.WithSchema(promocodesServiceGetByCodeMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	promocodesServiceListHandler := connect.NewUnaryHandler(
+		PromocodesServiceListProcedure,
+		svc.List,
+		connect.WithSchema(promocodesServiceListMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	promocodesServiceCountHandler := connect.NewUnaryHandler(
+		PromocodesServiceCountProcedure,
+		svc.Count,
+		connect.WithSchema(promocodesServiceCountMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	promocodesServiceDeleteHandler := connect.NewUnaryHandler(
+		PromocodesServiceDeleteProcedure,
+		svc.Delete,
+		connect.WithSchema(promocodesServiceDeleteMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	return "/nocloud.billing.PromocodesService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case PromocodesServiceCreateProcedure:
+			promocodesServiceCreateHandler.ServeHTTP(w, r)
+		case PromocodesServiceUpdateProcedure:
+			promocodesServiceUpdateHandler.ServeHTTP(w, r)
+		case PromocodesServiceGetProcedure:
+			promocodesServiceGetHandler.ServeHTTP(w, r)
+		case PromocodesServiceGetByCodeProcedure:
+			promocodesServiceGetByCodeHandler.ServeHTTP(w, r)
+		case PromocodesServiceListProcedure:
+			promocodesServiceListHandler.ServeHTTP(w, r)
+		case PromocodesServiceCountProcedure:
+			promocodesServiceCountHandler.ServeHTTP(w, r)
+		case PromocodesServiceDeleteProcedure:
+			promocodesServiceDeleteHandler.ServeHTTP(w, r)
+		default:
+			http.NotFound(w, r)
+		}
+	})
+}
+
+// UnimplementedPromocodesServiceHandler returns CodeUnimplemented from all methods.
+type UnimplementedPromocodesServiceHandler struct{}
+
+func (UnimplementedPromocodesServiceHandler) Create(context.Context, *connect.Request[promocodes.Promocode]) (*connect.Response[promocodes.Promocode], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.PromocodesService.Create is not implemented"))
+}
+
+func (UnimplementedPromocodesServiceHandler) Update(context.Context, *connect.Request[promocodes.Promocode]) (*connect.Response[promocodes.Promocode], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.PromocodesService.Update is not implemented"))
+}
+
+func (UnimplementedPromocodesServiceHandler) Get(context.Context, *connect.Request[promocodes.Promocode]) (*connect.Response[promocodes.Promocode], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.PromocodesService.Get is not implemented"))
+}
+
+func (UnimplementedPromocodesServiceHandler) GetByCode(context.Context, *connect.Request[promocodes.GetPromocodeByCodeRequest]) (*connect.Response[promocodes.Promocode], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.PromocodesService.GetByCode is not implemented"))
+}
+
+func (UnimplementedPromocodesServiceHandler) List(context.Context, *connect.Request[promocodes.ListPromocodesRequest]) (*connect.Response[promocodes.ListPromocodesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.PromocodesService.List is not implemented"))
+}
+
+func (UnimplementedPromocodesServiceHandler) Count(context.Context, *connect.Request[promocodes.CountPromocodesRequest]) (*connect.Response[promocodes.CountPromocodesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.PromocodesService.Count is not implemented"))
+}
+
+func (UnimplementedPromocodesServiceHandler) Delete(context.Context, *connect.Request[promocodes.Promocode]) (*connect.Response[promocodes.Promocode], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.PromocodesService.Delete is not implemented"))
 }

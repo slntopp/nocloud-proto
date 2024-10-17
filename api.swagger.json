@@ -32,6 +32,9 @@
       "name": "DescriptionsService"
     },
     {
+      "name": "PromocodesService"
+    },
+    {
       "name": "ChatService"
     },
     {
@@ -1405,6 +1408,28 @@
         ],
         "tags": [
           "BillingService"
+        ]
+      }
+    },
+    "/billing/count/promocodes": {
+      "get": {
+        "operationId": "PromocodesService_Count",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/promocodesCountPromocodesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "PromocodesService"
         ]
       }
     },
@@ -2803,6 +2828,378 @@
         ],
         "tags": [
           "BillingService"
+        ]
+      }
+    },
+    "/billing/promocodes": {
+      "get": {
+        "operationId": "PromocodesService_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/promocodesListPromocodesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "field",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PromocodesService"
+        ]
+      },
+      "put": {
+        "operationId": "PromocodesService_Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/promocodesPromocode"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/promocodesPromocode"
+            }
+          }
+        ],
+        "tags": [
+          "PromocodesService"
+        ]
+      }
+    },
+    "/billing/promocodes/{code}/by_code": {
+      "get": {
+        "operationId": "PromocodesService_GetByCode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/promocodesPromocode"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PromocodesService"
+        ]
+      }
+    },
+    "/billing/promocodes/{uuid}": {
+      "get": {
+        "operationId": "PromocodesService_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/promocodesPromocode"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "code",
+            "description": "Unique code, which user must enter as promocode",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "description": " - SUSPENDED: Temporary inactive\n - ALL_TAKEN: All available promocodes are taken\n - USED: Already used by this user maximum times",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "ACTIVE",
+              "SUSPENDED",
+              "DELETED",
+              "EXPIRED",
+              "ALL_TAKEN",
+              "USED"
+            ],
+            "default": "UNKNOWN"
+          },
+          {
+            "name": "dueDate",
+            "description": "0 - unlimited.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "description": "how many times this promocode can be used globally. 0 - unlimited",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "usesPerUser",
+            "description": "how many times this promocode can be used per one user. 0 - unlimited",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "linkedInstances",
+            "description": "Instances affected by this promocode",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "meta",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "created",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "PromocodesService"
+        ]
+      },
+      "delete": {
+        "operationId": "PromocodesService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/promocodesPromocode"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "code",
+            "description": "Unique code, which user must enter as promocode",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "description": " - SUSPENDED: Temporary inactive\n - ALL_TAKEN: All available promocodes are taken\n - USED: Already used by this user maximum times",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "ACTIVE",
+              "SUSPENDED",
+              "DELETED",
+              "EXPIRED",
+              "ALL_TAKEN",
+              "USED"
+            ],
+            "default": "UNKNOWN"
+          },
+          {
+            "name": "dueDate",
+            "description": "0 - unlimited.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "description": "how many times this promocode can be used globally. 0 - unlimited",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "usesPerUser",
+            "description": "how many times this promocode can be used per one user. 0 - unlimited",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "linkedInstances",
+            "description": "Instances affected by this promocode",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "meta",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "created",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "PromocodesService"
+        ]
+      },
+      "patch": {
+        "operationId": "PromocodesService_Update",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/promocodesPromocode"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingPromocodesServiceUpdateBody"
+            }
+          }
+        ],
+        "tags": [
+          "PromocodesService"
         ]
       }
     },
@@ -7513,6 +7910,61 @@
         }
       }
     },
+    "billingPromocodesServiceUpdateBody": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string",
+          "title": "Unique code, which user must enter as promocode"
+        },
+        "status": {
+          "$ref": "#/definitions/promocodesPromocodeStatus"
+        },
+        "dueDate": {
+          "type": "string",
+          "format": "int64",
+          "description": "0 - unlimited."
+        },
+        "limit": {
+          "type": "string",
+          "format": "int64",
+          "title": "how many times this promocode can be used globally. 0 - unlimited"
+        },
+        "usesPerUser": {
+          "type": "string",
+          "format": "int64",
+          "title": "how many times this promocode can be used per one user. 0 - unlimited"
+        },
+        "linkedInstances": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Instances affected by this promocode"
+        },
+        "meta": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "promoItems": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/promocodesPromoItem"
+          }
+        }
+      }
+    },
     "billingRecords": {
       "type": "object",
       "properties": {
@@ -8994,6 +9446,160 @@
           }
         }
       }
+    },
+    "promocodesAddonPromo": {
+      "type": "object",
+      "properties": {
+        "addon": {
+          "type": "string"
+        }
+      },
+      "title": "addon must be not empty string"
+    },
+    "promocodesBillingPlanPromo": {
+      "type": "object",
+      "properties": {
+        "billingPlan": {
+          "type": "string"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "product": {
+          "type": "string"
+        },
+        "addon": {
+          "type": "string"
+        }
+      },
+      "title": "billing_plan must be not empty string\r\nIf optional fields are not specified, then applied to ALL billing plan items.\r\nIf at least 1 optional item specified, then applied only to specified items"
+    },
+    "promocodesCountPromocodesResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "promocodesListPromocodesResponse": {
+      "type": "object",
+      "properties": {
+        "promocodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/promocodesPromocode"
+          }
+        }
+      }
+    },
+    "promocodesPromoItem": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "$ref": "#/definitions/promocodesPromoSchema"
+        },
+        "planPromo": {
+          "$ref": "#/definitions/promocodesBillingPlanPromo"
+        },
+        "addonPromo": {
+          "$ref": "#/definitions/promocodesAddonPromo"
+        }
+      },
+      "title": "At least 1 optional item must be specified"
+    },
+    "promocodesPromoSchema": {
+      "type": "object",
+      "properties": {
+        "discountPercent": {
+          "type": "number",
+          "format": "double",
+          "title": "[0, 1]; Highest priority when specified more than 1"
+        },
+        "discountAmount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "fixedPrice": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "title": "At least 1 must be specified"
+    },
+    "promocodesPromocode": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string",
+          "title": "Unique code, which user must enter as promocode"
+        },
+        "status": {
+          "$ref": "#/definitions/promocodesPromocodeStatus"
+        },
+        "dueDate": {
+          "type": "string",
+          "format": "int64",
+          "description": "0 - unlimited."
+        },
+        "limit": {
+          "type": "string",
+          "format": "int64",
+          "title": "how many times this promocode can be used globally. 0 - unlimited"
+        },
+        "usesPerUser": {
+          "type": "string",
+          "format": "int64",
+          "title": "how many times this promocode can be used per one user. 0 - unlimited"
+        },
+        "linkedInstances": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Instances affected by this promocode"
+        },
+        "meta": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "promoItems": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/promocodesPromoItem"
+          }
+        }
+      }
+    },
+    "promocodesPromocodeStatus": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "ACTIVE",
+        "SUSPENDED",
+        "DELETED",
+        "EXPIRED",
+        "ALL_TAKEN",
+        "USED"
+      ],
+      "default": "UNKNOWN",
+      "title": "- SUSPENDED: Temporary inactive\n - ALL_TAKEN: All available promocodes are taken\n - USED: Already used by this user maximum times"
     },
     "protobufAny": {
       "type": "object",

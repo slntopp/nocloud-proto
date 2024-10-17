@@ -20,6 +20,7 @@ package nocloud.billing;
 import "ansible/ansible.proto";
 import "billing/addons/addons.proto";
 import "billing/descriptions/descriptions.proto";
+import "billing/promocodes/promocodes.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
 import "states/states.proto";
@@ -780,6 +781,46 @@ service DescriptionsService {
   rpc Delete (descriptions.Description) returns (descriptions.Description) {
     option (google.api.http) = {
       delete: "/billing/descs/{uuid}"
+    };
+  };
+}
+
+service PromocodesService {
+  rpc Create (promocodes.Promocode) returns (promocodes.Promocode) {
+    option (google.api.http) = {
+      put: "/billing/promocodes"
+      body: "*"
+    };
+  };
+  rpc Update (promocodes.Promocode) returns (promocodes.Promocode) {
+    option (google.api.http) = {
+      patch: "/billing/promocodes/{uuid}"
+      body: "*"
+    };
+  };
+  rpc Get (promocodes.Promocode) returns (promocodes.Promocode) {
+    option (google.api.http) = {
+      get: "/billing/promocodes/{uuid}"
+    };
+  };
+  rpc GetByCode (promocodes.GetPromocodeByCodeRequest) returns (promocodes.Promocode) {
+    option (google.api.http) = {
+      get: "/billing/promocodes/{code}/by_code"
+    };
+  };
+  rpc List (promocodes.ListPromocodesRequest) returns (promocodes.ListPromocodesResponse) {
+    option (google.api.http) = {
+      get: "/billing/promocodes"
+    };
+  };
+  rpc Count (promocodes.CountPromocodesRequest) returns (promocodes.CountPromocodesResponse) {
+    option (google.api.http) = {
+      get: "/billing/count/promocodes"
+    };
+  };
+  rpc Delete (promocodes.Promocode) returns (promocodes.Promocode) {
+    option (google.api.http) = {
+      delete: "/billing/promocodes/{uuid}"
     };
   };
 }
