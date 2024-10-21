@@ -449,6 +449,10 @@ message GetInvoiceSettingsTemplateExampleResponse {
   string issue_renewal_invoice_after_example = 3;
 }
 
+message CreateTopUpBalanceInvoiceRequest{
+  double sum = 1;
+}
+
 service BillingService {
   rpc CreatePlan (Plan) returns (Plan) {
     option (google.api.http) = {
@@ -581,6 +585,12 @@ service BillingService {
   rpc UpdateInvoiceStatus (UpdateInvoiceStatusRequest) returns (Invoice) {
     option (google.api.http) = {
       patch: "/billing/invoices/{uuid}/status"
+      body: "*"
+    };
+  };
+  rpc CreateTopUpBalanceInvoice(CreateTopUpBalanceInvoiceRequest) returns (Invoice) {
+    option (google.api.http) = {
+      put: "/billing/invoices/topup"
       body: "*"
     };
   };
@@ -821,6 +831,12 @@ service PromocodesService {
   rpc Delete (promocodes.Promocode) returns (promocodes.Promocode) {
     option (google.api.http) = {
       delete: "/billing/promocodes/{uuid}"
+    };
+  };
+  rpc Apply (promocodes.ApplyPromocodeRequest) returns (promocodes.ApplyPromocodeResponse) {
+    option (google.api.http) = {
+      post: "/billing/promocodes/apply"
+      body: "*"
     };
   };
 }

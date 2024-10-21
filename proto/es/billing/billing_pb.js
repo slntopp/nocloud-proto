@@ -732,6 +732,16 @@ export const GetInvoiceSettingsTemplateExampleResponse = /*@__PURE__*/ proto3.ma
 );
 
 /**
+ * @generated from message nocloud.billing.CreateTopUpBalanceInvoiceRequest
+ */
+export const CreateTopUpBalanceInvoiceRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.CreateTopUpBalanceInvoiceRequest",
+  () => [
+    { no: 1, name: "sum", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+  ],
+);
+
+/**
  * @generated from message nocloud.billing.Currency
  */
 export const Currency = /*@__PURE__*/ proto3.makeMessageType(

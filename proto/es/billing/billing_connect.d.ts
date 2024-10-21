@@ -18,11 +18,11 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { ConversionRequest, ConversionResponse, CreateCurrencyRequest, CreateCurrencyResponse, CreateExchangeRateRequest, CreateExchangeRateResponse, CreateInvoiceRequest, DeleteExchangeRateRequest, DeleteExchangeRateResponse, GetActiveRequest, GetCurrenciesRequest, GetCurrenciesResponse, GetExchangeRateRequest, GetExchangeRateResponse, GetExchangeRatesRequest, GetExchangeRatesResponse, GetInstancesReportRequest, GetInstancesReportResponse, GetInstancesReportsCountRequest, GetInvoicesCountRequest, GetInvoicesCountResponse, GetInvoiceSettingsTemplateExampleRequest, GetInvoiceSettingsTemplateExampleResponse, GetInvoicesRequest, GetRecordsReportsCountRequest, GetRecordsReportsRequest, GetRecordsReportsResponse, GetReportsCountResponse, GetTransactionsCountRequest, GetTransactionsCountResponse, GetTransactionsRequest, Invoice, Invoices, ListPlansInstancesRequest, ListPlansInstancesResponse, ListRequest, ListResponse, PayRequest, PayResponse, Plan, PlansUniqueRequest, PlansUniqueResponse, Records, ReprocessTransactionsRequest, Transaction, Transactions, UpdateExchangeRateRequest, UpdateExchangeRateResponse, UpdateInvoiceRequest, UpdateInvoiceStatusRequest, UpdateTransactionResponse } from "./billing_pb.js";
+import { ConversionRequest, ConversionResponse, CreateCurrencyRequest, CreateCurrencyResponse, CreateExchangeRateRequest, CreateExchangeRateResponse, CreateInvoiceRequest, CreateTopUpBalanceInvoiceRequest, DeleteExchangeRateRequest, DeleteExchangeRateResponse, GetActiveRequest, GetCurrenciesRequest, GetCurrenciesResponse, GetExchangeRateRequest, GetExchangeRateResponse, GetExchangeRatesRequest, GetExchangeRatesResponse, GetInstancesReportRequest, GetInstancesReportResponse, GetInstancesReportsCountRequest, GetInvoicesCountRequest, GetInvoicesCountResponse, GetInvoiceSettingsTemplateExampleRequest, GetInvoiceSettingsTemplateExampleResponse, GetInvoicesRequest, GetRecordsReportsCountRequest, GetRecordsReportsRequest, GetRecordsReportsResponse, GetReportsCountResponse, GetTransactionsCountRequest, GetTransactionsCountResponse, GetTransactionsRequest, Invoice, Invoices, ListPlansInstancesRequest, ListPlansInstancesResponse, ListRequest, ListResponse, PayRequest, PayResponse, Plan, PlansUniqueRequest, PlansUniqueResponse, Records, ReprocessTransactionsRequest, Transaction, Transactions, UpdateExchangeRateRequest, UpdateExchangeRateResponse, UpdateInvoiceRequest, UpdateInvoiceStatusRequest, UpdateTransactionResponse } from "./billing_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 import { Addon, BulkAddons, CountAddonsRequest, CountAddonsResponse, ListAddonsRequest, ListAddonsResponse } from "./addons/addons_pb.js";
 import { CountDescriptionsRequest, CountDescriptionsResponse, Description, ListDescriptionsRequest, ListDescriptionsResponse } from "./descriptions/descriptions_pb.js";
-import { CountPromocodesRequest, CountPromocodesResponse, GetPromocodeByCodeRequest, ListPromocodesRequest, ListPromocodesResponse, Promocode } from "./promocodes/promocodes_pb.js";
+import { ApplyPromocodeRequest, ApplyPromocodeResponse, CountPromocodesRequest, CountPromocodesResponse, GetPromocodeByCodeRequest, ListPromocodesRequest, ListPromocodesResponse, Promocode } from "./promocodes/promocodes_pb.js";
 
 /**
  * @generated from service nocloud.billing.RecordsService
@@ -279,6 +279,15 @@ export declare const BillingService: {
     readonly updateInvoiceStatus: {
       readonly name: "UpdateInvoiceStatus",
       readonly I: typeof UpdateInvoiceStatusRequest,
+      readonly O: typeof Invoice,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.BillingService.CreateTopUpBalanceInvoice
+     */
+    readonly createTopUpBalanceInvoice: {
+      readonly name: "CreateTopUpBalanceInvoice",
+      readonly I: typeof CreateTopUpBalanceInvoiceRequest,
       readonly O: typeof Invoice,
       readonly kind: MethodKind.Unary,
     },
@@ -586,6 +595,15 @@ export declare const PromocodesService: {
       readonly name: "Delete",
       readonly I: typeof Promocode,
       readonly O: typeof Promocode,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.PromocodesService.Apply
+     */
+    readonly apply: {
+      readonly name: "Apply",
+      readonly I: typeof ApplyPromocodeRequest,
+      readonly O: typeof ApplyPromocodeResponse,
       readonly kind: MethodKind.Unary,
     },
   }

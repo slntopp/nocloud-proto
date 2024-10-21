@@ -2105,6 +2105,38 @@
         ]
       }
     },
+    "/billing/invoices/topup": {
+      "put": {
+        "operationId": "BillingService_CreateTopUpBalanceInvoice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingInvoice"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingCreateTopUpBalanceInvoiceRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
     "/billing/invoices/{invoiceId}/pay": {
       "post": {
         "operationId": "BillingService_Pay",
@@ -2911,6 +2943,38 @@
         ]
       }
     },
+    "/billing/promocodes/apply": {
+      "post": {
+        "operationId": "PromocodesService_Apply",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/promocodesApplyPromocodeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/promocodesApplyPromocodeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PromocodesService"
+        ]
+      }
+    },
     "/billing/promocodes/{code}/by_code": {
       "get": {
         "operationId": "PromocodesService_GetByCode",
@@ -2986,20 +3050,30 @@
           },
           {
             "name": "status",
-            "description": " - SUSPENDED: Temporary inactive\n - ALL_TAKEN: All available promocodes are taken\n - USED: Already used by this user maximum times",
+            "description": " - SUSPENDED: Temporary inactive",
             "in": "query",
             "required": false,
             "type": "string",
             "enum": [
-              "UNKNOWN",
               "ACTIVE",
               "SUSPENDED",
-              "DELETED",
+              "DELETED"
+            ],
+            "default": "ACTIVE"
+          },
+          {
+            "name": "state",
+            "description": " - ALL_TAKEN: All available promocodes are taken\n - USED: Already used by this user maximum times",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "USABLE",
               "EXPIRED",
               "ALL_TAKEN",
               "USED"
             ],
-            "default": "UNKNOWN"
+            "default": "USABLE"
           },
           {
             "name": "dueDate",
@@ -3024,17 +3098,6 @@
             "required": false,
             "type": "string",
             "format": "int64"
-          },
-          {
-            "name": "linkedInstances",
-            "description": "Instances affected by this promocode",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
           },
           {
             "name": "meta",
@@ -3098,20 +3161,30 @@
           },
           {
             "name": "status",
-            "description": " - SUSPENDED: Temporary inactive\n - ALL_TAKEN: All available promocodes are taken\n - USED: Already used by this user maximum times",
+            "description": " - SUSPENDED: Temporary inactive",
             "in": "query",
             "required": false,
             "type": "string",
             "enum": [
-              "UNKNOWN",
               "ACTIVE",
               "SUSPENDED",
-              "DELETED",
+              "DELETED"
+            ],
+            "default": "ACTIVE"
+          },
+          {
+            "name": "state",
+            "description": " - ALL_TAKEN: All available promocodes are taken\n - USED: Already used by this user maximum times",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "USABLE",
               "EXPIRED",
               "ALL_TAKEN",
               "USED"
             ],
-            "default": "UNKNOWN"
+            "default": "USABLE"
           },
           {
             "name": "dueDate",
@@ -3136,17 +3209,6 @@
             "required": false,
             "type": "string",
             "format": "int64"
-          },
-          {
-            "name": "linkedInstances",
-            "description": "Instances affected by this promocode",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
           },
           {
             "name": "meta",
@@ -7339,6 +7401,15 @@
         }
       }
     },
+    "billingCreateTopUpBalanceInvoiceRequest": {
+      "type": "object",
+      "properties": {
+        "sum": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
     "billingCurrency": {
       "type": "object",
       "properties": {
@@ -7926,6 +7997,9 @@
         "status": {
           "$ref": "#/definitions/promocodesPromocodeStatus"
         },
+        "state": {
+          "$ref": "#/definitions/promocodesPromocodeState"
+        },
         "dueDate": {
           "type": "string",
           "format": "int64",
@@ -7941,13 +8015,6 @@
           "format": "int64",
           "title": "how many times this promocode can be used per one user. 0 - unlimited"
         },
-        "linkedInstances": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "title": "Instances affected by this promocode"
-        },
         "meta": {
           "type": "object",
           "additionalProperties": {}
@@ -7962,6 +8029,14 @@
             "type": "object",
             "$ref": "#/definitions/promocodesPromoItem"
           }
+        },
+        "uses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/promocodesEntryResource"
+          },
+          "title": "Read-only field containing all promocode uses"
         }
       }
     },
@@ -9456,6 +9531,25 @@
       },
       "title": "addon must be not empty string"
     },
+    "promocodesApplyPromocodeRequest": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "resource": {
+          "type": "string"
+        }
+      }
+    },
+    "promocodesApplyPromocodeResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        }
+      }
+    },
     "promocodesBillingPlanPromo": {
       "type": "object",
       "properties": {
@@ -9480,6 +9574,22 @@
         "total": {
           "type": "string",
           "format": "int64"
+        }
+      }
+    },
+    "promocodesEntryResource": {
+      "type": "object",
+      "properties": {
+        "invoice": {
+          "type": "string"
+        },
+        "instance": {
+          "type": "string"
+        },
+        "exec": {
+          "type": "string",
+          "format": "int64",
+          "title": "Time of promocode usage"
         }
       }
     },
@@ -9508,7 +9618,7 @@
           "$ref": "#/definitions/promocodesAddonPromo"
         }
       },
-      "title": "At least 1 optional item must be specified"
+      "title": "At least 1 optional item must be specified\r\nIf nothing specified, then applied to EVERYTHING"
     },
     "promocodesPromoSchema": {
       "type": "object",
@@ -9548,6 +9658,9 @@
         "status": {
           "$ref": "#/definitions/promocodesPromocodeStatus"
         },
+        "state": {
+          "$ref": "#/definitions/promocodesPromocodeState"
+        },
         "dueDate": {
           "type": "string",
           "format": "int64",
@@ -9563,13 +9676,6 @@
           "format": "int64",
           "title": "how many times this promocode can be used per one user. 0 - unlimited"
         },
-        "linkedInstances": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "title": "Instances affected by this promocode"
-        },
         "meta": {
           "type": "object",
           "additionalProperties": {}
@@ -9584,22 +9690,39 @@
             "type": "object",
             "$ref": "#/definitions/promocodesPromoItem"
           }
+        },
+        "uses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/promocodesEntryResource"
+          },
+          "title": "Read-only field containing all promocode uses"
         }
       }
     },
-    "promocodesPromocodeStatus": {
+    "promocodesPromocodeState": {
       "type": "string",
       "enum": [
-        "UNKNOWN",
-        "ACTIVE",
-        "SUSPENDED",
-        "DELETED",
+        "USABLE",
         "EXPIRED",
         "ALL_TAKEN",
         "USED"
       ],
-      "default": "UNKNOWN",
-      "title": "- SUSPENDED: Temporary inactive\n - ALL_TAKEN: All available promocodes are taken\n - USED: Already used by this user maximum times"
+      "default": "USABLE",
+      "description": "- ALL_TAKEN: All available promocodes are taken\n - USED: Already used by this user maximum times",
+      "title": "Read-only state for visualization"
+    },
+    "promocodesPromocodeStatus": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "SUSPENDED",
+        "DELETED"
+      ],
+      "default": "ACTIVE",
+      "description": "- SUSPENDED: Temporary inactive",
+      "title": "User defined status"
     },
     "protobufAny": {
       "type": "object",

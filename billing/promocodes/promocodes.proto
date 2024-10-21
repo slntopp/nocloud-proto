@@ -4,14 +4,19 @@ package nocloud.billing.promocodes;
 
 import "google/protobuf/struct.proto";
 
+// User defined status
 enum PromocodeStatus {
-  UNKNOWN = 0;
-  ACTIVE = 1;
-  SUSPENDED = 2;    // Temporary inactive
-  DELETED = 3;
-  EXPIRED = 4;
-  ALL_TAKEN = 5;    // All available promocodes are taken
-  USED = 6;         // Already used by this user maximum times
+  ACTIVE = 0;
+  SUSPENDED = 1;    // Temporary inactive
+  DELETED = 2;
+}
+
+// Read-only state for visualization
+enum PromocodeState {
+  USABLE = 0;
+  EXPIRED = 1;
+  ALL_TAKEN = 2;    // All available promocodes are taken
+  USED = 3;         // Already used by this user maximum times
 }
 
 message Promocode {
@@ -20,19 +25,21 @@ message Promocode {
   string description = 3;
   string code = 4;         // Unique code, which user must enter as promocode
   PromocodeStatus status = 5;
-  int64 due_date = 6;      // 0 - unlimited.
-  int64 limit = 7;         // how many times this promocode can be used globally. 0 - unlimited
-  int64 uses_per_user = 8; // how many times this promocode can be used per one user. 0 - unlimited
-
-  repeated string linked_instances = 9; // Instances affected by this promocode
+  PromocodeState state = 6;
+  int64 due_date = 7;      // 0 - unlimited.
+  int64 limit = 8;         // how many times this promocode can be used globally. 0 - unlimited
+  int64 uses_per_user = 9; // how many times this promocode can be used per one user. 0 - unlimited
 
   map<string, google.protobuf.Value> meta = 10;
   int64 created = 11;
 
   repeated PromoItem promo_items = 12;
+
+  repeated EntryResource uses = 13; // Read-only field containing all promocode uses
 }
 
 // At least 1 optional item must be specified
+// If nothing specified, then applied to EVERYTHING
 message PromoItem {
     PromoSchema schema = 1;
     optional BillingPlanPromo plan_promo = 2;
@@ -61,6 +68,12 @@ message AddonPromo{
     string addon = 1;
 }
 
+message EntryResource{
+   optional string invoice = 1;
+   optional string instance = 2;
+   int64 exec = 3; // Time of promocode usage
+}
+
 // API
 message ListPromocodesRequest {
   optional uint64 page = 1;
@@ -72,6 +85,10 @@ message CountPromocodesRequest {}
 message GetPromocodeByCodeRequest {
   string code = 1;
 }
+message ApplyPromocodeRequest{
+  string code = 1;
+  string resource = 2;
+}
 
 message CountPromocodesResponse {
   int64 total = 1;
@@ -79,4 +96,7 @@ message CountPromocodesResponse {
 
 message ListPromocodesResponse {
   repeated Promocode promocodes = 1;
+}
+message ApplyPromocodeResponse{
+  bool success = 1;
 }

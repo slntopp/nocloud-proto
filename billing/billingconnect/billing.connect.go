@@ -138,6 +138,9 @@ const (
 	// BillingServiceUpdateInvoiceStatusProcedure is the fully-qualified name of the BillingService's
 	// UpdateInvoiceStatus RPC.
 	BillingServiceUpdateInvoiceStatusProcedure = "/nocloud.billing.BillingService/UpdateInvoiceStatus"
+	// BillingServiceCreateTopUpBalanceInvoiceProcedure is the fully-qualified name of the
+	// BillingService's CreateTopUpBalanceInvoice RPC.
+	BillingServiceCreateTopUpBalanceInvoiceProcedure = "/nocloud.billing.BillingService/CreateTopUpBalanceInvoice"
 	// BillingServiceGetInvoiceSettingsTemplateExampleProcedure is the fully-qualified name of the
 	// BillingService's GetInvoiceSettingsTemplateExample RPC.
 	BillingServiceGetInvoiceSettingsTemplateExampleProcedure = "/nocloud.billing.BillingService/GetInvoiceSettingsTemplateExample"
@@ -217,6 +220,8 @@ const (
 	// PromocodesServiceDeleteProcedure is the fully-qualified name of the PromocodesService's Delete
 	// RPC.
 	PromocodesServiceDeleteProcedure = "/nocloud.billing.PromocodesService/Delete"
+	// PromocodesServiceApplyProcedure is the fully-qualified name of the PromocodesService's Apply RPC.
+	PromocodesServiceApplyProcedure = "/nocloud.billing.PromocodesService/Apply"
 )
 
 // These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
@@ -250,6 +255,7 @@ var (
 	billingServiceUpdateInvoiceMethodDescriptor                     = billingServiceServiceDescriptor.Methods().ByName("UpdateInvoice")
 	billingServicePayMethodDescriptor                               = billingServiceServiceDescriptor.Methods().ByName("Pay")
 	billingServiceUpdateInvoiceStatusMethodDescriptor               = billingServiceServiceDescriptor.Methods().ByName("UpdateInvoiceStatus")
+	billingServiceCreateTopUpBalanceInvoiceMethodDescriptor         = billingServiceServiceDescriptor.Methods().ByName("CreateTopUpBalanceInvoice")
 	billingServiceGetInvoiceSettingsTemplateExampleMethodDescriptor = billingServiceServiceDescriptor.Methods().ByName("GetInvoiceSettingsTemplateExample")
 	currencyServiceServiceDescriptor                                = billing.File_billing_billing_proto.Services().ByName("CurrencyService")
 	currencyServiceCreateCurrencyMethodDescriptor                   = currencyServiceServiceDescriptor.Methods().ByName("CreateCurrency")
@@ -284,6 +290,7 @@ var (
 	promocodesServiceListMethodDescriptor                           = promocodesServiceServiceDescriptor.Methods().ByName("List")
 	promocodesServiceCountMethodDescriptor                          = promocodesServiceServiceDescriptor.Methods().ByName("Count")
 	promocodesServiceDeleteMethodDescriptor                         = promocodesServiceServiceDescriptor.Methods().ByName("Delete")
+	promocodesServiceApplyMethodDescriptor                          = promocodesServiceServiceDescriptor.Methods().ByName("Apply")
 )
 
 // RecordsServiceClient is a client for the nocloud.billing.RecordsService service.
@@ -432,6 +439,7 @@ type BillingServiceClient interface {
 	UpdateInvoice(context.Context, *connect.Request[billing.UpdateInvoiceRequest]) (*connect.Response[billing.Invoice], error)
 	Pay(context.Context, *connect.Request[billing.PayRequest]) (*connect.Response[billing.PayResponse], error)
 	UpdateInvoiceStatus(context.Context, *connect.Request[billing.UpdateInvoiceStatusRequest]) (*connect.Response[billing.Invoice], error)
+	CreateTopUpBalanceInvoice(context.Context, *connect.Request[billing.CreateTopUpBalanceInvoiceRequest]) (*connect.Response[billing.Invoice], error)
 	GetInvoiceSettingsTemplateExample(context.Context, *connect.Request[billing.GetInvoiceSettingsTemplateExampleRequest]) (*connect.Response[billing.GetInvoiceSettingsTemplateExampleResponse], error)
 }
 
@@ -589,6 +597,12 @@ func NewBillingServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(billingServiceUpdateInvoiceStatusMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		createTopUpBalanceInvoice: connect.NewClient[billing.CreateTopUpBalanceInvoiceRequest, billing.Invoice](
+			httpClient,
+			baseURL+BillingServiceCreateTopUpBalanceInvoiceProcedure,
+			connect.WithSchema(billingServiceCreateTopUpBalanceInvoiceMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 		getInvoiceSettingsTemplateExample: connect.NewClient[billing.GetInvoiceSettingsTemplateExampleRequest, billing.GetInvoiceSettingsTemplateExampleResponse](
 			httpClient,
 			baseURL+BillingServiceGetInvoiceSettingsTemplateExampleProcedure,
@@ -624,6 +638,7 @@ type billingServiceClient struct {
 	updateInvoice                     *connect.Client[billing.UpdateInvoiceRequest, billing.Invoice]
 	pay                               *connect.Client[billing.PayRequest, billing.PayResponse]
 	updateInvoiceStatus               *connect.Client[billing.UpdateInvoiceStatusRequest, billing.Invoice]
+	createTopUpBalanceInvoice         *connect.Client[billing.CreateTopUpBalanceInvoiceRequest, billing.Invoice]
 	getInvoiceSettingsTemplateExample *connect.Client[billing.GetInvoiceSettingsTemplateExampleRequest, billing.GetInvoiceSettingsTemplateExampleResponse]
 }
 
@@ -747,6 +762,11 @@ func (c *billingServiceClient) UpdateInvoiceStatus(ctx context.Context, req *con
 	return c.updateInvoiceStatus.CallUnary(ctx, req)
 }
 
+// CreateTopUpBalanceInvoice calls nocloud.billing.BillingService.CreateTopUpBalanceInvoice.
+func (c *billingServiceClient) CreateTopUpBalanceInvoice(ctx context.Context, req *connect.Request[billing.CreateTopUpBalanceInvoiceRequest]) (*connect.Response[billing.Invoice], error) {
+	return c.createTopUpBalanceInvoice.CallUnary(ctx, req)
+}
+
 // GetInvoiceSettingsTemplateExample calls
 // nocloud.billing.BillingService.GetInvoiceSettingsTemplateExample.
 func (c *billingServiceClient) GetInvoiceSettingsTemplateExample(ctx context.Context, req *connect.Request[billing.GetInvoiceSettingsTemplateExampleRequest]) (*connect.Response[billing.GetInvoiceSettingsTemplateExampleResponse], error) {
@@ -779,6 +799,7 @@ type BillingServiceHandler interface {
 	UpdateInvoice(context.Context, *connect.Request[billing.UpdateInvoiceRequest]) (*connect.Response[billing.Invoice], error)
 	Pay(context.Context, *connect.Request[billing.PayRequest]) (*connect.Response[billing.PayResponse], error)
 	UpdateInvoiceStatus(context.Context, *connect.Request[billing.UpdateInvoiceStatusRequest]) (*connect.Response[billing.Invoice], error)
+	CreateTopUpBalanceInvoice(context.Context, *connect.Request[billing.CreateTopUpBalanceInvoiceRequest]) (*connect.Response[billing.Invoice], error)
 	GetInvoiceSettingsTemplateExample(context.Context, *connect.Request[billing.GetInvoiceSettingsTemplateExampleRequest]) (*connect.Response[billing.GetInvoiceSettingsTemplateExampleResponse], error)
 }
 
@@ -932,6 +953,12 @@ func NewBillingServiceHandler(svc BillingServiceHandler, opts ...connect.Handler
 		connect.WithSchema(billingServiceUpdateInvoiceStatusMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	billingServiceCreateTopUpBalanceInvoiceHandler := connect.NewUnaryHandler(
+		BillingServiceCreateTopUpBalanceInvoiceProcedure,
+		svc.CreateTopUpBalanceInvoice,
+		connect.WithSchema(billingServiceCreateTopUpBalanceInvoiceMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	billingServiceGetInvoiceSettingsTemplateExampleHandler := connect.NewUnaryHandler(
 		BillingServiceGetInvoiceSettingsTemplateExampleProcedure,
 		svc.GetInvoiceSettingsTemplateExample,
@@ -988,6 +1015,8 @@ func NewBillingServiceHandler(svc BillingServiceHandler, opts ...connect.Handler
 			billingServicePayHandler.ServeHTTP(w, r)
 		case BillingServiceUpdateInvoiceStatusProcedure:
 			billingServiceUpdateInvoiceStatusHandler.ServeHTTP(w, r)
+		case BillingServiceCreateTopUpBalanceInvoiceProcedure:
+			billingServiceCreateTopUpBalanceInvoiceHandler.ServeHTTP(w, r)
 		case BillingServiceGetInvoiceSettingsTemplateExampleProcedure:
 			billingServiceGetInvoiceSettingsTemplateExampleHandler.ServeHTTP(w, r)
 		default:
@@ -1093,6 +1122,10 @@ func (UnimplementedBillingServiceHandler) Pay(context.Context, *connect.Request[
 
 func (UnimplementedBillingServiceHandler) UpdateInvoiceStatus(context.Context, *connect.Request[billing.UpdateInvoiceStatusRequest]) (*connect.Response[billing.Invoice], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.BillingService.UpdateInvoiceStatus is not implemented"))
+}
+
+func (UnimplementedBillingServiceHandler) CreateTopUpBalanceInvoice(context.Context, *connect.Request[billing.CreateTopUpBalanceInvoiceRequest]) (*connect.Response[billing.Invoice], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.BillingService.CreateTopUpBalanceInvoice is not implemented"))
 }
 
 func (UnimplementedBillingServiceHandler) GetInvoiceSettingsTemplateExample(context.Context, *connect.Request[billing.GetInvoiceSettingsTemplateExampleRequest]) (*connect.Response[billing.GetInvoiceSettingsTemplateExampleResponse], error) {
@@ -1807,6 +1840,7 @@ type PromocodesServiceClient interface {
 	List(context.Context, *connect.Request[promocodes.ListPromocodesRequest]) (*connect.Response[promocodes.ListPromocodesResponse], error)
 	Count(context.Context, *connect.Request[promocodes.CountPromocodesRequest]) (*connect.Response[promocodes.CountPromocodesResponse], error)
 	Delete(context.Context, *connect.Request[promocodes.Promocode]) (*connect.Response[promocodes.Promocode], error)
+	Apply(context.Context, *connect.Request[promocodes.ApplyPromocodeRequest]) (*connect.Response[promocodes.ApplyPromocodeResponse], error)
 }
 
 // NewPromocodesServiceClient constructs a client for the nocloud.billing.PromocodesService service.
@@ -1861,6 +1895,12 @@ func NewPromocodesServiceClient(httpClient connect.HTTPClient, baseURL string, o
 			connect.WithSchema(promocodesServiceDeleteMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		apply: connect.NewClient[promocodes.ApplyPromocodeRequest, promocodes.ApplyPromocodeResponse](
+			httpClient,
+			baseURL+PromocodesServiceApplyProcedure,
+			connect.WithSchema(promocodesServiceApplyMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -1873,6 +1913,7 @@ type promocodesServiceClient struct {
 	list      *connect.Client[promocodes.ListPromocodesRequest, promocodes.ListPromocodesResponse]
 	count     *connect.Client[promocodes.CountPromocodesRequest, promocodes.CountPromocodesResponse]
 	delete    *connect.Client[promocodes.Promocode, promocodes.Promocode]
+	apply     *connect.Client[promocodes.ApplyPromocodeRequest, promocodes.ApplyPromocodeResponse]
 }
 
 // Create calls nocloud.billing.PromocodesService.Create.
@@ -1910,6 +1951,11 @@ func (c *promocodesServiceClient) Delete(ctx context.Context, req *connect.Reque
 	return c.delete.CallUnary(ctx, req)
 }
 
+// Apply calls nocloud.billing.PromocodesService.Apply.
+func (c *promocodesServiceClient) Apply(ctx context.Context, req *connect.Request[promocodes.ApplyPromocodeRequest]) (*connect.Response[promocodes.ApplyPromocodeResponse], error) {
+	return c.apply.CallUnary(ctx, req)
+}
+
 // PromocodesServiceHandler is an implementation of the nocloud.billing.PromocodesService service.
 type PromocodesServiceHandler interface {
 	Create(context.Context, *connect.Request[promocodes.Promocode]) (*connect.Response[promocodes.Promocode], error)
@@ -1919,6 +1965,7 @@ type PromocodesServiceHandler interface {
 	List(context.Context, *connect.Request[promocodes.ListPromocodesRequest]) (*connect.Response[promocodes.ListPromocodesResponse], error)
 	Count(context.Context, *connect.Request[promocodes.CountPromocodesRequest]) (*connect.Response[promocodes.CountPromocodesResponse], error)
 	Delete(context.Context, *connect.Request[promocodes.Promocode]) (*connect.Response[promocodes.Promocode], error)
+	Apply(context.Context, *connect.Request[promocodes.ApplyPromocodeRequest]) (*connect.Response[promocodes.ApplyPromocodeResponse], error)
 }
 
 // NewPromocodesServiceHandler builds an HTTP handler from the service implementation. It returns
@@ -1969,6 +2016,12 @@ func NewPromocodesServiceHandler(svc PromocodesServiceHandler, opts ...connect.H
 		connect.WithSchema(promocodesServiceDeleteMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	promocodesServiceApplyHandler := connect.NewUnaryHandler(
+		PromocodesServiceApplyProcedure,
+		svc.Apply,
+		connect.WithSchema(promocodesServiceApplyMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/nocloud.billing.PromocodesService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case PromocodesServiceCreateProcedure:
@@ -1985,6 +2038,8 @@ func NewPromocodesServiceHandler(svc PromocodesServiceHandler, opts ...connect.H
 			promocodesServiceCountHandler.ServeHTTP(w, r)
 		case PromocodesServiceDeleteProcedure:
 			promocodesServiceDeleteHandler.ServeHTTP(w, r)
+		case PromocodesServiceApplyProcedure:
+			promocodesServiceApplyHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -2020,4 +2075,8 @@ func (UnimplementedPromocodesServiceHandler) Count(context.Context, *connect.Req
 
 func (UnimplementedPromocodesServiceHandler) Delete(context.Context, *connect.Request[promocodes.Promocode]) (*connect.Response[promocodes.Promocode], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.PromocodesService.Delete is not implemented"))
+}
+
+func (UnimplementedPromocodesServiceHandler) Apply(context.Context, *connect.Request[promocodes.ApplyPromocodeRequest]) (*connect.Response[promocodes.ApplyPromocodeResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.PromocodesService.Apply is not implemented"))
 }

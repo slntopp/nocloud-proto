@@ -18,11 +18,11 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { ConversionRequest, ConversionResponse, CreateCurrencyRequest, CreateCurrencyResponse, CreateExchangeRateRequest, CreateExchangeRateResponse, CreateInvoiceRequest, DeleteExchangeRateRequest, DeleteExchangeRateResponse, GetActiveRequest, GetCurrenciesRequest, GetCurrenciesResponse, GetExchangeRateRequest, GetExchangeRateResponse, GetExchangeRatesRequest, GetExchangeRatesResponse, GetInstancesReportRequest, GetInstancesReportResponse, GetInstancesReportsCountRequest, GetInvoicesCountRequest, GetInvoicesCountResponse, GetInvoiceSettingsTemplateExampleRequest, GetInvoiceSettingsTemplateExampleResponse, GetInvoicesRequest, GetRecordsReportsCountRequest, GetRecordsReportsRequest, GetRecordsReportsResponse, GetReportsCountResponse, GetTransactionsCountRequest, GetTransactionsCountResponse, GetTransactionsRequest, Invoice, Invoices, ListPlansInstancesRequest, ListPlansInstancesResponse, ListRequest, ListResponse, PayRequest, PayResponse, Plan, PlansUniqueRequest, PlansUniqueResponse, Records, ReprocessTransactionsRequest, Transaction, Transactions, UpdateExchangeRateRequest, UpdateExchangeRateResponse, UpdateInvoiceRequest, UpdateInvoiceStatusRequest, UpdateTransactionResponse } from "./billing_pb.js";
+import { ConversionRequest, ConversionResponse, CreateCurrencyRequest, CreateCurrencyResponse, CreateExchangeRateRequest, CreateExchangeRateResponse, CreateInvoiceRequest, CreateTopUpBalanceInvoiceRequest, DeleteExchangeRateRequest, DeleteExchangeRateResponse, GetActiveRequest, GetCurrenciesRequest, GetCurrenciesResponse, GetExchangeRateRequest, GetExchangeRateResponse, GetExchangeRatesRequest, GetExchangeRatesResponse, GetInstancesReportRequest, GetInstancesReportResponse, GetInstancesReportsCountRequest, GetInvoicesCountRequest, GetInvoicesCountResponse, GetInvoiceSettingsTemplateExampleRequest, GetInvoiceSettingsTemplateExampleResponse, GetInvoicesRequest, GetRecordsReportsCountRequest, GetRecordsReportsRequest, GetRecordsReportsResponse, GetReportsCountResponse, GetTransactionsCountRequest, GetTransactionsCountResponse, GetTransactionsRequest, Invoice, Invoices, ListPlansInstancesRequest, ListPlansInstancesResponse, ListRequest, ListResponse, PayRequest, PayResponse, Plan, PlansUniqueRequest, PlansUniqueResponse, Records, ReprocessTransactionsRequest, Transaction, Transactions, UpdateExchangeRateRequest, UpdateExchangeRateResponse, UpdateInvoiceRequest, UpdateInvoiceStatusRequest, UpdateTransactionResponse } from "./billing_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 import { Addon, BulkAddons, CountAddonsRequest, CountAddonsResponse, ListAddonsRequest, ListAddonsResponse } from "./addons/addons_pb.js";
 import { CountDescriptionsRequest, CountDescriptionsResponse, Description, ListDescriptionsRequest, ListDescriptionsResponse } from "./descriptions/descriptions_pb.js";
-import { CountPromocodesRequest, CountPromocodesResponse, GetPromocodeByCodeRequest, ListPromocodesRequest, ListPromocodesResponse, Promocode } from "./promocodes/promocodes_pb.js";
+import { ApplyPromocodeRequest, ApplyPromocodeResponse, CountPromocodesRequest, CountPromocodesResponse, GetPromocodeByCodeRequest, ListPromocodesRequest, ListPromocodesResponse, Promocode } from "./promocodes/promocodes_pb.js";
 
 /**
  * @generated from service nocloud.billing.RecordsService
@@ -279,6 +279,15 @@ export const BillingService = {
     updateInvoiceStatus: {
       name: "UpdateInvoiceStatus",
       I: UpdateInvoiceStatusRequest,
+      O: Invoice,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.BillingService.CreateTopUpBalanceInvoice
+     */
+    createTopUpBalanceInvoice: {
+      name: "CreateTopUpBalanceInvoice",
+      I: CreateTopUpBalanceInvoiceRequest,
       O: Invoice,
       kind: MethodKind.Unary,
     },
@@ -586,6 +595,15 @@ export const PromocodesService = {
       name: "Delete",
       I: Promocode,
       O: Promocode,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.PromocodesService.Apply
+     */
+    apply: {
+      name: "Apply",
+      I: ApplyPromocodeRequest,
+      O: ApplyPromocodeResponse,
       kind: MethodKind.Unary,
     },
   }

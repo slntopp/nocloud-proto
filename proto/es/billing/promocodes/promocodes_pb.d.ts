@@ -7,49 +7,58 @@ import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialM
 import { Message, proto3 } from "@bufbuild/protobuf";
 
 /**
+ * User defined status
+ *
  * @generated from enum nocloud.billing.promocodes.PromocodeStatus
  */
 export declare enum PromocodeStatus {
   /**
-   * @generated from enum value: UNKNOWN = 0;
+   * @generated from enum value: ACTIVE = 0;
    */
-  UNKNOWN = 0,
-
-  /**
-   * @generated from enum value: ACTIVE = 1;
-   */
-  ACTIVE = 1,
+  ACTIVE = 0,
 
   /**
    * Temporary inactive
    *
-   * @generated from enum value: SUSPENDED = 2;
+   * @generated from enum value: SUSPENDED = 1;
    */
-  SUSPENDED = 2,
+  SUSPENDED = 1,
 
   /**
-   * @generated from enum value: DELETED = 3;
+   * @generated from enum value: DELETED = 2;
    */
-  DELETED = 3,
+  DELETED = 2,
+}
+
+/**
+ * Read-only state for visualization
+ *
+ * @generated from enum nocloud.billing.promocodes.PromocodeState
+ */
+export declare enum PromocodeState {
+  /**
+   * @generated from enum value: USABLE = 0;
+   */
+  USABLE = 0,
 
   /**
-   * @generated from enum value: EXPIRED = 4;
+   * @generated from enum value: EXPIRED = 1;
    */
-  EXPIRED = 4,
+  EXPIRED = 1,
 
   /**
    * All available promocodes are taken
    *
-   * @generated from enum value: ALL_TAKEN = 5;
+   * @generated from enum value: ALL_TAKEN = 2;
    */
-  ALL_TAKEN = 5,
+  ALL_TAKEN = 2,
 
   /**
    * Already used by this user maximum times
    *
-   * @generated from enum value: USED = 6;
+   * @generated from enum value: USED = 3;
    */
-  USED = 6,
+  USED = 3,
 }
 
 /**
@@ -84,32 +93,30 @@ export declare class Promocode extends Message<Promocode> {
   status: PromocodeStatus;
 
   /**
+   * @generated from field: nocloud.billing.promocodes.PromocodeState state = 6;
+   */
+  state: PromocodeState;
+
+  /**
    * 0 - unlimited.
    *
-   * @generated from field: int64 due_date = 6;
+   * @generated from field: int64 due_date = 7;
    */
   dueDate: bigint;
 
   /**
    * how many times this promocode can be used globally. 0 - unlimited
    *
-   * @generated from field: int64 limit = 7;
+   * @generated from field: int64 limit = 8;
    */
   limit: bigint;
 
   /**
    * how many times this promocode can be used per one user. 0 - unlimited
    *
-   * @generated from field: int64 uses_per_user = 8;
+   * @generated from field: int64 uses_per_user = 9;
    */
   usesPerUser: bigint;
-
-  /**
-   * Instances affected by this promocode
-   *
-   * @generated from field: repeated string linked_instances = 9;
-   */
-  linkedInstances: string[];
 
   /**
    * @generated from field: map<string, google.protobuf.Value> meta = 10;
@@ -125,6 +132,13 @@ export declare class Promocode extends Message<Promocode> {
    * @generated from field: repeated nocloud.billing.promocodes.PromoItem promo_items = 12;
    */
   promoItems: PromoItem[];
+
+  /**
+   * Read-only field containing all promocode uses
+   *
+   * @generated from field: repeated nocloud.billing.promocodes.EntryResource uses = 13;
+   */
+  uses: EntryResource[];
 
   constructor(data?: PartialMessage<Promocode>);
 
@@ -143,6 +157,7 @@ export declare class Promocode extends Message<Promocode> {
 
 /**
  * At least 1 optional item must be specified
+ * If nothing specified, then applied to EVERYTHING
  *
  * @generated from message nocloud.billing.promocodes.PromoItem
  */
@@ -285,6 +300,42 @@ export declare class AddonPromo extends Message<AddonPromo> {
 }
 
 /**
+ * @generated from message nocloud.billing.promocodes.EntryResource
+ */
+export declare class EntryResource extends Message<EntryResource> {
+  /**
+   * @generated from field: optional string invoice = 1;
+   */
+  invoice?: string;
+
+  /**
+   * @generated from field: optional string instance = 2;
+   */
+  instance?: string;
+
+  /**
+   * Time of promocode usage
+   *
+   * @generated from field: int64 exec = 3;
+   */
+  exec: bigint;
+
+  constructor(data?: PartialMessage<EntryResource>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.promocodes.EntryResource";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EntryResource;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): EntryResource;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EntryResource;
+
+  static equals(a: EntryResource | PlainMessage<EntryResource> | undefined, b: EntryResource | PlainMessage<EntryResource> | undefined): boolean;
+}
+
+/**
  * API
  *
  * @generated from message nocloud.billing.promocodes.ListPromocodesRequest
@@ -369,6 +420,35 @@ export declare class GetPromocodeByCodeRequest extends Message<GetPromocodeByCod
 }
 
 /**
+ * @generated from message nocloud.billing.promocodes.ApplyPromocodeRequest
+ */
+export declare class ApplyPromocodeRequest extends Message<ApplyPromocodeRequest> {
+  /**
+   * @generated from field: string code = 1;
+   */
+  code: string;
+
+  /**
+   * @generated from field: string resource = 2;
+   */
+  resource: string;
+
+  constructor(data?: PartialMessage<ApplyPromocodeRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.promocodes.ApplyPromocodeRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ApplyPromocodeRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ApplyPromocodeRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ApplyPromocodeRequest;
+
+  static equals(a: ApplyPromocodeRequest | PlainMessage<ApplyPromocodeRequest> | undefined, b: ApplyPromocodeRequest | PlainMessage<ApplyPromocodeRequest> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.billing.promocodes.CountPromocodesResponse
  */
 export declare class CountPromocodesResponse extends Message<CountPromocodesResponse> {
@@ -414,5 +494,29 @@ export declare class ListPromocodesResponse extends Message<ListPromocodesRespon
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListPromocodesResponse;
 
   static equals(a: ListPromocodesResponse | PlainMessage<ListPromocodesResponse> | undefined, b: ListPromocodesResponse | PlainMessage<ListPromocodesResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.promocodes.ApplyPromocodeResponse
+ */
+export declare class ApplyPromocodeResponse extends Message<ApplyPromocodeResponse> {
+  /**
+   * @generated from field: bool success = 1;
+   */
+  success: boolean;
+
+  constructor(data?: PartialMessage<ApplyPromocodeResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.promocodes.ApplyPromocodeResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ApplyPromocodeResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ApplyPromocodeResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ApplyPromocodeResponse;
+
+  static equals(a: ApplyPromocodeResponse | PlainMessage<ApplyPromocodeResponse> | undefined, b: ApplyPromocodeResponse | PlainMessage<ApplyPromocodeResponse> | undefined): boolean;
 }
 

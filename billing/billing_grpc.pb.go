@@ -239,6 +239,7 @@ const (
 	BillingService_UpdateInvoice_FullMethodName                     = "/nocloud.billing.BillingService/UpdateInvoice"
 	BillingService_Pay_FullMethodName                               = "/nocloud.billing.BillingService/Pay"
 	BillingService_UpdateInvoiceStatus_FullMethodName               = "/nocloud.billing.BillingService/UpdateInvoiceStatus"
+	BillingService_CreateTopUpBalanceInvoice_FullMethodName         = "/nocloud.billing.BillingService/CreateTopUpBalanceInvoice"
 	BillingService_GetInvoiceSettingsTemplateExample_FullMethodName = "/nocloud.billing.BillingService/GetInvoiceSettingsTemplateExample"
 )
 
@@ -270,6 +271,7 @@ type BillingServiceClient interface {
 	UpdateInvoice(ctx context.Context, in *UpdateInvoiceRequest, opts ...grpc.CallOption) (*Invoice, error)
 	Pay(ctx context.Context, in *PayRequest, opts ...grpc.CallOption) (*PayResponse, error)
 	UpdateInvoiceStatus(ctx context.Context, in *UpdateInvoiceStatusRequest, opts ...grpc.CallOption) (*Invoice, error)
+	CreateTopUpBalanceInvoice(ctx context.Context, in *CreateTopUpBalanceInvoiceRequest, opts ...grpc.CallOption) (*Invoice, error)
 	GetInvoiceSettingsTemplateExample(ctx context.Context, in *GetInvoiceSettingsTemplateExampleRequest, opts ...grpc.CallOption) (*GetInvoiceSettingsTemplateExampleResponse, error)
 }
 
@@ -521,6 +523,16 @@ func (c *billingServiceClient) UpdateInvoiceStatus(ctx context.Context, in *Upda
 	return out, nil
 }
 
+func (c *billingServiceClient) CreateTopUpBalanceInvoice(ctx context.Context, in *CreateTopUpBalanceInvoiceRequest, opts ...grpc.CallOption) (*Invoice, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Invoice)
+	err := c.cc.Invoke(ctx, BillingService_CreateTopUpBalanceInvoice_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *billingServiceClient) GetInvoiceSettingsTemplateExample(ctx context.Context, in *GetInvoiceSettingsTemplateExampleRequest, opts ...grpc.CallOption) (*GetInvoiceSettingsTemplateExampleResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetInvoiceSettingsTemplateExampleResponse)
@@ -559,6 +571,7 @@ type BillingServiceServer interface {
 	UpdateInvoice(context.Context, *UpdateInvoiceRequest) (*Invoice, error)
 	Pay(context.Context, *PayRequest) (*PayResponse, error)
 	UpdateInvoiceStatus(context.Context, *UpdateInvoiceStatusRequest) (*Invoice, error)
+	CreateTopUpBalanceInvoice(context.Context, *CreateTopUpBalanceInvoiceRequest) (*Invoice, error)
 	GetInvoiceSettingsTemplateExample(context.Context, *GetInvoiceSettingsTemplateExampleRequest) (*GetInvoiceSettingsTemplateExampleResponse, error)
 	mustEmbedUnimplementedBillingServiceServer()
 }
@@ -641,6 +654,9 @@ func (UnimplementedBillingServiceServer) Pay(context.Context, *PayRequest) (*Pay
 }
 func (UnimplementedBillingServiceServer) UpdateInvoiceStatus(context.Context, *UpdateInvoiceStatusRequest) (*Invoice, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateInvoiceStatus not implemented")
+}
+func (UnimplementedBillingServiceServer) CreateTopUpBalanceInvoice(context.Context, *CreateTopUpBalanceInvoiceRequest) (*Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTopUpBalanceInvoice not implemented")
 }
 func (UnimplementedBillingServiceServer) GetInvoiceSettingsTemplateExample(context.Context, *GetInvoiceSettingsTemplateExampleRequest) (*GetInvoiceSettingsTemplateExampleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInvoiceSettingsTemplateExample not implemented")
@@ -1098,6 +1114,24 @@ func _BillingService_UpdateInvoiceStatus_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BillingService_CreateTopUpBalanceInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateTopUpBalanceInvoiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).CreateTopUpBalanceInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_CreateTopUpBalanceInvoice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).CreateTopUpBalanceInvoice(ctx, req.(*CreateTopUpBalanceInvoiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BillingService_GetInvoiceSettingsTemplateExample_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetInvoiceSettingsTemplateExampleRequest)
 	if err := dec(in); err != nil {
@@ -1218,6 +1252,10 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateInvoiceStatus",
 			Handler:    _BillingService_UpdateInvoiceStatus_Handler,
+		},
+		{
+			MethodName: "CreateTopUpBalanceInvoice",
+			Handler:    _BillingService_CreateTopUpBalanceInvoice_Handler,
 		},
 		{
 			MethodName: "GetInvoiceSettingsTemplateExample",
@@ -2264,6 +2302,7 @@ const (
 	PromocodesService_List_FullMethodName      = "/nocloud.billing.PromocodesService/List"
 	PromocodesService_Count_FullMethodName     = "/nocloud.billing.PromocodesService/Count"
 	PromocodesService_Delete_FullMethodName    = "/nocloud.billing.PromocodesService/Delete"
+	PromocodesService_Apply_FullMethodName     = "/nocloud.billing.PromocodesService/Apply"
 )
 
 // PromocodesServiceClient is the client API for PromocodesService service.
@@ -2277,6 +2316,7 @@ type PromocodesServiceClient interface {
 	List(ctx context.Context, in *promocodes.ListPromocodesRequest, opts ...grpc.CallOption) (*promocodes.ListPromocodesResponse, error)
 	Count(ctx context.Context, in *promocodes.CountPromocodesRequest, opts ...grpc.CallOption) (*promocodes.CountPromocodesResponse, error)
 	Delete(ctx context.Context, in *promocodes.Promocode, opts ...grpc.CallOption) (*promocodes.Promocode, error)
+	Apply(ctx context.Context, in *promocodes.ApplyPromocodeRequest, opts ...grpc.CallOption) (*promocodes.ApplyPromocodeResponse, error)
 }
 
 type promocodesServiceClient struct {
@@ -2357,6 +2397,16 @@ func (c *promocodesServiceClient) Delete(ctx context.Context, in *promocodes.Pro
 	return out, nil
 }
 
+func (c *promocodesServiceClient) Apply(ctx context.Context, in *promocodes.ApplyPromocodeRequest, opts ...grpc.CallOption) (*promocodes.ApplyPromocodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(promocodes.ApplyPromocodeResponse)
+	err := c.cc.Invoke(ctx, PromocodesService_Apply_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PromocodesServiceServer is the server API for PromocodesService service.
 // All implementations must embed UnimplementedPromocodesServiceServer
 // for forward compatibility.
@@ -2368,6 +2418,7 @@ type PromocodesServiceServer interface {
 	List(context.Context, *promocodes.ListPromocodesRequest) (*promocodes.ListPromocodesResponse, error)
 	Count(context.Context, *promocodes.CountPromocodesRequest) (*promocodes.CountPromocodesResponse, error)
 	Delete(context.Context, *promocodes.Promocode) (*promocodes.Promocode, error)
+	Apply(context.Context, *promocodes.ApplyPromocodeRequest) (*promocodes.ApplyPromocodeResponse, error)
 	mustEmbedUnimplementedPromocodesServiceServer()
 }
 
@@ -2398,6 +2449,9 @@ func (UnimplementedPromocodesServiceServer) Count(context.Context, *promocodes.C
 }
 func (UnimplementedPromocodesServiceServer) Delete(context.Context, *promocodes.Promocode) (*promocodes.Promocode, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedPromocodesServiceServer) Apply(context.Context, *promocodes.ApplyPromocodeRequest) (*promocodes.ApplyPromocodeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Apply not implemented")
 }
 func (UnimplementedPromocodesServiceServer) mustEmbedUnimplementedPromocodesServiceServer() {}
 func (UnimplementedPromocodesServiceServer) testEmbeddedByValue()                           {}
@@ -2546,6 +2600,24 @@ func _PromocodesService_Delete_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PromocodesService_Apply_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(promocodes.ApplyPromocodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PromocodesServiceServer).Apply(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PromocodesService_Apply_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PromocodesServiceServer).Apply(ctx, req.(*promocodes.ApplyPromocodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PromocodesService_ServiceDesc is the grpc.ServiceDesc for PromocodesService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2580,6 +2652,10 @@ var PromocodesService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _PromocodesService_Delete_Handler,
+		},
+		{
+			MethodName: "Apply",
+			Handler:    _PromocodesService_Apply_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

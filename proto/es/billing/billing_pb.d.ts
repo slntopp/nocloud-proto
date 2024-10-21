@@ -2177,6 +2177,30 @@ export declare class GetInvoiceSettingsTemplateExampleResponse extends Message<G
 }
 
 /**
+ * @generated from message nocloud.billing.CreateTopUpBalanceInvoiceRequest
+ */
+export declare class CreateTopUpBalanceInvoiceRequest extends Message<CreateTopUpBalanceInvoiceRequest> {
+  /**
+   * @generated from field: double sum = 1;
+   */
+  sum: number;
+
+  constructor(data?: PartialMessage<CreateTopUpBalanceInvoiceRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.CreateTopUpBalanceInvoiceRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateTopUpBalanceInvoiceRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateTopUpBalanceInvoiceRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateTopUpBalanceInvoiceRequest;
+
+  static equals(a: CreateTopUpBalanceInvoiceRequest | PlainMessage<CreateTopUpBalanceInvoiceRequest> | undefined, b: CreateTopUpBalanceInvoiceRequest | PlainMessage<CreateTopUpBalanceInvoiceRequest> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.billing.Currency
  */
 export declare class Currency extends Message<Currency> {

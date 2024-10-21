@@ -6,18 +6,31 @@
 import { proto3, Value } from "@bufbuild/protobuf";
 
 /**
+ * User defined status
+ *
  * @generated from enum nocloud.billing.promocodes.PromocodeStatus
  */
 export const PromocodeStatus = /*@__PURE__*/ proto3.makeEnum(
   "nocloud.billing.promocodes.PromocodeStatus",
   [
-    {no: 0, name: "UNKNOWN"},
-    {no: 1, name: "ACTIVE"},
-    {no: 2, name: "SUSPENDED"},
-    {no: 3, name: "DELETED"},
-    {no: 4, name: "EXPIRED"},
-    {no: 5, name: "ALL_TAKEN"},
-    {no: 6, name: "USED"},
+    {no: 0, name: "ACTIVE"},
+    {no: 1, name: "SUSPENDED"},
+    {no: 2, name: "DELETED"},
+  ],
+);
+
+/**
+ * Read-only state for visualization
+ *
+ * @generated from enum nocloud.billing.promocodes.PromocodeState
+ */
+export const PromocodeState = /*@__PURE__*/ proto3.makeEnum(
+  "nocloud.billing.promocodes.PromocodeState",
+  [
+    {no: 0, name: "USABLE"},
+    {no: 1, name: "EXPIRED"},
+    {no: 2, name: "ALL_TAKEN"},
+    {no: 3, name: "USED"},
   ],
 );
 
@@ -32,18 +45,20 @@ export const Promocode = /*@__PURE__*/ proto3.makeMessageType(
     { no: 3, name: "description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "code", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "status", kind: "enum", T: proto3.getEnumType(PromocodeStatus) },
-    { no: 6, name: "due_date", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 7, name: "limit", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 8, name: "uses_per_user", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 9, name: "linked_instances", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 6, name: "state", kind: "enum", T: proto3.getEnumType(PromocodeState) },
+    { no: 7, name: "due_date", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 8, name: "limit", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 9, name: "uses_per_user", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 10, name: "meta", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
     { no: 11, name: "created", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 12, name: "promo_items", kind: "message", T: PromoItem, repeated: true },
+    { no: 13, name: "uses", kind: "message", T: EntryResource, repeated: true },
   ],
 );
 
 /**
  * At least 1 optional item must be specified
+ * If nothing specified, then applied to EVERYTHING
  *
  * @generated from message nocloud.billing.promocodes.PromoItem
  */
@@ -100,6 +115,18 @@ export const AddonPromo = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * @generated from message nocloud.billing.promocodes.EntryResource
+ */
+export const EntryResource = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.promocodes.EntryResource",
+  () => [
+    { no: 1, name: "invoice", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 2, name: "instance", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 3, name: "exec", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
  * API
  *
  * @generated from message nocloud.billing.promocodes.ListPromocodesRequest
@@ -133,6 +160,17 @@ export const GetPromocodeByCodeRequest = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * @generated from message nocloud.billing.promocodes.ApplyPromocodeRequest
+ */
+export const ApplyPromocodeRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.promocodes.ApplyPromocodeRequest",
+  () => [
+    { no: 1, name: "code", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "resource", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
  * @generated from message nocloud.billing.promocodes.CountPromocodesResponse
  */
 export const CountPromocodesResponse = /*@__PURE__*/ proto3.makeMessageType(
@@ -149,6 +187,16 @@ export const ListPromocodesResponse = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.billing.promocodes.ListPromocodesResponse",
   () => [
     { no: 1, name: "promocodes", kind: "message", T: Promocode, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.promocodes.ApplyPromocodeResponse
+ */
+export const ApplyPromocodeResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.promocodes.ApplyPromocodeResponse",
+  () => [
+    { no: 1, name: "success", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
