@@ -2214,6 +2214,11 @@ export declare class Currency extends Message<Currency> {
    */
   title: string;
 
+  /**
+   * @generated from field: bool public = 3;
+   */
+  public: boolean;
+
   constructor(data?: PartialMessage<Currency>);
 
   static readonly runtime: typeof proto3;

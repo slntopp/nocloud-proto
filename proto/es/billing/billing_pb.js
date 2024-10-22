@@ -749,6 +749,7 @@ export const Currency = /*@__PURE__*/ proto3.makeMessageType(
   () => [
     { no: 1, name: "id", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
     { no: 2, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "public", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 

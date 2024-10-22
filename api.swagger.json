@@ -1705,6 +1705,12 @@
             "type": "string"
           },
           {
+            "name": "from.public",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "to.id",
             "in": "query",
             "required": false,
@@ -1716,6 +1722,12 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "to.public",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -1753,6 +1765,12 @@
             "type": "string"
           },
           {
+            "name": "from.public",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "to.id",
             "in": "query",
             "required": false,
@@ -1764,6 +1782,12 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "to.public",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -2288,6 +2312,12 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "currency.public",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           },
           {
             "name": "created",
@@ -3521,6 +3551,12 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "currency.public",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           },
           {
             "name": "created",
@@ -7429,6 +7465,9 @@
         },
         "title": {
           "type": "string"
+        },
+        "public": {
+          "type": "boolean"
         }
       }
     },
