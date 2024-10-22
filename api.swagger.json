@@ -2906,6 +2906,16 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "resources",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           }
         ],
         "tags": [

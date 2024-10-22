@@ -80,6 +80,7 @@ message ListPromocodesRequest {
   optional uint64 limit = 2;
   optional string field = 3;
   optional string sort = 4;
+  repeated string resources = 5;
 }
 message CountPromocodesRequest {}
 message GetPromocodeByCodeRequest {

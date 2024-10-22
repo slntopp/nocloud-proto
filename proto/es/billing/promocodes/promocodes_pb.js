@@ -138,6 +138,7 @@ export const ListPromocodesRequest = /*@__PURE__*/ proto3.makeMessageType(
     { no: 2, name: "limit", kind: "scalar", T: 4 /* ScalarType.UINT64 */, opt: true },
     { no: 3, name: "field", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 4, name: "sort", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 5, name: "resources", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
   ],
 );
 

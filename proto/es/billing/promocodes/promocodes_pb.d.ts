@@ -361,6 +361,11 @@ export declare class ListPromocodesRequest extends Message<ListPromocodesRequest
    */
   sort?: string;
 
+  /**
+   * @generated from field: repeated string resources = 5;
+   */
+  resources: string[];
+
   constructor(data?: PartialMessage<ListPromocodesRequest>);
 
   static readonly runtime: typeof proto3;
