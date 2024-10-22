@@ -453,6 +453,13 @@ message CreateTopUpBalanceInvoiceRequest{
   double sum = 1;
 }
 
+message PayWithBalanceRequest {
+  string invoice_uuid = 1;
+}
+message PayWithBalanceResponse {
+  bool success = 1;
+}
+
 service BillingService {
   rpc CreatePlan (Plan) returns (Plan) {
     option (google.api.http) = {
@@ -594,6 +601,12 @@ service BillingService {
       body: "*"
     };
   };
+  rpc PayWithBalance(PayWithBalanceRequest) returns (PayWithBalanceResponse) {
+    option (google.api.http) = {
+      post: "/billing/invoices/{invoice_uuid}/paywithbalance"
+      body: "*"
+    };
+  }
   rpc GetInvoiceSettingsTemplateExample(GetInvoiceSettingsTemplateExampleRequest)
       returns (GetInvoiceSettingsTemplateExampleResponse) {
     option (google.api.http) = {

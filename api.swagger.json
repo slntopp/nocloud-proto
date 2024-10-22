@@ -2199,6 +2199,44 @@
         ]
       }
     },
+    "/billing/invoices/{invoiceUuid}/paywithbalance": {
+      "post": {
+        "operationId": "BillingService_PayWithBalance",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingPayWithBalanceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "invoiceUuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingServicePayWithBalanceBody"
+            }
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
     "/billing/invoices/{uuid}": {
       "get": {
         "operationId": "BillingService_GetInvoice",
@@ -6494,6 +6532,9 @@
     "BillingServicePayBody": {
       "type": "object"
     },
+    "BillingServicePayWithBalanceBody": {
+      "type": "object"
+    },
     "BillingServiceUpdateInvoiceStatusBody": {
       "type": "object",
       "properties": {
@@ -7870,6 +7911,14 @@
       "properties": {
         "paymentLink": {
           "type": "string"
+        }
+      }
+    },
+    "billingPayWithBalanceResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
         }
       }
     },

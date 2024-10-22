@@ -2201,6 +2201,54 @@ export declare class CreateTopUpBalanceInvoiceRequest extends Message<CreateTopU
 }
 
 /**
+ * @generated from message nocloud.billing.PayWithBalanceRequest
+ */
+export declare class PayWithBalanceRequest extends Message<PayWithBalanceRequest> {
+  /**
+   * @generated from field: string invoice_uuid = 1;
+   */
+  invoiceUuid: string;
+
+  constructor(data?: PartialMessage<PayWithBalanceRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.PayWithBalanceRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PayWithBalanceRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PayWithBalanceRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PayWithBalanceRequest;
+
+  static equals(a: PayWithBalanceRequest | PlainMessage<PayWithBalanceRequest> | undefined, b: PayWithBalanceRequest | PlainMessage<PayWithBalanceRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.PayWithBalanceResponse
+ */
+export declare class PayWithBalanceResponse extends Message<PayWithBalanceResponse> {
+  /**
+   * @generated from field: bool success = 1;
+   */
+  success: boolean;
+
+  constructor(data?: PartialMessage<PayWithBalanceResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.PayWithBalanceResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PayWithBalanceResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PayWithBalanceResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PayWithBalanceResponse;
+
+  static equals(a: PayWithBalanceResponse | PlainMessage<PayWithBalanceResponse> | undefined, b: PayWithBalanceResponse | PlainMessage<PayWithBalanceResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.billing.Currency
  */
 export declare class Currency extends Message<Currency> {

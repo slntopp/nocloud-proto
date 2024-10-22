@@ -141,6 +141,9 @@ const (
 	// BillingServiceCreateTopUpBalanceInvoiceProcedure is the fully-qualified name of the
 	// BillingService's CreateTopUpBalanceInvoice RPC.
 	BillingServiceCreateTopUpBalanceInvoiceProcedure = "/nocloud.billing.BillingService/CreateTopUpBalanceInvoice"
+	// BillingServicePayWithBalanceProcedure is the fully-qualified name of the BillingService's
+	// PayWithBalance RPC.
+	BillingServicePayWithBalanceProcedure = "/nocloud.billing.BillingService/PayWithBalance"
 	// BillingServiceGetInvoiceSettingsTemplateExampleProcedure is the fully-qualified name of the
 	// BillingService's GetInvoiceSettingsTemplateExample RPC.
 	BillingServiceGetInvoiceSettingsTemplateExampleProcedure = "/nocloud.billing.BillingService/GetInvoiceSettingsTemplateExample"
@@ -256,6 +259,7 @@ var (
 	billingServicePayMethodDescriptor                               = billingServiceServiceDescriptor.Methods().ByName("Pay")
 	billingServiceUpdateInvoiceStatusMethodDescriptor               = billingServiceServiceDescriptor.Methods().ByName("UpdateInvoiceStatus")
 	billingServiceCreateTopUpBalanceInvoiceMethodDescriptor         = billingServiceServiceDescriptor.Methods().ByName("CreateTopUpBalanceInvoice")
+	billingServicePayWithBalanceMethodDescriptor                    = billingServiceServiceDescriptor.Methods().ByName("PayWithBalance")
 	billingServiceGetInvoiceSettingsTemplateExampleMethodDescriptor = billingServiceServiceDescriptor.Methods().ByName("GetInvoiceSettingsTemplateExample")
 	currencyServiceServiceDescriptor                                = billing.File_billing_billing_proto.Services().ByName("CurrencyService")
 	currencyServiceCreateCurrencyMethodDescriptor                   = currencyServiceServiceDescriptor.Methods().ByName("CreateCurrency")
@@ -440,6 +444,7 @@ type BillingServiceClient interface {
 	Pay(context.Context, *connect.Request[billing.PayRequest]) (*connect.Response[billing.PayResponse], error)
 	UpdateInvoiceStatus(context.Context, *connect.Request[billing.UpdateInvoiceStatusRequest]) (*connect.Response[billing.Invoice], error)
 	CreateTopUpBalanceInvoice(context.Context, *connect.Request[billing.CreateTopUpBalanceInvoiceRequest]) (*connect.Response[billing.Invoice], error)
+	PayWithBalance(context.Context, *connect.Request[billing.PayWithBalanceRequest]) (*connect.Response[billing.PayWithBalanceResponse], error)
 	GetInvoiceSettingsTemplateExample(context.Context, *connect.Request[billing.GetInvoiceSettingsTemplateExampleRequest]) (*connect.Response[billing.GetInvoiceSettingsTemplateExampleResponse], error)
 }
 
@@ -603,6 +608,12 @@ func NewBillingServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(billingServiceCreateTopUpBalanceInvoiceMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		payWithBalance: connect.NewClient[billing.PayWithBalanceRequest, billing.PayWithBalanceResponse](
+			httpClient,
+			baseURL+BillingServicePayWithBalanceProcedure,
+			connect.WithSchema(billingServicePayWithBalanceMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 		getInvoiceSettingsTemplateExample: connect.NewClient[billing.GetInvoiceSettingsTemplateExampleRequest, billing.GetInvoiceSettingsTemplateExampleResponse](
 			httpClient,
 			baseURL+BillingServiceGetInvoiceSettingsTemplateExampleProcedure,
@@ -639,6 +650,7 @@ type billingServiceClient struct {
 	pay                               *connect.Client[billing.PayRequest, billing.PayResponse]
 	updateInvoiceStatus               *connect.Client[billing.UpdateInvoiceStatusRequest, billing.Invoice]
 	createTopUpBalanceInvoice         *connect.Client[billing.CreateTopUpBalanceInvoiceRequest, billing.Invoice]
+	payWithBalance                    *connect.Client[billing.PayWithBalanceRequest, billing.PayWithBalanceResponse]
 	getInvoiceSettingsTemplateExample *connect.Client[billing.GetInvoiceSettingsTemplateExampleRequest, billing.GetInvoiceSettingsTemplateExampleResponse]
 }
 
@@ -767,6 +779,11 @@ func (c *billingServiceClient) CreateTopUpBalanceInvoice(ctx context.Context, re
 	return c.createTopUpBalanceInvoice.CallUnary(ctx, req)
 }
 
+// PayWithBalance calls nocloud.billing.BillingService.PayWithBalance.
+func (c *billingServiceClient) PayWithBalance(ctx context.Context, req *connect.Request[billing.PayWithBalanceRequest]) (*connect.Response[billing.PayWithBalanceResponse], error) {
+	return c.payWithBalance.CallUnary(ctx, req)
+}
+
 // GetInvoiceSettingsTemplateExample calls
 // nocloud.billing.BillingService.GetInvoiceSettingsTemplateExample.
 func (c *billingServiceClient) GetInvoiceSettingsTemplateExample(ctx context.Context, req *connect.Request[billing.GetInvoiceSettingsTemplateExampleRequest]) (*connect.Response[billing.GetInvoiceSettingsTemplateExampleResponse], error) {
@@ -800,6 +817,7 @@ type BillingServiceHandler interface {
 	Pay(context.Context, *connect.Request[billing.PayRequest]) (*connect.Response[billing.PayResponse], error)
 	UpdateInvoiceStatus(context.Context, *connect.Request[billing.UpdateInvoiceStatusRequest]) (*connect.Response[billing.Invoice], error)
 	CreateTopUpBalanceInvoice(context.Context, *connect.Request[billing.CreateTopUpBalanceInvoiceRequest]) (*connect.Response[billing.Invoice], error)
+	PayWithBalance(context.Context, *connect.Request[billing.PayWithBalanceRequest]) (*connect.Response[billing.PayWithBalanceResponse], error)
 	GetInvoiceSettingsTemplateExample(context.Context, *connect.Request[billing.GetInvoiceSettingsTemplateExampleRequest]) (*connect.Response[billing.GetInvoiceSettingsTemplateExampleResponse], error)
 }
 
@@ -959,6 +977,12 @@ func NewBillingServiceHandler(svc BillingServiceHandler, opts ...connect.Handler
 		connect.WithSchema(billingServiceCreateTopUpBalanceInvoiceMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	billingServicePayWithBalanceHandler := connect.NewUnaryHandler(
+		BillingServicePayWithBalanceProcedure,
+		svc.PayWithBalance,
+		connect.WithSchema(billingServicePayWithBalanceMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	billingServiceGetInvoiceSettingsTemplateExampleHandler := connect.NewUnaryHandler(
 		BillingServiceGetInvoiceSettingsTemplateExampleProcedure,
 		svc.GetInvoiceSettingsTemplateExample,
@@ -1017,6 +1041,8 @@ func NewBillingServiceHandler(svc BillingServiceHandler, opts ...connect.Handler
 			billingServiceUpdateInvoiceStatusHandler.ServeHTTP(w, r)
 		case BillingServiceCreateTopUpBalanceInvoiceProcedure:
 			billingServiceCreateTopUpBalanceInvoiceHandler.ServeHTTP(w, r)
+		case BillingServicePayWithBalanceProcedure:
+			billingServicePayWithBalanceHandler.ServeHTTP(w, r)
 		case BillingServiceGetInvoiceSettingsTemplateExampleProcedure:
 			billingServiceGetInvoiceSettingsTemplateExampleHandler.ServeHTTP(w, r)
 		default:
@@ -1126,6 +1152,10 @@ func (UnimplementedBillingServiceHandler) UpdateInvoiceStatus(context.Context, *
 
 func (UnimplementedBillingServiceHandler) CreateTopUpBalanceInvoice(context.Context, *connect.Request[billing.CreateTopUpBalanceInvoiceRequest]) (*connect.Response[billing.Invoice], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.BillingService.CreateTopUpBalanceInvoice is not implemented"))
+}
+
+func (UnimplementedBillingServiceHandler) PayWithBalance(context.Context, *connect.Request[billing.PayWithBalanceRequest]) (*connect.Response[billing.PayWithBalanceResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.BillingService.PayWithBalance is not implemented"))
 }
 
 func (UnimplementedBillingServiceHandler) GetInvoiceSettingsTemplateExample(context.Context, *connect.Request[billing.GetInvoiceSettingsTemplateExampleRequest]) (*connect.Response[billing.GetInvoiceSettingsTemplateExampleResponse], error) {

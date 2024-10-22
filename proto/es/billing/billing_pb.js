@@ -742,6 +742,26 @@ export const CreateTopUpBalanceInvoiceRequest = /*@__PURE__*/ proto3.makeMessage
 );
 
 /**
+ * @generated from message nocloud.billing.PayWithBalanceRequest
+ */
+export const PayWithBalanceRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.PayWithBalanceRequest",
+  () => [
+    { no: 1, name: "invoice_uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.PayWithBalanceResponse
+ */
+export const PayWithBalanceResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.PayWithBalanceResponse",
+  () => [
+    { no: 1, name: "success", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
  * @generated from message nocloud.billing.Currency
  */
 export const Currency = /*@__PURE__*/ proto3.makeMessageType(
