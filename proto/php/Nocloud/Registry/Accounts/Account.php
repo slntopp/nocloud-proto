@@ -72,6 +72,10 @@ class Account extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string account_owner = 13 [json_name = "accountOwner"];</code>
      */
     protected $account_owner = '';
+    /**
+     * Generated from protobuf field <code>string paymentsGateway = 14 [json_name = "paymentsGateway"];</code>
+     */
+    protected $paymentsGateway = '';
 
     /**
      * Constructor.
@@ -95,6 +99,7 @@ class Account extends \Google\Protobuf\Internal\Message
      *           List of UUID's of sub-accounts of this account
      *     @type string $account_owner
      *           Mother account of this account. If != "" - then this account is subaccount
+     *     @type string $paymentsGateway
      * }
      */
     public function __construct($data = NULL) {
@@ -456,6 +461,28 @@ class Account extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->account_owner = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string paymentsGateway = 14 [json_name = "paymentsGateway"];</code>
+     * @return string
+     */
+    public function getPaymentsGateway()
+    {
+        return $this->paymentsGateway;
+    }
+
+    /**
+     * Generated from protobuf field <code>string paymentsGateway = 14 [json_name = "paymentsGateway"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setPaymentsGateway($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->paymentsGateway = $var;
 
         return $this;
     }

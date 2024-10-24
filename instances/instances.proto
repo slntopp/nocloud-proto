@@ -52,11 +52,10 @@ message Instance {
 
     repeated nocloud.ansible.Software software = 13; // Must match contain all the software from the Billing Plan
     repeated notes.AdminNote admin_notes = 14;
-    repeated string addons = 15;
-    int64 deleted = 16;
-
-    optional int64 period = 17;
-    double estimate = 18;
+    int64 deleted = 15;
+    optional int64 period = 16;
+    double estimate = 17;
+    repeated string addons = 18;
 }
 
 message InstancesGroup {

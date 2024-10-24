@@ -340,6 +340,20 @@ class BillingServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * @param \Nocloud\Billing\PayRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function Pay(\Nocloud\Billing\PayRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/Pay',
+        $argument,
+        ['\Nocloud\Billing\PayResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * @param \Nocloud\Billing\UpdateInvoiceStatusRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -350,6 +364,34 @@ class BillingServiceClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/nocloud.billing.BillingService/UpdateInvoiceStatus',
         $argument,
         ['\Nocloud\Billing\Invoice', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Billing\CreateTopUpBalanceInvoiceRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function CreateTopUpBalanceInvoice(\Nocloud\Billing\CreateTopUpBalanceInvoiceRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/CreateTopUpBalanceInvoice',
+        $argument,
+        ['\Nocloud\Billing\Invoice', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Billing\PayWithBalanceRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function PayWithBalance(\Nocloud\Billing\PayWithBalanceRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/PayWithBalance',
+        $argument,
+        ['\Nocloud\Billing\PayWithBalanceResponse', 'decode'],
         $metadata, $options);
     }
 

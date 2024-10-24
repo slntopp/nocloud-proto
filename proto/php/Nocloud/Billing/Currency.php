@@ -22,6 +22,10 @@ class Currency extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string title = 2 [json_name = "title"];</code>
      */
     protected $title = '';
+    /**
+     * Generated from protobuf field <code>bool public = 3 [json_name = "public"];</code>
+     */
+    protected $public = false;
 
     /**
      * Constructor.
@@ -31,6 +35,7 @@ class Currency extends \Google\Protobuf\Internal\Message
      *
      *     @type int $id
      *     @type string $title
+     *     @type bool $public
      * }
      */
     public function __construct($data = NULL) {
@@ -78,6 +83,28 @@ class Currency extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->title = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool public = 3 [json_name = "public"];</code>
+     * @return bool
+     */
+    public function getPublic()
+    {
+        return $this->public;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool public = 3 [json_name = "public"];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setPublic($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->public = $var;
 
         return $this;
     }

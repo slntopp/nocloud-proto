@@ -26,6 +26,10 @@ class Access extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>optional string namespace = 3 [json_name = "namespace"];</code>
      */
     protected $namespace = null;
+    /**
+     * Generated from protobuf field <code>string username = 4 [json_name = "username"];</code>
+     */
+    protected $username = '';
 
     /**
      * Constructor.
@@ -36,6 +40,7 @@ class Access extends \Google\Protobuf\Internal\Message
      *     @type int $level
      *     @type string $role
      *     @type string $namespace
+     *     @type string $username
      * }
      */
     public function __construct($data = NULL) {
@@ -115,6 +120,28 @@ class Access extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->namespace = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string username = 4 [json_name = "username"];</code>
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Generated from protobuf field <code>string username = 4 [json_name = "username"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setUsername($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->username = $var;
 
         return $this;
     }

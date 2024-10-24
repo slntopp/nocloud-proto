@@ -4619,16 +4619,6 @@
             "format": "int64"
           },
           {
-            "name": "addons",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
             "name": "deleted",
             "in": "query",
             "required": false,
@@ -4648,6 +4638,16 @@
             "required": false,
             "type": "number",
             "format": "double"
+          },
+          {
+            "name": "addons",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           }
         ],
         "tags": [
@@ -9357,12 +9357,6 @@
             "$ref": "#/definitions/notesAdminNote"
           }
         },
-        "addons": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "deleted": {
           "type": "string",
           "format": "int64"
@@ -9374,6 +9368,12 @@
         "estimate": {
           "type": "number",
           "format": "double"
+        },
+        "addons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },

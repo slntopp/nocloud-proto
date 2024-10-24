@@ -47,6 +47,12 @@ class Playbook extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>repeated string supported_os = 6 [json_name = "supportedOs"];</code>
      */
     private $supported_os;
+    /**
+     * Whether this Playbook is private or not
+     *
+     * Generated from protobuf field <code>bool private = 7 [json_name = "private"];</code>
+     */
+    protected $private = false;
 
     /**
      * Constructor.
@@ -65,6 +71,8 @@ class Playbook extends \Google\Protobuf\Internal\Message
      *           (optionally Markdown) long description Marketplace like
      *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $supported_os
      *           List of supported platforms(OS) by this Playbook
+     *     @type bool $private
+     *           Whether this Playbook is private or not
      * }
      */
     public function __construct($data = NULL) {
@@ -218,6 +226,32 @@ class Playbook extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
         $this->supported_os = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Whether this Playbook is private or not
+     *
+     * Generated from protobuf field <code>bool private = 7 [json_name = "private"];</code>
+     * @return bool
+     */
+    public function getPrivate()
+    {
+        return $this->private;
+    }
+
+    /**
+     * Whether this Playbook is private or not
+     *
+     * Generated from protobuf field <code>bool private = 7 [json_name = "private"];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setPrivate($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->private = $var;
 
         return $this;
     }

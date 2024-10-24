@@ -105,24 +105,24 @@ export declare class Instance extends Message<Instance> {
   adminNotes: AdminNote[];
 
   /**
-   * @generated from field: repeated string addons = 15;
-   */
-  addons: string[];
-
-  /**
-   * @generated from field: int64 deleted = 16;
+   * @generated from field: int64 deleted = 15;
    */
   deleted: bigint;
 
   /**
-   * @generated from field: optional int64 period = 17;
+   * @generated from field: optional int64 period = 16;
    */
   period?: bigint;
 
   /**
-   * @generated from field: double estimate = 18;
+   * @generated from field: double estimate = 17;
    */
   estimate: number;
+
+  /**
+   * @generated from field: repeated string addons = 18;
+   */
+  addons: string[];
 
   constructor(data?: PartialMessage<Instance>);
 

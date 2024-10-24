@@ -73,21 +73,21 @@ class Instance extends \Google\Protobuf\Internal\Message
      */
     private $admin_notes;
     /**
-     * Generated from protobuf field <code>repeated string addons = 15 [json_name = "addons"];</code>
-     */
-    private $addons;
-    /**
-     * Generated from protobuf field <code>int64 deleted = 16 [json_name = "deleted"];</code>
+     * Generated from protobuf field <code>int64 deleted = 15 [json_name = "deleted"];</code>
      */
     protected $deleted = 0;
     /**
-     * Generated from protobuf field <code>optional int64 period = 17 [json_name = "period"];</code>
+     * Generated from protobuf field <code>optional int64 period = 16 [json_name = "period"];</code>
      */
     protected $period = null;
     /**
-     * Generated from protobuf field <code>double estimate = 18 [json_name = "estimate"];</code>
+     * Generated from protobuf field <code>double estimate = 17 [json_name = "estimate"];</code>
      */
     protected $estimate = 0.0;
+    /**
+     * Generated from protobuf field <code>repeated string addons = 18 [json_name = "addons"];</code>
+     */
+    private $addons;
 
     /**
      * Constructor.
@@ -110,10 +110,10 @@ class Instance extends \Google\Protobuf\Internal\Message
      *     @type array<\Nocloud\Ansible\Software>|\Google\Protobuf\Internal\RepeatedField $software
      *           Must match contain all the software from the Billing Plan
      *     @type array<\Nocloud\Notes\AdminNote>|\Google\Protobuf\Internal\RepeatedField $admin_notes
-     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $addons
      *     @type int|string $deleted
      *     @type int|string $period
      *     @type float $estimate
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $addons
      * }
      */
     public function __construct($data = NULL) {
@@ -474,29 +474,7 @@ class Instance extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated string addons = 15 [json_name = "addons"];</code>
-     * @return \Google\Protobuf\Internal\RepeatedField
-     */
-    public function getAddons()
-    {
-        return $this->addons;
-    }
-
-    /**
-     * Generated from protobuf field <code>repeated string addons = 15 [json_name = "addons"];</code>
-     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
-     * @return $this
-     */
-    public function setAddons($var)
-    {
-        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
-        $this->addons = $arr;
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>int64 deleted = 16 [json_name = "deleted"];</code>
+     * Generated from protobuf field <code>int64 deleted = 15 [json_name = "deleted"];</code>
      * @return int|string
      */
     public function getDeleted()
@@ -505,7 +483,7 @@ class Instance extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int64 deleted = 16 [json_name = "deleted"];</code>
+     * Generated from protobuf field <code>int64 deleted = 15 [json_name = "deleted"];</code>
      * @param int|string $var
      * @return $this
      */
@@ -518,7 +496,7 @@ class Instance extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>optional int64 period = 17 [json_name = "period"];</code>
+     * Generated from protobuf field <code>optional int64 period = 16 [json_name = "period"];</code>
      * @return int|string
      */
     public function getPeriod()
@@ -537,7 +515,7 @@ class Instance extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>optional int64 period = 17 [json_name = "period"];</code>
+     * Generated from protobuf field <code>optional int64 period = 16 [json_name = "period"];</code>
      * @param int|string $var
      * @return $this
      */
@@ -550,7 +528,7 @@ class Instance extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>double estimate = 18 [json_name = "estimate"];</code>
+     * Generated from protobuf field <code>double estimate = 17 [json_name = "estimate"];</code>
      * @return float
      */
     public function getEstimate()
@@ -559,7 +537,7 @@ class Instance extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>double estimate = 18 [json_name = "estimate"];</code>
+     * Generated from protobuf field <code>double estimate = 17 [json_name = "estimate"];</code>
      * @param float $var
      * @return $this
      */
@@ -567,6 +545,28 @@ class Instance extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkDouble($var);
         $this->estimate = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated string addons = 18 [json_name = "addons"];</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getAddons()
+    {
+        return $this->addons;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated string addons = 18 [json_name = "addons"];</code>
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setAddons($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
+        $this->addons = $arr;
 
         return $this;
     }
