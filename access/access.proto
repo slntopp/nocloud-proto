@@ -21,6 +21,7 @@ enum Level {
   ROOT = 4;
 }
 
+// Access
 message Access {
   Level level = 1;
   string role = 2;
