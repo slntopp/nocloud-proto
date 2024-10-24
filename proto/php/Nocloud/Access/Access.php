@@ -10,6 +10,8 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
+ * Access
+ *
  * Generated from protobuf message <code>nocloud.access.Access</code>
  */
 class Access extends \Google\Protobuf\Internal\Message
