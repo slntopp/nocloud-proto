@@ -2326,6 +2326,49 @@ export declare class CreateCurrencyResponse extends Message<CreateCurrencyRespon
 }
 
 /**
+ * @generated from message nocloud.billing.UpdateCurrencyRequest
+ */
+export declare class UpdateCurrencyRequest extends Message<UpdateCurrencyRequest> {
+  /**
+   * @generated from field: nocloud.billing.Currency currency = 1;
+   */
+  currency?: Currency;
+
+  constructor(data?: PartialMessage<UpdateCurrencyRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.UpdateCurrencyRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateCurrencyRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateCurrencyRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateCurrencyRequest;
+
+  static equals(a: UpdateCurrencyRequest | PlainMessage<UpdateCurrencyRequest> | undefined, b: UpdateCurrencyRequest | PlainMessage<UpdateCurrencyRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.UpdateCurrencyResponse
+ */
+export declare class UpdateCurrencyResponse extends Message<UpdateCurrencyResponse> {
+  constructor(data?: PartialMessage<UpdateCurrencyResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.UpdateCurrencyResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateCurrencyResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateCurrencyResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateCurrencyResponse;
+
+  static equals(a: UpdateCurrencyResponse | PlainMessage<UpdateCurrencyResponse> | undefined, b: UpdateCurrencyResponse | PlainMessage<UpdateCurrencyResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.billing.CreateExchangeRateRequest
  */
 export declare class CreateExchangeRateRequest extends Message<CreateExchangeRateRequest> {

@@ -49,6 +49,8 @@ export declare enum Level {
 }
 
 /**
+ * Access
+ *
  * @generated from message nocloud.access.Access
  */
 export declare class Access extends Message<Access> {

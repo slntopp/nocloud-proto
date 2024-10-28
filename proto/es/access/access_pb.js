@@ -32,6 +32,8 @@ export const Level = /*@__PURE__*/ proto3.makeEnum(
 );
 
 /**
+ * Access
+ *
  * @generated from message nocloud.access.Access
  */
 export const Access = /*@__PURE__*/ proto3.makeMessageType(

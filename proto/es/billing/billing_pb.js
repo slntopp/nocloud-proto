@@ -792,6 +792,24 @@ export const CreateCurrencyResponse = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * @generated from message nocloud.billing.UpdateCurrencyRequest
+ */
+export const UpdateCurrencyRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.UpdateCurrencyRequest",
+  () => [
+    { no: 1, name: "currency", kind: "message", T: Currency },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.UpdateCurrencyResponse
+ */
+export const UpdateCurrencyResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.UpdateCurrencyResponse",
+  [],
+);
+
+/**
  * @generated from message nocloud.billing.CreateExchangeRateRequest
  */
 export const CreateExchangeRateRequest = /*@__PURE__*/ proto3.makeMessageType(

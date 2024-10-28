@@ -1557,6 +1557,36 @@
         "tags": [
           "CurrencyService"
         ]
+      },
+      "put": {
+        "operationId": "CurrencyService_UpdateCurrency",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingUpdateCurrencyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingUpdateCurrencyRequest"
+            }
+          }
+        ],
+        "tags": [
+          "CurrencyService"
+        ]
       }
     },
     "/billing/currencies/convert": {
@@ -6827,7 +6857,8 @@
         "username": {
           "type": "string"
         }
-      }
+      },
+      "title": "Access"
     },
     "accessLevel": {
       "type": "string",
@@ -8294,6 +8325,17 @@
           }
         }
       }
+    },
+    "billingUpdateCurrencyRequest": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "$ref": "#/definitions/billingCurrency"
+        }
+      }
+    },
+    "billingUpdateCurrencyResponse": {
+      "type": "object"
     },
     "billingUpdateExchangeRateRequest": {
       "type": "object",

@@ -87,6 +87,7 @@ func (Level) EnumDescriptor() ([]byte, []int) {
 	return file_access_access_proto_rawDescGZIP(), []int{0}
 }
 
+// Access
 type Access struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
