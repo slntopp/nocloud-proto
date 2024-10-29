@@ -97,6 +97,7 @@ export const Currency = /*@__PURE__*/ proto3.makeEnum(
     {no: 4, name: "PLN"},
     {no: 5, name: "EUR_COLO"},
     {no: 6, name: "EUR_TECH"},
+    {no: 7, name: "RUB"},
   ],
 );
 

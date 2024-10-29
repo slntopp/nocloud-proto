@@ -1212,7 +1212,8 @@
               "BYN",
               "PLN",
               "EUR_COLO",
-              "EUR_TECH"
+              "EUR_TECH",
+              "RUB"
             ]
           },
           {
@@ -1227,7 +1228,8 @@
               "BYN",
               "PLN",
               "EUR_COLO",
-              "EUR_TECH"
+              "EUR_TECH",
+              "RUB"
             ]
           }
         ],
@@ -1264,7 +1266,8 @@
               "BYN",
               "PLN",
               "EUR_COLO",
-              "EUR_TECH"
+              "EUR_TECH",
+              "RUB"
             ]
           },
           {
@@ -1279,7 +1282,8 @@
               "BYN",
               "PLN",
               "EUR_COLO",
-              "EUR_TECH"
+              "EUR_TECH",
+              "RUB"
             ]
           }
         ],
@@ -1910,7 +1914,8 @@
               "BYN",
               "PLN",
               "EUR_COLO",
-              "EUR_TECH"
+              "EUR_TECH",
+              "RUB"
             ],
             "default": "NCU"
           },
@@ -5465,7 +5470,8 @@
         "BYN",
         "PLN",
         "EUR_COLO",
-        "EUR_TECH"
+        "EUR_TECH",
+        "RUB"
       ],
       "default": "NCU"
     },

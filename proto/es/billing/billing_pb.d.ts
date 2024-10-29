@@ -175,6 +175,11 @@ export declare enum Currency {
    * @generated from enum value: EUR_TECH = 6;
    */
   EUR_TECH = 6,
+
+  /**
+   * @generated from enum value: RUB = 7;
+   */
+  RUB = 7,
 }
 
 /**
