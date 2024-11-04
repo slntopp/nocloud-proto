@@ -69,6 +69,8 @@ export const PeriodKind = /*@__PURE__*/ proto3.makeEnum(
     {no: 0, name: "DEFAULT"},
     {no: 1, name: "CALENDAR_MONTH"},
     {no: 2, name: "CALENDAR_YEAR"},
+    {no: 3, name: "CALENDAR_QUARTER"},
+    {no: 4, name: "CALENDAR_HALF_YEAR"},
   ],
 );
 
@@ -140,6 +142,17 @@ export const Fee = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * @generated from message nocloud.billing.CustomEvent
+ */
+export const CustomEvent = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.CustomEvent",
+  () => [
+    { no: 1, name: "key", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "override", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
  * @generated from message nocloud.billing.Plan
  */
 export const Plan = /*@__PURE__*/ proto3.makeMessageType(
@@ -157,6 +170,7 @@ export const Plan = /*@__PURE__*/ proto3.makeMessageType(
     { no: 10, name: "software", kind: "message", T: Software, repeated: true },
     { no: 11, name: "status", kind: "enum", T: proto3.getEnumType(NoCloudStatus) },
     { no: 12, name: "addons", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 13, name: "custom_events", kind: "message", T: CustomEvent, repeated: true },
   ],
 );
 

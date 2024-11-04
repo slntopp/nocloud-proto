@@ -74,6 +74,10 @@ class Plan extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>repeated string addons = 12 [json_name = "addons"];</code>
      */
     private $addons;
+    /**
+     * Generated from protobuf field <code>repeated .nocloud.billing.CustomEvent custom_events = 13 [json_name = "customEvents"];</code>
+     */
+    private $custom_events;
 
     /**
      * Constructor.
@@ -99,6 +103,7 @@ class Plan extends \Google\Protobuf\Internal\Message
      *     @type array<\Nocloud\Ansible\Software>|\Google\Protobuf\Internal\RepeatedField $software
      *     @type int $status
      *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $addons
+     *     @type array<\Nocloud\Billing\CustomEvent>|\Google\Protobuf\Internal\RepeatedField $custom_events
      * }
      */
     public function __construct($data = NULL) {
@@ -400,6 +405,28 @@ class Plan extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
         $this->addons = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated .nocloud.billing.CustomEvent custom_events = 13 [json_name = "customEvents"];</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getCustomEvents()
+    {
+        return $this->custom_events;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated .nocloud.billing.CustomEvent custom_events = 13 [json_name = "customEvents"];</code>
+     * @param array<\Nocloud\Billing\CustomEvent>|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setCustomEvents($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Nocloud\Billing\CustomEvent::class);
+        $this->custom_events = $arr;
 
         return $this;
     }

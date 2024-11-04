@@ -48,7 +48,7 @@ class Playbook extends \Google\Protobuf\Internal\Message
      */
     private $supported_os;
     /**
-     * Whether this Playbook is private or not
+     * Is this Playbook visible only for root or not
      *
      * Generated from protobuf field <code>bool private = 7 [json_name = "private"];</code>
      */
@@ -72,7 +72,7 @@ class Playbook extends \Google\Protobuf\Internal\Message
      *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $supported_os
      *           List of supported platforms(OS) by this Playbook
      *     @type bool $private
-     *           Whether this Playbook is private or not
+     *           Is this Playbook visible only for root or not
      * }
      */
     public function __construct($data = NULL) {
@@ -231,7 +231,7 @@ class Playbook extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Whether this Playbook is private or not
+     * Is this Playbook visible only for root or not
      *
      * Generated from protobuf field <code>bool private = 7 [json_name = "private"];</code>
      * @return bool
@@ -242,7 +242,7 @@ class Playbook extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Whether this Playbook is private or not
+     * Is this Playbook visible only for root or not
      *
      * Generated from protobuf field <code>bool private = 7 [json_name = "private"];</code>
      * @param bool $var

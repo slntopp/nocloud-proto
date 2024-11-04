@@ -115,6 +115,16 @@ export declare enum PeriodKind {
    * @generated from enum value: CALENDAR_YEAR = 2;
    */
   CALENDAR_YEAR = 2,
+
+  /**
+   * @generated from enum value: CALENDAR_QUARTER = 3;
+   */
+  CALENDAR_QUARTER = 3,
+
+  /**
+   * @generated from enum value: CALENDAR_HALF_YEAR = 4;
+   */
+  CALENDAR_HALF_YEAR = 4,
 }
 
 /**
@@ -285,6 +295,35 @@ export declare class Fee extends Message<Fee> {
 }
 
 /**
+ * @generated from message nocloud.billing.CustomEvent
+ */
+export declare class CustomEvent extends Message<CustomEvent> {
+  /**
+   * @generated from field: string key = 1;
+   */
+  key: string;
+
+  /**
+   * @generated from field: string override = 2;
+   */
+  override: string;
+
+  constructor(data?: PartialMessage<CustomEvent>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.CustomEvent";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CustomEvent;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CustomEvent;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CustomEvent;
+
+  static equals(a: CustomEvent | PlainMessage<CustomEvent> | undefined, b: CustomEvent | PlainMessage<CustomEvent> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.billing.Plan
  */
 export declare class Plan extends Message<Plan> {
@@ -359,6 +398,11 @@ export declare class Plan extends Message<Plan> {
    * @generated from field: repeated string addons = 12;
    */
   addons: string[];
+
+  /**
+   * @generated from field: repeated nocloud.billing.CustomEvent custom_events = 13;
+   */
+  customEvents: CustomEvent[];
 
   constructor(data?: PartialMessage<Plan>);
 

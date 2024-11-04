@@ -121,7 +121,7 @@ export declare class Playbook extends Message<Playbook> {
   supportedOs: string[];
 
   /**
-   * Whether this Playbook is private or not
+   * Is this Playbook visible only for root or not
    *
    * @generated from field: bool private = 7;
    */
@@ -340,6 +340,8 @@ export declare class Instance extends Message<Instance> {
   pass?: string;
 
   /**
+   * Ansible Jump Host
+   *
    * @generated from field: optional string ansible_host = 6;
    */
   ansibleHost?: string;

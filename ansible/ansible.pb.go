@@ -129,7 +129,7 @@ type Playbook struct {
 	// (optionally Markdown) long description Marketplace like
 	Content     string   `protobuf:"bytes,5,opt,name=content,proto3" json:"content,omitempty"`                            // Ansible Playbook written in YAML
 	SupportedOs []string `protobuf:"bytes,6,rep,name=supported_os,json=supportedOs,proto3" json:"supported_os,omitempty"` // List of supported platforms(OS) by this Playbook
-	Private     bool     `protobuf:"varint,7,opt,name=private,proto3" json:"private,omitempty"`                           // Whether this Playbook is private or not
+	Private     bool     `protobuf:"varint,7,opt,name=private,proto3" json:"private,omitempty"`                           // Is this Playbook visible only for root or not
 }
 
 func (x *Playbook) Reset() {
@@ -483,11 +483,11 @@ type Instance struct {
 
 	Uuid string `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"` // NoCloud Instance UUID
 	// SSH Setup
-	Host        string  `protobuf:"bytes,2,opt,name=host,proto3" json:"host,omitempty"`       // SSH accessible hostname(hostname, IP addr, domain name)
-	Port        *string `protobuf:"bytes,3,opt,name=port,proto3,oneof" json:"port,omitempty"` // SSH port
-	User        *string `protobuf:"bytes,4,opt,name=user,proto3,oneof" json:"user,omitempty"` // SSH User
-	Pass        *string `protobuf:"bytes,5,opt,name=pass,proto3,oneof" json:"pass,omitempty"` // SSH Password
-	AnsibleHost *string `protobuf:"bytes,6,opt,name=ansible_host,json=ansibleHost,proto3,oneof" json:"ansible_host,omitempty"`
+	Host        string  `protobuf:"bytes,2,opt,name=host,proto3" json:"host,omitempty"`                                        // SSH accessible hostname(hostname, IP addr, domain name)
+	Port        *string `protobuf:"bytes,3,opt,name=port,proto3,oneof" json:"port,omitempty"`                                  // SSH port
+	User        *string `protobuf:"bytes,4,opt,name=user,proto3,oneof" json:"user,omitempty"`                                  // SSH User
+	Pass        *string `protobuf:"bytes,5,opt,name=pass,proto3,oneof" json:"pass,omitempty"`                                  // SSH Password
+	AnsibleHost *string `protobuf:"bytes,6,opt,name=ansible_host,json=ansibleHost,proto3,oneof" json:"ansible_host,omitempty"` // Ansible Jump Host
 	Python      *string `protobuf:"bytes,7,opt,name=python,proto3,oneof" json:"python,omitempty"`
 }
 
