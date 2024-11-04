@@ -69,6 +69,8 @@ export const PeriodKind = /*@__PURE__*/ proto3.makeEnum(
     {no: 0, name: "DEFAULT"},
     {no: 1, name: "CALENDAR_MONTH"},
     {no: 2, name: "CALENDAR_YEAR"},
+    {no: 3, name: "CALENDAR_QUARTER"},
+    {no: 4, name: "CALENDAR_HALF_YEAR"},
   ],
 );
 

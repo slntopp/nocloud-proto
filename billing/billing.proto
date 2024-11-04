@@ -101,6 +101,8 @@ enum PeriodKind {
     DEFAULT = 0;
     CALENDAR_MONTH = 1;
     CALENDAR_YEAR = 2;
+    CALENDAR_QUARTER = 3;
+    CALENDAR_HALF_YEAR = 4;
 }
 
 message ResourceConf {

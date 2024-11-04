@@ -115,6 +115,16 @@ export declare enum PeriodKind {
    * @generated from enum value: CALENDAR_YEAR = 2;
    */
   CALENDAR_YEAR = 2,
+
+  /**
+   * @generated from enum value: CALENDAR_QUARTER = 3;
+   */
+  CALENDAR_QUARTER = 3,
+
+  /**
+   * @generated from enum value: CALENDAR_HALF_YEAR = 4;
+   */
+  CALENDAR_HALF_YEAR = 4,
 }
 
 /**
