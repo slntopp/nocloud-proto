@@ -873,4 +873,10 @@ service PromocodesService {
       body: "*"
     };
   };
+  rpc Detach (promocodes.DetachPromocodeRequest) returns (promocodes.DetachPromocodeResponse) {
+    option (google.api.http) = {
+      post: "/billing/promocodes/detach"
+      body: "*"
+    };
+  };
 }

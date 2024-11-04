@@ -2379,6 +2379,7 @@ const (
 	PromocodesService_Count_FullMethodName     = "/nocloud.billing.PromocodesService/Count"
 	PromocodesService_Delete_FullMethodName    = "/nocloud.billing.PromocodesService/Delete"
 	PromocodesService_Apply_FullMethodName     = "/nocloud.billing.PromocodesService/Apply"
+	PromocodesService_Detach_FullMethodName    = "/nocloud.billing.PromocodesService/Detach"
 )
 
 // PromocodesServiceClient is the client API for PromocodesService service.
@@ -2393,6 +2394,7 @@ type PromocodesServiceClient interface {
 	Count(ctx context.Context, in *promocodes.CountPromocodesRequest, opts ...grpc.CallOption) (*promocodes.CountPromocodesResponse, error)
 	Delete(ctx context.Context, in *promocodes.Promocode, opts ...grpc.CallOption) (*promocodes.Promocode, error)
 	Apply(ctx context.Context, in *promocodes.ApplyPromocodeRequest, opts ...grpc.CallOption) (*promocodes.ApplyPromocodeResponse, error)
+	Detach(ctx context.Context, in *promocodes.DetachPromocodeRequest, opts ...grpc.CallOption) (*promocodes.DetachPromocodeResponse, error)
 }
 
 type promocodesServiceClient struct {
@@ -2483,6 +2485,16 @@ func (c *promocodesServiceClient) Apply(ctx context.Context, in *promocodes.Appl
 	return out, nil
 }
 
+func (c *promocodesServiceClient) Detach(ctx context.Context, in *promocodes.DetachPromocodeRequest, opts ...grpc.CallOption) (*promocodes.DetachPromocodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(promocodes.DetachPromocodeResponse)
+	err := c.cc.Invoke(ctx, PromocodesService_Detach_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PromocodesServiceServer is the server API for PromocodesService service.
 // All implementations must embed UnimplementedPromocodesServiceServer
 // for forward compatibility.
@@ -2495,6 +2507,7 @@ type PromocodesServiceServer interface {
 	Count(context.Context, *promocodes.CountPromocodesRequest) (*promocodes.CountPromocodesResponse, error)
 	Delete(context.Context, *promocodes.Promocode) (*promocodes.Promocode, error)
 	Apply(context.Context, *promocodes.ApplyPromocodeRequest) (*promocodes.ApplyPromocodeResponse, error)
+	Detach(context.Context, *promocodes.DetachPromocodeRequest) (*promocodes.DetachPromocodeResponse, error)
 	mustEmbedUnimplementedPromocodesServiceServer()
 }
 
@@ -2528,6 +2541,9 @@ func (UnimplementedPromocodesServiceServer) Delete(context.Context, *promocodes.
 }
 func (UnimplementedPromocodesServiceServer) Apply(context.Context, *promocodes.ApplyPromocodeRequest) (*promocodes.ApplyPromocodeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Apply not implemented")
+}
+func (UnimplementedPromocodesServiceServer) Detach(context.Context, *promocodes.DetachPromocodeRequest) (*promocodes.DetachPromocodeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Detach not implemented")
 }
 func (UnimplementedPromocodesServiceServer) mustEmbedUnimplementedPromocodesServiceServer() {}
 func (UnimplementedPromocodesServiceServer) testEmbeddedByValue()                           {}
@@ -2694,6 +2710,24 @@ func _PromocodesService_Apply_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PromocodesService_Detach_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(promocodes.DetachPromocodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PromocodesServiceServer).Detach(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PromocodesService_Detach_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PromocodesServiceServer).Detach(ctx, req.(*promocodes.DetachPromocodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PromocodesService_ServiceDesc is the grpc.ServiceDesc for PromocodesService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2732,6 +2766,10 @@ var PromocodesService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Apply",
 			Handler:    _PromocodesService_Apply_Handler,
+		},
+		{
+			MethodName: "Detach",
+			Handler:    _PromocodesService_Detach_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

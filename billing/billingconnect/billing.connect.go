@@ -228,6 +228,9 @@ const (
 	PromocodesServiceDeleteProcedure = "/nocloud.billing.PromocodesService/Delete"
 	// PromocodesServiceApplyProcedure is the fully-qualified name of the PromocodesService's Apply RPC.
 	PromocodesServiceApplyProcedure = "/nocloud.billing.PromocodesService/Apply"
+	// PromocodesServiceDetachProcedure is the fully-qualified name of the PromocodesService's Detach
+	// RPC.
+	PromocodesServiceDetachProcedure = "/nocloud.billing.PromocodesService/Detach"
 )
 
 // These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
@@ -299,6 +302,7 @@ var (
 	promocodesServiceCountMethodDescriptor                          = promocodesServiceServiceDescriptor.Methods().ByName("Count")
 	promocodesServiceDeleteMethodDescriptor                         = promocodesServiceServiceDescriptor.Methods().ByName("Delete")
 	promocodesServiceApplyMethodDescriptor                          = promocodesServiceServiceDescriptor.Methods().ByName("Apply")
+	promocodesServiceDetachMethodDescriptor                         = promocodesServiceServiceDescriptor.Methods().ByName("Detach")
 )
 
 // RecordsServiceClient is a client for the nocloud.billing.RecordsService service.
@@ -1901,6 +1905,7 @@ type PromocodesServiceClient interface {
 	Count(context.Context, *connect.Request[promocodes.CountPromocodesRequest]) (*connect.Response[promocodes.CountPromocodesResponse], error)
 	Delete(context.Context, *connect.Request[promocodes.Promocode]) (*connect.Response[promocodes.Promocode], error)
 	Apply(context.Context, *connect.Request[promocodes.ApplyPromocodeRequest]) (*connect.Response[promocodes.ApplyPromocodeResponse], error)
+	Detach(context.Context, *connect.Request[promocodes.DetachPromocodeRequest]) (*connect.Response[promocodes.DetachPromocodeResponse], error)
 }
 
 // NewPromocodesServiceClient constructs a client for the nocloud.billing.PromocodesService service.
@@ -1961,6 +1966,12 @@ func NewPromocodesServiceClient(httpClient connect.HTTPClient, baseURL string, o
 			connect.WithSchema(promocodesServiceApplyMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		detach: connect.NewClient[promocodes.DetachPromocodeRequest, promocodes.DetachPromocodeResponse](
+			httpClient,
+			baseURL+PromocodesServiceDetachProcedure,
+			connect.WithSchema(promocodesServiceDetachMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -1974,6 +1985,7 @@ type promocodesServiceClient struct {
 	count     *connect.Client[promocodes.CountPromocodesRequest, promocodes.CountPromocodesResponse]
 	delete    *connect.Client[promocodes.Promocode, promocodes.Promocode]
 	apply     *connect.Client[promocodes.ApplyPromocodeRequest, promocodes.ApplyPromocodeResponse]
+	detach    *connect.Client[promocodes.DetachPromocodeRequest, promocodes.DetachPromocodeResponse]
 }
 
 // Create calls nocloud.billing.PromocodesService.Create.
@@ -2016,6 +2028,11 @@ func (c *promocodesServiceClient) Apply(ctx context.Context, req *connect.Reques
 	return c.apply.CallUnary(ctx, req)
 }
 
+// Detach calls nocloud.billing.PromocodesService.Detach.
+func (c *promocodesServiceClient) Detach(ctx context.Context, req *connect.Request[promocodes.DetachPromocodeRequest]) (*connect.Response[promocodes.DetachPromocodeResponse], error) {
+	return c.detach.CallUnary(ctx, req)
+}
+
 // PromocodesServiceHandler is an implementation of the nocloud.billing.PromocodesService service.
 type PromocodesServiceHandler interface {
 	Create(context.Context, *connect.Request[promocodes.Promocode]) (*connect.Response[promocodes.Promocode], error)
@@ -2026,6 +2043,7 @@ type PromocodesServiceHandler interface {
 	Count(context.Context, *connect.Request[promocodes.CountPromocodesRequest]) (*connect.Response[promocodes.CountPromocodesResponse], error)
 	Delete(context.Context, *connect.Request[promocodes.Promocode]) (*connect.Response[promocodes.Promocode], error)
 	Apply(context.Context, *connect.Request[promocodes.ApplyPromocodeRequest]) (*connect.Response[promocodes.ApplyPromocodeResponse], error)
+	Detach(context.Context, *connect.Request[promocodes.DetachPromocodeRequest]) (*connect.Response[promocodes.DetachPromocodeResponse], error)
 }
 
 // NewPromocodesServiceHandler builds an HTTP handler from the service implementation. It returns
@@ -2082,6 +2100,12 @@ func NewPromocodesServiceHandler(svc PromocodesServiceHandler, opts ...connect.H
 		connect.WithSchema(promocodesServiceApplyMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	promocodesServiceDetachHandler := connect.NewUnaryHandler(
+		PromocodesServiceDetachProcedure,
+		svc.Detach,
+		connect.WithSchema(promocodesServiceDetachMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/nocloud.billing.PromocodesService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case PromocodesServiceCreateProcedure:
@@ -2100,6 +2124,8 @@ func NewPromocodesServiceHandler(svc PromocodesServiceHandler, opts ...connect.H
 			promocodesServiceDeleteHandler.ServeHTTP(w, r)
 		case PromocodesServiceApplyProcedure:
 			promocodesServiceApplyHandler.ServeHTTP(w, r)
+		case PromocodesServiceDetachProcedure:
+			promocodesServiceDetachHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -2139,4 +2165,8 @@ func (UnimplementedPromocodesServiceHandler) Delete(context.Context, *connect.Re
 
 func (UnimplementedPromocodesServiceHandler) Apply(context.Context, *connect.Request[promocodes.ApplyPromocodeRequest]) (*connect.Response[promocodes.ApplyPromocodeResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.PromocodesService.Apply is not implemented"))
+}
+
+func (UnimplementedPromocodesServiceHandler) Detach(context.Context, *connect.Request[promocodes.DetachPromocodeRequest]) (*connect.Response[promocodes.DetachPromocodeResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.PromocodesService.Detach is not implemented"))
 }

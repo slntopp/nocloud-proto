@@ -1428,6 +1428,14 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "filters",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          }
+        ],
         "tags": [
           "PromocodesService"
         ]
@@ -3006,14 +3014,10 @@
             "type": "string"
           },
           {
-            "name": "resources",
+            "name": "filters",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
             "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
+            "required": false
           }
         ],
         "tags": [
@@ -3075,6 +3079,38 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/promocodesApplyPromocodeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PromocodesService"
+        ]
+      }
+    },
+    "/billing/promocodes/detach": {
+      "post": {
+        "operationId": "PromocodesService_Detach",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/promocodesDetachPromocodeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/promocodesDetachPromocodeRequest"
             }
           }
         ],
@@ -9742,6 +9778,25 @@
         "total": {
           "type": "string",
           "format": "int64"
+        }
+      }
+    },
+    "promocodesDetachPromocodeRequest": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "resource": {
+          "type": "string"
+        }
+      }
+    },
+    "promocodesDetachPromocodeResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
         }
       }
     },

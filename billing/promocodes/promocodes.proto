@@ -80,14 +80,20 @@ message ListPromocodesRequest {
   optional uint64 limit = 2;
   optional string field = 3;
   optional string sort = 4;
-  repeated string resources = 5;
+  map<string, google.protobuf.Value> filters = 5;
 }
-message CountPromocodesRequest {}
+message CountPromocodesRequest {
+   map<string, google.protobuf.Value> filters = 1;
+}
 message GetPromocodeByCodeRequest {
   string code = 1;
 }
 message ApplyPromocodeRequest{
   string code = 1;
+  string resource = 2;
+}
+message DetachPromocodeRequest{
+  string uuid = 1;
   string resource = 2;
 }
 
@@ -99,5 +105,8 @@ message ListPromocodesResponse {
   repeated Promocode promocodes = 1;
 }
 message ApplyPromocodeResponse{
+  bool success = 1;
+}
+message DetachPromocodeResponse{
   bool success = 1;
 }

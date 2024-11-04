@@ -362,9 +362,9 @@ export declare class ListPromocodesRequest extends Message<ListPromocodesRequest
   sort?: string;
 
   /**
-   * @generated from field: repeated string resources = 5;
+   * @generated from field: map<string, google.protobuf.Value> filters = 5;
    */
-  resources: string[];
+  filters: { [key: string]: Value };
 
   constructor(data?: PartialMessage<ListPromocodesRequest>);
 
@@ -385,6 +385,11 @@ export declare class ListPromocodesRequest extends Message<ListPromocodesRequest
  * @generated from message nocloud.billing.promocodes.CountPromocodesRequest
  */
 export declare class CountPromocodesRequest extends Message<CountPromocodesRequest> {
+  /**
+   * @generated from field: map<string, google.protobuf.Value> filters = 1;
+   */
+  filters: { [key: string]: Value };
+
   constructor(data?: PartialMessage<CountPromocodesRequest>);
 
   static readonly runtime: typeof proto3;
@@ -451,6 +456,35 @@ export declare class ApplyPromocodeRequest extends Message<ApplyPromocodeRequest
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ApplyPromocodeRequest;
 
   static equals(a: ApplyPromocodeRequest | PlainMessage<ApplyPromocodeRequest> | undefined, b: ApplyPromocodeRequest | PlainMessage<ApplyPromocodeRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.promocodes.DetachPromocodeRequest
+ */
+export declare class DetachPromocodeRequest extends Message<DetachPromocodeRequest> {
+  /**
+   * @generated from field: string uuid = 1;
+   */
+  uuid: string;
+
+  /**
+   * @generated from field: string resource = 2;
+   */
+  resource: string;
+
+  constructor(data?: PartialMessage<DetachPromocodeRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.promocodes.DetachPromocodeRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DetachPromocodeRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DetachPromocodeRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DetachPromocodeRequest;
+
+  static equals(a: DetachPromocodeRequest | PlainMessage<DetachPromocodeRequest> | undefined, b: DetachPromocodeRequest | PlainMessage<DetachPromocodeRequest> | undefined): boolean;
 }
 
 /**
@@ -523,5 +557,29 @@ export declare class ApplyPromocodeResponse extends Message<ApplyPromocodeRespon
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ApplyPromocodeResponse;
 
   static equals(a: ApplyPromocodeResponse | PlainMessage<ApplyPromocodeResponse> | undefined, b: ApplyPromocodeResponse | PlainMessage<ApplyPromocodeResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.promocodes.DetachPromocodeResponse
+ */
+export declare class DetachPromocodeResponse extends Message<DetachPromocodeResponse> {
+  /**
+   * @generated from field: bool success = 1;
+   */
+  success: boolean;
+
+  constructor(data?: PartialMessage<DetachPromocodeResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.promocodes.DetachPromocodeResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DetachPromocodeResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DetachPromocodeResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DetachPromocodeResponse;
+
+  static equals(a: DetachPromocodeResponse | PlainMessage<DetachPromocodeResponse> | undefined, b: DetachPromocodeResponse | PlainMessage<DetachPromocodeResponse> | undefined): boolean;
 }
 

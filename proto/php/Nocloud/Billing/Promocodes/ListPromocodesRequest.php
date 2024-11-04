@@ -33,9 +33,9 @@ class ListPromocodesRequest extends \Google\Protobuf\Internal\Message
      */
     protected $sort = null;
     /**
-     * Generated from protobuf field <code>repeated string resources = 5 [json_name = "resources"];</code>
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> filters = 5 [json_name = "filters"];</code>
      */
-    private $resources;
+    private $filters;
 
     /**
      * Constructor.
@@ -47,7 +47,7 @@ class ListPromocodesRequest extends \Google\Protobuf\Internal\Message
      *     @type int|string $limit
      *     @type string $field
      *     @type string $sort
-     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $resources
+     *     @type array|\Google\Protobuf\Internal\MapField $filters
      * }
      */
     public function __construct($data = NULL) {
@@ -184,23 +184,23 @@ class ListPromocodesRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated string resources = 5 [json_name = "resources"];</code>
-     * @return \Google\Protobuf\Internal\RepeatedField
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> filters = 5 [json_name = "filters"];</code>
+     * @return \Google\Protobuf\Internal\MapField
      */
-    public function getResources()
+    public function getFilters()
     {
-        return $this->resources;
+        return $this->filters;
     }
 
     /**
-     * Generated from protobuf field <code>repeated string resources = 5 [json_name = "resources"];</code>
-     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> filters = 5 [json_name = "filters"];</code>
+     * @param array|\Google\Protobuf\Internal\MapField $var
      * @return $this
      */
-    public function setResources($var)
+    public function setFilters($var)
     {
-        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
-        $this->resources = $arr;
+        $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::MESSAGE, \Google\Protobuf\Value::class);
+        $this->filters = $arr;
 
         return $this;
     }

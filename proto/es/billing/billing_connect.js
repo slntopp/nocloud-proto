@@ -22,7 +22,7 @@ import { ConversionRequest, ConversionResponse, CreateCurrencyRequest, CreateCur
 import { MethodKind } from "@bufbuild/protobuf";
 import { Addon, BulkAddons, CountAddonsRequest, CountAddonsResponse, ListAddonsRequest, ListAddonsResponse } from "./addons/addons_pb.js";
 import { CountDescriptionsRequest, CountDescriptionsResponse, Description, ListDescriptionsRequest, ListDescriptionsResponse } from "./descriptions/descriptions_pb.js";
-import { ApplyPromocodeRequest, ApplyPromocodeResponse, CountPromocodesRequest, CountPromocodesResponse, GetPromocodeByCodeRequest, ListPromocodesRequest, ListPromocodesResponse, Promocode } from "./promocodes/promocodes_pb.js";
+import { ApplyPromocodeRequest, ApplyPromocodeResponse, CountPromocodesRequest, CountPromocodesResponse, DetachPromocodeRequest, DetachPromocodeResponse, GetPromocodeByCodeRequest, ListPromocodesRequest, ListPromocodesResponse, Promocode } from "./promocodes/promocodes_pb.js";
 
 /**
  * @generated from service nocloud.billing.RecordsService
@@ -622,6 +622,15 @@ export const PromocodesService = {
       name: "Apply",
       I: ApplyPromocodeRequest,
       O: ApplyPromocodeResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.PromocodesService.Detach
+     */
+    detach: {
+      name: "Detach",
+      I: DetachPromocodeRequest,
+      O: DetachPromocodeResponse,
       kind: MethodKind.Unary,
     },
   }

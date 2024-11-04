@@ -138,7 +138,7 @@ export const ListPromocodesRequest = /*@__PURE__*/ proto3.makeMessageType(
     { no: 2, name: "limit", kind: "scalar", T: 4 /* ScalarType.UINT64 */, opt: true },
     { no: 3, name: "field", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 4, name: "sort", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 5, name: "resources", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 5, name: "filters", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
   ],
 );
 
@@ -147,7 +147,9 @@ export const ListPromocodesRequest = /*@__PURE__*/ proto3.makeMessageType(
  */
 export const CountPromocodesRequest = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.billing.promocodes.CountPromocodesRequest",
-  [],
+  () => [
+    { no: 1, name: "filters", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
+  ],
 );
 
 /**
@@ -167,6 +169,17 @@ export const ApplyPromocodeRequest = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.billing.promocodes.ApplyPromocodeRequest",
   () => [
     { no: 1, name: "code", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "resource", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.promocodes.DetachPromocodeRequest
+ */
+export const DetachPromocodeRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.promocodes.DetachPromocodeRequest",
+  () => [
+    { no: 1, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "resource", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
@@ -196,6 +209,16 @@ export const ListPromocodesResponse = /*@__PURE__*/ proto3.makeMessageType(
  */
 export const ApplyPromocodeResponse = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.billing.promocodes.ApplyPromocodeResponse",
+  () => [
+    { no: 1, name: "success", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.promocodes.DetachPromocodeResponse
+ */
+export const DetachPromocodeResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.promocodes.DetachPromocodeResponse",
   () => [
     { no: 1, name: "success", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],

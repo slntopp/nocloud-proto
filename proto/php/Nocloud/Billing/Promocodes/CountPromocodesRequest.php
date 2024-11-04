@@ -14,6 +14,10 @@ use Google\Protobuf\Internal\GPBUtil;
  */
 class CountPromocodesRequest extends \Google\Protobuf\Internal\Message
 {
+    /**
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> filters = 1 [json_name = "filters"];</code>
+     */
+    private $filters;
 
     /**
      * Constructor.
@@ -21,11 +25,34 @@ class CountPromocodesRequest extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
+     *     @type array|\Google\Protobuf\Internal\MapField $filters
      * }
      */
     public function __construct($data = NULL) {
         \Nocloud\Billing\Promocodes\GPBMetadata\Promocodes::initOnce();
         parent::__construct($data);
+    }
+
+    /**
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> filters = 1 [json_name = "filters"];</code>
+     * @return \Google\Protobuf\Internal\MapField
+     */
+    public function getFilters()
+    {
+        return $this->filters;
+    }
+
+    /**
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> filters = 1 [json_name = "filters"];</code>
+     * @param array|\Google\Protobuf\Internal\MapField $var
+     * @return $this
+     */
+    public function setFilters($var)
+    {
+        $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::MESSAGE, \Google\Protobuf\Value::class);
+        $this->filters = $arr;
+
+        return $this;
     }
 
 }
