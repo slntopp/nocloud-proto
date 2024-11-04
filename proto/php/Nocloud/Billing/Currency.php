@@ -40,6 +40,10 @@ class Currency
      * Generated from protobuf enum <code>EUR_TECH = 6;</code>
      */
     const EUR_TECH = 6;
+    /**
+     * Generated from protobuf enum <code>RUB = 7;</code>
+     */
+    const RUB = 7;
 
     private static $valueToName = [
         self::NCU => 'NCU',
@@ -49,6 +53,7 @@ class Currency
         self::PLN => 'PLN',
         self::EUR_COLO => 'EUR_COLO',
         self::EUR_TECH => 'EUR_TECH',
+        self::RUB => 'RUB',
     ];
 
     public static function name($value)
