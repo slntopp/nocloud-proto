@@ -41,7 +41,7 @@ class Promocode extends \Google\Protobuf\Internal\Message
      */
     protected $state = 0;
     /**
-     * 0 - unlimited.
+     * 0 - unlimited. User can't apply promocode after due_date
      *
      * Generated from protobuf field <code>int64 due_date = 7 [json_name = "dueDate"];</code>
      */
@@ -59,21 +59,27 @@ class Promocode extends \Google\Protobuf\Internal\Message
      */
     protected $uses_per_user = 0;
     /**
-     * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 10 [json_name = "meta"];</code>
+     * how many seconds promocode is active after it was applied
+     *
+     * Generated from protobuf field <code>int64 active_time = 10 [json_name = "activeTime"];</code>
+     */
+    protected $active_time = 0;
+    /**
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 11 [json_name = "meta"];</code>
      */
     private $meta;
     /**
-     * Generated from protobuf field <code>int64 created = 11 [json_name = "created"];</code>
+     * Generated from protobuf field <code>int64 created = 12 [json_name = "created"];</code>
      */
     protected $created = 0;
     /**
-     * Generated from protobuf field <code>repeated .nocloud.billing.promocodes.PromoItem promo_items = 12 [json_name = "promoItems"];</code>
+     * Generated from protobuf field <code>repeated .nocloud.billing.promocodes.PromoItem promo_items = 13 [json_name = "promoItems"];</code>
      */
     private $promo_items;
     /**
      * Read-only field containing all promocode uses
      *
-     * Generated from protobuf field <code>repeated .nocloud.billing.promocodes.EntryResource uses = 13 [json_name = "uses"];</code>
+     * Generated from protobuf field <code>repeated .nocloud.billing.promocodes.EntryResource uses = 14 [json_name = "uses"];</code>
      */
     private $uses;
 
@@ -91,11 +97,13 @@ class Promocode extends \Google\Protobuf\Internal\Message
      *     @type int $status
      *     @type int $state
      *     @type int|string $due_date
-     *           0 - unlimited.
+     *           0 - unlimited. User can't apply promocode after due_date
      *     @type int|string $limit
      *           how many times this promocode can be used globally. 0 - unlimited
      *     @type int|string $uses_per_user
      *           how many times this promocode can be used per one user. 0 - unlimited
+     *     @type int|string $active_time
+     *           how many seconds promocode is active after it was applied
      *     @type array|\Google\Protobuf\Internal\MapField $meta
      *     @type int|string $created
      *     @type array<\Nocloud\Billing\Promocodes\PromoItem>|\Google\Protobuf\Internal\RepeatedField $promo_items
@@ -245,7 +253,7 @@ class Promocode extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * 0 - unlimited.
+     * 0 - unlimited. User can't apply promocode after due_date
      *
      * Generated from protobuf field <code>int64 due_date = 7 [json_name = "dueDate"];</code>
      * @return int|string
@@ -256,7 +264,7 @@ class Promocode extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * 0 - unlimited.
+     * 0 - unlimited. User can't apply promocode after due_date
      *
      * Generated from protobuf field <code>int64 due_date = 7 [json_name = "dueDate"];</code>
      * @param int|string $var
@@ -323,7 +331,33 @@ class Promocode extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 10 [json_name = "meta"];</code>
+     * how many seconds promocode is active after it was applied
+     *
+     * Generated from protobuf field <code>int64 active_time = 10 [json_name = "activeTime"];</code>
+     * @return int|string
+     */
+    public function getActiveTime()
+    {
+        return $this->active_time;
+    }
+
+    /**
+     * how many seconds promocode is active after it was applied
+     *
+     * Generated from protobuf field <code>int64 active_time = 10 [json_name = "activeTime"];</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setActiveTime($var)
+    {
+        GPBUtil::checkInt64($var);
+        $this->active_time = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 11 [json_name = "meta"];</code>
      * @return \Google\Protobuf\Internal\MapField
      */
     public function getMeta()
@@ -332,7 +366,7 @@ class Promocode extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 10 [json_name = "meta"];</code>
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 11 [json_name = "meta"];</code>
      * @param array|\Google\Protobuf\Internal\MapField $var
      * @return $this
      */
@@ -345,7 +379,7 @@ class Promocode extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int64 created = 11 [json_name = "created"];</code>
+     * Generated from protobuf field <code>int64 created = 12 [json_name = "created"];</code>
      * @return int|string
      */
     public function getCreated()
@@ -354,7 +388,7 @@ class Promocode extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int64 created = 11 [json_name = "created"];</code>
+     * Generated from protobuf field <code>int64 created = 12 [json_name = "created"];</code>
      * @param int|string $var
      * @return $this
      */
@@ -367,7 +401,7 @@ class Promocode extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated .nocloud.billing.promocodes.PromoItem promo_items = 12 [json_name = "promoItems"];</code>
+     * Generated from protobuf field <code>repeated .nocloud.billing.promocodes.PromoItem promo_items = 13 [json_name = "promoItems"];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getPromoItems()
@@ -376,7 +410,7 @@ class Promocode extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>repeated .nocloud.billing.promocodes.PromoItem promo_items = 12 [json_name = "promoItems"];</code>
+     * Generated from protobuf field <code>repeated .nocloud.billing.promocodes.PromoItem promo_items = 13 [json_name = "promoItems"];</code>
      * @param array<\Nocloud\Billing\Promocodes\PromoItem>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
@@ -391,7 +425,7 @@ class Promocode extends \Google\Protobuf\Internal\Message
     /**
      * Read-only field containing all promocode uses
      *
-     * Generated from protobuf field <code>repeated .nocloud.billing.promocodes.EntryResource uses = 13 [json_name = "uses"];</code>
+     * Generated from protobuf field <code>repeated .nocloud.billing.promocodes.EntryResource uses = 14 [json_name = "uses"];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getUses()
@@ -402,7 +436,7 @@ class Promocode extends \Google\Protobuf\Internal\Message
     /**
      * Read-only field containing all promocode uses
      *
-     * Generated from protobuf field <code>repeated .nocloud.billing.promocodes.EntryResource uses = 13 [json_name = "uses"];</code>
+     * Generated from protobuf field <code>repeated .nocloud.billing.promocodes.EntryResource uses = 14 [json_name = "uses"];</code>
      * @param array<\Nocloud\Billing\Promocodes\EntryResource>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */

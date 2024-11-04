@@ -98,7 +98,7 @@ export declare class Promocode extends Message<Promocode> {
   state: PromocodeState;
 
   /**
-   * 0 - unlimited.
+   * 0 - unlimited. User can't apply promocode after due_date
    *
    * @generated from field: int64 due_date = 7;
    */
@@ -119,24 +119,31 @@ export declare class Promocode extends Message<Promocode> {
   usesPerUser: bigint;
 
   /**
-   * @generated from field: map<string, google.protobuf.Value> meta = 10;
+   * how many seconds promocode is active after it was applied
+   *
+   * @generated from field: int64 active_time = 10;
+   */
+  activeTime: bigint;
+
+  /**
+   * @generated from field: map<string, google.protobuf.Value> meta = 11;
    */
   meta: { [key: string]: Value };
 
   /**
-   * @generated from field: int64 created = 11;
+   * @generated from field: int64 created = 12;
    */
   created: bigint;
 
   /**
-   * @generated from field: repeated nocloud.billing.promocodes.PromoItem promo_items = 12;
+   * @generated from field: repeated nocloud.billing.promocodes.PromoItem promo_items = 13;
    */
   promoItems: PromoItem[];
 
   /**
    * Read-only field containing all promocode uses
    *
-   * @generated from field: repeated nocloud.billing.promocodes.EntryResource uses = 13;
+   * @generated from field: repeated nocloud.billing.promocodes.EntryResource uses = 14;
    */
   uses: EntryResource[];
 

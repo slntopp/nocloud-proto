@@ -3221,7 +3221,7 @@
           },
           {
             "name": "dueDate",
-            "description": "0 - unlimited.",
+            "description": "0 - unlimited. User can't apply promocode after due_date",
             "in": "query",
             "required": false,
             "type": "string",
@@ -3238,6 +3238,14 @@
           {
             "name": "usesPerUser",
             "description": "how many times this promocode can be used per one user. 0 - unlimited",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "activeTime",
+            "description": "how many seconds promocode is active after it was applied",
             "in": "query",
             "required": false,
             "type": "string",
@@ -3332,7 +3340,7 @@
           },
           {
             "name": "dueDate",
-            "description": "0 - unlimited.",
+            "description": "0 - unlimited. User can't apply promocode after due_date",
             "in": "query",
             "required": false,
             "type": "string",
@@ -3349,6 +3357,14 @@
           {
             "name": "usesPerUser",
             "description": "how many times this promocode can be used per one user. 0 - unlimited",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "activeTime",
+            "description": "how many seconds promocode is active after it was applied",
             "in": "query",
             "required": false,
             "type": "string",
@@ -8195,7 +8211,7 @@
         "dueDate": {
           "type": "string",
           "format": "int64",
-          "description": "0 - unlimited."
+          "title": "0 - unlimited. User can't apply promocode after due_date"
         },
         "limit": {
           "type": "string",
@@ -8206,6 +8222,11 @@
           "type": "string",
           "format": "int64",
           "title": "how many times this promocode can be used per one user. 0 - unlimited"
+        },
+        "activeTime": {
+          "type": "string",
+          "format": "int64",
+          "title": "how many seconds promocode is active after it was applied"
         },
         "meta": {
           "type": "object",
@@ -9887,7 +9908,7 @@
         "dueDate": {
           "type": "string",
           "format": "int64",
-          "description": "0 - unlimited."
+          "title": "0 - unlimited. User can't apply promocode after due_date"
         },
         "limit": {
           "type": "string",
@@ -9898,6 +9919,11 @@
           "type": "string",
           "format": "int64",
           "title": "how many times this promocode can be used per one user. 0 - unlimited"
+        },
+        "activeTime": {
+          "type": "string",
+          "format": "int64",
+          "title": "how many seconds promocode is active after it was applied"
         },
         "meta": {
           "type": "object",

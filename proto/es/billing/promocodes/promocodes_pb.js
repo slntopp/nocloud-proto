@@ -49,10 +49,11 @@ export const Promocode = /*@__PURE__*/ proto3.makeMessageType(
     { no: 7, name: "due_date", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 8, name: "limit", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 9, name: "uses_per_user", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 10, name: "meta", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
-    { no: 11, name: "created", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 12, name: "promo_items", kind: "message", T: PromoItem, repeated: true },
-    { no: 13, name: "uses", kind: "message", T: EntryResource, repeated: true },
+    { no: 10, name: "active_time", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 11, name: "meta", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
+    { no: 12, name: "created", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 13, name: "promo_items", kind: "message", T: PromoItem, repeated: true },
+    { no: 14, name: "uses", kind: "message", T: EntryResource, repeated: true },
   ],
 );
 
