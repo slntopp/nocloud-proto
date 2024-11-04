@@ -44,7 +44,7 @@ message Playbook {
   // List of supported platforms(OS) by this Playbook
 
   bool private = 7;
-  // Whether this Playbook is private or not
+  // Is this Playbook visible only for root or not
 }
 
 message Run {
@@ -84,7 +84,7 @@ message Instance {
 
   optional string user = 4; // SSH User
   optional string pass = 5; // SSH Password
-  optional string ansible_host = 6;
+  optional string ansible_host = 6; // Ansible Jump Host
   optional string python = 7;
 }
 

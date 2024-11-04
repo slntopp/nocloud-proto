@@ -24,11 +24,21 @@ class PeriodKind
      * Generated from protobuf enum <code>CALENDAR_YEAR = 2;</code>
      */
     const CALENDAR_YEAR = 2;
+    /**
+     * Generated from protobuf enum <code>CALENDAR_QUARTER = 3;</code>
+     */
+    const CALENDAR_QUARTER = 3;
+    /**
+     * Generated from protobuf enum <code>CALENDAR_HALF_YEAR = 4;</code>
+     */
+    const CALENDAR_HALF_YEAR = 4;
 
     private static $valueToName = [
         self::PBDEFAULT => 'DEFAULT',
         self::CALENDAR_MONTH => 'CALENDAR_MONTH',
         self::CALENDAR_YEAR => 'CALENDAR_YEAR',
+        self::CALENDAR_QUARTER => 'CALENDAR_QUARTER',
+        self::CALENDAR_HALF_YEAR => 'CALENDAR_HALF_YEAR',
     ];
 
     public static function name($value)

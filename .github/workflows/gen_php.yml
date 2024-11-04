@@ -4,6 +4,7 @@ on:
     branches:
       - master
       - v2
+      - '!dependabot/**'
 jobs:
   build:
     runs-on: ubuntu-latest

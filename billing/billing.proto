@@ -53,6 +53,11 @@ message Fee {
   repeated FeeRange ranges = 4;
 }
 
+message CustomEvent {
+    string key = 1;
+    string override = 2;
+}
+
 message Plan {
   string uuid = 1;
   string title = 2;
@@ -71,6 +76,7 @@ message Plan {
 
   statuses.NoCloudStatus status = 11;
   repeated string addons = 12;
+  repeated CustomEvent custom_events = 13;
 }
 
 message ListRequest {
@@ -117,9 +123,11 @@ enum Kind {
 }
 
 enum PeriodKind {
-  DEFAULT = 0;
-  CALENDAR_MONTH = 1;
-  CALENDAR_YEAR = 2;
+    DEFAULT = 0;
+    CALENDAR_MONTH = 1;
+    CALENDAR_YEAR = 2;
+    CALENDAR_QUARTER = 3;
+    CALENDAR_HALF_YEAR = 4;
 }
 
 message ResourceConf {
