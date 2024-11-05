@@ -28,6 +28,12 @@ class EntryResource extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>int64 exec = 3 [json_name = "exec"];</code>
      */
     protected $exec = 0;
+    /**
+     * Account, that used promocode
+     *
+     * Generated from protobuf field <code>string account = 4 [json_name = "account"];</code>
+     */
+    protected $account = '';
 
     /**
      * Constructor.
@@ -39,6 +45,8 @@ class EntryResource extends \Google\Protobuf\Internal\Message
      *     @type string $instance
      *     @type int|string $exec
      *           Time of promocode usage
+     *     @type string $account
+     *           Account, that used promocode
      * }
      */
     public function __construct($data = NULL) {
@@ -132,6 +140,32 @@ class EntryResource extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt64($var);
         $this->exec = $var;
+
+        return $this;
+    }
+
+    /**
+     * Account, that used promocode
+     *
+     * Generated from protobuf field <code>string account = 4 [json_name = "account"];</code>
+     * @return string
+     */
+    public function getAccount()
+    {
+        return $this->account;
+    }
+
+    /**
+     * Account, that used promocode
+     *
+     * Generated from protobuf field <code>string account = 4 [json_name = "account"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setAccount($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->account = $var;
 
         return $this;
     }

@@ -9834,6 +9834,10 @@
           "type": "string",
           "format": "int64",
           "title": "Time of promocode usage"
+        },
+        "account": {
+          "type": "string",
+          "title": "Account, that used promocode"
         }
       }
     },

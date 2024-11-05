@@ -124,6 +124,7 @@ export const EntryResource = /*@__PURE__*/ proto3.makeMessageType(
     { no: 1, name: "invoice", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 2, name: "instance", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 3, name: "exec", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 4, name: "account", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

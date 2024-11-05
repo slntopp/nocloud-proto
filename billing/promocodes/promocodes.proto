@@ -74,6 +74,7 @@ message EntryResource{
    optional string invoice = 1;
    optional string instance = 2;
    int64 exec = 3; // Time of promocode usage
+   string account = 4; // Account, that used promocode
 }
 
 // API

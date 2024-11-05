@@ -327,6 +327,13 @@ export declare class EntryResource extends Message<EntryResource> {
    */
   exec: bigint;
 
+  /**
+   * Account, that used promocode
+   *
+   * @generated from field: string account = 4;
+   */
+  account: string;
+
   constructor(data?: PartialMessage<EntryResource>);
 
   static readonly runtime: typeof proto3;
