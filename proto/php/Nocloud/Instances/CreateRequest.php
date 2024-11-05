@@ -22,6 +22,12 @@ class CreateRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.nocloud.instances.Instance instance = 2 [json_name = "instance"];</code>
      */
     protected $instance = null;
+    /**
+     * uuid of promocode
+     *
+     * Generated from protobuf field <code>optional string promocode = 3 [json_name = "promocode"];</code>
+     */
+    protected $promocode = null;
 
     /**
      * Constructor.
@@ -31,6 +37,8 @@ class CreateRequest extends \Google\Protobuf\Internal\Message
      *
      *     @type string $ig
      *     @type \Nocloud\Instances\Instance $instance
+     *     @type string $promocode
+     *           uuid of promocode
      * }
      */
     public function __construct($data = NULL) {
@@ -88,6 +96,42 @@ class CreateRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Nocloud\Instances\Instance::class);
         $this->instance = $var;
+
+        return $this;
+    }
+
+    /**
+     * uuid of promocode
+     *
+     * Generated from protobuf field <code>optional string promocode = 3 [json_name = "promocode"];</code>
+     * @return string
+     */
+    public function getPromocode()
+    {
+        return isset($this->promocode) ? $this->promocode : '';
+    }
+
+    public function hasPromocode()
+    {
+        return isset($this->promocode);
+    }
+
+    public function clearPromocode()
+    {
+        unset($this->promocode);
+    }
+
+    /**
+     * uuid of promocode
+     *
+     * Generated from protobuf field <code>optional string promocode = 3 [json_name = "promocode"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setPromocode($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->promocode = $var;
 
         return $this;
     }
