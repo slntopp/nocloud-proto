@@ -836,6 +836,13 @@ export declare class CreateRequest extends Message<CreateRequest> {
    */
   instance?: Instance;
 
+  /**
+   * uuid of promocode
+   *
+   * @generated from field: optional string promocode = 3;
+   */
+  promocode?: string;
+
   constructor(data?: PartialMessage<CreateRequest>);
 
   static readonly runtime: typeof proto3;

@@ -9400,6 +9400,10 @@
         },
         "instance": {
           "$ref": "#/definitions/nocloudinstancesInstance"
+        },
+        "promocode": {
+          "type": "string",
+          "title": "uuid of promocode"
         }
       }
     },

@@ -182,6 +182,7 @@ message ListInstancesResponse {
 message CreateRequest{
     string ig = 1;
     Instance instance = 2;
+    optional string promocode = 3; // uuid of promocode
 }
 
 message CreateResponse{
