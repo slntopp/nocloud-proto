@@ -382,6 +382,20 @@ class BillingServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * @param \Nocloud\Billing\CreateRenewalInvoiceRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function CreateRenewalInvoice(\Nocloud\Billing\CreateRenewalInvoiceRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/CreateRenewalInvoice',
+        $argument,
+        ['\Nocloud\Billing\Invoice', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * @param \Nocloud\Billing\PayWithBalanceRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
