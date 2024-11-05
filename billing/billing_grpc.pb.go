@@ -240,6 +240,7 @@ const (
 	BillingService_Pay_FullMethodName                               = "/nocloud.billing.BillingService/Pay"
 	BillingService_UpdateInvoiceStatus_FullMethodName               = "/nocloud.billing.BillingService/UpdateInvoiceStatus"
 	BillingService_CreateTopUpBalanceInvoice_FullMethodName         = "/nocloud.billing.BillingService/CreateTopUpBalanceInvoice"
+	BillingService_CreateRenewalInvoice_FullMethodName              = "/nocloud.billing.BillingService/CreateRenewalInvoice"
 	BillingService_PayWithBalance_FullMethodName                    = "/nocloud.billing.BillingService/PayWithBalance"
 	BillingService_GetInvoiceSettingsTemplateExample_FullMethodName = "/nocloud.billing.BillingService/GetInvoiceSettingsTemplateExample"
 )
@@ -273,6 +274,7 @@ type BillingServiceClient interface {
 	Pay(ctx context.Context, in *PayRequest, opts ...grpc.CallOption) (*PayResponse, error)
 	UpdateInvoiceStatus(ctx context.Context, in *UpdateInvoiceStatusRequest, opts ...grpc.CallOption) (*Invoice, error)
 	CreateTopUpBalanceInvoice(ctx context.Context, in *CreateTopUpBalanceInvoiceRequest, opts ...grpc.CallOption) (*Invoice, error)
+	CreateRenewalInvoice(ctx context.Context, in *CreateRenewalInvoiceRequest, opts ...grpc.CallOption) (*Invoice, error)
 	PayWithBalance(ctx context.Context, in *PayWithBalanceRequest, opts ...grpc.CallOption) (*PayWithBalanceResponse, error)
 	GetInvoiceSettingsTemplateExample(ctx context.Context, in *GetInvoiceSettingsTemplateExampleRequest, opts ...grpc.CallOption) (*GetInvoiceSettingsTemplateExampleResponse, error)
 }
@@ -535,6 +537,16 @@ func (c *billingServiceClient) CreateTopUpBalanceInvoice(ctx context.Context, in
 	return out, nil
 }
 
+func (c *billingServiceClient) CreateRenewalInvoice(ctx context.Context, in *CreateRenewalInvoiceRequest, opts ...grpc.CallOption) (*Invoice, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Invoice)
+	err := c.cc.Invoke(ctx, BillingService_CreateRenewalInvoice_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *billingServiceClient) PayWithBalance(ctx context.Context, in *PayWithBalanceRequest, opts ...grpc.CallOption) (*PayWithBalanceResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(PayWithBalanceResponse)
@@ -584,6 +596,7 @@ type BillingServiceServer interface {
 	Pay(context.Context, *PayRequest) (*PayResponse, error)
 	UpdateInvoiceStatus(context.Context, *UpdateInvoiceStatusRequest) (*Invoice, error)
 	CreateTopUpBalanceInvoice(context.Context, *CreateTopUpBalanceInvoiceRequest) (*Invoice, error)
+	CreateRenewalInvoice(context.Context, *CreateRenewalInvoiceRequest) (*Invoice, error)
 	PayWithBalance(context.Context, *PayWithBalanceRequest) (*PayWithBalanceResponse, error)
 	GetInvoiceSettingsTemplateExample(context.Context, *GetInvoiceSettingsTemplateExampleRequest) (*GetInvoiceSettingsTemplateExampleResponse, error)
 	mustEmbedUnimplementedBillingServiceServer()
@@ -670,6 +683,9 @@ func (UnimplementedBillingServiceServer) UpdateInvoiceStatus(context.Context, *U
 }
 func (UnimplementedBillingServiceServer) CreateTopUpBalanceInvoice(context.Context, *CreateTopUpBalanceInvoiceRequest) (*Invoice, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateTopUpBalanceInvoice not implemented")
+}
+func (UnimplementedBillingServiceServer) CreateRenewalInvoice(context.Context, *CreateRenewalInvoiceRequest) (*Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateRenewalInvoice not implemented")
 }
 func (UnimplementedBillingServiceServer) PayWithBalance(context.Context, *PayWithBalanceRequest) (*PayWithBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PayWithBalance not implemented")
@@ -1148,6 +1164,24 @@ func _BillingService_CreateTopUpBalanceInvoice_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BillingService_CreateRenewalInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateRenewalInvoiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).CreateRenewalInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_CreateRenewalInvoice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).CreateRenewalInvoice(ctx, req.(*CreateRenewalInvoiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BillingService_PayWithBalance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PayWithBalanceRequest)
 	if err := dec(in); err != nil {
@@ -1290,6 +1324,10 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateTopUpBalanceInvoice",
 			Handler:    _BillingService_CreateTopUpBalanceInvoice_Handler,
+		},
+		{
+			MethodName: "CreateRenewalInvoice",
+			Handler:    _BillingService_CreateRenewalInvoice_Handler,
 		},
 		{
 			MethodName: "PayWithBalance",

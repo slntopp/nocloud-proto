@@ -460,6 +460,9 @@ message GetInvoiceSettingsTemplateExampleResponse {
 message CreateTopUpBalanceInvoiceRequest{
   double sum = 1;
 }
+message CreateRenewalInvoiceRequest{
+  string instance = 1;
+}
 
 message PayWithBalanceRequest {
   string invoice_uuid = 1;
@@ -606,6 +609,12 @@ service BillingService {
   rpc CreateTopUpBalanceInvoice(CreateTopUpBalanceInvoiceRequest) returns (Invoice) {
     option (google.api.http) = {
       put: "/billing/invoices/topup"
+      body: "*"
+    };
+  };
+  rpc CreateRenewalInvoice(CreateRenewalInvoiceRequest) returns (Invoice) {
+    option (google.api.http) = {
+      put: "/billing/invoices/renewal"
       body: "*"
     };
   };

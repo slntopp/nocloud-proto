@@ -141,6 +141,9 @@ const (
 	// BillingServiceCreateTopUpBalanceInvoiceProcedure is the fully-qualified name of the
 	// BillingService's CreateTopUpBalanceInvoice RPC.
 	BillingServiceCreateTopUpBalanceInvoiceProcedure = "/nocloud.billing.BillingService/CreateTopUpBalanceInvoice"
+	// BillingServiceCreateRenewalInvoiceProcedure is the fully-qualified name of the BillingService's
+	// CreateRenewalInvoice RPC.
+	BillingServiceCreateRenewalInvoiceProcedure = "/nocloud.billing.BillingService/CreateRenewalInvoice"
 	// BillingServicePayWithBalanceProcedure is the fully-qualified name of the BillingService's
 	// PayWithBalance RPC.
 	BillingServicePayWithBalanceProcedure = "/nocloud.billing.BillingService/PayWithBalance"
@@ -265,6 +268,7 @@ var (
 	billingServicePayMethodDescriptor                               = billingServiceServiceDescriptor.Methods().ByName("Pay")
 	billingServiceUpdateInvoiceStatusMethodDescriptor               = billingServiceServiceDescriptor.Methods().ByName("UpdateInvoiceStatus")
 	billingServiceCreateTopUpBalanceInvoiceMethodDescriptor         = billingServiceServiceDescriptor.Methods().ByName("CreateTopUpBalanceInvoice")
+	billingServiceCreateRenewalInvoiceMethodDescriptor              = billingServiceServiceDescriptor.Methods().ByName("CreateRenewalInvoice")
 	billingServicePayWithBalanceMethodDescriptor                    = billingServiceServiceDescriptor.Methods().ByName("PayWithBalance")
 	billingServiceGetInvoiceSettingsTemplateExampleMethodDescriptor = billingServiceServiceDescriptor.Methods().ByName("GetInvoiceSettingsTemplateExample")
 	currencyServiceServiceDescriptor                                = billing.File_billing_billing_proto.Services().ByName("CurrencyService")
@@ -452,6 +456,7 @@ type BillingServiceClient interface {
 	Pay(context.Context, *connect.Request[billing.PayRequest]) (*connect.Response[billing.PayResponse], error)
 	UpdateInvoiceStatus(context.Context, *connect.Request[billing.UpdateInvoiceStatusRequest]) (*connect.Response[billing.Invoice], error)
 	CreateTopUpBalanceInvoice(context.Context, *connect.Request[billing.CreateTopUpBalanceInvoiceRequest]) (*connect.Response[billing.Invoice], error)
+	CreateRenewalInvoice(context.Context, *connect.Request[billing.CreateRenewalInvoiceRequest]) (*connect.Response[billing.Invoice], error)
 	PayWithBalance(context.Context, *connect.Request[billing.PayWithBalanceRequest]) (*connect.Response[billing.PayWithBalanceResponse], error)
 	GetInvoiceSettingsTemplateExample(context.Context, *connect.Request[billing.GetInvoiceSettingsTemplateExampleRequest]) (*connect.Response[billing.GetInvoiceSettingsTemplateExampleResponse], error)
 }
@@ -616,6 +621,12 @@ func NewBillingServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(billingServiceCreateTopUpBalanceInvoiceMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		createRenewalInvoice: connect.NewClient[billing.CreateRenewalInvoiceRequest, billing.Invoice](
+			httpClient,
+			baseURL+BillingServiceCreateRenewalInvoiceProcedure,
+			connect.WithSchema(billingServiceCreateRenewalInvoiceMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 		payWithBalance: connect.NewClient[billing.PayWithBalanceRequest, billing.PayWithBalanceResponse](
 			httpClient,
 			baseURL+BillingServicePayWithBalanceProcedure,
@@ -658,6 +669,7 @@ type billingServiceClient struct {
 	pay                               *connect.Client[billing.PayRequest, billing.PayResponse]
 	updateInvoiceStatus               *connect.Client[billing.UpdateInvoiceStatusRequest, billing.Invoice]
 	createTopUpBalanceInvoice         *connect.Client[billing.CreateTopUpBalanceInvoiceRequest, billing.Invoice]
+	createRenewalInvoice              *connect.Client[billing.CreateRenewalInvoiceRequest, billing.Invoice]
 	payWithBalance                    *connect.Client[billing.PayWithBalanceRequest, billing.PayWithBalanceResponse]
 	getInvoiceSettingsTemplateExample *connect.Client[billing.GetInvoiceSettingsTemplateExampleRequest, billing.GetInvoiceSettingsTemplateExampleResponse]
 }
@@ -787,6 +799,11 @@ func (c *billingServiceClient) CreateTopUpBalanceInvoice(ctx context.Context, re
 	return c.createTopUpBalanceInvoice.CallUnary(ctx, req)
 }
 
+// CreateRenewalInvoice calls nocloud.billing.BillingService.CreateRenewalInvoice.
+func (c *billingServiceClient) CreateRenewalInvoice(ctx context.Context, req *connect.Request[billing.CreateRenewalInvoiceRequest]) (*connect.Response[billing.Invoice], error) {
+	return c.createRenewalInvoice.CallUnary(ctx, req)
+}
+
 // PayWithBalance calls nocloud.billing.BillingService.PayWithBalance.
 func (c *billingServiceClient) PayWithBalance(ctx context.Context, req *connect.Request[billing.PayWithBalanceRequest]) (*connect.Response[billing.PayWithBalanceResponse], error) {
 	return c.payWithBalance.CallUnary(ctx, req)
@@ -825,6 +842,7 @@ type BillingServiceHandler interface {
 	Pay(context.Context, *connect.Request[billing.PayRequest]) (*connect.Response[billing.PayResponse], error)
 	UpdateInvoiceStatus(context.Context, *connect.Request[billing.UpdateInvoiceStatusRequest]) (*connect.Response[billing.Invoice], error)
 	CreateTopUpBalanceInvoice(context.Context, *connect.Request[billing.CreateTopUpBalanceInvoiceRequest]) (*connect.Response[billing.Invoice], error)
+	CreateRenewalInvoice(context.Context, *connect.Request[billing.CreateRenewalInvoiceRequest]) (*connect.Response[billing.Invoice], error)
 	PayWithBalance(context.Context, *connect.Request[billing.PayWithBalanceRequest]) (*connect.Response[billing.PayWithBalanceResponse], error)
 	GetInvoiceSettingsTemplateExample(context.Context, *connect.Request[billing.GetInvoiceSettingsTemplateExampleRequest]) (*connect.Response[billing.GetInvoiceSettingsTemplateExampleResponse], error)
 }
@@ -985,6 +1003,12 @@ func NewBillingServiceHandler(svc BillingServiceHandler, opts ...connect.Handler
 		connect.WithSchema(billingServiceCreateTopUpBalanceInvoiceMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	billingServiceCreateRenewalInvoiceHandler := connect.NewUnaryHandler(
+		BillingServiceCreateRenewalInvoiceProcedure,
+		svc.CreateRenewalInvoice,
+		connect.WithSchema(billingServiceCreateRenewalInvoiceMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	billingServicePayWithBalanceHandler := connect.NewUnaryHandler(
 		BillingServicePayWithBalanceProcedure,
 		svc.PayWithBalance,
@@ -1049,6 +1073,8 @@ func NewBillingServiceHandler(svc BillingServiceHandler, opts ...connect.Handler
 			billingServiceUpdateInvoiceStatusHandler.ServeHTTP(w, r)
 		case BillingServiceCreateTopUpBalanceInvoiceProcedure:
 			billingServiceCreateTopUpBalanceInvoiceHandler.ServeHTTP(w, r)
+		case BillingServiceCreateRenewalInvoiceProcedure:
+			billingServiceCreateRenewalInvoiceHandler.ServeHTTP(w, r)
 		case BillingServicePayWithBalanceProcedure:
 			billingServicePayWithBalanceHandler.ServeHTTP(w, r)
 		case BillingServiceGetInvoiceSettingsTemplateExampleProcedure:
@@ -1160,6 +1186,10 @@ func (UnimplementedBillingServiceHandler) UpdateInvoiceStatus(context.Context, *
 
 func (UnimplementedBillingServiceHandler) CreateTopUpBalanceInvoice(context.Context, *connect.Request[billing.CreateTopUpBalanceInvoiceRequest]) (*connect.Response[billing.Invoice], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.BillingService.CreateTopUpBalanceInvoice is not implemented"))
+}
+
+func (UnimplementedBillingServiceHandler) CreateRenewalInvoice(context.Context, *connect.Request[billing.CreateRenewalInvoiceRequest]) (*connect.Response[billing.Invoice], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.BillingService.CreateRenewalInvoice is not implemented"))
 }
 
 func (UnimplementedBillingServiceHandler) PayWithBalance(context.Context, *connect.Request[billing.PayWithBalanceRequest]) (*connect.Response[billing.PayWithBalanceResponse], error) {

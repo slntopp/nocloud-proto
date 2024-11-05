@@ -2111,6 +2111,38 @@
         ]
       }
     },
+    "/billing/invoices/renewal": {
+      "put": {
+        "operationId": "BillingService_CreateRenewalInvoice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingInvoice"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingCreateRenewalInvoiceRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
     "/billing/invoices/templateexample": {
       "get": {
         "operationId": "BillingService_GetInvoiceSettingsTemplateExample",
@@ -7575,6 +7607,14 @@
         },
         "isSendEmail": {
           "type": "boolean"
+        }
+      }
+    },
+    "billingCreateRenewalInvoiceRequest": {
+      "type": "object",
+      "properties": {
+        "instance": {
+          "type": "string"
         }
       }
     },

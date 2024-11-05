@@ -18,7 +18,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { ConversionRequest, ConversionResponse, CreateCurrencyRequest, CreateCurrencyResponse, CreateExchangeRateRequest, CreateExchangeRateResponse, CreateInvoiceRequest, CreateTopUpBalanceInvoiceRequest, DeleteExchangeRateRequest, DeleteExchangeRateResponse, GetActiveRequest, GetCurrenciesRequest, GetCurrenciesResponse, GetExchangeRateRequest, GetExchangeRateResponse, GetExchangeRatesRequest, GetExchangeRatesResponse, GetInstancesReportRequest, GetInstancesReportResponse, GetInstancesReportsCountRequest, GetInvoicesCountRequest, GetInvoicesCountResponse, GetInvoiceSettingsTemplateExampleRequest, GetInvoiceSettingsTemplateExampleResponse, GetInvoicesRequest, GetRecordsReportsCountRequest, GetRecordsReportsRequest, GetRecordsReportsResponse, GetReportsCountResponse, GetTransactionsCountRequest, GetTransactionsCountResponse, GetTransactionsRequest, Invoice, Invoices, ListPlansInstancesRequest, ListPlansInstancesResponse, ListRequest, ListResponse, PayRequest, PayResponse, PayWithBalanceRequest, PayWithBalanceResponse, Plan, PlansUniqueRequest, PlansUniqueResponse, Records, ReprocessTransactionsRequest, Transaction, Transactions, UpdateCurrencyRequest, UpdateCurrencyResponse, UpdateExchangeRateRequest, UpdateExchangeRateResponse, UpdateInvoiceRequest, UpdateInvoiceStatusRequest, UpdateTransactionResponse } from "./billing_pb.js";
+import { ConversionRequest, ConversionResponse, CreateCurrencyRequest, CreateCurrencyResponse, CreateExchangeRateRequest, CreateExchangeRateResponse, CreateInvoiceRequest, CreateRenewalInvoiceRequest, CreateTopUpBalanceInvoiceRequest, DeleteExchangeRateRequest, DeleteExchangeRateResponse, GetActiveRequest, GetCurrenciesRequest, GetCurrenciesResponse, GetExchangeRateRequest, GetExchangeRateResponse, GetExchangeRatesRequest, GetExchangeRatesResponse, GetInstancesReportRequest, GetInstancesReportResponse, GetInstancesReportsCountRequest, GetInvoicesCountRequest, GetInvoicesCountResponse, GetInvoiceSettingsTemplateExampleRequest, GetInvoiceSettingsTemplateExampleResponse, GetInvoicesRequest, GetRecordsReportsCountRequest, GetRecordsReportsRequest, GetRecordsReportsResponse, GetReportsCountResponse, GetTransactionsCountRequest, GetTransactionsCountResponse, GetTransactionsRequest, Invoice, Invoices, ListPlansInstancesRequest, ListPlansInstancesResponse, ListRequest, ListResponse, PayRequest, PayResponse, PayWithBalanceRequest, PayWithBalanceResponse, Plan, PlansUniqueRequest, PlansUniqueResponse, Records, ReprocessTransactionsRequest, Transaction, Transactions, UpdateCurrencyRequest, UpdateCurrencyResponse, UpdateExchangeRateRequest, UpdateExchangeRateResponse, UpdateInvoiceRequest, UpdateInvoiceStatusRequest, UpdateTransactionResponse } from "./billing_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 import { Addon, BulkAddons, CountAddonsRequest, CountAddonsResponse, ListAddonsRequest, ListAddonsResponse } from "./addons/addons_pb.js";
 import { CountDescriptionsRequest, CountDescriptionsResponse, Description, ListDescriptionsRequest, ListDescriptionsResponse } from "./descriptions/descriptions_pb.js";
@@ -288,6 +288,15 @@ export declare const BillingService: {
     readonly createTopUpBalanceInvoice: {
       readonly name: "CreateTopUpBalanceInvoice",
       readonly I: typeof CreateTopUpBalanceInvoiceRequest,
+      readonly O: typeof Invoice,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.BillingService.CreateRenewalInvoice
+     */
+    readonly createRenewalInvoice: {
+      readonly name: "CreateRenewalInvoice",
+      readonly I: typeof CreateRenewalInvoiceRequest,
       readonly O: typeof Invoice,
       readonly kind: MethodKind.Unary,
     },

@@ -756,6 +756,16 @@ export const CreateTopUpBalanceInvoiceRequest = /*@__PURE__*/ proto3.makeMessage
 );
 
 /**
+ * @generated from message nocloud.billing.CreateRenewalInvoiceRequest
+ */
+export const CreateRenewalInvoiceRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.CreateRenewalInvoiceRequest",
+  () => [
+    { no: 1, name: "instance", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
  * @generated from message nocloud.billing.PayWithBalanceRequest
  */
 export const PayWithBalanceRequest = /*@__PURE__*/ proto3.makeMessageType(

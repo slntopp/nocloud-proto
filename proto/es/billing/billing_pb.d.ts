@@ -2245,6 +2245,30 @@ export declare class CreateTopUpBalanceInvoiceRequest extends Message<CreateTopU
 }
 
 /**
+ * @generated from message nocloud.billing.CreateRenewalInvoiceRequest
+ */
+export declare class CreateRenewalInvoiceRequest extends Message<CreateRenewalInvoiceRequest> {
+  /**
+   * @generated from field: string instance = 1;
+   */
+  instance: string;
+
+  constructor(data?: PartialMessage<CreateRenewalInvoiceRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.CreateRenewalInvoiceRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateRenewalInvoiceRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateRenewalInvoiceRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateRenewalInvoiceRequest;
+
+  static equals(a: CreateRenewalInvoiceRequest | PlainMessage<CreateRenewalInvoiceRequest> | undefined, b: CreateRenewalInvoiceRequest | PlainMessage<CreateRenewalInvoiceRequest> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.billing.PayWithBalanceRequest
  */
 export declare class PayWithBalanceRequest extends Message<PayWithBalanceRequest> {
