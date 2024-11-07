@@ -15,10 +15,14 @@ use UnexpectedValueException;
 class PromocodeState
 {
     /**
+     * OK.
+     *
      * Generated from protobuf enum <code>USABLE = 0;</code>
      */
     const USABLE = 0;
     /**
+     * Due date passed
+     *
      * Generated from protobuf enum <code>EXPIRED = 1;</code>
      */
     const EXPIRED = 1;

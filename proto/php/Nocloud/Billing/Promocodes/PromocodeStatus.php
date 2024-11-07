@@ -19,7 +19,7 @@ class PromocodeStatus
      */
     const ACTIVE = 0;
     /**
-     * Temporary inactive
+     * Temporary inactive for applying (still active for users which entered this promocode)
      *
      * Generated from protobuf enum <code>SUSPENDED = 1;</code>
      */

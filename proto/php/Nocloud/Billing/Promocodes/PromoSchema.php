@@ -10,7 +10,7 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * At least 1 must be specified
+ * At least 1 field must be specified
  *
  * Generated from protobuf message <code>nocloud.billing.promocodes.PromoSchema</code>
  */
@@ -23,10 +23,14 @@ class PromoSchema extends \Google\Protobuf\Internal\Message
      */
     protected $discount_percent = null;
     /**
+     * Fixed discount amount in NCU
+     *
      * Generated from protobuf field <code>optional int64 discount_amount = 2 [json_name = "discountAmount"];</code>
      */
     protected $discount_amount = null;
     /**
+     * Fixed price in NCU
+     *
      * Generated from protobuf field <code>optional int64 fixed_price = 3 [json_name = "fixedPrice"];</code>
      */
     protected $fixed_price = null;
@@ -40,7 +44,9 @@ class PromoSchema extends \Google\Protobuf\Internal\Message
      *     @type float $discount_percent
      *           [0, 1]; Highest priority when specified more than 1
      *     @type int|string $discount_amount
+     *           Fixed discount amount in NCU
      *     @type int|string $fixed_price
+     *           Fixed price in NCU
      * }
      */
     public function __construct($data = NULL) {
@@ -85,6 +91,8 @@ class PromoSchema extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Fixed discount amount in NCU
+     *
      * Generated from protobuf field <code>optional int64 discount_amount = 2 [json_name = "discountAmount"];</code>
      * @return int|string
      */
@@ -104,6 +112,8 @@ class PromoSchema extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Fixed discount amount in NCU
+     *
      * Generated from protobuf field <code>optional int64 discount_amount = 2 [json_name = "discountAmount"];</code>
      * @param int|string $var
      * @return $this
@@ -117,6 +127,8 @@ class PromoSchema extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Fixed price in NCU
+     *
      * Generated from protobuf field <code>optional int64 fixed_price = 3 [json_name = "fixedPrice"];</code>
      * @return int|string
      */
@@ -136,6 +148,8 @@ class PromoSchema extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Fixed price in NCU
+     *
      * Generated from protobuf field <code>optional int64 fixed_price = 3 [json_name = "fixedPrice"];</code>
      * @param int|string $var
      * @return $this

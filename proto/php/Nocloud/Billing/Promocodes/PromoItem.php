@@ -10,8 +10,7 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * At least 1 optional item must be specified
- * If nothing specified, then applied to EVERYTHING
+ * If no optional fields are specified, then applied to ALL billing items
  *
  * Generated from protobuf message <code>nocloud.billing.promocodes.PromoItem</code>
  */
@@ -29,6 +28,12 @@ class PromoItem extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>optional .nocloud.billing.promocodes.AddonPromo addon_promo = 3 [json_name = "addonPromo"];</code>
      */
     protected $addon_promo = null;
+    /**
+     * If specified, then applied to all showcase billing plans
+     *
+     * Generated from protobuf field <code>optional .nocloud.billing.promocodes.ShowcasePromo showcase_promo = 4 [json_name = "showcasePromo"];</code>
+     */
+    protected $showcase_promo = null;
 
     /**
      * Constructor.
@@ -39,6 +44,8 @@ class PromoItem extends \Google\Protobuf\Internal\Message
      *     @type \Nocloud\Billing\Promocodes\PromoSchema $schema
      *     @type \Nocloud\Billing\Promocodes\BillingPlanPromo $plan_promo
      *     @type \Nocloud\Billing\Promocodes\AddonPromo $addon_promo
+     *     @type \Nocloud\Billing\Promocodes\ShowcasePromo $showcase_promo
+     *           If specified, then applied to all showcase billing plans
      * }
      */
     public function __construct($data = NULL) {
@@ -138,6 +145,42 @@ class PromoItem extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Nocloud\Billing\Promocodes\AddonPromo::class);
         $this->addon_promo = $var;
+
+        return $this;
+    }
+
+    /**
+     * If specified, then applied to all showcase billing plans
+     *
+     * Generated from protobuf field <code>optional .nocloud.billing.promocodes.ShowcasePromo showcase_promo = 4 [json_name = "showcasePromo"];</code>
+     * @return \Nocloud\Billing\Promocodes\ShowcasePromo|null
+     */
+    public function getShowcasePromo()
+    {
+        return $this->showcase_promo;
+    }
+
+    public function hasShowcasePromo()
+    {
+        return isset($this->showcase_promo);
+    }
+
+    public function clearShowcasePromo()
+    {
+        unset($this->showcase_promo);
+    }
+
+    /**
+     * If specified, then applied to all showcase billing plans
+     *
+     * Generated from protobuf field <code>optional .nocloud.billing.promocodes.ShowcasePromo showcase_promo = 4 [json_name = "showcasePromo"];</code>
+     * @param \Nocloud\Billing\Promocodes\ShowcasePromo $var
+     * @return $this
+     */
+    public function setShowcasePromo($var)
+    {
+        GPBUtil::checkMessage($var, \Nocloud\Billing\Promocodes\ShowcasePromo::class);
+        $this->showcase_promo = $var;
 
         return $this;
     }

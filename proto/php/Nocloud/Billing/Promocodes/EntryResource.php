@@ -15,10 +15,14 @@ use Google\Protobuf\Internal\GPBUtil;
 class EntryResource extends \Google\Protobuf\Internal\Message
 {
     /**
+     * Connected invoice (not used yet)
+     *
      * Generated from protobuf field <code>optional string invoice = 1 [json_name = "invoice"];</code>
      */
     protected $invoice = null;
     /**
+     * Connected instance
+     *
      * Generated from protobuf field <code>optional string instance = 2 [json_name = "instance"];</code>
      */
     protected $instance = null;
@@ -42,7 +46,9 @@ class EntryResource extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $invoice
+     *           Connected invoice (not used yet)
      *     @type string $instance
+     *           Connected instance
      *     @type int|string $exec
      *           Time of promocode usage
      *     @type string $account
@@ -55,6 +61,8 @@ class EntryResource extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Connected invoice (not used yet)
+     *
      * Generated from protobuf field <code>optional string invoice = 1 [json_name = "invoice"];</code>
      * @return string
      */
@@ -74,6 +82,8 @@ class EntryResource extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Connected invoice (not used yet)
+     *
      * Generated from protobuf field <code>optional string invoice = 1 [json_name = "invoice"];</code>
      * @param string $var
      * @return $this
@@ -87,6 +97,8 @@ class EntryResource extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Connected instance
+     *
      * Generated from protobuf field <code>optional string instance = 2 [json_name = "instance"];</code>
      * @return string
      */
@@ -106,6 +118,8 @@ class EntryResource extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Connected instance
+     *
      * Generated from protobuf field <code>optional string instance = 2 [json_name = "instance"];</code>
      * @param string $var
      * @return $this
