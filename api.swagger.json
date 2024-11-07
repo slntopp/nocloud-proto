@@ -3226,7 +3226,7 @@
           },
           {
             "name": "status",
-            "description": " - SUSPENDED: Temporary inactive",
+            "description": " - SUSPENDED: Temporary inactive for applying (still active for users which entered this promocode)",
             "in": "query",
             "required": false,
             "type": "string",
@@ -3239,7 +3239,7 @@
           },
           {
             "name": "state",
-            "description": " - ALL_TAKEN: All available promocodes are taken\n - USED: Already used by this user maximum times",
+            "description": " - USABLE: OK.\n - EXPIRED: Due date passed\n - ALL_TAKEN: All available promocodes are taken\n - USED: Already used by this user maximum times",
             "in": "query",
             "required": false,
             "type": "string",
@@ -3253,7 +3253,7 @@
           },
           {
             "name": "dueDate",
-            "description": "0 - unlimited. User can't apply promocode after due_date",
+            "description": "User can't apply promocode after due_date. 0 - unlimited",
             "in": "query",
             "required": false,
             "type": "string",
@@ -3261,7 +3261,7 @@
           },
           {
             "name": "limit",
-            "description": "how many times this promocode can be used globally. 0 - unlimited",
+            "description": "How many times this promocode can be used globally. 0 - unlimited",
             "in": "query",
             "required": false,
             "type": "string",
@@ -3269,15 +3269,22 @@
           },
           {
             "name": "usesPerUser",
-            "description": "how many times this promocode can be used per one user. 0 - unlimited",
+            "description": "How many times this promocode can be used per one user. 0 - unlimited",
             "in": "query",
             "required": false,
             "type": "string",
             "format": "int64"
           },
           {
+            "name": "oneTime",
+            "description": "If true, then promocode will be applied only on instance start payment",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "activeTime",
-            "description": "how many seconds promocode is active after it was applied",
+            "description": "How many seconds promocode is active after it was applied. 0 - unlimited",
             "in": "query",
             "required": false,
             "type": "string",
@@ -3345,7 +3352,7 @@
           },
           {
             "name": "status",
-            "description": " - SUSPENDED: Temporary inactive",
+            "description": " - SUSPENDED: Temporary inactive for applying (still active for users which entered this promocode)",
             "in": "query",
             "required": false,
             "type": "string",
@@ -3358,7 +3365,7 @@
           },
           {
             "name": "state",
-            "description": " - ALL_TAKEN: All available promocodes are taken\n - USED: Already used by this user maximum times",
+            "description": " - USABLE: OK.\n - EXPIRED: Due date passed\n - ALL_TAKEN: All available promocodes are taken\n - USED: Already used by this user maximum times",
             "in": "query",
             "required": false,
             "type": "string",
@@ -3372,7 +3379,7 @@
           },
           {
             "name": "dueDate",
-            "description": "0 - unlimited. User can't apply promocode after due_date",
+            "description": "User can't apply promocode after due_date. 0 - unlimited",
             "in": "query",
             "required": false,
             "type": "string",
@@ -3380,7 +3387,7 @@
           },
           {
             "name": "limit",
-            "description": "how many times this promocode can be used globally. 0 - unlimited",
+            "description": "How many times this promocode can be used globally. 0 - unlimited",
             "in": "query",
             "required": false,
             "type": "string",
@@ -3388,15 +3395,22 @@
           },
           {
             "name": "usesPerUser",
-            "description": "how many times this promocode can be used per one user. 0 - unlimited",
+            "description": "How many times this promocode can be used per one user. 0 - unlimited",
             "in": "query",
             "required": false,
             "type": "string",
             "format": "int64"
           },
           {
+            "name": "oneTime",
+            "description": "If true, then promocode will be applied only on instance start payment",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "activeTime",
-            "description": "how many seconds promocode is active after it was applied",
+            "description": "How many seconds promocode is active after it was applied. 0 - unlimited",
             "in": "query",
             "required": false,
             "type": "string",
@@ -8251,22 +8265,26 @@
         "dueDate": {
           "type": "string",
           "format": "int64",
-          "title": "0 - unlimited. User can't apply promocode after due_date"
+          "title": "User can't apply promocode after due_date. 0 - unlimited"
         },
         "limit": {
           "type": "string",
           "format": "int64",
-          "title": "how many times this promocode can be used globally. 0 - unlimited"
+          "title": "How many times this promocode can be used globally. 0 - unlimited"
         },
         "usesPerUser": {
           "type": "string",
           "format": "int64",
-          "title": "how many times this promocode can be used per one user. 0 - unlimited"
+          "title": "How many times this promocode can be used per one user. 0 - unlimited"
+        },
+        "oneTime": {
+          "type": "boolean",
+          "title": "If true, then promocode will be applied only on instance start payment"
         },
         "activeTime": {
           "type": "string",
           "format": "int64",
-          "title": "how many seconds promocode is active after it was applied"
+          "title": "How many seconds promocode is active after it was applied. 0 - unlimited"
         },
         "meta": {
           "type": "object",
@@ -9869,10 +9887,12 @@
       "type": "object",
       "properties": {
         "invoice": {
-          "type": "string"
+          "type": "string",
+          "title": "Connected invoice (not used yet)"
         },
         "instance": {
-          "type": "string"
+          "type": "string",
+          "title": "Connected instance"
         },
         "exec": {
           "type": "string",
@@ -9908,9 +9928,13 @@
         },
         "addonPromo": {
           "$ref": "#/definitions/promocodesAddonPromo"
+        },
+        "showcasePromo": {
+          "$ref": "#/definitions/promocodesShowcasePromo",
+          "title": "If specified, then applied to all showcase billing plans"
         }
       },
-      "title": "At least 1 optional item must be specified\r\nIf nothing specified, then applied to EVERYTHING"
+      "title": "If no optional fields are specified, then applied to ALL billing items"
     },
     "promocodesPromoSchema": {
       "type": "object",
@@ -9922,14 +9946,16 @@
         },
         "discountAmount": {
           "type": "string",
-          "format": "int64"
+          "format": "int64",
+          "title": "Fixed discount amount in NCU"
         },
         "fixedPrice": {
           "type": "string",
-          "format": "int64"
+          "format": "int64",
+          "title": "Fixed price in NCU"
         }
       },
-      "title": "At least 1 must be specified"
+      "title": "At least 1 field must be specified"
     },
     "promocodesPromocode": {
       "type": "object",
@@ -9956,22 +9982,26 @@
         "dueDate": {
           "type": "string",
           "format": "int64",
-          "title": "0 - unlimited. User can't apply promocode after due_date"
+          "title": "User can't apply promocode after due_date. 0 - unlimited"
         },
         "limit": {
           "type": "string",
           "format": "int64",
-          "title": "how many times this promocode can be used globally. 0 - unlimited"
+          "title": "How many times this promocode can be used globally. 0 - unlimited"
         },
         "usesPerUser": {
           "type": "string",
           "format": "int64",
-          "title": "how many times this promocode can be used per one user. 0 - unlimited"
+          "title": "How many times this promocode can be used per one user. 0 - unlimited"
+        },
+        "oneTime": {
+          "type": "boolean",
+          "title": "If true, then promocode will be applied only on instance start payment"
         },
         "activeTime": {
           "type": "string",
           "format": "int64",
-          "title": "how many seconds promocode is active after it was applied"
+          "title": "How many seconds promocode is active after it was applied. 0 - unlimited"
         },
         "meta": {
           "type": "object",
@@ -10007,7 +10037,7 @@
         "USED"
       ],
       "default": "USABLE",
-      "description": "- ALL_TAKEN: All available promocodes are taken\n - USED: Already used by this user maximum times",
+      "description": "- USABLE: OK.\n - EXPIRED: Due date passed\n - ALL_TAKEN: All available promocodes are taken\n - USED: Already used by this user maximum times",
       "title": "Read-only state for visualization"
     },
     "promocodesPromocodeStatus": {
@@ -10018,8 +10048,17 @@
         "DELETED"
       ],
       "default": "ACTIVE",
-      "description": "- SUSPENDED: Temporary inactive",
+      "description": "- SUSPENDED: Temporary inactive for applying (still active for users which entered this promocode)",
       "title": "User defined status"
+    },
+    "promocodesShowcasePromo": {
+      "type": "object",
+      "properties": {
+        "showcase": {
+          "type": "string",
+          "title": "valid showcase uuid"
+        }
+      }
     },
     "protobufAny": {
       "type": "object",

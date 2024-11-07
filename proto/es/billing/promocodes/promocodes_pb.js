@@ -49,17 +49,17 @@ export const Promocode = /*@__PURE__*/ proto3.makeMessageType(
     { no: 7, name: "due_date", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 8, name: "limit", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 9, name: "uses_per_user", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 10, name: "active_time", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 11, name: "meta", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
-    { no: 12, name: "created", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 13, name: "promo_items", kind: "message", T: PromoItem, repeated: true },
-    { no: 14, name: "uses", kind: "message", T: EntryResource, repeated: true },
+    { no: 10, name: "one_time", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 11, name: "active_time", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 12, name: "meta", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
+    { no: 13, name: "created", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 14, name: "promo_items", kind: "message", T: PromoItem, repeated: true },
+    { no: 15, name: "uses", kind: "message", T: EntryResource, repeated: true },
   ],
 );
 
 /**
- * At least 1 optional item must be specified
- * If nothing specified, then applied to EVERYTHING
+ * If no optional fields are specified, then applied to ALL billing items
  *
  * @generated from message nocloud.billing.promocodes.PromoItem
  */
@@ -69,11 +69,12 @@ export const PromoItem = /*@__PURE__*/ proto3.makeMessageType(
     { no: 1, name: "schema", kind: "message", T: PromoSchema },
     { no: 2, name: "plan_promo", kind: "message", T: BillingPlanPromo, opt: true },
     { no: 3, name: "addon_promo", kind: "message", T: AddonPromo, opt: true },
+    { no: 4, name: "showcase_promo", kind: "message", T: ShowcasePromo, opt: true },
   ],
 );
 
 /**
- * At least 1 must be specified
+ * At least 1 field must be specified
  *
  * @generated from message nocloud.billing.promocodes.PromoSchema
  */
@@ -112,6 +113,16 @@ export const AddonPromo = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.billing.promocodes.AddonPromo",
   () => [
     { no: 1, name: "addon", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.promocodes.ShowcasePromo
+ */
+export const ShowcasePromo = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.promocodes.ShowcasePromo",
+  () => [
+    { no: 1, name: "showcase", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

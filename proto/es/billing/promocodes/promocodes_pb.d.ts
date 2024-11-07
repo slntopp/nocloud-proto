@@ -18,7 +18,7 @@ export declare enum PromocodeStatus {
   ACTIVE = 0,
 
   /**
-   * Temporary inactive
+   * Temporary inactive for applying (still active for users which entered this promocode)
    *
    * @generated from enum value: SUSPENDED = 1;
    */
@@ -37,11 +37,15 @@ export declare enum PromocodeStatus {
  */
 export declare enum PromocodeState {
   /**
+   * OK.
+   *
    * @generated from enum value: USABLE = 0;
    */
   USABLE = 0,
 
   /**
+   * Due date passed
+   *
    * @generated from enum value: EXPIRED = 1;
    */
   EXPIRED = 1,
@@ -98,52 +102,59 @@ export declare class Promocode extends Message<Promocode> {
   state: PromocodeState;
 
   /**
-   * 0 - unlimited. User can't apply promocode after due_date
+   * User can't apply promocode after due_date. 0 - unlimited
    *
    * @generated from field: int64 due_date = 7;
    */
   dueDate: bigint;
 
   /**
-   * how many times this promocode can be used globally. 0 - unlimited
+   * How many times this promocode can be used globally. 0 - unlimited
    *
    * @generated from field: int64 limit = 8;
    */
   limit: bigint;
 
   /**
-   * how many times this promocode can be used per one user. 0 - unlimited
+   * How many times this promocode can be used per one user. 0 - unlimited
    *
    * @generated from field: int64 uses_per_user = 9;
    */
   usesPerUser: bigint;
 
   /**
-   * how many seconds promocode is active after it was applied
+   * If true, then promocode will be applied only on instance start payment
    *
-   * @generated from field: int64 active_time = 10;
+   * @generated from field: bool one_time = 10;
+   */
+  oneTime: boolean;
+
+  /**
+   * How many seconds promocode is active after it was applied. 0 - unlimited
+   *
+   * @generated from field: int64 active_time = 11;
    */
   activeTime: bigint;
 
   /**
-   * @generated from field: map<string, google.protobuf.Value> meta = 11;
+   * @generated from field: map<string, google.protobuf.Value> meta = 12;
    */
   meta: { [key: string]: Value };
 
   /**
-   * @generated from field: int64 created = 12;
+   * @generated from field: int64 created = 13;
    */
   created: bigint;
 
   /**
-   * @generated from field: repeated nocloud.billing.promocodes.PromoItem promo_items = 13;
+   * @generated from field: repeated nocloud.billing.promocodes.PromoItem promo_items = 14;
    */
   promoItems: PromoItem[];
 
   /**
    * Read-only field containing all promocode uses
    *
-   * @generated from field: repeated nocloud.billing.promocodes.EntryResource uses = 14;
+   * @generated from field: repeated nocloud.billing.promocodes.EntryResource uses = 15;
    */
   uses: EntryResource[];
 
@@ -163,8 +174,7 @@ export declare class Promocode extends Message<Promocode> {
 }
 
 /**
- * At least 1 optional item must be specified
- * If nothing specified, then applied to EVERYTHING
+ * If no optional fields are specified, then applied to ALL billing items
  *
  * @generated from message nocloud.billing.promocodes.PromoItem
  */
@@ -184,6 +194,13 @@ export declare class PromoItem extends Message<PromoItem> {
    */
   addonPromo?: AddonPromo;
 
+  /**
+   * If specified, then applied to all showcase billing plans
+   *
+   * @generated from field: optional nocloud.billing.promocodes.ShowcasePromo showcase_promo = 4;
+   */
+  showcasePromo?: ShowcasePromo;
+
   constructor(data?: PartialMessage<PromoItem>);
 
   static readonly runtime: typeof proto3;
@@ -200,7 +217,7 @@ export declare class PromoItem extends Message<PromoItem> {
 }
 
 /**
- * At least 1 must be specified
+ * At least 1 field must be specified
  *
  * @generated from message nocloud.billing.promocodes.PromoSchema
  */
@@ -213,11 +230,15 @@ export declare class PromoSchema extends Message<PromoSchema> {
   discountPercent?: number;
 
   /**
+   * Fixed discount amount in NCU
+   *
    * @generated from field: optional int64 discount_amount = 2;
    */
   discountAmount?: bigint;
 
   /**
+   * Fixed price in NCU
+   *
    * @generated from field: optional int64 fixed_price = 3;
    */
   fixedPrice?: bigint;
@@ -307,15 +328,45 @@ export declare class AddonPromo extends Message<AddonPromo> {
 }
 
 /**
+ * @generated from message nocloud.billing.promocodes.ShowcasePromo
+ */
+export declare class ShowcasePromo extends Message<ShowcasePromo> {
+  /**
+   * valid showcase uuid
+   *
+   * @generated from field: string showcase = 1;
+   */
+  showcase: string;
+
+  constructor(data?: PartialMessage<ShowcasePromo>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.promocodes.ShowcasePromo";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ShowcasePromo;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ShowcasePromo;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ShowcasePromo;
+
+  static equals(a: ShowcasePromo | PlainMessage<ShowcasePromo> | undefined, b: ShowcasePromo | PlainMessage<ShowcasePromo> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.billing.promocodes.EntryResource
  */
 export declare class EntryResource extends Message<EntryResource> {
   /**
+   * Connected invoice (not used yet)
+   *
    * @generated from field: optional string invoice = 1;
    */
   invoice?: string;
 
   /**
+   * Connected instance
+   *
    * @generated from field: optional string instance = 2;
    */
   instance?: string;
