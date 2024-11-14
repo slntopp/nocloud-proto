@@ -205,7 +205,8 @@ export const TransferInstanceRequest = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.instances.TransferInstanceRequest",
   () => [
     { no: 1, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "ig", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "ig", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 3, name: "account", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
   ],
 );
 

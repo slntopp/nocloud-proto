@@ -6810,7 +6810,12 @@
       "type": "object",
       "properties": {
         "ig": {
-          "type": "string"
+          "type": "string",
+          "title": "Destination IG"
+        },
+        "account": {
+          "type": "string",
+          "title": "Destination account"
         }
       }
     },

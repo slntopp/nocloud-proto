@@ -559,9 +559,18 @@ export declare class TransferInstanceRequest extends Message<TransferInstanceReq
   uuid: string;
 
   /**
-   * @generated from field: string ig = 2;
+   * Destination IG
+   *
+   * @generated from field: optional string ig = 2;
    */
-  ig: string;
+  ig?: string;
+
+  /**
+   * Destination account
+   *
+   * @generated from field: optional string account = 3;
+   */
+  account?: string;
 
   constructor(data?: PartialMessage<TransferInstanceRequest>);
 

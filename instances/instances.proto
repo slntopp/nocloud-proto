@@ -132,7 +132,8 @@ message TransferIGResponse {
 
 message TransferInstanceRequest {
     string uuid = 1;
-    string ig = 2;
+    optional string ig = 2;      // Destination IG
+    optional string account = 3; // Destination account
 }
 
 message TransferInstanceResponse {
