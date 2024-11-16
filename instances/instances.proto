@@ -134,6 +134,7 @@ message TransferInstanceRequest {
     string uuid = 1;
     optional string ig = 2;      // Destination IG
     optional string account = 3; // Destination account
+    bool do_not_transfer_invoices = 4; // By default invoices are transferred
 }
 
 message TransferInstanceResponse {

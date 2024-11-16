@@ -207,6 +207,7 @@ export const TransferInstanceRequest = /*@__PURE__*/ proto3.makeMessageType(
     { no: 1, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "ig", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 3, name: "account", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 4, name: "do_not_transfer_invoices", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 

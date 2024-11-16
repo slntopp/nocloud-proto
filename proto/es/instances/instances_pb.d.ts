@@ -572,6 +572,13 @@ export declare class TransferInstanceRequest extends Message<TransferInstanceReq
    */
   account?: string;
 
+  /**
+   * By default invoices are transferred
+   *
+   * @generated from field: bool do_not_transfer_invoices = 4;
+   */
+  doNotTransferInvoices: boolean;
+
   constructor(data?: PartialMessage<TransferInstanceRequest>);
 
   static readonly runtime: typeof proto3;
