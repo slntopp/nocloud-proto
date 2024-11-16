@@ -30,6 +30,12 @@ class TransferInstanceRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>optional string account = 3 [json_name = "account"];</code>
      */
     protected $account = null;
+    /**
+     * By default invoices are transferred
+     *
+     * Generated from protobuf field <code>bool do_not_transfer_invoices = 4 [json_name = "doNotTransferInvoices"];</code>
+     */
+    protected $do_not_transfer_invoices = false;
 
     /**
      * Constructor.
@@ -42,6 +48,8 @@ class TransferInstanceRequest extends \Google\Protobuf\Internal\Message
      *           Destination IG
      *     @type string $account
      *           Destination account
+     *     @type bool $do_not_transfer_invoices
+     *           By default invoices are transferred
      * }
      */
     public function __construct($data = NULL) {
@@ -139,6 +147,32 @@ class TransferInstanceRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->account = $var;
+
+        return $this;
+    }
+
+    /**
+     * By default invoices are transferred
+     *
+     * Generated from protobuf field <code>bool do_not_transfer_invoices = 4 [json_name = "doNotTransferInvoices"];</code>
+     * @return bool
+     */
+    public function getDoNotTransferInvoices()
+    {
+        return $this->do_not_transfer_invoices;
+    }
+
+    /**
+     * By default invoices are transferred
+     *
+     * Generated from protobuf field <code>bool do_not_transfer_invoices = 4 [json_name = "doNotTransferInvoices"];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setDoNotTransferInvoices($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->do_not_transfer_invoices = $var;
 
         return $this;
     }
