@@ -34,6 +34,12 @@ class ActionType
      * Generated from protobuf enum <code>BALANCE = 4;</code>
      */
     const BALANCE = 4;
+    /**
+     * Same as NO_ACTION, but marks invoice that was originally created by WHMCS
+     *
+     * Generated from protobuf enum <code>WHMCS_INVOICE = 5;</code>
+     */
+    const WHMCS_INVOICE = 5;
 
     private static $valueToName = [
         self::ACTION_TYPE_UNKNOWN => 'ACTION_TYPE_UNKNOWN',
@@ -41,6 +47,7 @@ class ActionType
         self::INSTANCE_START => 'INSTANCE_START',
         self::INSTANCE_RENEWAL => 'INSTANCE_RENEWAL',
         self::BALANCE => 'BALANCE',
+        self::WHMCS_INVOICE => 'WHMCS_INVOICE',
     ];
 
     public static function name($value)
