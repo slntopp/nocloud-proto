@@ -117,6 +117,17 @@ export const ActionType = /*@__PURE__*/ proto3.makeEnum(
 );
 
 /**
+ * @generated from enum nocloud.billing.Rounding
+ */
+export const Rounding = /*@__PURE__*/ proto3.makeEnum(
+  "nocloud.billing.Rounding",
+  [
+    {no: 0, name: "ROUND_UP"},
+    {no: 2, name: "ROUND_DOWN"},
+  ],
+);
+
+/**
  * @generated from message nocloud.billing.FeeRange
  */
 export const FeeRange = /*@__PURE__*/ proto3.makeMessageType(
@@ -794,6 +805,9 @@ export const Currency = /*@__PURE__*/ proto3.makeMessageType(
     { no: 1, name: "id", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
     { no: 2, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "public", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 4, name: "precision", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 5, name: "rounding", kind: "enum", T: proto3.getEnumType(Rounding) },
+    { no: 6, name: "format", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

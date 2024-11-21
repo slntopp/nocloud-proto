@@ -1749,6 +1749,30 @@
             "type": "boolean"
           },
           {
+            "name": "from.precision",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "from.rounding",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ROUND_UP",
+              "ROUND_DOWN"
+            ],
+            "default": "ROUND_UP"
+          },
+          {
+            "name": "from.format",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "to.id",
             "in": "query",
             "required": false,
@@ -1766,6 +1790,30 @@
             "in": "query",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "to.precision",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "to.rounding",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ROUND_UP",
+              "ROUND_DOWN"
+            ],
+            "default": "ROUND_UP"
+          },
+          {
+            "name": "to.format",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -1809,6 +1857,30 @@
             "type": "boolean"
           },
           {
+            "name": "from.precision",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "from.rounding",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ROUND_UP",
+              "ROUND_DOWN"
+            ],
+            "default": "ROUND_UP"
+          },
+          {
+            "name": "from.format",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "to.id",
             "in": "query",
             "required": false,
@@ -1826,6 +1898,30 @@
             "in": "query",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "to.precision",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "to.rounding",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ROUND_UP",
+              "ROUND_DOWN"
+            ],
+            "default": "ROUND_UP"
+          },
+          {
+            "name": "to.format",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -2426,6 +2522,30 @@
             "in": "query",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "currency.precision",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "currency.rounding",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ROUND_UP",
+              "ROUND_DOWN"
+            ],
+            "default": "ROUND_UP"
+          },
+          {
+            "name": "currency.format",
+            "in": "query",
+            "required": false,
+            "type": "string"
           },
           {
             "name": "created",
@@ -3723,6 +3843,30 @@
             "in": "query",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "currency.precision",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "currency.rounding",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ROUND_UP",
+              "ROUND_DOWN"
+            ],
+            "default": "ROUND_UP"
+          },
+          {
+            "name": "currency.format",
+            "in": "query",
+            "required": false,
+            "type": "string"
           },
           {
             "name": "created",
@@ -7662,6 +7806,16 @@
         },
         "public": {
           "type": "boolean"
+        },
+        "precision": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "rounding": {
+          "$ref": "#/definitions/billingRounding"
+        },
+        "format": {
+          "type": "string"
         }
       }
     },
@@ -8402,6 +8556,14 @@
         "CEIL"
       ],
       "default": "NONE"
+    },
+    "billingRounding": {
+      "type": "string",
+      "enum": [
+        "ROUND_UP",
+        "ROUND_DOWN"
+      ],
+      "default": "ROUND_UP"
     },
     "billingTransaction": {
       "type": "object",

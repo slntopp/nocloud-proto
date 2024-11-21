@@ -222,6 +222,21 @@ export declare enum ActionType {
 }
 
 /**
+ * @generated from enum nocloud.billing.Rounding
+ */
+export declare enum Rounding {
+  /**
+   * @generated from enum value: ROUND_UP = 0;
+   */
+  ROUND_UP = 0,
+
+  /**
+   * @generated from enum value: ROUND_DOWN = 2;
+   */
+  ROUND_DOWN = 2,
+}
+
+/**
  * @generated from message nocloud.billing.FeeRange
  */
 export declare class FeeRange extends Message<FeeRange> {
@@ -2334,6 +2349,21 @@ export declare class Currency extends Message<Currency> {
    * @generated from field: bool public = 3;
    */
   public: boolean;
+
+  /**
+   * @generated from field: int32 precision = 4;
+   */
+  precision: number;
+
+  /**
+   * @generated from field: nocloud.billing.Rounding rounding = 5;
+   */
+  rounding: Rounding;
+
+  /**
+   * @generated from field: string format = 6;
+   */
+  format: string;
 
   constructor(data?: PartialMessage<Currency>);
 

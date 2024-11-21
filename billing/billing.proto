@@ -632,10 +632,18 @@ service BillingService {
   };
 }
 
+enum Rounding {
+  ROUND_UP = 0;
+  ROUND_DOWN = 2;
+}
+
 message Currency {
   int32 id = 1;
   string title = 2;
   bool public = 3;
+  int32  precision = 4;
+  Rounding rounding = 5;
+  string format = 6;
 }
 
 message CreateCurrencyRequest{
