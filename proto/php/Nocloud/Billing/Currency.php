@@ -26,6 +26,18 @@ class Currency extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>bool public = 3 [json_name = "public"];</code>
      */
     protected $public = false;
+    /**
+     * Generated from protobuf field <code>int32 precision = 4 [json_name = "precision"];</code>
+     */
+    protected $precision = 0;
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.Rounding rounding = 5 [json_name = "rounding"];</code>
+     */
+    protected $rounding = 0;
+    /**
+     * Generated from protobuf field <code>string format = 6 [json_name = "format"];</code>
+     */
+    protected $format = '';
 
     /**
      * Constructor.
@@ -36,6 +48,9 @@ class Currency extends \Google\Protobuf\Internal\Message
      *     @type int $id
      *     @type string $title
      *     @type bool $public
+     *     @type int $precision
+     *     @type int $rounding
+     *     @type string $format
      * }
      */
     public function __construct($data = NULL) {
@@ -105,6 +120,72 @@ class Currency extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkBool($var);
         $this->public = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>int32 precision = 4 [json_name = "precision"];</code>
+     * @return int
+     */
+    public function getPrecision()
+    {
+        return $this->precision;
+    }
+
+    /**
+     * Generated from protobuf field <code>int32 precision = 4 [json_name = "precision"];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setPrecision($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->precision = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.Rounding rounding = 5 [json_name = "rounding"];</code>
+     * @return int
+     */
+    public function getRounding()
+    {
+        return $this->rounding;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.Rounding rounding = 5 [json_name = "rounding"];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setRounding($var)
+    {
+        GPBUtil::checkEnum($var, \Nocloud\Billing\Rounding::class);
+        $this->rounding = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string format = 6 [json_name = "format"];</code>
+     * @return string
+     */
+    public function getFormat()
+    {
+        return $this->format;
+    }
+
+    /**
+     * Generated from protobuf field <code>string format = 6 [json_name = "format"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setFormat($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->format = $var;
 
         return $this;
     }
