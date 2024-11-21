@@ -2292,6 +2292,11 @@ export declare class PayWithBalanceRequest extends Message<PayWithBalanceRequest
    */
   invoiceUuid: string;
 
+  /**
+   * @generated from field: int64 whmcs_id = 2;
+   */
+  whmcsId: bigint;
+
   constructor(data?: PartialMessage<PayWithBalanceRequest>);
 
   static readonly runtime: typeof proto3;

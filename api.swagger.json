@@ -6805,7 +6805,13 @@
       "type": "object"
     },
     "BillingServicePayWithBalanceBody": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "whmcsId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
     },
     "BillingServiceUpdateInvoiceStatusBody": {
       "type": "object",

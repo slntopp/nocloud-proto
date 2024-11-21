@@ -783,6 +783,7 @@ export const PayWithBalanceRequest = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.billing.PayWithBalanceRequest",
   () => [
     { no: 1, name: "invoice_uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "whmcs_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ],
 );
 

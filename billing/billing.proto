@@ -466,6 +466,7 @@ message CreateRenewalInvoiceRequest{
 
 message PayWithBalanceRequest {
   string invoice_uuid = 1;
+  int64  whmcs_id = 2;
 }
 message PayWithBalanceResponse {
   bool success = 1;
