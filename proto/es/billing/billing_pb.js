@@ -113,6 +113,7 @@ export const ActionType = /*@__PURE__*/ proto3.makeEnum(
     {no: 2, name: "INSTANCE_START"},
     {no: 3, name: "INSTANCE_RENEWAL"},
     {no: 4, name: "BALANCE"},
+    {no: 5, name: "WHMCS_INVOICE"},
   ],
 );
 

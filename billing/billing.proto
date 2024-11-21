@@ -221,6 +221,7 @@ enum ActionType {
   INSTANCE_START = 2;
   INSTANCE_RENEWAL = 3;
   BALANCE = 4;
+  WHMCS_INVOICE = 5; // Same as NO_ACTION, but marks invoice that was originally created by WHMCS
 }
 
 // Position. Instance must be specified to connect action with instance

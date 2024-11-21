@@ -219,6 +219,13 @@ export declare enum ActionType {
    * @generated from enum value: BALANCE = 4;
    */
   BALANCE = 4,
+
+  /**
+   * Same as NO_ACTION, but marks invoice that was originally created by WHMCS
+   *
+   * @generated from enum value: WHMCS_INVOICE = 5;
+   */
+  WHMCS_INVOICE = 5,
 }
 
 /**

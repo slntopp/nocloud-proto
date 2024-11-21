@@ -2556,7 +2556,7 @@
           },
           {
             "name": "type",
-            "description": " - ACTION_TYPE_UNKNOWN: Dont use.",
+            "description": " - ACTION_TYPE_UNKNOWN: Dont use.\n - WHMCS_INVOICE: Same as NO_ACTION, but marks invoice that was originally created by WHMCS",
             "in": "query",
             "required": false,
             "type": "string",
@@ -2565,7 +2565,8 @@
               "NO_ACTION",
               "INSTANCE_START",
               "INSTANCE_RENEWAL",
-              "BALANCE"
+              "BALANCE",
+              "WHMCS_INVOICE"
             ],
             "default": "ACTION_TYPE_UNKNOWN"
           },
@@ -7638,10 +7639,11 @@
         "NO_ACTION",
         "INSTANCE_START",
         "INSTANCE_RENEWAL",
-        "BALANCE"
+        "BALANCE",
+        "WHMCS_INVOICE"
       ],
       "default": "ACTION_TYPE_UNKNOWN",
-      "description": " - ACTION_TYPE_UNKNOWN: Dont use."
+      "title": "- ACTION_TYPE_UNKNOWN: Dont use.\n - WHMCS_INVOICE: Same as NO_ACTION, but marks invoice that was originally created by WHMCS"
     },
     "billingAddonsServiceUpdateBody": {
       "type": "object",
