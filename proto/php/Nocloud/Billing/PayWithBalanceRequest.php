@@ -18,6 +18,10 @@ class PayWithBalanceRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string invoice_uuid = 1 [json_name = "invoiceUuid"];</code>
      */
     protected $invoice_uuid = '';
+    /**
+     * Generated from protobuf field <code>int64 whmcs_id = 2 [json_name = "whmcsId"];</code>
+     */
+    protected $whmcs_id = 0;
 
     /**
      * Constructor.
@@ -26,6 +30,7 @@ class PayWithBalanceRequest extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $invoice_uuid
+     *     @type int|string $whmcs_id
      * }
      */
     public function __construct($data = NULL) {
@@ -51,6 +56,28 @@ class PayWithBalanceRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->invoice_uuid = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>int64 whmcs_id = 2 [json_name = "whmcsId"];</code>
+     * @return int|string
+     */
+    public function getWhmcsId()
+    {
+        return $this->whmcs_id;
+    }
+
+    /**
+     * Generated from protobuf field <code>int64 whmcs_id = 2 [json_name = "whmcsId"];</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setWhmcsId($var)
+    {
+        GPBUtil::checkInt64($var);
+        $this->whmcs_id = $var;
 
         return $this;
     }
