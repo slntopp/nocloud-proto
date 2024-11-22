@@ -17,9 +17,9 @@ class Rounding
      */
     const ROUND_UP = 0;
     /**
-     * Generated from protobuf enum <code>ROUND_DOWN = 2;</code>
+     * Generated from protobuf enum <code>ROUND_DOWN = 1;</code>
      */
-    const ROUND_DOWN = 2;
+    const ROUND_DOWN = 1;
 
     private static $valueToName = [
         self::ROUND_UP => 'ROUND_UP',
