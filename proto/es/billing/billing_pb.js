@@ -124,7 +124,7 @@ export const Rounding = /*@__PURE__*/ proto3.makeEnum(
   "nocloud.billing.Rounding",
   [
     {no: 0, name: "ROUND_UP"},
-    {no: 2, name: "ROUND_DOWN"},
+    {no: 1, name: "ROUND_DOWN"},
   ],
 );
 

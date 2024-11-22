@@ -636,7 +636,7 @@ service BillingService {
 
 enum Rounding {
   ROUND_UP = 0;
-  ROUND_DOWN = 2;
+  ROUND_DOWN = 1;
 }
 
 message Currency {

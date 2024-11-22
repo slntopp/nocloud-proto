@@ -238,9 +238,9 @@ export declare enum Rounding {
   ROUND_UP = 0,
 
   /**
-   * @generated from enum value: ROUND_DOWN = 2;
+   * @generated from enum value: ROUND_DOWN = 1;
    */
-  ROUND_DOWN = 2,
+  ROUND_DOWN = 1,
 }
 
 /**
