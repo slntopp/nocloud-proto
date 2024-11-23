@@ -150,6 +150,9 @@ const (
 	// BillingServiceGetInvoiceSettingsTemplateExampleProcedure is the fully-qualified name of the
 	// BillingService's GetInvoiceSettingsTemplateExample RPC.
 	BillingServiceGetInvoiceSettingsTemplateExampleProcedure = "/nocloud.billing.BillingService/GetInvoiceSettingsTemplateExample"
+	// BillingServiceRunDailyCronJobProcedure is the fully-qualified name of the BillingService's
+	// RunDailyCronJob RPC.
+	BillingServiceRunDailyCronJobProcedure = "/nocloud.billing.BillingService/RunDailyCronJob"
 	// CurrencyServiceCreateCurrencyProcedure is the fully-qualified name of the CurrencyService's
 	// CreateCurrency RPC.
 	CurrencyServiceCreateCurrencyProcedure = "/nocloud.billing.CurrencyService/CreateCurrency"
@@ -271,6 +274,7 @@ var (
 	billingServiceCreateRenewalInvoiceMethodDescriptor              = billingServiceServiceDescriptor.Methods().ByName("CreateRenewalInvoice")
 	billingServicePayWithBalanceMethodDescriptor                    = billingServiceServiceDescriptor.Methods().ByName("PayWithBalance")
 	billingServiceGetInvoiceSettingsTemplateExampleMethodDescriptor = billingServiceServiceDescriptor.Methods().ByName("GetInvoiceSettingsTemplateExample")
+	billingServiceRunDailyCronJobMethodDescriptor                   = billingServiceServiceDescriptor.Methods().ByName("RunDailyCronJob")
 	currencyServiceServiceDescriptor                                = billing.File_billing_billing_proto.Services().ByName("CurrencyService")
 	currencyServiceCreateCurrencyMethodDescriptor                   = currencyServiceServiceDescriptor.Methods().ByName("CreateCurrency")
 	currencyServiceUpdateCurrencyMethodDescriptor                   = currencyServiceServiceDescriptor.Methods().ByName("UpdateCurrency")
@@ -459,6 +463,7 @@ type BillingServiceClient interface {
 	CreateRenewalInvoice(context.Context, *connect.Request[billing.CreateRenewalInvoiceRequest]) (*connect.Response[billing.Invoice], error)
 	PayWithBalance(context.Context, *connect.Request[billing.PayWithBalanceRequest]) (*connect.Response[billing.PayWithBalanceResponse], error)
 	GetInvoiceSettingsTemplateExample(context.Context, *connect.Request[billing.GetInvoiceSettingsTemplateExampleRequest]) (*connect.Response[billing.GetInvoiceSettingsTemplateExampleResponse], error)
+	RunDailyCronJob(context.Context, *connect.Request[billing.RunDailyCronJobRequest]) (*connect.Response[billing.RunDailyCronJobResponse], error)
 }
 
 // NewBillingServiceClient constructs a client for the nocloud.billing.BillingService service. By
@@ -639,6 +644,12 @@ func NewBillingServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(billingServiceGetInvoiceSettingsTemplateExampleMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		runDailyCronJob: connect.NewClient[billing.RunDailyCronJobRequest, billing.RunDailyCronJobResponse](
+			httpClient,
+			baseURL+BillingServiceRunDailyCronJobProcedure,
+			connect.WithSchema(billingServiceRunDailyCronJobMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -672,6 +683,7 @@ type billingServiceClient struct {
 	createRenewalInvoice              *connect.Client[billing.CreateRenewalInvoiceRequest, billing.Invoice]
 	payWithBalance                    *connect.Client[billing.PayWithBalanceRequest, billing.PayWithBalanceResponse]
 	getInvoiceSettingsTemplateExample *connect.Client[billing.GetInvoiceSettingsTemplateExampleRequest, billing.GetInvoiceSettingsTemplateExampleResponse]
+	runDailyCronJob                   *connect.Client[billing.RunDailyCronJobRequest, billing.RunDailyCronJobResponse]
 }
 
 // CreatePlan calls nocloud.billing.BillingService.CreatePlan.
@@ -815,6 +827,11 @@ func (c *billingServiceClient) GetInvoiceSettingsTemplateExample(ctx context.Con
 	return c.getInvoiceSettingsTemplateExample.CallUnary(ctx, req)
 }
 
+// RunDailyCronJob calls nocloud.billing.BillingService.RunDailyCronJob.
+func (c *billingServiceClient) RunDailyCronJob(ctx context.Context, req *connect.Request[billing.RunDailyCronJobRequest]) (*connect.Response[billing.RunDailyCronJobResponse], error) {
+	return c.runDailyCronJob.CallUnary(ctx, req)
+}
+
 // BillingServiceHandler is an implementation of the nocloud.billing.BillingService service.
 type BillingServiceHandler interface {
 	CreatePlan(context.Context, *connect.Request[billing.Plan]) (*connect.Response[billing.Plan], error)
@@ -845,6 +862,7 @@ type BillingServiceHandler interface {
 	CreateRenewalInvoice(context.Context, *connect.Request[billing.CreateRenewalInvoiceRequest]) (*connect.Response[billing.Invoice], error)
 	PayWithBalance(context.Context, *connect.Request[billing.PayWithBalanceRequest]) (*connect.Response[billing.PayWithBalanceResponse], error)
 	GetInvoiceSettingsTemplateExample(context.Context, *connect.Request[billing.GetInvoiceSettingsTemplateExampleRequest]) (*connect.Response[billing.GetInvoiceSettingsTemplateExampleResponse], error)
+	RunDailyCronJob(context.Context, *connect.Request[billing.RunDailyCronJobRequest]) (*connect.Response[billing.RunDailyCronJobResponse], error)
 }
 
 // NewBillingServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -1021,6 +1039,12 @@ func NewBillingServiceHandler(svc BillingServiceHandler, opts ...connect.Handler
 		connect.WithSchema(billingServiceGetInvoiceSettingsTemplateExampleMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	billingServiceRunDailyCronJobHandler := connect.NewUnaryHandler(
+		BillingServiceRunDailyCronJobProcedure,
+		svc.RunDailyCronJob,
+		connect.WithSchema(billingServiceRunDailyCronJobMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/nocloud.billing.BillingService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case BillingServiceCreatePlanProcedure:
@@ -1079,6 +1103,8 @@ func NewBillingServiceHandler(svc BillingServiceHandler, opts ...connect.Handler
 			billingServicePayWithBalanceHandler.ServeHTTP(w, r)
 		case BillingServiceGetInvoiceSettingsTemplateExampleProcedure:
 			billingServiceGetInvoiceSettingsTemplateExampleHandler.ServeHTTP(w, r)
+		case BillingServiceRunDailyCronJobProcedure:
+			billingServiceRunDailyCronJobHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -1198,6 +1224,10 @@ func (UnimplementedBillingServiceHandler) PayWithBalance(context.Context, *conne
 
 func (UnimplementedBillingServiceHandler) GetInvoiceSettingsTemplateExample(context.Context, *connect.Request[billing.GetInvoiceSettingsTemplateExampleRequest]) (*connect.Response[billing.GetInvoiceSettingsTemplateExampleResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.BillingService.GetInvoiceSettingsTemplateExample is not implemented"))
+}
+
+func (UnimplementedBillingServiceHandler) RunDailyCronJob(context.Context, *connect.Request[billing.RunDailyCronJobRequest]) (*connect.Response[billing.RunDailyCronJobResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.BillingService.RunDailyCronJob is not implemented"))
 }
 
 // CurrencyServiceClient is a client for the nocloud.billing.CurrencyService service.

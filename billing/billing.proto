@@ -473,6 +473,9 @@ message PayWithBalanceResponse {
   bool success = 1;
 }
 
+message RunDailyCronJobRequest{}
+message RunDailyCronJobResponse{}
+
 service BillingService {
   rpc CreatePlan (Plan) returns (Plan) {
     option (google.api.http) = {
@@ -630,6 +633,12 @@ service BillingService {
       returns (GetInvoiceSettingsTemplateExampleResponse) {
     option (google.api.http) = {
       get: "/billing/invoices/templateexample"
+    };
+  };
+  rpc RunDailyCronJob(RunDailyCronJobRequest) returns (RunDailyCronJobResponse) {
+    option (google.api.http) = {
+      post: "/billing/run_daily_cron_job"
+      body: "*"
     };
   };
 }

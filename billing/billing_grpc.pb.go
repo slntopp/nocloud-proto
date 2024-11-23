@@ -243,6 +243,7 @@ const (
 	BillingService_CreateRenewalInvoice_FullMethodName              = "/nocloud.billing.BillingService/CreateRenewalInvoice"
 	BillingService_PayWithBalance_FullMethodName                    = "/nocloud.billing.BillingService/PayWithBalance"
 	BillingService_GetInvoiceSettingsTemplateExample_FullMethodName = "/nocloud.billing.BillingService/GetInvoiceSettingsTemplateExample"
+	BillingService_RunDailyCronJob_FullMethodName                   = "/nocloud.billing.BillingService/RunDailyCronJob"
 )
 
 // BillingServiceClient is the client API for BillingService service.
@@ -277,6 +278,7 @@ type BillingServiceClient interface {
 	CreateRenewalInvoice(ctx context.Context, in *CreateRenewalInvoiceRequest, opts ...grpc.CallOption) (*Invoice, error)
 	PayWithBalance(ctx context.Context, in *PayWithBalanceRequest, opts ...grpc.CallOption) (*PayWithBalanceResponse, error)
 	GetInvoiceSettingsTemplateExample(ctx context.Context, in *GetInvoiceSettingsTemplateExampleRequest, opts ...grpc.CallOption) (*GetInvoiceSettingsTemplateExampleResponse, error)
+	RunDailyCronJob(ctx context.Context, in *RunDailyCronJobRequest, opts ...grpc.CallOption) (*RunDailyCronJobResponse, error)
 }
 
 type billingServiceClient struct {
@@ -567,6 +569,16 @@ func (c *billingServiceClient) GetInvoiceSettingsTemplateExample(ctx context.Con
 	return out, nil
 }
 
+func (c *billingServiceClient) RunDailyCronJob(ctx context.Context, in *RunDailyCronJobRequest, opts ...grpc.CallOption) (*RunDailyCronJobResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RunDailyCronJobResponse)
+	err := c.cc.Invoke(ctx, BillingService_RunDailyCronJob_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BillingServiceServer is the server API for BillingService service.
 // All implementations must embed UnimplementedBillingServiceServer
 // for forward compatibility.
@@ -599,6 +611,7 @@ type BillingServiceServer interface {
 	CreateRenewalInvoice(context.Context, *CreateRenewalInvoiceRequest) (*Invoice, error)
 	PayWithBalance(context.Context, *PayWithBalanceRequest) (*PayWithBalanceResponse, error)
 	GetInvoiceSettingsTemplateExample(context.Context, *GetInvoiceSettingsTemplateExampleRequest) (*GetInvoiceSettingsTemplateExampleResponse, error)
+	RunDailyCronJob(context.Context, *RunDailyCronJobRequest) (*RunDailyCronJobResponse, error)
 	mustEmbedUnimplementedBillingServiceServer()
 }
 
@@ -692,6 +705,9 @@ func (UnimplementedBillingServiceServer) PayWithBalance(context.Context, *PayWit
 }
 func (UnimplementedBillingServiceServer) GetInvoiceSettingsTemplateExample(context.Context, *GetInvoiceSettingsTemplateExampleRequest) (*GetInvoiceSettingsTemplateExampleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInvoiceSettingsTemplateExample not implemented")
+}
+func (UnimplementedBillingServiceServer) RunDailyCronJob(context.Context, *RunDailyCronJobRequest) (*RunDailyCronJobResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RunDailyCronJob not implemented")
 }
 func (UnimplementedBillingServiceServer) mustEmbedUnimplementedBillingServiceServer() {}
 func (UnimplementedBillingServiceServer) testEmbeddedByValue()                        {}
@@ -1218,6 +1234,24 @@ func _BillingService_GetInvoiceSettingsTemplateExample_Handler(srv interface{}, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BillingService_RunDailyCronJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RunDailyCronJobRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).RunDailyCronJob(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_RunDailyCronJob_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).RunDailyCronJob(ctx, req.(*RunDailyCronJobRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BillingService_ServiceDesc is the grpc.ServiceDesc for BillingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1336,6 +1370,10 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetInvoiceSettingsTemplateExample",
 			Handler:    _BillingService_GetInvoiceSettingsTemplateExample_Handler,
+		},
+		{
+			MethodName: "RunDailyCronJob",
+			Handler:    _BillingService_RunDailyCronJob_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

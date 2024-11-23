@@ -799,6 +799,22 @@ export const PayWithBalanceResponse = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * @generated from message nocloud.billing.RunDailyCronJobRequest
+ */
+export const RunDailyCronJobRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.RunDailyCronJobRequest",
+  [],
+);
+
+/**
+ * @generated from message nocloud.billing.RunDailyCronJobResponse
+ */
+export const RunDailyCronJobResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.RunDailyCronJobResponse",
+  [],
+);
+
+/**
  * @generated from message nocloud.billing.Currency
  */
 export const Currency = /*@__PURE__*/ proto3.makeMessageType(

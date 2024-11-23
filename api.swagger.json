@@ -3624,6 +3624,38 @@
         ]
       }
     },
+    "/billing/run_daily_cron_job": {
+      "post": {
+        "operationId": "BillingService_RunDailyCronJob",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingRunDailyCronJobResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingRunDailyCronJobRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
     "/billing/transactions": {
       "get": {
         "operationId": "BillingService_GetTransactions",
@@ -8572,6 +8604,12 @@
         "ROUND_DOWN"
       ],
       "default": "ROUND_UP"
+    },
+    "billingRunDailyCronJobRequest": {
+      "type": "object"
+    },
+    "billingRunDailyCronJobResponse": {
+      "type": "object"
     },
     "billingTransaction": {
       "type": "object",

@@ -2344,6 +2344,44 @@ export declare class PayWithBalanceResponse extends Message<PayWithBalanceRespon
 }
 
 /**
+ * @generated from message nocloud.billing.RunDailyCronJobRequest
+ */
+export declare class RunDailyCronJobRequest extends Message<RunDailyCronJobRequest> {
+  constructor(data?: PartialMessage<RunDailyCronJobRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.RunDailyCronJobRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RunDailyCronJobRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RunDailyCronJobRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RunDailyCronJobRequest;
+
+  static equals(a: RunDailyCronJobRequest | PlainMessage<RunDailyCronJobRequest> | undefined, b: RunDailyCronJobRequest | PlainMessage<RunDailyCronJobRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.RunDailyCronJobResponse
+ */
+export declare class RunDailyCronJobResponse extends Message<RunDailyCronJobResponse> {
+  constructor(data?: PartialMessage<RunDailyCronJobResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.RunDailyCronJobResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RunDailyCronJobResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RunDailyCronJobResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RunDailyCronJobResponse;
+
+  static equals(a: RunDailyCronJobResponse | PlainMessage<RunDailyCronJobResponse> | undefined, b: RunDailyCronJobResponse | PlainMessage<RunDailyCronJobResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.billing.Currency
  */
 export declare class Currency extends Message<Currency> {
