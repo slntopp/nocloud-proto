@@ -644,17 +644,19 @@ service BillingService {
 }
 
 enum Rounding {
-  ROUND_UP = 0;
-  ROUND_DOWN = 1;
+  ROUND_HALF = 0;
+  ROUND_UP = 1;
+  ROUND_DOWN = 2;
 }
 
 message Currency {
   int32 id = 1;
-  string title = 2;
+  string title = 2; // Name
   bool public = 3;
   int32  precision = 4;
   Rounding rounding = 5;
   string format = 6;
+  string code = 7; // Unique code
 }
 
 message CreateCurrencyRequest{

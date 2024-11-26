@@ -1738,6 +1738,7 @@
           },
           {
             "name": "from.title",
+            "description": "Name",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1761,13 +1762,21 @@
             "required": false,
             "type": "string",
             "enum": [
+              "ROUND_HALF",
               "ROUND_UP",
               "ROUND_DOWN"
             ],
-            "default": "ROUND_UP"
+            "default": "ROUND_HALF"
           },
           {
             "name": "from.format",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "from.code",
+            "description": "Unique code",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1781,6 +1790,7 @@
           },
           {
             "name": "to.title",
+            "description": "Name",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1804,13 +1814,21 @@
             "required": false,
             "type": "string",
             "enum": [
+              "ROUND_HALF",
               "ROUND_UP",
               "ROUND_DOWN"
             ],
-            "default": "ROUND_UP"
+            "default": "ROUND_HALF"
           },
           {
             "name": "to.format",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "to.code",
+            "description": "Unique code",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1846,6 +1864,7 @@
           },
           {
             "name": "from.title",
+            "description": "Name",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1869,13 +1888,21 @@
             "required": false,
             "type": "string",
             "enum": [
+              "ROUND_HALF",
               "ROUND_UP",
               "ROUND_DOWN"
             ],
-            "default": "ROUND_UP"
+            "default": "ROUND_HALF"
           },
           {
             "name": "from.format",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "from.code",
+            "description": "Unique code",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1889,6 +1916,7 @@
           },
           {
             "name": "to.title",
+            "description": "Name",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1912,13 +1940,21 @@
             "required": false,
             "type": "string",
             "enum": [
+              "ROUND_HALF",
               "ROUND_UP",
               "ROUND_DOWN"
             ],
-            "default": "ROUND_UP"
+            "default": "ROUND_HALF"
           },
           {
             "name": "to.format",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "to.code",
+            "description": "Unique code",
             "in": "query",
             "required": false,
             "type": "string"
@@ -2513,6 +2549,7 @@
           },
           {
             "name": "currency.title",
+            "description": "Name",
             "in": "query",
             "required": false,
             "type": "string"
@@ -2536,13 +2573,21 @@
             "required": false,
             "type": "string",
             "enum": [
+              "ROUND_HALF",
               "ROUND_UP",
               "ROUND_DOWN"
             ],
-            "default": "ROUND_UP"
+            "default": "ROUND_HALF"
           },
           {
             "name": "currency.format",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "currency.code",
+            "description": "Unique code",
             "in": "query",
             "required": false,
             "type": "string"
@@ -3867,6 +3912,7 @@
           },
           {
             "name": "currency.title",
+            "description": "Name",
             "in": "query",
             "required": false,
             "type": "string"
@@ -3890,13 +3936,21 @@
             "required": false,
             "type": "string",
             "enum": [
+              "ROUND_HALF",
               "ROUND_UP",
               "ROUND_DOWN"
             ],
-            "default": "ROUND_UP"
+            "default": "ROUND_HALF"
           },
           {
             "name": "currency.format",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "currency.code",
+            "description": "Unique code",
             "in": "query",
             "required": false,
             "type": "string"
@@ -7842,7 +7896,8 @@
           "format": "int32"
         },
         "title": {
-          "type": "string"
+          "type": "string",
+          "title": "Name"
         },
         "public": {
           "type": "boolean"
@@ -7856,6 +7911,10 @@
         },
         "format": {
           "type": "string"
+        },
+        "code": {
+          "type": "string",
+          "title": "Unique code"
         }
       }
     },
@@ -8600,10 +8659,11 @@
     "billingRounding": {
       "type": "string",
       "enum": [
+        "ROUND_HALF",
         "ROUND_UP",
         "ROUND_DOWN"
       ],
-      "default": "ROUND_UP"
+      "default": "ROUND_HALF"
     },
     "billingRunDailyCronJobRequest": {
       "type": "object"

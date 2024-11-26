@@ -233,14 +233,19 @@ export declare enum ActionType {
  */
 export declare enum Rounding {
   /**
-   * @generated from enum value: ROUND_UP = 0;
+   * @generated from enum value: ROUND_HALF = 0;
    */
-  ROUND_UP = 0,
+  ROUND_HALF = 0,
 
   /**
-   * @generated from enum value: ROUND_DOWN = 1;
+   * @generated from enum value: ROUND_UP = 1;
    */
-  ROUND_DOWN = 1,
+  ROUND_UP = 1,
+
+  /**
+   * @generated from enum value: ROUND_DOWN = 2;
+   */
+  ROUND_DOWN = 2,
 }
 
 /**
@@ -2391,6 +2396,8 @@ export declare class Currency extends Message<Currency> {
   id: number;
 
   /**
+   * Name
+   *
    * @generated from field: string title = 2;
    */
   title: string;
@@ -2414,6 +2421,13 @@ export declare class Currency extends Message<Currency> {
    * @generated from field: string format = 6;
    */
   format: string;
+
+  /**
+   * Unique code
+   *
+   * @generated from field: string code = 7;
+   */
+  code: string;
 
   constructor(data?: PartialMessage<Currency>);
 
