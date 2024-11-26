@@ -423,4 +423,18 @@ class BillingServiceClient extends \Grpc\BaseStub {
         $metadata, $options);
     }
 
+    /**
+     * @param \Nocloud\Billing\RunDailyCronJobRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function RunDailyCronJob(\Nocloud\Billing\RunDailyCronJobRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/RunDailyCronJob',
+        $argument,
+        ['\Nocloud\Billing\RunDailyCronJobResponse', 'decode'],
+        $metadata, $options);
+    }
+
 }
