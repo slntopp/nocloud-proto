@@ -13,15 +13,20 @@ use UnexpectedValueException;
 class Rounding
 {
     /**
-     * Generated from protobuf enum <code>ROUND_UP = 0;</code>
+     * Generated from protobuf enum <code>ROUND_HALF = 0;</code>
      */
-    const ROUND_UP = 0;
+    const ROUND_HALF = 0;
     /**
-     * Generated from protobuf enum <code>ROUND_DOWN = 1;</code>
+     * Generated from protobuf enum <code>ROUND_UP = 1;</code>
      */
-    const ROUND_DOWN = 1;
+    const ROUND_UP = 1;
+    /**
+     * Generated from protobuf enum <code>ROUND_DOWN = 2;</code>
+     */
+    const ROUND_DOWN = 2;
 
     private static $valueToName = [
+        self::ROUND_HALF => 'ROUND_HALF',
         self::ROUND_UP => 'ROUND_UP',
         self::ROUND_DOWN => 'ROUND_DOWN',
     ];

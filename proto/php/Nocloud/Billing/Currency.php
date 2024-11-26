@@ -19,6 +19,8 @@ class Currency extends \Google\Protobuf\Internal\Message
      */
     protected $id = 0;
     /**
+     * Name
+     *
      * Generated from protobuf field <code>string title = 2 [json_name = "title"];</code>
      */
     protected $title = '';
@@ -38,6 +40,12 @@ class Currency extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string format = 6 [json_name = "format"];</code>
      */
     protected $format = '';
+    /**
+     * Unique code
+     *
+     * Generated from protobuf field <code>string code = 7 [json_name = "code"];</code>
+     */
+    protected $code = '';
 
     /**
      * Constructor.
@@ -47,10 +55,13 @@ class Currency extends \Google\Protobuf\Internal\Message
      *
      *     @type int $id
      *     @type string $title
+     *           Name
      *     @type bool $public
      *     @type int $precision
      *     @type int $rounding
      *     @type string $format
+     *     @type string $code
+     *           Unique code
      * }
      */
     public function __construct($data = NULL) {
@@ -81,6 +92,8 @@ class Currency extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Name
+     *
      * Generated from protobuf field <code>string title = 2 [json_name = "title"];</code>
      * @return string
      */
@@ -90,6 +103,8 @@ class Currency extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Name
+     *
      * Generated from protobuf field <code>string title = 2 [json_name = "title"];</code>
      * @param string $var
      * @return $this
@@ -186,6 +201,32 @@ class Currency extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->format = $var;
+
+        return $this;
+    }
+
+    /**
+     * Unique code
+     *
+     * Generated from protobuf field <code>string code = 7 [json_name = "code"];</code>
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Unique code
+     *
+     * Generated from protobuf field <code>string code = 7 [json_name = "code"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setCode($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->code = $var;
 
         return $this;
     }
