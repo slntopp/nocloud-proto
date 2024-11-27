@@ -5,60 +5,231 @@
 
 namespace Nocloud\Billing;
 
-use UnexpectedValueException;
+use Google\Protobuf\Internal\GPBType;
+use Google\Protobuf\Internal\RepeatedField;
+use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Protobuf type <code>nocloud.billing.Currency</code>
+ * Generated from protobuf message <code>nocloud.billing.Currency</code>
  */
-class Currency
+class Currency extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf enum <code>NCU = 0;</code>
+     * Generated from protobuf field <code>int32 id = 1 [json_name = "id"];</code>
      */
-    const NCU = 0;
+    protected $id = 0;
     /**
-     * Generated from protobuf enum <code>USD = 1;</code>
+     * Name
+     *
+     * Generated from protobuf field <code>string title = 2 [json_name = "title"];</code>
      */
-    const USD = 1;
+    protected $title = '';
     /**
-     * Generated from protobuf enum <code>EUR = 2;</code>
+     * Generated from protobuf field <code>bool public = 3 [json_name = "public"];</code>
      */
-    const EUR = 2;
+    protected $public = false;
     /**
-     * Generated from protobuf enum <code>BYN = 3;</code>
+     * Generated from protobuf field <code>int32 precision = 4 [json_name = "precision"];</code>
      */
-    const BYN = 3;
+    protected $precision = 0;
     /**
-     * Generated from protobuf enum <code>PLN = 4;</code>
+     * Generated from protobuf field <code>.nocloud.billing.Rounding rounding = 5 [json_name = "rounding"];</code>
      */
-    const PLN = 4;
+    protected $rounding = 0;
+    /**
+     * Generated from protobuf field <code>string format = 6 [json_name = "format"];</code>
+     */
+    protected $format = '';
+    /**
+     * Unique code
+     *
+     * Generated from protobuf field <code>string code = 7 [json_name = "code"];</code>
+     */
+    protected $code = '';
 
-    private static $valueToName = [
-        self::NCU => 'NCU',
-        self::USD => 'USD',
-        self::EUR => 'EUR',
-        self::BYN => 'BYN',
-        self::PLN => 'PLN',
-    ];
-
-    public static function name($value)
-    {
-        if (!isset(self::$valueToName[$value])) {
-            throw new UnexpectedValueException(sprintf(
-                    'Enum %s has no name defined for value %s', __CLASS__, $value));
-        }
-        return self::$valueToName[$value];
+    /**
+     * Constructor.
+     *
+     * @param array $data {
+     *     Optional. Data for populating the Message object.
+     *
+     *     @type int $id
+     *     @type string $title
+     *           Name
+     *     @type bool $public
+     *     @type int $precision
+     *     @type int $rounding
+     *     @type string $format
+     *     @type string $code
+     *           Unique code
+     * }
+     */
+    public function __construct($data = NULL) {
+        \Nocloud\Billing\GPBMetadata\Billing::initOnce();
+        parent::__construct($data);
     }
 
-
-    public static function value($name)
+    /**
+     * Generated from protobuf field <code>int32 id = 1 [json_name = "id"];</code>
+     * @return int
+     */
+    public function getId()
     {
-        $const = __CLASS__ . '::' . strtoupper($name);
-        if (!defined($const)) {
-            throw new UnexpectedValueException(sprintf(
-                    'Enum %s has no value defined for name %s', __CLASS__, $name));
-        }
-        return constant($const);
+        return $this->id;
     }
+
+    /**
+     * Generated from protobuf field <code>int32 id = 1 [json_name = "id"];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setId($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->id = $var;
+
+        return $this;
+    }
+
+    /**
+     * Name
+     *
+     * Generated from protobuf field <code>string title = 2 [json_name = "title"];</code>
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Name
+     *
+     * Generated from protobuf field <code>string title = 2 [json_name = "title"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setTitle($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->title = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool public = 3 [json_name = "public"];</code>
+     * @return bool
+     */
+    public function getPublic()
+    {
+        return $this->public;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool public = 3 [json_name = "public"];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setPublic($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->public = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>int32 precision = 4 [json_name = "precision"];</code>
+     * @return int
+     */
+    public function getPrecision()
+    {
+        return $this->precision;
+    }
+
+    /**
+     * Generated from protobuf field <code>int32 precision = 4 [json_name = "precision"];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setPrecision($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->precision = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.Rounding rounding = 5 [json_name = "rounding"];</code>
+     * @return int
+     */
+    public function getRounding()
+    {
+        return $this->rounding;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.Rounding rounding = 5 [json_name = "rounding"];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setRounding($var)
+    {
+        GPBUtil::checkEnum($var, \Nocloud\Billing\Rounding::class);
+        $this->rounding = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string format = 6 [json_name = "format"];</code>
+     * @return string
+     */
+    public function getFormat()
+    {
+        return $this->format;
+    }
+
+    /**
+     * Generated from protobuf field <code>string format = 6 [json_name = "format"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setFormat($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->format = $var;
+
+        return $this;
+    }
+
+    /**
+     * Unique code
+     *
+     * Generated from protobuf field <code>string code = 7 [json_name = "code"];</code>
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Unique code
+     *
+     * Generated from protobuf field <code>string code = 7 [json_name = "code"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setCode($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->code = $var;
+
+        return $this;
+    }
+
 }
 

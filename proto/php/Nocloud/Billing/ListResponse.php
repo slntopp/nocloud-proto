@@ -18,6 +18,10 @@ class ListResponse extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>repeated .nocloud.billing.Plan pool = 1 [json_name = "pool"];</code>
      */
     private $pool;
+    /**
+     * Generated from protobuf field <code>uint64 total = 2 [json_name = "total"];</code>
+     */
+    protected $total = 0;
 
     /**
      * Constructor.
@@ -26,6 +30,7 @@ class ListResponse extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type array<\Nocloud\Billing\Plan>|\Google\Protobuf\Internal\RepeatedField $pool
+     *     @type int|string $total
      * }
      */
     public function __construct($data = NULL) {
@@ -51,6 +56,28 @@ class ListResponse extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Nocloud\Billing\Plan::class);
         $this->pool = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>uint64 total = 2 [json_name = "total"];</code>
+     * @return int|string
+     */
+    public function getTotal()
+    {
+        return $this->total;
+    }
+
+    /**
+     * Generated from protobuf field <code>uint64 total = 2 [json_name = "total"];</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setTotal($var)
+    {
+        GPBUtil::checkUint64($var);
+        $this->total = $var;
 
         return $this;
     }

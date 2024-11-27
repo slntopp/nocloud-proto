@@ -32,6 +32,34 @@ class CurrencyServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * @param \Nocloud\Billing\CreateCurrencyRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function CreateCurrency(\Nocloud\Billing\CreateCurrencyRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.CurrencyService/CreateCurrency',
+        $argument,
+        ['\Nocloud\Billing\CreateCurrencyResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Billing\UpdateCurrencyRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function UpdateCurrency(\Nocloud\Billing\UpdateCurrencyRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.CurrencyService/UpdateCurrency',
+        $argument,
+        ['\Nocloud\Billing\UpdateCurrencyResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * @param \Nocloud\Billing\GetCurrenciesRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options

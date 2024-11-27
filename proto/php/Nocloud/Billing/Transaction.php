@@ -77,7 +77,7 @@ class Transaction extends \Google\Protobuf\Internal\Message
     /**
      * Generated from protobuf field <code>.nocloud.billing.Currency currency = 11 [json_name = "currency"];</code>
      */
-    protected $currency = 0;
+    protected $currency = null;
     /**
      * Generated from protobuf field <code>int64 created = 12 [json_name = "created"];</code>
      */
@@ -120,7 +120,7 @@ class Transaction extends \Google\Protobuf\Internal\Message
      *          the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
      *          Type(SSD/HDD/NVMe/etc)
      *          }
-     *     @type int $currency
+     *     @type \Nocloud\Billing\Currency $currency
      *     @type int|string $created
      *     @type string $base
      *     @type string $previous
@@ -393,21 +393,31 @@ class Transaction extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>.nocloud.billing.Currency currency = 11 [json_name = "currency"];</code>
-     * @return int
+     * @return \Nocloud\Billing\Currency|null
      */
     public function getCurrency()
     {
         return $this->currency;
     }
 
+    public function hasCurrency()
+    {
+        return isset($this->currency);
+    }
+
+    public function clearCurrency()
+    {
+        unset($this->currency);
+    }
+
     /**
      * Generated from protobuf field <code>.nocloud.billing.Currency currency = 11 [json_name = "currency"];</code>
-     * @param int $var
+     * @param \Nocloud\Billing\Currency $var
      * @return $this
      */
     public function setCurrency($var)
     {
-        GPBUtil::checkEnum($var, \Nocloud\Billing\Currency::class);
+        GPBUtil::checkMessage($var, \Nocloud\Billing\Currency::class);
         $this->currency = $var;
 
         return $this;

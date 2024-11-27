@@ -25,7 +25,7 @@ class InstanceReport extends \Google\Protobuf\Internal\Message
     /**
      * Generated from protobuf field <code>.nocloud.billing.Currency currency = 3 [json_name = "currency"];</code>
      */
-    protected $currency = 0;
+    protected $currency = null;
 
     /**
      * Constructor.
@@ -35,7 +35,7 @@ class InstanceReport extends \Google\Protobuf\Internal\Message
      *
      *     @type string $uuid
      *     @type float $total
-     *     @type int $currency
+     *     @type \Nocloud\Billing\Currency $currency
      * }
      */
     public function __construct($data = NULL) {
@@ -89,21 +89,31 @@ class InstanceReport extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>.nocloud.billing.Currency currency = 3 [json_name = "currency"];</code>
-     * @return int
+     * @return \Nocloud\Billing\Currency|null
      */
     public function getCurrency()
     {
         return $this->currency;
     }
 
+    public function hasCurrency()
+    {
+        return isset($this->currency);
+    }
+
+    public function clearCurrency()
+    {
+        unset($this->currency);
+    }
+
     /**
      * Generated from protobuf field <code>.nocloud.billing.Currency currency = 3 [json_name = "currency"];</code>
-     * @param int $var
+     * @param \Nocloud\Billing\Currency $var
      * @return $this
      */
     public function setCurrency($var)
     {
-        GPBUtil::checkEnum($var, \Nocloud\Billing\Currency::class);
+        GPBUtil::checkMessage($var, \Nocloud\Billing\Currency::class);
         $this->currency = $var;
 
         return $this;

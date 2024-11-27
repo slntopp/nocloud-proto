@@ -78,6 +78,10 @@ class ResourceConf extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.nocloud.billing.PeriodKind period_kind = 14 [json_name = "periodKind"];</code>
      */
     protected $period_kind = 0;
+    /**
+     * Generated from protobuf field <code>string description_id = 15 [json_name = "descriptionId"];</code>
+     */
+    protected $description_id = '';
 
     /**
      * Constructor.
@@ -104,6 +108,7 @@ class ResourceConf extends \Google\Protobuf\Internal\Message
      *     @type int $min
      *     @type int $max
      *     @type int $period_kind
+     *     @type string $description_id
      * }
      */
     public function __construct($data = NULL) {
@@ -461,6 +466,28 @@ class ResourceConf extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkEnum($var, \Nocloud\Billing\PeriodKind::class);
         $this->period_kind = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string description_id = 15 [json_name = "descriptionId"];</code>
+     * @return string
+     */
+    public function getDescriptionId()
+    {
+        return $this->description_id;
+    }
+
+    /**
+     * Generated from protobuf field <code>string description_id = 15 [json_name = "descriptionId"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setDescriptionId($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->description_id = $var;
 
         return $this;
     }

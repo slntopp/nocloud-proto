@@ -30,6 +30,10 @@ class MonitoringRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>map<string, double> balance = 4 [json_name = "balance"];</code>
      */
     private $balance;
+    /**
+     * Generated from protobuf field <code>map<string, .nocloud.billing.addons.Addon> addons = 5 [json_name = "addons"];</code>
+     */
+    private $addons;
 
     /**
      * Constructor.
@@ -41,6 +45,7 @@ class MonitoringRequest extends \Google\Protobuf\Internal\Message
      *     @type \Nocloud\ServicesProviders\ServicesProvider $services_provider
      *     @type bool $scheduled
      *     @type array|\Google\Protobuf\Internal\MapField $balance
+     *     @type array|\Google\Protobuf\Internal\MapField $addons
      * }
      */
     public function __construct($data = NULL) {
@@ -142,6 +147,28 @@ class MonitoringRequest extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::DOUBLE);
         $this->balance = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>map<string, .nocloud.billing.addons.Addon> addons = 5 [json_name = "addons"];</code>
+     * @return \Google\Protobuf\Internal\MapField
+     */
+    public function getAddons()
+    {
+        return $this->addons;
+    }
+
+    /**
+     * Generated from protobuf field <code>map<string, .nocloud.billing.addons.Addon> addons = 5 [json_name = "addons"];</code>
+     * @param array|\Google\Protobuf\Internal\MapField $var
+     * @return $this
+     */
+    public function setAddons($var)
+    {
+        $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::MESSAGE, \Nocloud\Billing\Addons\Addon::class);
+        $this->addons = $arr;
 
         return $this;
     }

@@ -66,6 +66,14 @@ class Product extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.nocloud.billing.PeriodKind period_kind = 11 [json_name = "periodKind"];</code>
      */
     protected $period_kind = 0;
+    /**
+     * Generated from protobuf field <code>string description_id = 12 [json_name = "descriptionId"];</code>
+     */
+    protected $description_id = '';
+    /**
+     * Generated from protobuf field <code>repeated string addons = 13 [json_name = "addons"];</code>
+     */
+    private $addons;
 
     /**
      * Constructor.
@@ -88,6 +96,8 @@ class Product extends \Google\Protobuf\Internal\Message
      *     @type bool $public
      *     @type string $group
      *     @type int $period_kind
+     *     @type string $description_id
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $addons
      * }
      */
     public function __construct($data = NULL) {
@@ -369,6 +379,50 @@ class Product extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkEnum($var, \Nocloud\Billing\PeriodKind::class);
         $this->period_kind = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string description_id = 12 [json_name = "descriptionId"];</code>
+     * @return string
+     */
+    public function getDescriptionId()
+    {
+        return $this->description_id;
+    }
+
+    /**
+     * Generated from protobuf field <code>string description_id = 12 [json_name = "descriptionId"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setDescriptionId($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->description_id = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated string addons = 13 [json_name = "addons"];</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getAddons()
+    {
+        return $this->addons;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated string addons = 13 [json_name = "addons"];</code>
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setAddons($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
+        $this->addons = $arr;
 
         return $this;
     }

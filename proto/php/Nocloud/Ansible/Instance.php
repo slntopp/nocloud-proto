@@ -45,6 +45,8 @@ class Instance extends \Google\Protobuf\Internal\Message
      */
     protected $pass = null;
     /**
+     * Ansible Jump Host
+     *
      * Generated from protobuf field <code>optional string ansible_host = 6 [json_name = "ansibleHost"];</code>
      */
     protected $ansible_host = null;
@@ -70,6 +72,7 @@ class Instance extends \Google\Protobuf\Internal\Message
      *     @type string $pass
      *           SSH Password
      *     @type string $ansible_host
+     *           Ansible Jump Host
      *     @type string $python
      * }
      */
@@ -239,6 +242,8 @@ class Instance extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Ansible Jump Host
+     *
      * Generated from protobuf field <code>optional string ansible_host = 6 [json_name = "ansibleHost"];</code>
      * @return string
      */
@@ -258,6 +263,8 @@ class Instance extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Ansible Jump Host
+     *
      * Generated from protobuf field <code>optional string ansible_host = 6 [json_name = "ansibleHost"];</code>
      * @param string $var
      * @return $this

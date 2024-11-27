@@ -18,6 +18,10 @@ class ListPlansInstancesRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>bool anonymously = 1 [json_name = "anonymously"];</code>
      */
     protected $anonymously = false;
+    /**
+     * Generated from protobuf field <code>repeated string uuids = 2 [json_name = "uuids"];</code>
+     */
+    private $uuids;
 
     /**
      * Constructor.
@@ -26,6 +30,7 @@ class ListPlansInstancesRequest extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type bool $anonymously
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $uuids
      * }
      */
     public function __construct($data = NULL) {
@@ -51,6 +56,28 @@ class ListPlansInstancesRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkBool($var);
         $this->anonymously = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated string uuids = 2 [json_name = "uuids"];</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getUuids()
+    {
+        return $this->uuids;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated string uuids = 2 [json_name = "uuids"];</code>
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setUuids($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
+        $this->uuids = $arr;
 
         return $this;
     }

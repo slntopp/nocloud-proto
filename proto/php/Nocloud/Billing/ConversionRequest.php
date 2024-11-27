@@ -17,11 +17,11 @@ class ConversionRequest extends \Google\Protobuf\Internal\Message
     /**
      * Generated from protobuf field <code>.nocloud.billing.Currency from = 1 [json_name = "from"];</code>
      */
-    protected $from = 0;
+    protected $from = null;
     /**
      * Generated from protobuf field <code>.nocloud.billing.Currency to = 2 [json_name = "to"];</code>
      */
-    protected $to = 0;
+    protected $to = null;
     /**
      * Generated from protobuf field <code>double amount = 3 [json_name = "amount"];</code>
      */
@@ -33,8 +33,8 @@ class ConversionRequest extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type int $from
-     *     @type int $to
+     *     @type \Nocloud\Billing\Currency $from
+     *     @type \Nocloud\Billing\Currency $to
      *     @type float $amount
      * }
      */
@@ -45,21 +45,31 @@ class ConversionRequest extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>.nocloud.billing.Currency from = 1 [json_name = "from"];</code>
-     * @return int
+     * @return \Nocloud\Billing\Currency|null
      */
     public function getFrom()
     {
         return $this->from;
     }
 
+    public function hasFrom()
+    {
+        return isset($this->from);
+    }
+
+    public function clearFrom()
+    {
+        unset($this->from);
+    }
+
     /**
      * Generated from protobuf field <code>.nocloud.billing.Currency from = 1 [json_name = "from"];</code>
-     * @param int $var
+     * @param \Nocloud\Billing\Currency $var
      * @return $this
      */
     public function setFrom($var)
     {
-        GPBUtil::checkEnum($var, \Nocloud\Billing\Currency::class);
+        GPBUtil::checkMessage($var, \Nocloud\Billing\Currency::class);
         $this->from = $var;
 
         return $this;
@@ -67,21 +77,31 @@ class ConversionRequest extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>.nocloud.billing.Currency to = 2 [json_name = "to"];</code>
-     * @return int
+     * @return \Nocloud\Billing\Currency|null
      */
     public function getTo()
     {
         return $this->to;
     }
 
+    public function hasTo()
+    {
+        return isset($this->to);
+    }
+
+    public function clearTo()
+    {
+        unset($this->to);
+    }
+
     /**
      * Generated from protobuf field <code>.nocloud.billing.Currency to = 2 [json_name = "to"];</code>
-     * @param int $var
+     * @param \Nocloud\Billing\Currency $var
      * @return $this
      */
     public function setTo($var)
     {
-        GPBUtil::checkEnum($var, \Nocloud\Billing\Currency::class);
+        GPBUtil::checkMessage($var, \Nocloud\Billing\Currency::class);
         $this->to = $var;
 
         return $this;

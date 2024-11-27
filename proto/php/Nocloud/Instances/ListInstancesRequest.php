@@ -23,10 +23,14 @@ class ListInstancesRequest extends \Google\Protobuf\Internal\Message
      */
     protected $limit = null;
     /**
+     * Sort field
+     *
      * Generated from protobuf field <code>optional string field = 3 [json_name = "field"];</code>
      */
     protected $field = null;
     /**
+     * Sort direction
+     *
      * Generated from protobuf field <code>optional string sort = 4 [json_name = "sort"];</code>
      */
     protected $sort = null;
@@ -34,6 +38,12 @@ class ListInstancesRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>map<string, .google.protobuf.Value> filters = 5 [json_name = "filters"];</code>
      */
     private $filters;
+    /**
+     * Sort custom order
+     *
+     * Generated from protobuf field <code>optional .google.protobuf.Value custom_order = 6 [json_name = "customOrder"];</code>
+     */
+    protected $custom_order = null;
 
     /**
      * Constructor.
@@ -44,8 +54,12 @@ class ListInstancesRequest extends \Google\Protobuf\Internal\Message
      *     @type int|string $page
      *     @type int|string $limit
      *     @type string $field
+     *           Sort field
      *     @type string $sort
+     *           Sort direction
      *     @type array|\Google\Protobuf\Internal\MapField $filters
+     *     @type \Google\Protobuf\Value $custom_order
+     *           Sort custom order
      * }
      */
     public function __construct($data = NULL) {
@@ -118,6 +132,8 @@ class ListInstancesRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Sort field
+     *
      * Generated from protobuf field <code>optional string field = 3 [json_name = "field"];</code>
      * @return string
      */
@@ -137,6 +153,8 @@ class ListInstancesRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Sort field
+     *
      * Generated from protobuf field <code>optional string field = 3 [json_name = "field"];</code>
      * @param string $var
      * @return $this
@@ -150,6 +168,8 @@ class ListInstancesRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Sort direction
+     *
      * Generated from protobuf field <code>optional string sort = 4 [json_name = "sort"];</code>
      * @return string
      */
@@ -169,6 +189,8 @@ class ListInstancesRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Sort direction
+     *
      * Generated from protobuf field <code>optional string sort = 4 [json_name = "sort"];</code>
      * @param string $var
      * @return $this
@@ -199,6 +221,42 @@ class ListInstancesRequest extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::MESSAGE, \Google\Protobuf\Value::class);
         $this->filters = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Sort custom order
+     *
+     * Generated from protobuf field <code>optional .google.protobuf.Value custom_order = 6 [json_name = "customOrder"];</code>
+     * @return \Google\Protobuf\Value|null
+     */
+    public function getCustomOrder()
+    {
+        return $this->custom_order;
+    }
+
+    public function hasCustomOrder()
+    {
+        return isset($this->custom_order);
+    }
+
+    public function clearCustomOrder()
+    {
+        unset($this->custom_order);
+    }
+
+    /**
+     * Sort custom order
+     *
+     * Generated from protobuf field <code>optional .google.protobuf.Value custom_order = 6 [json_name = "customOrder"];</code>
+     * @param \Google\Protobuf\Value $var
+     * @return $this
+     */
+    public function setCustomOrder($var)
+    {
+        GPBUtil::checkMessage($var, \Google\Protobuf\Value::class);
+        $this->custom_order = $var;
 
         return $this;
     }

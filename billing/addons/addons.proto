@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package nocloud.billing.addons;
+
+import "google/protobuf/struct.proto";
+
+enum Kind {
+  UNSPECIFIED = 0; // Shall never be used, requests will be rejected
+  POSTPAID = 1;    // Transaction must be processed based on End time
+  PREPAID = 2;     // Transaction must be processed based on Start time
+}
+
+message Addon {
+  string uuid = 1;
+  string title = 2;
+  bool public = 3;
+  string group = 4;
+  map<string, google.protobuf.Value> meta = 5;
+  string description_id = 6;
+  map<int64, double> periods = 7;
+  int64 created = 8;
+  bool system = 9;
+  Kind kind = 10;
+}
+
+message BulkAddons {
+  repeated Addon addons = 1;
+}
+
+message ListAddonsRequest {
+  optional uint64 page = 1;
+  optional uint64 limit = 2;
+  optional string field = 3;
+  optional string sort = 4;
+  map<string, google.protobuf.Value> filters = 5;
+}
+
+message CountAddonsRequest {
+  map<string, google.protobuf.Value> filters = 1;
+}
+
+message CountAddonsResponse {
+  int64 total = 1;
+  google.protobuf.Value unique = 2;
+}
+
+message ListAddonsResponse {
+  repeated Addon addons = 1;
+}

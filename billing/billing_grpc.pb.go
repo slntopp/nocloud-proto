@@ -23,6 +23,9 @@ package billing
 
 import (
 	context "context"
+	addons "github.com/slntopp/nocloud-proto/billing/addons"
+	descriptions "github.com/slntopp/nocloud-proto/billing/descriptions"
+	promocodes "github.com/slntopp/nocloud-proto/billing/promocodes"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -212,22 +215,35 @@ var RecordsService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	BillingService_CreatePlan_FullMethodName               = "/nocloud.billing.BillingService/CreatePlan"
-	BillingService_UpdatePlan_FullMethodName               = "/nocloud.billing.BillingService/UpdatePlan"
-	BillingService_GetPlan_FullMethodName                  = "/nocloud.billing.BillingService/GetPlan"
-	BillingService_ListPlans_FullMethodName                = "/nocloud.billing.BillingService/ListPlans"
-	BillingService_ListPlansInstances_FullMethodName       = "/nocloud.billing.BillingService/ListPlansInstances"
-	BillingService_DeletePlan_FullMethodName               = "/nocloud.billing.BillingService/DeletePlan"
-	BillingService_CreateTransaction_FullMethodName        = "/nocloud.billing.BillingService/CreateTransaction"
-	BillingService_GetTransactions_FullMethodName          = "/nocloud.billing.BillingService/GetTransactions"
-	BillingService_GetTransactionsCount_FullMethodName     = "/nocloud.billing.BillingService/GetTransactionsCount"
-	BillingService_UpdateTransaction_FullMethodName        = "/nocloud.billing.BillingService/UpdateTransaction"
-	BillingService_GetRecords_FullMethodName               = "/nocloud.billing.BillingService/GetRecords"
-	BillingService_GetInstancesReports_FullMethodName      = "/nocloud.billing.BillingService/GetInstancesReports"
-	BillingService_GetInstancesReportsCount_FullMethodName = "/nocloud.billing.BillingService/GetInstancesReportsCount"
-	BillingService_GetRecordsReports_FullMethodName        = "/nocloud.billing.BillingService/GetRecordsReports"
-	BillingService_GetRecordsReportsCount_FullMethodName   = "/nocloud.billing.BillingService/GetRecordsReportsCount"
-	BillingService_Reprocess_FullMethodName                = "/nocloud.billing.BillingService/Reprocess"
+	BillingService_CreatePlan_FullMethodName                        = "/nocloud.billing.BillingService/CreatePlan"
+	BillingService_UpdatePlan_FullMethodName                        = "/nocloud.billing.BillingService/UpdatePlan"
+	BillingService_GetPlan_FullMethodName                           = "/nocloud.billing.BillingService/GetPlan"
+	BillingService_ListPlans_FullMethodName                         = "/nocloud.billing.BillingService/ListPlans"
+	BillingService_ListPlansInstances_FullMethodName                = "/nocloud.billing.BillingService/ListPlansInstances"
+	BillingService_PlansUnique_FullMethodName                       = "/nocloud.billing.BillingService/PlansUnique"
+	BillingService_DeletePlan_FullMethodName                        = "/nocloud.billing.BillingService/DeletePlan"
+	BillingService_CreateTransaction_FullMethodName                 = "/nocloud.billing.BillingService/CreateTransaction"
+	BillingService_GetTransactions_FullMethodName                   = "/nocloud.billing.BillingService/GetTransactions"
+	BillingService_GetTransactionsCount_FullMethodName              = "/nocloud.billing.BillingService/GetTransactionsCount"
+	BillingService_UpdateTransaction_FullMethodName                 = "/nocloud.billing.BillingService/UpdateTransaction"
+	BillingService_GetRecords_FullMethodName                        = "/nocloud.billing.BillingService/GetRecords"
+	BillingService_GetInstancesReports_FullMethodName               = "/nocloud.billing.BillingService/GetInstancesReports"
+	BillingService_GetInstancesReportsCount_FullMethodName          = "/nocloud.billing.BillingService/GetInstancesReportsCount"
+	BillingService_GetRecordsReports_FullMethodName                 = "/nocloud.billing.BillingService/GetRecordsReports"
+	BillingService_GetRecordsReportsCount_FullMethodName            = "/nocloud.billing.BillingService/GetRecordsReportsCount"
+	BillingService_Reprocess_FullMethodName                         = "/nocloud.billing.BillingService/Reprocess"
+	BillingService_CreateInvoice_FullMethodName                     = "/nocloud.billing.BillingService/CreateInvoice"
+	BillingService_GetInvoice_FullMethodName                        = "/nocloud.billing.BillingService/GetInvoice"
+	BillingService_GetInvoices_FullMethodName                       = "/nocloud.billing.BillingService/GetInvoices"
+	BillingService_GetInvoicesCount_FullMethodName                  = "/nocloud.billing.BillingService/GetInvoicesCount"
+	BillingService_UpdateInvoice_FullMethodName                     = "/nocloud.billing.BillingService/UpdateInvoice"
+	BillingService_Pay_FullMethodName                               = "/nocloud.billing.BillingService/Pay"
+	BillingService_UpdateInvoiceStatus_FullMethodName               = "/nocloud.billing.BillingService/UpdateInvoiceStatus"
+	BillingService_CreateTopUpBalanceInvoice_FullMethodName         = "/nocloud.billing.BillingService/CreateTopUpBalanceInvoice"
+	BillingService_CreateRenewalInvoice_FullMethodName              = "/nocloud.billing.BillingService/CreateRenewalInvoice"
+	BillingService_PayWithBalance_FullMethodName                    = "/nocloud.billing.BillingService/PayWithBalance"
+	BillingService_GetInvoiceSettingsTemplateExample_FullMethodName = "/nocloud.billing.BillingService/GetInvoiceSettingsTemplateExample"
+	BillingService_RunDailyCronJob_FullMethodName                   = "/nocloud.billing.BillingService/RunDailyCronJob"
 )
 
 // BillingServiceClient is the client API for BillingService service.
@@ -239,6 +255,7 @@ type BillingServiceClient interface {
 	GetPlan(ctx context.Context, in *Plan, opts ...grpc.CallOption) (*Plan, error)
 	ListPlans(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListResponse, error)
 	ListPlansInstances(ctx context.Context, in *ListPlansInstancesRequest, opts ...grpc.CallOption) (*ListPlansInstancesResponse, error)
+	PlansUnique(ctx context.Context, in *PlansUniqueRequest, opts ...grpc.CallOption) (*PlansUniqueResponse, error)
 	DeletePlan(ctx context.Context, in *Plan, opts ...grpc.CallOption) (*Plan, error)
 	CreateTransaction(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*Transaction, error)
 	GetTransactions(ctx context.Context, in *GetTransactionsRequest, opts ...grpc.CallOption) (*Transactions, error)
@@ -250,6 +267,18 @@ type BillingServiceClient interface {
 	GetRecordsReports(ctx context.Context, in *GetRecordsReportsRequest, opts ...grpc.CallOption) (*GetRecordsReportsResponse, error)
 	GetRecordsReportsCount(ctx context.Context, in *GetRecordsReportsCountRequest, opts ...grpc.CallOption) (*GetReportsCountResponse, error)
 	Reprocess(ctx context.Context, in *ReprocessTransactionsRequest, opts ...grpc.CallOption) (*Transactions, error)
+	CreateInvoice(ctx context.Context, in *CreateInvoiceRequest, opts ...grpc.CallOption) (*Invoice, error)
+	GetInvoice(ctx context.Context, in *Invoice, opts ...grpc.CallOption) (*Invoice, error)
+	GetInvoices(ctx context.Context, in *GetInvoicesRequest, opts ...grpc.CallOption) (*Invoices, error)
+	GetInvoicesCount(ctx context.Context, in *GetInvoicesCountRequest, opts ...grpc.CallOption) (*GetInvoicesCountResponse, error)
+	UpdateInvoice(ctx context.Context, in *UpdateInvoiceRequest, opts ...grpc.CallOption) (*Invoice, error)
+	Pay(ctx context.Context, in *PayRequest, opts ...grpc.CallOption) (*PayResponse, error)
+	UpdateInvoiceStatus(ctx context.Context, in *UpdateInvoiceStatusRequest, opts ...grpc.CallOption) (*Invoice, error)
+	CreateTopUpBalanceInvoice(ctx context.Context, in *CreateTopUpBalanceInvoiceRequest, opts ...grpc.CallOption) (*Invoice, error)
+	CreateRenewalInvoice(ctx context.Context, in *CreateRenewalInvoiceRequest, opts ...grpc.CallOption) (*Invoice, error)
+	PayWithBalance(ctx context.Context, in *PayWithBalanceRequest, opts ...grpc.CallOption) (*PayWithBalanceResponse, error)
+	GetInvoiceSettingsTemplateExample(ctx context.Context, in *GetInvoiceSettingsTemplateExampleRequest, opts ...grpc.CallOption) (*GetInvoiceSettingsTemplateExampleResponse, error)
+	RunDailyCronJob(ctx context.Context, in *RunDailyCronJobRequest, opts ...grpc.CallOption) (*RunDailyCronJobResponse, error)
 }
 
 type billingServiceClient struct {
@@ -304,6 +333,16 @@ func (c *billingServiceClient) ListPlansInstances(ctx context.Context, in *ListP
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListPlansInstancesResponse)
 	err := c.cc.Invoke(ctx, BillingService_ListPlansInstances_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingServiceClient) PlansUnique(ctx context.Context, in *PlansUniqueRequest, opts ...grpc.CallOption) (*PlansUniqueResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PlansUniqueResponse)
+	err := c.cc.Invoke(ctx, BillingService_PlansUnique_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -420,6 +459,126 @@ func (c *billingServiceClient) Reprocess(ctx context.Context, in *ReprocessTrans
 	return out, nil
 }
 
+func (c *billingServiceClient) CreateInvoice(ctx context.Context, in *CreateInvoiceRequest, opts ...grpc.CallOption) (*Invoice, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Invoice)
+	err := c.cc.Invoke(ctx, BillingService_CreateInvoice_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingServiceClient) GetInvoice(ctx context.Context, in *Invoice, opts ...grpc.CallOption) (*Invoice, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Invoice)
+	err := c.cc.Invoke(ctx, BillingService_GetInvoice_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingServiceClient) GetInvoices(ctx context.Context, in *GetInvoicesRequest, opts ...grpc.CallOption) (*Invoices, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Invoices)
+	err := c.cc.Invoke(ctx, BillingService_GetInvoices_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingServiceClient) GetInvoicesCount(ctx context.Context, in *GetInvoicesCountRequest, opts ...grpc.CallOption) (*GetInvoicesCountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetInvoicesCountResponse)
+	err := c.cc.Invoke(ctx, BillingService_GetInvoicesCount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingServiceClient) UpdateInvoice(ctx context.Context, in *UpdateInvoiceRequest, opts ...grpc.CallOption) (*Invoice, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Invoice)
+	err := c.cc.Invoke(ctx, BillingService_UpdateInvoice_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingServiceClient) Pay(ctx context.Context, in *PayRequest, opts ...grpc.CallOption) (*PayResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PayResponse)
+	err := c.cc.Invoke(ctx, BillingService_Pay_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingServiceClient) UpdateInvoiceStatus(ctx context.Context, in *UpdateInvoiceStatusRequest, opts ...grpc.CallOption) (*Invoice, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Invoice)
+	err := c.cc.Invoke(ctx, BillingService_UpdateInvoiceStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingServiceClient) CreateTopUpBalanceInvoice(ctx context.Context, in *CreateTopUpBalanceInvoiceRequest, opts ...grpc.CallOption) (*Invoice, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Invoice)
+	err := c.cc.Invoke(ctx, BillingService_CreateTopUpBalanceInvoice_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingServiceClient) CreateRenewalInvoice(ctx context.Context, in *CreateRenewalInvoiceRequest, opts ...grpc.CallOption) (*Invoice, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Invoice)
+	err := c.cc.Invoke(ctx, BillingService_CreateRenewalInvoice_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingServiceClient) PayWithBalance(ctx context.Context, in *PayWithBalanceRequest, opts ...grpc.CallOption) (*PayWithBalanceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PayWithBalanceResponse)
+	err := c.cc.Invoke(ctx, BillingService_PayWithBalance_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingServiceClient) GetInvoiceSettingsTemplateExample(ctx context.Context, in *GetInvoiceSettingsTemplateExampleRequest, opts ...grpc.CallOption) (*GetInvoiceSettingsTemplateExampleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetInvoiceSettingsTemplateExampleResponse)
+	err := c.cc.Invoke(ctx, BillingService_GetInvoiceSettingsTemplateExample_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingServiceClient) RunDailyCronJob(ctx context.Context, in *RunDailyCronJobRequest, opts ...grpc.CallOption) (*RunDailyCronJobResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RunDailyCronJobResponse)
+	err := c.cc.Invoke(ctx, BillingService_RunDailyCronJob_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BillingServiceServer is the server API for BillingService service.
 // All implementations must embed UnimplementedBillingServiceServer
 // for forward compatibility.
@@ -429,6 +588,7 @@ type BillingServiceServer interface {
 	GetPlan(context.Context, *Plan) (*Plan, error)
 	ListPlans(context.Context, *ListRequest) (*ListResponse, error)
 	ListPlansInstances(context.Context, *ListPlansInstancesRequest) (*ListPlansInstancesResponse, error)
+	PlansUnique(context.Context, *PlansUniqueRequest) (*PlansUniqueResponse, error)
 	DeletePlan(context.Context, *Plan) (*Plan, error)
 	CreateTransaction(context.Context, *Transaction) (*Transaction, error)
 	GetTransactions(context.Context, *GetTransactionsRequest) (*Transactions, error)
@@ -440,6 +600,18 @@ type BillingServiceServer interface {
 	GetRecordsReports(context.Context, *GetRecordsReportsRequest) (*GetRecordsReportsResponse, error)
 	GetRecordsReportsCount(context.Context, *GetRecordsReportsCountRequest) (*GetReportsCountResponse, error)
 	Reprocess(context.Context, *ReprocessTransactionsRequest) (*Transactions, error)
+	CreateInvoice(context.Context, *CreateInvoiceRequest) (*Invoice, error)
+	GetInvoice(context.Context, *Invoice) (*Invoice, error)
+	GetInvoices(context.Context, *GetInvoicesRequest) (*Invoices, error)
+	GetInvoicesCount(context.Context, *GetInvoicesCountRequest) (*GetInvoicesCountResponse, error)
+	UpdateInvoice(context.Context, *UpdateInvoiceRequest) (*Invoice, error)
+	Pay(context.Context, *PayRequest) (*PayResponse, error)
+	UpdateInvoiceStatus(context.Context, *UpdateInvoiceStatusRequest) (*Invoice, error)
+	CreateTopUpBalanceInvoice(context.Context, *CreateTopUpBalanceInvoiceRequest) (*Invoice, error)
+	CreateRenewalInvoice(context.Context, *CreateRenewalInvoiceRequest) (*Invoice, error)
+	PayWithBalance(context.Context, *PayWithBalanceRequest) (*PayWithBalanceResponse, error)
+	GetInvoiceSettingsTemplateExample(context.Context, *GetInvoiceSettingsTemplateExampleRequest) (*GetInvoiceSettingsTemplateExampleResponse, error)
+	RunDailyCronJob(context.Context, *RunDailyCronJobRequest) (*RunDailyCronJobResponse, error)
 	mustEmbedUnimplementedBillingServiceServer()
 }
 
@@ -464,6 +636,9 @@ func (UnimplementedBillingServiceServer) ListPlans(context.Context, *ListRequest
 }
 func (UnimplementedBillingServiceServer) ListPlansInstances(context.Context, *ListPlansInstancesRequest) (*ListPlansInstancesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPlansInstances not implemented")
+}
+func (UnimplementedBillingServiceServer) PlansUnique(context.Context, *PlansUniqueRequest) (*PlansUniqueResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PlansUnique not implemented")
 }
 func (UnimplementedBillingServiceServer) DeletePlan(context.Context, *Plan) (*Plan, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeletePlan not implemented")
@@ -497,6 +672,42 @@ func (UnimplementedBillingServiceServer) GetRecordsReportsCount(context.Context,
 }
 func (UnimplementedBillingServiceServer) Reprocess(context.Context, *ReprocessTransactionsRequest) (*Transactions, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Reprocess not implemented")
+}
+func (UnimplementedBillingServiceServer) CreateInvoice(context.Context, *CreateInvoiceRequest) (*Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateInvoice not implemented")
+}
+func (UnimplementedBillingServiceServer) GetInvoice(context.Context, *Invoice) (*Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInvoice not implemented")
+}
+func (UnimplementedBillingServiceServer) GetInvoices(context.Context, *GetInvoicesRequest) (*Invoices, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInvoices not implemented")
+}
+func (UnimplementedBillingServiceServer) GetInvoicesCount(context.Context, *GetInvoicesCountRequest) (*GetInvoicesCountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInvoicesCount not implemented")
+}
+func (UnimplementedBillingServiceServer) UpdateInvoice(context.Context, *UpdateInvoiceRequest) (*Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateInvoice not implemented")
+}
+func (UnimplementedBillingServiceServer) Pay(context.Context, *PayRequest) (*PayResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Pay not implemented")
+}
+func (UnimplementedBillingServiceServer) UpdateInvoiceStatus(context.Context, *UpdateInvoiceStatusRequest) (*Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateInvoiceStatus not implemented")
+}
+func (UnimplementedBillingServiceServer) CreateTopUpBalanceInvoice(context.Context, *CreateTopUpBalanceInvoiceRequest) (*Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTopUpBalanceInvoice not implemented")
+}
+func (UnimplementedBillingServiceServer) CreateRenewalInvoice(context.Context, *CreateRenewalInvoiceRequest) (*Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateRenewalInvoice not implemented")
+}
+func (UnimplementedBillingServiceServer) PayWithBalance(context.Context, *PayWithBalanceRequest) (*PayWithBalanceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PayWithBalance not implemented")
+}
+func (UnimplementedBillingServiceServer) GetInvoiceSettingsTemplateExample(context.Context, *GetInvoiceSettingsTemplateExampleRequest) (*GetInvoiceSettingsTemplateExampleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInvoiceSettingsTemplateExample not implemented")
+}
+func (UnimplementedBillingServiceServer) RunDailyCronJob(context.Context, *RunDailyCronJobRequest) (*RunDailyCronJobResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RunDailyCronJob not implemented")
 }
 func (UnimplementedBillingServiceServer) mustEmbedUnimplementedBillingServiceServer() {}
 func (UnimplementedBillingServiceServer) testEmbeddedByValue()                        {}
@@ -605,6 +816,24 @@ func _BillingService_ListPlansInstances_Handler(srv interface{}, ctx context.Con
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BillingServiceServer).ListPlansInstances(ctx, req.(*ListPlansInstancesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BillingService_PlansUnique_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PlansUniqueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).PlansUnique(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_PlansUnique_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).PlansUnique(ctx, req.(*PlansUniqueRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -807,6 +1036,222 @@ func _BillingService_Reprocess_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BillingService_CreateInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateInvoiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).CreateInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_CreateInvoice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).CreateInvoice(ctx, req.(*CreateInvoiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BillingService_GetInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Invoice)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).GetInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_GetInvoice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).GetInvoice(ctx, req.(*Invoice))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BillingService_GetInvoices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInvoicesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).GetInvoices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_GetInvoices_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).GetInvoices(ctx, req.(*GetInvoicesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BillingService_GetInvoicesCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInvoicesCountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).GetInvoicesCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_GetInvoicesCount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).GetInvoicesCount(ctx, req.(*GetInvoicesCountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BillingService_UpdateInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateInvoiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).UpdateInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_UpdateInvoice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).UpdateInvoice(ctx, req.(*UpdateInvoiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BillingService_Pay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PayRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).Pay(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_Pay_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).Pay(ctx, req.(*PayRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BillingService_UpdateInvoiceStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateInvoiceStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).UpdateInvoiceStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_UpdateInvoiceStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).UpdateInvoiceStatus(ctx, req.(*UpdateInvoiceStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BillingService_CreateTopUpBalanceInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateTopUpBalanceInvoiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).CreateTopUpBalanceInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_CreateTopUpBalanceInvoice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).CreateTopUpBalanceInvoice(ctx, req.(*CreateTopUpBalanceInvoiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BillingService_CreateRenewalInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateRenewalInvoiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).CreateRenewalInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_CreateRenewalInvoice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).CreateRenewalInvoice(ctx, req.(*CreateRenewalInvoiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BillingService_PayWithBalance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PayWithBalanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).PayWithBalance(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_PayWithBalance_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).PayWithBalance(ctx, req.(*PayWithBalanceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BillingService_GetInvoiceSettingsTemplateExample_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInvoiceSettingsTemplateExampleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).GetInvoiceSettingsTemplateExample(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_GetInvoiceSettingsTemplateExample_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).GetInvoiceSettingsTemplateExample(ctx, req.(*GetInvoiceSettingsTemplateExampleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BillingService_RunDailyCronJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RunDailyCronJobRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).RunDailyCronJob(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_RunDailyCronJob_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).RunDailyCronJob(ctx, req.(*RunDailyCronJobRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BillingService_ServiceDesc is the grpc.ServiceDesc for BillingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -833,6 +1278,10 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListPlansInstances",
 			Handler:    _BillingService_ListPlansInstances_Handler,
+		},
+		{
+			MethodName: "PlansUnique",
+			Handler:    _BillingService_PlansUnique_Handler,
 		},
 		{
 			MethodName: "DeletePlan",
@@ -878,12 +1327,62 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "Reprocess",
 			Handler:    _BillingService_Reprocess_Handler,
 		},
+		{
+			MethodName: "CreateInvoice",
+			Handler:    _BillingService_CreateInvoice_Handler,
+		},
+		{
+			MethodName: "GetInvoice",
+			Handler:    _BillingService_GetInvoice_Handler,
+		},
+		{
+			MethodName: "GetInvoices",
+			Handler:    _BillingService_GetInvoices_Handler,
+		},
+		{
+			MethodName: "GetInvoicesCount",
+			Handler:    _BillingService_GetInvoicesCount_Handler,
+		},
+		{
+			MethodName: "UpdateInvoice",
+			Handler:    _BillingService_UpdateInvoice_Handler,
+		},
+		{
+			MethodName: "Pay",
+			Handler:    _BillingService_Pay_Handler,
+		},
+		{
+			MethodName: "UpdateInvoiceStatus",
+			Handler:    _BillingService_UpdateInvoiceStatus_Handler,
+		},
+		{
+			MethodName: "CreateTopUpBalanceInvoice",
+			Handler:    _BillingService_CreateTopUpBalanceInvoice_Handler,
+		},
+		{
+			MethodName: "CreateRenewalInvoice",
+			Handler:    _BillingService_CreateRenewalInvoice_Handler,
+		},
+		{
+			MethodName: "PayWithBalance",
+			Handler:    _BillingService_PayWithBalance_Handler,
+		},
+		{
+			MethodName: "GetInvoiceSettingsTemplateExample",
+			Handler:    _BillingService_GetInvoiceSettingsTemplateExample_Handler,
+		},
+		{
+			MethodName: "RunDailyCronJob",
+			Handler:    _BillingService_RunDailyCronJob_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "billing/billing.proto",
 }
 
 const (
+	CurrencyService_CreateCurrency_FullMethodName     = "/nocloud.billing.CurrencyService/CreateCurrency"
+	CurrencyService_UpdateCurrency_FullMethodName     = "/nocloud.billing.CurrencyService/UpdateCurrency"
 	CurrencyService_GetCurrencies_FullMethodName      = "/nocloud.billing.CurrencyService/GetCurrencies"
 	CurrencyService_GetExchangeRate_FullMethodName    = "/nocloud.billing.CurrencyService/GetExchangeRate"
 	CurrencyService_GetExchangeRates_FullMethodName   = "/nocloud.billing.CurrencyService/GetExchangeRates"
@@ -897,6 +1396,8 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CurrencyServiceClient interface {
+	CreateCurrency(ctx context.Context, in *CreateCurrencyRequest, opts ...grpc.CallOption) (*CreateCurrencyResponse, error)
+	UpdateCurrency(ctx context.Context, in *UpdateCurrencyRequest, opts ...grpc.CallOption) (*UpdateCurrencyResponse, error)
 	GetCurrencies(ctx context.Context, in *GetCurrenciesRequest, opts ...grpc.CallOption) (*GetCurrenciesResponse, error)
 	GetExchangeRate(ctx context.Context, in *GetExchangeRateRequest, opts ...grpc.CallOption) (*GetExchangeRateResponse, error)
 	GetExchangeRates(ctx context.Context, in *GetExchangeRatesRequest, opts ...grpc.CallOption) (*GetExchangeRatesResponse, error)
@@ -912,6 +1413,26 @@ type currencyServiceClient struct {
 
 func NewCurrencyServiceClient(cc grpc.ClientConnInterface) CurrencyServiceClient {
 	return &currencyServiceClient{cc}
+}
+
+func (c *currencyServiceClient) CreateCurrency(ctx context.Context, in *CreateCurrencyRequest, opts ...grpc.CallOption) (*CreateCurrencyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateCurrencyResponse)
+	err := c.cc.Invoke(ctx, CurrencyService_CreateCurrency_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *currencyServiceClient) UpdateCurrency(ctx context.Context, in *UpdateCurrencyRequest, opts ...grpc.CallOption) (*UpdateCurrencyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateCurrencyResponse)
+	err := c.cc.Invoke(ctx, CurrencyService_UpdateCurrency_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *currencyServiceClient) GetCurrencies(ctx context.Context, in *GetCurrenciesRequest, opts ...grpc.CallOption) (*GetCurrenciesResponse, error) {
@@ -988,6 +1509,8 @@ func (c *currencyServiceClient) Convert(ctx context.Context, in *ConversionReque
 // All implementations must embed UnimplementedCurrencyServiceServer
 // for forward compatibility.
 type CurrencyServiceServer interface {
+	CreateCurrency(context.Context, *CreateCurrencyRequest) (*CreateCurrencyResponse, error)
+	UpdateCurrency(context.Context, *UpdateCurrencyRequest) (*UpdateCurrencyResponse, error)
 	GetCurrencies(context.Context, *GetCurrenciesRequest) (*GetCurrenciesResponse, error)
 	GetExchangeRate(context.Context, *GetExchangeRateRequest) (*GetExchangeRateResponse, error)
 	GetExchangeRates(context.Context, *GetExchangeRatesRequest) (*GetExchangeRatesResponse, error)
@@ -1005,6 +1528,12 @@ type CurrencyServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedCurrencyServiceServer struct{}
 
+func (UnimplementedCurrencyServiceServer) CreateCurrency(context.Context, *CreateCurrencyRequest) (*CreateCurrencyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCurrency not implemented")
+}
+func (UnimplementedCurrencyServiceServer) UpdateCurrency(context.Context, *UpdateCurrencyRequest) (*UpdateCurrencyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCurrency not implemented")
+}
 func (UnimplementedCurrencyServiceServer) GetCurrencies(context.Context, *GetCurrenciesRequest) (*GetCurrenciesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCurrencies not implemented")
 }
@@ -1045,6 +1574,42 @@ func RegisterCurrencyServiceServer(s grpc.ServiceRegistrar, srv CurrencyServiceS
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&CurrencyService_ServiceDesc, srv)
+}
+
+func _CurrencyService_CreateCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCurrencyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyServiceServer).CreateCurrency(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CurrencyService_CreateCurrency_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyServiceServer).CreateCurrency(ctx, req.(*CreateCurrencyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CurrencyService_UpdateCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCurrencyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyServiceServer).UpdateCurrency(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CurrencyService_UpdateCurrency_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyServiceServer).UpdateCurrency(ctx, req.(*UpdateCurrencyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _CurrencyService_GetCurrencies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -1181,6 +1746,14 @@ var CurrencyService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*CurrencyServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "CreateCurrency",
+			Handler:    _CurrencyService_CreateCurrency_Handler,
+		},
+		{
+			MethodName: "UpdateCurrency",
+			Handler:    _CurrencyService_UpdateCurrency_Handler,
+		},
+		{
 			MethodName: "GetCurrencies",
 			Handler:    _CurrencyService_GetCurrencies_Handler,
 		},
@@ -1207,6 +1780,1072 @@ var CurrencyService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Convert",
 			Handler:    _CurrencyService_Convert_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "billing/billing.proto",
+}
+
+const (
+	AddonsService_Create_FullMethodName     = "/nocloud.billing.AddonsService/Create"
+	AddonsService_CreateBulk_FullMethodName = "/nocloud.billing.AddonsService/CreateBulk"
+	AddonsService_Update_FullMethodName     = "/nocloud.billing.AddonsService/Update"
+	AddonsService_UpdateBulk_FullMethodName = "/nocloud.billing.AddonsService/UpdateBulk"
+	AddonsService_Get_FullMethodName        = "/nocloud.billing.AddonsService/Get"
+	AddonsService_List_FullMethodName       = "/nocloud.billing.AddonsService/List"
+	AddonsService_Count_FullMethodName      = "/nocloud.billing.AddonsService/Count"
+	AddonsService_Delete_FullMethodName     = "/nocloud.billing.AddonsService/Delete"
+)
+
+// AddonsServiceClient is the client API for AddonsService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type AddonsServiceClient interface {
+	Create(ctx context.Context, in *addons.Addon, opts ...grpc.CallOption) (*addons.Addon, error)
+	CreateBulk(ctx context.Context, in *addons.BulkAddons, opts ...grpc.CallOption) (*addons.BulkAddons, error)
+	Update(ctx context.Context, in *addons.Addon, opts ...grpc.CallOption) (*addons.Addon, error)
+	UpdateBulk(ctx context.Context, in *addons.BulkAddons, opts ...grpc.CallOption) (*addons.BulkAddons, error)
+	Get(ctx context.Context, in *addons.Addon, opts ...grpc.CallOption) (*addons.Addon, error)
+	List(ctx context.Context, in *addons.ListAddonsRequest, opts ...grpc.CallOption) (*addons.ListAddonsResponse, error)
+	Count(ctx context.Context, in *addons.CountAddonsRequest, opts ...grpc.CallOption) (*addons.CountAddonsResponse, error)
+	Delete(ctx context.Context, in *addons.Addon, opts ...grpc.CallOption) (*addons.Addon, error)
+}
+
+type addonsServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewAddonsServiceClient(cc grpc.ClientConnInterface) AddonsServiceClient {
+	return &addonsServiceClient{cc}
+}
+
+func (c *addonsServiceClient) Create(ctx context.Context, in *addons.Addon, opts ...grpc.CallOption) (*addons.Addon, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(addons.Addon)
+	err := c.cc.Invoke(ctx, AddonsService_Create_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *addonsServiceClient) CreateBulk(ctx context.Context, in *addons.BulkAddons, opts ...grpc.CallOption) (*addons.BulkAddons, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(addons.BulkAddons)
+	err := c.cc.Invoke(ctx, AddonsService_CreateBulk_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *addonsServiceClient) Update(ctx context.Context, in *addons.Addon, opts ...grpc.CallOption) (*addons.Addon, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(addons.Addon)
+	err := c.cc.Invoke(ctx, AddonsService_Update_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *addonsServiceClient) UpdateBulk(ctx context.Context, in *addons.BulkAddons, opts ...grpc.CallOption) (*addons.BulkAddons, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(addons.BulkAddons)
+	err := c.cc.Invoke(ctx, AddonsService_UpdateBulk_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *addonsServiceClient) Get(ctx context.Context, in *addons.Addon, opts ...grpc.CallOption) (*addons.Addon, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(addons.Addon)
+	err := c.cc.Invoke(ctx, AddonsService_Get_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *addonsServiceClient) List(ctx context.Context, in *addons.ListAddonsRequest, opts ...grpc.CallOption) (*addons.ListAddonsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(addons.ListAddonsResponse)
+	err := c.cc.Invoke(ctx, AddonsService_List_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *addonsServiceClient) Count(ctx context.Context, in *addons.CountAddonsRequest, opts ...grpc.CallOption) (*addons.CountAddonsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(addons.CountAddonsResponse)
+	err := c.cc.Invoke(ctx, AddonsService_Count_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *addonsServiceClient) Delete(ctx context.Context, in *addons.Addon, opts ...grpc.CallOption) (*addons.Addon, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(addons.Addon)
+	err := c.cc.Invoke(ctx, AddonsService_Delete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AddonsServiceServer is the server API for AddonsService service.
+// All implementations must embed UnimplementedAddonsServiceServer
+// for forward compatibility.
+type AddonsServiceServer interface {
+	Create(context.Context, *addons.Addon) (*addons.Addon, error)
+	CreateBulk(context.Context, *addons.BulkAddons) (*addons.BulkAddons, error)
+	Update(context.Context, *addons.Addon) (*addons.Addon, error)
+	UpdateBulk(context.Context, *addons.BulkAddons) (*addons.BulkAddons, error)
+	Get(context.Context, *addons.Addon) (*addons.Addon, error)
+	List(context.Context, *addons.ListAddonsRequest) (*addons.ListAddonsResponse, error)
+	Count(context.Context, *addons.CountAddonsRequest) (*addons.CountAddonsResponse, error)
+	Delete(context.Context, *addons.Addon) (*addons.Addon, error)
+	mustEmbedUnimplementedAddonsServiceServer()
+}
+
+// UnimplementedAddonsServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedAddonsServiceServer struct{}
+
+func (UnimplementedAddonsServiceServer) Create(context.Context, *addons.Addon) (*addons.Addon, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (UnimplementedAddonsServiceServer) CreateBulk(context.Context, *addons.BulkAddons) (*addons.BulkAddons, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateBulk not implemented")
+}
+func (UnimplementedAddonsServiceServer) Update(context.Context, *addons.Addon) (*addons.Addon, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (UnimplementedAddonsServiceServer) UpdateBulk(context.Context, *addons.BulkAddons) (*addons.BulkAddons, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateBulk not implemented")
+}
+func (UnimplementedAddonsServiceServer) Get(context.Context, *addons.Addon) (*addons.Addon, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedAddonsServiceServer) List(context.Context, *addons.ListAddonsRequest) (*addons.ListAddonsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedAddonsServiceServer) Count(context.Context, *addons.CountAddonsRequest) (*addons.CountAddonsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Count not implemented")
+}
+func (UnimplementedAddonsServiceServer) Delete(context.Context, *addons.Addon) (*addons.Addon, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedAddonsServiceServer) mustEmbedUnimplementedAddonsServiceServer() {}
+func (UnimplementedAddonsServiceServer) testEmbeddedByValue()                       {}
+
+// UnsafeAddonsServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AddonsServiceServer will
+// result in compilation errors.
+type UnsafeAddonsServiceServer interface {
+	mustEmbedUnimplementedAddonsServiceServer()
+}
+
+func RegisterAddonsServiceServer(s grpc.ServiceRegistrar, srv AddonsServiceServer) {
+	// If the following call pancis, it indicates UnimplementedAddonsServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&AddonsService_ServiceDesc, srv)
+}
+
+func _AddonsService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(addons.Addon)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AddonsServiceServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AddonsService_Create_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AddonsServiceServer).Create(ctx, req.(*addons.Addon))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AddonsService_CreateBulk_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(addons.BulkAddons)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AddonsServiceServer).CreateBulk(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AddonsService_CreateBulk_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AddonsServiceServer).CreateBulk(ctx, req.(*addons.BulkAddons))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AddonsService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(addons.Addon)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AddonsServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AddonsService_Update_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AddonsServiceServer).Update(ctx, req.(*addons.Addon))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AddonsService_UpdateBulk_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(addons.BulkAddons)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AddonsServiceServer).UpdateBulk(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AddonsService_UpdateBulk_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AddonsServiceServer).UpdateBulk(ctx, req.(*addons.BulkAddons))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AddonsService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(addons.Addon)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AddonsServiceServer).Get(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AddonsService_Get_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AddonsServiceServer).Get(ctx, req.(*addons.Addon))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AddonsService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(addons.ListAddonsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AddonsServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AddonsService_List_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AddonsServiceServer).List(ctx, req.(*addons.ListAddonsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AddonsService_Count_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(addons.CountAddonsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AddonsServiceServer).Count(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AddonsService_Count_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AddonsServiceServer).Count(ctx, req.(*addons.CountAddonsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AddonsService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(addons.Addon)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AddonsServiceServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AddonsService_Delete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AddonsServiceServer).Delete(ctx, req.(*addons.Addon))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// AddonsService_ServiceDesc is the grpc.ServiceDesc for AddonsService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var AddonsService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "nocloud.billing.AddonsService",
+	HandlerType: (*AddonsServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Create",
+			Handler:    _AddonsService_Create_Handler,
+		},
+		{
+			MethodName: "CreateBulk",
+			Handler:    _AddonsService_CreateBulk_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _AddonsService_Update_Handler,
+		},
+		{
+			MethodName: "UpdateBulk",
+			Handler:    _AddonsService_UpdateBulk_Handler,
+		},
+		{
+			MethodName: "Get",
+			Handler:    _AddonsService_Get_Handler,
+		},
+		{
+			MethodName: "List",
+			Handler:    _AddonsService_List_Handler,
+		},
+		{
+			MethodName: "Count",
+			Handler:    _AddonsService_Count_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _AddonsService_Delete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "billing/billing.proto",
+}
+
+const (
+	DescriptionsService_Create_FullMethodName = "/nocloud.billing.DescriptionsService/Create"
+	DescriptionsService_Update_FullMethodName = "/nocloud.billing.DescriptionsService/Update"
+	DescriptionsService_Get_FullMethodName    = "/nocloud.billing.DescriptionsService/Get"
+	DescriptionsService_List_FullMethodName   = "/nocloud.billing.DescriptionsService/List"
+	DescriptionsService_Count_FullMethodName  = "/nocloud.billing.DescriptionsService/Count"
+	DescriptionsService_Delete_FullMethodName = "/nocloud.billing.DescriptionsService/Delete"
+)
+
+// DescriptionsServiceClient is the client API for DescriptionsService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type DescriptionsServiceClient interface {
+	Create(ctx context.Context, in *descriptions.Description, opts ...grpc.CallOption) (*descriptions.Description, error)
+	Update(ctx context.Context, in *descriptions.Description, opts ...grpc.CallOption) (*descriptions.Description, error)
+	Get(ctx context.Context, in *descriptions.Description, opts ...grpc.CallOption) (*descriptions.Description, error)
+	List(ctx context.Context, in *descriptions.ListDescriptionsRequest, opts ...grpc.CallOption) (*descriptions.ListDescriptionsResponse, error)
+	Count(ctx context.Context, in *descriptions.CountDescriptionsRequest, opts ...grpc.CallOption) (*descriptions.CountDescriptionsResponse, error)
+	Delete(ctx context.Context, in *descriptions.Description, opts ...grpc.CallOption) (*descriptions.Description, error)
+}
+
+type descriptionsServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewDescriptionsServiceClient(cc grpc.ClientConnInterface) DescriptionsServiceClient {
+	return &descriptionsServiceClient{cc}
+}
+
+func (c *descriptionsServiceClient) Create(ctx context.Context, in *descriptions.Description, opts ...grpc.CallOption) (*descriptions.Description, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(descriptions.Description)
+	err := c.cc.Invoke(ctx, DescriptionsService_Create_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *descriptionsServiceClient) Update(ctx context.Context, in *descriptions.Description, opts ...grpc.CallOption) (*descriptions.Description, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(descriptions.Description)
+	err := c.cc.Invoke(ctx, DescriptionsService_Update_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *descriptionsServiceClient) Get(ctx context.Context, in *descriptions.Description, opts ...grpc.CallOption) (*descriptions.Description, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(descriptions.Description)
+	err := c.cc.Invoke(ctx, DescriptionsService_Get_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *descriptionsServiceClient) List(ctx context.Context, in *descriptions.ListDescriptionsRequest, opts ...grpc.CallOption) (*descriptions.ListDescriptionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(descriptions.ListDescriptionsResponse)
+	err := c.cc.Invoke(ctx, DescriptionsService_List_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *descriptionsServiceClient) Count(ctx context.Context, in *descriptions.CountDescriptionsRequest, opts ...grpc.CallOption) (*descriptions.CountDescriptionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(descriptions.CountDescriptionsResponse)
+	err := c.cc.Invoke(ctx, DescriptionsService_Count_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *descriptionsServiceClient) Delete(ctx context.Context, in *descriptions.Description, opts ...grpc.CallOption) (*descriptions.Description, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(descriptions.Description)
+	err := c.cc.Invoke(ctx, DescriptionsService_Delete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// DescriptionsServiceServer is the server API for DescriptionsService service.
+// All implementations must embed UnimplementedDescriptionsServiceServer
+// for forward compatibility.
+type DescriptionsServiceServer interface {
+	Create(context.Context, *descriptions.Description) (*descriptions.Description, error)
+	Update(context.Context, *descriptions.Description) (*descriptions.Description, error)
+	Get(context.Context, *descriptions.Description) (*descriptions.Description, error)
+	List(context.Context, *descriptions.ListDescriptionsRequest) (*descriptions.ListDescriptionsResponse, error)
+	Count(context.Context, *descriptions.CountDescriptionsRequest) (*descriptions.CountDescriptionsResponse, error)
+	Delete(context.Context, *descriptions.Description) (*descriptions.Description, error)
+	mustEmbedUnimplementedDescriptionsServiceServer()
+}
+
+// UnimplementedDescriptionsServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedDescriptionsServiceServer struct{}
+
+func (UnimplementedDescriptionsServiceServer) Create(context.Context, *descriptions.Description) (*descriptions.Description, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (UnimplementedDescriptionsServiceServer) Update(context.Context, *descriptions.Description) (*descriptions.Description, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (UnimplementedDescriptionsServiceServer) Get(context.Context, *descriptions.Description) (*descriptions.Description, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedDescriptionsServiceServer) List(context.Context, *descriptions.ListDescriptionsRequest) (*descriptions.ListDescriptionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedDescriptionsServiceServer) Count(context.Context, *descriptions.CountDescriptionsRequest) (*descriptions.CountDescriptionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Count not implemented")
+}
+func (UnimplementedDescriptionsServiceServer) Delete(context.Context, *descriptions.Description) (*descriptions.Description, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedDescriptionsServiceServer) mustEmbedUnimplementedDescriptionsServiceServer() {}
+func (UnimplementedDescriptionsServiceServer) testEmbeddedByValue()                             {}
+
+// UnsafeDescriptionsServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to DescriptionsServiceServer will
+// result in compilation errors.
+type UnsafeDescriptionsServiceServer interface {
+	mustEmbedUnimplementedDescriptionsServiceServer()
+}
+
+func RegisterDescriptionsServiceServer(s grpc.ServiceRegistrar, srv DescriptionsServiceServer) {
+	// If the following call pancis, it indicates UnimplementedDescriptionsServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&DescriptionsService_ServiceDesc, srv)
+}
+
+func _DescriptionsService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(descriptions.Description)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DescriptionsServiceServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DescriptionsService_Create_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DescriptionsServiceServer).Create(ctx, req.(*descriptions.Description))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DescriptionsService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(descriptions.Description)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DescriptionsServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DescriptionsService_Update_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DescriptionsServiceServer).Update(ctx, req.(*descriptions.Description))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DescriptionsService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(descriptions.Description)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DescriptionsServiceServer).Get(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DescriptionsService_Get_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DescriptionsServiceServer).Get(ctx, req.(*descriptions.Description))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DescriptionsService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(descriptions.ListDescriptionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DescriptionsServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DescriptionsService_List_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DescriptionsServiceServer).List(ctx, req.(*descriptions.ListDescriptionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DescriptionsService_Count_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(descriptions.CountDescriptionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DescriptionsServiceServer).Count(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DescriptionsService_Count_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DescriptionsServiceServer).Count(ctx, req.(*descriptions.CountDescriptionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DescriptionsService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(descriptions.Description)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DescriptionsServiceServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DescriptionsService_Delete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DescriptionsServiceServer).Delete(ctx, req.(*descriptions.Description))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// DescriptionsService_ServiceDesc is the grpc.ServiceDesc for DescriptionsService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var DescriptionsService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "nocloud.billing.DescriptionsService",
+	HandlerType: (*DescriptionsServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Create",
+			Handler:    _DescriptionsService_Create_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _DescriptionsService_Update_Handler,
+		},
+		{
+			MethodName: "Get",
+			Handler:    _DescriptionsService_Get_Handler,
+		},
+		{
+			MethodName: "List",
+			Handler:    _DescriptionsService_List_Handler,
+		},
+		{
+			MethodName: "Count",
+			Handler:    _DescriptionsService_Count_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _DescriptionsService_Delete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "billing/billing.proto",
+}
+
+const (
+	PromocodesService_Create_FullMethodName    = "/nocloud.billing.PromocodesService/Create"
+	PromocodesService_Update_FullMethodName    = "/nocloud.billing.PromocodesService/Update"
+	PromocodesService_Get_FullMethodName       = "/nocloud.billing.PromocodesService/Get"
+	PromocodesService_GetByCode_FullMethodName = "/nocloud.billing.PromocodesService/GetByCode"
+	PromocodesService_List_FullMethodName      = "/nocloud.billing.PromocodesService/List"
+	PromocodesService_Count_FullMethodName     = "/nocloud.billing.PromocodesService/Count"
+	PromocodesService_Delete_FullMethodName    = "/nocloud.billing.PromocodesService/Delete"
+	PromocodesService_Apply_FullMethodName     = "/nocloud.billing.PromocodesService/Apply"
+	PromocodesService_Detach_FullMethodName    = "/nocloud.billing.PromocodesService/Detach"
+)
+
+// PromocodesServiceClient is the client API for PromocodesService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type PromocodesServiceClient interface {
+	Create(ctx context.Context, in *promocodes.Promocode, opts ...grpc.CallOption) (*promocodes.Promocode, error)
+	Update(ctx context.Context, in *promocodes.Promocode, opts ...grpc.CallOption) (*promocodes.Promocode, error)
+	Get(ctx context.Context, in *promocodes.Promocode, opts ...grpc.CallOption) (*promocodes.Promocode, error)
+	GetByCode(ctx context.Context, in *promocodes.GetPromocodeByCodeRequest, opts ...grpc.CallOption) (*promocodes.Promocode, error)
+	List(ctx context.Context, in *promocodes.ListPromocodesRequest, opts ...grpc.CallOption) (*promocodes.ListPromocodesResponse, error)
+	Count(ctx context.Context, in *promocodes.CountPromocodesRequest, opts ...grpc.CallOption) (*promocodes.CountPromocodesResponse, error)
+	Delete(ctx context.Context, in *promocodes.Promocode, opts ...grpc.CallOption) (*promocodes.Promocode, error)
+	Apply(ctx context.Context, in *promocodes.ApplyPromocodeRequest, opts ...grpc.CallOption) (*promocodes.ApplyPromocodeResponse, error)
+	Detach(ctx context.Context, in *promocodes.DetachPromocodeRequest, opts ...grpc.CallOption) (*promocodes.DetachPromocodeResponse, error)
+}
+
+type promocodesServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewPromocodesServiceClient(cc grpc.ClientConnInterface) PromocodesServiceClient {
+	return &promocodesServiceClient{cc}
+}
+
+func (c *promocodesServiceClient) Create(ctx context.Context, in *promocodes.Promocode, opts ...grpc.CallOption) (*promocodes.Promocode, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(promocodes.Promocode)
+	err := c.cc.Invoke(ctx, PromocodesService_Create_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *promocodesServiceClient) Update(ctx context.Context, in *promocodes.Promocode, opts ...grpc.CallOption) (*promocodes.Promocode, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(promocodes.Promocode)
+	err := c.cc.Invoke(ctx, PromocodesService_Update_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *promocodesServiceClient) Get(ctx context.Context, in *promocodes.Promocode, opts ...grpc.CallOption) (*promocodes.Promocode, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(promocodes.Promocode)
+	err := c.cc.Invoke(ctx, PromocodesService_Get_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *promocodesServiceClient) GetByCode(ctx context.Context, in *promocodes.GetPromocodeByCodeRequest, opts ...grpc.CallOption) (*promocodes.Promocode, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(promocodes.Promocode)
+	err := c.cc.Invoke(ctx, PromocodesService_GetByCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *promocodesServiceClient) List(ctx context.Context, in *promocodes.ListPromocodesRequest, opts ...grpc.CallOption) (*promocodes.ListPromocodesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(promocodes.ListPromocodesResponse)
+	err := c.cc.Invoke(ctx, PromocodesService_List_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *promocodesServiceClient) Count(ctx context.Context, in *promocodes.CountPromocodesRequest, opts ...grpc.CallOption) (*promocodes.CountPromocodesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(promocodes.CountPromocodesResponse)
+	err := c.cc.Invoke(ctx, PromocodesService_Count_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *promocodesServiceClient) Delete(ctx context.Context, in *promocodes.Promocode, opts ...grpc.CallOption) (*promocodes.Promocode, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(promocodes.Promocode)
+	err := c.cc.Invoke(ctx, PromocodesService_Delete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *promocodesServiceClient) Apply(ctx context.Context, in *promocodes.ApplyPromocodeRequest, opts ...grpc.CallOption) (*promocodes.ApplyPromocodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(promocodes.ApplyPromocodeResponse)
+	err := c.cc.Invoke(ctx, PromocodesService_Apply_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *promocodesServiceClient) Detach(ctx context.Context, in *promocodes.DetachPromocodeRequest, opts ...grpc.CallOption) (*promocodes.DetachPromocodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(promocodes.DetachPromocodeResponse)
+	err := c.cc.Invoke(ctx, PromocodesService_Detach_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// PromocodesServiceServer is the server API for PromocodesService service.
+// All implementations must embed UnimplementedPromocodesServiceServer
+// for forward compatibility.
+type PromocodesServiceServer interface {
+	Create(context.Context, *promocodes.Promocode) (*promocodes.Promocode, error)
+	Update(context.Context, *promocodes.Promocode) (*promocodes.Promocode, error)
+	Get(context.Context, *promocodes.Promocode) (*promocodes.Promocode, error)
+	GetByCode(context.Context, *promocodes.GetPromocodeByCodeRequest) (*promocodes.Promocode, error)
+	List(context.Context, *promocodes.ListPromocodesRequest) (*promocodes.ListPromocodesResponse, error)
+	Count(context.Context, *promocodes.CountPromocodesRequest) (*promocodes.CountPromocodesResponse, error)
+	Delete(context.Context, *promocodes.Promocode) (*promocodes.Promocode, error)
+	Apply(context.Context, *promocodes.ApplyPromocodeRequest) (*promocodes.ApplyPromocodeResponse, error)
+	Detach(context.Context, *promocodes.DetachPromocodeRequest) (*promocodes.DetachPromocodeResponse, error)
+	mustEmbedUnimplementedPromocodesServiceServer()
+}
+
+// UnimplementedPromocodesServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedPromocodesServiceServer struct{}
+
+func (UnimplementedPromocodesServiceServer) Create(context.Context, *promocodes.Promocode) (*promocodes.Promocode, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (UnimplementedPromocodesServiceServer) Update(context.Context, *promocodes.Promocode) (*promocodes.Promocode, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (UnimplementedPromocodesServiceServer) Get(context.Context, *promocodes.Promocode) (*promocodes.Promocode, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedPromocodesServiceServer) GetByCode(context.Context, *promocodes.GetPromocodeByCodeRequest) (*promocodes.Promocode, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetByCode not implemented")
+}
+func (UnimplementedPromocodesServiceServer) List(context.Context, *promocodes.ListPromocodesRequest) (*promocodes.ListPromocodesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedPromocodesServiceServer) Count(context.Context, *promocodes.CountPromocodesRequest) (*promocodes.CountPromocodesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Count not implemented")
+}
+func (UnimplementedPromocodesServiceServer) Delete(context.Context, *promocodes.Promocode) (*promocodes.Promocode, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedPromocodesServiceServer) Apply(context.Context, *promocodes.ApplyPromocodeRequest) (*promocodes.ApplyPromocodeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Apply not implemented")
+}
+func (UnimplementedPromocodesServiceServer) Detach(context.Context, *promocodes.DetachPromocodeRequest) (*promocodes.DetachPromocodeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Detach not implemented")
+}
+func (UnimplementedPromocodesServiceServer) mustEmbedUnimplementedPromocodesServiceServer() {}
+func (UnimplementedPromocodesServiceServer) testEmbeddedByValue()                           {}
+
+// UnsafePromocodesServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to PromocodesServiceServer will
+// result in compilation errors.
+type UnsafePromocodesServiceServer interface {
+	mustEmbedUnimplementedPromocodesServiceServer()
+}
+
+func RegisterPromocodesServiceServer(s grpc.ServiceRegistrar, srv PromocodesServiceServer) {
+	// If the following call pancis, it indicates UnimplementedPromocodesServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&PromocodesService_ServiceDesc, srv)
+}
+
+func _PromocodesService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(promocodes.Promocode)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PromocodesServiceServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PromocodesService_Create_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PromocodesServiceServer).Create(ctx, req.(*promocodes.Promocode))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PromocodesService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(promocodes.Promocode)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PromocodesServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PromocodesService_Update_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PromocodesServiceServer).Update(ctx, req.(*promocodes.Promocode))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PromocodesService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(promocodes.Promocode)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PromocodesServiceServer).Get(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PromocodesService_Get_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PromocodesServiceServer).Get(ctx, req.(*promocodes.Promocode))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PromocodesService_GetByCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(promocodes.GetPromocodeByCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PromocodesServiceServer).GetByCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PromocodesService_GetByCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PromocodesServiceServer).GetByCode(ctx, req.(*promocodes.GetPromocodeByCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PromocodesService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(promocodes.ListPromocodesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PromocodesServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PromocodesService_List_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PromocodesServiceServer).List(ctx, req.(*promocodes.ListPromocodesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PromocodesService_Count_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(promocodes.CountPromocodesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PromocodesServiceServer).Count(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PromocodesService_Count_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PromocodesServiceServer).Count(ctx, req.(*promocodes.CountPromocodesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PromocodesService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(promocodes.Promocode)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PromocodesServiceServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PromocodesService_Delete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PromocodesServiceServer).Delete(ctx, req.(*promocodes.Promocode))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PromocodesService_Apply_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(promocodes.ApplyPromocodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PromocodesServiceServer).Apply(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PromocodesService_Apply_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PromocodesServiceServer).Apply(ctx, req.(*promocodes.ApplyPromocodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PromocodesService_Detach_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(promocodes.DetachPromocodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PromocodesServiceServer).Detach(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PromocodesService_Detach_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PromocodesServiceServer).Detach(ctx, req.(*promocodes.DetachPromocodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// PromocodesService_ServiceDesc is the grpc.ServiceDesc for PromocodesService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var PromocodesService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "nocloud.billing.PromocodesService",
+	HandlerType: (*PromocodesServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Create",
+			Handler:    _PromocodesService_Create_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _PromocodesService_Update_Handler,
+		},
+		{
+			MethodName: "Get",
+			Handler:    _PromocodesService_Get_Handler,
+		},
+		{
+			MethodName: "GetByCode",
+			Handler:    _PromocodesService_GetByCode_Handler,
+		},
+		{
+			MethodName: "List",
+			Handler:    _PromocodesService_List_Handler,
+		},
+		{
+			MethodName: "Count",
+			Handler:    _PromocodesService_Count_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _PromocodesService_Delete_Handler,
+		},
+		{
+			MethodName: "Apply",
+			Handler:    _PromocodesService_Apply_Handler,
+		},
+		{
+			MethodName: "Detach",
+			Handler:    _PromocodesService_Detach_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

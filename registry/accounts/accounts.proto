@@ -34,6 +34,7 @@ message CreateRequest {
   optional int32 access = 4; // Account access level to parent namespace
   nocloud.billing.Currency currency = 5; // Account Balance Currency
   google.protobuf.Struct data = 6;
+  string account_owner = 7; // Mother account of this account. If != "" - then this account is gonna be subaccount
 }
 
 message CreateResponse {
@@ -71,6 +72,11 @@ message Account {
   AccountStatus status = 9;
   repeated notes.AdminNote admin_notes = 10;
   bool active = 11;
+
+  repeated string subaccounts = 12; // List of UUID's of sub-accounts of this account
+  string account_owner = 13;        // Mother account of this account. If != "" - then this account is subaccount
+
+  string paymentsGateway = 14;
 }
 
 message UpdateResponse {bool result = 1;}

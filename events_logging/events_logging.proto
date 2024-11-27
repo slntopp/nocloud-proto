@@ -35,6 +35,7 @@ message Event {
   int64 ts = 8;
 
   optional Snapshot snapshot = 9;
+  int32 priority = 10; // 0 - unspecified, 1 - highest
 }
 
 message Events {

@@ -60,6 +60,22 @@ class Account extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>bool active = 11 [json_name = "active"];</code>
      */
     protected $active = false;
+    /**
+     * List of UUID's of sub-accounts of this account
+     *
+     * Generated from protobuf field <code>repeated string subaccounts = 12 [json_name = "subaccounts"];</code>
+     */
+    private $subaccounts;
+    /**
+     * Mother account of this account. If != "" - then this account is subaccount
+     *
+     * Generated from protobuf field <code>string account_owner = 13 [json_name = "accountOwner"];</code>
+     */
+    protected $account_owner = '';
+    /**
+     * Generated from protobuf field <code>string paymentsGateway = 14 [json_name = "paymentsGateway"];</code>
+     */
+    protected $paymentsGateway = '';
 
     /**
      * Constructor.
@@ -74,11 +90,16 @@ class Account extends \Google\Protobuf\Internal\Message
      *     @type \Nocloud\Access\Access $access
      *     @type \Nocloud\Registry\Accounts\SuspendConf $suspend_conf
      *     @type bool $suspended
-     *     @type int $currency
+     *     @type \Nocloud\Billing\Currency $currency
      *           Account Balance Currency
      *     @type int $status
      *     @type array<\Nocloud\Notes\AdminNote>|\Google\Protobuf\Internal\RepeatedField $admin_notes
      *     @type bool $active
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $subaccounts
+     *           List of UUID's of sub-accounts of this account
+     *     @type string $account_owner
+     *           Mother account of this account. If != "" - then this account is subaccount
+     *     @type string $paymentsGateway
      * }
      */
     public function __construct($data = NULL) {
@@ -294,11 +315,11 @@ class Account extends \Google\Protobuf\Internal\Message
      * Account Balance Currency
      *
      * Generated from protobuf field <code>optional .nocloud.billing.Currency currency = 8 [json_name = "currency"];</code>
-     * @return int
+     * @return \Nocloud\Billing\Currency|null
      */
     public function getCurrency()
     {
-        return isset($this->currency) ? $this->currency : 0;
+        return $this->currency;
     }
 
     public function hasCurrency()
@@ -315,12 +336,12 @@ class Account extends \Google\Protobuf\Internal\Message
      * Account Balance Currency
      *
      * Generated from protobuf field <code>optional .nocloud.billing.Currency currency = 8 [json_name = "currency"];</code>
-     * @param int $var
+     * @param \Nocloud\Billing\Currency $var
      * @return $this
      */
     public function setCurrency($var)
     {
-        GPBUtil::checkEnum($var, \Nocloud\Billing\Currency::class);
+        GPBUtil::checkMessage($var, \Nocloud\Billing\Currency::class);
         $this->currency = $var;
 
         return $this;
@@ -388,6 +409,80 @@ class Account extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkBool($var);
         $this->active = $var;
+
+        return $this;
+    }
+
+    /**
+     * List of UUID's of sub-accounts of this account
+     *
+     * Generated from protobuf field <code>repeated string subaccounts = 12 [json_name = "subaccounts"];</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getSubaccounts()
+    {
+        return $this->subaccounts;
+    }
+
+    /**
+     * List of UUID's of sub-accounts of this account
+     *
+     * Generated from protobuf field <code>repeated string subaccounts = 12 [json_name = "subaccounts"];</code>
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setSubaccounts($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
+        $this->subaccounts = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Mother account of this account. If != "" - then this account is subaccount
+     *
+     * Generated from protobuf field <code>string account_owner = 13 [json_name = "accountOwner"];</code>
+     * @return string
+     */
+    public function getAccountOwner()
+    {
+        return $this->account_owner;
+    }
+
+    /**
+     * Mother account of this account. If != "" - then this account is subaccount
+     *
+     * Generated from protobuf field <code>string account_owner = 13 [json_name = "accountOwner"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setAccountOwner($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->account_owner = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string paymentsGateway = 14 [json_name = "paymentsGateway"];</code>
+     * @return string
+     */
+    public function getPaymentsGateway()
+    {
+        return $this->paymentsGateway;
+    }
+
+    /**
+     * Generated from protobuf field <code>string paymentsGateway = 14 [json_name = "paymentsGateway"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setPaymentsGateway($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->paymentsGateway = $var;
 
         return $this;
     }

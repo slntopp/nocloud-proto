@@ -93,7 +93,7 @@ class Record extends \Google\Protobuf\Internal\Message
     /**
      * Generated from protobuf field <code>.nocloud.billing.Currency currency = 13 [json_name = "currency"];</code>
      */
-    protected $currency = 0;
+    protected $currency = null;
     /**
      * Generated from protobuf field <code>string service = 14 [json_name = "service"];</code>
      */
@@ -110,6 +110,16 @@ class Record extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>optional string previous = 17 [json_name = "previous"];</code>
      */
     protected $previous = null;
+    /**
+     * Generated from protobuf field <code>double cost = 18 [json_name = "cost"];</code>
+     */
+    protected $cost = 0.0;
+    /**
+     * Addon key
+     *
+     * Generated from protobuf field <code>string addon = 19 [json_name = "addon"];</code>
+     */
+    protected $addon = '';
 
     /**
      * Constructor.
@@ -146,11 +156,14 @@ class Record extends \Google\Protobuf\Internal\Message
      *          the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
      *          Type(SSD/HDD/NVMe/etc)
      *          }
-     *     @type int $currency
+     *     @type \Nocloud\Billing\Currency $currency
      *     @type string $service
      *     @type string $account
      *     @type string $base
      *     @type string $previous
+     *     @type float $cost
+     *     @type string $addon
+     *           Addon key
      * }
      */
     public function __construct($data = NULL) {
@@ -480,21 +493,31 @@ class Record extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>.nocloud.billing.Currency currency = 13 [json_name = "currency"];</code>
-     * @return int
+     * @return \Nocloud\Billing\Currency|null
      */
     public function getCurrency()
     {
         return $this->currency;
     }
 
+    public function hasCurrency()
+    {
+        return isset($this->currency);
+    }
+
+    public function clearCurrency()
+    {
+        unset($this->currency);
+    }
+
     /**
      * Generated from protobuf field <code>.nocloud.billing.Currency currency = 13 [json_name = "currency"];</code>
-     * @param int $var
+     * @param \Nocloud\Billing\Currency $var
      * @return $this
      */
     public function setCurrency($var)
     {
-        GPBUtil::checkEnum($var, \Nocloud\Billing\Currency::class);
+        GPBUtil::checkMessage($var, \Nocloud\Billing\Currency::class);
         $this->currency = $var;
 
         return $this;
@@ -604,6 +627,54 @@ class Record extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->previous = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>double cost = 18 [json_name = "cost"];</code>
+     * @return float
+     */
+    public function getCost()
+    {
+        return $this->cost;
+    }
+
+    /**
+     * Generated from protobuf field <code>double cost = 18 [json_name = "cost"];</code>
+     * @param float $var
+     * @return $this
+     */
+    public function setCost($var)
+    {
+        GPBUtil::checkDouble($var);
+        $this->cost = $var;
+
+        return $this;
+    }
+
+    /**
+     * Addon key
+     *
+     * Generated from protobuf field <code>string addon = 19 [json_name = "addon"];</code>
+     * @return string
+     */
+    public function getAddon()
+    {
+        return $this->addon;
+    }
+
+    /**
+     * Addon key
+     *
+     * Generated from protobuf field <code>string addon = 19 [json_name = "addon"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setAddon($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->addon = $var;
 
         return $this;
     }

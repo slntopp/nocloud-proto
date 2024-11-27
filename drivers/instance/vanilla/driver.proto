@@ -16,6 +16,7 @@ limitations under the License.
 syntax = "proto3";
 package nocloud.instance.driver.vanilla;
 
+import "billing/addons/addons.proto";
 import "services/services.proto";
 import "instances/instances.proto";
 import "services_providers/services_providers.proto";
@@ -47,6 +48,7 @@ message MonitoringRequest {
   nocloud.services_providers.ServicesProvider services_provider = 2;
   bool scheduled = 3;
   map<string, double> balance = 4;
+  map<string, nocloud.billing.addons.Addon> addons = 5;
 }
 
 message MonitoringResponse {}
@@ -63,6 +65,23 @@ message SpInvokeRequest {
   nocloud.services_providers.ServicesProvider services_provider = 1;
   string method = 2;
   map<string, google.protobuf.Value> params = 3;
+}
+
+message ExpirationRecord{
+  int64 expires = 1;
+  string product = 2;
+  string resource = 3;
+  string addon = 4;
+  int64 period = 5;
+}
+
+message GetExpirationRequest {
+  nocloud.instances.Instance instance = 1;
+  nocloud.services_providers.ServicesProvider services_provider = 2;
+}
+
+message GetExpirationResponse {
+  repeated ExpirationRecord records = 1;
 }
 
 service DriverService {
@@ -89,4 +108,7 @@ service DriverService {
 
   rpc SpPrep(nocloud.services_providers.PrepSP)
       returns (nocloud.services_providers.PrepSP);
+
+  rpc GetExpiration(GetExpirationRequest)
+      returns (GetExpirationResponse);
 }

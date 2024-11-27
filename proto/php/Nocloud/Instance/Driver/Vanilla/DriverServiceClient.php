@@ -171,4 +171,18 @@ class DriverServiceClient extends \Grpc\BaseStub {
         $metadata, $options);
     }
 
+    /**
+     * @param \Nocloud\Instance\Driver\Vanilla\GetExpirationRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function GetExpiration(\Nocloud\Instance\Driver\Vanilla\GetExpirationRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.instance.driver.vanilla.DriverService/GetExpiration',
+        $argument,
+        ['\Nocloud\Instance\Driver\Vanilla\GetExpirationResponse', 'decode'],
+        $metadata, $options);
+    }
+
 }

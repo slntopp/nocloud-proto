@@ -25,7 +25,7 @@ class GetCurrenciesResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type array<int>|\Google\Protobuf\Internal\RepeatedField $currencies
+     *     @type array<\Nocloud\Billing\Currency>|\Google\Protobuf\Internal\RepeatedField $currencies
      * }
      */
     public function __construct($data = NULL) {
@@ -44,12 +44,12 @@ class GetCurrenciesResponse extends \Google\Protobuf\Internal\Message
 
     /**
      * Generated from protobuf field <code>repeated .nocloud.billing.Currency currencies = 1 [json_name = "currencies"];</code>
-     * @param array<int>|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Nocloud\Billing\Currency>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setCurrencies($var)
     {
-        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::ENUM, \Nocloud\Billing\Currency::class);
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Nocloud\Billing\Currency::class);
         $this->currencies = $arr;
 
         return $this;

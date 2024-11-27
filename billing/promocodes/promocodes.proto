@@ -1,0 +1,120 @@
+syntax = "proto3";
+
+package nocloud.billing.promocodes;
+
+import "google/protobuf/struct.proto";
+
+// User defined status
+enum PromocodeStatus {
+  ACTIVE = 0;
+  SUSPENDED = 1;    // Temporary inactive for applying (still active for users which entered this promocode)
+  DELETED = 2;
+}
+
+// Read-only state for visualization
+enum PromocodeState {
+  USABLE = 0;       // OK.
+  EXPIRED = 1;      // Due date passed
+  ALL_TAKEN = 2;    // All available promocodes are taken
+  USED = 3;         // Already used by this user maximum times
+}
+
+message Promocode {
+  string uuid = 1;
+  string title = 2;
+  string description = 3;
+  string code = 4;         // Unique code, which user must enter as promocode
+  PromocodeStatus status = 5;
+  PromocodeState state = 6;
+  int64 due_date = 7;      // User can't apply promocode after due_date. 0 - unlimited
+  int64 limit = 8;         // How many times this promocode can be used globally. 0 - unlimited
+  int64 uses_per_user = 9; // How many times this promocode can be used per one user. 0 - unlimited
+
+  bool one_time = 10;     // If true, then promocode will be applied only on instance start payment
+  int64 active_time = 11; // How many seconds promocode is active after it was applied. 0 - unlimited
+
+  map<string, google.protobuf.Value> meta = 12;
+  int64 created = 13;
+
+  repeated PromoItem promo_items = 14;
+
+  repeated EntryResource uses = 15; // Read-only field containing all promocode uses
+}
+
+// If no optional fields are specified, then applied to ALL billing items
+message PromoItem {
+    PromoSchema schema = 1;
+    optional BillingPlanPromo plan_promo = 2;
+    optional AddonPromo addon_promo = 3;
+    optional ShowcasePromo showcase_promo = 4; // If specified, then applied to all showcase billing plans
+}
+
+// At least 1 field must be specified
+message PromoSchema {
+  optional double discount_percent = 1; // [0, 1]; Highest priority when specified more than 1
+  optional int64 discount_amount = 2;   // Fixed discount amount in NCU
+  optional int64 fixed_price = 3;       // Fixed price in NCU
+}
+
+// billing_plan must be not empty string
+// If optional fields are not specified, then applied to ALL billing plan items.
+// If at least 1 optional item specified, then applied only to specified items
+message BillingPlanPromo{
+    string billing_plan = 1;
+    optional string resource = 2;
+    optional string product = 3;
+    optional string addon = 4;
+}
+
+// addon must be not empty string
+message AddonPromo{
+    string addon = 1;
+}
+
+message ShowcasePromo{
+  string showcase = 1; // valid showcase uuid
+}
+
+message EntryResource{
+   optional string invoice = 1;  // Connected invoice (not used yet)
+   optional string instance = 2; // Connected instance
+   int64 exec = 3;               // Time of promocode usage
+   string account = 4;           // Account, that used promocode
+}
+
+// API
+message ListPromocodesRequest {
+  optional uint64 page = 1;
+  optional uint64 limit = 2;
+  optional string field = 3;
+  optional string sort = 4;
+  map<string, google.protobuf.Value> filters = 5;
+}
+message CountPromocodesRequest {
+   map<string, google.protobuf.Value> filters = 1;
+}
+message GetPromocodeByCodeRequest {
+  string code = 1;
+}
+message ApplyPromocodeRequest{
+  string code = 1;
+  string resource = 2;
+}
+message DetachPromocodeRequest{
+  string uuid = 1;
+  string resource = 2;
+}
+
+message CountPromocodesResponse {
+  int64 total = 1;
+}
+
+message ListPromocodesResponse {
+  repeated Promocode promocodes = 1;
+}
+message ApplyPromocodeResponse{
+  bool success = 1;
+}
+message DetachPromocodeResponse{
+  bool success = 1;
+}

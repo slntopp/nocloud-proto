@@ -30,6 +30,14 @@ class ResponseInstance extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string type = 4 [json_name = "type"];</code>
      */
     protected $type = '';
+    /**
+     * Generated from protobuf field <code>string account = 5 [json_name = "account"];</code>
+     */
+    protected $account = '';
+    /**
+     * Generated from protobuf field <code>string namespace = 6 [json_name = "namespace"];</code>
+     */
+    protected $namespace = '';
 
     /**
      * Constructor.
@@ -41,6 +49,8 @@ class ResponseInstance extends \Google\Protobuf\Internal\Message
      *     @type string $service
      *     @type string $sp
      *     @type string $type
+     *     @type string $account
+     *     @type string $namespace
      * }
      */
     public function __construct($data = NULL) {
@@ -142,6 +152,50 @@ class ResponseInstance extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->type = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string account = 5 [json_name = "account"];</code>
+     * @return string
+     */
+    public function getAccount()
+    {
+        return $this->account;
+    }
+
+    /**
+     * Generated from protobuf field <code>string account = 5 [json_name = "account"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setAccount($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->account = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string namespace = 6 [json_name = "namespace"];</code>
+     * @return string
+     */
+    public function getNamespace()
+    {
+        return $this->namespace;
+    }
+
+    /**
+     * Generated from protobuf field <code>string namespace = 6 [json_name = "namespace"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setNamespace($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->namespace = $var;
 
         return $this;
     }

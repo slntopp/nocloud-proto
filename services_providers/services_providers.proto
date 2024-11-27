@@ -23,6 +23,8 @@ import "access/access.proto";
 import "statuses/statuses.proto";
 
 
+
+
 message Var {map<string, google.protobuf.Value> value = 1;}
 
 message ProxyConf {optional string socket = 1;}
@@ -34,6 +36,11 @@ message LocationConf {
   string title = 4;
   map<string, google.protobuf.Value> extra = 5;
   string type = 6;
+}
+
+message Hook{
+  string playbook = 1;
+  map<string, string> vars = 2;
 }
 
 message ServicesProvider {
@@ -53,6 +60,7 @@ message ServicesProvider {
   map<string, google.protobuf.Value> meta = 13;
 
   statuses.NoCloudStatus status = 14;
+  map<string, Hook> hooks = 15;
 }
 
 message TestResponse {

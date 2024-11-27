@@ -43,6 +43,10 @@ const (
 	InstancesService_Detach_FullMethodName           = "/nocloud.instances.InstancesService/Detach"
 	InstancesService_Attach_FullMethodName           = "/nocloud.instances.InstancesService/Attach"
 	InstancesService_List_FullMethodName             = "/nocloud.instances.InstancesService/List"
+	InstancesService_Get_FullMethodName              = "/nocloud.instances.InstancesService/Get"
+	InstancesService_Create_FullMethodName           = "/nocloud.instances.InstancesService/Create"
+	InstancesService_Update_FullMethodName           = "/nocloud.instances.InstancesService/Update"
+	InstancesService_GetUnique_FullMethodName        = "/nocloud.instances.InstancesService/GetUnique"
 	InstancesService_TransferIG_FullMethodName       = "/nocloud.instances.InstancesService/TransferIG"
 	InstancesService_TransferInstance_FullMethodName = "/nocloud.instances.InstancesService/TransferInstance"
 )
@@ -59,6 +63,10 @@ type InstancesServiceClient interface {
 	Detach(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
 	Attach(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
 	List(ctx context.Context, in *ListInstancesRequest, opts ...grpc.CallOption) (*ListInstancesResponse, error)
+	Get(ctx context.Context, in *Instance, opts ...grpc.CallOption) (*ResponseInstance, error)
+	Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*CreateResponse, error)
+	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*UpdateResponse, error)
+	GetUnique(ctx context.Context, in *GetUniqueRequest, opts ...grpc.CallOption) (*GetUniqueResponse, error)
 	TransferIG(ctx context.Context, in *TransferIGRequest, opts ...grpc.CallOption) (*TransferIGResponse, error)
 	TransferInstance(ctx context.Context, in *TransferInstanceRequest, opts ...grpc.CallOption) (*TransferInstanceResponse, error)
 }
@@ -151,6 +159,46 @@ func (c *instancesServiceClient) List(ctx context.Context, in *ListInstancesRequ
 	return out, nil
 }
 
+func (c *instancesServiceClient) Get(ctx context.Context, in *Instance, opts ...grpc.CallOption) (*ResponseInstance, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResponseInstance)
+	err := c.cc.Invoke(ctx, InstancesService_Get_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *instancesServiceClient) Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*CreateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateResponse)
+	err := c.cc.Invoke(ctx, InstancesService_Create_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *instancesServiceClient) Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*UpdateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateResponse)
+	err := c.cc.Invoke(ctx, InstancesService_Update_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *instancesServiceClient) GetUnique(ctx context.Context, in *GetUniqueRequest, opts ...grpc.CallOption) (*GetUniqueResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUniqueResponse)
+	err := c.cc.Invoke(ctx, InstancesService_GetUnique_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *instancesServiceClient) TransferIG(ctx context.Context, in *TransferIGRequest, opts ...grpc.CallOption) (*TransferIGResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(TransferIGResponse)
@@ -183,6 +231,10 @@ type InstancesServiceServer interface {
 	Detach(context.Context, *DeleteRequest) (*DeleteResponse, error)
 	Attach(context.Context, *DeleteRequest) (*DeleteResponse, error)
 	List(context.Context, *ListInstancesRequest) (*ListInstancesResponse, error)
+	Get(context.Context, *Instance) (*ResponseInstance, error)
+	Create(context.Context, *CreateRequest) (*CreateResponse, error)
+	Update(context.Context, *UpdateRequest) (*UpdateResponse, error)
+	GetUnique(context.Context, *GetUniqueRequest) (*GetUniqueResponse, error)
 	TransferIG(context.Context, *TransferIGRequest) (*TransferIGResponse, error)
 	TransferInstance(context.Context, *TransferInstanceRequest) (*TransferInstanceResponse, error)
 	mustEmbedUnimplementedInstancesServiceServer()
@@ -218,6 +270,18 @@ func (UnimplementedInstancesServiceServer) Attach(context.Context, *DeleteReques
 }
 func (UnimplementedInstancesServiceServer) List(context.Context, *ListInstancesRequest) (*ListInstancesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedInstancesServiceServer) Get(context.Context, *Instance) (*ResponseInstance, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedInstancesServiceServer) Create(context.Context, *CreateRequest) (*CreateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (UnimplementedInstancesServiceServer) Update(context.Context, *UpdateRequest) (*UpdateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (UnimplementedInstancesServiceServer) GetUnique(context.Context, *GetUniqueRequest) (*GetUniqueResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUnique not implemented")
 }
 func (UnimplementedInstancesServiceServer) TransferIG(context.Context, *TransferIGRequest) (*TransferIGResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TransferIG not implemented")
@@ -390,6 +454,78 @@ func _InstancesService_List_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _InstancesService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Instance)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstancesServiceServer).Get(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstancesService_Get_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstancesServiceServer).Get(ctx, req.(*Instance))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InstancesService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstancesServiceServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstancesService_Create_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstancesServiceServer).Create(ctx, req.(*CreateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InstancesService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstancesServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstancesService_Update_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstancesServiceServer).Update(ctx, req.(*UpdateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InstancesService_GetUnique_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUniqueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstancesServiceServer).GetUnique(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstancesService_GetUnique_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstancesServiceServer).GetUnique(ctx, req.(*GetUniqueRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _InstancesService_TransferIG_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TransferIGRequest)
 	if err := dec(in); err != nil {
@@ -464,6 +600,22 @@ var InstancesService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "List",
 			Handler:    _InstancesService_List_Handler,
+		},
+		{
+			MethodName: "Get",
+			Handler:    _InstancesService_Get_Handler,
+		},
+		{
+			MethodName: "Create",
+			Handler:    _InstancesService_Create_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _InstancesService_Update_Handler,
+		},
+		{
+			MethodName: "GetUnique",
+			Handler:    _InstancesService_GetUnique_Handler,
 		},
 		{
 			MethodName: "TransferIG",

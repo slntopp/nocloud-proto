@@ -102,6 +102,20 @@ class BillingServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * @param \Nocloud\Billing\PlansUniqueRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function PlansUnique(\Nocloud\Billing\PlansUniqueRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/PlansUnique',
+        $argument,
+        ['\Nocloud\Billing\PlansUniqueResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * @param \Nocloud\Billing\Plan $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -252,6 +266,174 @@ class BillingServiceClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/nocloud.billing.BillingService/Reprocess',
         $argument,
         ['\Nocloud\Billing\Transactions', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Billing\CreateInvoiceRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function CreateInvoice(\Nocloud\Billing\CreateInvoiceRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/CreateInvoice',
+        $argument,
+        ['\Nocloud\Billing\Invoice', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Billing\Invoice $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function GetInvoice(\Nocloud\Billing\Invoice $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/GetInvoice',
+        $argument,
+        ['\Nocloud\Billing\Invoice', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Billing\GetInvoicesRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function GetInvoices(\Nocloud\Billing\GetInvoicesRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/GetInvoices',
+        $argument,
+        ['\Nocloud\Billing\Invoices', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Billing\GetInvoicesCountRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function GetInvoicesCount(\Nocloud\Billing\GetInvoicesCountRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/GetInvoicesCount',
+        $argument,
+        ['\Nocloud\Billing\GetInvoicesCountResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Billing\UpdateInvoiceRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function UpdateInvoice(\Nocloud\Billing\UpdateInvoiceRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/UpdateInvoice',
+        $argument,
+        ['\Nocloud\Billing\Invoice', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Billing\PayRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function Pay(\Nocloud\Billing\PayRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/Pay',
+        $argument,
+        ['\Nocloud\Billing\PayResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Billing\UpdateInvoiceStatusRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function UpdateInvoiceStatus(\Nocloud\Billing\UpdateInvoiceStatusRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/UpdateInvoiceStatus',
+        $argument,
+        ['\Nocloud\Billing\Invoice', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Billing\CreateTopUpBalanceInvoiceRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function CreateTopUpBalanceInvoice(\Nocloud\Billing\CreateTopUpBalanceInvoiceRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/CreateTopUpBalanceInvoice',
+        $argument,
+        ['\Nocloud\Billing\Invoice', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Billing\CreateRenewalInvoiceRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function CreateRenewalInvoice(\Nocloud\Billing\CreateRenewalInvoiceRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/CreateRenewalInvoice',
+        $argument,
+        ['\Nocloud\Billing\Invoice', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Billing\PayWithBalanceRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function PayWithBalance(\Nocloud\Billing\PayWithBalanceRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/PayWithBalance',
+        $argument,
+        ['\Nocloud\Billing\PayWithBalanceResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Billing\GetInvoiceSettingsTemplateExampleRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function GetInvoiceSettingsTemplateExample(\Nocloud\Billing\GetInvoiceSettingsTemplateExampleRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/GetInvoiceSettingsTemplateExample',
+        $argument,
+        ['\Nocloud\Billing\GetInvoiceSettingsTemplateExampleResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Billing\RunDailyCronJobRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function RunDailyCronJob(\Nocloud\Billing\RunDailyCronJobRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/RunDailyCronJob',
+        $argument,
+        ['\Nocloud\Billing\RunDailyCronJobResponse', 'decode'],
         $metadata, $options);
     }
 
