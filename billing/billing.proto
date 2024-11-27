@@ -229,8 +229,7 @@ message Item {
   int32 amount = 1;
   string unit = 2;
   double price = 3;
-  string instance = 4;
-  string description = 5;
+  string description = 4;
 }
 
 message Invoice {
@@ -249,6 +248,7 @@ message Invoice {
   repeated Item items = 13;
   ActionType type = 14;
   string number = 15;
+  repeated string instances = 16; // Linked instances
 }
 
 message Invoices {repeated Invoice pool = 1;}

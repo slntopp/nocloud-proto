@@ -990,12 +990,7 @@ export declare class Item extends Message<Item> {
   price: number;
 
   /**
-   * @generated from field: string instance = 4;
-   */
-  instance: string;
-
-  /**
-   * @generated from field: string description = 5;
+   * @generated from field: string description = 4;
    */
   description: string;
 
@@ -1098,6 +1093,13 @@ export declare class Invoice extends Message<Invoice> {
    * @generated from field: string number = 15;
    */
   number: string;
+
+  /**
+   * Linked instances
+   *
+   * @generated from field: repeated string instances = 16;
+   */
+  instances: string[];
 
   constructor(data?: PartialMessage<Invoice>);
 

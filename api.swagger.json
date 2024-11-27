@@ -2620,6 +2620,17 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "instances",
+            "description": "Linked instances",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           }
         ],
         "tags": [
@@ -8276,6 +8287,13 @@
         },
         "number": {
           "type": "string"
+        },
+        "instances": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Linked instances"
         }
       }
     },
@@ -8304,9 +8322,6 @@
         "price": {
           "type": "number",
           "format": "double"
-        },
-        "instance": {
-          "type": "string"
         },
         "description": {
           "type": "string"
