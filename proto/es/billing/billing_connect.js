@@ -18,7 +18,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { ConversionRequest, ConversionResponse, CreateCurrencyRequest, CreateCurrencyResponse, CreateExchangeRateRequest, CreateExchangeRateResponse, CreateInvoiceRequest, CreateRenewalInvoiceRequest, CreateTopUpBalanceInvoiceRequest, DeleteExchangeRateRequest, DeleteExchangeRateResponse, GetActiveRequest, GetCurrenciesRequest, GetCurrenciesResponse, GetExchangeRateRequest, GetExchangeRateResponse, GetExchangeRatesRequest, GetExchangeRatesResponse, GetInstancesReportRequest, GetInstancesReportResponse, GetInstancesReportsCountRequest, GetInvoicesCountRequest, GetInvoicesCountResponse, GetInvoiceSettingsTemplateExampleRequest, GetInvoiceSettingsTemplateExampleResponse, GetInvoicesRequest, GetRecordsReportsCountRequest, GetRecordsReportsRequest, GetRecordsReportsResponse, GetReportsCountResponse, GetTransactionsCountRequest, GetTransactionsCountResponse, GetTransactionsRequest, Invoice, Invoices, ListPlansInstancesRequest, ListPlansInstancesResponse, ListRequest, ListResponse, PayRequest, PayResponse, PayWithBalanceRequest, PayWithBalanceResponse, Plan, PlansUniqueRequest, PlansUniqueResponse, Records, ReprocessTransactionsRequest, RunDailyCronJobRequest, RunDailyCronJobResponse, Transaction, Transactions, UpdateCurrencyRequest, UpdateCurrencyResponse, UpdateExchangeRateRequest, UpdateExchangeRateResponse, UpdateInvoiceRequest, UpdateInvoiceStatusRequest, UpdateTransactionResponse } from "./billing_pb.js";
+import { ChangeDefaultCurrencyRequest, ChangeDefaultCurrencyResponse, ConversionRequest, ConversionResponse, CreateCurrencyRequest, CreateCurrencyResponse, CreateExchangeRateRequest, CreateExchangeRateResponse, CreateInvoiceRequest, CreateRenewalInvoiceRequest, CreateTopUpBalanceInvoiceRequest, DeleteExchangeRateRequest, DeleteExchangeRateResponse, GetActiveRequest, GetCurrenciesRequest, GetCurrenciesResponse, GetExchangeRateRequest, GetExchangeRateResponse, GetExchangeRatesRequest, GetExchangeRatesResponse, GetInstancesReportRequest, GetInstancesReportResponse, GetInstancesReportsCountRequest, GetInvoicesCountRequest, GetInvoicesCountResponse, GetInvoiceSettingsTemplateExampleRequest, GetInvoiceSettingsTemplateExampleResponse, GetInvoicesRequest, GetRecordsReportsCountRequest, GetRecordsReportsRequest, GetRecordsReportsResponse, GetReportsCountResponse, GetTransactionsCountRequest, GetTransactionsCountResponse, GetTransactionsRequest, Invoice, Invoices, ListPlansInstancesRequest, ListPlansInstancesResponse, ListRequest, ListResponse, PayRequest, PayResponse, PayWithBalanceRequest, PayWithBalanceResponse, Plan, PlansUniqueRequest, PlansUniqueResponse, Records, ReprocessTransactionsRequest, RunDailyCronJobRequest, RunDailyCronJobResponse, Transaction, Transactions, UpdateCurrencyRequest, UpdateCurrencyResponse, UpdateExchangeRateRequest, UpdateExchangeRateResponse, UpdateInvoiceRequest, UpdateInvoiceStatusRequest, UpdateTransactionResponse } from "./billing_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 import { Addon, BulkAddons, CountAddonsRequest, CountAddonsResponse, ListAddonsRequest, ListAddonsResponse } from "./addons/addons_pb.js";
 import { CountDescriptionsRequest, CountDescriptionsResponse, Description, ListDescriptionsRequest, ListDescriptionsResponse } from "./descriptions/descriptions_pb.js";
@@ -415,6 +415,15 @@ export const CurrencyService = {
       name: "Convert",
       I: ConversionRequest,
       O: ConversionResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.CurrencyService.ChangeDefaultCurrency
+     */
+    changeDefaultCurrency: {
+      name: "ChangeDefaultCurrency",
+      I: ChangeDefaultCurrencyRequest,
+      O: ChangeDefaultCurrencyResponse,
       kind: MethodKind.Unary,
     },
   }

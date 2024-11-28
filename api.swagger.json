@@ -1597,6 +1597,38 @@
         ]
       }
     },
+    "/billing/currencies/change_default": {
+      "post": {
+        "operationId": "CurrencyService_ChangeDefaultCurrency",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingChangeDefaultCurrencyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingChangeDefaultCurrencyRequest"
+            }
+          }
+        ],
+        "tags": [
+          "CurrencyService"
+        ]
+      }
+    },
     "/billing/currencies/convert": {
       "post": {
         "operationId": "CurrencyService_Convert",
@@ -7829,6 +7861,18 @@
       ],
       "default": "BILLING_STATUS_UNKNOWN",
       "description": " - BILLING_STATUS_UNKNOWN: Dont use."
+    },
+    "billingChangeDefaultCurrencyRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "billingChangeDefaultCurrencyResponse": {
+      "type": "object"
     },
     "billingConversionRequest": {
       "type": "object",

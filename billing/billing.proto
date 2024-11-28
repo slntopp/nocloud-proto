@@ -693,6 +693,11 @@ message DeleteExchangeRateResponse {}
 message GetCurrenciesRequest {}
 message GetCurrenciesResponse {repeated Currency currencies = 1;}
 
+message ChangeDefaultCurrencyRequest{
+  int32 id = 1;
+}
+message ChangeDefaultCurrencyResponse{}
+
 message GetExchangeRateRequest {
   Currency from = 1;
   Currency to = 2;
@@ -772,6 +777,12 @@ service CurrencyService {
   rpc Convert (ConversionRequest) returns (ConversionResponse) {
     option (google.api.http) = {
       post: "/billing/currencies/convert"
+      body: "*"
+    };
+  };
+  rpc ChangeDefaultCurrency (ChangeDefaultCurrencyRequest) returns (ChangeDefaultCurrencyResponse) {
+    option (google.api.http) = {
+      post: "/billing/currencies/change_default"
       body: "*"
     };
   };

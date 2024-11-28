@@ -948,6 +948,24 @@ export const GetCurrenciesResponse = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * @generated from message nocloud.billing.ChangeDefaultCurrencyRequest
+ */
+export const ChangeDefaultCurrencyRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.ChangeDefaultCurrencyRequest",
+  () => [
+    { no: 1, name: "id", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.ChangeDefaultCurrencyResponse
+ */
+export const ChangeDefaultCurrencyResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.ChangeDefaultCurrencyResponse",
+  [],
+);
+
+/**
  * @generated from message nocloud.billing.GetExchangeRateRequest
  */
 export const GetExchangeRateRequest = /*@__PURE__*/ proto3.makeMessageType(

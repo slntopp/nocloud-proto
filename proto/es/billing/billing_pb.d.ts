@@ -2745,6 +2745,49 @@ export declare class GetCurrenciesResponse extends Message<GetCurrenciesResponse
 }
 
 /**
+ * @generated from message nocloud.billing.ChangeDefaultCurrencyRequest
+ */
+export declare class ChangeDefaultCurrencyRequest extends Message<ChangeDefaultCurrencyRequest> {
+  /**
+   * @generated from field: int32 id = 1;
+   */
+  id: number;
+
+  constructor(data?: PartialMessage<ChangeDefaultCurrencyRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.ChangeDefaultCurrencyRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ChangeDefaultCurrencyRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ChangeDefaultCurrencyRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ChangeDefaultCurrencyRequest;
+
+  static equals(a: ChangeDefaultCurrencyRequest | PlainMessage<ChangeDefaultCurrencyRequest> | undefined, b: ChangeDefaultCurrencyRequest | PlainMessage<ChangeDefaultCurrencyRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.ChangeDefaultCurrencyResponse
+ */
+export declare class ChangeDefaultCurrencyResponse extends Message<ChangeDefaultCurrencyResponse> {
+  constructor(data?: PartialMessage<ChangeDefaultCurrencyResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.ChangeDefaultCurrencyResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ChangeDefaultCurrencyResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ChangeDefaultCurrencyResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ChangeDefaultCurrencyResponse;
+
+  static equals(a: ChangeDefaultCurrencyResponse | PlainMessage<ChangeDefaultCurrencyResponse> | undefined, b: ChangeDefaultCurrencyResponse | PlainMessage<ChangeDefaultCurrencyResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.billing.GetExchangeRateRequest
  */
 export declare class GetExchangeRateRequest extends Message<GetExchangeRateRequest> {

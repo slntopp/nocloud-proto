@@ -1381,15 +1381,16 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	CurrencyService_CreateCurrency_FullMethodName     = "/nocloud.billing.CurrencyService/CreateCurrency"
-	CurrencyService_UpdateCurrency_FullMethodName     = "/nocloud.billing.CurrencyService/UpdateCurrency"
-	CurrencyService_GetCurrencies_FullMethodName      = "/nocloud.billing.CurrencyService/GetCurrencies"
-	CurrencyService_GetExchangeRate_FullMethodName    = "/nocloud.billing.CurrencyService/GetExchangeRate"
-	CurrencyService_GetExchangeRates_FullMethodName   = "/nocloud.billing.CurrencyService/GetExchangeRates"
-	CurrencyService_CreateExchangeRate_FullMethodName = "/nocloud.billing.CurrencyService/CreateExchangeRate"
-	CurrencyService_UpdateExchangeRate_FullMethodName = "/nocloud.billing.CurrencyService/UpdateExchangeRate"
-	CurrencyService_DeleteExchangeRate_FullMethodName = "/nocloud.billing.CurrencyService/DeleteExchangeRate"
-	CurrencyService_Convert_FullMethodName            = "/nocloud.billing.CurrencyService/Convert"
+	CurrencyService_CreateCurrency_FullMethodName        = "/nocloud.billing.CurrencyService/CreateCurrency"
+	CurrencyService_UpdateCurrency_FullMethodName        = "/nocloud.billing.CurrencyService/UpdateCurrency"
+	CurrencyService_GetCurrencies_FullMethodName         = "/nocloud.billing.CurrencyService/GetCurrencies"
+	CurrencyService_GetExchangeRate_FullMethodName       = "/nocloud.billing.CurrencyService/GetExchangeRate"
+	CurrencyService_GetExchangeRates_FullMethodName      = "/nocloud.billing.CurrencyService/GetExchangeRates"
+	CurrencyService_CreateExchangeRate_FullMethodName    = "/nocloud.billing.CurrencyService/CreateExchangeRate"
+	CurrencyService_UpdateExchangeRate_FullMethodName    = "/nocloud.billing.CurrencyService/UpdateExchangeRate"
+	CurrencyService_DeleteExchangeRate_FullMethodName    = "/nocloud.billing.CurrencyService/DeleteExchangeRate"
+	CurrencyService_Convert_FullMethodName               = "/nocloud.billing.CurrencyService/Convert"
+	CurrencyService_ChangeDefaultCurrency_FullMethodName = "/nocloud.billing.CurrencyService/ChangeDefaultCurrency"
 )
 
 // CurrencyServiceClient is the client API for CurrencyService service.
@@ -1405,6 +1406,7 @@ type CurrencyServiceClient interface {
 	UpdateExchangeRate(ctx context.Context, in *UpdateExchangeRateRequest, opts ...grpc.CallOption) (*UpdateExchangeRateResponse, error)
 	DeleteExchangeRate(ctx context.Context, in *DeleteExchangeRateRequest, opts ...grpc.CallOption) (*DeleteExchangeRateResponse, error)
 	Convert(ctx context.Context, in *ConversionRequest, opts ...grpc.CallOption) (*ConversionResponse, error)
+	ChangeDefaultCurrency(ctx context.Context, in *ChangeDefaultCurrencyRequest, opts ...grpc.CallOption) (*ChangeDefaultCurrencyResponse, error)
 }
 
 type currencyServiceClient struct {
@@ -1505,6 +1507,16 @@ func (c *currencyServiceClient) Convert(ctx context.Context, in *ConversionReque
 	return out, nil
 }
 
+func (c *currencyServiceClient) ChangeDefaultCurrency(ctx context.Context, in *ChangeDefaultCurrencyRequest, opts ...grpc.CallOption) (*ChangeDefaultCurrencyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ChangeDefaultCurrencyResponse)
+	err := c.cc.Invoke(ctx, CurrencyService_ChangeDefaultCurrency_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CurrencyServiceServer is the server API for CurrencyService service.
 // All implementations must embed UnimplementedCurrencyServiceServer
 // for forward compatibility.
@@ -1518,6 +1530,7 @@ type CurrencyServiceServer interface {
 	UpdateExchangeRate(context.Context, *UpdateExchangeRateRequest) (*UpdateExchangeRateResponse, error)
 	DeleteExchangeRate(context.Context, *DeleteExchangeRateRequest) (*DeleteExchangeRateResponse, error)
 	Convert(context.Context, *ConversionRequest) (*ConversionResponse, error)
+	ChangeDefaultCurrency(context.Context, *ChangeDefaultCurrencyRequest) (*ChangeDefaultCurrencyResponse, error)
 	mustEmbedUnimplementedCurrencyServiceServer()
 }
 
@@ -1554,6 +1567,9 @@ func (UnimplementedCurrencyServiceServer) DeleteExchangeRate(context.Context, *D
 }
 func (UnimplementedCurrencyServiceServer) Convert(context.Context, *ConversionRequest) (*ConversionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Convert not implemented")
+}
+func (UnimplementedCurrencyServiceServer) ChangeDefaultCurrency(context.Context, *ChangeDefaultCurrencyRequest) (*ChangeDefaultCurrencyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ChangeDefaultCurrency not implemented")
 }
 func (UnimplementedCurrencyServiceServer) mustEmbedUnimplementedCurrencyServiceServer() {}
 func (UnimplementedCurrencyServiceServer) testEmbeddedByValue()                         {}
@@ -1738,6 +1754,24 @@ func _CurrencyService_Convert_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CurrencyService_ChangeDefaultCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ChangeDefaultCurrencyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyServiceServer).ChangeDefaultCurrency(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CurrencyService_ChangeDefaultCurrency_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyServiceServer).ChangeDefaultCurrency(ctx, req.(*ChangeDefaultCurrencyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CurrencyService_ServiceDesc is the grpc.ServiceDesc for CurrencyService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1780,6 +1814,10 @@ var CurrencyService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Convert",
 			Handler:    _CurrencyService_Convert_Handler,
+		},
+		{
+			MethodName: "ChangeDefaultCurrency",
+			Handler:    _CurrencyService_ChangeDefaultCurrency_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
