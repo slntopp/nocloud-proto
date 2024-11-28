@@ -2431,6 +2431,11 @@ export declare class Currency extends Message<Currency> {
    */
   code: string;
 
+  /**
+   * @generated from field: bool default = 8;
+   */
+  default: boolean;
+
   constructor(data?: PartialMessage<Currency>);
 
   static readonly runtime: typeof proto3;

@@ -828,6 +828,7 @@ export const Currency = /*@__PURE__*/ proto3.makeMessageType(
     { no: 5, name: "rounding", kind: "enum", T: proto3.getEnumType(Rounding) },
     { no: 6, name: "format", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 7, name: "code", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 8, name: "default", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 

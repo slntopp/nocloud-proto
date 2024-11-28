@@ -1782,6 +1782,12 @@
             "type": "string"
           },
           {
+            "name": "from.default",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "to.id",
             "in": "query",
             "required": false,
@@ -1832,6 +1838,12 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "to.default",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -1908,6 +1920,12 @@
             "type": "string"
           },
           {
+            "name": "from.default",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "to.id",
             "in": "query",
             "required": false,
@@ -1958,6 +1976,12 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "to.default",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -2591,6 +2615,12 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "currency.default",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           },
           {
             "name": "created",
@@ -3965,6 +3995,12 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "currency.default",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           },
           {
             "name": "created",
@@ -7926,6 +7962,9 @@
         "code": {
           "type": "string",
           "title": "Unique code"
+        },
+        "default": {
+          "type": "boolean"
         }
       }
     },
