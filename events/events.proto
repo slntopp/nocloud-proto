@@ -44,6 +44,37 @@ message CancelRequest {
 
 message Response {}
 
+// v2
+message SubscribeOptions{
+  bool auto_ack = 1;
+}
+message Subscription {
+  string type = 1;
+  string uuid = 2;
+  optional SubscribeOptions options = 3;
+}
+enum ResultStatus {
+  ACK = 0;
+  NACK = 1;
+}
+message ResultNotify {
+  string event_id = 1;
+  string ack_type = 2;
+}
+message SubscribeRequest{
+  optional Subscription sub = 1;
+  optional ResultNotify notify = 2;
+}
+message PublishOptions{
+  int64 ttl = 1;
+  bool no_dlx = 2;
+  // Here should be retries policy and so on
+}
+message PublishEventRequest{
+  Event event = 1;
+  optional PublishOptions options = 2;
+}
+
 service EventsService {
   rpc Publish(Event) returns (Response) {
     option (google.api.http) = {
@@ -56,16 +87,27 @@ service EventsService {
       get : "/bus/sub/{type}/{uuid}"
     };
   };
-
   rpc List(ConsumeRequest) returns (Events) {
     option (google.api.http) = {
       get : "/bus/list/{type}/{uuid}"
     };
   };
-
   rpc Cancel(CancelRequest) returns (Response) {
     option (google.api.http) = {
       post : "/bus/cancel"
+      body : "*"
+    };
+  };
+  // v2
+  rpc Subscribe(stream SubscribeRequest) returns (stream Event) {
+    option (google.api.http) = {
+      post : "/bus/v2/sub"
+      body : "*"
+    };
+  };
+  rpc PublishEvent(PublishEventRequest) returns (Response) {
+    option (google.api.http) = {
+      post : "/bus/v2/pub"
       body : "*"
     };
   };

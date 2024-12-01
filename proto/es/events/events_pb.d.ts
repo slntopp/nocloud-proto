@@ -22,6 +22,21 @@ import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialM
 import { Message, proto3 } from "@bufbuild/protobuf";
 
 /**
+ * @generated from enum nocloud.events.ResultStatus
+ */
+export declare enum ResultStatus {
+  /**
+   * @generated from enum value: ACK = 0;
+   */
+  ACK = 0,
+
+  /**
+   * @generated from enum value: NACK = 1;
+   */
+  NACK = 1,
+}
+
+/**
  * @generated from message nocloud.events.Event
  */
 export declare class Event extends Message<Event> {
@@ -185,5 +200,183 @@ export declare class Response extends Message<Response> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Response;
 
   static equals(a: Response | PlainMessage<Response> | undefined, b: Response | PlainMessage<Response> | undefined): boolean;
+}
+
+/**
+ * v2
+ *
+ * @generated from message nocloud.events.SubscribeOptions
+ */
+export declare class SubscribeOptions extends Message<SubscribeOptions> {
+  /**
+   * @generated from field: bool auto_ack = 1;
+   */
+  autoAck: boolean;
+
+  constructor(data?: PartialMessage<SubscribeOptions>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.events.SubscribeOptions";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SubscribeOptions;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SubscribeOptions;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SubscribeOptions;
+
+  static equals(a: SubscribeOptions | PlainMessage<SubscribeOptions> | undefined, b: SubscribeOptions | PlainMessage<SubscribeOptions> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.events.Subscription
+ */
+export declare class Subscription extends Message<Subscription> {
+  /**
+   * @generated from field: string type = 1;
+   */
+  type: string;
+
+  /**
+   * @generated from field: string uuid = 2;
+   */
+  uuid: string;
+
+  /**
+   * @generated from field: optional nocloud.events.SubscribeOptions options = 3;
+   */
+  options?: SubscribeOptions;
+
+  constructor(data?: PartialMessage<Subscription>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.events.Subscription";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Subscription;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Subscription;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Subscription;
+
+  static equals(a: Subscription | PlainMessage<Subscription> | undefined, b: Subscription | PlainMessage<Subscription> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.events.ResultNotify
+ */
+export declare class ResultNotify extends Message<ResultNotify> {
+  /**
+   * @generated from field: string event_id = 1;
+   */
+  eventId: string;
+
+  /**
+   * @generated from field: string ack_type = 2;
+   */
+  ackType: string;
+
+  constructor(data?: PartialMessage<ResultNotify>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.events.ResultNotify";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ResultNotify;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ResultNotify;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ResultNotify;
+
+  static equals(a: ResultNotify | PlainMessage<ResultNotify> | undefined, b: ResultNotify | PlainMessage<ResultNotify> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.events.SubscribeRequest
+ */
+export declare class SubscribeRequest extends Message<SubscribeRequest> {
+  /**
+   * @generated from field: optional nocloud.events.Subscription sub = 1;
+   */
+  sub?: Subscription;
+
+  /**
+   * @generated from field: optional nocloud.events.ResultNotify notify = 2;
+   */
+  notify?: ResultNotify;
+
+  constructor(data?: PartialMessage<SubscribeRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.events.SubscribeRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SubscribeRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SubscribeRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SubscribeRequest;
+
+  static equals(a: SubscribeRequest | PlainMessage<SubscribeRequest> | undefined, b: SubscribeRequest | PlainMessage<SubscribeRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.events.PublishOptions
+ */
+export declare class PublishOptions extends Message<PublishOptions> {
+  /**
+   * @generated from field: int64 ttl = 1;
+   */
+  ttl: bigint;
+
+  /**
+   * Here should be retries policy and so on
+   *
+   * @generated from field: bool no_dlx = 2;
+   */
+  noDlx: boolean;
+
+  constructor(data?: PartialMessage<PublishOptions>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.events.PublishOptions";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PublishOptions;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PublishOptions;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PublishOptions;
+
+  static equals(a: PublishOptions | PlainMessage<PublishOptions> | undefined, b: PublishOptions | PlainMessage<PublishOptions> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.events.PublishEventRequest
+ */
+export declare class PublishEventRequest extends Message<PublishEventRequest> {
+  /**
+   * @generated from field: nocloud.events.Event event = 1;
+   */
+  event?: Event;
+
+  /**
+   * @generated from field: optional nocloud.events.PublishOptions options = 2;
+   */
+  options?: PublishOptions;
+
+  constructor(data?: PartialMessage<PublishEventRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.events.PublishEventRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PublishEventRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PublishEventRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PublishEventRequest;
+
+  static equals(a: PublishEventRequest | PlainMessage<PublishEventRequest> | undefined, b: PublishEventRequest | PlainMessage<PublishEventRequest> | undefined): boolean;
 }
 

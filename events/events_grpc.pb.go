@@ -34,10 +34,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	EventsService_Publish_FullMethodName = "/nocloud.events.EventsService/Publish"
-	EventsService_Consume_FullMethodName = "/nocloud.events.EventsService/Consume"
-	EventsService_List_FullMethodName    = "/nocloud.events.EventsService/List"
-	EventsService_Cancel_FullMethodName  = "/nocloud.events.EventsService/Cancel"
+	EventsService_Publish_FullMethodName      = "/nocloud.events.EventsService/Publish"
+	EventsService_Consume_FullMethodName      = "/nocloud.events.EventsService/Consume"
+	EventsService_List_FullMethodName         = "/nocloud.events.EventsService/List"
+	EventsService_Cancel_FullMethodName       = "/nocloud.events.EventsService/Cancel"
+	EventsService_Subscribe_FullMethodName    = "/nocloud.events.EventsService/Subscribe"
+	EventsService_PublishEvent_FullMethodName = "/nocloud.events.EventsService/PublishEvent"
 )
 
 // EventsServiceClient is the client API for EventsService service.
@@ -48,6 +50,9 @@ type EventsServiceClient interface {
 	Consume(ctx context.Context, in *ConsumeRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Event], error)
 	List(ctx context.Context, in *ConsumeRequest, opts ...grpc.CallOption) (*Events, error)
 	Cancel(ctx context.Context, in *CancelRequest, opts ...grpc.CallOption) (*Response, error)
+	// v2
+	Subscribe(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[SubscribeRequest, Event], error)
+	PublishEvent(ctx context.Context, in *PublishEventRequest, opts ...grpc.CallOption) (*Response, error)
 }
 
 type eventsServiceClient struct {
@@ -107,6 +112,29 @@ func (c *eventsServiceClient) Cancel(ctx context.Context, in *CancelRequest, opt
 	return out, nil
 }
 
+func (c *eventsServiceClient) Subscribe(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[SubscribeRequest, Event], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &EventsService_ServiceDesc.Streams[1], EventsService_Subscribe_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[SubscribeRequest, Event]{ClientStream: stream}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type EventsService_SubscribeClient = grpc.BidiStreamingClient[SubscribeRequest, Event]
+
+func (c *eventsServiceClient) PublishEvent(ctx context.Context, in *PublishEventRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, EventsService_PublishEvent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EventsServiceServer is the server API for EventsService service.
 // All implementations must embed UnimplementedEventsServiceServer
 // for forward compatibility.
@@ -115,6 +143,9 @@ type EventsServiceServer interface {
 	Consume(*ConsumeRequest, grpc.ServerStreamingServer[Event]) error
 	List(context.Context, *ConsumeRequest) (*Events, error)
 	Cancel(context.Context, *CancelRequest) (*Response, error)
+	// v2
+	Subscribe(grpc.BidiStreamingServer[SubscribeRequest, Event]) error
+	PublishEvent(context.Context, *PublishEventRequest) (*Response, error)
 	mustEmbedUnimplementedEventsServiceServer()
 }
 
@@ -136,6 +167,12 @@ func (UnimplementedEventsServiceServer) List(context.Context, *ConsumeRequest) (
 }
 func (UnimplementedEventsServiceServer) Cancel(context.Context, *CancelRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Cancel not implemented")
+}
+func (UnimplementedEventsServiceServer) Subscribe(grpc.BidiStreamingServer[SubscribeRequest, Event]) error {
+	return status.Errorf(codes.Unimplemented, "method Subscribe not implemented")
+}
+func (UnimplementedEventsServiceServer) PublishEvent(context.Context, *PublishEventRequest) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PublishEvent not implemented")
 }
 func (UnimplementedEventsServiceServer) mustEmbedUnimplementedEventsServiceServer() {}
 func (UnimplementedEventsServiceServer) testEmbeddedByValue()                       {}
@@ -223,6 +260,31 @@ func _EventsService_Cancel_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EventsService_Subscribe_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(EventsServiceServer).Subscribe(&grpc.GenericServerStream[SubscribeRequest, Event]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type EventsService_SubscribeServer = grpc.BidiStreamingServer[SubscribeRequest, Event]
+
+func _EventsService_PublishEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PublishEventRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EventsServiceServer).PublishEvent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EventsService_PublishEvent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EventsServiceServer).PublishEvent(ctx, req.(*PublishEventRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EventsService_ServiceDesc is the grpc.ServiceDesc for EventsService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -242,12 +304,22 @@ var EventsService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "Cancel",
 			Handler:    _EventsService_Cancel_Handler,
 		},
+		{
+			MethodName: "PublishEvent",
+			Handler:    _EventsService_PublishEvent_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "Consume",
 			Handler:       _EventsService_Consume_Handler,
 			ServerStreams: true,
+		},
+		{
+			StreamName:    "Subscribe",
+			Handler:       _EventsService_Subscribe_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
 		},
 	},
 	Metadata: "events/events.proto",

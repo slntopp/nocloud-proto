@@ -4241,6 +4241,81 @@
         ]
       }
     },
+    "/bus/v2/pub": {
+      "post": {
+        "operationId": "EventsService_PublishEvent",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/nocloudeventsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/eventsPublishEventRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EventsService"
+        ]
+      }
+    },
+    "/bus/v2/sub": {
+      "post": {
+        "summary": "v2",
+        "operationId": "EventsService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/nocloudeventsEvent"
+                },
+                "error": {
+                  "$ref": "#/definitions/googlerpcStatus"
+                }
+              },
+              "title": "Stream result of nocloudeventsEvent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " (streaming inputs)",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/eventsSubscribeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EventsService"
+        ]
+      }
+    },
     "/chats": {
       "put": {
         "operationId": "ChatService_CreateChat",
@@ -9075,6 +9150,75 @@
         },
         "id": {
           "type": "string"
+        }
+      }
+    },
+    "eventsPublishEventRequest": {
+      "type": "object",
+      "properties": {
+        "event": {
+          "$ref": "#/definitions/nocloudeventsEvent"
+        },
+        "options": {
+          "$ref": "#/definitions/eventsPublishOptions"
+        }
+      }
+    },
+    "eventsPublishOptions": {
+      "type": "object",
+      "properties": {
+        "ttl": {
+          "type": "string",
+          "format": "int64"
+        },
+        "noDlx": {
+          "type": "boolean",
+          "title": "Here should be retries policy and so on"
+        }
+      }
+    },
+    "eventsResultNotify": {
+      "type": "object",
+      "properties": {
+        "eventId": {
+          "type": "string"
+        },
+        "ackType": {
+          "type": "string"
+        }
+      }
+    },
+    "eventsSubscribeOptions": {
+      "type": "object",
+      "properties": {
+        "autoAck": {
+          "type": "boolean"
+        }
+      },
+      "title": "v2"
+    },
+    "eventsSubscribeRequest": {
+      "type": "object",
+      "properties": {
+        "sub": {
+          "$ref": "#/definitions/eventsSubscription"
+        },
+        "notify": {
+          "$ref": "#/definitions/eventsResultNotify"
+        }
+      }
+    },
+    "eventsSubscription": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string"
+        },
+        "options": {
+          "$ref": "#/definitions/eventsSubscribeOptions"
         }
       }
     },

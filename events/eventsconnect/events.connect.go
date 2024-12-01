@@ -56,15 +56,22 @@ const (
 	EventsServiceListProcedure = "/nocloud.events.EventsService/List"
 	// EventsServiceCancelProcedure is the fully-qualified name of the EventsService's Cancel RPC.
 	EventsServiceCancelProcedure = "/nocloud.events.EventsService/Cancel"
+	// EventsServiceSubscribeProcedure is the fully-qualified name of the EventsService's Subscribe RPC.
+	EventsServiceSubscribeProcedure = "/nocloud.events.EventsService/Subscribe"
+	// EventsServicePublishEventProcedure is the fully-qualified name of the EventsService's
+	// PublishEvent RPC.
+	EventsServicePublishEventProcedure = "/nocloud.events.EventsService/PublishEvent"
 )
 
 // These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
 var (
-	eventsServiceServiceDescriptor       = events.File_events_events_proto.Services().ByName("EventsService")
-	eventsServicePublishMethodDescriptor = eventsServiceServiceDescriptor.Methods().ByName("Publish")
-	eventsServiceConsumeMethodDescriptor = eventsServiceServiceDescriptor.Methods().ByName("Consume")
-	eventsServiceListMethodDescriptor    = eventsServiceServiceDescriptor.Methods().ByName("List")
-	eventsServiceCancelMethodDescriptor  = eventsServiceServiceDescriptor.Methods().ByName("Cancel")
+	eventsServiceServiceDescriptor            = events.File_events_events_proto.Services().ByName("EventsService")
+	eventsServicePublishMethodDescriptor      = eventsServiceServiceDescriptor.Methods().ByName("Publish")
+	eventsServiceConsumeMethodDescriptor      = eventsServiceServiceDescriptor.Methods().ByName("Consume")
+	eventsServiceListMethodDescriptor         = eventsServiceServiceDescriptor.Methods().ByName("List")
+	eventsServiceCancelMethodDescriptor       = eventsServiceServiceDescriptor.Methods().ByName("Cancel")
+	eventsServiceSubscribeMethodDescriptor    = eventsServiceServiceDescriptor.Methods().ByName("Subscribe")
+	eventsServicePublishEventMethodDescriptor = eventsServiceServiceDescriptor.Methods().ByName("PublishEvent")
 )
 
 // EventsServiceClient is a client for the nocloud.events.EventsService service.
@@ -73,6 +80,9 @@ type EventsServiceClient interface {
 	Consume(context.Context, *connect.Request[events.ConsumeRequest]) (*connect.ServerStreamForClient[events.Event], error)
 	List(context.Context, *connect.Request[events.ConsumeRequest]) (*connect.Response[events.Events], error)
 	Cancel(context.Context, *connect.Request[events.CancelRequest]) (*connect.Response[events.Response], error)
+	// v2
+	Subscribe(context.Context) *connect.BidiStreamForClient[events.SubscribeRequest, events.Event]
+	PublishEvent(context.Context, *connect.Request[events.PublishEventRequest]) (*connect.Response[events.Response], error)
 }
 
 // NewEventsServiceClient constructs a client for the nocloud.events.EventsService service. By
@@ -109,15 +119,29 @@ func NewEventsServiceClient(httpClient connect.HTTPClient, baseURL string, opts 
 			connect.WithSchema(eventsServiceCancelMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		subscribe: connect.NewClient[events.SubscribeRequest, events.Event](
+			httpClient,
+			baseURL+EventsServiceSubscribeProcedure,
+			connect.WithSchema(eventsServiceSubscribeMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		publishEvent: connect.NewClient[events.PublishEventRequest, events.Response](
+			httpClient,
+			baseURL+EventsServicePublishEventProcedure,
+			connect.WithSchema(eventsServicePublishEventMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // eventsServiceClient implements EventsServiceClient.
 type eventsServiceClient struct {
-	publish *connect.Client[events.Event, events.Response]
-	consume *connect.Client[events.ConsumeRequest, events.Event]
-	list    *connect.Client[events.ConsumeRequest, events.Events]
-	cancel  *connect.Client[events.CancelRequest, events.Response]
+	publish      *connect.Client[events.Event, events.Response]
+	consume      *connect.Client[events.ConsumeRequest, events.Event]
+	list         *connect.Client[events.ConsumeRequest, events.Events]
+	cancel       *connect.Client[events.CancelRequest, events.Response]
+	subscribe    *connect.Client[events.SubscribeRequest, events.Event]
+	publishEvent *connect.Client[events.PublishEventRequest, events.Response]
 }
 
 // Publish calls nocloud.events.EventsService.Publish.
@@ -140,12 +164,25 @@ func (c *eventsServiceClient) Cancel(ctx context.Context, req *connect.Request[e
 	return c.cancel.CallUnary(ctx, req)
 }
 
+// Subscribe calls nocloud.events.EventsService.Subscribe.
+func (c *eventsServiceClient) Subscribe(ctx context.Context) *connect.BidiStreamForClient[events.SubscribeRequest, events.Event] {
+	return c.subscribe.CallBidiStream(ctx)
+}
+
+// PublishEvent calls nocloud.events.EventsService.PublishEvent.
+func (c *eventsServiceClient) PublishEvent(ctx context.Context, req *connect.Request[events.PublishEventRequest]) (*connect.Response[events.Response], error) {
+	return c.publishEvent.CallUnary(ctx, req)
+}
+
 // EventsServiceHandler is an implementation of the nocloud.events.EventsService service.
 type EventsServiceHandler interface {
 	Publish(context.Context, *connect.Request[events.Event]) (*connect.Response[events.Response], error)
 	Consume(context.Context, *connect.Request[events.ConsumeRequest], *connect.ServerStream[events.Event]) error
 	List(context.Context, *connect.Request[events.ConsumeRequest]) (*connect.Response[events.Events], error)
 	Cancel(context.Context, *connect.Request[events.CancelRequest]) (*connect.Response[events.Response], error)
+	// v2
+	Subscribe(context.Context, *connect.BidiStream[events.SubscribeRequest, events.Event]) error
+	PublishEvent(context.Context, *connect.Request[events.PublishEventRequest]) (*connect.Response[events.Response], error)
 }
 
 // NewEventsServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -178,6 +215,18 @@ func NewEventsServiceHandler(svc EventsServiceHandler, opts ...connect.HandlerOp
 		connect.WithSchema(eventsServiceCancelMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	eventsServiceSubscribeHandler := connect.NewBidiStreamHandler(
+		EventsServiceSubscribeProcedure,
+		svc.Subscribe,
+		connect.WithSchema(eventsServiceSubscribeMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	eventsServicePublishEventHandler := connect.NewUnaryHandler(
+		EventsServicePublishEventProcedure,
+		svc.PublishEvent,
+		connect.WithSchema(eventsServicePublishEventMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/nocloud.events.EventsService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case EventsServicePublishProcedure:
@@ -188,6 +237,10 @@ func NewEventsServiceHandler(svc EventsServiceHandler, opts ...connect.HandlerOp
 			eventsServiceListHandler.ServeHTTP(w, r)
 		case EventsServiceCancelProcedure:
 			eventsServiceCancelHandler.ServeHTTP(w, r)
+		case EventsServiceSubscribeProcedure:
+			eventsServiceSubscribeHandler.ServeHTTP(w, r)
+		case EventsServicePublishEventProcedure:
+			eventsServicePublishEventHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -211,4 +264,12 @@ func (UnimplementedEventsServiceHandler) List(context.Context, *connect.Request[
 
 func (UnimplementedEventsServiceHandler) Cancel(context.Context, *connect.Request[events.CancelRequest]) (*connect.Response[events.Response], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.events.EventsService.Cancel is not implemented"))
+}
+
+func (UnimplementedEventsServiceHandler) Subscribe(context.Context, *connect.BidiStream[events.SubscribeRequest, events.Event]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.events.EventsService.Subscribe is not implemented"))
+}
+
+func (UnimplementedEventsServiceHandler) PublishEvent(context.Context, *connect.Request[events.PublishEventRequest]) (*connect.Response[events.Response], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.events.EventsService.PublishEvent is not implemented"))
 }

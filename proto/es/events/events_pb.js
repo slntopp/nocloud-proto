@@ -21,6 +21,17 @@
 import { proto3, Value } from "@bufbuild/protobuf";
 
 /**
+ * @generated from enum nocloud.events.ResultStatus
+ */
+export const ResultStatus = /*@__PURE__*/ proto3.makeEnum(
+  "nocloud.events.ResultStatus",
+  [
+    {no: 0, name: "ACK"},
+    {no: 1, name: "NACK"},
+  ],
+);
+
+/**
  * @generated from message nocloud.events.Event
  */
 export const Event = /*@__PURE__*/ proto3.makeMessageType(
@@ -75,5 +86,73 @@ export const CancelRequest = /*@__PURE__*/ proto3.makeMessageType(
 export const Response = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.events.Response",
   [],
+);
+
+/**
+ * v2
+ *
+ * @generated from message nocloud.events.SubscribeOptions
+ */
+export const SubscribeOptions = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.events.SubscribeOptions",
+  () => [
+    { no: 1, name: "auto_ack", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.events.Subscription
+ */
+export const Subscription = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.events.Subscription",
+  () => [
+    { no: 1, name: "type", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "options", kind: "message", T: SubscribeOptions, opt: true },
+  ],
+);
+
+/**
+ * @generated from message nocloud.events.ResultNotify
+ */
+export const ResultNotify = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.events.ResultNotify",
+  () => [
+    { no: 1, name: "event_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "ack_type", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.events.SubscribeRequest
+ */
+export const SubscribeRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.events.SubscribeRequest",
+  () => [
+    { no: 1, name: "sub", kind: "message", T: Subscription, opt: true },
+    { no: 2, name: "notify", kind: "message", T: ResultNotify, opt: true },
+  ],
+);
+
+/**
+ * @generated from message nocloud.events.PublishOptions
+ */
+export const PublishOptions = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.events.PublishOptions",
+  () => [
+    { no: 1, name: "ttl", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "no_dlx", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.events.PublishEventRequest
+ */
+export const PublishEventRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.events.PublishEventRequest",
+  () => [
+    { no: 1, name: "event", kind: "message", T: Event },
+    { no: 2, name: "options", kind: "message", T: PublishOptions, opt: true },
+  ],
 );
 

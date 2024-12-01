@@ -18,7 +18,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { CancelRequest, ConsumeRequest, Event, Events, Response } from "./events_pb.js";
+import { CancelRequest, ConsumeRequest, Event, Events, PublishEventRequest, Response, SubscribeRequest } from "./events_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -60,6 +60,26 @@ export const EventsService = {
     cancel: {
       name: "Cancel",
       I: CancelRequest,
+      O: Response,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * v2
+     *
+     * @generated from rpc nocloud.events.EventsService.Subscribe
+     */
+    subscribe: {
+      name: "Subscribe",
+      I: SubscribeRequest,
+      O: Event,
+      kind: MethodKind.BiDiStreaming,
+    },
+    /**
+     * @generated from rpc nocloud.events.EventsService.PublishEvent
+     */
+    publishEvent: {
+      name: "PublishEvent",
+      I: PublishEventRequest,
       O: Response,
       kind: MethodKind.Unary,
     },
