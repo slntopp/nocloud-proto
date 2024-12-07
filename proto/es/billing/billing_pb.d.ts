@@ -1573,6 +1573,11 @@ export declare class UpdateInvoiceRequest extends Message<UpdateInvoiceRequest> 
    */
   isSendEmail: boolean;
 
+  /**
+   * @generated from field: bool ignore_null_fields = 3;
+   */
+  ignoreNullFields: boolean;
+
   constructor(data?: PartialMessage<UpdateInvoiceRequest>);
 
   static readonly runtime: typeof proto3;

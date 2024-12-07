@@ -518,6 +518,7 @@ export const UpdateInvoiceRequest = /*@__PURE__*/ proto3.makeMessageType(
   () => [
     { no: 1, name: "invoice", kind: "message", T: Invoice },
     { no: 2, name: "is_send_email", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 3, name: "ignore_null_fields", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 

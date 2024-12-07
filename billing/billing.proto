@@ -332,6 +332,7 @@ message CreateInvoiceRequest{
 message UpdateInvoiceRequest{
   Invoice invoice = 1;
   bool is_send_email = 2;
+  bool ignore_null_fields = 3;
 }
 
 message UpdateInvoiceStatusRequest{
