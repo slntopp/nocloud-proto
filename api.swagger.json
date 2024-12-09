@@ -4545,6 +4545,68 @@
         ]
       }
     },
+    "/edge/post_state": {
+      "post": {
+        "operationId": "EdgeService_PostState",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/edgeEmpty"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "state.state",
+            "description": "NoCloud Instance State",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "INIT",
+              "UNKNOWN",
+              "STOPPED",
+              "RUNNING",
+              "FAILURE",
+              "DELETED",
+              "SUSPENDED",
+              "OPERATION",
+              "PENDING"
+            ],
+            "default": "INIT"
+          },
+          {
+            "name": "state.meta",
+            "description": "Driver(Provider/Hypervisor) State data\n\nThis is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "state.ts",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "EdgeService"
+        ]
+      }
+    },
     "/health/probe": {
       "post": {
         "operationId": "HealthService_Probe",

@@ -17,6 +17,7 @@ syntax = "proto3";
 package nocloud.edge;
 
 import "states/states.proto";
+import "google/api/annotations.proto";
 
 message TestRequest {}
 message TestResponse {
@@ -27,5 +28,9 @@ message Empty {}
 
 service EdgeService {
   rpc Test(TestRequest) returns (TestResponse);
-  rpc PostState(nocloud.states.ObjectState) returns (Empty);
+  rpc PostState(nocloud.states.ObjectState) returns (Empty){
+    option (google.api.http) = {
+      post : "/edge/post_state"
+    };
+  };
 }
