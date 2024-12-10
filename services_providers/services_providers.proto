@@ -73,6 +73,8 @@ message GetRequest {string uuid = 1;}
 message ListRequest {
   bool anonymously = 1;
   bool show_deleted = 2;
+  repeated string exclude_uuids = 3;
+  map<string, google.protobuf.Value> filters = 4;
 }
 
 message ListResponse {repeated ServicesProvider pool = 1;}

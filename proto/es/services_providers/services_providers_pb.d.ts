@@ -315,6 +315,16 @@ export declare class ListRequest extends Message<ListRequest> {
    */
   showDeleted: boolean;
 
+  /**
+   * @generated from field: repeated string exclude_uuids = 3;
+   */
+  excludeUuids: string[];
+
+  /**
+   * @generated from field: map<string, google.protobuf.Value> filters = 4;
+   */
+  filters: { [key: string]: Value };
+
   constructor(data?: PartialMessage<ListRequest>);
 
   static readonly runtime: typeof proto3;

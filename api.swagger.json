@@ -6451,6 +6451,22 @@
             "in": "query",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "excludeUuids",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "filters",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
           }
         ],
         "tags": [
@@ -6611,6 +6627,22 @@
             "in": "query",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "excludeUuids",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "filters",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
           }
         ],
         "tags": [
@@ -6707,6 +6739,22 @@
             "in": "query",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "excludeUuids",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "filters",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
           }
         ],
         "tags": [
