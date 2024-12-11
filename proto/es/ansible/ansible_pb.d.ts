@@ -447,6 +447,11 @@ export declare class ExecRunRequest extends Message<ExecRunRequest> {
    */
   uuid: string;
 
+  /**
+   * @generated from field: bool wait_finish = 2;
+   */
+  waitFinish: boolean;
+
   constructor(data?: PartialMessage<ExecRunRequest>);
 
   static readonly runtime: typeof proto3;

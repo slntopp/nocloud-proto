@@ -96,7 +96,10 @@ message GetRunRequest { string uuid = 1; }
 
 message ListRunsRequest {}
 
-message ExecRunRequest { string uuid = 1; }
+message ExecRunRequest {
+  string uuid = 1;
+  bool wait_finish = 2;
+}
 message ResyncRunRequest { string uuid = 1; }
 
 message ExecRunResponse {}

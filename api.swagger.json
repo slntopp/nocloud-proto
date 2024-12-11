@@ -7045,7 +7045,12 @@
       }
     },
     "AnsibleServiceExecBody": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "waitFinish": {
+          "type": "boolean"
+        }
+      }
     },
     "BillingServicePayBody": {
       "type": "object"

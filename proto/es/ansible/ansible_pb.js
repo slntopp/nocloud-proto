@@ -147,6 +147,7 @@ export const ExecRunRequest = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.ansible.ExecRunRequest",
   () => [
     { no: 1, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "wait_finish", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
