@@ -18,7 +18,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { Empty, TestRequest, TestResponse } from "./edge_pb.js";
+import { ConfigData, Empty, TestRequest, TestResponse } from "./edge_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 import { ObjectState } from "../states/states_pb.js";
 
@@ -43,6 +43,15 @@ export const EdgeService = {
     postState: {
       name: "PostState",
       I: ObjectState,
+      O: Empty,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.edge.EdgeService.PostConfigData
+     */
+    postConfigData: {
+      name: "PostConfigData",
+      I: ConfigData,
       O: Empty,
       kind: MethodKind.Unary,
     },

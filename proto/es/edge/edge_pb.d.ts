@@ -18,7 +18,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
+import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage, Value } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 
 /**
@@ -86,5 +86,34 @@ export declare class Empty extends Message<Empty> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Empty;
 
   static equals(a: Empty | PlainMessage<Empty> | undefined, b: Empty | PlainMessage<Empty> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.edge.ConfigData
+ */
+export declare class ConfigData extends Message<ConfigData> {
+  /**
+   * @generated from field: string field = 1;
+   */
+  field: string;
+
+  /**
+   * @generated from field: google.protobuf.Value value = 2;
+   */
+  value?: Value;
+
+  constructor(data?: PartialMessage<ConfigData>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.edge.ConfigData";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ConfigData;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ConfigData;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ConfigData;
+
+  static equals(a: ConfigData | PlainMessage<ConfigData> | undefined, b: ConfigData | PlainMessage<ConfigData> | undefined): boolean;
 }
 

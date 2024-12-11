@@ -18,7 +18,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { proto3 } from "@bufbuild/protobuf";
+import { proto3, Value } from "@bufbuild/protobuf";
 
 /**
  * @generated from message nocloud.edge.TestRequest
@@ -45,5 +45,16 @@ export const TestResponse = /*@__PURE__*/ proto3.makeMessageType(
 export const Empty = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.edge.Empty",
   [],
+);
+
+/**
+ * @generated from message nocloud.edge.ConfigData
+ */
+export const ConfigData = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.edge.ConfigData",
+  () => [
+    { no: 1, name: "field", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "value", kind: "message", T: Value },
+  ],
 );
 

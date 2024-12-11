@@ -4545,6 +4545,38 @@
         ]
       }
     },
+    "/edge/post_config_data": {
+      "post": {
+        "operationId": "EdgeService_PostConfigData",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/edgeEmpty"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/edgeConfigData"
+            }
+          }
+        ],
+        "tags": [
+          "EdgeService"
+        ]
+      }
+    },
     "/edge/post_state": {
       "post": {
         "operationId": "EdgeService_PostState",
@@ -9147,6 +9179,15 @@
         "group": {
           "$ref": "#/definitions/instancesInstancesGroup"
         }
+      }
+    },
+    "edgeConfigData": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "type": "string"
+        },
+        "value": {}
       }
     },
     "edgeEmpty": {

@@ -35,8 +35,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	EdgeService_Test_FullMethodName      = "/nocloud.edge.EdgeService/Test"
-	EdgeService_PostState_FullMethodName = "/nocloud.edge.EdgeService/PostState"
+	EdgeService_Test_FullMethodName           = "/nocloud.edge.EdgeService/Test"
+	EdgeService_PostState_FullMethodName      = "/nocloud.edge.EdgeService/PostState"
+	EdgeService_PostConfigData_FullMethodName = "/nocloud.edge.EdgeService/PostConfigData"
 )
 
 // EdgeServiceClient is the client API for EdgeService service.
@@ -45,6 +46,7 @@ const (
 type EdgeServiceClient interface {
 	Test(ctx context.Context, in *TestRequest, opts ...grpc.CallOption) (*TestResponse, error)
 	PostState(ctx context.Context, in *states.ObjectState, opts ...grpc.CallOption) (*Empty, error)
+	PostConfigData(ctx context.Context, in *ConfigData, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type edgeServiceClient struct {
@@ -75,12 +77,23 @@ func (c *edgeServiceClient) PostState(ctx context.Context, in *states.ObjectStat
 	return out, nil
 }
 
+func (c *edgeServiceClient) PostConfigData(ctx context.Context, in *ConfigData, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, EdgeService_PostConfigData_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EdgeServiceServer is the server API for EdgeService service.
 // All implementations must embed UnimplementedEdgeServiceServer
 // for forward compatibility.
 type EdgeServiceServer interface {
 	Test(context.Context, *TestRequest) (*TestResponse, error)
 	PostState(context.Context, *states.ObjectState) (*Empty, error)
+	PostConfigData(context.Context, *ConfigData) (*Empty, error)
 	mustEmbedUnimplementedEdgeServiceServer()
 }
 
@@ -96,6 +109,9 @@ func (UnimplementedEdgeServiceServer) Test(context.Context, *TestRequest) (*Test
 }
 func (UnimplementedEdgeServiceServer) PostState(context.Context, *states.ObjectState) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostState not implemented")
+}
+func (UnimplementedEdgeServiceServer) PostConfigData(context.Context, *ConfigData) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostConfigData not implemented")
 }
 func (UnimplementedEdgeServiceServer) mustEmbedUnimplementedEdgeServiceServer() {}
 func (UnimplementedEdgeServiceServer) testEmbeddedByValue()                     {}
@@ -154,6 +170,24 @@ func _EdgeService_PostState_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EdgeService_PostConfigData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfigData)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EdgeServiceServer).PostConfigData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EdgeService_PostConfigData_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EdgeServiceServer).PostConfigData(ctx, req.(*ConfigData))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EdgeService_ServiceDesc is the grpc.ServiceDesc for EdgeService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -168,6 +202,10 @@ var EdgeService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostState",
 			Handler:    _EdgeService_PostState_Handler,
+		},
+		{
+			MethodName: "PostConfigData",
+			Handler:    _EdgeService_PostConfigData_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

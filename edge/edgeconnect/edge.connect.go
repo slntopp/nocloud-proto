@@ -53,19 +53,24 @@ const (
 	EdgeServiceTestProcedure = "/nocloud.edge.EdgeService/Test"
 	// EdgeServicePostStateProcedure is the fully-qualified name of the EdgeService's PostState RPC.
 	EdgeServicePostStateProcedure = "/nocloud.edge.EdgeService/PostState"
+	// EdgeServicePostConfigDataProcedure is the fully-qualified name of the EdgeService's
+	// PostConfigData RPC.
+	EdgeServicePostConfigDataProcedure = "/nocloud.edge.EdgeService/PostConfigData"
 )
 
 // These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
 var (
-	edgeServiceServiceDescriptor         = edge.File_edge_edge_proto.Services().ByName("EdgeService")
-	edgeServiceTestMethodDescriptor      = edgeServiceServiceDescriptor.Methods().ByName("Test")
-	edgeServicePostStateMethodDescriptor = edgeServiceServiceDescriptor.Methods().ByName("PostState")
+	edgeServiceServiceDescriptor              = edge.File_edge_edge_proto.Services().ByName("EdgeService")
+	edgeServiceTestMethodDescriptor           = edgeServiceServiceDescriptor.Methods().ByName("Test")
+	edgeServicePostStateMethodDescriptor      = edgeServiceServiceDescriptor.Methods().ByName("PostState")
+	edgeServicePostConfigDataMethodDescriptor = edgeServiceServiceDescriptor.Methods().ByName("PostConfigData")
 )
 
 // EdgeServiceClient is a client for the nocloud.edge.EdgeService service.
 type EdgeServiceClient interface {
 	Test(context.Context, *connect.Request[edge.TestRequest]) (*connect.Response[edge.TestResponse], error)
 	PostState(context.Context, *connect.Request[states.ObjectState]) (*connect.Response[edge.Empty], error)
+	PostConfigData(context.Context, *connect.Request[edge.ConfigData]) (*connect.Response[edge.Empty], error)
 }
 
 // NewEdgeServiceClient constructs a client for the nocloud.edge.EdgeService service. By default, it
@@ -90,13 +95,20 @@ func NewEdgeServiceClient(httpClient connect.HTTPClient, baseURL string, opts ..
 			connect.WithSchema(edgeServicePostStateMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		postConfigData: connect.NewClient[edge.ConfigData, edge.Empty](
+			httpClient,
+			baseURL+EdgeServicePostConfigDataProcedure,
+			connect.WithSchema(edgeServicePostConfigDataMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // edgeServiceClient implements EdgeServiceClient.
 type edgeServiceClient struct {
-	test      *connect.Client[edge.TestRequest, edge.TestResponse]
-	postState *connect.Client[states.ObjectState, edge.Empty]
+	test           *connect.Client[edge.TestRequest, edge.TestResponse]
+	postState      *connect.Client[states.ObjectState, edge.Empty]
+	postConfigData *connect.Client[edge.ConfigData, edge.Empty]
 }
 
 // Test calls nocloud.edge.EdgeService.Test.
@@ -109,10 +121,16 @@ func (c *edgeServiceClient) PostState(ctx context.Context, req *connect.Request[
 	return c.postState.CallUnary(ctx, req)
 }
 
+// PostConfigData calls nocloud.edge.EdgeService.PostConfigData.
+func (c *edgeServiceClient) PostConfigData(ctx context.Context, req *connect.Request[edge.ConfigData]) (*connect.Response[edge.Empty], error) {
+	return c.postConfigData.CallUnary(ctx, req)
+}
+
 // EdgeServiceHandler is an implementation of the nocloud.edge.EdgeService service.
 type EdgeServiceHandler interface {
 	Test(context.Context, *connect.Request[edge.TestRequest]) (*connect.Response[edge.TestResponse], error)
 	PostState(context.Context, *connect.Request[states.ObjectState]) (*connect.Response[edge.Empty], error)
+	PostConfigData(context.Context, *connect.Request[edge.ConfigData]) (*connect.Response[edge.Empty], error)
 }
 
 // NewEdgeServiceHandler builds an HTTP handler from the service implementation. It returns the path
@@ -133,12 +151,20 @@ func NewEdgeServiceHandler(svc EdgeServiceHandler, opts ...connect.HandlerOption
 		connect.WithSchema(edgeServicePostStateMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	edgeServicePostConfigDataHandler := connect.NewUnaryHandler(
+		EdgeServicePostConfigDataProcedure,
+		svc.PostConfigData,
+		connect.WithSchema(edgeServicePostConfigDataMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/nocloud.edge.EdgeService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case EdgeServiceTestProcedure:
 			edgeServiceTestHandler.ServeHTTP(w, r)
 		case EdgeServicePostStateProcedure:
 			edgeServicePostStateHandler.ServeHTTP(w, r)
+		case EdgeServicePostConfigDataProcedure:
+			edgeServicePostConfigDataHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -154,4 +180,8 @@ func (UnimplementedEdgeServiceHandler) Test(context.Context, *connect.Request[ed
 
 func (UnimplementedEdgeServiceHandler) PostState(context.Context, *connect.Request[states.ObjectState]) (*connect.Response[edge.Empty], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.edge.EdgeService.PostState is not implemented"))
+}
+
+func (UnimplementedEdgeServiceHandler) PostConfigData(context.Context, *connect.Request[edge.ConfigData]) (*connect.Response[edge.Empty], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.edge.EdgeService.PostConfigData is not implemented"))
 }

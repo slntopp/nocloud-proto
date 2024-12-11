@@ -17,6 +17,7 @@ syntax = "proto3";
 package nocloud.edge;
 
 import "states/states.proto";
+import "google/protobuf/struct.proto";
 import "google/api/annotations.proto";
 
 message TestRequest {}
@@ -26,11 +27,22 @@ message TestResponse {
 }
 message Empty {}
 
+message ConfigData{
+  string field = 1;
+  google.protobuf.Value value = 2;
+}
+
 service EdgeService {
   rpc Test(TestRequest) returns (TestResponse);
   rpc PostState(nocloud.states.ObjectState) returns (Empty){
     option (google.api.http) = {
       post : "/edge/post_state"
+      body: "*"
+    };
+  };
+  rpc PostConfigData(ConfigData) returns (Empty){
+    option (google.api.http) = {
+      post : "/edge/post_config_data"
       body: "*"
     };
   };
