@@ -6,17 +6,19 @@ import "google/protobuf/struct.proto";
 
 // User defined status
 enum PromocodeStatus {
-  ACTIVE = 0;
-  SUSPENDED = 1;    // Temporary inactive for applying (still active for users which entered this promocode)
-  DELETED = 2;
+  STATUS_UNKNOWN = 0;
+  ACTIVE = 1;
+  SUSPENDED = 2;    // Temporary inactive for applying (still active for users which entered this promocode)
+  DELETED = 3;
 }
 
 // Read-only state for visualization
-enum PromocodeState {
-  USABLE = 0;       // OK.
-  EXPIRED = 1;      // Due date passed
-  ALL_TAKEN = 2;    // All available promocodes are taken
-  USED = 3;         // Already used by this user maximum times
+enum PromocodeCondition {
+  CONDITION_UNKNOWN = 0;
+  USABLE = 1;       // OK.
+  EXPIRED = 2;      // Due date passed
+  ALL_TAKEN = 3;    // All available promocodes are taken
+  USED = 4;         // Already used by this user maximum times
 }
 
 message Promocode {
@@ -25,7 +27,7 @@ message Promocode {
   string description = 3;
   string code = 4;         // Unique code, which user must enter as promocode
   PromocodeStatus status = 5;
-  PromocodeState state = 6;
+  PromocodeCondition condition = 6;
   int64 due_date = 7;      // User can't apply promocode after due_date. 0 - unlimited
   int64 limit = 8;         // How many times this promocode can be used globally. 0 - unlimited
   int64 uses_per_user = 9; // How many times this promocode can be used per one user. 0 - unlimited

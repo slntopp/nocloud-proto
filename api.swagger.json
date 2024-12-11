@@ -3470,25 +3470,27 @@
             "required": false,
             "type": "string",
             "enum": [
+              "STATUS_UNKNOWN",
               "ACTIVE",
               "SUSPENDED",
               "DELETED"
             ],
-            "default": "ACTIVE"
+            "default": "STATUS_UNKNOWN"
           },
           {
-            "name": "state",
+            "name": "condition",
             "description": " - USABLE: OK.\n - EXPIRED: Due date passed\n - ALL_TAKEN: All available promocodes are taken\n - USED: Already used by this user maximum times",
             "in": "query",
             "required": false,
             "type": "string",
             "enum": [
+              "CONDITION_UNKNOWN",
               "USABLE",
               "EXPIRED",
               "ALL_TAKEN",
               "USED"
             ],
-            "default": "USABLE"
+            "default": "CONDITION_UNKNOWN"
           },
           {
             "name": "dueDate",
@@ -3596,25 +3598,27 @@
             "required": false,
             "type": "string",
             "enum": [
+              "STATUS_UNKNOWN",
               "ACTIVE",
               "SUSPENDED",
               "DELETED"
             ],
-            "default": "ACTIVE"
+            "default": "STATUS_UNKNOWN"
           },
           {
-            "name": "state",
+            "name": "condition",
             "description": " - USABLE: OK.\n - EXPIRED: Due date passed\n - ALL_TAKEN: All available promocodes are taken\n - USED: Already used by this user maximum times",
             "in": "query",
             "required": false,
             "type": "string",
             "enum": [
+              "CONDITION_UNKNOWN",
               "USABLE",
               "EXPIRED",
               "ALL_TAKEN",
               "USED"
             ],
-            "default": "USABLE"
+            "default": "CONDITION_UNKNOWN"
           },
           {
             "name": "dueDate",
@@ -8736,8 +8740,8 @@
         "status": {
           "$ref": "#/definitions/promocodesPromocodeStatus"
         },
-        "state": {
-          "$ref": "#/definitions/promocodesPromocodeState"
+        "condition": {
+          "$ref": "#/definitions/promocodesPromocodeCondition"
         },
         "dueDate": {
           "type": "string",
@@ -10480,8 +10484,8 @@
         "status": {
           "$ref": "#/definitions/promocodesPromocodeStatus"
         },
-        "state": {
-          "$ref": "#/definitions/promocodesPromocodeState"
+        "condition": {
+          "$ref": "#/definitions/promocodesPromocodeCondition"
         },
         "dueDate": {
           "type": "string",
@@ -10532,26 +10536,28 @@
         }
       }
     },
-    "promocodesPromocodeState": {
+    "promocodesPromocodeCondition": {
       "type": "string",
       "enum": [
+        "CONDITION_UNKNOWN",
         "USABLE",
         "EXPIRED",
         "ALL_TAKEN",
         "USED"
       ],
-      "default": "USABLE",
+      "default": "CONDITION_UNKNOWN",
       "description": "- USABLE: OK.\n - EXPIRED: Due date passed\n - ALL_TAKEN: All available promocodes are taken\n - USED: Already used by this user maximum times",
       "title": "Read-only state for visualization"
     },
     "promocodesPromocodeStatus": {
       "type": "string",
       "enum": [
+        "STATUS_UNKNOWN",
         "ACTIVE",
         "SUSPENDED",
         "DELETED"
       ],
-      "default": "ACTIVE",
+      "default": "STATUS_UNKNOWN",
       "description": "- SUSPENDED: Temporary inactive for applying (still active for users which entered this promocode)",
       "title": "User defined status"
     },

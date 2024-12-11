@@ -13,24 +13,26 @@ import { proto3, Value } from "@bufbuild/protobuf";
 export const PromocodeStatus = /*@__PURE__*/ proto3.makeEnum(
   "nocloud.billing.promocodes.PromocodeStatus",
   [
-    {no: 0, name: "ACTIVE"},
-    {no: 1, name: "SUSPENDED"},
-    {no: 2, name: "DELETED"},
+    {no: 0, name: "STATUS_UNKNOWN"},
+    {no: 1, name: "ACTIVE"},
+    {no: 2, name: "SUSPENDED"},
+    {no: 3, name: "DELETED"},
   ],
 );
 
 /**
  * Read-only state for visualization
  *
- * @generated from enum nocloud.billing.promocodes.PromocodeState
+ * @generated from enum nocloud.billing.promocodes.PromocodeCondition
  */
-export const PromocodeState = /*@__PURE__*/ proto3.makeEnum(
-  "nocloud.billing.promocodes.PromocodeState",
+export const PromocodeCondition = /*@__PURE__*/ proto3.makeEnum(
+  "nocloud.billing.promocodes.PromocodeCondition",
   [
-    {no: 0, name: "USABLE"},
-    {no: 1, name: "EXPIRED"},
-    {no: 2, name: "ALL_TAKEN"},
-    {no: 3, name: "USED"},
+    {no: 0, name: "CONDITION_UNKNOWN"},
+    {no: 1, name: "USABLE"},
+    {no: 2, name: "EXPIRED"},
+    {no: 3, name: "ALL_TAKEN"},
+    {no: 4, name: "USED"},
   ],
 );
 
@@ -45,7 +47,7 @@ export const Promocode = /*@__PURE__*/ proto3.makeMessageType(
     { no: 3, name: "description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "code", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "status", kind: "enum", T: proto3.getEnumType(PromocodeStatus) },
-    { no: 6, name: "state", kind: "enum", T: proto3.getEnumType(PromocodeState) },
+    { no: 6, name: "condition", kind: "enum", T: proto3.getEnumType(PromocodeCondition) },
     { no: 7, name: "due_date", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 8, name: "limit", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 9, name: "uses_per_user", kind: "scalar", T: 3 /* ScalarType.INT64 */ },

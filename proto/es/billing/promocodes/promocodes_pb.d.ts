@@ -13,56 +13,66 @@ import { Message, proto3 } from "@bufbuild/protobuf";
  */
 export declare enum PromocodeStatus {
   /**
-   * @generated from enum value: ACTIVE = 0;
+   * @generated from enum value: STATUS_UNKNOWN = 0;
    */
-  ACTIVE = 0,
+  STATUS_UNKNOWN = 0,
+
+  /**
+   * @generated from enum value: ACTIVE = 1;
+   */
+  ACTIVE = 1,
 
   /**
    * Temporary inactive for applying (still active for users which entered this promocode)
    *
-   * @generated from enum value: SUSPENDED = 1;
+   * @generated from enum value: SUSPENDED = 2;
    */
-  SUSPENDED = 1,
+  SUSPENDED = 2,
 
   /**
-   * @generated from enum value: DELETED = 2;
+   * @generated from enum value: DELETED = 3;
    */
-  DELETED = 2,
+  DELETED = 3,
 }
 
 /**
  * Read-only state for visualization
  *
- * @generated from enum nocloud.billing.promocodes.PromocodeState
+ * @generated from enum nocloud.billing.promocodes.PromocodeCondition
  */
-export declare enum PromocodeState {
+export declare enum PromocodeCondition {
+  /**
+   * @generated from enum value: CONDITION_UNKNOWN = 0;
+   */
+  CONDITION_UNKNOWN = 0,
+
   /**
    * OK.
    *
-   * @generated from enum value: USABLE = 0;
+   * @generated from enum value: USABLE = 1;
    */
-  USABLE = 0,
+  USABLE = 1,
 
   /**
    * Due date passed
    *
-   * @generated from enum value: EXPIRED = 1;
+   * @generated from enum value: EXPIRED = 2;
    */
-  EXPIRED = 1,
+  EXPIRED = 2,
 
   /**
    * All available promocodes are taken
    *
-   * @generated from enum value: ALL_TAKEN = 2;
+   * @generated from enum value: ALL_TAKEN = 3;
    */
-  ALL_TAKEN = 2,
+  ALL_TAKEN = 3,
 
   /**
    * Already used by this user maximum times
    *
-   * @generated from enum value: USED = 3;
+   * @generated from enum value: USED = 4;
    */
-  USED = 3,
+  USED = 4,
 }
 
 /**
@@ -97,9 +107,9 @@ export declare class Promocode extends Message<Promocode> {
   status: PromocodeStatus;
 
   /**
-   * @generated from field: nocloud.billing.promocodes.PromocodeState state = 6;
+   * @generated from field: nocloud.billing.promocodes.PromocodeCondition condition = 6;
    */
-  state: PromocodeState;
+  condition: PromocodeCondition;
 
   /**
    * User can't apply promocode after due_date. 0 - unlimited
