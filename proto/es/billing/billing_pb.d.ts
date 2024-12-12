@@ -23,6 +23,7 @@ import { Message, proto3 } from "@bufbuild/protobuf";
 import type { Software } from "../ansible/ansible_pb.js";
 import type { NoCloudStatus } from "../statuses/statuses_pb.js";
 import type { NoCloudState } from "../states/states_pb.js";
+import type { Addon } from "./addons/addons_pb.js";
 
 /**
  * @generated from enum nocloud.billing.PlanKind
@@ -2959,5 +2960,70 @@ export declare class ConversionResponse extends Message<ConversionResponse> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ConversionResponse;
 
   static equals(a: ConversionResponse | PlainMessage<ConversionResponse> | undefined, b: ConversionResponse | PlainMessage<ConversionResponse> | undefined): boolean;
+}
+
+/**
+ * Promocodes
+ *
+ * @generated from message nocloud.billing.ApplySaleRequest
+ */
+export declare class ApplySaleRequest extends Message<ApplySaleRequest> {
+  /**
+   * @generated from field: repeated string promocodes = 1;
+   */
+  promocodes: string[];
+
+  /**
+   * @generated from field: repeated string billing_plans = 2;
+   */
+  billingPlans: string[];
+
+  /**
+   * @generated from field: repeated string addons = 3;
+   */
+  addons: string[];
+
+  constructor(data?: PartialMessage<ApplySaleRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.ApplySaleRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ApplySaleRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ApplySaleRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ApplySaleRequest;
+
+  static equals(a: ApplySaleRequest | PlainMessage<ApplySaleRequest> | undefined, b: ApplySaleRequest | PlainMessage<ApplySaleRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.ApplySaleResponse
+ */
+export declare class ApplySaleResponse extends Message<ApplySaleResponse> {
+  /**
+   * @generated from field: repeated nocloud.billing.Plan billing_plans = 1;
+   */
+  billingPlans: Plan[];
+
+  /**
+   * @generated from field: repeated nocloud.billing.addons.Addon addons = 2;
+   */
+  addons: Addon[];
+
+  constructor(data?: PartialMessage<ApplySaleResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.ApplySaleResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ApplySaleResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ApplySaleResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ApplySaleResponse;
+
+  static equals(a: ApplySaleResponse | PlainMessage<ApplySaleResponse> | undefined, b: ApplySaleResponse | PlainMessage<ApplySaleResponse> | undefined): boolean;
 }
 

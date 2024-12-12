@@ -723,6 +723,17 @@ message ConversionRequest {
 
 message ConversionResponse {double amount = 1;}
 
+// Promocodes
+message ApplySaleRequest{
+  repeated string promocodes = 1;
+  repeated string billing_plans = 2;
+  repeated string addons = 3;
+}
+message ApplySaleResponse{
+  repeated Plan billing_plans = 1;
+  repeated addons.Addon addons = 2;
+}
+
 service CurrencyService {
   rpc CreateCurrency (CreateCurrencyRequest)
       returns (CreateCurrencyResponse) {
@@ -919,6 +930,12 @@ service PromocodesService {
   rpc Detach (promocodes.DetachPromocodeRequest) returns (promocodes.DetachPromocodeResponse) {
     option (google.api.http) = {
       post: "/billing/promocodes/detach"
+      body: "*"
+    };
+  };
+  rpc ApplySale (ApplySaleRequest) returns (ApplySaleResponse) {
+    option (google.api.http) = {
+      post: "/billing/promocodes/apply_sale"
       body: "*"
     };
   };

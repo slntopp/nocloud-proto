@@ -3358,6 +3358,38 @@
         ]
       }
     },
+    "/billing/promocodes/apply_sale": {
+      "post": {
+        "operationId": "PromocodesService_ApplySale",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingApplySaleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingApplySaleRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PromocodesService"
+        ]
+      }
+    },
     "/billing/promocodes/detach": {
       "post": {
         "operationId": "PromocodesService_Detach",
@@ -7966,6 +7998,49 @@
         },
         "kind": {
           "$ref": "#/definitions/billingaddonsKind"
+        }
+      }
+    },
+    "billingApplySaleRequest": {
+      "type": "object",
+      "properties": {
+        "promocodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "billingPlans": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "addons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "Promocodes"
+    },
+    "billingApplySaleResponse": {
+      "type": "object",
+      "properties": {
+        "billingPlans": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/billingPlan"
+          }
+        },
+        "addons": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/addonsAddon"
+          }
         }
       }
     },

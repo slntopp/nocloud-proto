@@ -22,6 +22,7 @@ import { proto3, Value } from "@bufbuild/protobuf";
 import { Software } from "../ansible/ansible_pb.js";
 import { NoCloudStatus } from "../statuses/statuses_pb.js";
 import { NoCloudState } from "../states/states_pb.js";
+import { Addon } from "./addons/addons_pb.js";
 
 /**
  * @generated from enum nocloud.billing.PlanKind
@@ -1027,6 +1028,31 @@ export const ConversionResponse = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.billing.ConversionResponse",
   () => [
     { no: 1, name: "amount", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+  ],
+);
+
+/**
+ * Promocodes
+ *
+ * @generated from message nocloud.billing.ApplySaleRequest
+ */
+export const ApplySaleRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.ApplySaleRequest",
+  () => [
+    { no: 1, name: "promocodes", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 2, name: "billing_plans", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 3, name: "addons", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.ApplySaleResponse
+ */
+export const ApplySaleResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.ApplySaleResponse",
+  () => [
+    { no: 1, name: "billing_plans", kind: "message", T: Plan, repeated: true },
+    { no: 2, name: "addons", kind: "message", T: Addon, repeated: true },
   ],
 );
 
