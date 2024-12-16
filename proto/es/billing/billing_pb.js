@@ -1040,7 +1040,7 @@ export const ApplySaleRequest = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.billing.ApplySaleRequest",
   () => [
     { no: 1, name: "promocodes", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
-    { no: 2, name: "billing_plans", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 2, name: "billing_plan", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "addons", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
   ],
 );

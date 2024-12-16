@@ -8029,11 +8029,8 @@
             "type": "string"
           }
         },
-        "billingPlans": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "billingPlan": {
+          "type": "string"
         },
         "addons": {
           "type": "array",

@@ -2974,9 +2974,9 @@ export declare class ApplySaleRequest extends Message<ApplySaleRequest> {
   promocodes: string[];
 
   /**
-   * @generated from field: repeated string billing_plans = 2;
+   * @generated from field: string billing_plan = 2;
    */
-  billingPlans: string[];
+  billingPlan: string;
 
   /**
    * @generated from field: repeated string addons = 3;

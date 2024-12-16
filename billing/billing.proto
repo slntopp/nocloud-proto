@@ -726,7 +726,7 @@ message ConversionResponse {double amount = 1;}
 // Promocodes
 message ApplySaleRequest{
   repeated string promocodes = 1;
-  repeated string billing_plans = 2;
+  string billing_plan = 2;
   repeated string addons = 3;
 }
 message ApplySaleResponse{
