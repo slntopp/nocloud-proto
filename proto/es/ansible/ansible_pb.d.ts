@@ -501,9 +501,9 @@ export declare class ExecRunResponse extends Message<ExecRunResponse> {
   status: string;
 
   /**
-   * @generated from field: nocloud.ansible.ExecRunResponse.Error error = 2;
+   * @generated from field: repeated nocloud.ansible.ExecRunResponse.Error error = 2;
    */
-  error?: ExecRunResponse_Error;
+  error: ExecRunResponse_Error[];
 
   constructor(data?: PartialMessage<ExecRunResponse>);
 

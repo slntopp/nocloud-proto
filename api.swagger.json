@@ -7745,7 +7745,11 @@
           "type": "string"
         },
         "error": {
-          "$ref": "#/definitions/ExecRunResponseError"
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ExecRunResponseError"
+          }
         }
       }
     },

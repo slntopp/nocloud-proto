@@ -168,7 +168,7 @@ export const ExecRunResponse = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.ansible.ExecRunResponse",
   () => [
     { no: 1, name: "status", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "error", kind: "message", T: ExecRunResponse_Error },
+    { no: 2, name: "error", kind: "message", T: ExecRunResponse_Error, repeated: true },
   ],
 );
 
