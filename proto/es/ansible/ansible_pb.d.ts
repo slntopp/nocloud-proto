@@ -495,6 +495,16 @@ export declare class ResyncRunRequest extends Message<ResyncRunRequest> {
  * @generated from message nocloud.ansible.ExecRunResponse
  */
 export declare class ExecRunResponse extends Message<ExecRunResponse> {
+  /**
+   * @generated from field: string status = 1;
+   */
+  status: string;
+
+  /**
+   * @generated from field: nocloud.ansible.ExecRunResponse.Error error = 2;
+   */
+  error?: ExecRunResponse_Error;
+
   constructor(data?: PartialMessage<ExecRunResponse>);
 
   static readonly runtime: typeof proto3;
@@ -508,6 +518,35 @@ export declare class ExecRunResponse extends Message<ExecRunResponse> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ExecRunResponse;
 
   static equals(a: ExecRunResponse | PlainMessage<ExecRunResponse> | undefined, b: ExecRunResponse | PlainMessage<ExecRunResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.ansible.ExecRunResponse.Error
+ */
+export declare class ExecRunResponse_Error extends Message<ExecRunResponse_Error> {
+  /**
+   * @generated from field: string host = 1;
+   */
+  host: string;
+
+  /**
+   * @generated from field: string error = 2;
+   */
+  error: string;
+
+  constructor(data?: PartialMessage<ExecRunResponse_Error>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.ansible.ExecRunResponse.Error";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ExecRunResponse_Error;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ExecRunResponse_Error;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ExecRunResponse_Error;
+
+  static equals(a: ExecRunResponse_Error | PlainMessage<ExecRunResponse_Error> | undefined, b: ExecRunResponse_Error | PlainMessage<ExecRunResponse_Error> | undefined): boolean;
 }
 
 /**

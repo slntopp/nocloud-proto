@@ -102,7 +102,14 @@ message ExecRunRequest {
 }
 message ResyncRunRequest { string uuid = 1; }
 
-message ExecRunResponse {}
+message ExecRunResponse {
+  message Error{
+    string host = 1;
+    string error = 2;
+  }
+  string status = 1;
+  Error error = 2;
+}
 
 message WatchRunRequest { string uuid = 1; }
 

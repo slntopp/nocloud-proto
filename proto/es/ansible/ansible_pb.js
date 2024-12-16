@@ -166,7 +166,22 @@ export const ResyncRunRequest = /*@__PURE__*/ proto3.makeMessageType(
  */
 export const ExecRunResponse = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.ansible.ExecRunResponse",
-  [],
+  () => [
+    { no: 1, name: "status", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "error", kind: "message", T: ExecRunResponse_Error },
+  ],
+);
+
+/**
+ * @generated from message nocloud.ansible.ExecRunResponse.Error
+ */
+export const ExecRunResponse_Error = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.ansible.ExecRunResponse.Error",
+  () => [
+    { no: 1, name: "host", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "error", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+  {localName: "ExecRunResponse_Error"},
 );
 
 /**

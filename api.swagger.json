@@ -7267,6 +7267,17 @@
         }
       }
     },
+    "ExecRunResponseError": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
     "InstancesServiceTransferIGBody": {
       "type": "object",
       "properties": {
@@ -7728,7 +7739,15 @@
       "type": "object"
     },
     "ansibleExecRunResponse": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/ExecRunResponseError"
+        }
+      }
     },
     "ansibleGetPlaybookResponse": {
       "type": "object",
