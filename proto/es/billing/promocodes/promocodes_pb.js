@@ -174,6 +174,7 @@ export const GetPromocodeByCodeRequest = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.billing.promocodes.GetPromocodeByCodeRequest",
   () => [
     { no: 1, name: "code", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "billing_plan", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
   ],
 );
 

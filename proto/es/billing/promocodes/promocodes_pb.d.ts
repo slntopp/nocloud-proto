@@ -489,6 +489,11 @@ export declare class GetPromocodeByCodeRequest extends Message<GetPromocodeByCod
    */
   code: string;
 
+  /**
+   * @generated from field: optional string billing_plan = 2;
+   */
+  billingPlan?: string;
+
   constructor(data?: PartialMessage<GetPromocodeByCodeRequest>);
 
   static readonly runtime: typeof proto3;

@@ -97,6 +97,7 @@ message CountPromocodesRequest {
 }
 message GetPromocodeByCodeRequest {
   string code = 1;
+  optional string billing_plan = 2;
 }
 message ApplyPromocodeRequest{
   string code = 1;

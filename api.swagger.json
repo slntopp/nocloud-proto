@@ -3445,6 +3445,12 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "billingPlan",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
