@@ -323,6 +323,11 @@ export declare class SpInvokeRequest extends Message<SpInvokeRequest> {
    */
   params: { [key: string]: Value };
 
+  /**
+   * @generated from field: bool admin_access = 4;
+   */
+  adminAccess: boolean;
+
   constructor(data?: PartialMessage<SpInvokeRequest>);
 
   static readonly runtime: typeof proto3;
