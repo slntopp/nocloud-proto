@@ -11193,6 +11193,9 @@
         "params": {
           "type": "object",
           "additionalProperties": {}
+        },
+        "adminAccess": {
+          "type": "boolean"
         }
       }
     },

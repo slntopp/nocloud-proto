@@ -556,6 +556,11 @@ export declare class InvokeRequest extends Message<InvokeRequest> {
    */
   params: { [key: string]: Value };
 
+  /**
+   * @generated from field: bool admin_access = 4;
+   */
+  adminAccess: boolean;
+
   constructor(data?: PartialMessage<InvokeRequest>);
 
   static readonly runtime: typeof proto3;
