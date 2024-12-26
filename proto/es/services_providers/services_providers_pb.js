@@ -307,6 +307,7 @@ export const Showcase = /*@__PURE__*/ proto3.makeMessageType(
     { no: 7, name: "public", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 8, name: "locations", kind: "message", T: LocationConf, repeated: true },
     { no: 9, name: "sorter", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
+    { no: 10, name: "meta", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
   ],
 );
 

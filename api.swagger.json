@@ -11297,6 +11297,10 @@
         "sorter": {
           "type": "integer",
           "format": "int32"
+        },
+        "meta": {
+          "type": "object",
+          "additionalProperties": {}
         }
       }
     },
@@ -11362,6 +11366,10 @@
         "sorter": {
           "type": "integer",
           "format": "int32"
+        },
+        "meta": {
+          "type": "object",
+          "additionalProperties": {}
         }
       }
     },

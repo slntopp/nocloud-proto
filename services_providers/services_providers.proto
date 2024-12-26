@@ -237,6 +237,7 @@ message Showcase {
   bool public = 7;
   repeated LocationConf locations = 8;
   optional int32 sorter = 9;
+  map<string, google.protobuf.Value> meta = 10;
 }
 
 message Showcases {

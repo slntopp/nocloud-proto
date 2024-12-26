@@ -817,6 +817,11 @@ export declare class Showcase extends Message<Showcase> {
    */
   sorter?: number;
 
+  /**
+   * @generated from field: map<string, google.protobuf.Value> meta = 10;
+   */
+  meta: { [key: string]: Value };
+
   constructor(data?: PartialMessage<Showcase>);
 
   static readonly runtime: typeof proto3;
