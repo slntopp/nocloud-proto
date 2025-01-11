@@ -182,14 +182,23 @@ message ListInstancesResponse {
 }
 
 message CreateRequest{
-    string ig = 1;
+    string ig = 1;                 // Ignored when auto_assign is true
     Instance instance = 2;
-    optional string promocode = 3; // uuid of promocode
+    optional string promocode = 3; // Uuid of promocode
+    bool auto_assign = 4;          // If true, then auto creates service, instance group, links instance group with sp (if not already done). ig field is ignored in this case
+    string sp = 5;                 // Instances group service provider. Used only when auto_assign is true. Required field if auto_assign is true
 }
 
 message CreateResponse{
     bool result = 1;
     string id = 2;
+}
+
+message StartRequest{
+    string id = 1;
+}
+message StartResponse{
+    bool result = 1;
 }
 
 message UpdateRequest{
@@ -263,6 +272,13 @@ service InstancesService {
         returns (nocloud.instances.CreateResponse) {
         option (google.api.http) = {
             post: "/instances/create"
+            body: "*"
+        };
+    };
+    rpc Start (nocloud.instances.StartRequest)
+        returns (nocloud.instances.StartResponse) {
+        option (google.api.http) = {
+            post: "/instances/{id}/start"
             body: "*"
         };
     };

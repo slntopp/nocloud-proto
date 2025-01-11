@@ -304,6 +304,8 @@ export const CreateRequest = /*@__PURE__*/ proto3.makeMessageType(
     { no: 1, name: "ig", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "instance", kind: "message", T: Instance },
     { no: 3, name: "promocode", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 4, name: "auto_assign", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 5, name: "sp", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -315,6 +317,26 @@ export const CreateResponse = /*@__PURE__*/ proto3.makeMessageType(
   () => [
     { no: 1, name: "result", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 2, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.instances.StartRequest
+ */
+export const StartRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.instances.StartRequest",
+  () => [
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.instances.StartResponse
+ */
+export const StartResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.instances.StartResponse",
+  () => [
+    { no: 1, name: "result", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 

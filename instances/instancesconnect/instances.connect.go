@@ -72,6 +72,8 @@ const (
 	InstancesServiceGetProcedure = "/nocloud.instances.InstancesService/Get"
 	// InstancesServiceCreateProcedure is the fully-qualified name of the InstancesService's Create RPC.
 	InstancesServiceCreateProcedure = "/nocloud.instances.InstancesService/Create"
+	// InstancesServiceStartProcedure is the fully-qualified name of the InstancesService's Start RPC.
+	InstancesServiceStartProcedure = "/nocloud.instances.InstancesService/Start"
 	// InstancesServiceUpdateProcedure is the fully-qualified name of the InstancesService's Update RPC.
 	InstancesServiceUpdateProcedure = "/nocloud.instances.InstancesService/Update"
 	// InstancesServiceGetUniqueProcedure is the fully-qualified name of the InstancesService's
@@ -98,6 +100,7 @@ var (
 	instancesServiceListMethodDescriptor             = instancesServiceServiceDescriptor.Methods().ByName("List")
 	instancesServiceGetMethodDescriptor              = instancesServiceServiceDescriptor.Methods().ByName("Get")
 	instancesServiceCreateMethodDescriptor           = instancesServiceServiceDescriptor.Methods().ByName("Create")
+	instancesServiceStartMethodDescriptor            = instancesServiceServiceDescriptor.Methods().ByName("Start")
 	instancesServiceUpdateMethodDescriptor           = instancesServiceServiceDescriptor.Methods().ByName("Update")
 	instancesServiceGetUniqueMethodDescriptor        = instancesServiceServiceDescriptor.Methods().ByName("GetUnique")
 	instancesServiceTransferIGMethodDescriptor       = instancesServiceServiceDescriptor.Methods().ByName("TransferIG")
@@ -116,6 +119,7 @@ type InstancesServiceClient interface {
 	List(context.Context, *connect.Request[instances.ListInstancesRequest]) (*connect.Response[instances.ListInstancesResponse], error)
 	Get(context.Context, *connect.Request[instances.Instance]) (*connect.Response[instances.ResponseInstance], error)
 	Create(context.Context, *connect.Request[instances.CreateRequest]) (*connect.Response[instances.CreateResponse], error)
+	Start(context.Context, *connect.Request[instances.StartRequest]) (*connect.Response[instances.StartResponse], error)
 	Update(context.Context, *connect.Request[instances.UpdateRequest]) (*connect.Response[instances.UpdateResponse], error)
 	GetUnique(context.Context, *connect.Request[instances.GetUniqueRequest]) (*connect.Response[instances.GetUniqueResponse], error)
 	TransferIG(context.Context, *connect.Request[instances.TransferIGRequest]) (*connect.Response[instances.TransferIGResponse], error)
@@ -192,6 +196,12 @@ func NewInstancesServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(instancesServiceCreateMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		start: connect.NewClient[instances.StartRequest, instances.StartResponse](
+			httpClient,
+			baseURL+InstancesServiceStartProcedure,
+			connect.WithSchema(instancesServiceStartMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 		update: connect.NewClient[instances.UpdateRequest, instances.UpdateResponse](
 			httpClient,
 			baseURL+InstancesServiceUpdateProcedure,
@@ -231,6 +241,7 @@ type instancesServiceClient struct {
 	list             *connect.Client[instances.ListInstancesRequest, instances.ListInstancesResponse]
 	get              *connect.Client[instances.Instance, instances.ResponseInstance]
 	create           *connect.Client[instances.CreateRequest, instances.CreateResponse]
+	start            *connect.Client[instances.StartRequest, instances.StartResponse]
 	update           *connect.Client[instances.UpdateRequest, instances.UpdateResponse]
 	getUnique        *connect.Client[instances.GetUniqueRequest, instances.GetUniqueResponse]
 	transferIG       *connect.Client[instances.TransferIGRequest, instances.TransferIGResponse]
@@ -287,6 +298,11 @@ func (c *instancesServiceClient) Create(ctx context.Context, req *connect.Reques
 	return c.create.CallUnary(ctx, req)
 }
 
+// Start calls nocloud.instances.InstancesService.Start.
+func (c *instancesServiceClient) Start(ctx context.Context, req *connect.Request[instances.StartRequest]) (*connect.Response[instances.StartResponse], error) {
+	return c.start.CallUnary(ctx, req)
+}
+
 // Update calls nocloud.instances.InstancesService.Update.
 func (c *instancesServiceClient) Update(ctx context.Context, req *connect.Request[instances.UpdateRequest]) (*connect.Response[instances.UpdateResponse], error) {
 	return c.update.CallUnary(ctx, req)
@@ -319,6 +335,7 @@ type InstancesServiceHandler interface {
 	List(context.Context, *connect.Request[instances.ListInstancesRequest]) (*connect.Response[instances.ListInstancesResponse], error)
 	Get(context.Context, *connect.Request[instances.Instance]) (*connect.Response[instances.ResponseInstance], error)
 	Create(context.Context, *connect.Request[instances.CreateRequest]) (*connect.Response[instances.CreateResponse], error)
+	Start(context.Context, *connect.Request[instances.StartRequest]) (*connect.Response[instances.StartResponse], error)
 	Update(context.Context, *connect.Request[instances.UpdateRequest]) (*connect.Response[instances.UpdateResponse], error)
 	GetUnique(context.Context, *connect.Request[instances.GetUniqueRequest]) (*connect.Response[instances.GetUniqueResponse], error)
 	TransferIG(context.Context, *connect.Request[instances.TransferIGRequest]) (*connect.Response[instances.TransferIGResponse], error)
@@ -391,6 +408,12 @@ func NewInstancesServiceHandler(svc InstancesServiceHandler, opts ...connect.Han
 		connect.WithSchema(instancesServiceCreateMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	instancesServiceStartHandler := connect.NewUnaryHandler(
+		InstancesServiceStartProcedure,
+		svc.Start,
+		connect.WithSchema(instancesServiceStartMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	instancesServiceUpdateHandler := connect.NewUnaryHandler(
 		InstancesServiceUpdateProcedure,
 		svc.Update,
@@ -437,6 +460,8 @@ func NewInstancesServiceHandler(svc InstancesServiceHandler, opts ...connect.Han
 			instancesServiceGetHandler.ServeHTTP(w, r)
 		case InstancesServiceCreateProcedure:
 			instancesServiceCreateHandler.ServeHTTP(w, r)
+		case InstancesServiceStartProcedure:
+			instancesServiceStartHandler.ServeHTTP(w, r)
 		case InstancesServiceUpdateProcedure:
 			instancesServiceUpdateHandler.ServeHTTP(w, r)
 		case InstancesServiceGetUniqueProcedure:
@@ -492,6 +517,10 @@ func (UnimplementedInstancesServiceHandler) Get(context.Context, *connect.Reques
 
 func (UnimplementedInstancesServiceHandler) Create(context.Context, *connect.Request[instances.CreateRequest]) (*connect.Response[instances.CreateResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.instances.InstancesService.Create is not implemented"))
+}
+
+func (UnimplementedInstancesServiceHandler) Start(context.Context, *connect.Request[instances.StartRequest]) (*connect.Response[instances.StartResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.instances.InstancesService.Start is not implemented"))
 }
 
 func (UnimplementedInstancesServiceHandler) Update(context.Context, *connect.Request[instances.UpdateRequest]) (*connect.Response[instances.UpdateResponse], error) {

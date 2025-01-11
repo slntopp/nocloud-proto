@@ -843,6 +843,8 @@ export declare class ListInstancesResponse extends Message<ListInstancesResponse
  */
 export declare class CreateRequest extends Message<CreateRequest> {
   /**
+   * Ignored when auto_assign is true
+   *
    * @generated from field: string ig = 1;
    */
   ig: string;
@@ -853,11 +855,25 @@ export declare class CreateRequest extends Message<CreateRequest> {
   instance?: Instance;
 
   /**
-   * uuid of promocode
+   * Uuid of promocode
    *
    * @generated from field: optional string promocode = 3;
    */
   promocode?: string;
+
+  /**
+   * If true, then auto creates service, instance group, links instance group with sp (if not already done). ig field is ignored in this case
+   *
+   * @generated from field: bool auto_assign = 4;
+   */
+  autoAssign: boolean;
+
+  /**
+   * Instances group service provider. Used only when auto_assign is true. Required field if auto_assign is true
+   *
+   * @generated from field: string sp = 5;
+   */
+  sp: string;
 
   constructor(data?: PartialMessage<CreateRequest>);
 
@@ -901,6 +917,54 @@ export declare class CreateResponse extends Message<CreateResponse> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateResponse;
 
   static equals(a: CreateResponse | PlainMessage<CreateResponse> | undefined, b: CreateResponse | PlainMessage<CreateResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.instances.StartRequest
+ */
+export declare class StartRequest extends Message<StartRequest> {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  constructor(data?: PartialMessage<StartRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.instances.StartRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StartRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StartRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StartRequest;
+
+  static equals(a: StartRequest | PlainMessage<StartRequest> | undefined, b: StartRequest | PlainMessage<StartRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.instances.StartResponse
+ */
+export declare class StartResponse extends Message<StartResponse> {
+  /**
+   * @generated from field: bool result = 1;
+   */
+  result: boolean;
+
+  constructor(data?: PartialMessage<StartResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.instances.StartResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StartResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StartResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StartResponse;
+
+  static equals(a: StartResponse | PlainMessage<StartResponse> | undefined, b: StartResponse | PlainMessage<StartResponse> | undefined): boolean;
 }
 
 /**

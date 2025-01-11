@@ -4907,6 +4907,44 @@
         ]
       }
     },
+    "/instances/{id}/start": {
+      "post": {
+        "operationId": "InstancesService_Start",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/instancesStartResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InstancesServiceStartBody"
+            }
+          }
+        ],
+        "tags": [
+          "InstancesService"
+        ]
+      }
+    },
     "/instances/{uuid}": {
       "get": {
         "operationId": "InstancesService_Get",
@@ -7284,6 +7322,9 @@
         }
       }
     },
+    "InstancesServiceStartBody": {
+      "type": "object"
+    },
     "InstancesServiceTransferIGBody": {
       "type": "object",
       "properties": {
@@ -9638,6 +9679,14 @@
         }
       }
     },
+    "instancesStartResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "boolean"
+        }
+      }
+    },
     "instancesTestInstancesGroupConfigError": {
       "type": "object",
       "properties": {
@@ -10063,14 +10112,23 @@
       "type": "object",
       "properties": {
         "ig": {
-          "type": "string"
+          "type": "string",
+          "title": "Ignored when auto_assign is true"
         },
         "instance": {
           "$ref": "#/definitions/nocloudinstancesInstance"
         },
         "promocode": {
           "type": "string",
-          "title": "uuid of promocode"
+          "title": "Uuid of promocode"
+        },
+        "autoAssign": {
+          "type": "boolean",
+          "title": "If true, then auto creates service, instance group, links instance group with sp (if not already done). ig field is ignored in this case"
+        },
+        "sp": {
+          "type": "string",
+          "title": "Instances group service provider. Used only when auto_assign is true. Required field if auto_assign is true"
         }
       }
     },

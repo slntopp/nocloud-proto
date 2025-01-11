@@ -45,6 +45,7 @@ const (
 	InstancesService_List_FullMethodName             = "/nocloud.instances.InstancesService/List"
 	InstancesService_Get_FullMethodName              = "/nocloud.instances.InstancesService/Get"
 	InstancesService_Create_FullMethodName           = "/nocloud.instances.InstancesService/Create"
+	InstancesService_Start_FullMethodName            = "/nocloud.instances.InstancesService/Start"
 	InstancesService_Update_FullMethodName           = "/nocloud.instances.InstancesService/Update"
 	InstancesService_GetUnique_FullMethodName        = "/nocloud.instances.InstancesService/GetUnique"
 	InstancesService_TransferIG_FullMethodName       = "/nocloud.instances.InstancesService/TransferIG"
@@ -65,6 +66,7 @@ type InstancesServiceClient interface {
 	List(ctx context.Context, in *ListInstancesRequest, opts ...grpc.CallOption) (*ListInstancesResponse, error)
 	Get(ctx context.Context, in *Instance, opts ...grpc.CallOption) (*ResponseInstance, error)
 	Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*CreateResponse, error)
+	Start(ctx context.Context, in *StartRequest, opts ...grpc.CallOption) (*StartResponse, error)
 	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*UpdateResponse, error)
 	GetUnique(ctx context.Context, in *GetUniqueRequest, opts ...grpc.CallOption) (*GetUniqueResponse, error)
 	TransferIG(ctx context.Context, in *TransferIGRequest, opts ...grpc.CallOption) (*TransferIGResponse, error)
@@ -179,6 +181,16 @@ func (c *instancesServiceClient) Create(ctx context.Context, in *CreateRequest, 
 	return out, nil
 }
 
+func (c *instancesServiceClient) Start(ctx context.Context, in *StartRequest, opts ...grpc.CallOption) (*StartResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StartResponse)
+	err := c.cc.Invoke(ctx, InstancesService_Start_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *instancesServiceClient) Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*UpdateResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateResponse)
@@ -233,6 +245,7 @@ type InstancesServiceServer interface {
 	List(context.Context, *ListInstancesRequest) (*ListInstancesResponse, error)
 	Get(context.Context, *Instance) (*ResponseInstance, error)
 	Create(context.Context, *CreateRequest) (*CreateResponse, error)
+	Start(context.Context, *StartRequest) (*StartResponse, error)
 	Update(context.Context, *UpdateRequest) (*UpdateResponse, error)
 	GetUnique(context.Context, *GetUniqueRequest) (*GetUniqueResponse, error)
 	TransferIG(context.Context, *TransferIGRequest) (*TransferIGResponse, error)
@@ -276,6 +289,9 @@ func (UnimplementedInstancesServiceServer) Get(context.Context, *Instance) (*Res
 }
 func (UnimplementedInstancesServiceServer) Create(context.Context, *CreateRequest) (*CreateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (UnimplementedInstancesServiceServer) Start(context.Context, *StartRequest) (*StartResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Start not implemented")
 }
 func (UnimplementedInstancesServiceServer) Update(context.Context, *UpdateRequest) (*UpdateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
@@ -490,6 +506,24 @@ func _InstancesService_Create_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _InstancesService_Start_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstancesServiceServer).Start(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstancesService_Start_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstancesServiceServer).Start(ctx, req.(*StartRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _InstancesService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateRequest)
 	if err := dec(in); err != nil {
@@ -608,6 +642,10 @@ var InstancesService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Create",
 			Handler:    _InstancesService_Create_Handler,
+		},
+		{
+			MethodName: "Start",
+			Handler:    _InstancesService_Start_Handler,
 		},
 		{
 			MethodName: "Update",
