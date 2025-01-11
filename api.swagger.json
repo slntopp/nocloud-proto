@@ -10129,6 +10129,10 @@
         "sp": {
           "type": "string",
           "title": "Instances group service provider. Used only when auto_assign is true. Required field if auto_assign is true"
+        },
+        "account": {
+          "type": "string",
+          "title": "Target account. Used only when auto_assign is true. Required field if auto_assign is true"
         }
       }
     },

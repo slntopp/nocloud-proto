@@ -306,6 +306,7 @@ export const CreateRequest = /*@__PURE__*/ proto3.makeMessageType(
     { no: 3, name: "promocode", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 4, name: "auto_assign", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 5, name: "sp", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 6, name: "account", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

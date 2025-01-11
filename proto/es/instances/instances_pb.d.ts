@@ -875,6 +875,13 @@ export declare class CreateRequest extends Message<CreateRequest> {
    */
   sp: string;
 
+  /**
+   * Target account. Used only when auto_assign is true. Required field if auto_assign is true
+   *
+   * @generated from field: string account = 6;
+   */
+  account: string;
+
   constructor(data?: PartialMessage<CreateRequest>);
 
   static readonly runtime: typeof proto3;
