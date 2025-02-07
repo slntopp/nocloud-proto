@@ -61,6 +61,8 @@ message ServicesProvider {
 
   statuses.NoCloudStatus status = 14;
   map<string, Hook> hooks = 15;
+
+  SuspendRules suspend_rules = 16;
 }
 
 message TestResponse {
@@ -242,6 +244,31 @@ message Showcase {
 
 message Showcases {
   repeated Showcase showcases = 1;
+}
+
+message SuspendRules {
+  repeated DaySchedule schedules = 1;
+  bool enabled = 2;
+}
+
+message DaySchedule {
+  DayOfWeek day = 1;
+  repeated TimeRange allowed_suspend_time = 2;
+}
+
+message TimeRange {
+  string start_time = 1;  // "HH:MM"
+  string end_time = 2;    // "HH:MM"
+}
+
+enum DayOfWeek {
+  MONDAY = 0;
+  TUESDAY = 1;
+  WEDNESDAY = 2;
+  THURSDAY = 3;
+  FRIDAY = 4;
+  SATURDAY = 5;
+  SUNDAY = 6;
 }
 
 service ShowcasesService {

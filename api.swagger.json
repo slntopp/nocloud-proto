@@ -11094,6 +11094,34 @@
     "services_providersBindPlanResponse": {
       "type": "object"
     },
+    "services_providersDayOfWeek": {
+      "type": "string",
+      "enum": [
+        "MONDAY",
+        "TUESDAY",
+        "WEDNESDAY",
+        "THURSDAY",
+        "FRIDAY",
+        "SATURDAY",
+        "SUNDAY"
+      ],
+      "default": "MONDAY"
+    },
+    "services_providersDaySchedule": {
+      "type": "object",
+      "properties": {
+        "day": {
+          "$ref": "#/definitions/services_providersDayOfWeek"
+        },
+        "allowedSuspendTime": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/services_providersTimeRange"
+          }
+        }
+      }
+    },
     "services_providersGenericResponse": {
       "type": "object",
       "properties": {
@@ -11243,6 +11271,9 @@
           "additionalProperties": {
             "$ref": "#/definitions/services_providersHook"
           }
+        },
+        "suspendRules": {
+          "$ref": "#/definitions/services_providersSuspendRules"
         }
       }
     },
@@ -11320,6 +11351,9 @@
           "additionalProperties": {
             "$ref": "#/definitions/services_providersHook"
           }
+        },
+        "suspendRules": {
+          "$ref": "#/definitions/services_providersSuspendRules"
         }
       }
     },
@@ -11432,6 +11466,34 @@
         "meta": {
           "type": "object",
           "additionalProperties": {}
+        }
+      }
+    },
+    "services_providersSuspendRules": {
+      "type": "object",
+      "properties": {
+        "schedules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/services_providersDaySchedule"
+          }
+        },
+        "enabled": {
+          "type": "boolean"
+        }
+      }
+    },
+    "services_providersTimeRange": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "title": "\"HH:MM\""
+        },
+        "endTime": {
+          "type": "string",
+          "title": "\"HH:MM\""
         }
       }
     },

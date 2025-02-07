@@ -24,6 +24,22 @@ import { Access } from "../access/access_pb.js";
 import { NoCloudStatus } from "../statuses/statuses_pb.js";
 
 /**
+ * @generated from enum nocloud.services_providers.DayOfWeek
+ */
+export const DayOfWeek = /*@__PURE__*/ proto3.makeEnum(
+  "nocloud.services_providers.DayOfWeek",
+  [
+    {no: 0, name: "MONDAY"},
+    {no: 1, name: "TUESDAY"},
+    {no: 2, name: "WEDNESDAY"},
+    {no: 3, name: "THURSDAY"},
+    {no: 4, name: "FRIDAY"},
+    {no: 5, name: "SATURDAY"},
+    {no: 6, name: "SUNDAY"},
+  ],
+);
+
+/**
  * @generated from message nocloud.services_providers.Var
  */
 export const Var = /*@__PURE__*/ proto3.makeMessageType(
@@ -90,6 +106,7 @@ export const ServicesProvider = /*@__PURE__*/ proto3.makeMessageType(
     { no: 13, name: "meta", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
     { no: 14, name: "status", kind: "enum", T: proto3.getEnumType(NoCloudStatus) },
     { no: 15, name: "hooks", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Hook} },
+    { no: 16, name: "suspend_rules", kind: "message", T: SuspendRules },
   ],
 );
 
@@ -318,6 +335,39 @@ export const Showcases = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.services_providers.Showcases",
   () => [
     { no: 1, name: "showcases", kind: "message", T: Showcase, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message nocloud.services_providers.SuspendRules
+ */
+export const SuspendRules = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.services_providers.SuspendRules",
+  () => [
+    { no: 1, name: "schedules", kind: "message", T: DaySchedule, repeated: true },
+    { no: 2, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.services_providers.DaySchedule
+ */
+export const DaySchedule = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.services_providers.DaySchedule",
+  () => [
+    { no: 1, name: "day", kind: "enum", T: proto3.getEnumType(DayOfWeek) },
+    { no: 2, name: "allowed_suspend_time", kind: "message", T: TimeRange, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message nocloud.services_providers.TimeRange
+ */
+export const TimeRange = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.services_providers.TimeRange",
+  () => [
+    { no: 1, name: "start_time", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "end_time", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

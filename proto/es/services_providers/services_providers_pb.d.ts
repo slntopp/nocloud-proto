@@ -25,6 +25,46 @@ import type { Access } from "../access/access_pb.js";
 import type { NoCloudStatus } from "../statuses/statuses_pb.js";
 
 /**
+ * @generated from enum nocloud.services_providers.DayOfWeek
+ */
+export declare enum DayOfWeek {
+  /**
+   * @generated from enum value: MONDAY = 0;
+   */
+  MONDAY = 0,
+
+  /**
+   * @generated from enum value: TUESDAY = 1;
+   */
+  TUESDAY = 1,
+
+  /**
+   * @generated from enum value: WEDNESDAY = 2;
+   */
+  WEDNESDAY = 2,
+
+  /**
+   * @generated from enum value: THURSDAY = 3;
+   */
+  THURSDAY = 3,
+
+  /**
+   * @generated from enum value: FRIDAY = 4;
+   */
+  FRIDAY = 4,
+
+  /**
+   * @generated from enum value: SATURDAY = 5;
+   */
+  SATURDAY = 5,
+
+  /**
+   * @generated from enum value: SUNDAY = 6;
+   */
+  SUNDAY = 6,
+}
+
+/**
  * @generated from message nocloud.services_providers.Var
  */
 export declare class Var extends Message<Var> {
@@ -232,6 +272,11 @@ export declare class ServicesProvider extends Message<ServicesProvider> {
    * @generated from field: map<string, nocloud.services_providers.Hook> hooks = 15;
    */
   hooks: { [key: string]: Hook };
+
+  /**
+   * @generated from field: nocloud.services_providers.SuspendRules suspend_rules = 16;
+   */
+  suspendRules?: SuspendRules;
 
   constructor(data?: PartialMessage<ServicesProvider>);
 
@@ -859,6 +904,97 @@ export declare class Showcases extends Message<Showcases> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Showcases;
 
   static equals(a: Showcases | PlainMessage<Showcases> | undefined, b: Showcases | PlainMessage<Showcases> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.services_providers.SuspendRules
+ */
+export declare class SuspendRules extends Message<SuspendRules> {
+  /**
+   * @generated from field: repeated nocloud.services_providers.DaySchedule schedules = 1;
+   */
+  schedules: DaySchedule[];
+
+  /**
+   * @generated from field: bool enabled = 2;
+   */
+  enabled: boolean;
+
+  constructor(data?: PartialMessage<SuspendRules>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.services_providers.SuspendRules";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SuspendRules;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SuspendRules;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SuspendRules;
+
+  static equals(a: SuspendRules | PlainMessage<SuspendRules> | undefined, b: SuspendRules | PlainMessage<SuspendRules> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.services_providers.DaySchedule
+ */
+export declare class DaySchedule extends Message<DaySchedule> {
+  /**
+   * @generated from field: nocloud.services_providers.DayOfWeek day = 1;
+   */
+  day: DayOfWeek;
+
+  /**
+   * @generated from field: repeated nocloud.services_providers.TimeRange allowed_suspend_time = 2;
+   */
+  allowedSuspendTime: TimeRange[];
+
+  constructor(data?: PartialMessage<DaySchedule>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.services_providers.DaySchedule";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DaySchedule;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DaySchedule;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DaySchedule;
+
+  static equals(a: DaySchedule | PlainMessage<DaySchedule> | undefined, b: DaySchedule | PlainMessage<DaySchedule> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.services_providers.TimeRange
+ */
+export declare class TimeRange extends Message<TimeRange> {
+  /**
+   * "HH:MM"
+   *
+   * @generated from field: string start_time = 1;
+   */
+  startTime: string;
+
+  /**
+   * "HH:MM"
+   *
+   * @generated from field: string end_time = 2;
+   */
+  endTime: string;
+
+  constructor(data?: PartialMessage<TimeRange>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.services_providers.TimeRange";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): TimeRange;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): TimeRange;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): TimeRange;
+
+  static equals(a: TimeRange | PlainMessage<TimeRange> | undefined, b: TimeRange | PlainMessage<TimeRange> | undefined): boolean;
 }
 
 /**
