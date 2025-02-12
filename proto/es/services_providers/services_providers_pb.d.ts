@@ -949,6 +949,11 @@ export declare class DaySchedule extends Message<DaySchedule> {
    */
   allowedSuspendTime: TimeRange[];
 
+  /**
+   * @generated from field: bool enabled = 3;
+   */
+  enabled: boolean;
+
   constructor(data?: PartialMessage<DaySchedule>);
 
   static readonly runtime: typeof proto3;

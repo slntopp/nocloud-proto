@@ -11119,6 +11119,9 @@
             "type": "object",
             "$ref": "#/definitions/services_providersTimeRange"
           }
+        },
+        "enabled": {
+          "type": "boolean"
         }
       }
     },

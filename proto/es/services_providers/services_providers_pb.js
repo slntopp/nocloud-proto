@@ -357,6 +357,7 @@ export const DaySchedule = /*@__PURE__*/ proto3.makeMessageType(
   () => [
     { no: 1, name: "day", kind: "enum", T: proto3.getEnumType(DayOfWeek) },
     { no: 2, name: "allowed_suspend_time", kind: "message", T: TimeRange, repeated: true },
+    { no: 3, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 

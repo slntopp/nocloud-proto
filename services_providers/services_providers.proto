@@ -254,6 +254,7 @@ message SuspendRules {
 message DaySchedule {
   DayOfWeek day = 1;
   repeated TimeRange allowed_suspend_time = 2;
+  bool enabled = 3;
 }
 
 message TimeRange {
