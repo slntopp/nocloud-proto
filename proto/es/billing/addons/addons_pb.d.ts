@@ -86,6 +86,11 @@ export declare class Addon extends Message<Addon> {
    */
   kind: Kind;
 
+  /**
+   * @generated from field: repeated nocloud.billing.addons.Action actions = 11;
+   */
+  actions: Action[];
+
   constructor(data?: PartialMessage<Addon>);
 
   static readonly runtime: typeof proto3;
@@ -99,6 +104,35 @@ export declare class Addon extends Message<Addon> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Addon;
 
   static equals(a: Addon | PlainMessage<Addon> | undefined, b: Addon | PlainMessage<Addon> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.addons.Action
+ */
+export declare class Action extends Message<Action> {
+  /**
+   * @generated from field: string playbook = 1;
+   */
+  playbook: string;
+
+  /**
+   * @generated from field: map<string, string> vars = 2;
+   */
+  vars: { [key: string]: string };
+
+  constructor(data?: PartialMessage<Action>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.addons.Action";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Action;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Action;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Action;
+
+  static equals(a: Action | PlainMessage<Action> | undefined, b: Action | PlainMessage<Action> | undefined): boolean;
 }
 
 /**

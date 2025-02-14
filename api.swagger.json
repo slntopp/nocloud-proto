@@ -7645,6 +7645,20 @@
         }
       }
     },
+    "addonsAction": {
+      "type": "object",
+      "properties": {
+        "playbook": {
+          "type": "string"
+        },
+        "vars": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "addonsAddon": {
       "type": "object",
       "properties": {
@@ -7683,6 +7697,13 @@
         },
         "kind": {
           "$ref": "#/definitions/billingaddonsKind"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/addonsAction"
+          }
         }
       }
     },
@@ -8068,6 +8089,13 @@
         },
         "kind": {
           "$ref": "#/definitions/billingaddonsKind"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/addonsAction"
+          }
         }
       }
     },

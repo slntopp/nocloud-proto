@@ -21,6 +21,12 @@ message Addon {
   int64 created = 8;
   bool system = 9;
   Kind kind = 10;
+  repeated Action actions = 11;
+}
+
+message Action {
+  string playbook = 1;
+  map<string, string> vars = 2;
 }
 
 message BulkAddons {
