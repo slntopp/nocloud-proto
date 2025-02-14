@@ -87,9 +87,9 @@ export declare class Addon extends Message<Addon> {
   kind: Kind;
 
   /**
-   * @generated from field: repeated nocloud.billing.addons.Action actions = 11;
+   * @generated from field: nocloud.billing.addons.Action action = 11;
    */
-  actions: Action[];
+  action?: Action;
 
   constructor(data?: PartialMessage<Addon>);
 

@@ -21,7 +21,7 @@ message Addon {
   int64 created = 8;
   bool system = 9;
   Kind kind = 10;
-  repeated Action actions = 11;
+  Action action = 11;
 }
 
 message Action {

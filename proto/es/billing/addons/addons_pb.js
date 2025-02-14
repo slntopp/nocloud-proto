@@ -33,7 +33,7 @@ export const Addon = /*@__PURE__*/ proto3.makeMessageType(
     { no: 8, name: "created", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 9, name: "system", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 10, name: "kind", kind: "enum", T: proto3.getEnumType(Kind) },
-    { no: 11, name: "actions", kind: "message", T: Action, repeated: true },
+    { no: 11, name: "action", kind: "message", T: Action },
   ],
 );
 
