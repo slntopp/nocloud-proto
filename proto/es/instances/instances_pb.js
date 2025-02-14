@@ -83,6 +83,7 @@ export const Context = /*@__PURE__*/ proto3.makeMessageType(
     { no: 1, name: "instance", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "sp", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "event", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "addon", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
   ],
 );
 

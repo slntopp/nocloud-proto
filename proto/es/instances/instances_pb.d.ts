@@ -232,6 +232,11 @@ export declare class Context extends Message<Context> {
    */
   event: string;
 
+  /**
+   * @generated from field: optional string addon = 4;
+   */
+  addon?: string;
+
   constructor(data?: PartialMessage<Context>);
 
   static readonly runtime: typeof proto3;

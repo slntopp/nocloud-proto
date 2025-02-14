@@ -78,6 +78,7 @@ message Context {
     string instance = 1;
     string sp = 2;
     string event = 3;
+    optional string addon = 4;
 }
 
 message TestInstancesGroupConfigRequest {
