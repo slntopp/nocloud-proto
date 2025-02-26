@@ -1,6 +1,6 @@
 version: v1
 plugins:
   - plugin: buf.build/grpc/python
-    out: proto/python
+    out: proto/python/nocloud/nocloud
   - plugin: buf.build/protocolbuffers/python
-    out: proto/python
+    out: proto/python/nocloud/nocloud

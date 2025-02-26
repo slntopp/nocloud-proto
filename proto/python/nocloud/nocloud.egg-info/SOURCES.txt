@@ -1,0 +1,5 @@
+setup.py
+nocloud.egg-info/PKG-INFO
+nocloud.egg-info/SOURCES.txt
+nocloud.egg-info/dependency_links.txt
+nocloud.egg-info/top_level.txt

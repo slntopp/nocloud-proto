@@ -1,0 +1,20 @@
+Metadata-Version: 2.2
+Name: nocloud
+Version: 0.1.0
+Summary: nocloud api
+Home-page: https://github.com/slntopp/nocloud-proto
+Author: coddmeistr
+Author-email: euseew.maxim2015@yandex.ru
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: summary
+
+nocloud api long
