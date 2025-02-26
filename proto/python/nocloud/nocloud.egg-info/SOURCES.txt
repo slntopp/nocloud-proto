@@ -1,5 +1,9 @@
 setup.py
+nocloud/__init__.py
 nocloud.egg-info/PKG-INFO
 nocloud.egg-info/SOURCES.txt
 nocloud.egg-info/dependency_links.txt
 nocloud.egg-info/top_level.txt
+nocloud/billing/__init__.py
+nocloud/billing/billing_pb2.py
+nocloud/billing/billing_pb2_grpc.py
