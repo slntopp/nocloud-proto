@@ -370,6 +370,11 @@ export declare class ListRequest extends Message<ListRequest> {
    */
   filters: { [key: string]: Value };
 
+  /**
+   * @generated from field: bool omitPromos = 5;
+   */
+  omitPromos: boolean;
+
   constructor(data?: PartialMessage<ListRequest>);
 
   static readonly runtime: typeof proto3;

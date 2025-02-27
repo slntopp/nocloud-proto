@@ -141,6 +141,7 @@ export const ListRequest = /*@__PURE__*/ proto3.makeMessageType(
     { no: 2, name: "show_deleted", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 3, name: "exclude_uuids", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 4, name: "filters", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
+    { no: 5, name: "omitPromos", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
