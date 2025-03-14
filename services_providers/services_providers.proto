@@ -286,7 +286,7 @@ message Service {
 }
 
 message Main {
-  string default_field = 1 [json_name = "default"];
+  string default = 1;
 }
 // End Promo types
 

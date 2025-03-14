@@ -1123,9 +1123,9 @@ export declare class Service extends Message<Service> {
  */
 export declare class Main extends Message<Main> {
   /**
-   * @generated from field: string default_field = 1 [json_name = "default"];
+   * @generated from field: string default = 1;
    */
-  defaultField: string;
+  default: string;
 
   constructor(data?: PartialMessage<Main>);
 

@@ -414,7 +414,7 @@ export const Service = /*@__PURE__*/ proto3.makeMessageType(
 export const Main = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.services_providers.Main",
   () => [
-    { no: 1, name: "default_field", jsonName: "default", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "default", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
