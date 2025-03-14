@@ -320,12 +320,101 @@ export const Showcase = /*@__PURE__*/ proto3.makeMessageType(
     { no: 2, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "icon", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "items", kind: "message", T: ShowcaseItem, repeated: true },
-    { no: 5, name: "promo", kind: "message", T: Value },
+    { no: 5, name: "promo", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: LanguagePromo} },
     { no: 6, name: "primary", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 7, name: "public", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 8, name: "locations", kind: "message", T: LocationConf, repeated: true },
     { no: 9, name: "sorter", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
     { no: 10, name: "meta", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
+    { no: 11, name: "languages", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 12, name: "main", kind: "message", T: Main },
+  ],
+);
+
+/**
+ * Promo types
+ *
+ * @generated from message nocloud.services_providers.LanguagePromo
+ */
+export const LanguagePromo = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.services_providers.LanguagePromo",
+  () => [
+    { no: 1, name: "icons", kind: "message", T: Icon, repeated: true },
+    { no: 2, name: "location", kind: "message", T: Location },
+    { no: 3, name: "locations", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Location} },
+    { no: 4, name: "offer", kind: "message", T: Offer },
+    { no: 5, name: "preview", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 6, name: "previewEnable", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 7, name: "rewards", kind: "message", T: TitleDesc },
+    { no: 8, name: "service", kind: "message", T: Service },
+    { no: 9, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.services_providers.Icon
+ */
+export const Icon = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.services_providers.Icon",
+  () => [
+    { no: 1, name: "id", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 2, name: "src", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.services_providers.Location
+ */
+export const Location = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.services_providers.Location",
+  () => [
+    { no: 1, name: "description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.services_providers.Offer
+ */
+export const Offer = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.services_providers.Offer",
+  () => [
+    { no: 1, name: "link", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "src", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "text", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.services_providers.TitleDesc
+ */
+export const TitleDesc = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.services_providers.TitleDesc",
+  () => [
+    { no: 1, name: "description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.services_providers.Service
+ */
+export const Service = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.services_providers.Service",
+  () => [
+    { no: 1, name: "btn", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.services_providers.Main
+ */
+export const Main = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.services_providers.Main",
+  () => [
+    { no: 1, name: "default_field", jsonName: "default", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

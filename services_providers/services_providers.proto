@@ -235,13 +235,60 @@ message Showcase {
   string title = 2;
   string icon = 3;
   repeated ShowcaseItem items = 4;
-  google.protobuf.Value promo = 5;
+  map<string, LanguagePromo> promo = 5;
   bool primary = 6;
   bool public = 7;
   repeated LocationConf locations = 8;
   optional int32 sorter = 9;
   map<string, google.protobuf.Value> meta = 10;
+  repeated string languages = 11;
+  Main main = 12;
 }
+
+// Promo types
+message LanguagePromo {
+  repeated Icon icons = 1;
+  Location location = 2;
+  map<string, Location> locations = 3;
+  Offer offer = 4;
+  string preview = 5;
+  bool previewEnable = 6;
+  TitleDesc rewards = 7;
+  Service service = 8;
+  string title = 9;
+}
+
+message Icon {
+  int32 id = 1;
+  string src = 2;
+}
+
+message Location {
+  string description = 1;
+  string title = 2;
+}
+
+message Offer {
+  string link = 1;
+  string src = 2;
+  string text = 3;
+}
+
+message TitleDesc {
+  string description = 1;
+  string title = 2;
+}
+
+message Service {
+  string btn = 1;
+  string description = 2;
+  string title = 3;
+}
+
+message Main {
+  string default_field = 1 [json_name = "default"];
+}
+// End Promo types
 
 message Showcases {
   repeated Showcase showcases = 1;

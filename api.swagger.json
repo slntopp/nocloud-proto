@@ -10477,6 +10477,31 @@
         }
       }
     },
+    "nocloudservices_providersLocation": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "nocloudservices_providersService": {
+      "type": "object",
+      "properties": {
+        "btn": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
     "nocloudservices_providersTestResponse": {
       "type": "object",
       "properties": {
@@ -11214,6 +11239,58 @@
         }
       }
     },
+    "services_providersIcon": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "src": {
+          "type": "string"
+        }
+      }
+    },
+    "services_providersLanguagePromo": {
+      "type": "object",
+      "properties": {
+        "icons": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/services_providersIcon"
+          }
+        },
+        "location": {
+          "$ref": "#/definitions/nocloudservices_providersLocation"
+        },
+        "locations": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/nocloudservices_providersLocation"
+          }
+        },
+        "offer": {
+          "$ref": "#/definitions/services_providersOffer"
+        },
+        "preview": {
+          "type": "string"
+        },
+        "previewEnable": {
+          "type": "boolean"
+        },
+        "rewards": {
+          "$ref": "#/definitions/services_providersTitleDesc"
+        },
+        "service": {
+          "$ref": "#/definitions/nocloudservices_providersService"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "title": "Promo types"
+    },
     "services_providersListExtentionsResponse": {
       "type": "object",
       "properties": {
@@ -11247,6 +11324,28 @@
           "additionalProperties": {}
         },
         "type": {
+          "type": "string"
+        }
+      }
+    },
+    "services_providersMain": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string"
+        }
+      }
+    },
+    "services_providersOffer": {
+      "type": "object",
+      "properties": {
+        "link": {
+          "type": "string"
+        },
+        "src": {
+          "type": "string"
+        },
+        "text": {
           "type": "string"
         }
       }
@@ -11443,7 +11542,12 @@
             "$ref": "#/definitions/services_providersShowcaseItem"
           }
         },
-        "promo": {},
+        "promo": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/services_providersLanguagePromo"
+          }
+        },
         "primary": {
           "type": "boolean"
         },
@@ -11464,6 +11568,15 @@
         "meta": {
           "type": "object",
           "additionalProperties": {}
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "main": {
+          "$ref": "#/definitions/services_providersMain"
         }
       }
     },
@@ -11512,7 +11625,12 @@
             "$ref": "#/definitions/services_providersShowcaseItem"
           }
         },
-        "promo": {},
+        "promo": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/services_providersLanguagePromo"
+          }
+        },
         "primary": {
           "type": "boolean"
         },
@@ -11533,6 +11651,15 @@
         "meta": {
           "type": "object",
           "additionalProperties": {}
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "main": {
+          "$ref": "#/definitions/services_providersMain"
         }
       }
     },
@@ -11561,6 +11688,17 @@
         "endTime": {
           "type": "string",
           "title": "\"HH:MM\""
+        }
+      }
+    },
+    "services_providersTitleDesc": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
         }
       }
     },

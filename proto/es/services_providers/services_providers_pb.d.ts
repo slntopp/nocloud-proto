@@ -843,9 +843,9 @@ export declare class Showcase extends Message<Showcase> {
   items: ShowcaseItem[];
 
   /**
-   * @generated from field: google.protobuf.Value promo = 5;
+   * @generated from field: map<string, nocloud.services_providers.LanguagePromo> promo = 5;
    */
-  promo?: Value;
+  promo: { [key: string]: LanguagePromo };
 
   /**
    * @generated from field: bool primary = 6;
@@ -872,6 +872,16 @@ export declare class Showcase extends Message<Showcase> {
    */
   meta: { [key: string]: Value };
 
+  /**
+   * @generated from field: repeated string languages = 11;
+   */
+  languages: string[];
+
+  /**
+   * @generated from field: nocloud.services_providers.Main main = 12;
+   */
+  main?: Main;
+
   constructor(data?: PartialMessage<Showcase>);
 
   static readonly runtime: typeof proto3;
@@ -885,6 +895,251 @@ export declare class Showcase extends Message<Showcase> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Showcase;
 
   static equals(a: Showcase | PlainMessage<Showcase> | undefined, b: Showcase | PlainMessage<Showcase> | undefined): boolean;
+}
+
+/**
+ * Promo types
+ *
+ * @generated from message nocloud.services_providers.LanguagePromo
+ */
+export declare class LanguagePromo extends Message<LanguagePromo> {
+  /**
+   * @generated from field: repeated nocloud.services_providers.Icon icons = 1;
+   */
+  icons: Icon[];
+
+  /**
+   * @generated from field: nocloud.services_providers.Location location = 2;
+   */
+  location?: Location;
+
+  /**
+   * @generated from field: map<string, nocloud.services_providers.Location> locations = 3;
+   */
+  locations: { [key: string]: Location };
+
+  /**
+   * @generated from field: nocloud.services_providers.Offer offer = 4;
+   */
+  offer?: Offer;
+
+  /**
+   * @generated from field: string preview = 5;
+   */
+  preview: string;
+
+  /**
+   * @generated from field: bool previewEnable = 6;
+   */
+  previewEnable: boolean;
+
+  /**
+   * @generated from field: nocloud.services_providers.TitleDesc rewards = 7;
+   */
+  rewards?: TitleDesc;
+
+  /**
+   * @generated from field: nocloud.services_providers.Service service = 8;
+   */
+  service?: Service;
+
+  /**
+   * @generated from field: string title = 9;
+   */
+  title: string;
+
+  constructor(data?: PartialMessage<LanguagePromo>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.services_providers.LanguagePromo";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LanguagePromo;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LanguagePromo;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LanguagePromo;
+
+  static equals(a: LanguagePromo | PlainMessage<LanguagePromo> | undefined, b: LanguagePromo | PlainMessage<LanguagePromo> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.services_providers.Icon
+ */
+export declare class Icon extends Message<Icon> {
+  /**
+   * @generated from field: int32 id = 1;
+   */
+  id: number;
+
+  /**
+   * @generated from field: string src = 2;
+   */
+  src: string;
+
+  constructor(data?: PartialMessage<Icon>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.services_providers.Icon";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Icon;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Icon;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Icon;
+
+  static equals(a: Icon | PlainMessage<Icon> | undefined, b: Icon | PlainMessage<Icon> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.services_providers.Location
+ */
+export declare class Location extends Message<Location> {
+  /**
+   * @generated from field: string description = 1;
+   */
+  description: string;
+
+  /**
+   * @generated from field: string title = 2;
+   */
+  title: string;
+
+  constructor(data?: PartialMessage<Location>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.services_providers.Location";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Location;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Location;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Location;
+
+  static equals(a: Location | PlainMessage<Location> | undefined, b: Location | PlainMessage<Location> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.services_providers.Offer
+ */
+export declare class Offer extends Message<Offer> {
+  /**
+   * @generated from field: string link = 1;
+   */
+  link: string;
+
+  /**
+   * @generated from field: string src = 2;
+   */
+  src: string;
+
+  /**
+   * @generated from field: string text = 3;
+   */
+  text: string;
+
+  constructor(data?: PartialMessage<Offer>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.services_providers.Offer";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Offer;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Offer;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Offer;
+
+  static equals(a: Offer | PlainMessage<Offer> | undefined, b: Offer | PlainMessage<Offer> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.services_providers.TitleDesc
+ */
+export declare class TitleDesc extends Message<TitleDesc> {
+  /**
+   * @generated from field: string description = 1;
+   */
+  description: string;
+
+  /**
+   * @generated from field: string title = 2;
+   */
+  title: string;
+
+  constructor(data?: PartialMessage<TitleDesc>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.services_providers.TitleDesc";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): TitleDesc;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): TitleDesc;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): TitleDesc;
+
+  static equals(a: TitleDesc | PlainMessage<TitleDesc> | undefined, b: TitleDesc | PlainMessage<TitleDesc> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.services_providers.Service
+ */
+export declare class Service extends Message<Service> {
+  /**
+   * @generated from field: string btn = 1;
+   */
+  btn: string;
+
+  /**
+   * @generated from field: string description = 2;
+   */
+  description: string;
+
+  /**
+   * @generated from field: string title = 3;
+   */
+  title: string;
+
+  constructor(data?: PartialMessage<Service>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.services_providers.Service";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Service;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Service;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Service;
+
+  static equals(a: Service | PlainMessage<Service> | undefined, b: Service | PlainMessage<Service> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.services_providers.Main
+ */
+export declare class Main extends Message<Main> {
+  /**
+   * @generated from field: string default_field = 1 [json_name = "default"];
+   */
+  defaultField: string;
+
+  constructor(data?: PartialMessage<Main>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.services_providers.Main";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Main;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Main;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Main;
+
+  static equals(a: Main | PlainMessage<Main> | undefined, b: Main | PlainMessage<Main> | undefined): boolean;
 }
 
 /**
