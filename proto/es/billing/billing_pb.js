@@ -349,6 +349,17 @@ export const Item = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * @generated from message nocloud.billing.TaxOptions
+ */
+export const TaxOptions = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.TaxOptions",
+  () => [
+    { no: 1, name: "tax_rate", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 2, name: "tax_included", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
  * @generated from message nocloud.billing.Invoice
  */
 export const Invoice = /*@__PURE__*/ proto3.makeMessageType(
@@ -370,7 +381,7 @@ export const Invoice = /*@__PURE__*/ proto3.makeMessageType(
     { no: 14, name: "type", kind: "enum", T: proto3.getEnumType(ActionType) },
     { no: 15, name: "number", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 16, name: "instances", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
-    { no: 17, name: "tax_rate", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 17, name: "tax_options", kind: "message", T: TaxOptions },
   ],
 );
 

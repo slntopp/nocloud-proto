@@ -2721,12 +2721,18 @@
             "collectionFormat": "multi"
           },
           {
-            "name": "taxRate",
+            "name": "taxOptions.taxRate",
             "description": "0.00 is min",
             "in": "query",
             "required": false,
             "type": "number",
             "format": "double"
+          },
+          {
+            "name": "taxOptions.taxIncluded",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -8713,10 +8719,8 @@
           },
           "title": "Linked instances"
         },
-        "taxRate": {
-          "type": "number",
-          "format": "double",
-          "title": "0.00 is min"
+        "taxOptions": {
+          "$ref": "#/definitions/billingTaxOptions"
         }
       }
     },
@@ -9111,6 +9115,19 @@
     },
     "billingRunDailyCronJobResponse": {
       "type": "object"
+    },
+    "billingTaxOptions": {
+      "type": "object",
+      "properties": {
+        "taxRate": {
+          "type": "number",
+          "format": "double",
+          "title": "0.00 is min"
+        },
+        "taxIncluded": {
+          "type": "boolean"
+        }
+      }
     },
     "billingTransaction": {
       "type": "object",

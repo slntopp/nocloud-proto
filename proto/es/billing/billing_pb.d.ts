@@ -1016,6 +1016,37 @@ export declare class Item extends Message<Item> {
 }
 
 /**
+ * @generated from message nocloud.billing.TaxOptions
+ */
+export declare class TaxOptions extends Message<TaxOptions> {
+  /**
+   * 0.00 is min
+   *
+   * @generated from field: double tax_rate = 1;
+   */
+  taxRate: number;
+
+  /**
+   * @generated from field: bool tax_included = 2;
+   */
+  taxIncluded: boolean;
+
+  constructor(data?: PartialMessage<TaxOptions>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.TaxOptions";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): TaxOptions;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): TaxOptions;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): TaxOptions;
+
+  static equals(a: TaxOptions | PlainMessage<TaxOptions> | undefined, b: TaxOptions | PlainMessage<TaxOptions> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.billing.Invoice
  */
 export declare class Invoice extends Message<Invoice> {
@@ -1108,11 +1139,9 @@ export declare class Invoice extends Message<Invoice> {
   instances: string[];
 
   /**
-   * 0.00 is min
-   *
-   * @generated from field: double tax_rate = 17;
+   * @generated from field: nocloud.billing.TaxOptions tax_options = 17;
    */
-  taxRate: number;
+  taxOptions?: TaxOptions;
 
   constructor(data?: PartialMessage<Invoice>);
 

@@ -233,6 +233,11 @@ message Item {
   bool apply_tax = 5;
 }
 
+message TaxOptions {
+  double tax_rate = 1; // 0.00 is min
+  bool tax_included = 2;
+}
+
 message Invoice {
   string uuid = 1;
   int64 payment = 2;    // Payment date timestamp
@@ -250,7 +255,7 @@ message Invoice {
   ActionType type = 14;
   string number = 15;
   repeated string instances = 16; // Linked instances
-  double tax_rate = 17; // 0.00 is min
+  TaxOptions tax_options = 17;
 }
 
 message Invoices {repeated Invoice pool = 1;}
