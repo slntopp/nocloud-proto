@@ -382,6 +382,7 @@ export const Invoice = /*@__PURE__*/ proto3.makeMessageType(
     { no: 15, name: "number", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 16, name: "instances", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 17, name: "tax_options", kind: "message", T: TaxOptions },
+    { no: 18, name: "subtotal", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
   ],
 );
 

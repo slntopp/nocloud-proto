@@ -247,7 +247,7 @@ message Invoice {
   BillingStatus status = 6;
   string account = 7;
   repeated string transactions = 8;
-  double total = 9;
+  double total = 9; // Final total, amount that client will pay
   map<string, google.protobuf.Value> meta = 10;
   Currency currency = 11;
   int64 created = 12;
@@ -256,6 +256,7 @@ message Invoice {
   string number = 15;
   repeated string instances = 16; // Linked instances
   TaxOptions tax_options = 17;
+  double subtotal = 18; // Total before additional fees (taxes etc.)
 }
 
 message Invoices {repeated Invoice pool = 1;}

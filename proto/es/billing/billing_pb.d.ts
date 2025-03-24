@@ -1097,6 +1097,8 @@ export declare class Invoice extends Message<Invoice> {
   transactions: string[];
 
   /**
+   * Final total, amount that client will pay
+   *
    * @generated from field: double total = 9;
    */
   total: number;
@@ -1142,6 +1144,13 @@ export declare class Invoice extends Message<Invoice> {
    * @generated from field: nocloud.billing.TaxOptions tax_options = 17;
    */
   taxOptions?: TaxOptions;
+
+  /**
+   * Total before additional fees (taxes etc.)
+   *
+   * @generated from field: double subtotal = 18;
+   */
+  subtotal: number;
 
   constructor(data?: PartialMessage<Invoice>);
 

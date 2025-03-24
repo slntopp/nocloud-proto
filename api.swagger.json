@@ -2611,6 +2611,7 @@
           },
           {
             "name": "total",
+            "description": "Final total, amount that client will pay",
             "in": "query",
             "required": false,
             "type": "number",
@@ -2733,6 +2734,14 @@
             "in": "query",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "subtotal",
+            "description": "Total before additional fees (taxes etc.)",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
           }
         ],
         "tags": [
@@ -8686,7 +8695,8 @@
         },
         "total": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "title": "Final total, amount that client will pay"
         },
         "meta": {
           "type": "object",
@@ -8721,6 +8731,11 @@
         },
         "taxOptions": {
           "$ref": "#/definitions/billingTaxOptions"
+        },
+        "subtotal": {
+          "type": "number",
+          "format": "double",
+          "title": "Total before additional fees (taxes etc.)"
         }
       }
     },
