@@ -2719,6 +2719,14 @@
               "type": "string"
             },
             "collectionFormat": "multi"
+          },
+          {
+            "name": "taxRate",
+            "description": "0.00 is min",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
           }
         ],
         "tags": [
@@ -8704,6 +8712,11 @@
             "type": "string"
           },
           "title": "Linked instances"
+        },
+        "taxRate": {
+          "type": "number",
+          "format": "double",
+          "title": "0.00 is min"
         }
       }
     },
@@ -8736,10 +8749,8 @@
         "description": {
           "type": "string"
         },
-        "taxRate": {
-          "type": "number",
-          "format": "double",
-          "title": "0.00 is min"
+        "applyTax": {
+          "type": "boolean"
         }
       },
       "title": "Position. Instance must be specified to connect action with instance"

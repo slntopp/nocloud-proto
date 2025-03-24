@@ -996,11 +996,9 @@ export declare class Item extends Message<Item> {
   description: string;
 
   /**
-   * 0.00 is min
-   *
-   * @generated from field: double tax_rate = 5;
+   * @generated from field: bool apply_tax = 5;
    */
-  taxRate: number;
+  applyTax: boolean;
 
   constructor(data?: PartialMessage<Item>);
 
@@ -1108,6 +1106,13 @@ export declare class Invoice extends Message<Invoice> {
    * @generated from field: repeated string instances = 16;
    */
   instances: string[];
+
+  /**
+   * 0.00 is min
+   *
+   * @generated from field: double tax_rate = 17;
+   */
+  taxRate: number;
 
   constructor(data?: PartialMessage<Invoice>);
 

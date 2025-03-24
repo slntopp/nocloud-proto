@@ -344,7 +344,7 @@ export const Item = /*@__PURE__*/ proto3.makeMessageType(
     { no: 2, name: "unit", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "price", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
     { no: 4, name: "description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 5, name: "tax_rate", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 5, name: "apply_tax", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
@@ -370,6 +370,7 @@ export const Invoice = /*@__PURE__*/ proto3.makeMessageType(
     { no: 14, name: "type", kind: "enum", T: proto3.getEnumType(ActionType) },
     { no: 15, name: "number", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 16, name: "instances", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 17, name: "tax_rate", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
   ],
 );
 

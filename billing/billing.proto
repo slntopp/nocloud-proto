@@ -230,7 +230,7 @@ message Item {
   string unit = 2;
   double price = 3;
   string description = 4;
-  double tax_rate = 5; // 0.00 is min
+  bool apply_tax = 5;
 }
 
 message Invoice {
@@ -250,6 +250,7 @@ message Invoice {
   ActionType type = 14;
   string number = 15;
   repeated string instances = 16; // Linked instances
+  double tax_rate = 17; // 0.00 is min
 }
 
 message Invoices {repeated Invoice pool = 1;}
