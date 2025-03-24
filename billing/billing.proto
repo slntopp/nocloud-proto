@@ -230,6 +230,7 @@ message Item {
   string unit = 2;
   double price = 3;
   string description = 4;
+  double tax_rate = 5; // 0.00 is min
 }
 
 message Invoice {

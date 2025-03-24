@@ -8735,6 +8735,11 @@
         },
         "description": {
           "type": "string"
+        },
+        "taxRate": {
+          "type": "number",
+          "format": "double",
+          "title": "0.00 is min"
         }
       },
       "title": "Position. Instance must be specified to connect action with instance"

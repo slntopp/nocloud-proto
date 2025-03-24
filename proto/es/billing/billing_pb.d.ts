@@ -995,6 +995,13 @@ export declare class Item extends Message<Item> {
    */
   description: string;
 
+  /**
+   * 0.00 is min
+   *
+   * @generated from field: double tax_rate = 5;
+   */
+  taxRate: number;
+
   constructor(data?: PartialMessage<Item>);
 
   static readonly runtime: typeof proto3;
