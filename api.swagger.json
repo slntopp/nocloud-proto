@@ -1687,6 +1687,38 @@
         ]
       }
     },
+    "/billing/currencies/convert_many": {
+      "post": {
+        "operationId": "CurrencyService_ConvertMany",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingMultiConversionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingMultiConversionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "CurrencyService"
+        ]
+      }
+    },
     "/billing/currencies/rates": {
       "get": {
         "operationId": "CurrencyService_GetExchangeRates",
@@ -8780,6 +8812,36 @@
         "plans": {
           "type": "object",
           "additionalProperties": {}
+        }
+      }
+    },
+    "billingMultiConversionRequest": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "$ref": "#/definitions/billingCurrency"
+        },
+        "to": {
+          "$ref": "#/definitions/billingCurrency"
+        },
+        "amounts": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      }
+    },
+    "billingMultiConversionResponse": {
+      "type": "object",
+      "properties": {
+        "amounts": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
         }
       }
     },

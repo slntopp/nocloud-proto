@@ -731,6 +731,14 @@ message ConversionRequest {
 
 message ConversionResponse {double amount = 1;}
 
+message MultiConversionRequest {
+  Currency from = 1;
+  Currency to = 2;
+  repeated double amounts = 3;
+}
+
+message MultiConversionResponse {repeated double amounts = 1;}
+
 // Promocodes
 message ApplySaleRequest{
   repeated string promocodes = 1;
@@ -797,6 +805,12 @@ service CurrencyService {
   rpc Convert (ConversionRequest) returns (ConversionResponse) {
     option (google.api.http) = {
       post: "/billing/currencies/convert"
+      body: "*"
+    };
+  };
+  rpc ConvertMany (MultiConversionRequest) returns (MultiConversionResponse) {
+    option (google.api.http) = {
+      post: "/billing/currencies/convert_many"
       body: "*"
     };
   };

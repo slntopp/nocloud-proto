@@ -1046,6 +1046,28 @@ export const ConversionResponse = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * @generated from message nocloud.billing.MultiConversionRequest
+ */
+export const MultiConversionRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.MultiConversionRequest",
+  () => [
+    { no: 1, name: "from", kind: "message", T: Currency },
+    { no: 2, name: "to", kind: "message", T: Currency },
+    { no: 3, name: "amounts", kind: "scalar", T: 1 /* ScalarType.DOUBLE */, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.MultiConversionResponse
+ */
+export const MultiConversionResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.MultiConversionResponse",
+  () => [
+    { no: 1, name: "amounts", kind: "scalar", T: 1 /* ScalarType.DOUBLE */, repeated: true },
+  ],
+);
+
+/**
  * Promocodes
  *
  * @generated from message nocloud.billing.ApplySaleRequest

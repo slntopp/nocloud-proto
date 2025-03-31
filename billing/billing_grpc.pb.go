@@ -1390,6 +1390,7 @@ const (
 	CurrencyService_UpdateExchangeRate_FullMethodName    = "/nocloud.billing.CurrencyService/UpdateExchangeRate"
 	CurrencyService_DeleteExchangeRate_FullMethodName    = "/nocloud.billing.CurrencyService/DeleteExchangeRate"
 	CurrencyService_Convert_FullMethodName               = "/nocloud.billing.CurrencyService/Convert"
+	CurrencyService_ConvertMany_FullMethodName           = "/nocloud.billing.CurrencyService/ConvertMany"
 	CurrencyService_ChangeDefaultCurrency_FullMethodName = "/nocloud.billing.CurrencyService/ChangeDefaultCurrency"
 )
 
@@ -1406,6 +1407,7 @@ type CurrencyServiceClient interface {
 	UpdateExchangeRate(ctx context.Context, in *UpdateExchangeRateRequest, opts ...grpc.CallOption) (*UpdateExchangeRateResponse, error)
 	DeleteExchangeRate(ctx context.Context, in *DeleteExchangeRateRequest, opts ...grpc.CallOption) (*DeleteExchangeRateResponse, error)
 	Convert(ctx context.Context, in *ConversionRequest, opts ...grpc.CallOption) (*ConversionResponse, error)
+	ConvertMany(ctx context.Context, in *MultiConversionRequest, opts ...grpc.CallOption) (*MultiConversionResponse, error)
 	ChangeDefaultCurrency(ctx context.Context, in *ChangeDefaultCurrencyRequest, opts ...grpc.CallOption) (*ChangeDefaultCurrencyResponse, error)
 }
 
@@ -1507,6 +1509,16 @@ func (c *currencyServiceClient) Convert(ctx context.Context, in *ConversionReque
 	return out, nil
 }
 
+func (c *currencyServiceClient) ConvertMany(ctx context.Context, in *MultiConversionRequest, opts ...grpc.CallOption) (*MultiConversionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MultiConversionResponse)
+	err := c.cc.Invoke(ctx, CurrencyService_ConvertMany_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *currencyServiceClient) ChangeDefaultCurrency(ctx context.Context, in *ChangeDefaultCurrencyRequest, opts ...grpc.CallOption) (*ChangeDefaultCurrencyResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ChangeDefaultCurrencyResponse)
@@ -1530,6 +1542,7 @@ type CurrencyServiceServer interface {
 	UpdateExchangeRate(context.Context, *UpdateExchangeRateRequest) (*UpdateExchangeRateResponse, error)
 	DeleteExchangeRate(context.Context, *DeleteExchangeRateRequest) (*DeleteExchangeRateResponse, error)
 	Convert(context.Context, *ConversionRequest) (*ConversionResponse, error)
+	ConvertMany(context.Context, *MultiConversionRequest) (*MultiConversionResponse, error)
 	ChangeDefaultCurrency(context.Context, *ChangeDefaultCurrencyRequest) (*ChangeDefaultCurrencyResponse, error)
 	mustEmbedUnimplementedCurrencyServiceServer()
 }
@@ -1567,6 +1580,9 @@ func (UnimplementedCurrencyServiceServer) DeleteExchangeRate(context.Context, *D
 }
 func (UnimplementedCurrencyServiceServer) Convert(context.Context, *ConversionRequest) (*ConversionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Convert not implemented")
+}
+func (UnimplementedCurrencyServiceServer) ConvertMany(context.Context, *MultiConversionRequest) (*MultiConversionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConvertMany not implemented")
 }
 func (UnimplementedCurrencyServiceServer) ChangeDefaultCurrency(context.Context, *ChangeDefaultCurrencyRequest) (*ChangeDefaultCurrencyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ChangeDefaultCurrency not implemented")
@@ -1754,6 +1770,24 @@ func _CurrencyService_Convert_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CurrencyService_ConvertMany_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MultiConversionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyServiceServer).ConvertMany(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CurrencyService_ConvertMany_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyServiceServer).ConvertMany(ctx, req.(*MultiConversionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _CurrencyService_ChangeDefaultCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ChangeDefaultCurrencyRequest)
 	if err := dec(in); err != nil {
@@ -1814,6 +1848,10 @@ var CurrencyService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Convert",
 			Handler:    _CurrencyService_Convert_Handler,
+		},
+		{
+			MethodName: "ConvertMany",
+			Handler:    _CurrencyService_ConvertMany_Handler,
 		},
 		{
 			MethodName: "ChangeDefaultCurrency",

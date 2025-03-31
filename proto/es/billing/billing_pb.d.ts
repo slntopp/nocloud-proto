@@ -3013,6 +3013,64 @@ export declare class ConversionResponse extends Message<ConversionResponse> {
 }
 
 /**
+ * @generated from message nocloud.billing.MultiConversionRequest
+ */
+export declare class MultiConversionRequest extends Message<MultiConversionRequest> {
+  /**
+   * @generated from field: nocloud.billing.Currency from = 1;
+   */
+  from?: Currency;
+
+  /**
+   * @generated from field: nocloud.billing.Currency to = 2;
+   */
+  to?: Currency;
+
+  /**
+   * @generated from field: repeated double amounts = 3;
+   */
+  amounts: number[];
+
+  constructor(data?: PartialMessage<MultiConversionRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.MultiConversionRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MultiConversionRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MultiConversionRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MultiConversionRequest;
+
+  static equals(a: MultiConversionRequest | PlainMessage<MultiConversionRequest> | undefined, b: MultiConversionRequest | PlainMessage<MultiConversionRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.MultiConversionResponse
+ */
+export declare class MultiConversionResponse extends Message<MultiConversionResponse> {
+  /**
+   * @generated from field: repeated double amounts = 1;
+   */
+  amounts: number[];
+
+  constructor(data?: PartialMessage<MultiConversionResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.MultiConversionResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MultiConversionResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MultiConversionResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MultiConversionResponse;
+
+  static equals(a: MultiConversionResponse | PlainMessage<MultiConversionResponse> | undefined, b: MultiConversionResponse | PlainMessage<MultiConversionResponse> | undefined): boolean;
+}
+
+/**
  * Promocodes
  *
  * @generated from message nocloud.billing.ApplySaleRequest

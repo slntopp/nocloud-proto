@@ -179,6 +179,9 @@ const (
 	CurrencyServiceDeleteExchangeRateProcedure = "/nocloud.billing.CurrencyService/DeleteExchangeRate"
 	// CurrencyServiceConvertProcedure is the fully-qualified name of the CurrencyService's Convert RPC.
 	CurrencyServiceConvertProcedure = "/nocloud.billing.CurrencyService/Convert"
+	// CurrencyServiceConvertManyProcedure is the fully-qualified name of the CurrencyService's
+	// ConvertMany RPC.
+	CurrencyServiceConvertManyProcedure = "/nocloud.billing.CurrencyService/ConvertMany"
 	// CurrencyServiceChangeDefaultCurrencyProcedure is the fully-qualified name of the
 	// CurrencyService's ChangeDefaultCurrency RPC.
 	CurrencyServiceChangeDefaultCurrencyProcedure = "/nocloud.billing.CurrencyService/ChangeDefaultCurrency"
@@ -291,6 +294,7 @@ var (
 	currencyServiceUpdateExchangeRateMethodDescriptor               = currencyServiceServiceDescriptor.Methods().ByName("UpdateExchangeRate")
 	currencyServiceDeleteExchangeRateMethodDescriptor               = currencyServiceServiceDescriptor.Methods().ByName("DeleteExchangeRate")
 	currencyServiceConvertMethodDescriptor                          = currencyServiceServiceDescriptor.Methods().ByName("Convert")
+	currencyServiceConvertManyMethodDescriptor                      = currencyServiceServiceDescriptor.Methods().ByName("ConvertMany")
 	currencyServiceChangeDefaultCurrencyMethodDescriptor            = currencyServiceServiceDescriptor.Methods().ByName("ChangeDefaultCurrency")
 	addonsServiceServiceDescriptor                                  = billing.File_billing_billing_proto.Services().ByName("AddonsService")
 	addonsServiceCreateMethodDescriptor                             = addonsServiceServiceDescriptor.Methods().ByName("Create")
@@ -1249,6 +1253,7 @@ type CurrencyServiceClient interface {
 	UpdateExchangeRate(context.Context, *connect.Request[billing.UpdateExchangeRateRequest]) (*connect.Response[billing.UpdateExchangeRateResponse], error)
 	DeleteExchangeRate(context.Context, *connect.Request[billing.DeleteExchangeRateRequest]) (*connect.Response[billing.DeleteExchangeRateResponse], error)
 	Convert(context.Context, *connect.Request[billing.ConversionRequest]) (*connect.Response[billing.ConversionResponse], error)
+	ConvertMany(context.Context, *connect.Request[billing.MultiConversionRequest]) (*connect.Response[billing.MultiConversionResponse], error)
 	ChangeDefaultCurrency(context.Context, *connect.Request[billing.ChangeDefaultCurrencyRequest]) (*connect.Response[billing.ChangeDefaultCurrencyResponse], error)
 }
 
@@ -1316,6 +1321,12 @@ func NewCurrencyServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(currencyServiceConvertMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		convertMany: connect.NewClient[billing.MultiConversionRequest, billing.MultiConversionResponse](
+			httpClient,
+			baseURL+CurrencyServiceConvertManyProcedure,
+			connect.WithSchema(currencyServiceConvertManyMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 		changeDefaultCurrency: connect.NewClient[billing.ChangeDefaultCurrencyRequest, billing.ChangeDefaultCurrencyResponse](
 			httpClient,
 			baseURL+CurrencyServiceChangeDefaultCurrencyProcedure,
@@ -1336,6 +1347,7 @@ type currencyServiceClient struct {
 	updateExchangeRate    *connect.Client[billing.UpdateExchangeRateRequest, billing.UpdateExchangeRateResponse]
 	deleteExchangeRate    *connect.Client[billing.DeleteExchangeRateRequest, billing.DeleteExchangeRateResponse]
 	convert               *connect.Client[billing.ConversionRequest, billing.ConversionResponse]
+	convertMany           *connect.Client[billing.MultiConversionRequest, billing.MultiConversionResponse]
 	changeDefaultCurrency *connect.Client[billing.ChangeDefaultCurrencyRequest, billing.ChangeDefaultCurrencyResponse]
 }
 
@@ -1384,6 +1396,11 @@ func (c *currencyServiceClient) Convert(ctx context.Context, req *connect.Reques
 	return c.convert.CallUnary(ctx, req)
 }
 
+// ConvertMany calls nocloud.billing.CurrencyService.ConvertMany.
+func (c *currencyServiceClient) ConvertMany(ctx context.Context, req *connect.Request[billing.MultiConversionRequest]) (*connect.Response[billing.MultiConversionResponse], error) {
+	return c.convertMany.CallUnary(ctx, req)
+}
+
 // ChangeDefaultCurrency calls nocloud.billing.CurrencyService.ChangeDefaultCurrency.
 func (c *currencyServiceClient) ChangeDefaultCurrency(ctx context.Context, req *connect.Request[billing.ChangeDefaultCurrencyRequest]) (*connect.Response[billing.ChangeDefaultCurrencyResponse], error) {
 	return c.changeDefaultCurrency.CallUnary(ctx, req)
@@ -1400,6 +1417,7 @@ type CurrencyServiceHandler interface {
 	UpdateExchangeRate(context.Context, *connect.Request[billing.UpdateExchangeRateRequest]) (*connect.Response[billing.UpdateExchangeRateResponse], error)
 	DeleteExchangeRate(context.Context, *connect.Request[billing.DeleteExchangeRateRequest]) (*connect.Response[billing.DeleteExchangeRateResponse], error)
 	Convert(context.Context, *connect.Request[billing.ConversionRequest]) (*connect.Response[billing.ConversionResponse], error)
+	ConvertMany(context.Context, *connect.Request[billing.MultiConversionRequest]) (*connect.Response[billing.MultiConversionResponse], error)
 	ChangeDefaultCurrency(context.Context, *connect.Request[billing.ChangeDefaultCurrencyRequest]) (*connect.Response[billing.ChangeDefaultCurrencyResponse], error)
 }
 
@@ -1463,6 +1481,12 @@ func NewCurrencyServiceHandler(svc CurrencyServiceHandler, opts ...connect.Handl
 		connect.WithSchema(currencyServiceConvertMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	currencyServiceConvertManyHandler := connect.NewUnaryHandler(
+		CurrencyServiceConvertManyProcedure,
+		svc.ConvertMany,
+		connect.WithSchema(currencyServiceConvertManyMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	currencyServiceChangeDefaultCurrencyHandler := connect.NewUnaryHandler(
 		CurrencyServiceChangeDefaultCurrencyProcedure,
 		svc.ChangeDefaultCurrency,
@@ -1489,6 +1513,8 @@ func NewCurrencyServiceHandler(svc CurrencyServiceHandler, opts ...connect.Handl
 			currencyServiceDeleteExchangeRateHandler.ServeHTTP(w, r)
 		case CurrencyServiceConvertProcedure:
 			currencyServiceConvertHandler.ServeHTTP(w, r)
+		case CurrencyServiceConvertManyProcedure:
+			currencyServiceConvertManyHandler.ServeHTTP(w, r)
 		case CurrencyServiceChangeDefaultCurrencyProcedure:
 			currencyServiceChangeDefaultCurrencyHandler.ServeHTTP(w, r)
 		default:
@@ -1534,6 +1560,10 @@ func (UnimplementedCurrencyServiceHandler) DeleteExchangeRate(context.Context, *
 
 func (UnimplementedCurrencyServiceHandler) Convert(context.Context, *connect.Request[billing.ConversionRequest]) (*connect.Response[billing.ConversionResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.CurrencyService.Convert is not implemented"))
+}
+
+func (UnimplementedCurrencyServiceHandler) ConvertMany(context.Context, *connect.Request[billing.MultiConversionRequest]) (*connect.Response[billing.MultiConversionResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.CurrencyService.ConvertMany is not implemented"))
 }
 
 func (UnimplementedCurrencyServiceHandler) ChangeDefaultCurrency(context.Context, *connect.Request[billing.ChangeDefaultCurrencyRequest]) (*connect.Response[billing.ChangeDefaultCurrencyResponse], error) {
