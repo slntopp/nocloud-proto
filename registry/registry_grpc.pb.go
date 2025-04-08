@@ -50,6 +50,7 @@ const (
 	AccountsService_Delete_FullMethodName         = "/nocloud.registry.AccountsService/Delete"
 	AccountsService_Suspend_FullMethodName        = "/nocloud.registry.AccountsService/Suspend"
 	AccountsService_Unsuspend_FullMethodName      = "/nocloud.registry.AccountsService/Unsuspend"
+	AccountsService_Verify_FullMethodName         = "/nocloud.registry.AccountsService/Verify"
 )
 
 // AccountsServiceClient is the client API for AccountsService service.
@@ -69,6 +70,7 @@ type AccountsServiceClient interface {
 	Delete(ctx context.Context, in *accounts.DeleteRequest, opts ...grpc.CallOption) (*accounts.DeleteResponse, error)
 	Suspend(ctx context.Context, in *accounts.SuspendRequest, opts ...grpc.CallOption) (*accounts.SuspendResponse, error)
 	Unsuspend(ctx context.Context, in *accounts.UnsuspendRequest, opts ...grpc.CallOption) (*accounts.UnsuspendResponse, error)
+	Verify(ctx context.Context, in *VerificationRequest, opts ...grpc.CallOption) (*VerificationResponse, error)
 }
 
 type accountsServiceClient struct {
@@ -209,6 +211,16 @@ func (c *accountsServiceClient) Unsuspend(ctx context.Context, in *accounts.Unsu
 	return out, nil
 }
 
+func (c *accountsServiceClient) Verify(ctx context.Context, in *VerificationRequest, opts ...grpc.CallOption) (*VerificationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(VerificationResponse)
+	err := c.cc.Invoke(ctx, AccountsService_Verify_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AccountsServiceServer is the server API for AccountsService service.
 // All implementations must embed UnimplementedAccountsServiceServer
 // for forward compatibility.
@@ -226,6 +238,7 @@ type AccountsServiceServer interface {
 	Delete(context.Context, *accounts.DeleteRequest) (*accounts.DeleteResponse, error)
 	Suspend(context.Context, *accounts.SuspendRequest) (*accounts.SuspendResponse, error)
 	Unsuspend(context.Context, *accounts.UnsuspendRequest) (*accounts.UnsuspendResponse, error)
+	Verify(context.Context, *VerificationRequest) (*VerificationResponse, error)
 	mustEmbedUnimplementedAccountsServiceServer()
 }
 
@@ -274,6 +287,9 @@ func (UnimplementedAccountsServiceServer) Suspend(context.Context, *accounts.Sus
 }
 func (UnimplementedAccountsServiceServer) Unsuspend(context.Context, *accounts.UnsuspendRequest) (*accounts.UnsuspendResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Unsuspend not implemented")
+}
+func (UnimplementedAccountsServiceServer) Verify(context.Context, *VerificationRequest) (*VerificationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Verify not implemented")
 }
 func (UnimplementedAccountsServiceServer) mustEmbedUnimplementedAccountsServiceServer() {}
 func (UnimplementedAccountsServiceServer) testEmbeddedByValue()                         {}
@@ -530,6 +546,24 @@ func _AccountsService_Unsuspend_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AccountsService_Verify_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VerificationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServiceServer).Verify(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountsService_Verify_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServiceServer).Verify(ctx, req.(*VerificationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AccountsService_ServiceDesc is the grpc.ServiceDesc for AccountsService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -588,6 +622,10 @@ var AccountsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Unsuspend",
 			Handler:    _AccountsService_Unsuspend_Handler,
+		},
+		{
+			MethodName: "Verify",
+			Handler:    _AccountsService_Verify_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

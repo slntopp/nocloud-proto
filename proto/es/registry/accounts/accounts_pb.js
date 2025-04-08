@@ -115,6 +115,8 @@ export const Account = /*@__PURE__*/ proto3.makeMessageType(
     { no: 12, name: "subaccounts", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 13, name: "account_owner", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 14, name: "paymentsGateway", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 15, name: "is_email_verified", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 16, name: "is_phone_verified", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 

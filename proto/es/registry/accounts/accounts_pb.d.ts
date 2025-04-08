@@ -306,6 +306,16 @@ export declare class Account extends Message<Account> {
    */
   paymentsGateway: string;
 
+  /**
+   * @generated from field: bool is_email_verified = 15;
+   */
+  isEmailVerified: boolean;
+
+  /**
+   * @generated from field: bool is_phone_verified = 16;
+   */
+  isPhoneVerified: boolean;
+
   constructor(data?: PartialMessage<Account>);
 
   static readonly runtime: typeof proto3;

@@ -21,6 +21,7 @@
 import { Account, CreateRequest, CreateResponse, DeleteRequest, DeleteResponse, GetRequest, ListRequest, ListResponse, SetCredentialsRequest, SetCredentialsResponse, SuspendRequest, SuspendResponse, TokenRequest, TokenResponse, UnsuspendRequest, UnsuspendResponse, UpdateResponse } from "./accounts/accounts_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 import { AddNoteRequest, NoteResponse, PatchNoteRequest, RemoveNoteRequest } from "../notes/notes_pb.js";
+import { VerificationRequest, VerificationResponse } from "./registry_pb.js";
 import { CreateRequest as CreateRequest$1, CreateResponse as CreateResponse$1, DeleteRequest as DeleteRequest$1, DeleteResponse as DeleteResponse$1, GetRequest as GetRequest$1, JoinRequest, JoinResponse, LinkRequest, LinkResponse, ListRequest as ListRequest$1, ListResponse as ListResponse$1, Namespace, PatchRequest, PatchResponse } from "./namespaces/namespaces_pb.js";
 
 /**
@@ -144,6 +145,15 @@ export declare const AccountsService: {
       readonly name: "Unsuspend",
       readonly I: typeof UnsuspendRequest,
       readonly O: typeof UnsuspendResponse,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.registry.AccountsService.Verify
+     */
+    readonly verify: {
+      readonly name: "Verify",
+      readonly I: typeof VerificationRequest,
+      readonly O: typeof VerificationResponse,
       readonly kind: MethodKind.Unary,
     },
   }

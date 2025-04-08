@@ -83,6 +83,8 @@ const (
 	// AccountsServiceUnsuspendProcedure is the fully-qualified name of the AccountsService's Unsuspend
 	// RPC.
 	AccountsServiceUnsuspendProcedure = "/nocloud.registry.AccountsService/Unsuspend"
+	// AccountsServiceVerifyProcedure is the fully-qualified name of the AccountsService's Verify RPC.
+	AccountsServiceVerifyProcedure = "/nocloud.registry.AccountsService/Verify"
 	// NamespacesServiceCreateProcedure is the fully-qualified name of the NamespacesService's Create
 	// RPC.
 	NamespacesServiceCreateProcedure = "/nocloud.registry.NamespacesService/Create"
@@ -117,6 +119,7 @@ var (
 	accountsServiceDeleteMethodDescriptor         = accountsServiceServiceDescriptor.Methods().ByName("Delete")
 	accountsServiceSuspendMethodDescriptor        = accountsServiceServiceDescriptor.Methods().ByName("Suspend")
 	accountsServiceUnsuspendMethodDescriptor      = accountsServiceServiceDescriptor.Methods().ByName("Unsuspend")
+	accountsServiceVerifyMethodDescriptor         = accountsServiceServiceDescriptor.Methods().ByName("Verify")
 	namespacesServiceServiceDescriptor            = registry.File_registry_registry_proto.Services().ByName("NamespacesService")
 	namespacesServiceCreateMethodDescriptor       = namespacesServiceServiceDescriptor.Methods().ByName("Create")
 	namespacesServiceListMethodDescriptor         = namespacesServiceServiceDescriptor.Methods().ByName("List")
@@ -142,6 +145,7 @@ type AccountsServiceClient interface {
 	Delete(context.Context, *connect.Request[accounts.DeleteRequest]) (*connect.Response[accounts.DeleteResponse], error)
 	Suspend(context.Context, *connect.Request[accounts.SuspendRequest]) (*connect.Response[accounts.SuspendResponse], error)
 	Unsuspend(context.Context, *connect.Request[accounts.UnsuspendRequest]) (*connect.Response[accounts.UnsuspendResponse], error)
+	Verify(context.Context, *connect.Request[registry.VerificationRequest]) (*connect.Response[registry.VerificationResponse], error)
 }
 
 // NewAccountsServiceClient constructs a client for the nocloud.registry.AccountsService service. By
@@ -232,6 +236,12 @@ func NewAccountsServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(accountsServiceUnsuspendMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		verify: connect.NewClient[registry.VerificationRequest, registry.VerificationResponse](
+			httpClient,
+			baseURL+AccountsServiceVerifyProcedure,
+			connect.WithSchema(accountsServiceVerifyMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -250,6 +260,7 @@ type accountsServiceClient struct {
 	delete         *connect.Client[accounts.DeleteRequest, accounts.DeleteResponse]
 	suspend        *connect.Client[accounts.SuspendRequest, accounts.SuspendResponse]
 	unsuspend      *connect.Client[accounts.UnsuspendRequest, accounts.UnsuspendResponse]
+	verify         *connect.Client[registry.VerificationRequest, registry.VerificationResponse]
 }
 
 // Token calls nocloud.registry.AccountsService.Token.
@@ -317,6 +328,11 @@ func (c *accountsServiceClient) Unsuspend(ctx context.Context, req *connect.Requ
 	return c.unsuspend.CallUnary(ctx, req)
 }
 
+// Verify calls nocloud.registry.AccountsService.Verify.
+func (c *accountsServiceClient) Verify(ctx context.Context, req *connect.Request[registry.VerificationRequest]) (*connect.Response[registry.VerificationResponse], error) {
+	return c.verify.CallUnary(ctx, req)
+}
+
 // AccountsServiceHandler is an implementation of the nocloud.registry.AccountsService service.
 type AccountsServiceHandler interface {
 	Token(context.Context, *connect.Request[accounts.TokenRequest]) (*connect.Response[accounts.TokenResponse], error)
@@ -332,6 +348,7 @@ type AccountsServiceHandler interface {
 	Delete(context.Context, *connect.Request[accounts.DeleteRequest]) (*connect.Response[accounts.DeleteResponse], error)
 	Suspend(context.Context, *connect.Request[accounts.SuspendRequest]) (*connect.Response[accounts.SuspendResponse], error)
 	Unsuspend(context.Context, *connect.Request[accounts.UnsuspendRequest]) (*connect.Response[accounts.UnsuspendResponse], error)
+	Verify(context.Context, *connect.Request[registry.VerificationRequest]) (*connect.Response[registry.VerificationResponse], error)
 }
 
 // NewAccountsServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -418,6 +435,12 @@ func NewAccountsServiceHandler(svc AccountsServiceHandler, opts ...connect.Handl
 		connect.WithSchema(accountsServiceUnsuspendMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	accountsServiceVerifyHandler := connect.NewUnaryHandler(
+		AccountsServiceVerifyProcedure,
+		svc.Verify,
+		connect.WithSchema(accountsServiceVerifyMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/nocloud.registry.AccountsService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case AccountsServiceTokenProcedure:
@@ -446,6 +469,8 @@ func NewAccountsServiceHandler(svc AccountsServiceHandler, opts ...connect.Handl
 			accountsServiceSuspendHandler.ServeHTTP(w, r)
 		case AccountsServiceUnsuspendProcedure:
 			accountsServiceUnsuspendHandler.ServeHTTP(w, r)
+		case AccountsServiceVerifyProcedure:
+			accountsServiceVerifyHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -505,6 +530,10 @@ func (UnimplementedAccountsServiceHandler) Suspend(context.Context, *connect.Req
 
 func (UnimplementedAccountsServiceHandler) Unsuspend(context.Context, *connect.Request[accounts.UnsuspendRequest]) (*connect.Response[accounts.UnsuspendResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.registry.AccountsService.Unsuspend is not implemented"))
+}
+
+func (UnimplementedAccountsServiceHandler) Verify(context.Context, *connect.Request[registry.VerificationRequest]) (*connect.Response[registry.VerificationResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.registry.AccountsService.Verify is not implemented"))
 }
 
 // NamespacesServiceClient is a client for the nocloud.registry.NamespacesService service.

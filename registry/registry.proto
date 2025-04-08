@@ -22,6 +22,27 @@ import "notes/notes.proto";
 import "registry/accounts/accounts.proto";
 import "registry/namespaces/namespaces.proto";
 
+enum VerificationAction{
+  BEGIN = 0;
+  APPROVE = 1;
+}
+
+enum VerificationType{
+  EMAIL = 0;
+  PHONE = 1;
+}
+
+message VerificationRequest{
+  VerificationAction action = 1;
+  VerificationType type = 2;
+  optional string account = 3;
+  optional string secure_code = 4;
+}
+
+message VerificationResponse{
+  bool result = 1;
+}
+
 service AccountsService {
   rpc Token (nocloud.registry.accounts.TokenRequest)
       returns (nocloud.registry.accounts.TokenResponse) {
@@ -107,6 +128,12 @@ service AccountsService {
       returns (nocloud.registry.accounts.UnsuspendResponse) {
     option (google.api.http) = {
       post: "/accounts/{uuid}/unsuspend"
+    };
+  };
+  rpc Verify (VerificationRequest)
+      returns (VerificationResponse){
+    option (google.api.http) = {
+      post: "/accounts/verify"
     };
   };
 }

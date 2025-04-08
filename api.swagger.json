@@ -193,6 +193,64 @@
         ]
       }
     },
+    "/accounts/verify": {
+      "post": {
+        "operationId": "AccountsService_Verify",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/registryVerificationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "action",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "BEGIN",
+              "APPROVE"
+            ],
+            "default": "BEGIN"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "EMAIL",
+              "PHONE"
+            ],
+            "default": "EMAIL"
+          },
+          {
+            "name": "account",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "secureCode",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AccountsService"
+        ]
+      }
+    },
     "/accounts/{account}/credentials": {
       "post": {
         "operationId": "AccountsService_SetCredentials",
@@ -7666,6 +7724,12 @@
         },
         "paymentsGateway": {
           "type": "string"
+        },
+        "isEmailVerified": {
+          "type": "boolean"
+        },
+        "isPhoneVerified": {
+          "type": "boolean"
         }
       }
     },
@@ -11021,8 +11085,38 @@
         },
         "paymentsGateway": {
           "type": "string"
+        },
+        "isEmailVerified": {
+          "type": "boolean"
+        },
+        "isPhoneVerified": {
+          "type": "boolean"
         }
       }
+    },
+    "registryVerificationAction": {
+      "type": "string",
+      "enum": [
+        "BEGIN",
+        "APPROVE"
+      ],
+      "default": "BEGIN"
+    },
+    "registryVerificationResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "boolean"
+        }
+      }
+    },
+    "registryVerificationType": {
+      "type": "string",
+      "enum": [
+        "EMAIL",
+        "PHONE"
+      ],
+      "default": "EMAIL"
     },
     "registryaccountsCreateRequest": {
       "type": "object",
