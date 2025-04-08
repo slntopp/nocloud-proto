@@ -134,6 +134,7 @@ service AccountsService {
       returns (VerificationResponse){
     option (google.api.http) = {
       post: "/accounts/verify"
+      body: "*"
     };
   };
 }

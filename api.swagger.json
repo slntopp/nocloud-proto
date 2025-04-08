@@ -212,38 +212,12 @@
         },
         "parameters": [
           {
-            "name": "action",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "BEGIN",
-              "APPROVE"
-            ],
-            "default": "BEGIN"
-          },
-          {
-            "name": "type",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "EMAIL",
-              "PHONE"
-            ],
-            "default": "EMAIL"
-          },
-          {
-            "name": "account",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "secureCode",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/registryVerificationRequest"
+            }
           }
         ],
         "tags": [
@@ -11101,6 +11075,23 @@
         "APPROVE"
       ],
       "default": "BEGIN"
+    },
+    "registryVerificationRequest": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/registryVerificationAction"
+        },
+        "type": {
+          "$ref": "#/definitions/registryVerificationType"
+        },
+        "account": {
+          "type": "string"
+        },
+        "secureCode": {
+          "type": "string"
+        }
+      }
     },
     "registryVerificationResponse": {
       "type": "object",
