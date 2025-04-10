@@ -2806,6 +2806,18 @@
             "required": false,
             "type": "number",
             "format": "double"
+          },
+          {
+            "name": "properties.phoneVerificationRequired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "properties.emailVerificationRequired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -3182,6 +3194,18 @@
               "type": "string"
             },
             "collectionFormat": "multi"
+          },
+          {
+            "name": "properties.phoneVerificationRequired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "properties.emailVerificationRequired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -3310,6 +3334,18 @@
               "type": "string"
             },
             "collectionFormat": "multi"
+          },
+          {
+            "name": "properties.phoneVerificationRequired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "properties.emailVerificationRequired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -5267,6 +5303,18 @@
               "type": "string"
             },
             "collectionFormat": "multi"
+          },
+          {
+            "name": "billingPlan.properties.phoneVerificationRequired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "billingPlan.properties.emailVerificationRequired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           },
           {
             "name": "product",
@@ -7381,6 +7429,9 @@
             "type": "object",
             "$ref": "#/definitions/billingCustomEvent"
           }
+        },
+        "properties": {
+          "$ref": "#/definitions/billingAdditionalProperties"
         }
       }
     },
@@ -8187,6 +8238,17 @@
       "default": "ACTION_TYPE_UNKNOWN",
       "title": "- ACTION_TYPE_UNKNOWN: Dont use.\n - WHMCS_INVOICE: Same as NO_ACTION, but marks invoice that was originally created by WHMCS"
     },
+    "billingAdditionalProperties": {
+      "type": "object",
+      "properties": {
+        "phoneVerificationRequired": {
+          "type": "boolean"
+        },
+        "emailVerificationRequired": {
+          "type": "boolean"
+        }
+      }
+    },
     "billingAddonsServiceUpdateBody": {
       "type": "object",
       "properties": {
@@ -8806,6 +8868,9 @@
           "type": "number",
           "format": "double",
           "title": "Total before additional fees (taxes etc.)"
+        },
+        "properties": {
+          "$ref": "#/definitions/billingAdditionalProperties"
         }
       }
     },
@@ -8976,6 +9041,9 @@
             "type": "object",
             "$ref": "#/definitions/billingCustomEvent"
           }
+        },
+        "properties": {
+          "$ref": "#/definitions/billingAdditionalProperties"
         }
       }
     },

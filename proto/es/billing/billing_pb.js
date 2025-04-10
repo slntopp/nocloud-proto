@@ -167,6 +167,17 @@ export const CustomEvent = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * @generated from message nocloud.billing.AdditionalProperties
+ */
+export const AdditionalProperties = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.AdditionalProperties",
+  () => [
+    { no: 1, name: "phone_verification_required", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 2, name: "email_verification_required", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
  * @generated from message nocloud.billing.Plan
  */
 export const Plan = /*@__PURE__*/ proto3.makeMessageType(
@@ -185,6 +196,7 @@ export const Plan = /*@__PURE__*/ proto3.makeMessageType(
     { no: 11, name: "status", kind: "enum", T: proto3.getEnumType(NoCloudStatus) },
     { no: 12, name: "addons", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 13, name: "custom_events", kind: "message", T: CustomEvent, repeated: true },
+    { no: 14, name: "properties", kind: "message", T: AdditionalProperties },
   ],
 );
 
@@ -383,6 +395,7 @@ export const Invoice = /*@__PURE__*/ proto3.makeMessageType(
     { no: 16, name: "instances", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 17, name: "tax_options", kind: "message", T: TaxOptions },
     { no: 18, name: "subtotal", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 19, name: "properties", kind: "message", T: AdditionalProperties },
   ],
 );
 

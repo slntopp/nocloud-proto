@@ -352,6 +352,35 @@ export declare class CustomEvent extends Message<CustomEvent> {
 }
 
 /**
+ * @generated from message nocloud.billing.AdditionalProperties
+ */
+export declare class AdditionalProperties extends Message<AdditionalProperties> {
+  /**
+   * @generated from field: bool phone_verification_required = 1;
+   */
+  phoneVerificationRequired: boolean;
+
+  /**
+   * @generated from field: bool email_verification_required = 2;
+   */
+  emailVerificationRequired: boolean;
+
+  constructor(data?: PartialMessage<AdditionalProperties>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.AdditionalProperties";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AdditionalProperties;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AdditionalProperties;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AdditionalProperties;
+
+  static equals(a: AdditionalProperties | PlainMessage<AdditionalProperties> | undefined, b: AdditionalProperties | PlainMessage<AdditionalProperties> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.billing.Plan
  */
 export declare class Plan extends Message<Plan> {
@@ -431,6 +460,11 @@ export declare class Plan extends Message<Plan> {
    * @generated from field: repeated nocloud.billing.CustomEvent custom_events = 13;
    */
   customEvents: CustomEvent[];
+
+  /**
+   * @generated from field: nocloud.billing.AdditionalProperties properties = 14;
+   */
+  properties?: AdditionalProperties;
 
   constructor(data?: PartialMessage<Plan>);
 
@@ -1151,6 +1185,11 @@ export declare class Invoice extends Message<Invoice> {
    * @generated from field: double subtotal = 18;
    */
   subtotal: number;
+
+  /**
+   * @generated from field: nocloud.billing.AdditionalProperties properties = 19;
+   */
+  properties?: AdditionalProperties;
 
   constructor(data?: PartialMessage<Invoice>);
 
