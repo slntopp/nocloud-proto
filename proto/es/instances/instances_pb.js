@@ -51,6 +51,7 @@ export const Instance = /*@__PURE__*/ proto3.makeMessageType(
     { no: 16, name: "period", kind: "scalar", T: 3 /* ScalarType.INT64 */, opt: true },
     { no: 17, name: "estimate", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
     { no: 18, name: "addons", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 19, name: "meta", kind: "message", T: InstanceMeta },
   ],
 );
 
@@ -71,6 +72,16 @@ export const InstancesGroup = /*@__PURE__*/ proto3.makeMessageType(
     { no: 9, name: "hash", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 10, name: "sp", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 11, name: "access", kind: "message", T: Access, opt: true },
+  ],
+);
+
+/**
+ * @generated from message nocloud.instances.InstanceMeta
+ */
+export const InstanceMeta = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.instances.InstanceMeta",
+  () => [
+    { no: 1, name: "started", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ],
 );
 

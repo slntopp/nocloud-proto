@@ -56,6 +56,8 @@ message Instance {
     optional int64 period = 16;
     double estimate = 17;
     repeated string addons = 18;
+
+    InstanceMeta meta = 19;
 }
 
 message InstancesGroup {
@@ -72,6 +74,10 @@ message InstancesGroup {
     string hash = 9 [(nocloud.hasher.hash) = true];
     optional string sp = 10;
     optional nocloud.access.Access access = 11;
+}
+
+message InstanceMeta {
+    int64 started = 1;
 }
 
 message Context {

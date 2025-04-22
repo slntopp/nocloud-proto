@@ -124,6 +124,11 @@ export declare class Instance extends Message<Instance> {
    */
   addons: string[];
 
+  /**
+   * @generated from field: nocloud.instances.InstanceMeta meta = 19;
+   */
+  meta?: InstanceMeta;
+
   constructor(data?: PartialMessage<Instance>);
 
   static readonly runtime: typeof proto3;
@@ -211,6 +216,30 @@ export declare class InstancesGroup extends Message<InstancesGroup> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): InstancesGroup;
 
   static equals(a: InstancesGroup | PlainMessage<InstancesGroup> | undefined, b: InstancesGroup | PlainMessage<InstancesGroup> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.instances.InstanceMeta
+ */
+export declare class InstanceMeta extends Message<InstanceMeta> {
+  /**
+   * @generated from field: int64 started = 1;
+   */
+  started: bigint;
+
+  constructor(data?: PartialMessage<InstanceMeta>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.instances.InstanceMeta";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): InstanceMeta;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): InstanceMeta;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): InstanceMeta;
+
+  static equals(a: InstanceMeta | PlainMessage<InstanceMeta> | undefined, b: InstanceMeta | PlainMessage<InstanceMeta> | undefined): boolean;
 }
 
 /**

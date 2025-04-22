@@ -5391,6 +5391,13 @@
               "type": "string"
             },
             "collectionFormat": "multi"
+          },
+          {
+            "name": "meta.started",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -9815,6 +9822,15 @@
         }
       }
     },
+    "instancesInstanceMeta": {
+      "type": "object",
+      "properties": {
+        "started": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
     "instancesInstancesGroup": {
       "type": "object",
       "properties": {
@@ -10514,6 +10530,9 @@
           "items": {
             "type": "string"
           }
+        },
+        "meta": {
+          "$ref": "#/definitions/instancesInstanceMeta"
         }
       }
     },
