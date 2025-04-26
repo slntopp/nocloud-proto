@@ -153,6 +153,8 @@ const (
 	// BillingServiceRunDailyCronJobProcedure is the fully-qualified name of the BillingService's
 	// RunDailyCronJob RPC.
 	BillingServiceRunDailyCronJobProcedure = "/nocloud.billing.BillingService/RunDailyCronJob"
+	// BillingServiceStreamProcedure is the fully-qualified name of the BillingService's Stream RPC.
+	BillingServiceStreamProcedure = "/nocloud.billing.BillingService/Stream"
 	// CurrencyServiceCreateCurrencyProcedure is the fully-qualified name of the CurrencyService's
 	// CreateCurrency RPC.
 	CurrencyServiceCreateCurrencyProcedure = "/nocloud.billing.CurrencyService/CreateCurrency"
@@ -246,9 +248,6 @@ const (
 	// PromocodesServiceApplySaleProcedure is the fully-qualified name of the PromocodesService's
 	// ApplySale RPC.
 	PromocodesServiceApplySaleProcedure = "/nocloud.billing.PromocodesService/ApplySale"
-	// PromocodesServiceStreamProcedure is the fully-qualified name of the PromocodesService's Stream
-	// RPC.
-	PromocodesServiceStreamProcedure = "/nocloud.billing.PromocodesService/Stream"
 )
 
 // These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
@@ -287,6 +286,7 @@ var (
 	billingServicePayWithBalanceMethodDescriptor                    = billingServiceServiceDescriptor.Methods().ByName("PayWithBalance")
 	billingServiceGetInvoiceSettingsTemplateExampleMethodDescriptor = billingServiceServiceDescriptor.Methods().ByName("GetInvoiceSettingsTemplateExample")
 	billingServiceRunDailyCronJobMethodDescriptor                   = billingServiceServiceDescriptor.Methods().ByName("RunDailyCronJob")
+	billingServiceStreamMethodDescriptor                            = billingServiceServiceDescriptor.Methods().ByName("Stream")
 	currencyServiceServiceDescriptor                                = billing.File_billing_billing_proto.Services().ByName("CurrencyService")
 	currencyServiceCreateCurrencyMethodDescriptor                   = currencyServiceServiceDescriptor.Methods().ByName("CreateCurrency")
 	currencyServiceUpdateCurrencyMethodDescriptor                   = currencyServiceServiceDescriptor.Methods().ByName("UpdateCurrency")
@@ -326,7 +326,6 @@ var (
 	promocodesServiceApplyMethodDescriptor                          = promocodesServiceServiceDescriptor.Methods().ByName("Apply")
 	promocodesServiceDetachMethodDescriptor                         = promocodesServiceServiceDescriptor.Methods().ByName("Detach")
 	promocodesServiceApplySaleMethodDescriptor                      = promocodesServiceServiceDescriptor.Methods().ByName("ApplySale")
-	promocodesServiceStreamMethodDescriptor                         = promocodesServiceServiceDescriptor.Methods().ByName("Stream")
 )
 
 // RecordsServiceClient is a client for the nocloud.billing.RecordsService service.
@@ -480,6 +479,7 @@ type BillingServiceClient interface {
 	PayWithBalance(context.Context, *connect.Request[billing.PayWithBalanceRequest]) (*connect.Response[billing.PayWithBalanceResponse], error)
 	GetInvoiceSettingsTemplateExample(context.Context, *connect.Request[billing.GetInvoiceSettingsTemplateExampleRequest]) (*connect.Response[billing.GetInvoiceSettingsTemplateExampleResponse], error)
 	RunDailyCronJob(context.Context, *connect.Request[billing.RunDailyCronJobRequest]) (*connect.Response[billing.RunDailyCronJobResponse], error)
+	Stream(context.Context, *connect.Request[billing.StreamRequest]) (*connect.ServerStreamForClient[billing.StreamResponse], error)
 }
 
 // NewBillingServiceClient constructs a client for the nocloud.billing.BillingService service. By
@@ -666,6 +666,12 @@ func NewBillingServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(billingServiceRunDailyCronJobMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		stream: connect.NewClient[billing.StreamRequest, billing.StreamResponse](
+			httpClient,
+			baseURL+BillingServiceStreamProcedure,
+			connect.WithSchema(billingServiceStreamMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -700,6 +706,7 @@ type billingServiceClient struct {
 	payWithBalance                    *connect.Client[billing.PayWithBalanceRequest, billing.PayWithBalanceResponse]
 	getInvoiceSettingsTemplateExample *connect.Client[billing.GetInvoiceSettingsTemplateExampleRequest, billing.GetInvoiceSettingsTemplateExampleResponse]
 	runDailyCronJob                   *connect.Client[billing.RunDailyCronJobRequest, billing.RunDailyCronJobResponse]
+	stream                            *connect.Client[billing.StreamRequest, billing.StreamResponse]
 }
 
 // CreatePlan calls nocloud.billing.BillingService.CreatePlan.
@@ -848,6 +855,11 @@ func (c *billingServiceClient) RunDailyCronJob(ctx context.Context, req *connect
 	return c.runDailyCronJob.CallUnary(ctx, req)
 }
 
+// Stream calls nocloud.billing.BillingService.Stream.
+func (c *billingServiceClient) Stream(ctx context.Context, req *connect.Request[billing.StreamRequest]) (*connect.ServerStreamForClient[billing.StreamResponse], error) {
+	return c.stream.CallServerStream(ctx, req)
+}
+
 // BillingServiceHandler is an implementation of the nocloud.billing.BillingService service.
 type BillingServiceHandler interface {
 	CreatePlan(context.Context, *connect.Request[billing.Plan]) (*connect.Response[billing.Plan], error)
@@ -879,6 +891,7 @@ type BillingServiceHandler interface {
 	PayWithBalance(context.Context, *connect.Request[billing.PayWithBalanceRequest]) (*connect.Response[billing.PayWithBalanceResponse], error)
 	GetInvoiceSettingsTemplateExample(context.Context, *connect.Request[billing.GetInvoiceSettingsTemplateExampleRequest]) (*connect.Response[billing.GetInvoiceSettingsTemplateExampleResponse], error)
 	RunDailyCronJob(context.Context, *connect.Request[billing.RunDailyCronJobRequest]) (*connect.Response[billing.RunDailyCronJobResponse], error)
+	Stream(context.Context, *connect.Request[billing.StreamRequest], *connect.ServerStream[billing.StreamResponse]) error
 }
 
 // NewBillingServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -1061,6 +1074,12 @@ func NewBillingServiceHandler(svc BillingServiceHandler, opts ...connect.Handler
 		connect.WithSchema(billingServiceRunDailyCronJobMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	billingServiceStreamHandler := connect.NewServerStreamHandler(
+		BillingServiceStreamProcedure,
+		svc.Stream,
+		connect.WithSchema(billingServiceStreamMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/nocloud.billing.BillingService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case BillingServiceCreatePlanProcedure:
@@ -1121,6 +1140,8 @@ func NewBillingServiceHandler(svc BillingServiceHandler, opts ...connect.Handler
 			billingServiceGetInvoiceSettingsTemplateExampleHandler.ServeHTTP(w, r)
 		case BillingServiceRunDailyCronJobProcedure:
 			billingServiceRunDailyCronJobHandler.ServeHTTP(w, r)
+		case BillingServiceStreamProcedure:
+			billingServiceStreamHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -1244,6 +1265,10 @@ func (UnimplementedBillingServiceHandler) GetInvoiceSettingsTemplateExample(cont
 
 func (UnimplementedBillingServiceHandler) RunDailyCronJob(context.Context, *connect.Request[billing.RunDailyCronJobRequest]) (*connect.Response[billing.RunDailyCronJobResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.BillingService.RunDailyCronJob is not implemented"))
+}
+
+func (UnimplementedBillingServiceHandler) Stream(context.Context, *connect.Request[billing.StreamRequest], *connect.ServerStream[billing.StreamResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.BillingService.Stream is not implemented"))
 }
 
 // CurrencyServiceClient is a client for the nocloud.billing.CurrencyService service.
@@ -2035,7 +2060,6 @@ type PromocodesServiceClient interface {
 	Apply(context.Context, *connect.Request[promocodes.ApplyPromocodeRequest]) (*connect.Response[promocodes.ApplyPromocodeResponse], error)
 	Detach(context.Context, *connect.Request[promocodes.DetachPromocodeRequest]) (*connect.Response[promocodes.DetachPromocodeResponse], error)
 	ApplySale(context.Context, *connect.Request[billing.ApplySaleRequest]) (*connect.Response[billing.ApplySaleResponse], error)
-	Stream(context.Context, *connect.Request[billing.StreamRequest]) (*connect.ServerStreamForClient[billing.StreamResponse], error)
 }
 
 // NewPromocodesServiceClient constructs a client for the nocloud.billing.PromocodesService service.
@@ -2108,12 +2132,6 @@ func NewPromocodesServiceClient(httpClient connect.HTTPClient, baseURL string, o
 			connect.WithSchema(promocodesServiceApplySaleMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
-		stream: connect.NewClient[billing.StreamRequest, billing.StreamResponse](
-			httpClient,
-			baseURL+PromocodesServiceStreamProcedure,
-			connect.WithSchema(promocodesServiceStreamMethodDescriptor),
-			connect.WithClientOptions(opts...),
-		),
 	}
 }
 
@@ -2129,7 +2147,6 @@ type promocodesServiceClient struct {
 	apply     *connect.Client[promocodes.ApplyPromocodeRequest, promocodes.ApplyPromocodeResponse]
 	detach    *connect.Client[promocodes.DetachPromocodeRequest, promocodes.DetachPromocodeResponse]
 	applySale *connect.Client[billing.ApplySaleRequest, billing.ApplySaleResponse]
-	stream    *connect.Client[billing.StreamRequest, billing.StreamResponse]
 }
 
 // Create calls nocloud.billing.PromocodesService.Create.
@@ -2182,11 +2199,6 @@ func (c *promocodesServiceClient) ApplySale(ctx context.Context, req *connect.Re
 	return c.applySale.CallUnary(ctx, req)
 }
 
-// Stream calls nocloud.billing.PromocodesService.Stream.
-func (c *promocodesServiceClient) Stream(ctx context.Context, req *connect.Request[billing.StreamRequest]) (*connect.ServerStreamForClient[billing.StreamResponse], error) {
-	return c.stream.CallServerStream(ctx, req)
-}
-
 // PromocodesServiceHandler is an implementation of the nocloud.billing.PromocodesService service.
 type PromocodesServiceHandler interface {
 	Create(context.Context, *connect.Request[promocodes.Promocode]) (*connect.Response[promocodes.Promocode], error)
@@ -2199,7 +2211,6 @@ type PromocodesServiceHandler interface {
 	Apply(context.Context, *connect.Request[promocodes.ApplyPromocodeRequest]) (*connect.Response[promocodes.ApplyPromocodeResponse], error)
 	Detach(context.Context, *connect.Request[promocodes.DetachPromocodeRequest]) (*connect.Response[promocodes.DetachPromocodeResponse], error)
 	ApplySale(context.Context, *connect.Request[billing.ApplySaleRequest]) (*connect.Response[billing.ApplySaleResponse], error)
-	Stream(context.Context, *connect.Request[billing.StreamRequest], *connect.ServerStream[billing.StreamResponse]) error
 }
 
 // NewPromocodesServiceHandler builds an HTTP handler from the service implementation. It returns
@@ -2268,12 +2279,6 @@ func NewPromocodesServiceHandler(svc PromocodesServiceHandler, opts ...connect.H
 		connect.WithSchema(promocodesServiceApplySaleMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
-	promocodesServiceStreamHandler := connect.NewServerStreamHandler(
-		PromocodesServiceStreamProcedure,
-		svc.Stream,
-		connect.WithSchema(promocodesServiceStreamMethodDescriptor),
-		connect.WithHandlerOptions(opts...),
-	)
 	return "/nocloud.billing.PromocodesService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case PromocodesServiceCreateProcedure:
@@ -2296,8 +2301,6 @@ func NewPromocodesServiceHandler(svc PromocodesServiceHandler, opts ...connect.H
 			promocodesServiceDetachHandler.ServeHTTP(w, r)
 		case PromocodesServiceApplySaleProcedure:
 			promocodesServiceApplySaleHandler.ServeHTTP(w, r)
-		case PromocodesServiceStreamProcedure:
-			promocodesServiceStreamHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -2345,8 +2348,4 @@ func (UnimplementedPromocodesServiceHandler) Detach(context.Context, *connect.Re
 
 func (UnimplementedPromocodesServiceHandler) ApplySale(context.Context, *connect.Request[billing.ApplySaleRequest]) (*connect.Response[billing.ApplySaleResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.PromocodesService.ApplySale is not implemented"))
-}
-
-func (UnimplementedPromocodesServiceHandler) Stream(context.Context, *connect.Request[billing.StreamRequest], *connect.ServerStream[billing.StreamResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.PromocodesService.Stream is not implemented"))
 }

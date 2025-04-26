@@ -658,6 +658,13 @@ service BillingService {
       body: "*"
     };
   };
+  rpc Stream(StreamRequest)
+      returns (stream StreamResponse) {
+    option (google.api.http) = {
+      post: "/billing/stream"
+      body: "*"
+    };
+  };
 }
 
 enum Rounding {
@@ -981,13 +988,6 @@ service PromocodesService {
   rpc ApplySale (ApplySaleRequest) returns (ApplySaleResponse) {
     option (google.api.http) = {
       post: "/billing/promocodes/apply_sale"
-      body: "*"
-    };
-  };
-  rpc Stream(StreamRequest)
-      returns (stream StreamResponse) {
-    option (google.api.http) = {
-      post: "/billing/stream"
       body: "*"
     };
   };

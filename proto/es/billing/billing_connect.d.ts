@@ -327,6 +327,15 @@ export declare const BillingService: {
       readonly O: typeof RunDailyCronJobResponse,
       readonly kind: MethodKind.Unary,
     },
+    /**
+     * @generated from rpc nocloud.billing.BillingService.Stream
+     */
+    readonly stream: {
+      readonly name: "Stream",
+      readonly I: typeof StreamRequest,
+      readonly O: typeof StreamResponse,
+      readonly kind: MethodKind.ServerStreaming,
+    },
   }
 };
 
@@ -677,15 +686,6 @@ export declare const PromocodesService: {
       readonly I: typeof ApplySaleRequest,
       readonly O: typeof ApplySaleResponse,
       readonly kind: MethodKind.Unary,
-    },
-    /**
-     * @generated from rpc nocloud.billing.PromocodesService.Stream
-     */
-    readonly stream: {
-      readonly name: "Stream",
-      readonly I: typeof StreamRequest,
-      readonly O: typeof StreamResponse,
-      readonly kind: MethodKind.ServerStreaming,
     },
   }
 };

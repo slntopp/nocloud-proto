@@ -327,6 +327,15 @@ export const BillingService = {
       O: RunDailyCronJobResponse,
       kind: MethodKind.Unary,
     },
+    /**
+     * @generated from rpc nocloud.billing.BillingService.Stream
+     */
+    stream: {
+      name: "Stream",
+      I: StreamRequest,
+      O: StreamResponse,
+      kind: MethodKind.ServerStreaming,
+    },
   }
 };
 
@@ -677,15 +686,6 @@ export const PromocodesService = {
       I: ApplySaleRequest,
       O: ApplySaleResponse,
       kind: MethodKind.Unary,
-    },
-    /**
-     * @generated from rpc nocloud.billing.PromocodesService.Stream
-     */
-    stream: {
-      name: "Stream",
-      I: StreamRequest,
-      O: StreamResponse,
-      kind: MethodKind.ServerStreaming,
     },
   }
 };

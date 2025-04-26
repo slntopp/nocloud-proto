@@ -244,6 +244,7 @@ const (
 	BillingService_PayWithBalance_FullMethodName                    = "/nocloud.billing.BillingService/PayWithBalance"
 	BillingService_GetInvoiceSettingsTemplateExample_FullMethodName = "/nocloud.billing.BillingService/GetInvoiceSettingsTemplateExample"
 	BillingService_RunDailyCronJob_FullMethodName                   = "/nocloud.billing.BillingService/RunDailyCronJob"
+	BillingService_Stream_FullMethodName                            = "/nocloud.billing.BillingService/Stream"
 )
 
 // BillingServiceClient is the client API for BillingService service.
@@ -279,6 +280,7 @@ type BillingServiceClient interface {
 	PayWithBalance(ctx context.Context, in *PayWithBalanceRequest, opts ...grpc.CallOption) (*PayWithBalanceResponse, error)
 	GetInvoiceSettingsTemplateExample(ctx context.Context, in *GetInvoiceSettingsTemplateExampleRequest, opts ...grpc.CallOption) (*GetInvoiceSettingsTemplateExampleResponse, error)
 	RunDailyCronJob(ctx context.Context, in *RunDailyCronJobRequest, opts ...grpc.CallOption) (*RunDailyCronJobResponse, error)
+	Stream(ctx context.Context, in *StreamRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamResponse], error)
 }
 
 type billingServiceClient struct {
@@ -579,6 +581,25 @@ func (c *billingServiceClient) RunDailyCronJob(ctx context.Context, in *RunDaily
 	return out, nil
 }
 
+func (c *billingServiceClient) Stream(ctx context.Context, in *StreamRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamResponse], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &BillingService_ServiceDesc.Streams[0], BillingService_Stream_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[StreamRequest, StreamResponse]{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type BillingService_StreamClient = grpc.ServerStreamingClient[StreamResponse]
+
 // BillingServiceServer is the server API for BillingService service.
 // All implementations must embed UnimplementedBillingServiceServer
 // for forward compatibility.
@@ -612,6 +633,7 @@ type BillingServiceServer interface {
 	PayWithBalance(context.Context, *PayWithBalanceRequest) (*PayWithBalanceResponse, error)
 	GetInvoiceSettingsTemplateExample(context.Context, *GetInvoiceSettingsTemplateExampleRequest) (*GetInvoiceSettingsTemplateExampleResponse, error)
 	RunDailyCronJob(context.Context, *RunDailyCronJobRequest) (*RunDailyCronJobResponse, error)
+	Stream(*StreamRequest, grpc.ServerStreamingServer[StreamResponse]) error
 	mustEmbedUnimplementedBillingServiceServer()
 }
 
@@ -708,6 +730,9 @@ func (UnimplementedBillingServiceServer) GetInvoiceSettingsTemplateExample(conte
 }
 func (UnimplementedBillingServiceServer) RunDailyCronJob(context.Context, *RunDailyCronJobRequest) (*RunDailyCronJobResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RunDailyCronJob not implemented")
+}
+func (UnimplementedBillingServiceServer) Stream(*StreamRequest, grpc.ServerStreamingServer[StreamResponse]) error {
+	return status.Errorf(codes.Unimplemented, "method Stream not implemented")
 }
 func (UnimplementedBillingServiceServer) mustEmbedUnimplementedBillingServiceServer() {}
 func (UnimplementedBillingServiceServer) testEmbeddedByValue()                        {}
@@ -1252,6 +1277,17 @@ func _BillingService_RunDailyCronJob_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BillingService_Stream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServiceServer).Stream(m, &grpc.GenericServerStream[StreamRequest, StreamResponse]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type BillingService_StreamServer = grpc.ServerStreamingServer[StreamResponse]
+
 // BillingService_ServiceDesc is the grpc.ServiceDesc for BillingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1376,7 +1412,13 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BillingService_RunDailyCronJob_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "Stream",
+			Handler:       _BillingService_Stream_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "billing/billing.proto",
 }
 
@@ -2533,7 +2575,6 @@ const (
 	PromocodesService_Apply_FullMethodName     = "/nocloud.billing.PromocodesService/Apply"
 	PromocodesService_Detach_FullMethodName    = "/nocloud.billing.PromocodesService/Detach"
 	PromocodesService_ApplySale_FullMethodName = "/nocloud.billing.PromocodesService/ApplySale"
-	PromocodesService_Stream_FullMethodName    = "/nocloud.billing.PromocodesService/Stream"
 )
 
 // PromocodesServiceClient is the client API for PromocodesService service.
@@ -2550,7 +2591,6 @@ type PromocodesServiceClient interface {
 	Apply(ctx context.Context, in *promocodes.ApplyPromocodeRequest, opts ...grpc.CallOption) (*promocodes.ApplyPromocodeResponse, error)
 	Detach(ctx context.Context, in *promocodes.DetachPromocodeRequest, opts ...grpc.CallOption) (*promocodes.DetachPromocodeResponse, error)
 	ApplySale(ctx context.Context, in *ApplySaleRequest, opts ...grpc.CallOption) (*ApplySaleResponse, error)
-	Stream(ctx context.Context, in *StreamRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamResponse], error)
 }
 
 type promocodesServiceClient struct {
@@ -2661,25 +2701,6 @@ func (c *promocodesServiceClient) ApplySale(ctx context.Context, in *ApplySaleRe
 	return out, nil
 }
 
-func (c *promocodesServiceClient) Stream(ctx context.Context, in *StreamRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamResponse], error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &PromocodesService_ServiceDesc.Streams[0], PromocodesService_Stream_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[StreamRequest, StreamResponse]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type PromocodesService_StreamClient = grpc.ServerStreamingClient[StreamResponse]
-
 // PromocodesServiceServer is the server API for PromocodesService service.
 // All implementations must embed UnimplementedPromocodesServiceServer
 // for forward compatibility.
@@ -2694,7 +2715,6 @@ type PromocodesServiceServer interface {
 	Apply(context.Context, *promocodes.ApplyPromocodeRequest) (*promocodes.ApplyPromocodeResponse, error)
 	Detach(context.Context, *promocodes.DetachPromocodeRequest) (*promocodes.DetachPromocodeResponse, error)
 	ApplySale(context.Context, *ApplySaleRequest) (*ApplySaleResponse, error)
-	Stream(*StreamRequest, grpc.ServerStreamingServer[StreamResponse]) error
 	mustEmbedUnimplementedPromocodesServiceServer()
 }
 
@@ -2734,9 +2754,6 @@ func (UnimplementedPromocodesServiceServer) Detach(context.Context, *promocodes.
 }
 func (UnimplementedPromocodesServiceServer) ApplySale(context.Context, *ApplySaleRequest) (*ApplySaleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ApplySale not implemented")
-}
-func (UnimplementedPromocodesServiceServer) Stream(*StreamRequest, grpc.ServerStreamingServer[StreamResponse]) error {
-	return status.Errorf(codes.Unimplemented, "method Stream not implemented")
 }
 func (UnimplementedPromocodesServiceServer) mustEmbedUnimplementedPromocodesServiceServer() {}
 func (UnimplementedPromocodesServiceServer) testEmbeddedByValue()                           {}
@@ -2939,17 +2956,6 @@ func _PromocodesService_ApplySale_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PromocodesService_Stream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(StreamRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(PromocodesServiceServer).Stream(m, &grpc.GenericServerStream[StreamRequest, StreamResponse]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type PromocodesService_StreamServer = grpc.ServerStreamingServer[StreamResponse]
-
 // PromocodesService_ServiceDesc is the grpc.ServiceDesc for PromocodesService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2998,12 +3004,6 @@ var PromocodesService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _PromocodesService_ApplySale_Handler,
 		},
 	},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "Stream",
-			Handler:       _PromocodesService_Stream_Handler,
-			ServerStreams: true,
-		},
-	},
+	Streams:  []grpc.StreamDesc{},
 	Metadata: "billing/billing.proto",
 }
