@@ -2568,6 +2568,27 @@ func local_request_PromocodesService_ApplySale_0(ctx context.Context, marshaler 
 
 }
 
+func request_PromocodesService_Stream_0(ctx context.Context, marshaler runtime.Marshaler, client PromocodesServiceClient, req *http.Request, pathParams map[string]string) (PromocodesService_StreamClient, runtime.ServerMetadata, error) {
+	var protoReq StreamRequest
+	var metadata runtime.ServerMetadata
+
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	stream, err := client.Stream(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
 // RegisterBillingServiceHandlerServer registers the http handlers for service BillingService to "mux".
 // UnaryRPC     :call BillingServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
@@ -4208,6 +4229,13 @@ func RegisterPromocodesServiceHandlerServer(ctx context.Context, mux *runtime.Se
 
 		forward_PromocodesService_ApplySale_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
+	})
+
+	mux.Handle("POST", pattern_PromocodesService_Stream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
 	})
 
 	return nil
@@ -6055,6 +6083,28 @@ func RegisterPromocodesServiceHandlerClient(ctx context.Context, mux *runtime.Se
 
 	})
 
+	mux.Handle("POST", pattern_PromocodesService_Stream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/nocloud.billing.PromocodesService/Stream", runtime.WithHTTPPathPattern("/billing/stream"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_PromocodesService_Stream_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_PromocodesService_Stream_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
 	return nil
 }
 
@@ -6078,6 +6128,8 @@ var (
 	pattern_PromocodesService_Detach_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"billing", "promocodes", "detach"}, ""))
 
 	pattern_PromocodesService_ApplySale_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"billing", "promocodes", "apply_sale"}, ""))
+
+	pattern_PromocodesService_Stream_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"billing", "stream"}, ""))
 )
 
 var (
@@ -6100,4 +6152,6 @@ var (
 	forward_PromocodesService_Detach_0 = runtime.ForwardResponseMessage
 
 	forward_PromocodesService_ApplySale_0 = runtime.ForwardResponseMessage
+
+	forward_PromocodesService_Stream_0 = runtime.ForwardResponseStream
 )

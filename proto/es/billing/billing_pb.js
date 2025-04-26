@@ -131,6 +131,20 @@ export const Rounding = /*@__PURE__*/ proto3.makeEnum(
 );
 
 /**
+ * Events
+ *
+ * @generated from enum nocloud.billing.BillingEvent
+ */
+export const BillingEvent = /*@__PURE__*/ proto3.makeEnum(
+  "nocloud.billing.BillingEvent",
+  [
+    {no: 0, name: "EVENT_UNKNOWN"},
+    {no: 1, name: "EVENT_INVOICE_CREATED"},
+    {no: 2, name: "EVENT_INVOICE_UPDATED"},
+  ],
+);
+
+/**
  * @generated from message nocloud.billing.FeeRange
  */
 export const FeeRange = /*@__PURE__*/ proto3.makeMessageType(
@@ -1102,6 +1116,27 @@ export const ApplySaleResponse = /*@__PURE__*/ proto3.makeMessageType(
   () => [
     { no: 1, name: "billing_plans", kind: "message", T: Plan, repeated: true },
     { no: 2, name: "addons", kind: "message", T: Addon, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.StreamRequest
+ */
+export const StreamRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.StreamRequest",
+  () => [
+    { no: 1, name: "events", kind: "enum", T: proto3.getEnumType(BillingEvent), repeated: true },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.StreamResponse
+ */
+export const StreamResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.StreamResponse",
+  () => [
+    { no: 1, name: "event", kind: "enum", T: proto3.getEnumType(BillingEvent) },
+    { no: 2, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

@@ -3965,6 +3965,47 @@
         ]
       }
     },
+    "/billing/stream": {
+      "post": {
+        "operationId": "PromocodesService_Stream",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/billingStreamResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/googlerpcStatus"
+                }
+              },
+              "title": "Stream result of billingStreamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/nocloudbillingStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PromocodesService"
+        ]
+      }
+    },
     "/billing/transactions": {
       "get": {
         "operationId": "BillingService_GetTransactions",
@@ -8337,6 +8378,16 @@
         }
       }
     },
+    "billingBillingEvent": {
+      "type": "string",
+      "enum": [
+        "EVENT_UNKNOWN",
+        "EVENT_INVOICE_CREATED",
+        "EVENT_INVOICE_UPDATED"
+      ],
+      "default": "EVENT_UNKNOWN",
+      "title": "Events"
+    },
     "billingBillingStatus": {
       "type": "string",
       "enum": [
@@ -9306,6 +9357,17 @@
     "billingRunDailyCronJobResponse": {
       "type": "object"
     },
+    "billingStreamResponse": {
+      "type": "object",
+      "properties": {
+        "event": {
+          "$ref": "#/definitions/billingBillingEvent"
+        },
+        "uuid": {
+          "type": "string"
+        }
+      }
+    },
     "billingTaxOptions": {
       "type": "object",
       "properties": {
@@ -10225,6 +10287,17 @@
         "addon": {
           "type": "string",
           "title": "Addon key"
+        }
+      }
+    },
+    "nocloudbillingStreamRequest": {
+      "type": "object",
+      "properties": {
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/billingBillingEvent"
+          }
         }
       }
     },

@@ -250,6 +250,28 @@ export declare enum Rounding {
 }
 
 /**
+ * Events
+ *
+ * @generated from enum nocloud.billing.BillingEvent
+ */
+export declare enum BillingEvent {
+  /**
+   * @generated from enum value: EVENT_UNKNOWN = 0;
+   */
+  EVENT_UNKNOWN = 0,
+
+  /**
+   * @generated from enum value: EVENT_INVOICE_CREATED = 1;
+   */
+  EVENT_INVOICE_CREATED = 1,
+
+  /**
+   * @generated from enum value: EVENT_INVOICE_UPDATED = 2;
+   */
+  EVENT_INVOICE_UPDATED = 2,
+}
+
+/**
  * @generated from message nocloud.billing.FeeRange
  */
 export declare class FeeRange extends Message<FeeRange> {
@@ -3172,5 +3194,58 @@ export declare class ApplySaleResponse extends Message<ApplySaleResponse> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ApplySaleResponse;
 
   static equals(a: ApplySaleResponse | PlainMessage<ApplySaleResponse> | undefined, b: ApplySaleResponse | PlainMessage<ApplySaleResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.StreamRequest
+ */
+export declare class StreamRequest extends Message<StreamRequest> {
+  /**
+   * @generated from field: repeated nocloud.billing.BillingEvent events = 1;
+   */
+  events: BillingEvent[];
+
+  constructor(data?: PartialMessage<StreamRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.StreamRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamRequest;
+
+  static equals(a: StreamRequest | PlainMessage<StreamRequest> | undefined, b: StreamRequest | PlainMessage<StreamRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.StreamResponse
+ */
+export declare class StreamResponse extends Message<StreamResponse> {
+  /**
+   * @generated from field: nocloud.billing.BillingEvent event = 1;
+   */
+  event: BillingEvent;
+
+  /**
+   * @generated from field: string uuid = 2;
+   */
+  uuid: string;
+
+  constructor(data?: PartialMessage<StreamResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.StreamResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamResponse;
+
+  static equals(a: StreamResponse | PlainMessage<StreamResponse> | undefined, b: StreamResponse | PlainMessage<StreamResponse> | undefined): boolean;
 }
 

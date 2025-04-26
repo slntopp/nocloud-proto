@@ -758,6 +758,21 @@ message ApplySaleResponse{
   repeated addons.Addon addons = 2;
 }
 
+// Events
+enum BillingEvent {
+  EVENT_UNKNOWN = 0;
+  EVENT_INVOICE_CREATED = 1;
+  EVENT_INVOICE_UPDATED = 2;
+}
+
+message StreamRequest{
+  repeated BillingEvent events = 1;
+}
+message StreamResponse {
+  BillingEvent event = 1;
+  string uuid = 2;
+}
+
 service CurrencyService {
   rpc CreateCurrency (CreateCurrencyRequest)
       returns (CreateCurrencyResponse) {
@@ -966,6 +981,13 @@ service PromocodesService {
   rpc ApplySale (ApplySaleRequest) returns (ApplySaleResponse) {
     option (google.api.http) = {
       post: "/billing/promocodes/apply_sale"
+      body: "*"
+    };
+  };
+  rpc Stream(StreamRequest)
+      returns (stream StreamResponse) {
+    option (google.api.http) = {
+      post: "/billing/stream"
       body: "*"
     };
   };
