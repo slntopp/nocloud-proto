@@ -768,8 +768,9 @@ message ApplySaleResponse{
 // Events
 enum BillingEvent {
   EVENT_UNKNOWN = 0;
-  EVENT_INVOICE_CREATED = 1;
-  EVENT_INVOICE_UPDATED = 2;
+  EVENT_PING = 1;
+  EVENT_INVOICE_CREATED = 2;
+  EVENT_INVOICE_UPDATED = 3;
 }
 
 message StreamRequest{
@@ -777,7 +778,10 @@ message StreamRequest{
 }
 message StreamResponse {
   BillingEvent event = 1;
-  string uuid = 2;
+  StreamResponseBody body = 2;
+}
+message StreamResponseBody {
+  optional Invoice invoice = 1;
 }
 
 service CurrencyService {

@@ -261,14 +261,19 @@ export declare enum BillingEvent {
   EVENT_UNKNOWN = 0,
 
   /**
-   * @generated from enum value: EVENT_INVOICE_CREATED = 1;
+   * @generated from enum value: EVENT_PING = 1;
    */
-  EVENT_INVOICE_CREATED = 1,
+  EVENT_PING = 1,
 
   /**
-   * @generated from enum value: EVENT_INVOICE_UPDATED = 2;
+   * @generated from enum value: EVENT_INVOICE_CREATED = 2;
    */
-  EVENT_INVOICE_UPDATED = 2,
+  EVENT_INVOICE_CREATED = 2,
+
+  /**
+   * @generated from enum value: EVENT_INVOICE_UPDATED = 3;
+   */
+  EVENT_INVOICE_UPDATED = 3,
 }
 
 /**
@@ -3230,9 +3235,9 @@ export declare class StreamResponse extends Message<StreamResponse> {
   event: BillingEvent;
 
   /**
-   * @generated from field: string uuid = 2;
+   * @generated from field: nocloud.billing.StreamResponseBody body = 2;
    */
-  uuid: string;
+  body?: StreamResponseBody;
 
   constructor(data?: PartialMessage<StreamResponse>);
 
@@ -3247,5 +3252,29 @@ export declare class StreamResponse extends Message<StreamResponse> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamResponse;
 
   static equals(a: StreamResponse | PlainMessage<StreamResponse> | undefined, b: StreamResponse | PlainMessage<StreamResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.StreamResponseBody
+ */
+export declare class StreamResponseBody extends Message<StreamResponseBody> {
+  /**
+   * @generated from field: optional nocloud.billing.Invoice invoice = 1;
+   */
+  invoice?: Invoice;
+
+  constructor(data?: PartialMessage<StreamResponseBody>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.StreamResponseBody";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamResponseBody;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamResponseBody;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamResponseBody;
+
+  static equals(a: StreamResponseBody | PlainMessage<StreamResponseBody> | undefined, b: StreamResponseBody | PlainMessage<StreamResponseBody> | undefined): boolean;
 }
 

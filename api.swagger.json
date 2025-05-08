@@ -8382,6 +8382,7 @@
       "type": "string",
       "enum": [
         "EVENT_UNKNOWN",
+        "EVENT_PING",
         "EVENT_INVOICE_CREATED",
         "EVENT_INVOICE_UPDATED"
       ],
@@ -9363,8 +9364,16 @@
         "event": {
           "$ref": "#/definitions/billingBillingEvent"
         },
-        "uuid": {
-          "type": "string"
+        "body": {
+          "$ref": "#/definitions/billingStreamResponseBody"
+        }
+      }
+    },
+    "billingStreamResponseBody": {
+      "type": "object",
+      "properties": {
+        "invoice": {
+          "$ref": "#/definitions/billingInvoice"
         }
       }
     },

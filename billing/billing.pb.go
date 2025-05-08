@@ -470,21 +470,24 @@ type BillingEvent int32
 
 const (
 	BillingEvent_EVENT_UNKNOWN         BillingEvent = 0
-	BillingEvent_EVENT_INVOICE_CREATED BillingEvent = 1
-	BillingEvent_EVENT_INVOICE_UPDATED BillingEvent = 2
+	BillingEvent_EVENT_PING            BillingEvent = 1
+	BillingEvent_EVENT_INVOICE_CREATED BillingEvent = 2
+	BillingEvent_EVENT_INVOICE_UPDATED BillingEvent = 3
 )
 
 // Enum value maps for BillingEvent.
 var (
 	BillingEvent_name = map[int32]string{
 		0: "EVENT_UNKNOWN",
-		1: "EVENT_INVOICE_CREATED",
-		2: "EVENT_INVOICE_UPDATED",
+		1: "EVENT_PING",
+		2: "EVENT_INVOICE_CREATED",
+		3: "EVENT_INVOICE_UPDATED",
 	}
 	BillingEvent_value = map[string]int32{
 		"EVENT_UNKNOWN":         0,
-		"EVENT_INVOICE_CREATED": 1,
-		"EVENT_INVOICE_UPDATED": 2,
+		"EVENT_PING":            1,
+		"EVENT_INVOICE_CREATED": 2,
+		"EVENT_INVOICE_UPDATED": 3,
 	}
 )
 
@@ -5702,8 +5705,8 @@ type StreamResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Event BillingEvent `protobuf:"varint,1,opt,name=event,proto3,enum=nocloud.billing.BillingEvent" json:"event,omitempty"`
-	Uuid  string       `protobuf:"bytes,2,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	Event BillingEvent        `protobuf:"varint,1,opt,name=event,proto3,enum=nocloud.billing.BillingEvent" json:"event,omitempty"`
+	Body  *StreamResponseBody `protobuf:"bytes,2,opt,name=body,proto3" json:"body,omitempty"`
 }
 
 func (x *StreamResponse) Reset() {
@@ -5745,11 +5748,58 @@ func (x *StreamResponse) GetEvent() BillingEvent {
 	return BillingEvent_EVENT_UNKNOWN
 }
 
-func (x *StreamResponse) GetUuid() string {
+func (x *StreamResponse) GetBody() *StreamResponseBody {
 	if x != nil {
-		return x.Uuid
+		return x.Body
 	}
-	return ""
+	return nil
+}
+
+type StreamResponseBody struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Invoice *Invoice `protobuf:"bytes,1,opt,name=invoice,proto3,oneof" json:"invoice,omitempty"`
+}
+
+func (x *StreamResponseBody) Reset() {
+	*x = StreamResponseBody{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_billing_billing_proto_msgTypes[80]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *StreamResponseBody) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StreamResponseBody) ProtoMessage() {}
+
+func (x *StreamResponseBody) ProtoReflect() protoreflect.Message {
+	mi := &file_billing_billing_proto_msgTypes[80]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StreamResponseBody.ProtoReflect.Descriptor instead.
+func (*StreamResponseBody) Descriptor() ([]byte, []int) {
+	return file_billing_billing_proto_rawDescGZIP(), []int{80}
+}
+
+func (x *StreamResponseBody) GetInvoice() *Invoice {
+	if x != nil {
+		return x.Invoice
+	}
+	return nil
 }
 
 type UpdateInvoiceStatusRequest_Params struct {
@@ -5764,7 +5814,7 @@ type UpdateInvoiceStatusRequest_Params struct {
 func (x *UpdateInvoiceStatusRequest_Params) Reset() {
 	*x = UpdateInvoiceStatusRequest_Params{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_billing_billing_proto_msgTypes[91]
+		mi := &file_billing_billing_proto_msgTypes[92]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5777,7 +5827,7 @@ func (x *UpdateInvoiceStatusRequest_Params) String() string {
 func (*UpdateInvoiceStatusRequest_Params) ProtoMessage() {}
 
 func (x *UpdateInvoiceStatusRequest_Params) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_billing_proto_msgTypes[91]
+	mi := &file_billing_billing_proto_msgTypes[92]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6652,13 +6702,21 @@ var file_billing_billing_proto_rawDesc = []byte{
 	0x75, 0x65, 0x73, 0x74, 0x12, 0x35, 0x0a, 0x06, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x18, 0x01,
 	0x20, 0x03, 0x28, 0x0e, 0x32, 0x1d, 0x2e, 0x6e, 0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x62,
 	0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x42, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x45, 0x76,
-	0x65, 0x6e, 0x74, 0x52, 0x06, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x22, 0x59, 0x0a, 0x0e, 0x53,
+	0x65, 0x6e, 0x74, 0x52, 0x06, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x22, 0x7e, 0x0a, 0x0e, 0x53,
 	0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x33, 0x0a,
 	0x05, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x1d, 0x2e, 0x6e,
 	0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x42,
 	0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x52, 0x05, 0x65, 0x76, 0x65,
-	0x6e, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x75, 0x75, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x04, 0x75, 0x75, 0x69, 0x64, 0x2a, 0x30, 0x0a, 0x08, 0x50, 0x6c, 0x61, 0x6e, 0x4b, 0x69,
+	0x6e, 0x74, 0x12, 0x37, 0x0a, 0x04, 0x62, 0x6f, 0x64, 0x79, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x23, 0x2e, 0x6e, 0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69,
+	0x6e, 0x67, 0x2e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x42, 0x6f, 0x64, 0x79, 0x52, 0x04, 0x62, 0x6f, 0x64, 0x79, 0x22, 0x59, 0x0a, 0x12, 0x53,
+	0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x6f, 0x64,
+	0x79, 0x12, 0x37, 0x0a, 0x07, 0x69, 0x6e, 0x76, 0x6f, 0x69, 0x63, 0x65, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x18, 0x2e, 0x6e, 0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x62, 0x69, 0x6c,
+	0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x49, 0x6e, 0x76, 0x6f, 0x69, 0x63, 0x65, 0x48, 0x00, 0x52, 0x07,
+	0x69, 0x6e, 0x76, 0x6f, 0x69, 0x63, 0x65, 0x88, 0x01, 0x01, 0x42, 0x0a, 0x0a, 0x08, 0x5f, 0x69,
+	0x6e, 0x76, 0x6f, 0x69, 0x63, 0x65, 0x2a, 0x30, 0x0a, 0x08, 0x50, 0x6c, 0x61, 0x6e, 0x4b, 0x69,
 	0x6e, 0x64, 0x12, 0x0b, 0x0a, 0x07, 0x55, 0x4e, 0x4b, 0x4e, 0x4f, 0x57, 0x4e, 0x10, 0x00, 0x12,
 	0x0b, 0x0a, 0x07, 0x44, 0x59, 0x4e, 0x41, 0x4d, 0x49, 0x43, 0x10, 0x01, 0x12, 0x0a, 0x0a, 0x06,
 	0x53, 0x54, 0x41, 0x54, 0x49, 0x43, 0x10, 0x02, 0x2a, 0x31, 0x0a, 0x05, 0x52, 0x6f, 0x75, 0x6e,
@@ -6697,12 +6755,13 @@ var file_billing_billing_proto_rawDesc = []byte{
 	0x08, 0x52, 0x6f, 0x75, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x12, 0x0e, 0x0a, 0x0a, 0x52, 0x4f, 0x55,
 	0x4e, 0x44, 0x5f, 0x48, 0x41, 0x4c, 0x46, 0x10, 0x00, 0x12, 0x0c, 0x0a, 0x08, 0x52, 0x4f, 0x55,
 	0x4e, 0x44, 0x5f, 0x55, 0x50, 0x10, 0x01, 0x12, 0x0e, 0x0a, 0x0a, 0x52, 0x4f, 0x55, 0x4e, 0x44,
-	0x5f, 0x44, 0x4f, 0x57, 0x4e, 0x10, 0x02, 0x2a, 0x57, 0x0a, 0x0c, 0x42, 0x69, 0x6c, 0x6c, 0x69,
+	0x5f, 0x44, 0x4f, 0x57, 0x4e, 0x10, 0x02, 0x2a, 0x67, 0x0a, 0x0c, 0x42, 0x69, 0x6c, 0x6c, 0x69,
 	0x6e, 0x67, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x12, 0x11, 0x0a, 0x0d, 0x45, 0x56, 0x45, 0x4e, 0x54,
-	0x5f, 0x55, 0x4e, 0x4b, 0x4e, 0x4f, 0x57, 0x4e, 0x10, 0x00, 0x12, 0x19, 0x0a, 0x15, 0x45, 0x56,
+	0x5f, 0x55, 0x4e, 0x4b, 0x4e, 0x4f, 0x57, 0x4e, 0x10, 0x00, 0x12, 0x0e, 0x0a, 0x0a, 0x45, 0x56,
+	0x45, 0x4e, 0x54, 0x5f, 0x50, 0x49, 0x4e, 0x47, 0x10, 0x01, 0x12, 0x19, 0x0a, 0x15, 0x45, 0x56,
 	0x45, 0x4e, 0x54, 0x5f, 0x49, 0x4e, 0x56, 0x4f, 0x49, 0x43, 0x45, 0x5f, 0x43, 0x52, 0x45, 0x41,
-	0x54, 0x45, 0x44, 0x10, 0x01, 0x12, 0x19, 0x0a, 0x15, 0x45, 0x56, 0x45, 0x4e, 0x54, 0x5f, 0x49,
-	0x4e, 0x56, 0x4f, 0x49, 0x43, 0x45, 0x5f, 0x55, 0x50, 0x44, 0x41, 0x54, 0x45, 0x44, 0x10, 0x02,
+	0x54, 0x45, 0x44, 0x10, 0x02, 0x12, 0x19, 0x0a, 0x15, 0x45, 0x56, 0x45, 0x4e, 0x54, 0x5f, 0x49,
+	0x4e, 0x56, 0x4f, 0x49, 0x43, 0x45, 0x5f, 0x55, 0x50, 0x44, 0x41, 0x54, 0x45, 0x44, 0x10, 0x03,
 	0x32, 0xd6, 0x01, 0x0a, 0x0e, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x73, 0x53, 0x65, 0x72, 0x76,
 	0x69, 0x63, 0x65, 0x12, 0x48, 0x0a, 0x09, 0x47, 0x65, 0x74, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65,
 	0x12, 0x21, 0x2e, 0x6e, 0x6f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69,
@@ -7277,7 +7336,7 @@ func file_billing_billing_proto_rawDescGZIP() []byte {
 }
 
 var file_billing_billing_proto_enumTypes = make([]protoimpl.EnumInfo, 9)
-var file_billing_billing_proto_msgTypes = make([]protoimpl.MessageInfo, 97)
+var file_billing_billing_proto_msgTypes = make([]protoimpl.MessageInfo, 98)
 var file_billing_billing_proto_goTypes = []any{
 	(PlanKind)(0),                                     // 0: nocloud.billing.PlanKind
 	(Round)(0),                                        // 1: nocloud.billing.Round
@@ -7368,80 +7427,81 @@ var file_billing_billing_proto_goTypes = []any{
 	(*ApplySaleResponse)(nil),                         // 86: nocloud.billing.ApplySaleResponse
 	(*StreamRequest)(nil),                             // 87: nocloud.billing.StreamRequest
 	(*StreamResponse)(nil),                            // 88: nocloud.billing.StreamResponse
-	nil,                                               // 89: nocloud.billing.Plan.ProductsEntry
-	nil,                                               // 90: nocloud.billing.Plan.MetaEntry
-	nil,                                               // 91: nocloud.billing.ListRequest.FiltersEntry
-	nil,                                               // 92: nocloud.billing.ListPlansInstancesResponse.PlansEntry
-	nil,                                               // 93: nocloud.billing.PlansUniqueRequest.FiltersEntry
-	nil,                                               // 94: nocloud.billing.ResourceConf.MetaEntry
-	nil,                                               // 95: nocloud.billing.Product.ResourcesEntry
-	nil,                                               // 96: nocloud.billing.Product.MetaEntry
-	nil,                                               // 97: nocloud.billing.Transaction.MetaEntry
-	nil,                                               // 98: nocloud.billing.Invoice.MetaEntry
-	nil,                                               // 99: nocloud.billing.Record.MetaEntry
-	(*UpdateInvoiceStatusRequest_Params)(nil),         // 100: nocloud.billing.UpdateInvoiceStatusRequest.Params
-	nil,                               // 101: nocloud.billing.GetInvoicesCountRequest.FiltersEntry
-	nil,                               // 102: nocloud.billing.GetInvoicesRequest.FiltersEntry
-	nil,                               // 103: nocloud.billing.CostEstimation.ResourcesEntry
-	nil,                               // 104: nocloud.billing.GetRecordsReportsRequest.FiltersEntry
-	nil,                               // 105: nocloud.billing.GetRecordsReportsCountRequest.FiltersEntry
-	(*ansible.Software)(nil),          // 106: nocloud.ansible.Software
-	(statuses.NoCloudStatus)(0),       // 107: nocloud.statuses.NoCloudStatus
-	(*structpb.Value)(nil),            // 108: google.protobuf.Value
-	(states.NoCloudState)(0),          // 109: nocloud.states.NoCloudState
-	(*addons.Addon)(nil),              // 110: nocloud.billing.addons.Addon
-	(*addons.BulkAddons)(nil),         // 111: nocloud.billing.addons.BulkAddons
-	(*addons.ListAddonsRequest)(nil),  // 112: nocloud.billing.addons.ListAddonsRequest
-	(*addons.CountAddonsRequest)(nil), // 113: nocloud.billing.addons.CountAddonsRequest
-	(*descriptions.Description)(nil),  // 114: nocloud.billing.descriptions.Description
-	(*descriptions.ListDescriptionsRequest)(nil),   // 115: nocloud.billing.descriptions.ListDescriptionsRequest
-	(*descriptions.CountDescriptionsRequest)(nil),  // 116: nocloud.billing.descriptions.CountDescriptionsRequest
-	(*promocodes.Promocode)(nil),                   // 117: nocloud.billing.promocodes.Promocode
-	(*promocodes.GetPromocodeByCodeRequest)(nil),   // 118: nocloud.billing.promocodes.GetPromocodeByCodeRequest
-	(*promocodes.ListPromocodesRequest)(nil),       // 119: nocloud.billing.promocodes.ListPromocodesRequest
-	(*promocodes.CountPromocodesRequest)(nil),      // 120: nocloud.billing.promocodes.CountPromocodesRequest
-	(*promocodes.ApplyPromocodeRequest)(nil),       // 121: nocloud.billing.promocodes.ApplyPromocodeRequest
-	(*promocodes.DetachPromocodeRequest)(nil),      // 122: nocloud.billing.promocodes.DetachPromocodeRequest
-	(*addons.ListAddonsResponse)(nil),              // 123: nocloud.billing.addons.ListAddonsResponse
-	(*addons.CountAddonsResponse)(nil),             // 124: nocloud.billing.addons.CountAddonsResponse
-	(*descriptions.ListDescriptionsResponse)(nil),  // 125: nocloud.billing.descriptions.ListDescriptionsResponse
-	(*descriptions.CountDescriptionsResponse)(nil), // 126: nocloud.billing.descriptions.CountDescriptionsResponse
-	(*promocodes.ListPromocodesResponse)(nil),      // 127: nocloud.billing.promocodes.ListPromocodesResponse
-	(*promocodes.CountPromocodesResponse)(nil),     // 128: nocloud.billing.promocodes.CountPromocodesResponse
-	(*promocodes.ApplyPromocodeResponse)(nil),      // 129: nocloud.billing.promocodes.ApplyPromocodeResponse
-	(*promocodes.DetachPromocodeResponse)(nil),     // 130: nocloud.billing.promocodes.DetachPromocodeResponse
+	(*StreamResponseBody)(nil),                        // 89: nocloud.billing.StreamResponseBody
+	nil,                                               // 90: nocloud.billing.Plan.ProductsEntry
+	nil,                                               // 91: nocloud.billing.Plan.MetaEntry
+	nil,                                               // 92: nocloud.billing.ListRequest.FiltersEntry
+	nil,                                               // 93: nocloud.billing.ListPlansInstancesResponse.PlansEntry
+	nil,                                               // 94: nocloud.billing.PlansUniqueRequest.FiltersEntry
+	nil,                                               // 95: nocloud.billing.ResourceConf.MetaEntry
+	nil,                                               // 96: nocloud.billing.Product.ResourcesEntry
+	nil,                                               // 97: nocloud.billing.Product.MetaEntry
+	nil,                                               // 98: nocloud.billing.Transaction.MetaEntry
+	nil,                                               // 99: nocloud.billing.Invoice.MetaEntry
+	nil,                                               // 100: nocloud.billing.Record.MetaEntry
+	(*UpdateInvoiceStatusRequest_Params)(nil),         // 101: nocloud.billing.UpdateInvoiceStatusRequest.Params
+	nil,                               // 102: nocloud.billing.GetInvoicesCountRequest.FiltersEntry
+	nil,                               // 103: nocloud.billing.GetInvoicesRequest.FiltersEntry
+	nil,                               // 104: nocloud.billing.CostEstimation.ResourcesEntry
+	nil,                               // 105: nocloud.billing.GetRecordsReportsRequest.FiltersEntry
+	nil,                               // 106: nocloud.billing.GetRecordsReportsCountRequest.FiltersEntry
+	(*ansible.Software)(nil),          // 107: nocloud.ansible.Software
+	(statuses.NoCloudStatus)(0),       // 108: nocloud.statuses.NoCloudStatus
+	(*structpb.Value)(nil),            // 109: google.protobuf.Value
+	(states.NoCloudState)(0),          // 110: nocloud.states.NoCloudState
+	(*addons.Addon)(nil),              // 111: nocloud.billing.addons.Addon
+	(*addons.BulkAddons)(nil),         // 112: nocloud.billing.addons.BulkAddons
+	(*addons.ListAddonsRequest)(nil),  // 113: nocloud.billing.addons.ListAddonsRequest
+	(*addons.CountAddonsRequest)(nil), // 114: nocloud.billing.addons.CountAddonsRequest
+	(*descriptions.Description)(nil),  // 115: nocloud.billing.descriptions.Description
+	(*descriptions.ListDescriptionsRequest)(nil),   // 116: nocloud.billing.descriptions.ListDescriptionsRequest
+	(*descriptions.CountDescriptionsRequest)(nil),  // 117: nocloud.billing.descriptions.CountDescriptionsRequest
+	(*promocodes.Promocode)(nil),                   // 118: nocloud.billing.promocodes.Promocode
+	(*promocodes.GetPromocodeByCodeRequest)(nil),   // 119: nocloud.billing.promocodes.GetPromocodeByCodeRequest
+	(*promocodes.ListPromocodesRequest)(nil),       // 120: nocloud.billing.promocodes.ListPromocodesRequest
+	(*promocodes.CountPromocodesRequest)(nil),      // 121: nocloud.billing.promocodes.CountPromocodesRequest
+	(*promocodes.ApplyPromocodeRequest)(nil),       // 122: nocloud.billing.promocodes.ApplyPromocodeRequest
+	(*promocodes.DetachPromocodeRequest)(nil),      // 123: nocloud.billing.promocodes.DetachPromocodeRequest
+	(*addons.ListAddonsResponse)(nil),              // 124: nocloud.billing.addons.ListAddonsResponse
+	(*addons.CountAddonsResponse)(nil),             // 125: nocloud.billing.addons.CountAddonsResponse
+	(*descriptions.ListDescriptionsResponse)(nil),  // 126: nocloud.billing.descriptions.ListDescriptionsResponse
+	(*descriptions.CountDescriptionsResponse)(nil), // 127: nocloud.billing.descriptions.CountDescriptionsResponse
+	(*promocodes.ListPromocodesResponse)(nil),      // 128: nocloud.billing.promocodes.ListPromocodesResponse
+	(*promocodes.CountPromocodesResponse)(nil),     // 129: nocloud.billing.promocodes.CountPromocodesResponse
+	(*promocodes.ApplyPromocodeResponse)(nil),      // 130: nocloud.billing.promocodes.ApplyPromocodeResponse
+	(*promocodes.DetachPromocodeResponse)(nil),     // 131: nocloud.billing.promocodes.DetachPromocodeResponse
 }
 var file_billing_billing_proto_depIdxs = []int32{
 	1,   // 0: nocloud.billing.Fee.round:type_name -> nocloud.billing.Round
 	9,   // 1: nocloud.billing.Fee.ranges:type_name -> nocloud.billing.FeeRange
 	0,   // 2: nocloud.billing.Plan.kind:type_name -> nocloud.billing.PlanKind
 	20,  // 3: nocloud.billing.Plan.resources:type_name -> nocloud.billing.ResourceConf
-	89,  // 4: nocloud.billing.Plan.products:type_name -> nocloud.billing.Plan.ProductsEntry
-	90,  // 5: nocloud.billing.Plan.meta:type_name -> nocloud.billing.Plan.MetaEntry
+	90,  // 4: nocloud.billing.Plan.products:type_name -> nocloud.billing.Plan.ProductsEntry
+	91,  // 5: nocloud.billing.Plan.meta:type_name -> nocloud.billing.Plan.MetaEntry
 	10,  // 6: nocloud.billing.Plan.fee:type_name -> nocloud.billing.Fee
-	106, // 7: nocloud.billing.Plan.software:type_name -> nocloud.ansible.Software
-	107, // 8: nocloud.billing.Plan.status:type_name -> nocloud.statuses.NoCloudStatus
+	107, // 7: nocloud.billing.Plan.software:type_name -> nocloud.ansible.Software
+	108, // 8: nocloud.billing.Plan.status:type_name -> nocloud.statuses.NoCloudStatus
 	11,  // 9: nocloud.billing.Plan.custom_events:type_name -> nocloud.billing.CustomEvent
 	12,  // 10: nocloud.billing.Plan.properties:type_name -> nocloud.billing.AdditionalProperties
-	91,  // 11: nocloud.billing.ListRequest.filters:type_name -> nocloud.billing.ListRequest.FiltersEntry
+	92,  // 11: nocloud.billing.ListRequest.filters:type_name -> nocloud.billing.ListRequest.FiltersEntry
 	13,  // 12: nocloud.billing.ListResponse.pool:type_name -> nocloud.billing.Plan
-	92,  // 13: nocloud.billing.ListPlansInstancesResponse.plans:type_name -> nocloud.billing.ListPlansInstancesResponse.PlansEntry
-	93,  // 14: nocloud.billing.PlansUniqueRequest.filters:type_name -> nocloud.billing.PlansUniqueRequest.FiltersEntry
-	108, // 15: nocloud.billing.PlansUniqueResponse.unique:type_name -> google.protobuf.Value
+	93,  // 13: nocloud.billing.ListPlansInstancesResponse.plans:type_name -> nocloud.billing.ListPlansInstancesResponse.PlansEntry
+	94,  // 14: nocloud.billing.PlansUniqueRequest.filters:type_name -> nocloud.billing.PlansUniqueRequest.FiltersEntry
+	109, // 15: nocloud.billing.PlansUniqueResponse.unique:type_name -> google.protobuf.Value
 	2,   // 16: nocloud.billing.ResourceConf.kind:type_name -> nocloud.billing.Kind
-	109, // 17: nocloud.billing.ResourceConf.on:type_name -> nocloud.states.NoCloudState
+	110, // 17: nocloud.billing.ResourceConf.on:type_name -> nocloud.states.NoCloudState
 	10,  // 18: nocloud.billing.ResourceConf.fee:type_name -> nocloud.billing.Fee
-	94,  // 19: nocloud.billing.ResourceConf.meta:type_name -> nocloud.billing.ResourceConf.MetaEntry
+	95,  // 19: nocloud.billing.ResourceConf.meta:type_name -> nocloud.billing.ResourceConf.MetaEntry
 	3,   // 20: nocloud.billing.ResourceConf.period_kind:type_name -> nocloud.billing.PeriodKind
 	2,   // 21: nocloud.billing.Product.kind:type_name -> nocloud.billing.Kind
-	95,  // 22: nocloud.billing.Product.resources:type_name -> nocloud.billing.Product.ResourcesEntry
-	96,  // 23: nocloud.billing.Product.meta:type_name -> nocloud.billing.Product.MetaEntry
+	96,  // 22: nocloud.billing.Product.resources:type_name -> nocloud.billing.Product.ResourcesEntry
+	97,  // 23: nocloud.billing.Product.meta:type_name -> nocloud.billing.Product.MetaEntry
 	3,   // 24: nocloud.billing.Product.period_kind:type_name -> nocloud.billing.PeriodKind
 	4,   // 25: nocloud.billing.Transaction.priority:type_name -> nocloud.billing.Priority
-	97,  // 26: nocloud.billing.Transaction.meta:type_name -> nocloud.billing.Transaction.MetaEntry
+	98,  // 26: nocloud.billing.Transaction.meta:type_name -> nocloud.billing.Transaction.MetaEntry
 	62,  // 27: nocloud.billing.Transaction.currency:type_name -> nocloud.billing.Currency
 	5,   // 28: nocloud.billing.Invoice.status:type_name -> nocloud.billing.BillingStatus
-	98,  // 29: nocloud.billing.Invoice.meta:type_name -> nocloud.billing.Invoice.MetaEntry
+	99,  // 29: nocloud.billing.Invoice.meta:type_name -> nocloud.billing.Invoice.MetaEntry
 	62,  // 30: nocloud.billing.Invoice.currency:type_name -> nocloud.billing.Currency
 	23,  // 31: nocloud.billing.Invoice.items:type_name -> nocloud.billing.Item
 	6,   // 32: nocloud.billing.Invoice.type:type_name -> nocloud.billing.ActionType
@@ -7450,25 +7510,25 @@ var file_billing_billing_proto_depIdxs = []int32{
 	25,  // 35: nocloud.billing.Invoices.pool:type_name -> nocloud.billing.Invoice
 	22,  // 36: nocloud.billing.Transactions.pool:type_name -> nocloud.billing.Transaction
 	4,   // 37: nocloud.billing.Record.priority:type_name -> nocloud.billing.Priority
-	109, // 38: nocloud.billing.Record.state:type_name -> nocloud.states.NoCloudState
-	99,  // 39: nocloud.billing.Record.meta:type_name -> nocloud.billing.Record.MetaEntry
+	110, // 38: nocloud.billing.Record.state:type_name -> nocloud.states.NoCloudState
+	100, // 39: nocloud.billing.Record.meta:type_name -> nocloud.billing.Record.MetaEntry
 	62,  // 40: nocloud.billing.Record.currency:type_name -> nocloud.billing.Currency
 	28,  // 41: nocloud.billing.Records.pool:type_name -> nocloud.billing.Record
 	25,  // 42: nocloud.billing.CreateInvoiceRequest.invoice:type_name -> nocloud.billing.Invoice
 	25,  // 43: nocloud.billing.UpdateInvoiceRequest.invoice:type_name -> nocloud.billing.Invoice
 	5,   // 44: nocloud.billing.UpdateInvoiceStatusRequest.status:type_name -> nocloud.billing.BillingStatus
-	100, // 45: nocloud.billing.UpdateInvoiceStatusRequest.params:type_name -> nocloud.billing.UpdateInvoiceStatusRequest.Params
+	101, // 45: nocloud.billing.UpdateInvoiceStatusRequest.params:type_name -> nocloud.billing.UpdateInvoiceStatusRequest.Params
 	5,   // 46: nocloud.billing.GetInvoicesCountRequest.status:type_name -> nocloud.billing.BillingStatus
-	101, // 47: nocloud.billing.GetInvoicesCountRequest.filters:type_name -> nocloud.billing.GetInvoicesCountRequest.FiltersEntry
+	102, // 47: nocloud.billing.GetInvoicesCountRequest.filters:type_name -> nocloud.billing.GetInvoicesCountRequest.FiltersEntry
 	5,   // 48: nocloud.billing.GetInvoicesRequest.status:type_name -> nocloud.billing.BillingStatus
-	102, // 49: nocloud.billing.GetInvoicesRequest.filters:type_name -> nocloud.billing.GetInvoicesRequest.FiltersEntry
-	103, // 50: nocloud.billing.CostEstimation.resources:type_name -> nocloud.billing.CostEstimation.ResourcesEntry
+	103, // 49: nocloud.billing.GetInvoicesRequest.filters:type_name -> nocloud.billing.GetInvoicesRequest.FiltersEntry
+	104, // 50: nocloud.billing.CostEstimation.resources:type_name -> nocloud.billing.CostEstimation.ResourcesEntry
 	62,  // 51: nocloud.billing.InstanceReport.currency:type_name -> nocloud.billing.Currency
 	47,  // 52: nocloud.billing.GetInstancesReportResponse.reports:type_name -> nocloud.billing.InstanceReport
-	104, // 53: nocloud.billing.GetRecordsReportsRequest.filters:type_name -> nocloud.billing.GetRecordsReportsRequest.FiltersEntry
+	105, // 53: nocloud.billing.GetRecordsReportsRequest.filters:type_name -> nocloud.billing.GetRecordsReportsRequest.FiltersEntry
 	28,  // 54: nocloud.billing.GetRecordsReportsResponse.records:type_name -> nocloud.billing.Record
-	105, // 55: nocloud.billing.GetRecordsReportsCountRequest.filters:type_name -> nocloud.billing.GetRecordsReportsCountRequest.FiltersEntry
-	108, // 56: nocloud.billing.GetReportsCountResponse.unique:type_name -> google.protobuf.Value
+	106, // 55: nocloud.billing.GetRecordsReportsCountRequest.filters:type_name -> nocloud.billing.GetRecordsReportsCountRequest.FiltersEntry
+	109, // 56: nocloud.billing.GetReportsCountResponse.unique:type_name -> google.protobuf.Value
 	7,   // 57: nocloud.billing.Currency.rounding:type_name -> nocloud.billing.Rounding
 	62,  // 58: nocloud.billing.CreateCurrencyRequest.currency:type_name -> nocloud.billing.Currency
 	62,  // 59: nocloud.billing.UpdateCurrencyRequest.currency:type_name -> nocloud.billing.Currency
@@ -7489,165 +7549,167 @@ var file_billing_billing_proto_depIdxs = []int32{
 	62,  // 74: nocloud.billing.MultiConversionRequest.from:type_name -> nocloud.billing.Currency
 	62,  // 75: nocloud.billing.MultiConversionRequest.to:type_name -> nocloud.billing.Currency
 	13,  // 76: nocloud.billing.ApplySaleResponse.billing_plans:type_name -> nocloud.billing.Plan
-	110, // 77: nocloud.billing.ApplySaleResponse.addons:type_name -> nocloud.billing.addons.Addon
+	111, // 77: nocloud.billing.ApplySaleResponse.addons:type_name -> nocloud.billing.addons.Addon
 	8,   // 78: nocloud.billing.StreamRequest.events:type_name -> nocloud.billing.BillingEvent
 	8,   // 79: nocloud.billing.StreamResponse.event:type_name -> nocloud.billing.BillingEvent
-	21,  // 80: nocloud.billing.Plan.ProductsEntry.value:type_name -> nocloud.billing.Product
-	108, // 81: nocloud.billing.Plan.MetaEntry.value:type_name -> google.protobuf.Value
-	108, // 82: nocloud.billing.ListRequest.FiltersEntry.value:type_name -> google.protobuf.Value
-	108, // 83: nocloud.billing.ListPlansInstancesResponse.PlansEntry.value:type_name -> google.protobuf.Value
-	108, // 84: nocloud.billing.PlansUniqueRequest.FiltersEntry.value:type_name -> google.protobuf.Value
-	108, // 85: nocloud.billing.ResourceConf.MetaEntry.value:type_name -> google.protobuf.Value
-	108, // 86: nocloud.billing.Product.ResourcesEntry.value:type_name -> google.protobuf.Value
-	108, // 87: nocloud.billing.Product.MetaEntry.value:type_name -> google.protobuf.Value
-	108, // 88: nocloud.billing.Transaction.MetaEntry.value:type_name -> google.protobuf.Value
-	108, // 89: nocloud.billing.Invoice.MetaEntry.value:type_name -> google.protobuf.Value
-	108, // 90: nocloud.billing.Record.MetaEntry.value:type_name -> google.protobuf.Value
-	108, // 91: nocloud.billing.GetInvoicesCountRequest.FiltersEntry.value:type_name -> google.protobuf.Value
-	108, // 92: nocloud.billing.GetInvoicesRequest.FiltersEntry.value:type_name -> google.protobuf.Value
-	108, // 93: nocloud.billing.GetRecordsReportsRequest.FiltersEntry.value:type_name -> google.protobuf.Value
-	108, // 94: nocloud.billing.GetRecordsReportsCountRequest.FiltersEntry.value:type_name -> google.protobuf.Value
-	30,  // 95: nocloud.billing.RecordsService.GetActive:input_type -> nocloud.billing.GetActiveRequest
-	29,  // 96: nocloud.billing.RecordsService.Create:input_type -> nocloud.billing.Records
-	29,  // 97: nocloud.billing.RecordsService.Update:input_type -> nocloud.billing.Records
-	13,  // 98: nocloud.billing.BillingService.CreatePlan:input_type -> nocloud.billing.Plan
-	13,  // 99: nocloud.billing.BillingService.UpdatePlan:input_type -> nocloud.billing.Plan
-	13,  // 100: nocloud.billing.BillingService.GetPlan:input_type -> nocloud.billing.Plan
-	14,  // 101: nocloud.billing.BillingService.ListPlans:input_type -> nocloud.billing.ListRequest
-	16,  // 102: nocloud.billing.BillingService.ListPlansInstances:input_type -> nocloud.billing.ListPlansInstancesRequest
-	18,  // 103: nocloud.billing.BillingService.PlansUnique:input_type -> nocloud.billing.PlansUniqueRequest
-	13,  // 104: nocloud.billing.BillingService.DeletePlan:input_type -> nocloud.billing.Plan
-	22,  // 105: nocloud.billing.BillingService.CreateTransaction:input_type -> nocloud.billing.Transaction
-	31,  // 106: nocloud.billing.BillingService.GetTransactions:input_type -> nocloud.billing.GetTransactionsRequest
-	33,  // 107: nocloud.billing.BillingService.GetTransactionsCount:input_type -> nocloud.billing.GetTransactionsCountRequest
-	22,  // 108: nocloud.billing.BillingService.UpdateTransaction:input_type -> nocloud.billing.Transaction
-	22,  // 109: nocloud.billing.BillingService.GetRecords:input_type -> nocloud.billing.Transaction
-	46,  // 110: nocloud.billing.BillingService.GetInstancesReports:input_type -> nocloud.billing.GetInstancesReportRequest
-	51,  // 111: nocloud.billing.BillingService.GetInstancesReportsCount:input_type -> nocloud.billing.GetInstancesReportsCountRequest
-	49,  // 112: nocloud.billing.BillingService.GetRecordsReports:input_type -> nocloud.billing.GetRecordsReportsRequest
-	52,  // 113: nocloud.billing.BillingService.GetRecordsReportsCount:input_type -> nocloud.billing.GetRecordsReportsCountRequest
-	32,  // 114: nocloud.billing.BillingService.Reprocess:input_type -> nocloud.billing.ReprocessTransactionsRequest
-	36,  // 115: nocloud.billing.BillingService.CreateInvoice:input_type -> nocloud.billing.CreateInvoiceRequest
-	25,  // 116: nocloud.billing.BillingService.GetInvoice:input_type -> nocloud.billing.Invoice
-	40,  // 117: nocloud.billing.BillingService.GetInvoices:input_type -> nocloud.billing.GetInvoicesRequest
-	39,  // 118: nocloud.billing.BillingService.GetInvoicesCount:input_type -> nocloud.billing.GetInvoicesCountRequest
-	37,  // 119: nocloud.billing.BillingService.UpdateInvoice:input_type -> nocloud.billing.UpdateInvoiceRequest
-	43,  // 120: nocloud.billing.BillingService.Pay:input_type -> nocloud.billing.PayRequest
-	38,  // 121: nocloud.billing.BillingService.UpdateInvoiceStatus:input_type -> nocloud.billing.UpdateInvoiceStatusRequest
-	56,  // 122: nocloud.billing.BillingService.CreateTopUpBalanceInvoice:input_type -> nocloud.billing.CreateTopUpBalanceInvoiceRequest
-	57,  // 123: nocloud.billing.BillingService.CreateRenewalInvoice:input_type -> nocloud.billing.CreateRenewalInvoiceRequest
-	58,  // 124: nocloud.billing.BillingService.PayWithBalance:input_type -> nocloud.billing.PayWithBalanceRequest
-	54,  // 125: nocloud.billing.BillingService.GetInvoiceSettingsTemplateExample:input_type -> nocloud.billing.GetInvoiceSettingsTemplateExampleRequest
-	60,  // 126: nocloud.billing.BillingService.RunDailyCronJob:input_type -> nocloud.billing.RunDailyCronJobRequest
-	87,  // 127: nocloud.billing.BillingService.Stream:input_type -> nocloud.billing.StreamRequest
-	63,  // 128: nocloud.billing.CurrencyService.CreateCurrency:input_type -> nocloud.billing.CreateCurrencyRequest
-	65,  // 129: nocloud.billing.CurrencyService.UpdateCurrency:input_type -> nocloud.billing.UpdateCurrencyRequest
-	73,  // 130: nocloud.billing.CurrencyService.GetCurrencies:input_type -> nocloud.billing.GetCurrenciesRequest
-	77,  // 131: nocloud.billing.CurrencyService.GetExchangeRate:input_type -> nocloud.billing.GetExchangeRateRequest
-	78,  // 132: nocloud.billing.CurrencyService.GetExchangeRates:input_type -> nocloud.billing.GetExchangeRatesRequest
-	67,  // 133: nocloud.billing.CurrencyService.CreateExchangeRate:input_type -> nocloud.billing.CreateExchangeRateRequest
-	69,  // 134: nocloud.billing.CurrencyService.UpdateExchangeRate:input_type -> nocloud.billing.UpdateExchangeRateRequest
-	71,  // 135: nocloud.billing.CurrencyService.DeleteExchangeRate:input_type -> nocloud.billing.DeleteExchangeRateRequest
-	81,  // 136: nocloud.billing.CurrencyService.Convert:input_type -> nocloud.billing.ConversionRequest
-	83,  // 137: nocloud.billing.CurrencyService.ConvertMany:input_type -> nocloud.billing.MultiConversionRequest
-	75,  // 138: nocloud.billing.CurrencyService.ChangeDefaultCurrency:input_type -> nocloud.billing.ChangeDefaultCurrencyRequest
-	110, // 139: nocloud.billing.AddonsService.Create:input_type -> nocloud.billing.addons.Addon
-	111, // 140: nocloud.billing.AddonsService.CreateBulk:input_type -> nocloud.billing.addons.BulkAddons
-	110, // 141: nocloud.billing.AddonsService.Update:input_type -> nocloud.billing.addons.Addon
-	111, // 142: nocloud.billing.AddonsService.UpdateBulk:input_type -> nocloud.billing.addons.BulkAddons
-	110, // 143: nocloud.billing.AddonsService.Get:input_type -> nocloud.billing.addons.Addon
-	112, // 144: nocloud.billing.AddonsService.List:input_type -> nocloud.billing.addons.ListAddonsRequest
-	113, // 145: nocloud.billing.AddonsService.Count:input_type -> nocloud.billing.addons.CountAddonsRequest
-	110, // 146: nocloud.billing.AddonsService.Delete:input_type -> nocloud.billing.addons.Addon
-	114, // 147: nocloud.billing.DescriptionsService.Create:input_type -> nocloud.billing.descriptions.Description
-	114, // 148: nocloud.billing.DescriptionsService.Update:input_type -> nocloud.billing.descriptions.Description
-	114, // 149: nocloud.billing.DescriptionsService.Get:input_type -> nocloud.billing.descriptions.Description
-	115, // 150: nocloud.billing.DescriptionsService.List:input_type -> nocloud.billing.descriptions.ListDescriptionsRequest
-	116, // 151: nocloud.billing.DescriptionsService.Count:input_type -> nocloud.billing.descriptions.CountDescriptionsRequest
-	114, // 152: nocloud.billing.DescriptionsService.Delete:input_type -> nocloud.billing.descriptions.Description
-	117, // 153: nocloud.billing.PromocodesService.Create:input_type -> nocloud.billing.promocodes.Promocode
-	117, // 154: nocloud.billing.PromocodesService.Update:input_type -> nocloud.billing.promocodes.Promocode
-	117, // 155: nocloud.billing.PromocodesService.Get:input_type -> nocloud.billing.promocodes.Promocode
-	118, // 156: nocloud.billing.PromocodesService.GetByCode:input_type -> nocloud.billing.promocodes.GetPromocodeByCodeRequest
-	119, // 157: nocloud.billing.PromocodesService.List:input_type -> nocloud.billing.promocodes.ListPromocodesRequest
-	120, // 158: nocloud.billing.PromocodesService.Count:input_type -> nocloud.billing.promocodes.CountPromocodesRequest
-	117, // 159: nocloud.billing.PromocodesService.Delete:input_type -> nocloud.billing.promocodes.Promocode
-	121, // 160: nocloud.billing.PromocodesService.Apply:input_type -> nocloud.billing.promocodes.ApplyPromocodeRequest
-	122, // 161: nocloud.billing.PromocodesService.Detach:input_type -> nocloud.billing.promocodes.DetachPromocodeRequest
-	85,  // 162: nocloud.billing.PromocodesService.ApplySale:input_type -> nocloud.billing.ApplySaleRequest
-	29,  // 163: nocloud.billing.RecordsService.GetActive:output_type -> nocloud.billing.Records
-	29,  // 164: nocloud.billing.RecordsService.Create:output_type -> nocloud.billing.Records
-	29,  // 165: nocloud.billing.RecordsService.Update:output_type -> nocloud.billing.Records
-	13,  // 166: nocloud.billing.BillingService.CreatePlan:output_type -> nocloud.billing.Plan
-	13,  // 167: nocloud.billing.BillingService.UpdatePlan:output_type -> nocloud.billing.Plan
-	13,  // 168: nocloud.billing.BillingService.GetPlan:output_type -> nocloud.billing.Plan
-	15,  // 169: nocloud.billing.BillingService.ListPlans:output_type -> nocloud.billing.ListResponse
-	17,  // 170: nocloud.billing.BillingService.ListPlansInstances:output_type -> nocloud.billing.ListPlansInstancesResponse
-	19,  // 171: nocloud.billing.BillingService.PlansUnique:output_type -> nocloud.billing.PlansUniqueResponse
-	13,  // 172: nocloud.billing.BillingService.DeletePlan:output_type -> nocloud.billing.Plan
-	22,  // 173: nocloud.billing.BillingService.CreateTransaction:output_type -> nocloud.billing.Transaction
-	27,  // 174: nocloud.billing.BillingService.GetTransactions:output_type -> nocloud.billing.Transactions
-	34,  // 175: nocloud.billing.BillingService.GetTransactionsCount:output_type -> nocloud.billing.GetTransactionsCountResponse
-	42,  // 176: nocloud.billing.BillingService.UpdateTransaction:output_type -> nocloud.billing.UpdateTransactionResponse
-	29,  // 177: nocloud.billing.BillingService.GetRecords:output_type -> nocloud.billing.Records
-	48,  // 178: nocloud.billing.BillingService.GetInstancesReports:output_type -> nocloud.billing.GetInstancesReportResponse
-	53,  // 179: nocloud.billing.BillingService.GetInstancesReportsCount:output_type -> nocloud.billing.GetReportsCountResponse
-	50,  // 180: nocloud.billing.BillingService.GetRecordsReports:output_type -> nocloud.billing.GetRecordsReportsResponse
-	53,  // 181: nocloud.billing.BillingService.GetRecordsReportsCount:output_type -> nocloud.billing.GetReportsCountResponse
-	27,  // 182: nocloud.billing.BillingService.Reprocess:output_type -> nocloud.billing.Transactions
-	25,  // 183: nocloud.billing.BillingService.CreateInvoice:output_type -> nocloud.billing.Invoice
-	25,  // 184: nocloud.billing.BillingService.GetInvoice:output_type -> nocloud.billing.Invoice
-	26,  // 185: nocloud.billing.BillingService.GetInvoices:output_type -> nocloud.billing.Invoices
-	41,  // 186: nocloud.billing.BillingService.GetInvoicesCount:output_type -> nocloud.billing.GetInvoicesCountResponse
-	25,  // 187: nocloud.billing.BillingService.UpdateInvoice:output_type -> nocloud.billing.Invoice
-	44,  // 188: nocloud.billing.BillingService.Pay:output_type -> nocloud.billing.PayResponse
-	25,  // 189: nocloud.billing.BillingService.UpdateInvoiceStatus:output_type -> nocloud.billing.Invoice
-	25,  // 190: nocloud.billing.BillingService.CreateTopUpBalanceInvoice:output_type -> nocloud.billing.Invoice
-	25,  // 191: nocloud.billing.BillingService.CreateRenewalInvoice:output_type -> nocloud.billing.Invoice
-	59,  // 192: nocloud.billing.BillingService.PayWithBalance:output_type -> nocloud.billing.PayWithBalanceResponse
-	55,  // 193: nocloud.billing.BillingService.GetInvoiceSettingsTemplateExample:output_type -> nocloud.billing.GetInvoiceSettingsTemplateExampleResponse
-	61,  // 194: nocloud.billing.BillingService.RunDailyCronJob:output_type -> nocloud.billing.RunDailyCronJobResponse
-	88,  // 195: nocloud.billing.BillingService.Stream:output_type -> nocloud.billing.StreamResponse
-	64,  // 196: nocloud.billing.CurrencyService.CreateCurrency:output_type -> nocloud.billing.CreateCurrencyResponse
-	66,  // 197: nocloud.billing.CurrencyService.UpdateCurrency:output_type -> nocloud.billing.UpdateCurrencyResponse
-	74,  // 198: nocloud.billing.CurrencyService.GetCurrencies:output_type -> nocloud.billing.GetCurrenciesResponse
-	79,  // 199: nocloud.billing.CurrencyService.GetExchangeRate:output_type -> nocloud.billing.GetExchangeRateResponse
-	80,  // 200: nocloud.billing.CurrencyService.GetExchangeRates:output_type -> nocloud.billing.GetExchangeRatesResponse
-	68,  // 201: nocloud.billing.CurrencyService.CreateExchangeRate:output_type -> nocloud.billing.CreateExchangeRateResponse
-	70,  // 202: nocloud.billing.CurrencyService.UpdateExchangeRate:output_type -> nocloud.billing.UpdateExchangeRateResponse
-	72,  // 203: nocloud.billing.CurrencyService.DeleteExchangeRate:output_type -> nocloud.billing.DeleteExchangeRateResponse
-	82,  // 204: nocloud.billing.CurrencyService.Convert:output_type -> nocloud.billing.ConversionResponse
-	84,  // 205: nocloud.billing.CurrencyService.ConvertMany:output_type -> nocloud.billing.MultiConversionResponse
-	76,  // 206: nocloud.billing.CurrencyService.ChangeDefaultCurrency:output_type -> nocloud.billing.ChangeDefaultCurrencyResponse
-	110, // 207: nocloud.billing.AddonsService.Create:output_type -> nocloud.billing.addons.Addon
-	111, // 208: nocloud.billing.AddonsService.CreateBulk:output_type -> nocloud.billing.addons.BulkAddons
-	110, // 209: nocloud.billing.AddonsService.Update:output_type -> nocloud.billing.addons.Addon
-	111, // 210: nocloud.billing.AddonsService.UpdateBulk:output_type -> nocloud.billing.addons.BulkAddons
-	110, // 211: nocloud.billing.AddonsService.Get:output_type -> nocloud.billing.addons.Addon
-	123, // 212: nocloud.billing.AddonsService.List:output_type -> nocloud.billing.addons.ListAddonsResponse
-	124, // 213: nocloud.billing.AddonsService.Count:output_type -> nocloud.billing.addons.CountAddonsResponse
-	110, // 214: nocloud.billing.AddonsService.Delete:output_type -> nocloud.billing.addons.Addon
-	114, // 215: nocloud.billing.DescriptionsService.Create:output_type -> nocloud.billing.descriptions.Description
-	114, // 216: nocloud.billing.DescriptionsService.Update:output_type -> nocloud.billing.descriptions.Description
-	114, // 217: nocloud.billing.DescriptionsService.Get:output_type -> nocloud.billing.descriptions.Description
-	125, // 218: nocloud.billing.DescriptionsService.List:output_type -> nocloud.billing.descriptions.ListDescriptionsResponse
-	126, // 219: nocloud.billing.DescriptionsService.Count:output_type -> nocloud.billing.descriptions.CountDescriptionsResponse
-	114, // 220: nocloud.billing.DescriptionsService.Delete:output_type -> nocloud.billing.descriptions.Description
-	117, // 221: nocloud.billing.PromocodesService.Create:output_type -> nocloud.billing.promocodes.Promocode
-	117, // 222: nocloud.billing.PromocodesService.Update:output_type -> nocloud.billing.promocodes.Promocode
-	117, // 223: nocloud.billing.PromocodesService.Get:output_type -> nocloud.billing.promocodes.Promocode
-	117, // 224: nocloud.billing.PromocodesService.GetByCode:output_type -> nocloud.billing.promocodes.Promocode
-	127, // 225: nocloud.billing.PromocodesService.List:output_type -> nocloud.billing.promocodes.ListPromocodesResponse
-	128, // 226: nocloud.billing.PromocodesService.Count:output_type -> nocloud.billing.promocodes.CountPromocodesResponse
-	117, // 227: nocloud.billing.PromocodesService.Delete:output_type -> nocloud.billing.promocodes.Promocode
-	129, // 228: nocloud.billing.PromocodesService.Apply:output_type -> nocloud.billing.promocodes.ApplyPromocodeResponse
-	130, // 229: nocloud.billing.PromocodesService.Detach:output_type -> nocloud.billing.promocodes.DetachPromocodeResponse
-	86,  // 230: nocloud.billing.PromocodesService.ApplySale:output_type -> nocloud.billing.ApplySaleResponse
-	163, // [163:231] is the sub-list for method output_type
-	95,  // [95:163] is the sub-list for method input_type
-	95,  // [95:95] is the sub-list for extension type_name
-	95,  // [95:95] is the sub-list for extension extendee
-	0,   // [0:95] is the sub-list for field type_name
+	89,  // 80: nocloud.billing.StreamResponse.body:type_name -> nocloud.billing.StreamResponseBody
+	25,  // 81: nocloud.billing.StreamResponseBody.invoice:type_name -> nocloud.billing.Invoice
+	21,  // 82: nocloud.billing.Plan.ProductsEntry.value:type_name -> nocloud.billing.Product
+	109, // 83: nocloud.billing.Plan.MetaEntry.value:type_name -> google.protobuf.Value
+	109, // 84: nocloud.billing.ListRequest.FiltersEntry.value:type_name -> google.protobuf.Value
+	109, // 85: nocloud.billing.ListPlansInstancesResponse.PlansEntry.value:type_name -> google.protobuf.Value
+	109, // 86: nocloud.billing.PlansUniqueRequest.FiltersEntry.value:type_name -> google.protobuf.Value
+	109, // 87: nocloud.billing.ResourceConf.MetaEntry.value:type_name -> google.protobuf.Value
+	109, // 88: nocloud.billing.Product.ResourcesEntry.value:type_name -> google.protobuf.Value
+	109, // 89: nocloud.billing.Product.MetaEntry.value:type_name -> google.protobuf.Value
+	109, // 90: nocloud.billing.Transaction.MetaEntry.value:type_name -> google.protobuf.Value
+	109, // 91: nocloud.billing.Invoice.MetaEntry.value:type_name -> google.protobuf.Value
+	109, // 92: nocloud.billing.Record.MetaEntry.value:type_name -> google.protobuf.Value
+	109, // 93: nocloud.billing.GetInvoicesCountRequest.FiltersEntry.value:type_name -> google.protobuf.Value
+	109, // 94: nocloud.billing.GetInvoicesRequest.FiltersEntry.value:type_name -> google.protobuf.Value
+	109, // 95: nocloud.billing.GetRecordsReportsRequest.FiltersEntry.value:type_name -> google.protobuf.Value
+	109, // 96: nocloud.billing.GetRecordsReportsCountRequest.FiltersEntry.value:type_name -> google.protobuf.Value
+	30,  // 97: nocloud.billing.RecordsService.GetActive:input_type -> nocloud.billing.GetActiveRequest
+	29,  // 98: nocloud.billing.RecordsService.Create:input_type -> nocloud.billing.Records
+	29,  // 99: nocloud.billing.RecordsService.Update:input_type -> nocloud.billing.Records
+	13,  // 100: nocloud.billing.BillingService.CreatePlan:input_type -> nocloud.billing.Plan
+	13,  // 101: nocloud.billing.BillingService.UpdatePlan:input_type -> nocloud.billing.Plan
+	13,  // 102: nocloud.billing.BillingService.GetPlan:input_type -> nocloud.billing.Plan
+	14,  // 103: nocloud.billing.BillingService.ListPlans:input_type -> nocloud.billing.ListRequest
+	16,  // 104: nocloud.billing.BillingService.ListPlansInstances:input_type -> nocloud.billing.ListPlansInstancesRequest
+	18,  // 105: nocloud.billing.BillingService.PlansUnique:input_type -> nocloud.billing.PlansUniqueRequest
+	13,  // 106: nocloud.billing.BillingService.DeletePlan:input_type -> nocloud.billing.Plan
+	22,  // 107: nocloud.billing.BillingService.CreateTransaction:input_type -> nocloud.billing.Transaction
+	31,  // 108: nocloud.billing.BillingService.GetTransactions:input_type -> nocloud.billing.GetTransactionsRequest
+	33,  // 109: nocloud.billing.BillingService.GetTransactionsCount:input_type -> nocloud.billing.GetTransactionsCountRequest
+	22,  // 110: nocloud.billing.BillingService.UpdateTransaction:input_type -> nocloud.billing.Transaction
+	22,  // 111: nocloud.billing.BillingService.GetRecords:input_type -> nocloud.billing.Transaction
+	46,  // 112: nocloud.billing.BillingService.GetInstancesReports:input_type -> nocloud.billing.GetInstancesReportRequest
+	51,  // 113: nocloud.billing.BillingService.GetInstancesReportsCount:input_type -> nocloud.billing.GetInstancesReportsCountRequest
+	49,  // 114: nocloud.billing.BillingService.GetRecordsReports:input_type -> nocloud.billing.GetRecordsReportsRequest
+	52,  // 115: nocloud.billing.BillingService.GetRecordsReportsCount:input_type -> nocloud.billing.GetRecordsReportsCountRequest
+	32,  // 116: nocloud.billing.BillingService.Reprocess:input_type -> nocloud.billing.ReprocessTransactionsRequest
+	36,  // 117: nocloud.billing.BillingService.CreateInvoice:input_type -> nocloud.billing.CreateInvoiceRequest
+	25,  // 118: nocloud.billing.BillingService.GetInvoice:input_type -> nocloud.billing.Invoice
+	40,  // 119: nocloud.billing.BillingService.GetInvoices:input_type -> nocloud.billing.GetInvoicesRequest
+	39,  // 120: nocloud.billing.BillingService.GetInvoicesCount:input_type -> nocloud.billing.GetInvoicesCountRequest
+	37,  // 121: nocloud.billing.BillingService.UpdateInvoice:input_type -> nocloud.billing.UpdateInvoiceRequest
+	43,  // 122: nocloud.billing.BillingService.Pay:input_type -> nocloud.billing.PayRequest
+	38,  // 123: nocloud.billing.BillingService.UpdateInvoiceStatus:input_type -> nocloud.billing.UpdateInvoiceStatusRequest
+	56,  // 124: nocloud.billing.BillingService.CreateTopUpBalanceInvoice:input_type -> nocloud.billing.CreateTopUpBalanceInvoiceRequest
+	57,  // 125: nocloud.billing.BillingService.CreateRenewalInvoice:input_type -> nocloud.billing.CreateRenewalInvoiceRequest
+	58,  // 126: nocloud.billing.BillingService.PayWithBalance:input_type -> nocloud.billing.PayWithBalanceRequest
+	54,  // 127: nocloud.billing.BillingService.GetInvoiceSettingsTemplateExample:input_type -> nocloud.billing.GetInvoiceSettingsTemplateExampleRequest
+	60,  // 128: nocloud.billing.BillingService.RunDailyCronJob:input_type -> nocloud.billing.RunDailyCronJobRequest
+	87,  // 129: nocloud.billing.BillingService.Stream:input_type -> nocloud.billing.StreamRequest
+	63,  // 130: nocloud.billing.CurrencyService.CreateCurrency:input_type -> nocloud.billing.CreateCurrencyRequest
+	65,  // 131: nocloud.billing.CurrencyService.UpdateCurrency:input_type -> nocloud.billing.UpdateCurrencyRequest
+	73,  // 132: nocloud.billing.CurrencyService.GetCurrencies:input_type -> nocloud.billing.GetCurrenciesRequest
+	77,  // 133: nocloud.billing.CurrencyService.GetExchangeRate:input_type -> nocloud.billing.GetExchangeRateRequest
+	78,  // 134: nocloud.billing.CurrencyService.GetExchangeRates:input_type -> nocloud.billing.GetExchangeRatesRequest
+	67,  // 135: nocloud.billing.CurrencyService.CreateExchangeRate:input_type -> nocloud.billing.CreateExchangeRateRequest
+	69,  // 136: nocloud.billing.CurrencyService.UpdateExchangeRate:input_type -> nocloud.billing.UpdateExchangeRateRequest
+	71,  // 137: nocloud.billing.CurrencyService.DeleteExchangeRate:input_type -> nocloud.billing.DeleteExchangeRateRequest
+	81,  // 138: nocloud.billing.CurrencyService.Convert:input_type -> nocloud.billing.ConversionRequest
+	83,  // 139: nocloud.billing.CurrencyService.ConvertMany:input_type -> nocloud.billing.MultiConversionRequest
+	75,  // 140: nocloud.billing.CurrencyService.ChangeDefaultCurrency:input_type -> nocloud.billing.ChangeDefaultCurrencyRequest
+	111, // 141: nocloud.billing.AddonsService.Create:input_type -> nocloud.billing.addons.Addon
+	112, // 142: nocloud.billing.AddonsService.CreateBulk:input_type -> nocloud.billing.addons.BulkAddons
+	111, // 143: nocloud.billing.AddonsService.Update:input_type -> nocloud.billing.addons.Addon
+	112, // 144: nocloud.billing.AddonsService.UpdateBulk:input_type -> nocloud.billing.addons.BulkAddons
+	111, // 145: nocloud.billing.AddonsService.Get:input_type -> nocloud.billing.addons.Addon
+	113, // 146: nocloud.billing.AddonsService.List:input_type -> nocloud.billing.addons.ListAddonsRequest
+	114, // 147: nocloud.billing.AddonsService.Count:input_type -> nocloud.billing.addons.CountAddonsRequest
+	111, // 148: nocloud.billing.AddonsService.Delete:input_type -> nocloud.billing.addons.Addon
+	115, // 149: nocloud.billing.DescriptionsService.Create:input_type -> nocloud.billing.descriptions.Description
+	115, // 150: nocloud.billing.DescriptionsService.Update:input_type -> nocloud.billing.descriptions.Description
+	115, // 151: nocloud.billing.DescriptionsService.Get:input_type -> nocloud.billing.descriptions.Description
+	116, // 152: nocloud.billing.DescriptionsService.List:input_type -> nocloud.billing.descriptions.ListDescriptionsRequest
+	117, // 153: nocloud.billing.DescriptionsService.Count:input_type -> nocloud.billing.descriptions.CountDescriptionsRequest
+	115, // 154: nocloud.billing.DescriptionsService.Delete:input_type -> nocloud.billing.descriptions.Description
+	118, // 155: nocloud.billing.PromocodesService.Create:input_type -> nocloud.billing.promocodes.Promocode
+	118, // 156: nocloud.billing.PromocodesService.Update:input_type -> nocloud.billing.promocodes.Promocode
+	118, // 157: nocloud.billing.PromocodesService.Get:input_type -> nocloud.billing.promocodes.Promocode
+	119, // 158: nocloud.billing.PromocodesService.GetByCode:input_type -> nocloud.billing.promocodes.GetPromocodeByCodeRequest
+	120, // 159: nocloud.billing.PromocodesService.List:input_type -> nocloud.billing.promocodes.ListPromocodesRequest
+	121, // 160: nocloud.billing.PromocodesService.Count:input_type -> nocloud.billing.promocodes.CountPromocodesRequest
+	118, // 161: nocloud.billing.PromocodesService.Delete:input_type -> nocloud.billing.promocodes.Promocode
+	122, // 162: nocloud.billing.PromocodesService.Apply:input_type -> nocloud.billing.promocodes.ApplyPromocodeRequest
+	123, // 163: nocloud.billing.PromocodesService.Detach:input_type -> nocloud.billing.promocodes.DetachPromocodeRequest
+	85,  // 164: nocloud.billing.PromocodesService.ApplySale:input_type -> nocloud.billing.ApplySaleRequest
+	29,  // 165: nocloud.billing.RecordsService.GetActive:output_type -> nocloud.billing.Records
+	29,  // 166: nocloud.billing.RecordsService.Create:output_type -> nocloud.billing.Records
+	29,  // 167: nocloud.billing.RecordsService.Update:output_type -> nocloud.billing.Records
+	13,  // 168: nocloud.billing.BillingService.CreatePlan:output_type -> nocloud.billing.Plan
+	13,  // 169: nocloud.billing.BillingService.UpdatePlan:output_type -> nocloud.billing.Plan
+	13,  // 170: nocloud.billing.BillingService.GetPlan:output_type -> nocloud.billing.Plan
+	15,  // 171: nocloud.billing.BillingService.ListPlans:output_type -> nocloud.billing.ListResponse
+	17,  // 172: nocloud.billing.BillingService.ListPlansInstances:output_type -> nocloud.billing.ListPlansInstancesResponse
+	19,  // 173: nocloud.billing.BillingService.PlansUnique:output_type -> nocloud.billing.PlansUniqueResponse
+	13,  // 174: nocloud.billing.BillingService.DeletePlan:output_type -> nocloud.billing.Plan
+	22,  // 175: nocloud.billing.BillingService.CreateTransaction:output_type -> nocloud.billing.Transaction
+	27,  // 176: nocloud.billing.BillingService.GetTransactions:output_type -> nocloud.billing.Transactions
+	34,  // 177: nocloud.billing.BillingService.GetTransactionsCount:output_type -> nocloud.billing.GetTransactionsCountResponse
+	42,  // 178: nocloud.billing.BillingService.UpdateTransaction:output_type -> nocloud.billing.UpdateTransactionResponse
+	29,  // 179: nocloud.billing.BillingService.GetRecords:output_type -> nocloud.billing.Records
+	48,  // 180: nocloud.billing.BillingService.GetInstancesReports:output_type -> nocloud.billing.GetInstancesReportResponse
+	53,  // 181: nocloud.billing.BillingService.GetInstancesReportsCount:output_type -> nocloud.billing.GetReportsCountResponse
+	50,  // 182: nocloud.billing.BillingService.GetRecordsReports:output_type -> nocloud.billing.GetRecordsReportsResponse
+	53,  // 183: nocloud.billing.BillingService.GetRecordsReportsCount:output_type -> nocloud.billing.GetReportsCountResponse
+	27,  // 184: nocloud.billing.BillingService.Reprocess:output_type -> nocloud.billing.Transactions
+	25,  // 185: nocloud.billing.BillingService.CreateInvoice:output_type -> nocloud.billing.Invoice
+	25,  // 186: nocloud.billing.BillingService.GetInvoice:output_type -> nocloud.billing.Invoice
+	26,  // 187: nocloud.billing.BillingService.GetInvoices:output_type -> nocloud.billing.Invoices
+	41,  // 188: nocloud.billing.BillingService.GetInvoicesCount:output_type -> nocloud.billing.GetInvoicesCountResponse
+	25,  // 189: nocloud.billing.BillingService.UpdateInvoice:output_type -> nocloud.billing.Invoice
+	44,  // 190: nocloud.billing.BillingService.Pay:output_type -> nocloud.billing.PayResponse
+	25,  // 191: nocloud.billing.BillingService.UpdateInvoiceStatus:output_type -> nocloud.billing.Invoice
+	25,  // 192: nocloud.billing.BillingService.CreateTopUpBalanceInvoice:output_type -> nocloud.billing.Invoice
+	25,  // 193: nocloud.billing.BillingService.CreateRenewalInvoice:output_type -> nocloud.billing.Invoice
+	59,  // 194: nocloud.billing.BillingService.PayWithBalance:output_type -> nocloud.billing.PayWithBalanceResponse
+	55,  // 195: nocloud.billing.BillingService.GetInvoiceSettingsTemplateExample:output_type -> nocloud.billing.GetInvoiceSettingsTemplateExampleResponse
+	61,  // 196: nocloud.billing.BillingService.RunDailyCronJob:output_type -> nocloud.billing.RunDailyCronJobResponse
+	88,  // 197: nocloud.billing.BillingService.Stream:output_type -> nocloud.billing.StreamResponse
+	64,  // 198: nocloud.billing.CurrencyService.CreateCurrency:output_type -> nocloud.billing.CreateCurrencyResponse
+	66,  // 199: nocloud.billing.CurrencyService.UpdateCurrency:output_type -> nocloud.billing.UpdateCurrencyResponse
+	74,  // 200: nocloud.billing.CurrencyService.GetCurrencies:output_type -> nocloud.billing.GetCurrenciesResponse
+	79,  // 201: nocloud.billing.CurrencyService.GetExchangeRate:output_type -> nocloud.billing.GetExchangeRateResponse
+	80,  // 202: nocloud.billing.CurrencyService.GetExchangeRates:output_type -> nocloud.billing.GetExchangeRatesResponse
+	68,  // 203: nocloud.billing.CurrencyService.CreateExchangeRate:output_type -> nocloud.billing.CreateExchangeRateResponse
+	70,  // 204: nocloud.billing.CurrencyService.UpdateExchangeRate:output_type -> nocloud.billing.UpdateExchangeRateResponse
+	72,  // 205: nocloud.billing.CurrencyService.DeleteExchangeRate:output_type -> nocloud.billing.DeleteExchangeRateResponse
+	82,  // 206: nocloud.billing.CurrencyService.Convert:output_type -> nocloud.billing.ConversionResponse
+	84,  // 207: nocloud.billing.CurrencyService.ConvertMany:output_type -> nocloud.billing.MultiConversionResponse
+	76,  // 208: nocloud.billing.CurrencyService.ChangeDefaultCurrency:output_type -> nocloud.billing.ChangeDefaultCurrencyResponse
+	111, // 209: nocloud.billing.AddonsService.Create:output_type -> nocloud.billing.addons.Addon
+	112, // 210: nocloud.billing.AddonsService.CreateBulk:output_type -> nocloud.billing.addons.BulkAddons
+	111, // 211: nocloud.billing.AddonsService.Update:output_type -> nocloud.billing.addons.Addon
+	112, // 212: nocloud.billing.AddonsService.UpdateBulk:output_type -> nocloud.billing.addons.BulkAddons
+	111, // 213: nocloud.billing.AddonsService.Get:output_type -> nocloud.billing.addons.Addon
+	124, // 214: nocloud.billing.AddonsService.List:output_type -> nocloud.billing.addons.ListAddonsResponse
+	125, // 215: nocloud.billing.AddonsService.Count:output_type -> nocloud.billing.addons.CountAddonsResponse
+	111, // 216: nocloud.billing.AddonsService.Delete:output_type -> nocloud.billing.addons.Addon
+	115, // 217: nocloud.billing.DescriptionsService.Create:output_type -> nocloud.billing.descriptions.Description
+	115, // 218: nocloud.billing.DescriptionsService.Update:output_type -> nocloud.billing.descriptions.Description
+	115, // 219: nocloud.billing.DescriptionsService.Get:output_type -> nocloud.billing.descriptions.Description
+	126, // 220: nocloud.billing.DescriptionsService.List:output_type -> nocloud.billing.descriptions.ListDescriptionsResponse
+	127, // 221: nocloud.billing.DescriptionsService.Count:output_type -> nocloud.billing.descriptions.CountDescriptionsResponse
+	115, // 222: nocloud.billing.DescriptionsService.Delete:output_type -> nocloud.billing.descriptions.Description
+	118, // 223: nocloud.billing.PromocodesService.Create:output_type -> nocloud.billing.promocodes.Promocode
+	118, // 224: nocloud.billing.PromocodesService.Update:output_type -> nocloud.billing.promocodes.Promocode
+	118, // 225: nocloud.billing.PromocodesService.Get:output_type -> nocloud.billing.promocodes.Promocode
+	118, // 226: nocloud.billing.PromocodesService.GetByCode:output_type -> nocloud.billing.promocodes.Promocode
+	128, // 227: nocloud.billing.PromocodesService.List:output_type -> nocloud.billing.promocodes.ListPromocodesResponse
+	129, // 228: nocloud.billing.PromocodesService.Count:output_type -> nocloud.billing.promocodes.CountPromocodesResponse
+	118, // 229: nocloud.billing.PromocodesService.Delete:output_type -> nocloud.billing.promocodes.Promocode
+	130, // 230: nocloud.billing.PromocodesService.Apply:output_type -> nocloud.billing.promocodes.ApplyPromocodeResponse
+	131, // 231: nocloud.billing.PromocodesService.Detach:output_type -> nocloud.billing.promocodes.DetachPromocodeResponse
+	86,  // 232: nocloud.billing.PromocodesService.ApplySale:output_type -> nocloud.billing.ApplySaleResponse
+	165, // [165:233] is the sub-list for method output_type
+	97,  // [97:165] is the sub-list for method input_type
+	97,  // [97:97] is the sub-list for extension type_name
+	97,  // [97:97] is the sub-list for extension extendee
+	0,   // [0:97] is the sub-list for field type_name
 }
 
 func init() { file_billing_billing_proto_init() }
@@ -8616,7 +8678,19 @@ func file_billing_billing_proto_init() {
 				return nil
 			}
 		}
-		file_billing_billing_proto_msgTypes[91].Exporter = func(v any, i int) any {
+		file_billing_billing_proto_msgTypes[80].Exporter = func(v any, i int) any {
+			switch v := v.(*StreamResponseBody); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_billing_billing_proto_msgTypes[92].Exporter = func(v any, i int) any {
 			switch v := v.(*UpdateInvoiceStatusRequest_Params); i {
 			case 0:
 				return &v.state
@@ -8641,13 +8715,14 @@ func file_billing_billing_proto_init() {
 	file_billing_billing_proto_msgTypes[37].OneofWrappers = []any{}
 	file_billing_billing_proto_msgTypes[40].OneofWrappers = []any{}
 	file_billing_billing_proto_msgTypes[43].OneofWrappers = []any{}
+	file_billing_billing_proto_msgTypes[80].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_billing_billing_proto_rawDesc,
 			NumEnums:      9,
-			NumMessages:   97,
+			NumMessages:   98,
 			NumExtensions: 0,
 			NumServices:   6,
 		},

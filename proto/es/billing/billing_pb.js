@@ -139,8 +139,9 @@ export const BillingEvent = /*@__PURE__*/ proto3.makeEnum(
   "nocloud.billing.BillingEvent",
   [
     {no: 0, name: "EVENT_UNKNOWN"},
-    {no: 1, name: "EVENT_INVOICE_CREATED"},
-    {no: 2, name: "EVENT_INVOICE_UPDATED"},
+    {no: 1, name: "EVENT_PING"},
+    {no: 2, name: "EVENT_INVOICE_CREATED"},
+    {no: 3, name: "EVENT_INVOICE_UPDATED"},
   ],
 );
 
@@ -1136,7 +1137,17 @@ export const StreamResponse = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.billing.StreamResponse",
   () => [
     { no: 1, name: "event", kind: "enum", T: proto3.getEnumType(BillingEvent) },
-    { no: 2, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "body", kind: "message", T: StreamResponseBody },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.StreamResponseBody
+ */
+export const StreamResponseBody = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.StreamResponseBody",
+  () => [
+    { no: 1, name: "invoice", kind: "message", T: Invoice, opt: true },
   ],
 );
 
