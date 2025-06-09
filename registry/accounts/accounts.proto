@@ -129,3 +129,13 @@ message SuspendResponse {bool result = 1;}
 message UnsuspendRequest {string uuid = 1;}
 
 message UnsuspendResponse {bool result = 1;}
+
+message Phone {
+  string country_code = 1;
+  string number = 2;
+}
+message ChangePhoneRequest {
+   Phone new_phone = 1;
+}
+
+message ChangePhoneResponse {bool result = 1;}

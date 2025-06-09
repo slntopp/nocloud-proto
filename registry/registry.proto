@@ -137,6 +137,13 @@ service AccountsService {
       body: "*"
     };
   };
+  rpc ChangePhone (accounts.ChangePhoneRequest)
+      returns (accounts.ChangePhoneResponse){
+    option (google.api.http) = {
+      post: "/accounts/change_phone"
+      body: "*"
+    };
+  };
 }
 
 service NamespacesService {

@@ -161,6 +161,38 @@
         ]
       }
     },
+    "/accounts/change_phone": {
+      "post": {
+        "operationId": "AccountsService_ChangePhone",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/accountsChangePhoneResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/accountsChangePhoneRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AccountsService"
+        ]
+      }
+    },
     "/accounts/signup": {
       "post": {
         "operationId": "AccountsService_SignUp",
@@ -7815,6 +7847,22 @@
       ],
       "default": "ACTIVE"
     },
+    "accountsChangePhoneRequest": {
+      "type": "object",
+      "properties": {
+        "newPhone": {
+          "$ref": "#/definitions/accountsPhone"
+        }
+      }
+    },
+    "accountsChangePhoneResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "boolean"
+        }
+      }
+    },
     "accountsCredentials": {
       "type": "object",
       "properties": {
@@ -7826,6 +7874,17 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "accountsPhone": {
+      "type": "object",
+      "properties": {
+        "countryCode": {
+          "type": "string"
+        },
+        "number": {
+          "type": "string"
         }
       }
     },

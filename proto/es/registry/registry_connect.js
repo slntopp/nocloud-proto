@@ -18,7 +18,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { Account, CreateRequest, CreateResponse, DeleteRequest, DeleteResponse, GetRequest, ListRequest, ListResponse, SetCredentialsRequest, SetCredentialsResponse, SuspendRequest, SuspendResponse, TokenRequest, TokenResponse, UnsuspendRequest, UnsuspendResponse, UpdateResponse } from "./accounts/accounts_pb.js";
+import { Account, ChangePhoneRequest, ChangePhoneResponse, CreateRequest, CreateResponse, DeleteRequest, DeleteResponse, GetRequest, ListRequest, ListResponse, SetCredentialsRequest, SetCredentialsResponse, SuspendRequest, SuspendResponse, TokenRequest, TokenResponse, UnsuspendRequest, UnsuspendResponse, UpdateResponse } from "./accounts/accounts_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 import { AddNoteRequest, NoteResponse, PatchNoteRequest, RemoveNoteRequest } from "../notes/notes_pb.js";
 import { VerificationRequest, VerificationResponse } from "./registry_pb.js";
@@ -154,6 +154,15 @@ export const AccountsService = {
       name: "Verify",
       I: VerificationRequest,
       O: VerificationResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.registry.AccountsService.ChangePhone
+     */
+    changePhone: {
+      name: "ChangePhone",
+      I: ChangePhoneRequest,
+      O: ChangePhoneResponse,
       kind: MethodKind.Unary,
     },
   }

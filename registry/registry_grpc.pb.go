@@ -51,6 +51,7 @@ const (
 	AccountsService_Suspend_FullMethodName        = "/nocloud.registry.AccountsService/Suspend"
 	AccountsService_Unsuspend_FullMethodName      = "/nocloud.registry.AccountsService/Unsuspend"
 	AccountsService_Verify_FullMethodName         = "/nocloud.registry.AccountsService/Verify"
+	AccountsService_ChangePhone_FullMethodName    = "/nocloud.registry.AccountsService/ChangePhone"
 )
 
 // AccountsServiceClient is the client API for AccountsService service.
@@ -71,6 +72,7 @@ type AccountsServiceClient interface {
 	Suspend(ctx context.Context, in *accounts.SuspendRequest, opts ...grpc.CallOption) (*accounts.SuspendResponse, error)
 	Unsuspend(ctx context.Context, in *accounts.UnsuspendRequest, opts ...grpc.CallOption) (*accounts.UnsuspendResponse, error)
 	Verify(ctx context.Context, in *VerificationRequest, opts ...grpc.CallOption) (*VerificationResponse, error)
+	ChangePhone(ctx context.Context, in *accounts.ChangePhoneRequest, opts ...grpc.CallOption) (*accounts.ChangePhoneResponse, error)
 }
 
 type accountsServiceClient struct {
@@ -221,6 +223,16 @@ func (c *accountsServiceClient) Verify(ctx context.Context, in *VerificationRequ
 	return out, nil
 }
 
+func (c *accountsServiceClient) ChangePhone(ctx context.Context, in *accounts.ChangePhoneRequest, opts ...grpc.CallOption) (*accounts.ChangePhoneResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(accounts.ChangePhoneResponse)
+	err := c.cc.Invoke(ctx, AccountsService_ChangePhone_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AccountsServiceServer is the server API for AccountsService service.
 // All implementations must embed UnimplementedAccountsServiceServer
 // for forward compatibility.
@@ -239,6 +251,7 @@ type AccountsServiceServer interface {
 	Suspend(context.Context, *accounts.SuspendRequest) (*accounts.SuspendResponse, error)
 	Unsuspend(context.Context, *accounts.UnsuspendRequest) (*accounts.UnsuspendResponse, error)
 	Verify(context.Context, *VerificationRequest) (*VerificationResponse, error)
+	ChangePhone(context.Context, *accounts.ChangePhoneRequest) (*accounts.ChangePhoneResponse, error)
 	mustEmbedUnimplementedAccountsServiceServer()
 }
 
@@ -290,6 +303,9 @@ func (UnimplementedAccountsServiceServer) Unsuspend(context.Context, *accounts.U
 }
 func (UnimplementedAccountsServiceServer) Verify(context.Context, *VerificationRequest) (*VerificationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Verify not implemented")
+}
+func (UnimplementedAccountsServiceServer) ChangePhone(context.Context, *accounts.ChangePhoneRequest) (*accounts.ChangePhoneResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ChangePhone not implemented")
 }
 func (UnimplementedAccountsServiceServer) mustEmbedUnimplementedAccountsServiceServer() {}
 func (UnimplementedAccountsServiceServer) testEmbeddedByValue()                         {}
@@ -564,6 +580,24 @@ func _AccountsService_Verify_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AccountsService_ChangePhone_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(accounts.ChangePhoneRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServiceServer).ChangePhone(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountsService_ChangePhone_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServiceServer).ChangePhone(ctx, req.(*accounts.ChangePhoneRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AccountsService_ServiceDesc is the grpc.ServiceDesc for AccountsService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -626,6 +660,10 @@ var AccountsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Verify",
 			Handler:    _AccountsService_Verify_Handler,
+		},
+		{
+			MethodName: "ChangePhone",
+			Handler:    _AccountsService_ChangePhone_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

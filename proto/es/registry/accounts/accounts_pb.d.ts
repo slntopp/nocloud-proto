@@ -717,3 +717,80 @@ export declare class UnsuspendResponse extends Message<UnsuspendResponse> {
   static equals(a: UnsuspendResponse | PlainMessage<UnsuspendResponse> | undefined, b: UnsuspendResponse | PlainMessage<UnsuspendResponse> | undefined): boolean;
 }
 
+/**
+ * @generated from message nocloud.registry.accounts.Phone
+ */
+export declare class Phone extends Message<Phone> {
+  /**
+   * @generated from field: string country_code = 1;
+   */
+  countryCode: string;
+
+  /**
+   * @generated from field: string number = 2;
+   */
+  number: string;
+
+  constructor(data?: PartialMessage<Phone>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.Phone";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Phone;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Phone;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Phone;
+
+  static equals(a: Phone | PlainMessage<Phone> | undefined, b: Phone | PlainMessage<Phone> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.registry.accounts.ChangePhoneRequest
+ */
+export declare class ChangePhoneRequest extends Message<ChangePhoneRequest> {
+  /**
+   * @generated from field: nocloud.registry.accounts.Phone new_phone = 1;
+   */
+  newPhone?: Phone;
+
+  constructor(data?: PartialMessage<ChangePhoneRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.ChangePhoneRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ChangePhoneRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ChangePhoneRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ChangePhoneRequest;
+
+  static equals(a: ChangePhoneRequest | PlainMessage<ChangePhoneRequest> | undefined, b: ChangePhoneRequest | PlainMessage<ChangePhoneRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.registry.accounts.ChangePhoneResponse
+ */
+export declare class ChangePhoneResponse extends Message<ChangePhoneResponse> {
+  /**
+   * @generated from field: bool result = 1;
+   */
+  result: boolean;
+
+  constructor(data?: PartialMessage<ChangePhoneResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.ChangePhoneResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ChangePhoneResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ChangePhoneResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ChangePhoneResponse;
+
+  static equals(a: ChangePhoneResponse | PlainMessage<ChangePhoneResponse> | undefined, b: ChangePhoneResponse | PlainMessage<ChangePhoneResponse> | undefined): boolean;
+}
+

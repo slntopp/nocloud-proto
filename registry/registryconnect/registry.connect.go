@@ -85,6 +85,9 @@ const (
 	AccountsServiceUnsuspendProcedure = "/nocloud.registry.AccountsService/Unsuspend"
 	// AccountsServiceVerifyProcedure is the fully-qualified name of the AccountsService's Verify RPC.
 	AccountsServiceVerifyProcedure = "/nocloud.registry.AccountsService/Verify"
+	// AccountsServiceChangePhoneProcedure is the fully-qualified name of the AccountsService's
+	// ChangePhone RPC.
+	AccountsServiceChangePhoneProcedure = "/nocloud.registry.AccountsService/ChangePhone"
 	// NamespacesServiceCreateProcedure is the fully-qualified name of the NamespacesService's Create
 	// RPC.
 	NamespacesServiceCreateProcedure = "/nocloud.registry.NamespacesService/Create"
@@ -120,6 +123,7 @@ var (
 	accountsServiceSuspendMethodDescriptor        = accountsServiceServiceDescriptor.Methods().ByName("Suspend")
 	accountsServiceUnsuspendMethodDescriptor      = accountsServiceServiceDescriptor.Methods().ByName("Unsuspend")
 	accountsServiceVerifyMethodDescriptor         = accountsServiceServiceDescriptor.Methods().ByName("Verify")
+	accountsServiceChangePhoneMethodDescriptor    = accountsServiceServiceDescriptor.Methods().ByName("ChangePhone")
 	namespacesServiceServiceDescriptor            = registry.File_registry_registry_proto.Services().ByName("NamespacesService")
 	namespacesServiceCreateMethodDescriptor       = namespacesServiceServiceDescriptor.Methods().ByName("Create")
 	namespacesServiceListMethodDescriptor         = namespacesServiceServiceDescriptor.Methods().ByName("List")
@@ -146,6 +150,7 @@ type AccountsServiceClient interface {
 	Suspend(context.Context, *connect.Request[accounts.SuspendRequest]) (*connect.Response[accounts.SuspendResponse], error)
 	Unsuspend(context.Context, *connect.Request[accounts.UnsuspendRequest]) (*connect.Response[accounts.UnsuspendResponse], error)
 	Verify(context.Context, *connect.Request[registry.VerificationRequest]) (*connect.Response[registry.VerificationResponse], error)
+	ChangePhone(context.Context, *connect.Request[accounts.ChangePhoneRequest]) (*connect.Response[accounts.ChangePhoneResponse], error)
 }
 
 // NewAccountsServiceClient constructs a client for the nocloud.registry.AccountsService service. By
@@ -242,6 +247,12 @@ func NewAccountsServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(accountsServiceVerifyMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		changePhone: connect.NewClient[accounts.ChangePhoneRequest, accounts.ChangePhoneResponse](
+			httpClient,
+			baseURL+AccountsServiceChangePhoneProcedure,
+			connect.WithSchema(accountsServiceChangePhoneMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -261,6 +272,7 @@ type accountsServiceClient struct {
 	suspend        *connect.Client[accounts.SuspendRequest, accounts.SuspendResponse]
 	unsuspend      *connect.Client[accounts.UnsuspendRequest, accounts.UnsuspendResponse]
 	verify         *connect.Client[registry.VerificationRequest, registry.VerificationResponse]
+	changePhone    *connect.Client[accounts.ChangePhoneRequest, accounts.ChangePhoneResponse]
 }
 
 // Token calls nocloud.registry.AccountsService.Token.
@@ -333,6 +345,11 @@ func (c *accountsServiceClient) Verify(ctx context.Context, req *connect.Request
 	return c.verify.CallUnary(ctx, req)
 }
 
+// ChangePhone calls nocloud.registry.AccountsService.ChangePhone.
+func (c *accountsServiceClient) ChangePhone(ctx context.Context, req *connect.Request[accounts.ChangePhoneRequest]) (*connect.Response[accounts.ChangePhoneResponse], error) {
+	return c.changePhone.CallUnary(ctx, req)
+}
+
 // AccountsServiceHandler is an implementation of the nocloud.registry.AccountsService service.
 type AccountsServiceHandler interface {
 	Token(context.Context, *connect.Request[accounts.TokenRequest]) (*connect.Response[accounts.TokenResponse], error)
@@ -349,6 +366,7 @@ type AccountsServiceHandler interface {
 	Suspend(context.Context, *connect.Request[accounts.SuspendRequest]) (*connect.Response[accounts.SuspendResponse], error)
 	Unsuspend(context.Context, *connect.Request[accounts.UnsuspendRequest]) (*connect.Response[accounts.UnsuspendResponse], error)
 	Verify(context.Context, *connect.Request[registry.VerificationRequest]) (*connect.Response[registry.VerificationResponse], error)
+	ChangePhone(context.Context, *connect.Request[accounts.ChangePhoneRequest]) (*connect.Response[accounts.ChangePhoneResponse], error)
 }
 
 // NewAccountsServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -441,6 +459,12 @@ func NewAccountsServiceHandler(svc AccountsServiceHandler, opts ...connect.Handl
 		connect.WithSchema(accountsServiceVerifyMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	accountsServiceChangePhoneHandler := connect.NewUnaryHandler(
+		AccountsServiceChangePhoneProcedure,
+		svc.ChangePhone,
+		connect.WithSchema(accountsServiceChangePhoneMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/nocloud.registry.AccountsService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case AccountsServiceTokenProcedure:
@@ -471,6 +495,8 @@ func NewAccountsServiceHandler(svc AccountsServiceHandler, opts ...connect.Handl
 			accountsServiceUnsuspendHandler.ServeHTTP(w, r)
 		case AccountsServiceVerifyProcedure:
 			accountsServiceVerifyHandler.ServeHTTP(w, r)
+		case AccountsServiceChangePhoneProcedure:
+			accountsServiceChangePhoneHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -534,6 +560,10 @@ func (UnimplementedAccountsServiceHandler) Unsuspend(context.Context, *connect.R
 
 func (UnimplementedAccountsServiceHandler) Verify(context.Context, *connect.Request[registry.VerificationRequest]) (*connect.Response[registry.VerificationResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.registry.AccountsService.Verify is not implemented"))
+}
+
+func (UnimplementedAccountsServiceHandler) ChangePhone(context.Context, *connect.Request[accounts.ChangePhoneRequest]) (*connect.Response[accounts.ChangePhoneResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.registry.AccountsService.ChangePhone is not implemented"))
 }
 
 // NamespacesServiceClient is a client for the nocloud.registry.NamespacesService service.

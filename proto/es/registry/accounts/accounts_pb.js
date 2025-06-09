@@ -264,3 +264,34 @@ export const UnsuspendResponse = /*@__PURE__*/ proto3.makeMessageType(
   ],
 );
 
+/**
+ * @generated from message nocloud.registry.accounts.Phone
+ */
+export const Phone = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.Phone",
+  () => [
+    { no: 1, name: "country_code", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "number", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.registry.accounts.ChangePhoneRequest
+ */
+export const ChangePhoneRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.ChangePhoneRequest",
+  () => [
+    { no: 1, name: "new_phone", kind: "message", T: Phone },
+  ],
+);
+
+/**
+ * @generated from message nocloud.registry.accounts.ChangePhoneResponse
+ */
+export const ChangePhoneResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.ChangePhoneResponse",
+  () => [
+    { no: 1, name: "result", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
