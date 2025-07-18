@@ -2850,6 +2850,12 @@
             "in": "query",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "properties.autoRenew",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -3238,6 +3244,12 @@
             "in": "query",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "properties.autoRenew",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -3375,6 +3387,12 @@
           },
           {
             "name": "properties.emailVerificationRequired",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "properties.autoRenew",
             "in": "query",
             "required": false,
             "type": "boolean"
@@ -5390,6 +5408,12 @@
             "type": "boolean"
           },
           {
+            "name": "billingPlan.properties.autoRenew",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "product",
             "in": "query",
             "required": false,
@@ -5471,6 +5495,12 @@
             "required": false,
             "type": "string",
             "format": "int64"
+          },
+          {
+            "name": "meta.autoRenew",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -8353,6 +8383,9 @@
         },
         "emailVerificationRequired": {
           "type": "boolean"
+        },
+        "autoRenew": {
+          "type": "boolean"
         }
       }
     },
@@ -9958,6 +9991,9 @@
         "started": {
           "type": "string",
           "format": "int64"
+        },
+        "autoRenew": {
+          "type": "boolean"
         }
       }
     },

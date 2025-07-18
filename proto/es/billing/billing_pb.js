@@ -189,6 +189,7 @@ export const AdditionalProperties = /*@__PURE__*/ proto3.makeMessageType(
   () => [
     { no: 1, name: "phone_verification_required", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 2, name: "email_verification_required", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 3, name: "auto_renew", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
@@ -411,6 +412,16 @@ export const Invoice = /*@__PURE__*/ proto3.makeMessageType(
     { no: 17, name: "tax_options", kind: "message", T: TaxOptions },
     { no: 18, name: "subtotal", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
     { no: 19, name: "properties", kind: "message", T: AdditionalProperties },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.InvoiceMeta
+ */
+export const InvoiceMeta = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.InvoiceMeta",
+  () => [
+    { no: 1, name: "last_charge_try", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ],
 );
 

@@ -392,6 +392,11 @@ export declare class AdditionalProperties extends Message<AdditionalProperties> 
    */
   emailVerificationRequired: boolean;
 
+  /**
+   * @generated from field: bool auto_renew = 3;
+   */
+  autoRenew: boolean;
+
   constructor(data?: PartialMessage<AdditionalProperties>);
 
   static readonly runtime: typeof proto3;
@@ -1231,6 +1236,30 @@ export declare class Invoice extends Message<Invoice> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Invoice;
 
   static equals(a: Invoice | PlainMessage<Invoice> | undefined, b: Invoice | PlainMessage<Invoice> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.InvoiceMeta
+ */
+export declare class InvoiceMeta extends Message<InvoiceMeta> {
+  /**
+   * @generated from field: int64 last_charge_try = 1;
+   */
+  lastChargeTry: bigint;
+
+  constructor(data?: PartialMessage<InvoiceMeta>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.InvoiceMeta";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): InvoiceMeta;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): InvoiceMeta;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): InvoiceMeta;
+
+  static equals(a: InvoiceMeta | PlainMessage<InvoiceMeta> | undefined, b: InvoiceMeta | PlainMessage<InvoiceMeta> | undefined): boolean;
 }
 
 /**

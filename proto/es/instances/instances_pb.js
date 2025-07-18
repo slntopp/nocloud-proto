@@ -82,6 +82,7 @@ export const InstanceMeta = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.instances.InstanceMeta",
   () => [
     { no: 1, name: "started", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "auto_renew", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 

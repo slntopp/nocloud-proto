@@ -61,6 +61,7 @@ message CustomEvent {
 message AdditionalProperties {
   bool phone_verification_required = 1;
   bool email_verification_required = 2;
+  bool auto_renew = 3;
 }
 
 message Plan {
@@ -265,6 +266,10 @@ message Invoice {
   TaxOptions tax_options = 17;
   double subtotal = 18; // Total before additional fees (taxes etc.)
   AdditionalProperties properties = 19;
+}
+
+message InvoiceMeta {
+  int64 last_charge_try = 1;
 }
 
 message Invoices {repeated Invoice pool = 1;}
