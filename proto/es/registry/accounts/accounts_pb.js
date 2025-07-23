@@ -117,6 +117,52 @@ export const Account = /*@__PURE__*/ proto3.makeMessageType(
     { no: 14, name: "paymentsGateway", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 15, name: "is_email_verified", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 16, name: "is_phone_verified", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 17, name: "meta", kind: "message", T: AccountMeta },
+  ],
+);
+
+/**
+ * @generated from message nocloud.registry.accounts.AccountMeta
+ */
+export const AccountMeta = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.AccountMeta",
+  () => [
+    { no: 1, name: "notifications", kind: "message", T: Notifications },
+  ],
+);
+
+/**
+ * @generated from message nocloud.registry.accounts.Notifications
+ */
+export const Notifications = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.Notifications",
+  () => [
+    { no: 1, name: "first_balance_notify", kind: "message", T: BalanceNotification },
+    { no: 2, name: "second_balance_notify", kind: "message", T: BalanceNotification },
+  ],
+);
+
+/**
+ * @generated from message nocloud.registry.accounts.BalanceNotification
+ */
+export const BalanceNotification = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.BalanceNotification",
+  () => [
+    { no: 1, name: "base", kind: "message", T: AccountNotification },
+    { no: 2, name: "invalidated", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 3, name: "threshold", kind: "scalar", T: 1 /* ScalarType.DOUBLE */, opt: true },
+  ],
+);
+
+/**
+ * @generated from message nocloud.registry.accounts.AccountNotification
+ */
+export const AccountNotification = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.AccountNotification",
+  () => [
+    { no: 1, name: "disabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 2, name: "last_notification", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "sent_notifications", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ],
 );
 

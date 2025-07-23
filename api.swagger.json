@@ -7865,6 +7865,33 @@
         },
         "isPhoneVerified": {
           "type": "boolean"
+        },
+        "meta": {
+          "$ref": "#/definitions/accountsAccountMeta"
+        }
+      }
+    },
+    "accountsAccountMeta": {
+      "type": "object",
+      "properties": {
+        "notifications": {
+          "$ref": "#/definitions/accountsNotifications"
+        }
+      }
+    },
+    "accountsAccountNotification": {
+      "type": "object",
+      "properties": {
+        "disabled": {
+          "type": "boolean"
+        },
+        "lastNotification": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sentNotifications": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -7876,6 +7903,21 @@
         "PERMANENT_LOCK"
       ],
       "default": "ACTIVE"
+    },
+    "accountsBalanceNotification": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/definitions/accountsAccountNotification"
+        },
+        "invalidated": {
+          "type": "boolean"
+        },
+        "threshold": {
+          "type": "number",
+          "format": "double"
+        }
+      }
     },
     "accountsChangePhoneRequest": {
       "type": "object",
@@ -7904,6 +7946,17 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "accountsNotifications": {
+      "type": "object",
+      "properties": {
+        "firstBalanceNotify": {
+          "$ref": "#/definitions/accountsBalanceNotification"
+        },
+        "secondBalanceNotify": {
+          "$ref": "#/definitions/accountsBalanceNotification"
         }
       }
     },
@@ -11329,6 +11382,9 @@
         },
         "isPhoneVerified": {
           "type": "boolean"
+        },
+        "meta": {
+          "$ref": "#/definitions/accountsAccountMeta"
         }
       }
     },

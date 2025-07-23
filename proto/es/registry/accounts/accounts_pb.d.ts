@@ -316,6 +316,11 @@ export declare class Account extends Message<Account> {
    */
   isPhoneVerified: boolean;
 
+  /**
+   * @generated from field: nocloud.registry.accounts.AccountMeta meta = 17;
+   */
+  meta?: AccountMeta;
+
   constructor(data?: PartialMessage<Account>);
 
   static readonly runtime: typeof proto3;
@@ -329,6 +334,127 @@ export declare class Account extends Message<Account> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Account;
 
   static equals(a: Account | PlainMessage<Account> | undefined, b: Account | PlainMessage<Account> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.registry.accounts.AccountMeta
+ */
+export declare class AccountMeta extends Message<AccountMeta> {
+  /**
+   * @generated from field: nocloud.registry.accounts.Notifications notifications = 1;
+   */
+  notifications?: Notifications;
+
+  constructor(data?: PartialMessage<AccountMeta>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.AccountMeta";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AccountMeta;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AccountMeta;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AccountMeta;
+
+  static equals(a: AccountMeta | PlainMessage<AccountMeta> | undefined, b: AccountMeta | PlainMessage<AccountMeta> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.registry.accounts.Notifications
+ */
+export declare class Notifications extends Message<Notifications> {
+  /**
+   * @generated from field: nocloud.registry.accounts.BalanceNotification first_balance_notify = 1;
+   */
+  firstBalanceNotify?: BalanceNotification;
+
+  /**
+   * @generated from field: nocloud.registry.accounts.BalanceNotification second_balance_notify = 2;
+   */
+  secondBalanceNotify?: BalanceNotification;
+
+  constructor(data?: PartialMessage<Notifications>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.Notifications";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Notifications;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Notifications;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Notifications;
+
+  static equals(a: Notifications | PlainMessage<Notifications> | undefined, b: Notifications | PlainMessage<Notifications> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.registry.accounts.BalanceNotification
+ */
+export declare class BalanceNotification extends Message<BalanceNotification> {
+  /**
+   * @generated from field: nocloud.registry.accounts.AccountNotification base = 1;
+   */
+  base?: AccountNotification;
+
+  /**
+   * @generated from field: bool invalidated = 2;
+   */
+  invalidated: boolean;
+
+  /**
+   * @generated from field: optional double threshold = 3;
+   */
+  threshold?: number;
+
+  constructor(data?: PartialMessage<BalanceNotification>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.BalanceNotification";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): BalanceNotification;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): BalanceNotification;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): BalanceNotification;
+
+  static equals(a: BalanceNotification | PlainMessage<BalanceNotification> | undefined, b: BalanceNotification | PlainMessage<BalanceNotification> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.registry.accounts.AccountNotification
+ */
+export declare class AccountNotification extends Message<AccountNotification> {
+  /**
+   * @generated from field: bool disabled = 1;
+   */
+  disabled: boolean;
+
+  /**
+   * @generated from field: int64 last_notification = 2;
+   */
+  lastNotification: bigint;
+
+  /**
+   * @generated from field: int64 sent_notifications = 3;
+   */
+  sentNotifications: bigint;
+
+  constructor(data?: PartialMessage<AccountNotification>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.AccountNotification";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AccountNotification;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AccountNotification;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AccountNotification;
+
+  static equals(a: AccountNotification | PlainMessage<AccountNotification> | undefined, b: AccountNotification | PlainMessage<AccountNotification> | undefined): boolean;
 }
 
 /**

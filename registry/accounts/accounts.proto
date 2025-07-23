@@ -80,6 +80,29 @@ message Account {
 
   bool is_email_verified = 15;
   bool is_phone_verified = 16;
+
+  AccountMeta meta = 17;
+}
+
+message AccountMeta {
+   Notifications notifications = 1;
+}
+
+message Notifications {
+   BalanceNotification first_balance_notify = 1;
+   BalanceNotification second_balance_notify = 2;
+}
+
+message BalanceNotification {
+  AccountNotification base = 1;
+  bool invalidated = 2;
+  optional double threshold = 3;
+}
+
+message AccountNotification {
+  bool  disabled = 1;
+  int64 last_notification = 2;
+  int64 sent_notifications = 3;
 }
 
 message UpdateResponse {bool result = 1;}
