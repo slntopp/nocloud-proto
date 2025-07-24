@@ -228,9 +228,9 @@ export declare class InstanceMeta extends Message<InstanceMeta> {
   started: bigint;
 
   /**
-   * @generated from field: bool auto_renew = 2;
+   * @generated from field: optional bool auto_renew = 2;
    */
-  autoRenew: boolean;
+  autoRenew?: boolean;
 
   constructor(data?: PartialMessage<InstanceMeta>);
 

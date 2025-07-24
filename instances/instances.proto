@@ -78,7 +78,7 @@ message InstancesGroup {
 
 message InstanceMeta {
     int64 started = 1;
-    bool auto_renew = 2;
+    optional bool auto_renew = 2;
 }
 
 message Context {
