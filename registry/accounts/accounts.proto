@@ -95,12 +95,12 @@ message Notifications {
 
 message BalanceNotification {
   AccountNotification base = 1;
-  bool invalidated = 2;
+  optional bool invalidated = 2;
   optional double threshold = 3;
 }
 
 message AccountNotification {
-  bool  disabled = 1;
+  optional bool  disabled = 1;
   int64 last_notification = 2;
   int64 sent_notifications = 3;
 }

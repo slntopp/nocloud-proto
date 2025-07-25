@@ -399,9 +399,9 @@ export declare class BalanceNotification extends Message<BalanceNotification> {
   base?: AccountNotification;
 
   /**
-   * @generated from field: bool invalidated = 2;
+   * @generated from field: optional bool invalidated = 2;
    */
-  invalidated: boolean;
+  invalidated?: boolean;
 
   /**
    * @generated from field: optional double threshold = 3;
@@ -428,9 +428,9 @@ export declare class BalanceNotification extends Message<BalanceNotification> {
  */
 export declare class AccountNotification extends Message<AccountNotification> {
   /**
-   * @generated from field: bool disabled = 1;
+   * @generated from field: optional bool disabled = 1;
    */
-  disabled: boolean;
+  disabled?: boolean;
 
   /**
    * @generated from field: int64 last_notification = 2;
