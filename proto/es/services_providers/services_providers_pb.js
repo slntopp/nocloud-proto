@@ -107,6 +107,7 @@ export const ServicesProvider = /*@__PURE__*/ proto3.makeMessageType(
     { no: 14, name: "status", kind: "enum", T: proto3.getEnumType(NoCloudStatus) },
     { no: 15, name: "hooks", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Hook} },
     { no: 16, name: "suspend_rules", kind: "message", T: SuspendRules },
+    { no: 17, name: "monitoring_frequency", kind: "scalar", T: 3 /* ScalarType.INT64 */, opt: true },
   ],
 );
 

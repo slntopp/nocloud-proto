@@ -63,6 +63,8 @@ message ServicesProvider {
   map<string, Hook> hooks = 15;
 
   SuspendRules suspend_rules = 16;
+
+  optional int64 monitoring_frequency = 17;
 }
 
 message TestResponse {

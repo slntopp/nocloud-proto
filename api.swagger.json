@@ -11955,6 +11955,10 @@
         },
         "suspendRules": {
           "$ref": "#/definitions/services_providersSuspendRules"
+        },
+        "monitoringFrequency": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -12035,6 +12039,10 @@
         },
         "suspendRules": {
           "$ref": "#/definitions/services_providersSuspendRules"
+        },
+        "monitoringFrequency": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },

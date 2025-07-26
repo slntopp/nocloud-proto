@@ -278,6 +278,11 @@ export declare class ServicesProvider extends Message<ServicesProvider> {
    */
   suspendRules?: SuspendRules;
 
+  /**
+   * @generated from field: optional int64 monitoring_frequency = 17;
+   */
+  monitoringFrequency?: bigint;
+
   constructor(data?: PartialMessage<ServicesProvider>);
 
   static readonly runtime: typeof proto3;
