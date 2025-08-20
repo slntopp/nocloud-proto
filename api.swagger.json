@@ -161,6 +161,38 @@
         ]
       }
     },
+    "/accounts/change_language": {
+      "post": {
+        "operationId": "AccountsService_ChangeLanguageCode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/accountsChangeLanguageCodeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/accountsChangeLanguageCodeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AccountsService"
+        ]
+      }
+    },
     "/accounts/change_phone": {
       "post": {
         "operationId": "AccountsService_ChangePhone",
@@ -7868,6 +7900,9 @@
         },
         "meta": {
           "$ref": "#/definitions/accountsAccountMeta"
+        },
+        "languageCode": {
+          "type": "string"
         }
       }
     },
@@ -7918,6 +7953,20 @@
           "format": "double"
         }
       }
+    },
+    "accountsChangeLanguageCodeRequest": {
+      "type": "object",
+      "properties": {
+        "languageCode": {
+          "type": "string"
+        },
+        "targetAccount": {
+          "type": "string"
+        }
+      }
+    },
+    "accountsChangeLanguageCodeResponse": {
+      "type": "object"
     },
     "accountsChangePhoneRequest": {
       "type": "object",
@@ -11385,6 +11434,9 @@
         },
         "meta": {
           "$ref": "#/definitions/accountsAccountMeta"
+        },
+        "languageCode": {
+          "type": "string"
         }
       }
     },

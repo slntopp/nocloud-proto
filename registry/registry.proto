@@ -144,6 +144,13 @@ service AccountsService {
       body: "*"
     };
   };
+  rpc ChangeLanguageCode (accounts.ChangeLanguageCodeRequest)
+      returns (accounts.ChangeLanguageCodeResponse){
+    option (google.api.http) = {
+      post: "/accounts/change_language"
+      body: "*"
+    };
+  };
 }
 
 service NamespacesService {

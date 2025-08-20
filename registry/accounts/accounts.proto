@@ -82,6 +82,8 @@ message Account {
   bool is_phone_verified = 16;
 
   AccountMeta meta = 17;
+
+  string language_code = 18;
 }
 
 message AccountMeta {
@@ -162,3 +164,10 @@ message ChangePhoneRequest {
 }
 
 message ChangePhoneResponse {bool result = 1;}
+
+message ChangeLanguageCodeRequest {
+  string language_code = 1;
+  optional string target_account = 2;
+}
+
+message ChangeLanguageCodeResponse {}

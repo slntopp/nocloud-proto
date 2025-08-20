@@ -118,6 +118,7 @@ export const Account = /*@__PURE__*/ proto3.makeMessageType(
     { no: 15, name: "is_email_verified", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 16, name: "is_phone_verified", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 17, name: "meta", kind: "message", T: AccountMeta },
+    { no: 18, name: "language_code", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -339,5 +340,24 @@ export const ChangePhoneResponse = /*@__PURE__*/ proto3.makeMessageType(
   () => [
     { no: 1, name: "result", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
+);
+
+/**
+ * @generated from message nocloud.registry.accounts.ChangeLanguageCodeRequest
+ */
+export const ChangeLanguageCodeRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.ChangeLanguageCodeRequest",
+  () => [
+    { no: 1, name: "language_code", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "target_account", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+  ],
+);
+
+/**
+ * @generated from message nocloud.registry.accounts.ChangeLanguageCodeResponse
+ */
+export const ChangeLanguageCodeResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.ChangeLanguageCodeResponse",
+  [],
 );
 
