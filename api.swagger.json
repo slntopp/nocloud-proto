@@ -10493,6 +10493,9 @@
         "addon": {
           "type": "string",
           "title": "Addon key"
+        },
+        "ignoreOverlapping": {
+          "type": "boolean"
         }
       }
     },

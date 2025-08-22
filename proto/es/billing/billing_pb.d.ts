@@ -1439,6 +1439,11 @@ export declare class Record extends Message<Record> {
    */
   addon: string;
 
+  /**
+   * @generated from field: bool ignore_overlapping = 20;
+   */
+  ignoreOverlapping: boolean;
+
   constructor(data?: PartialMessage<Record>);
 
   static readonly runtime: typeof proto3;

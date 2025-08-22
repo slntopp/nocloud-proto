@@ -309,6 +309,8 @@ message Record {
   double cost = 18;
 
   string addon = 19; // Addon key
+
+  bool ignore_overlapping = 20;
 }
 
 message Records {repeated Record pool = 1;}

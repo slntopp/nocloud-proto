@@ -2215,16 +2215,17 @@ type Record struct {
 	//the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
 	//Type(SSD/HDD/NVMe/etc)
 	//}
-	Meta          map[string]*structpb.Value `protobuf:"bytes,12,rep,name=meta,proto3" json:"meta,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Currency      *Currency                  `protobuf:"bytes,13,opt,name=currency,proto3" json:"currency,omitempty"`
-	Service       string                     `protobuf:"bytes,14,opt,name=service,proto3" json:"service,omitempty"`
-	Account       string                     `protobuf:"bytes,15,opt,name=account,proto3" json:"account,omitempty"`
-	Base          *string                    `protobuf:"bytes,16,opt,name=base,proto3,oneof" json:"base,omitempty"`
-	Previous      *string                    `protobuf:"bytes,17,opt,name=previous,proto3,oneof" json:"previous,omitempty"`
-	Cost          float64                    `protobuf:"fixed64,18,opt,name=cost,proto3" json:"cost,omitempty"`
-	Addon         string                     `protobuf:"bytes,19,opt,name=addon,proto3" json:"addon,omitempty"` // Addon key
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Meta              map[string]*structpb.Value `protobuf:"bytes,12,rep,name=meta,proto3" json:"meta,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Currency          *Currency                  `protobuf:"bytes,13,opt,name=currency,proto3" json:"currency,omitempty"`
+	Service           string                     `protobuf:"bytes,14,opt,name=service,proto3" json:"service,omitempty"`
+	Account           string                     `protobuf:"bytes,15,opt,name=account,proto3" json:"account,omitempty"`
+	Base              *string                    `protobuf:"bytes,16,opt,name=base,proto3,oneof" json:"base,omitempty"`
+	Previous          *string                    `protobuf:"bytes,17,opt,name=previous,proto3,oneof" json:"previous,omitempty"`
+	Cost              float64                    `protobuf:"fixed64,18,opt,name=cost,proto3" json:"cost,omitempty"`
+	Addon             string                     `protobuf:"bytes,19,opt,name=addon,proto3" json:"addon,omitempty"` // Addon key
+	IgnoreOverlapping bool                       `protobuf:"varint,20,opt,name=ignore_overlapping,json=ignoreOverlapping,proto3" json:"ignore_overlapping,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *Record) Reset() {
@@ -2388,6 +2389,13 @@ func (x *Record) GetAddon() string {
 		return x.Addon
 	}
 	return ""
+}
+
+func (x *Record) GetIgnoreOverlapping() bool {
+	if x != nil {
+		return x.IgnoreOverlapping
+	}
+	return false
 }
 
 type Records struct {
@@ -5874,7 +5882,7 @@ const file_billing_billing_proto_rawDesc = "" +
 	"\bInvoices\x12,\n" +
 	"\x04pool\x18\x01 \x03(\v2\x18.nocloud.billing.InvoiceR\x04pool\"@\n" +
 	"\fTransactions\x120\n" +
-	"\x04pool\x18\x01 \x03(\v2\x1c.nocloud.billing.TransactionR\x04pool\"\xb6\x05\n" +
+	"\x04pool\x18\x01 \x03(\v2\x1c.nocloud.billing.TransactionR\x04pool\"\xe5\x05\n" +
 	"\x06Record\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x14\n" +
 	"\x05start\x18\x02 \x01(\x03R\x05start\x12\x10\n" +
@@ -5895,7 +5903,8 @@ const file_billing_billing_proto_rawDesc = "" +
 	"\x04base\x18\x10 \x01(\tH\x00R\x04base\x88\x01\x01\x12\x1f\n" +
 	"\bprevious\x18\x11 \x01(\tH\x01R\bprevious\x88\x01\x01\x12\x12\n" +
 	"\x04cost\x18\x12 \x01(\x01R\x04cost\x12\x14\n" +
-	"\x05addon\x18\x13 \x01(\tR\x05addon\x1aO\n" +
+	"\x05addon\x18\x13 \x01(\tR\x05addon\x12-\n" +
+	"\x12ignore_overlapping\x18\x14 \x01(\bR\x11ignoreOverlapping\x1aO\n" +
 	"\tMetaEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
 	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01B\a\n" +

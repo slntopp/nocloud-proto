@@ -470,6 +470,7 @@ export const Record = /*@__PURE__*/ proto3.makeMessageType(
     { no: 17, name: "previous", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 18, name: "cost", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
     { no: 19, name: "addon", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 20, name: "ignore_overlapping", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
