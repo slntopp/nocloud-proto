@@ -1609,13 +1609,14 @@ type Transaction struct {
 	//the moment, e.g. 1 NCU [other keys]: <any> // for example Drive
 	//Type(SSD/HDD/NVMe/etc)
 	//}
-	Meta          map[string]*structpb.Value `protobuf:"bytes,10,rep,name=meta,proto3" json:"meta,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Currency      *Currency                  `protobuf:"bytes,11,opt,name=currency,proto3" json:"currency,omitempty"`
-	Created       int64                      `protobuf:"varint,12,opt,name=created,proto3" json:"created,omitempty"`
-	Base          *string                    `protobuf:"bytes,13,opt,name=base,proto3,oneof" json:"base,omitempty"`
-	Previous      *string                    `protobuf:"bytes,14,opt,name=previous,proto3,oneof" json:"previous,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Meta              map[string]*structpb.Value `protobuf:"bytes,10,rep,name=meta,proto3" json:"meta,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Currency          *Currency                  `protobuf:"bytes,11,opt,name=currency,proto3" json:"currency,omitempty"`
+	Created           int64                      `protobuf:"varint,12,opt,name=created,proto3" json:"created,omitempty"`
+	Base              *string                    `protobuf:"bytes,13,opt,name=base,proto3,oneof" json:"base,omitempty"`
+	Previous          *string                    `protobuf:"bytes,14,opt,name=previous,proto3,oneof" json:"previous,omitempty"`
+	IgnoreOverlapping bool                       `protobuf:"varint,15,opt,name=ignore_overlapping,json=ignoreOverlapping,proto3" json:"ignore_overlapping,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *Transaction) Reset() {
@@ -1744,6 +1745,13 @@ func (x *Transaction) GetPrevious() string {
 		return *x.Previous
 	}
 	return ""
+}
+
+func (x *Transaction) GetIgnoreOverlapping() bool {
+	if x != nil {
+		return x.IgnoreOverlapping
+	}
+	return false
 }
 
 // Position. Instance must be specified to connect action with instance
@@ -5818,7 +5826,7 @@ const file_billing_billing_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
 	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01B\t\n" +
 	"\a_sorterB\x13\n" +
-	"\x11_installation_fee\"\xb0\x04\n" +
+	"\x11_installation_fee\"\xdf\x04\n" +
 	"\vTransaction\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x12\n" +
 	"\x04exec\x18\x02 \x01(\x03R\x04exec\x12\x12\n" +
@@ -5834,7 +5842,8 @@ const file_billing_billing_proto_rawDesc = "" +
 	"\bcurrency\x18\v \x01(\v2\x19.nocloud.billing.CurrencyR\bcurrency\x12\x18\n" +
 	"\acreated\x18\f \x01(\x03R\acreated\x12\x17\n" +
 	"\x04base\x18\r \x01(\tH\x00R\x04base\x88\x01\x01\x12\x1f\n" +
-	"\bprevious\x18\x0e \x01(\tH\x01R\bprevious\x88\x01\x01\x1aO\n" +
+	"\bprevious\x18\x0e \x01(\tH\x01R\bprevious\x88\x01\x01\x12-\n" +
+	"\x12ignore_overlapping\x18\x0f \x01(\bR\x11ignoreOverlapping\x1aO\n" +
 	"\tMetaEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
 	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01B\a\n" +

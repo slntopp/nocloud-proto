@@ -4366,6 +4366,12 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "ignoreOverlapping",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -7632,6 +7638,9 @@
         },
         "previous": {
           "type": "string"
+        },
+        "ignoreOverlapping": {
+          "type": "boolean"
         }
       }
     },
@@ -9643,6 +9652,9 @@
         },
         "previous": {
           "type": "string"
+        },
+        "ignoreOverlapping": {
+          "type": "boolean"
         }
       }
     },

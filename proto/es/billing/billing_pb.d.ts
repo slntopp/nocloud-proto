@@ -1020,6 +1020,11 @@ export declare class Transaction extends Message<Transaction> {
    */
   previous?: string;
 
+  /**
+   * @generated from field: bool ignore_overlapping = 15;
+   */
+  ignoreOverlapping: boolean;
+
   constructor(data?: PartialMessage<Transaction>);
 
   static readonly runtime: typeof proto3;
