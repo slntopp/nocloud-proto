@@ -1020,6 +1020,11 @@ export declare class Transaction extends Message<Transaction> {
    */
   previous?: string;
 
+  /**
+   * @generated from field: bool ignore_overlapping = 15;
+   */
+  ignoreOverlapping: boolean;
+
   constructor(data?: PartialMessage<Transaction>);
 
   static readonly runtime: typeof proto3;
@@ -1438,6 +1443,11 @@ export declare class Record extends Message<Record> {
    * @generated from field: string addon = 19;
    */
   addon: string;
+
+  /**
+   * @generated from field: bool ignore_overlapping = 20;
+   */
+  ignoreOverlapping: boolean;
 
   constructor(data?: PartialMessage<Record>);
 

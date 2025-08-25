@@ -37,21 +37,22 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AccountsService_Token_FullMethodName          = "/nocloud.registry.AccountsService/Token"
-	AccountsService_SetCredentials_FullMethodName = "/nocloud.registry.AccountsService/SetCredentials"
-	AccountsService_AddNote_FullMethodName        = "/nocloud.registry.AccountsService/AddNote"
-	AccountsService_PatchNote_FullMethodName      = "/nocloud.registry.AccountsService/PatchNote"
-	AccountsService_RemoveNote_FullMethodName     = "/nocloud.registry.AccountsService/RemoveNote"
-	AccountsService_Create_FullMethodName         = "/nocloud.registry.AccountsService/Create"
-	AccountsService_SignUp_FullMethodName         = "/nocloud.registry.AccountsService/SignUp"
-	AccountsService_Update_FullMethodName         = "/nocloud.registry.AccountsService/Update"
-	AccountsService_Get_FullMethodName            = "/nocloud.registry.AccountsService/Get"
-	AccountsService_List_FullMethodName           = "/nocloud.registry.AccountsService/List"
-	AccountsService_Delete_FullMethodName         = "/nocloud.registry.AccountsService/Delete"
-	AccountsService_Suspend_FullMethodName        = "/nocloud.registry.AccountsService/Suspend"
-	AccountsService_Unsuspend_FullMethodName      = "/nocloud.registry.AccountsService/Unsuspend"
-	AccountsService_Verify_FullMethodName         = "/nocloud.registry.AccountsService/Verify"
-	AccountsService_ChangePhone_FullMethodName    = "/nocloud.registry.AccountsService/ChangePhone"
+	AccountsService_Token_FullMethodName              = "/nocloud.registry.AccountsService/Token"
+	AccountsService_SetCredentials_FullMethodName     = "/nocloud.registry.AccountsService/SetCredentials"
+	AccountsService_AddNote_FullMethodName            = "/nocloud.registry.AccountsService/AddNote"
+	AccountsService_PatchNote_FullMethodName          = "/nocloud.registry.AccountsService/PatchNote"
+	AccountsService_RemoveNote_FullMethodName         = "/nocloud.registry.AccountsService/RemoveNote"
+	AccountsService_Create_FullMethodName             = "/nocloud.registry.AccountsService/Create"
+	AccountsService_SignUp_FullMethodName             = "/nocloud.registry.AccountsService/SignUp"
+	AccountsService_Update_FullMethodName             = "/nocloud.registry.AccountsService/Update"
+	AccountsService_Get_FullMethodName                = "/nocloud.registry.AccountsService/Get"
+	AccountsService_List_FullMethodName               = "/nocloud.registry.AccountsService/List"
+	AccountsService_Delete_FullMethodName             = "/nocloud.registry.AccountsService/Delete"
+	AccountsService_Suspend_FullMethodName            = "/nocloud.registry.AccountsService/Suspend"
+	AccountsService_Unsuspend_FullMethodName          = "/nocloud.registry.AccountsService/Unsuspend"
+	AccountsService_Verify_FullMethodName             = "/nocloud.registry.AccountsService/Verify"
+	AccountsService_ChangePhone_FullMethodName        = "/nocloud.registry.AccountsService/ChangePhone"
+	AccountsService_ChangeLanguageCode_FullMethodName = "/nocloud.registry.AccountsService/ChangeLanguageCode"
 )
 
 // AccountsServiceClient is the client API for AccountsService service.
@@ -73,6 +74,7 @@ type AccountsServiceClient interface {
 	Unsuspend(ctx context.Context, in *accounts.UnsuspendRequest, opts ...grpc.CallOption) (*accounts.UnsuspendResponse, error)
 	Verify(ctx context.Context, in *VerificationRequest, opts ...grpc.CallOption) (*VerificationResponse, error)
 	ChangePhone(ctx context.Context, in *accounts.ChangePhoneRequest, opts ...grpc.CallOption) (*accounts.ChangePhoneResponse, error)
+	ChangeLanguageCode(ctx context.Context, in *accounts.ChangeLanguageCodeRequest, opts ...grpc.CallOption) (*accounts.ChangeLanguageCodeResponse, error)
 }
 
 type accountsServiceClient struct {
@@ -233,6 +235,16 @@ func (c *accountsServiceClient) ChangePhone(ctx context.Context, in *accounts.Ch
 	return out, nil
 }
 
+func (c *accountsServiceClient) ChangeLanguageCode(ctx context.Context, in *accounts.ChangeLanguageCodeRequest, opts ...grpc.CallOption) (*accounts.ChangeLanguageCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(accounts.ChangeLanguageCodeResponse)
+	err := c.cc.Invoke(ctx, AccountsService_ChangeLanguageCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AccountsServiceServer is the server API for AccountsService service.
 // All implementations must embed UnimplementedAccountsServiceServer
 // for forward compatibility.
@@ -252,6 +264,7 @@ type AccountsServiceServer interface {
 	Unsuspend(context.Context, *accounts.UnsuspendRequest) (*accounts.UnsuspendResponse, error)
 	Verify(context.Context, *VerificationRequest) (*VerificationResponse, error)
 	ChangePhone(context.Context, *accounts.ChangePhoneRequest) (*accounts.ChangePhoneResponse, error)
+	ChangeLanguageCode(context.Context, *accounts.ChangeLanguageCodeRequest) (*accounts.ChangeLanguageCodeResponse, error)
 	mustEmbedUnimplementedAccountsServiceServer()
 }
 
@@ -306,6 +319,9 @@ func (UnimplementedAccountsServiceServer) Verify(context.Context, *VerificationR
 }
 func (UnimplementedAccountsServiceServer) ChangePhone(context.Context, *accounts.ChangePhoneRequest) (*accounts.ChangePhoneResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ChangePhone not implemented")
+}
+func (UnimplementedAccountsServiceServer) ChangeLanguageCode(context.Context, *accounts.ChangeLanguageCodeRequest) (*accounts.ChangeLanguageCodeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ChangeLanguageCode not implemented")
 }
 func (UnimplementedAccountsServiceServer) mustEmbedUnimplementedAccountsServiceServer() {}
 func (UnimplementedAccountsServiceServer) testEmbeddedByValue()                         {}
@@ -598,6 +614,24 @@ func _AccountsService_ChangePhone_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AccountsService_ChangeLanguageCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(accounts.ChangeLanguageCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServiceServer).ChangeLanguageCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountsService_ChangeLanguageCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServiceServer).ChangeLanguageCode(ctx, req.(*accounts.ChangeLanguageCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AccountsService_ServiceDesc is the grpc.ServiceDesc for AccountsService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -664,6 +698,10 @@ var AccountsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ChangePhone",
 			Handler:    _AccountsService_ChangePhone_Handler,
+		},
+		{
+			MethodName: "ChangeLanguageCode",
+			Handler:    _AccountsService_ChangeLanguageCode_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

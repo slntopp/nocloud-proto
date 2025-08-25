@@ -321,6 +321,11 @@ export declare class Account extends Message<Account> {
    */
   meta?: AccountMeta;
 
+  /**
+   * @generated from field: string language_code = 18;
+   */
+  languageCode: string;
+
   constructor(data?: PartialMessage<Account>);
 
   static readonly runtime: typeof proto3;
@@ -918,5 +923,53 @@ export declare class ChangePhoneResponse extends Message<ChangePhoneResponse> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ChangePhoneResponse;
 
   static equals(a: ChangePhoneResponse | PlainMessage<ChangePhoneResponse> | undefined, b: ChangePhoneResponse | PlainMessage<ChangePhoneResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.registry.accounts.ChangeLanguageCodeRequest
+ */
+export declare class ChangeLanguageCodeRequest extends Message<ChangeLanguageCodeRequest> {
+  /**
+   * @generated from field: string language_code = 1;
+   */
+  languageCode: string;
+
+  /**
+   * @generated from field: optional string target_account = 2;
+   */
+  targetAccount?: string;
+
+  constructor(data?: PartialMessage<ChangeLanguageCodeRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.ChangeLanguageCodeRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ChangeLanguageCodeRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ChangeLanguageCodeRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ChangeLanguageCodeRequest;
+
+  static equals(a: ChangeLanguageCodeRequest | PlainMessage<ChangeLanguageCodeRequest> | undefined, b: ChangeLanguageCodeRequest | PlainMessage<ChangeLanguageCodeRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.registry.accounts.ChangeLanguageCodeResponse
+ */
+export declare class ChangeLanguageCodeResponse extends Message<ChangeLanguageCodeResponse> {
+  constructor(data?: PartialMessage<ChangeLanguageCodeResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.ChangeLanguageCodeResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ChangeLanguageCodeResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ChangeLanguageCodeResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ChangeLanguageCodeResponse;
+
+  static equals(a: ChangeLanguageCodeResponse | PlainMessage<ChangeLanguageCodeResponse> | undefined, b: ChangeLanguageCodeResponse | PlainMessage<ChangeLanguageCodeResponse> | undefined): boolean;
 }
 

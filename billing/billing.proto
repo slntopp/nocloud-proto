@@ -211,6 +211,7 @@ message Transaction {
   int64 created = 12;
   optional string base = 13;
   optional string previous = 14;
+  bool ignore_overlapping = 15;
 }
 
 enum BillingStatus {
@@ -309,6 +310,8 @@ message Record {
   double cost = 18;
 
   string addon = 19; // Addon key
+
+  bool ignore_overlapping = 20;
 }
 
 message Records {repeated Record pool = 1;}

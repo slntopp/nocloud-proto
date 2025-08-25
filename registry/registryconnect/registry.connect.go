@@ -88,6 +88,9 @@ const (
 	// AccountsServiceChangePhoneProcedure is the fully-qualified name of the AccountsService's
 	// ChangePhone RPC.
 	AccountsServiceChangePhoneProcedure = "/nocloud.registry.AccountsService/ChangePhone"
+	// AccountsServiceChangeLanguageCodeProcedure is the fully-qualified name of the AccountsService's
+	// ChangeLanguageCode RPC.
+	AccountsServiceChangeLanguageCodeProcedure = "/nocloud.registry.AccountsService/ChangeLanguageCode"
 	// NamespacesServiceCreateProcedure is the fully-qualified name of the NamespacesService's Create
 	// RPC.
 	NamespacesServiceCreateProcedure = "/nocloud.registry.NamespacesService/Create"
@@ -108,30 +111,31 @@ const (
 
 // These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
 var (
-	accountsServiceServiceDescriptor              = registry.File_registry_registry_proto.Services().ByName("AccountsService")
-	accountsServiceTokenMethodDescriptor          = accountsServiceServiceDescriptor.Methods().ByName("Token")
-	accountsServiceSetCredentialsMethodDescriptor = accountsServiceServiceDescriptor.Methods().ByName("SetCredentials")
-	accountsServiceAddNoteMethodDescriptor        = accountsServiceServiceDescriptor.Methods().ByName("AddNote")
-	accountsServicePatchNoteMethodDescriptor      = accountsServiceServiceDescriptor.Methods().ByName("PatchNote")
-	accountsServiceRemoveNoteMethodDescriptor     = accountsServiceServiceDescriptor.Methods().ByName("RemoveNote")
-	accountsServiceCreateMethodDescriptor         = accountsServiceServiceDescriptor.Methods().ByName("Create")
-	accountsServiceSignUpMethodDescriptor         = accountsServiceServiceDescriptor.Methods().ByName("SignUp")
-	accountsServiceUpdateMethodDescriptor         = accountsServiceServiceDescriptor.Methods().ByName("Update")
-	accountsServiceGetMethodDescriptor            = accountsServiceServiceDescriptor.Methods().ByName("Get")
-	accountsServiceListMethodDescriptor           = accountsServiceServiceDescriptor.Methods().ByName("List")
-	accountsServiceDeleteMethodDescriptor         = accountsServiceServiceDescriptor.Methods().ByName("Delete")
-	accountsServiceSuspendMethodDescriptor        = accountsServiceServiceDescriptor.Methods().ByName("Suspend")
-	accountsServiceUnsuspendMethodDescriptor      = accountsServiceServiceDescriptor.Methods().ByName("Unsuspend")
-	accountsServiceVerifyMethodDescriptor         = accountsServiceServiceDescriptor.Methods().ByName("Verify")
-	accountsServiceChangePhoneMethodDescriptor    = accountsServiceServiceDescriptor.Methods().ByName("ChangePhone")
-	namespacesServiceServiceDescriptor            = registry.File_registry_registry_proto.Services().ByName("NamespacesService")
-	namespacesServiceCreateMethodDescriptor       = namespacesServiceServiceDescriptor.Methods().ByName("Create")
-	namespacesServiceListMethodDescriptor         = namespacesServiceServiceDescriptor.Methods().ByName("List")
-	namespacesServiceGetMethodDescriptor          = namespacesServiceServiceDescriptor.Methods().ByName("Get")
-	namespacesServiceJoinMethodDescriptor         = namespacesServiceServiceDescriptor.Methods().ByName("Join")
-	namespacesServiceLinkMethodDescriptor         = namespacesServiceServiceDescriptor.Methods().ByName("Link")
-	namespacesServiceDeleteMethodDescriptor       = namespacesServiceServiceDescriptor.Methods().ByName("Delete")
-	namespacesServicePatchMethodDescriptor        = namespacesServiceServiceDescriptor.Methods().ByName("Patch")
+	accountsServiceServiceDescriptor                  = registry.File_registry_registry_proto.Services().ByName("AccountsService")
+	accountsServiceTokenMethodDescriptor              = accountsServiceServiceDescriptor.Methods().ByName("Token")
+	accountsServiceSetCredentialsMethodDescriptor     = accountsServiceServiceDescriptor.Methods().ByName("SetCredentials")
+	accountsServiceAddNoteMethodDescriptor            = accountsServiceServiceDescriptor.Methods().ByName("AddNote")
+	accountsServicePatchNoteMethodDescriptor          = accountsServiceServiceDescriptor.Methods().ByName("PatchNote")
+	accountsServiceRemoveNoteMethodDescriptor         = accountsServiceServiceDescriptor.Methods().ByName("RemoveNote")
+	accountsServiceCreateMethodDescriptor             = accountsServiceServiceDescriptor.Methods().ByName("Create")
+	accountsServiceSignUpMethodDescriptor             = accountsServiceServiceDescriptor.Methods().ByName("SignUp")
+	accountsServiceUpdateMethodDescriptor             = accountsServiceServiceDescriptor.Methods().ByName("Update")
+	accountsServiceGetMethodDescriptor                = accountsServiceServiceDescriptor.Methods().ByName("Get")
+	accountsServiceListMethodDescriptor               = accountsServiceServiceDescriptor.Methods().ByName("List")
+	accountsServiceDeleteMethodDescriptor             = accountsServiceServiceDescriptor.Methods().ByName("Delete")
+	accountsServiceSuspendMethodDescriptor            = accountsServiceServiceDescriptor.Methods().ByName("Suspend")
+	accountsServiceUnsuspendMethodDescriptor          = accountsServiceServiceDescriptor.Methods().ByName("Unsuspend")
+	accountsServiceVerifyMethodDescriptor             = accountsServiceServiceDescriptor.Methods().ByName("Verify")
+	accountsServiceChangePhoneMethodDescriptor        = accountsServiceServiceDescriptor.Methods().ByName("ChangePhone")
+	accountsServiceChangeLanguageCodeMethodDescriptor = accountsServiceServiceDescriptor.Methods().ByName("ChangeLanguageCode")
+	namespacesServiceServiceDescriptor                = registry.File_registry_registry_proto.Services().ByName("NamespacesService")
+	namespacesServiceCreateMethodDescriptor           = namespacesServiceServiceDescriptor.Methods().ByName("Create")
+	namespacesServiceListMethodDescriptor             = namespacesServiceServiceDescriptor.Methods().ByName("List")
+	namespacesServiceGetMethodDescriptor              = namespacesServiceServiceDescriptor.Methods().ByName("Get")
+	namespacesServiceJoinMethodDescriptor             = namespacesServiceServiceDescriptor.Methods().ByName("Join")
+	namespacesServiceLinkMethodDescriptor             = namespacesServiceServiceDescriptor.Methods().ByName("Link")
+	namespacesServiceDeleteMethodDescriptor           = namespacesServiceServiceDescriptor.Methods().ByName("Delete")
+	namespacesServicePatchMethodDescriptor            = namespacesServiceServiceDescriptor.Methods().ByName("Patch")
 )
 
 // AccountsServiceClient is a client for the nocloud.registry.AccountsService service.
@@ -151,6 +155,7 @@ type AccountsServiceClient interface {
 	Unsuspend(context.Context, *connect.Request[accounts.UnsuspendRequest]) (*connect.Response[accounts.UnsuspendResponse], error)
 	Verify(context.Context, *connect.Request[registry.VerificationRequest]) (*connect.Response[registry.VerificationResponse], error)
 	ChangePhone(context.Context, *connect.Request[accounts.ChangePhoneRequest]) (*connect.Response[accounts.ChangePhoneResponse], error)
+	ChangeLanguageCode(context.Context, *connect.Request[accounts.ChangeLanguageCodeRequest]) (*connect.Response[accounts.ChangeLanguageCodeResponse], error)
 }
 
 // NewAccountsServiceClient constructs a client for the nocloud.registry.AccountsService service. By
@@ -253,26 +258,33 @@ func NewAccountsServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(accountsServiceChangePhoneMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		changeLanguageCode: connect.NewClient[accounts.ChangeLanguageCodeRequest, accounts.ChangeLanguageCodeResponse](
+			httpClient,
+			baseURL+AccountsServiceChangeLanguageCodeProcedure,
+			connect.WithSchema(accountsServiceChangeLanguageCodeMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // accountsServiceClient implements AccountsServiceClient.
 type accountsServiceClient struct {
-	token          *connect.Client[accounts.TokenRequest, accounts.TokenResponse]
-	setCredentials *connect.Client[accounts.SetCredentialsRequest, accounts.SetCredentialsResponse]
-	addNote        *connect.Client[notes.AddNoteRequest, notes.NoteResponse]
-	patchNote      *connect.Client[notes.PatchNoteRequest, notes.NoteResponse]
-	removeNote     *connect.Client[notes.RemoveNoteRequest, notes.NoteResponse]
-	create         *connect.Client[accounts.CreateRequest, accounts.CreateResponse]
-	signUp         *connect.Client[accounts.CreateRequest, accounts.CreateResponse]
-	update         *connect.Client[accounts.Account, accounts.UpdateResponse]
-	get            *connect.Client[accounts.GetRequest, accounts.Account]
-	list           *connect.Client[accounts.ListRequest, accounts.ListResponse]
-	delete         *connect.Client[accounts.DeleteRequest, accounts.DeleteResponse]
-	suspend        *connect.Client[accounts.SuspendRequest, accounts.SuspendResponse]
-	unsuspend      *connect.Client[accounts.UnsuspendRequest, accounts.UnsuspendResponse]
-	verify         *connect.Client[registry.VerificationRequest, registry.VerificationResponse]
-	changePhone    *connect.Client[accounts.ChangePhoneRequest, accounts.ChangePhoneResponse]
+	token              *connect.Client[accounts.TokenRequest, accounts.TokenResponse]
+	setCredentials     *connect.Client[accounts.SetCredentialsRequest, accounts.SetCredentialsResponse]
+	addNote            *connect.Client[notes.AddNoteRequest, notes.NoteResponse]
+	patchNote          *connect.Client[notes.PatchNoteRequest, notes.NoteResponse]
+	removeNote         *connect.Client[notes.RemoveNoteRequest, notes.NoteResponse]
+	create             *connect.Client[accounts.CreateRequest, accounts.CreateResponse]
+	signUp             *connect.Client[accounts.CreateRequest, accounts.CreateResponse]
+	update             *connect.Client[accounts.Account, accounts.UpdateResponse]
+	get                *connect.Client[accounts.GetRequest, accounts.Account]
+	list               *connect.Client[accounts.ListRequest, accounts.ListResponse]
+	delete             *connect.Client[accounts.DeleteRequest, accounts.DeleteResponse]
+	suspend            *connect.Client[accounts.SuspendRequest, accounts.SuspendResponse]
+	unsuspend          *connect.Client[accounts.UnsuspendRequest, accounts.UnsuspendResponse]
+	verify             *connect.Client[registry.VerificationRequest, registry.VerificationResponse]
+	changePhone        *connect.Client[accounts.ChangePhoneRequest, accounts.ChangePhoneResponse]
+	changeLanguageCode *connect.Client[accounts.ChangeLanguageCodeRequest, accounts.ChangeLanguageCodeResponse]
 }
 
 // Token calls nocloud.registry.AccountsService.Token.
@@ -350,6 +362,11 @@ func (c *accountsServiceClient) ChangePhone(ctx context.Context, req *connect.Re
 	return c.changePhone.CallUnary(ctx, req)
 }
 
+// ChangeLanguageCode calls nocloud.registry.AccountsService.ChangeLanguageCode.
+func (c *accountsServiceClient) ChangeLanguageCode(ctx context.Context, req *connect.Request[accounts.ChangeLanguageCodeRequest]) (*connect.Response[accounts.ChangeLanguageCodeResponse], error) {
+	return c.changeLanguageCode.CallUnary(ctx, req)
+}
+
 // AccountsServiceHandler is an implementation of the nocloud.registry.AccountsService service.
 type AccountsServiceHandler interface {
 	Token(context.Context, *connect.Request[accounts.TokenRequest]) (*connect.Response[accounts.TokenResponse], error)
@@ -367,6 +384,7 @@ type AccountsServiceHandler interface {
 	Unsuspend(context.Context, *connect.Request[accounts.UnsuspendRequest]) (*connect.Response[accounts.UnsuspendResponse], error)
 	Verify(context.Context, *connect.Request[registry.VerificationRequest]) (*connect.Response[registry.VerificationResponse], error)
 	ChangePhone(context.Context, *connect.Request[accounts.ChangePhoneRequest]) (*connect.Response[accounts.ChangePhoneResponse], error)
+	ChangeLanguageCode(context.Context, *connect.Request[accounts.ChangeLanguageCodeRequest]) (*connect.Response[accounts.ChangeLanguageCodeResponse], error)
 }
 
 // NewAccountsServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -465,6 +483,12 @@ func NewAccountsServiceHandler(svc AccountsServiceHandler, opts ...connect.Handl
 		connect.WithSchema(accountsServiceChangePhoneMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	accountsServiceChangeLanguageCodeHandler := connect.NewUnaryHandler(
+		AccountsServiceChangeLanguageCodeProcedure,
+		svc.ChangeLanguageCode,
+		connect.WithSchema(accountsServiceChangeLanguageCodeMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/nocloud.registry.AccountsService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case AccountsServiceTokenProcedure:
@@ -497,6 +521,8 @@ func NewAccountsServiceHandler(svc AccountsServiceHandler, opts ...connect.Handl
 			accountsServiceVerifyHandler.ServeHTTP(w, r)
 		case AccountsServiceChangePhoneProcedure:
 			accountsServiceChangePhoneHandler.ServeHTTP(w, r)
+		case AccountsServiceChangeLanguageCodeProcedure:
+			accountsServiceChangeLanguageCodeHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -564,6 +590,10 @@ func (UnimplementedAccountsServiceHandler) Verify(context.Context, *connect.Requ
 
 func (UnimplementedAccountsServiceHandler) ChangePhone(context.Context, *connect.Request[accounts.ChangePhoneRequest]) (*connect.Response[accounts.ChangePhoneResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.registry.AccountsService.ChangePhone is not implemented"))
+}
+
+func (UnimplementedAccountsServiceHandler) ChangeLanguageCode(context.Context, *connect.Request[accounts.ChangeLanguageCodeRequest]) (*connect.Response[accounts.ChangeLanguageCodeResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.registry.AccountsService.ChangeLanguageCode is not implemented"))
 }
 
 // NamespacesServiceClient is a client for the nocloud.registry.NamespacesService service.
