@@ -15,7 +15,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { proto3 } from "@bufbuild/protobuf";
+import { proto3, Value } from "@bufbuild/protobuf";
 import { Access } from "../access/access_pb.js";
 
 /**
@@ -137,7 +137,14 @@ export const GetRunRequest = /*@__PURE__*/ proto3.makeMessageType(
  */
 export const ListRunsRequest = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.ansible.ListRunsRequest",
-  [],
+  () => [
+    { no: 1, name: "page", kind: "scalar", T: 4 /* ScalarType.UINT64 */, opt: true },
+    { no: 2, name: "limit", kind: "scalar", T: 4 /* ScalarType.UINT64 */, opt: true },
+    { no: 3, name: "field", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 4, name: "sort", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 5, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 6, name: "filters", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
+  ],
 );
 
 /**
