@@ -23,6 +23,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -660,7 +661,13 @@ func (x *GetRunRequest) GetUuid() string {
 }
 
 type ListRunsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState     `protogen:"open.v1"`
+	Page          *uint64                    `protobuf:"varint,1,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	Limit         *uint64                    `protobuf:"varint,2,opt,name=limit,proto3,oneof" json:"limit,omitempty"`
+	Field         *string                    `protobuf:"bytes,3,opt,name=field,proto3,oneof" json:"field,omitempty"`
+	Sort          *string                    `protobuf:"bytes,4,opt,name=sort,proto3,oneof" json:"sort,omitempty"`
+	Uuid          *string                    `protobuf:"bytes,5,opt,name=uuid,proto3,oneof" json:"uuid,omitempty"`
+	Filters       map[string]*structpb.Value `protobuf:"bytes,6,rep,name=filters,proto3" json:"filters,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -693,6 +700,48 @@ func (x *ListRunsRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ListRunsRequest.ProtoReflect.Descriptor instead.
 func (*ListRunsRequest) Descriptor() ([]byte, []int) {
 	return file_ansible_ansible_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ListRunsRequest) GetPage() uint64 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListRunsRequest) GetLimit() uint64 {
+	if x != nil && x.Limit != nil {
+		return *x.Limit
+	}
+	return 0
+}
+
+func (x *ListRunsRequest) GetField() string {
+	if x != nil && x.Field != nil {
+		return *x.Field
+	}
+	return ""
+}
+
+func (x *ListRunsRequest) GetSort() string {
+	if x != nil && x.Sort != nil {
+		return *x.Sort
+	}
+	return ""
+}
+
+func (x *ListRunsRequest) GetUuid() string {
+	if x != nil && x.Uuid != nil {
+		return *x.Uuid
+	}
+	return ""
+}
+
+func (x *ListRunsRequest) GetFilters() map[string]*structpb.Value {
+	if x != nil {
+		return x.Filters
+	}
+	return nil
 }
 
 type ExecRunRequest struct {
@@ -1401,7 +1450,7 @@ type ExecRunResponse_Error struct {
 
 func (x *ExecRunResponse_Error) Reset() {
 	*x = ExecRunResponse_Error{}
-	mi := &file_ansible_ansible_proto_msgTypes[28]
+	mi := &file_ansible_ansible_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1413,7 +1462,7 @@ func (x *ExecRunResponse_Error) String() string {
 func (*ExecRunResponse_Error) ProtoMessage() {}
 
 func (x *ExecRunResponse_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_ansible_ansible_proto_msgTypes[28]
+	mi := &file_ansible_ansible_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1447,7 +1496,7 @@ var File_ansible_ansible_proto protoreflect.FileDescriptor
 
 const file_ansible_ansible_proto_rawDesc = "" +
 	"\n" +
-	"\x15ansible/ansible.proto\x12\x0fnocloud.ansible\x1a\x1cgoogle/api/annotations.proto\x1a\x13access/access.proto\"\xd8\x01\n" +
+	"\x15ansible/ansible.proto\x12\x0fnocloud.ansible\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x13access/access.proto\"\xd8\x01\n" +
 	"\bSoftware\x12\x1a\n" +
 	"\bplaybook\x18\x01 \x01(\tR\bplaybook\x127\n" +
 	"\x04vars\x18\x02 \x03(\v2#.nocloud.ansible.Software.VarsEntryR\x04vars\x12\x18\n" +
@@ -1519,8 +1568,22 @@ const file_ansible_ansible_proto_rawDesc = "" +
 	"\n" +
 	"_namespace\"#\n" +
 	"\rGetRunRequest\x12\x12\n" +
-	"\x04uuid\x18\x01 \x01(\tR\x04uuid\"\x11\n" +
-	"\x0fListRunsRequest\"E\n" +
+	"\x04uuid\x18\x01 \x01(\tR\x04uuid\"\xde\x02\n" +
+	"\x0fListRunsRequest\x12\x17\n" +
+	"\x04page\x18\x01 \x01(\x04H\x00R\x04page\x88\x01\x01\x12\x19\n" +
+	"\x05limit\x18\x02 \x01(\x04H\x01R\x05limit\x88\x01\x01\x12\x19\n" +
+	"\x05field\x18\x03 \x01(\tH\x02R\x05field\x88\x01\x01\x12\x17\n" +
+	"\x04sort\x18\x04 \x01(\tH\x03R\x04sort\x88\x01\x01\x12\x17\n" +
+	"\x04uuid\x18\x05 \x01(\tH\x04R\x04uuid\x88\x01\x01\x12G\n" +
+	"\afilters\x18\x06 \x03(\v2-.nocloud.ansible.ListRunsRequest.FiltersEntryR\afilters\x1aR\n" +
+	"\fFiltersEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01B\a\n" +
+	"\x05_pageB\b\n" +
+	"\x06_limitB\b\n" +
+	"\x06_fieldB\a\n" +
+	"\x05_sortB\a\n" +
+	"\x05_uuid\"E\n" +
 	"\x0eExecRunRequest\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x1f\n" +
 	"\vwait_finish\x18\x02 \x01(\bR\n" +
@@ -1584,7 +1647,7 @@ func file_ansible_ansible_proto_rawDescGZIP() []byte {
 	return file_ansible_ansible_proto_rawDescData
 }
 
-var file_ansible_ansible_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
+var file_ansible_ansible_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
 var file_ansible_ansible_proto_goTypes = []any{
 	(*Software)(nil),               // 0: nocloud.ansible.Software
 	(*Playbook)(nil),               // 1: nocloud.ansible.Playbook
@@ -1614,54 +1677,58 @@ var file_ansible_ansible_proto_goTypes = []any{
 	nil,                            // 25: nocloud.ansible.Software.VarsEntry
 	nil,                            // 26: nocloud.ansible.Run.JobsEntry
 	nil,                            // 27: nocloud.ansible.Run.VarsEntry
-	(*ExecRunResponse_Error)(nil),  // 28: nocloud.ansible.ExecRunResponse.Error
-	(*access.Access)(nil),          // 29: nocloud.access.Access
+	nil,                            // 28: nocloud.ansible.ListRunsRequest.FiltersEntry
+	(*ExecRunResponse_Error)(nil),  // 29: nocloud.ansible.ExecRunResponse.Error
+	(*access.Access)(nil),          // 30: nocloud.access.Access
+	(*structpb.Value)(nil),         // 31: google.protobuf.Value
 }
 var file_ansible_ansible_proto_depIdxs = []int32{
 	25, // 0: nocloud.ansible.Software.vars:type_name -> nocloud.ansible.Software.VarsEntry
 	5,  // 1: nocloud.ansible.Run.instances:type_name -> nocloud.ansible.Instance
 	26, // 2: nocloud.ansible.Run.jobs:type_name -> nocloud.ansible.Run.JobsEntry
-	29, // 3: nocloud.ansible.Run.access:type_name -> nocloud.access.Access
+	30, // 3: nocloud.ansible.Run.access:type_name -> nocloud.access.Access
 	27, // 4: nocloud.ansible.Run.vars:type_name -> nocloud.ansible.Run.VarsEntry
 	5,  // 5: nocloud.ansible.Run.hop:type_name -> nocloud.ansible.Instance
 	2,  // 6: nocloud.ansible.Runs.pool:type_name -> nocloud.ansible.Run
 	2,  // 7: nocloud.ansible.CreateRunRequest.run:type_name -> nocloud.ansible.Run
-	28, // 8: nocloud.ansible.ExecRunResponse.error:type_name -> nocloud.ansible.ExecRunResponse.Error
-	1,  // 9: nocloud.ansible.ListPlaybooksResponse.playbooks:type_name -> nocloud.ansible.Playbook
-	1,  // 10: nocloud.ansible.GetPlaybookResponse.playbook:type_name -> nocloud.ansible.Playbook
-	1,  // 11: nocloud.ansible.UpdatePlaybookRequest.playbook:type_name -> nocloud.ansible.Playbook
-	1,  // 12: nocloud.ansible.UpdatePlaybookResponse.playbook:type_name -> nocloud.ansible.Playbook
-	1,  // 13: nocloud.ansible.CreatePlaybookRequest.playbook:type_name -> nocloud.ansible.Playbook
-	1,  // 14: nocloud.ansible.CreatePlaybookResponse.playbook:type_name -> nocloud.ansible.Playbook
-	7,  // 15: nocloud.ansible.AnsibleService.Get:input_type -> nocloud.ansible.GetRunRequest
-	8,  // 16: nocloud.ansible.AnsibleService.List:input_type -> nocloud.ansible.ListRunsRequest
-	6,  // 17: nocloud.ansible.AnsibleService.Create:input_type -> nocloud.ansible.CreateRunRequest
-	9,  // 18: nocloud.ansible.AnsibleService.Exec:input_type -> nocloud.ansible.ExecRunRequest
-	12, // 19: nocloud.ansible.AnsibleService.Watch:input_type -> nocloud.ansible.WatchRunRequest
-	13, // 20: nocloud.ansible.AnsibleService.Delete:input_type -> nocloud.ansible.DeleteRunRequest
-	10, // 21: nocloud.ansible.AnsibleService.Resync:input_type -> nocloud.ansible.ResyncRunRequest
-	17, // 22: nocloud.ansible.PlaybooksService.Get:input_type -> nocloud.ansible.GetPlaybookRequest
-	15, // 23: nocloud.ansible.PlaybooksService.List:input_type -> nocloud.ansible.ListPlaybooksRequest
-	23, // 24: nocloud.ansible.PlaybooksService.Create:input_type -> nocloud.ansible.CreatePlaybookRequest
-	21, // 25: nocloud.ansible.PlaybooksService.Update:input_type -> nocloud.ansible.UpdatePlaybookRequest
-	19, // 26: nocloud.ansible.PlaybooksService.Delete:input_type -> nocloud.ansible.DeletePlaybookRequest
-	2,  // 27: nocloud.ansible.AnsibleService.Get:output_type -> nocloud.ansible.Run
-	3,  // 28: nocloud.ansible.AnsibleService.List:output_type -> nocloud.ansible.Runs
-	2,  // 29: nocloud.ansible.AnsibleService.Create:output_type -> nocloud.ansible.Run
-	11, // 30: nocloud.ansible.AnsibleService.Exec:output_type -> nocloud.ansible.ExecRunResponse
-	4,  // 31: nocloud.ansible.AnsibleService.Watch:output_type -> nocloud.ansible.Job
-	14, // 32: nocloud.ansible.AnsibleService.Delete:output_type -> nocloud.ansible.DeleteRunResponse
-	2,  // 33: nocloud.ansible.AnsibleService.Resync:output_type -> nocloud.ansible.Run
-	18, // 34: nocloud.ansible.PlaybooksService.Get:output_type -> nocloud.ansible.GetPlaybookResponse
-	16, // 35: nocloud.ansible.PlaybooksService.List:output_type -> nocloud.ansible.ListPlaybooksResponse
-	24, // 36: nocloud.ansible.PlaybooksService.Create:output_type -> nocloud.ansible.CreatePlaybookResponse
-	22, // 37: nocloud.ansible.PlaybooksService.Update:output_type -> nocloud.ansible.UpdatePlaybookResponse
-	20, // 38: nocloud.ansible.PlaybooksService.Delete:output_type -> nocloud.ansible.DeletePlaybookResponse
-	27, // [27:39] is the sub-list for method output_type
-	15, // [15:27] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	28, // 8: nocloud.ansible.ListRunsRequest.filters:type_name -> nocloud.ansible.ListRunsRequest.FiltersEntry
+	29, // 9: nocloud.ansible.ExecRunResponse.error:type_name -> nocloud.ansible.ExecRunResponse.Error
+	1,  // 10: nocloud.ansible.ListPlaybooksResponse.playbooks:type_name -> nocloud.ansible.Playbook
+	1,  // 11: nocloud.ansible.GetPlaybookResponse.playbook:type_name -> nocloud.ansible.Playbook
+	1,  // 12: nocloud.ansible.UpdatePlaybookRequest.playbook:type_name -> nocloud.ansible.Playbook
+	1,  // 13: nocloud.ansible.UpdatePlaybookResponse.playbook:type_name -> nocloud.ansible.Playbook
+	1,  // 14: nocloud.ansible.CreatePlaybookRequest.playbook:type_name -> nocloud.ansible.Playbook
+	1,  // 15: nocloud.ansible.CreatePlaybookResponse.playbook:type_name -> nocloud.ansible.Playbook
+	31, // 16: nocloud.ansible.ListRunsRequest.FiltersEntry.value:type_name -> google.protobuf.Value
+	7,  // 17: nocloud.ansible.AnsibleService.Get:input_type -> nocloud.ansible.GetRunRequest
+	8,  // 18: nocloud.ansible.AnsibleService.List:input_type -> nocloud.ansible.ListRunsRequest
+	6,  // 19: nocloud.ansible.AnsibleService.Create:input_type -> nocloud.ansible.CreateRunRequest
+	9,  // 20: nocloud.ansible.AnsibleService.Exec:input_type -> nocloud.ansible.ExecRunRequest
+	12, // 21: nocloud.ansible.AnsibleService.Watch:input_type -> nocloud.ansible.WatchRunRequest
+	13, // 22: nocloud.ansible.AnsibleService.Delete:input_type -> nocloud.ansible.DeleteRunRequest
+	10, // 23: nocloud.ansible.AnsibleService.Resync:input_type -> nocloud.ansible.ResyncRunRequest
+	17, // 24: nocloud.ansible.PlaybooksService.Get:input_type -> nocloud.ansible.GetPlaybookRequest
+	15, // 25: nocloud.ansible.PlaybooksService.List:input_type -> nocloud.ansible.ListPlaybooksRequest
+	23, // 26: nocloud.ansible.PlaybooksService.Create:input_type -> nocloud.ansible.CreatePlaybookRequest
+	21, // 27: nocloud.ansible.PlaybooksService.Update:input_type -> nocloud.ansible.UpdatePlaybookRequest
+	19, // 28: nocloud.ansible.PlaybooksService.Delete:input_type -> nocloud.ansible.DeletePlaybookRequest
+	2,  // 29: nocloud.ansible.AnsibleService.Get:output_type -> nocloud.ansible.Run
+	3,  // 30: nocloud.ansible.AnsibleService.List:output_type -> nocloud.ansible.Runs
+	2,  // 31: nocloud.ansible.AnsibleService.Create:output_type -> nocloud.ansible.Run
+	11, // 32: nocloud.ansible.AnsibleService.Exec:output_type -> nocloud.ansible.ExecRunResponse
+	4,  // 33: nocloud.ansible.AnsibleService.Watch:output_type -> nocloud.ansible.Job
+	14, // 34: nocloud.ansible.AnsibleService.Delete:output_type -> nocloud.ansible.DeleteRunResponse
+	2,  // 35: nocloud.ansible.AnsibleService.Resync:output_type -> nocloud.ansible.Run
+	18, // 36: nocloud.ansible.PlaybooksService.Get:output_type -> nocloud.ansible.GetPlaybookResponse
+	16, // 37: nocloud.ansible.PlaybooksService.List:output_type -> nocloud.ansible.ListPlaybooksResponse
+	24, // 38: nocloud.ansible.PlaybooksService.Create:output_type -> nocloud.ansible.CreatePlaybookResponse
+	22, // 39: nocloud.ansible.PlaybooksService.Update:output_type -> nocloud.ansible.UpdatePlaybookResponse
+	20, // 40: nocloud.ansible.PlaybooksService.Delete:output_type -> nocloud.ansible.DeletePlaybookResponse
+	29, // [29:41] is the sub-list for method output_type
+	17, // [17:29] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_ansible_ansible_proto_init() }
@@ -1673,13 +1740,14 @@ func file_ansible_ansible_proto_init() {
 	file_ansible_ansible_proto_msgTypes[4].OneofWrappers = []any{}
 	file_ansible_ansible_proto_msgTypes[5].OneofWrappers = []any{}
 	file_ansible_ansible_proto_msgTypes[6].OneofWrappers = []any{}
+	file_ansible_ansible_proto_msgTypes[8].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_ansible_ansible_proto_rawDesc), len(file_ansible_ansible_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   29,
+			NumMessages:   30,
 			NumExtensions: 0,
 			NumServices:   2,
 		},
