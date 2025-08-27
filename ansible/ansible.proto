@@ -151,7 +151,8 @@ service AnsibleService {
   };
   rpc List(ListRunsRequest) returns (Runs) {
     option (google.api.http) = {
-      get : "/ansible/runs"
+      put : "/ansible/runs"
+      body : "*"
     };
   }
   rpc Create(CreateRunRequest) returns (Run) {

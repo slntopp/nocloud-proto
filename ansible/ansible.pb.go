@@ -1618,10 +1618,10 @@ const file_ansible_ansible_proto_rawDesc = "" +
 	"\x15CreatePlaybookRequest\x125\n" +
 	"\bplaybook\x18\x01 \x01(\v2\x19.nocloud.ansible.PlaybookR\bplaybook\"O\n" +
 	"\x16CreatePlaybookResponse\x125\n" +
-	"\bplaybook\x18\x01 \x01(\v2\x19.nocloud.ansible.PlaybookR\bplaybook2\xcf\x05\n" +
+	"\bplaybook\x18\x01 \x01(\v2\x19.nocloud.ansible.PlaybookR\bplaybook2\xd2\x05\n" +
 	"\x0eAnsibleService\x12Y\n" +
-	"\x03Get\x12\x1e.nocloud.ansible.GetRunRequest\x1a\x14.nocloud.ansible.Run\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/ansible/runs/{uuid}\x12V\n" +
-	"\x04List\x12 .nocloud.ansible.ListRunsRequest\x1a\x15.nocloud.ansible.Runs\"\x15\x82\xd3\xe4\x93\x02\x0f\x12\r/ansible/runs\x12[\n" +
+	"\x03Get\x12\x1e.nocloud.ansible.GetRunRequest\x1a\x14.nocloud.ansible.Run\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/ansible/runs/{uuid}\x12Y\n" +
+	"\x04List\x12 .nocloud.ansible.ListRunsRequest\x1a\x15.nocloud.ansible.Runs\"\x18\x82\xd3\xe4\x93\x02\x12:\x01*\x1a\r/ansible/runs\x12[\n" +
 	"\x06Create\x12!.nocloud.ansible.CreateRunRequest\x1a\x14.nocloud.ansible.Run\"\x18\x82\xd3\xe4\x93\x02\x12:\x01*\"\r/ansible/runs\x12o\n" +
 	"\x04Exec\x12\x1f.nocloud.ansible.ExecRunRequest\x1a .nocloud.ansible.ExecRunResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/ansible/runs/{uuid}/exec\x12e\n" +
 	"\x05Watch\x12 .nocloud.ansible.WatchRunRequest\x1a\x14.nocloud.ansible.Job\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/ansible/runs/{uuid}/watch0\x01\x12m\n" +
