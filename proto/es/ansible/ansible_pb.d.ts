@@ -239,6 +239,11 @@ export declare class Runs extends Message<Runs> {
    */
   pool: Run[];
 
+  /**
+   * @generated from field: uint64 total = 2;
+   */
+  total: bigint;
+
   constructor(data?: PartialMessage<Runs>);
 
   static readonly runtime: typeof proto3;

@@ -78,6 +78,7 @@ export const Runs = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.ansible.Runs",
   () => [
     { no: 1, name: "pool", kind: "message", T: Run, repeated: true },
+    { no: 2, name: "total", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
   ],
 );
 

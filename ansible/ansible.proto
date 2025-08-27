@@ -65,7 +65,7 @@ message Run {
   map<string, string> vars = 11;
   optional Instance hop = 12;
 }
-message Runs { repeated Run pool = 1; }
+message Runs { repeated Run pool = 1; uint64 total = 2; }
 
 message Job {
   string run_uuid = 1;

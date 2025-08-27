@@ -345,6 +345,7 @@ func (x *Run) GetHop() *Instance {
 type Runs struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Pool          []*Run                 `protobuf:"bytes,1,rep,name=pool,proto3" json:"pool,omitempty"`
+	Total         uint64                 `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -384,6 +385,13 @@ func (x *Runs) GetPool() []*Run {
 		return x.Pool
 	}
 	return nil
+}
+
+func (x *Runs) GetTotal() uint64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
 }
 
 type Job struct {
@@ -1481,9 +1489,10 @@ const file_ansible_ansible_proto_rawDesc = "" +
 	"\n" +
 	"\b_ssh_keyB\t\n" +
 	"\a_accessB\x06\n" +
-	"\x04_hop\"0\n" +
+	"\x04_hop\"F\n" +
 	"\x04Runs\x12(\n" +
-	"\x04pool\x18\x01 \x03(\v2\x14.nocloud.ansible.RunR\x04pool\"\x81\x01\n" +
+	"\x04pool\x18\x01 \x03(\v2\x14.nocloud.ansible.RunR\x04pool\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x04R\x05total\"\x81\x01\n" +
 	"\x03Job\x12\x19\n" +
 	"\brun_uuid\x18\x01 \x01(\tR\arunUuid\x12\x19\n" +
 	"\bjob_uuid\x18\x02 \x01(\tR\ajobUuid\x12\x10\n" +

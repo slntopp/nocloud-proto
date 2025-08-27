@@ -8433,6 +8433,10 @@
             "type": "object",
             "$ref": "#/definitions/ansibleRun"
           }
+        },
+        "total": {
+          "type": "string",
+          "format": "uint64"
         }
       }
     },
