@@ -15,7 +15,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
+import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage, Value } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 import type { Access } from "../access/access_pb.js";
 
@@ -428,6 +428,36 @@ export declare class GetRunRequest extends Message<GetRunRequest> {
  * @generated from message nocloud.ansible.ListRunsRequest
  */
 export declare class ListRunsRequest extends Message<ListRunsRequest> {
+  /**
+   * @generated from field: optional uint64 page = 1;
+   */
+  page?: bigint;
+
+  /**
+   * @generated from field: optional uint64 limit = 2;
+   */
+  limit?: bigint;
+
+  /**
+   * @generated from field: optional string field = 3;
+   */
+  field?: string;
+
+  /**
+   * @generated from field: optional string sort = 4;
+   */
+  sort?: string;
+
+  /**
+   * @generated from field: optional string uuid = 5;
+   */
+  uuid?: string;
+
+  /**
+   * @generated from field: map<string, google.protobuf.Value> filters = 6;
+   */
+  filters: { [key: string]: Value };
+
   constructor(data?: PartialMessage<ListRunsRequest>);
 
   static readonly runtime: typeof proto3;
