@@ -242,6 +242,7 @@ const (
 	BillingService_CreateTopUpBalanceInvoice_FullMethodName         = "/nocloud.billing.BillingService/CreateTopUpBalanceInvoice"
 	BillingService_CreateRenewalInvoice_FullMethodName              = "/nocloud.billing.BillingService/CreateRenewalInvoice"
 	BillingService_PayWithBalance_FullMethodName                    = "/nocloud.billing.BillingService/PayWithBalance"
+	BillingService_SendInvoiceEmail_FullMethodName                  = "/nocloud.billing.BillingService/SendInvoiceEmail"
 	BillingService_GetInvoiceSettingsTemplateExample_FullMethodName = "/nocloud.billing.BillingService/GetInvoiceSettingsTemplateExample"
 	BillingService_RunDailyCronJob_FullMethodName                   = "/nocloud.billing.BillingService/RunDailyCronJob"
 	BillingService_Stream_FullMethodName                            = "/nocloud.billing.BillingService/Stream"
@@ -278,6 +279,7 @@ type BillingServiceClient interface {
 	CreateTopUpBalanceInvoice(ctx context.Context, in *CreateTopUpBalanceInvoiceRequest, opts ...grpc.CallOption) (*Invoice, error)
 	CreateRenewalInvoice(ctx context.Context, in *CreateRenewalInvoiceRequest, opts ...grpc.CallOption) (*Invoice, error)
 	PayWithBalance(ctx context.Context, in *PayWithBalanceRequest, opts ...grpc.CallOption) (*PayWithBalanceResponse, error)
+	SendInvoiceEmail(ctx context.Context, in *SendInvoiceEmailRequest, opts ...grpc.CallOption) (*SendInvoiceEmailResponse, error)
 	GetInvoiceSettingsTemplateExample(ctx context.Context, in *GetInvoiceSettingsTemplateExampleRequest, opts ...grpc.CallOption) (*GetInvoiceSettingsTemplateExampleResponse, error)
 	RunDailyCronJob(ctx context.Context, in *RunDailyCronJobRequest, opts ...grpc.CallOption) (*RunDailyCronJobResponse, error)
 	Stream(ctx context.Context, in *StreamRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamResponse], error)
@@ -561,6 +563,16 @@ func (c *billingServiceClient) PayWithBalance(ctx context.Context, in *PayWithBa
 	return out, nil
 }
 
+func (c *billingServiceClient) SendInvoiceEmail(ctx context.Context, in *SendInvoiceEmailRequest, opts ...grpc.CallOption) (*SendInvoiceEmailResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SendInvoiceEmailResponse)
+	err := c.cc.Invoke(ctx, BillingService_SendInvoiceEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *billingServiceClient) GetInvoiceSettingsTemplateExample(ctx context.Context, in *GetInvoiceSettingsTemplateExampleRequest, opts ...grpc.CallOption) (*GetInvoiceSettingsTemplateExampleResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetInvoiceSettingsTemplateExampleResponse)
@@ -631,6 +643,7 @@ type BillingServiceServer interface {
 	CreateTopUpBalanceInvoice(context.Context, *CreateTopUpBalanceInvoiceRequest) (*Invoice, error)
 	CreateRenewalInvoice(context.Context, *CreateRenewalInvoiceRequest) (*Invoice, error)
 	PayWithBalance(context.Context, *PayWithBalanceRequest) (*PayWithBalanceResponse, error)
+	SendInvoiceEmail(context.Context, *SendInvoiceEmailRequest) (*SendInvoiceEmailResponse, error)
 	GetInvoiceSettingsTemplateExample(context.Context, *GetInvoiceSettingsTemplateExampleRequest) (*GetInvoiceSettingsTemplateExampleResponse, error)
 	RunDailyCronJob(context.Context, *RunDailyCronJobRequest) (*RunDailyCronJobResponse, error)
 	Stream(*StreamRequest, grpc.ServerStreamingServer[StreamResponse]) error
@@ -724,6 +737,9 @@ func (UnimplementedBillingServiceServer) CreateRenewalInvoice(context.Context, *
 }
 func (UnimplementedBillingServiceServer) PayWithBalance(context.Context, *PayWithBalanceRequest) (*PayWithBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PayWithBalance not implemented")
+}
+func (UnimplementedBillingServiceServer) SendInvoiceEmail(context.Context, *SendInvoiceEmailRequest) (*SendInvoiceEmailResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendInvoiceEmail not implemented")
 }
 func (UnimplementedBillingServiceServer) GetInvoiceSettingsTemplateExample(context.Context, *GetInvoiceSettingsTemplateExampleRequest) (*GetInvoiceSettingsTemplateExampleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInvoiceSettingsTemplateExample not implemented")
@@ -1241,6 +1257,24 @@ func _BillingService_PayWithBalance_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BillingService_SendInvoiceEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendInvoiceEmailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).SendInvoiceEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_SendInvoiceEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).SendInvoiceEmail(ctx, req.(*SendInvoiceEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BillingService_GetInvoiceSettingsTemplateExample_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetInvoiceSettingsTemplateExampleRequest)
 	if err := dec(in); err != nil {
@@ -1402,6 +1436,10 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PayWithBalance",
 			Handler:    _BillingService_PayWithBalance_Handler,
+		},
+		{
+			MethodName: "SendInvoiceEmail",
+			Handler:    _BillingService_SendInvoiceEmail_Handler,
 		},
 		{
 			MethodName: "GetInvoiceSettingsTemplateExample",

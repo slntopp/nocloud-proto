@@ -857,6 +857,24 @@ export const PayWithBalanceResponse = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * @generated from message nocloud.billing.SendInvoiceEmailRequest
+ */
+export const SendInvoiceEmailRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.SendInvoiceEmailRequest",
+  () => [
+    { no: 1, name: "invoice_uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.SendInvoiceEmailResponse
+ */
+export const SendInvoiceEmailResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.SendInvoiceEmailResponse",
+  [],
+);
+
+/**
  * @generated from message nocloud.billing.RunDailyCronJobRequest
  */
 export const RunDailyCronJobRequest = /*@__PURE__*/ proto3.makeMessageType(

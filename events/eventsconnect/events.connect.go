@@ -58,15 +58,6 @@ const (
 	EventsServiceCancelProcedure = "/nocloud.events.EventsService/Cancel"
 )
 
-// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
-var (
-	eventsServiceServiceDescriptor       = events.File_events_events_proto.Services().ByName("EventsService")
-	eventsServicePublishMethodDescriptor = eventsServiceServiceDescriptor.Methods().ByName("Publish")
-	eventsServiceConsumeMethodDescriptor = eventsServiceServiceDescriptor.Methods().ByName("Consume")
-	eventsServiceListMethodDescriptor    = eventsServiceServiceDescriptor.Methods().ByName("List")
-	eventsServiceCancelMethodDescriptor  = eventsServiceServiceDescriptor.Methods().ByName("Cancel")
-)
-
 // EventsServiceClient is a client for the nocloud.events.EventsService service.
 type EventsServiceClient interface {
 	Publish(context.Context, *connect.Request[events.Event]) (*connect.Response[events.Response], error)
@@ -84,29 +75,30 @@ type EventsServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewEventsServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) EventsServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	eventsServiceMethods := events.File_events_events_proto.Services().ByName("EventsService").Methods()
 	return &eventsServiceClient{
 		publish: connect.NewClient[events.Event, events.Response](
 			httpClient,
 			baseURL+EventsServicePublishProcedure,
-			connect.WithSchema(eventsServicePublishMethodDescriptor),
+			connect.WithSchema(eventsServiceMethods.ByName("Publish")),
 			connect.WithClientOptions(opts...),
 		),
 		consume: connect.NewClient[events.ConsumeRequest, events.Event](
 			httpClient,
 			baseURL+EventsServiceConsumeProcedure,
-			connect.WithSchema(eventsServiceConsumeMethodDescriptor),
+			connect.WithSchema(eventsServiceMethods.ByName("Consume")),
 			connect.WithClientOptions(opts...),
 		),
 		list: connect.NewClient[events.ConsumeRequest, events.Events](
 			httpClient,
 			baseURL+EventsServiceListProcedure,
-			connect.WithSchema(eventsServiceListMethodDescriptor),
+			connect.WithSchema(eventsServiceMethods.ByName("List")),
 			connect.WithClientOptions(opts...),
 		),
 		cancel: connect.NewClient[events.CancelRequest, events.Response](
 			httpClient,
 			baseURL+EventsServiceCancelProcedure,
-			connect.WithSchema(eventsServiceCancelMethodDescriptor),
+			connect.WithSchema(eventsServiceMethods.ByName("Cancel")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -154,28 +146,29 @@ type EventsServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewEventsServiceHandler(svc EventsServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	eventsServiceMethods := events.File_events_events_proto.Services().ByName("EventsService").Methods()
 	eventsServicePublishHandler := connect.NewUnaryHandler(
 		EventsServicePublishProcedure,
 		svc.Publish,
-		connect.WithSchema(eventsServicePublishMethodDescriptor),
+		connect.WithSchema(eventsServiceMethods.ByName("Publish")),
 		connect.WithHandlerOptions(opts...),
 	)
 	eventsServiceConsumeHandler := connect.NewServerStreamHandler(
 		EventsServiceConsumeProcedure,
 		svc.Consume,
-		connect.WithSchema(eventsServiceConsumeMethodDescriptor),
+		connect.WithSchema(eventsServiceMethods.ByName("Consume")),
 		connect.WithHandlerOptions(opts...),
 	)
 	eventsServiceListHandler := connect.NewUnaryHandler(
 		EventsServiceListProcedure,
 		svc.List,
-		connect.WithSchema(eventsServiceListMethodDescriptor),
+		connect.WithSchema(eventsServiceMethods.ByName("List")),
 		connect.WithHandlerOptions(opts...),
 	)
 	eventsServiceCancelHandler := connect.NewUnaryHandler(
 		EventsServiceCancelProcedure,
 		svc.Cancel,
-		connect.WithSchema(eventsServiceCancelMethodDescriptor),
+		connect.WithSchema(eventsServiceMethods.ByName("Cancel")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.events.EventsService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

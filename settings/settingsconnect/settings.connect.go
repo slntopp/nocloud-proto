@@ -61,16 +61,6 @@ const (
 	SettingsServiceDeleteProcedure = "/nocloud.settings.SettingsService/Delete"
 )
 
-// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
-var (
-	settingsServiceServiceDescriptor      = settings.File_settings_settings_proto.Services().ByName("SettingsService")
-	settingsServiceGetMethodDescriptor    = settingsServiceServiceDescriptor.Methods().ByName("Get")
-	settingsServicePutMethodDescriptor    = settingsServiceServiceDescriptor.Methods().ByName("Put")
-	settingsServiceSubMethodDescriptor    = settingsServiceServiceDescriptor.Methods().ByName("Sub")
-	settingsServiceKeysMethodDescriptor   = settingsServiceServiceDescriptor.Methods().ByName("Keys")
-	settingsServiceDeleteMethodDescriptor = settingsServiceServiceDescriptor.Methods().ByName("Delete")
-)
-
 // SettingsServiceClient is a client for the nocloud.settings.SettingsService service.
 type SettingsServiceClient interface {
 	Get(context.Context, *connect.Request[settings.GetRequest]) (*connect.Response[structpb.Struct], error)
@@ -89,35 +79,36 @@ type SettingsServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewSettingsServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) SettingsServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	settingsServiceMethods := settings.File_settings_settings_proto.Services().ByName("SettingsService").Methods()
 	return &settingsServiceClient{
 		get: connect.NewClient[settings.GetRequest, structpb.Struct](
 			httpClient,
 			baseURL+SettingsServiceGetProcedure,
-			connect.WithSchema(settingsServiceGetMethodDescriptor),
+			connect.WithSchema(settingsServiceMethods.ByName("Get")),
 			connect.WithClientOptions(opts...),
 		),
 		put: connect.NewClient[settings.PutRequest, settings.PutResponse](
 			httpClient,
 			baseURL+SettingsServicePutProcedure,
-			connect.WithSchema(settingsServicePutMethodDescriptor),
+			connect.WithSchema(settingsServiceMethods.ByName("Put")),
 			connect.WithClientOptions(opts...),
 		),
 		sub: connect.NewClient[settings.GetRequest, settings.KeyEvent](
 			httpClient,
 			baseURL+SettingsServiceSubProcedure,
-			connect.WithSchema(settingsServiceSubMethodDescriptor),
+			connect.WithSchema(settingsServiceMethods.ByName("Sub")),
 			connect.WithClientOptions(opts...),
 		),
 		keys: connect.NewClient[settings.KeysRequest, settings.KeysResponse](
 			httpClient,
 			baseURL+SettingsServiceKeysProcedure,
-			connect.WithSchema(settingsServiceKeysMethodDescriptor),
+			connect.WithSchema(settingsServiceMethods.ByName("Keys")),
 			connect.WithClientOptions(opts...),
 		),
 		delete: connect.NewClient[settings.DeleteRequest, settings.DeleteResponse](
 			httpClient,
 			baseURL+SettingsServiceDeleteProcedure,
-			connect.WithSchema(settingsServiceDeleteMethodDescriptor),
+			connect.WithSchema(settingsServiceMethods.ByName("Delete")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -172,34 +163,35 @@ type SettingsServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewSettingsServiceHandler(svc SettingsServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	settingsServiceMethods := settings.File_settings_settings_proto.Services().ByName("SettingsService").Methods()
 	settingsServiceGetHandler := connect.NewUnaryHandler(
 		SettingsServiceGetProcedure,
 		svc.Get,
-		connect.WithSchema(settingsServiceGetMethodDescriptor),
+		connect.WithSchema(settingsServiceMethods.ByName("Get")),
 		connect.WithHandlerOptions(opts...),
 	)
 	settingsServicePutHandler := connect.NewUnaryHandler(
 		SettingsServicePutProcedure,
 		svc.Put,
-		connect.WithSchema(settingsServicePutMethodDescriptor),
+		connect.WithSchema(settingsServiceMethods.ByName("Put")),
 		connect.WithHandlerOptions(opts...),
 	)
 	settingsServiceSubHandler := connect.NewServerStreamHandler(
 		SettingsServiceSubProcedure,
 		svc.Sub,
-		connect.WithSchema(settingsServiceSubMethodDescriptor),
+		connect.WithSchema(settingsServiceMethods.ByName("Sub")),
 		connect.WithHandlerOptions(opts...),
 	)
 	settingsServiceKeysHandler := connect.NewUnaryHandler(
 		SettingsServiceKeysProcedure,
 		svc.Keys,
-		connect.WithSchema(settingsServiceKeysMethodDescriptor),
+		connect.WithSchema(settingsServiceMethods.ByName("Keys")),
 		connect.WithHandlerOptions(opts...),
 	)
 	settingsServiceDeleteHandler := connect.NewUnaryHandler(
 		SettingsServiceDeleteProcedure,
 		svc.Delete,
-		connect.WithSchema(settingsServiceDeleteMethodDescriptor),
+		connect.WithSchema(settingsServiceMethods.ByName("Delete")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.settings.SettingsService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

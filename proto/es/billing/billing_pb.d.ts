@@ -2512,6 +2512,49 @@ export declare class PayWithBalanceResponse extends Message<PayWithBalanceRespon
 }
 
 /**
+ * @generated from message nocloud.billing.SendInvoiceEmailRequest
+ */
+export declare class SendInvoiceEmailRequest extends Message<SendInvoiceEmailRequest> {
+  /**
+   * @generated from field: string invoice_uuid = 1;
+   */
+  invoiceUuid: string;
+
+  constructor(data?: PartialMessage<SendInvoiceEmailRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.SendInvoiceEmailRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SendInvoiceEmailRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SendInvoiceEmailRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SendInvoiceEmailRequest;
+
+  static equals(a: SendInvoiceEmailRequest | PlainMessage<SendInvoiceEmailRequest> | undefined, b: SendInvoiceEmailRequest | PlainMessage<SendInvoiceEmailRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.SendInvoiceEmailResponse
+ */
+export declare class SendInvoiceEmailResponse extends Message<SendInvoiceEmailResponse> {
+  constructor(data?: PartialMessage<SendInvoiceEmailResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.SendInvoiceEmailResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SendInvoiceEmailResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SendInvoiceEmailResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SendInvoiceEmailResponse;
+
+  static equals(a: SendInvoiceEmailResponse | PlainMessage<SendInvoiceEmailResponse> | undefined, b: SendInvoiceEmailResponse | PlainMessage<SendInvoiceEmailResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.billing.RunDailyCronJobRequest
  */
 export declare class RunDailyCronJobRequest extends Message<RunDailyCronJobRequest> {

@@ -73,24 +73,6 @@ const (
 	PlaybooksServiceDeleteProcedure = "/nocloud.ansible.PlaybooksService/Delete"
 )
 
-// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
-var (
-	ansibleServiceServiceDescriptor        = ansible.File_ansible_ansible_proto.Services().ByName("AnsibleService")
-	ansibleServiceGetMethodDescriptor      = ansibleServiceServiceDescriptor.Methods().ByName("Get")
-	ansibleServiceListMethodDescriptor     = ansibleServiceServiceDescriptor.Methods().ByName("List")
-	ansibleServiceCreateMethodDescriptor   = ansibleServiceServiceDescriptor.Methods().ByName("Create")
-	ansibleServiceExecMethodDescriptor     = ansibleServiceServiceDescriptor.Methods().ByName("Exec")
-	ansibleServiceWatchMethodDescriptor    = ansibleServiceServiceDescriptor.Methods().ByName("Watch")
-	ansibleServiceDeleteMethodDescriptor   = ansibleServiceServiceDescriptor.Methods().ByName("Delete")
-	ansibleServiceResyncMethodDescriptor   = ansibleServiceServiceDescriptor.Methods().ByName("Resync")
-	playbooksServiceServiceDescriptor      = ansible.File_ansible_ansible_proto.Services().ByName("PlaybooksService")
-	playbooksServiceGetMethodDescriptor    = playbooksServiceServiceDescriptor.Methods().ByName("Get")
-	playbooksServiceListMethodDescriptor   = playbooksServiceServiceDescriptor.Methods().ByName("List")
-	playbooksServiceCreateMethodDescriptor = playbooksServiceServiceDescriptor.Methods().ByName("Create")
-	playbooksServiceUpdateMethodDescriptor = playbooksServiceServiceDescriptor.Methods().ByName("Update")
-	playbooksServiceDeleteMethodDescriptor = playbooksServiceServiceDescriptor.Methods().ByName("Delete")
-)
-
 // AnsibleServiceClient is a client for the nocloud.ansible.AnsibleService service.
 type AnsibleServiceClient interface {
 	Get(context.Context, *connect.Request[ansible.GetRunRequest]) (*connect.Response[ansible.Run], error)
@@ -111,47 +93,48 @@ type AnsibleServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewAnsibleServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) AnsibleServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	ansibleServiceMethods := ansible.File_ansible_ansible_proto.Services().ByName("AnsibleService").Methods()
 	return &ansibleServiceClient{
 		get: connect.NewClient[ansible.GetRunRequest, ansible.Run](
 			httpClient,
 			baseURL+AnsibleServiceGetProcedure,
-			connect.WithSchema(ansibleServiceGetMethodDescriptor),
+			connect.WithSchema(ansibleServiceMethods.ByName("Get")),
 			connect.WithClientOptions(opts...),
 		),
 		list: connect.NewClient[ansible.ListRunsRequest, ansible.Runs](
 			httpClient,
 			baseURL+AnsibleServiceListProcedure,
-			connect.WithSchema(ansibleServiceListMethodDescriptor),
+			connect.WithSchema(ansibleServiceMethods.ByName("List")),
 			connect.WithClientOptions(opts...),
 		),
 		create: connect.NewClient[ansible.CreateRunRequest, ansible.Run](
 			httpClient,
 			baseURL+AnsibleServiceCreateProcedure,
-			connect.WithSchema(ansibleServiceCreateMethodDescriptor),
+			connect.WithSchema(ansibleServiceMethods.ByName("Create")),
 			connect.WithClientOptions(opts...),
 		),
 		exec: connect.NewClient[ansible.ExecRunRequest, ansible.ExecRunResponse](
 			httpClient,
 			baseURL+AnsibleServiceExecProcedure,
-			connect.WithSchema(ansibleServiceExecMethodDescriptor),
+			connect.WithSchema(ansibleServiceMethods.ByName("Exec")),
 			connect.WithClientOptions(opts...),
 		),
 		watch: connect.NewClient[ansible.WatchRunRequest, ansible.Job](
 			httpClient,
 			baseURL+AnsibleServiceWatchProcedure,
-			connect.WithSchema(ansibleServiceWatchMethodDescriptor),
+			connect.WithSchema(ansibleServiceMethods.ByName("Watch")),
 			connect.WithClientOptions(opts...),
 		),
 		delete: connect.NewClient[ansible.DeleteRunRequest, ansible.DeleteRunResponse](
 			httpClient,
 			baseURL+AnsibleServiceDeleteProcedure,
-			connect.WithSchema(ansibleServiceDeleteMethodDescriptor),
+			connect.WithSchema(ansibleServiceMethods.ByName("Delete")),
 			connect.WithClientOptions(opts...),
 		),
 		resync: connect.NewClient[ansible.ResyncRunRequest, ansible.Run](
 			httpClient,
 			baseURL+AnsibleServiceResyncProcedure,
-			connect.WithSchema(ansibleServiceResyncMethodDescriptor),
+			connect.WithSchema(ansibleServiceMethods.ByName("Resync")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -220,46 +203,47 @@ type AnsibleServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewAnsibleServiceHandler(svc AnsibleServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	ansibleServiceMethods := ansible.File_ansible_ansible_proto.Services().ByName("AnsibleService").Methods()
 	ansibleServiceGetHandler := connect.NewUnaryHandler(
 		AnsibleServiceGetProcedure,
 		svc.Get,
-		connect.WithSchema(ansibleServiceGetMethodDescriptor),
+		connect.WithSchema(ansibleServiceMethods.ByName("Get")),
 		connect.WithHandlerOptions(opts...),
 	)
 	ansibleServiceListHandler := connect.NewUnaryHandler(
 		AnsibleServiceListProcedure,
 		svc.List,
-		connect.WithSchema(ansibleServiceListMethodDescriptor),
+		connect.WithSchema(ansibleServiceMethods.ByName("List")),
 		connect.WithHandlerOptions(opts...),
 	)
 	ansibleServiceCreateHandler := connect.NewUnaryHandler(
 		AnsibleServiceCreateProcedure,
 		svc.Create,
-		connect.WithSchema(ansibleServiceCreateMethodDescriptor),
+		connect.WithSchema(ansibleServiceMethods.ByName("Create")),
 		connect.WithHandlerOptions(opts...),
 	)
 	ansibleServiceExecHandler := connect.NewUnaryHandler(
 		AnsibleServiceExecProcedure,
 		svc.Exec,
-		connect.WithSchema(ansibleServiceExecMethodDescriptor),
+		connect.WithSchema(ansibleServiceMethods.ByName("Exec")),
 		connect.WithHandlerOptions(opts...),
 	)
 	ansibleServiceWatchHandler := connect.NewServerStreamHandler(
 		AnsibleServiceWatchProcedure,
 		svc.Watch,
-		connect.WithSchema(ansibleServiceWatchMethodDescriptor),
+		connect.WithSchema(ansibleServiceMethods.ByName("Watch")),
 		connect.WithHandlerOptions(opts...),
 	)
 	ansibleServiceDeleteHandler := connect.NewUnaryHandler(
 		AnsibleServiceDeleteProcedure,
 		svc.Delete,
-		connect.WithSchema(ansibleServiceDeleteMethodDescriptor),
+		connect.WithSchema(ansibleServiceMethods.ByName("Delete")),
 		connect.WithHandlerOptions(opts...),
 	)
 	ansibleServiceResyncHandler := connect.NewUnaryHandler(
 		AnsibleServiceResyncProcedure,
 		svc.Resync,
-		connect.WithSchema(ansibleServiceResyncMethodDescriptor),
+		connect.WithSchema(ansibleServiceMethods.ByName("Resync")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.ansible.AnsibleService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -333,35 +317,36 @@ type PlaybooksServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewPlaybooksServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) PlaybooksServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	playbooksServiceMethods := ansible.File_ansible_ansible_proto.Services().ByName("PlaybooksService").Methods()
 	return &playbooksServiceClient{
 		get: connect.NewClient[ansible.GetPlaybookRequest, ansible.GetPlaybookResponse](
 			httpClient,
 			baseURL+PlaybooksServiceGetProcedure,
-			connect.WithSchema(playbooksServiceGetMethodDescriptor),
+			connect.WithSchema(playbooksServiceMethods.ByName("Get")),
 			connect.WithClientOptions(opts...),
 		),
 		list: connect.NewClient[ansible.ListPlaybooksRequest, ansible.ListPlaybooksResponse](
 			httpClient,
 			baseURL+PlaybooksServiceListProcedure,
-			connect.WithSchema(playbooksServiceListMethodDescriptor),
+			connect.WithSchema(playbooksServiceMethods.ByName("List")),
 			connect.WithClientOptions(opts...),
 		),
 		create: connect.NewClient[ansible.CreatePlaybookRequest, ansible.CreatePlaybookResponse](
 			httpClient,
 			baseURL+PlaybooksServiceCreateProcedure,
-			connect.WithSchema(playbooksServiceCreateMethodDescriptor),
+			connect.WithSchema(playbooksServiceMethods.ByName("Create")),
 			connect.WithClientOptions(opts...),
 		),
 		update: connect.NewClient[ansible.UpdatePlaybookRequest, ansible.UpdatePlaybookResponse](
 			httpClient,
 			baseURL+PlaybooksServiceUpdateProcedure,
-			connect.WithSchema(playbooksServiceUpdateMethodDescriptor),
+			connect.WithSchema(playbooksServiceMethods.ByName("Update")),
 			connect.WithClientOptions(opts...),
 		),
 		delete: connect.NewClient[ansible.DeletePlaybookRequest, ansible.DeletePlaybookResponse](
 			httpClient,
 			baseURL+PlaybooksServiceDeleteProcedure,
-			connect.WithSchema(playbooksServiceDeleteMethodDescriptor),
+			connect.WithSchema(playbooksServiceMethods.ByName("Delete")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -416,34 +401,35 @@ type PlaybooksServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewPlaybooksServiceHandler(svc PlaybooksServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	playbooksServiceMethods := ansible.File_ansible_ansible_proto.Services().ByName("PlaybooksService").Methods()
 	playbooksServiceGetHandler := connect.NewUnaryHandler(
 		PlaybooksServiceGetProcedure,
 		svc.Get,
-		connect.WithSchema(playbooksServiceGetMethodDescriptor),
+		connect.WithSchema(playbooksServiceMethods.ByName("Get")),
 		connect.WithHandlerOptions(opts...),
 	)
 	playbooksServiceListHandler := connect.NewUnaryHandler(
 		PlaybooksServiceListProcedure,
 		svc.List,
-		connect.WithSchema(playbooksServiceListMethodDescriptor),
+		connect.WithSchema(playbooksServiceMethods.ByName("List")),
 		connect.WithHandlerOptions(opts...),
 	)
 	playbooksServiceCreateHandler := connect.NewUnaryHandler(
 		PlaybooksServiceCreateProcedure,
 		svc.Create,
-		connect.WithSchema(playbooksServiceCreateMethodDescriptor),
+		connect.WithSchema(playbooksServiceMethods.ByName("Create")),
 		connect.WithHandlerOptions(opts...),
 	)
 	playbooksServiceUpdateHandler := connect.NewUnaryHandler(
 		PlaybooksServiceUpdateProcedure,
 		svc.Update,
-		connect.WithSchema(playbooksServiceUpdateMethodDescriptor),
+		connect.WithSchema(playbooksServiceMethods.ByName("Update")),
 		connect.WithHandlerOptions(opts...),
 	)
 	playbooksServiceDeleteHandler := connect.NewUnaryHandler(
 		PlaybooksServiceDeleteProcedure,
 		svc.Delete,
-		connect.WithSchema(playbooksServiceDeleteMethodDescriptor),
+		connect.WithSchema(playbooksServiceMethods.ByName("Delete")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.ansible.PlaybooksService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

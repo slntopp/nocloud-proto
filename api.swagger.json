@@ -2659,6 +2659,44 @@
         ]
       }
     },
+    "/billing/invoices/{invoiceUuid}/send_email": {
+      "post": {
+        "operationId": "BillingService_SendInvoiceEmail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingSendInvoiceEmailResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "invoiceUuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingServiceSendInvoiceEmailBody"
+            }
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
     "/billing/invoices/{uuid}": {
       "get": {
         "operationId": "BillingService_GetInvoice",
@@ -7513,6 +7551,9 @@
         }
       }
     },
+    "BillingServiceSendInvoiceEmailBody": {
+      "type": "object"
+    },
     "BillingServiceUpdateInvoiceStatusBody": {
       "type": "object",
       "properties": {
@@ -9599,6 +9640,9 @@
       "type": "object"
     },
     "billingRunDailyCronJobResponse": {
+      "type": "object"
+    },
+    "billingSendInvoiceEmailResponse": {
       "type": "object"
     },
     "billingStreamResponse": {

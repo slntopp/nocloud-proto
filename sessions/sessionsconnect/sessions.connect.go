@@ -42,14 +42,6 @@ const (
 	SessionsServiceGetActivityProcedure = "/nocloud.sessions.SessionsService/GetActivity"
 )
 
-// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
-var (
-	sessionsServiceServiceDescriptor           = sessions.File_sessions_sessions_proto.Services().ByName("SessionsService")
-	sessionsServiceGetMethodDescriptor         = sessionsServiceServiceDescriptor.Methods().ByName("Get")
-	sessionsServiceRevokeMethodDescriptor      = sessionsServiceServiceDescriptor.Methods().ByName("Revoke")
-	sessionsServiceGetActivityMethodDescriptor = sessionsServiceServiceDescriptor.Methods().ByName("GetActivity")
-)
-
 // SessionsServiceClient is a client for the nocloud.sessions.SessionsService service.
 type SessionsServiceClient interface {
 	Get(context.Context, *connect.Request[sessions.GetSessions]) (*connect.Response[sessions.Sessions], error)
@@ -66,23 +58,24 @@ type SessionsServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewSessionsServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) SessionsServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	sessionsServiceMethods := sessions.File_sessions_sessions_proto.Services().ByName("SessionsService").Methods()
 	return &sessionsServiceClient{
 		get: connect.NewClient[sessions.GetSessions, sessions.Sessions](
 			httpClient,
 			baseURL+SessionsServiceGetProcedure,
-			connect.WithSchema(sessionsServiceGetMethodDescriptor),
+			connect.WithSchema(sessionsServiceMethods.ByName("Get")),
 			connect.WithClientOptions(opts...),
 		),
 		revoke: connect.NewClient[sessions.Session, sessions.DeleteResponse](
 			httpClient,
 			baseURL+SessionsServiceRevokeProcedure,
-			connect.WithSchema(sessionsServiceRevokeMethodDescriptor),
+			connect.WithSchema(sessionsServiceMethods.ByName("Revoke")),
 			connect.WithClientOptions(opts...),
 		),
 		getActivity: connect.NewClient[sessions.GetActivityRequest, sessions.Activity](
 			httpClient,
 			baseURL+SessionsServiceGetActivityProcedure,
-			connect.WithSchema(sessionsServiceGetActivityMethodDescriptor),
+			connect.WithSchema(sessionsServiceMethods.ByName("GetActivity")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -123,22 +116,23 @@ type SessionsServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewSessionsServiceHandler(svc SessionsServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	sessionsServiceMethods := sessions.File_sessions_sessions_proto.Services().ByName("SessionsService").Methods()
 	sessionsServiceGetHandler := connect.NewUnaryHandler(
 		SessionsServiceGetProcedure,
 		svc.Get,
-		connect.WithSchema(sessionsServiceGetMethodDescriptor),
+		connect.WithSchema(sessionsServiceMethods.ByName("Get")),
 		connect.WithHandlerOptions(opts...),
 	)
 	sessionsServiceRevokeHandler := connect.NewUnaryHandler(
 		SessionsServiceRevokeProcedure,
 		svc.Revoke,
-		connect.WithSchema(sessionsServiceRevokeMethodDescriptor),
+		connect.WithSchema(sessionsServiceMethods.ByName("Revoke")),
 		connect.WithHandlerOptions(opts...),
 	)
 	sessionsServiceGetActivityHandler := connect.NewUnaryHandler(
 		SessionsServiceGetActivityProcedure,
 		svc.GetActivity,
-		connect.WithSchema(sessionsServiceGetActivityMethodDescriptor),
+		connect.WithSchema(sessionsServiceMethods.ByName("GetActivity")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.sessions.SessionsService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

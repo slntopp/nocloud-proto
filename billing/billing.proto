@@ -498,6 +498,11 @@ message PayWithBalanceResponse {
   bool success = 1;
 }
 
+message SendInvoiceEmailRequest{
+  string invoice_uuid = 1;
+}
+message SendInvoiceEmailResponse{}
+
 message RunDailyCronJobRequest{}
 message RunDailyCronJobResponse{}
 
@@ -651,6 +656,12 @@ service BillingService {
   rpc PayWithBalance(PayWithBalanceRequest) returns (PayWithBalanceResponse) {
     option (google.api.http) = {
       post: "/billing/invoices/{invoice_uuid}/paywithbalance"
+      body: "*"
+    };
+  }
+  rpc SendInvoiceEmail(SendInvoiceEmailRequest) returns (SendInvoiceEmailResponse) {
+    option (google.api.http) = {
+      post: "/billing/invoices/{invoice_uuid}/send_email"
       body: "*"
     };
   }
