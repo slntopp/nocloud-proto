@@ -12473,6 +12473,9 @@
           "items": {
             "type": "string"
           }
+        },
+        "public": {
+          "type": "boolean"
         }
       }
     },
@@ -12501,6 +12504,9 @@
           "items": {
             "type": "string"
           }
+        },
+        "public": {
+          "type": "boolean"
         }
       }
     },

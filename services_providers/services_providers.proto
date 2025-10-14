@@ -233,6 +233,7 @@ message ShowcaseCategory{
   optional int32 sorter = 4;
   map<string, google.protobuf.Value> promo = 5;
   repeated string showcases = 6;
+  bool public = 7;
 }
 
 message ShowcaseItem {

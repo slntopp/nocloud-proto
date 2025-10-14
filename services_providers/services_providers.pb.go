@@ -1386,6 +1386,7 @@ type ShowcaseCategory struct {
 	Sorter        *int32                     `protobuf:"varint,4,opt,name=sorter,proto3,oneof" json:"sorter,omitempty"`
 	Promo         map[string]*structpb.Value `protobuf:"bytes,5,rep,name=promo,proto3" json:"promo,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	Showcases     []string                   `protobuf:"bytes,6,rep,name=showcases,proto3" json:"showcases,omitempty"`
+	Public        bool                       `protobuf:"varint,7,opt,name=public,proto3" json:"public,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1460,6 +1461,13 @@ func (x *ShowcaseCategory) GetShowcases() []string {
 		return x.Showcases
 	}
 	return nil
+}
+
+func (x *ShowcaseCategory) GetPublic() bool {
+	if x != nil {
+		return x.Public
+	}
+	return false
 }
 
 type ShowcaseItem struct {
@@ -2524,14 +2532,15 @@ const file_services_providers_services_providers_proto_rawDesc = "" +
 	"\x04data\x18\x02 \x01(\v2\x17.google.protobuf.StructR\x04data\"?\n" +
 	"\x0fGenericResponse\x12\x16\n" +
 	"\x06result\x18\x01 \x01(\bR\x06result\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"\xb7\x02\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"\xcf\x02\n" +
 	"\x10ShowcaseCategory\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\tR\x04type\x12\x1b\n" +
 	"\x06sorter\x18\x04 \x01(\x05H\x00R\x06sorter\x88\x01\x01\x12M\n" +
 	"\x05promo\x18\x05 \x03(\v27.nocloud.services_providers.ShowcaseCategory.PromoEntryR\x05promo\x12\x1c\n" +
-	"\tshowcases\x18\x06 \x03(\tR\tshowcases\x1aP\n" +
+	"\tshowcases\x18\x06 \x03(\tR\tshowcases\x12\x16\n" +
+	"\x06public\x18\a \x01(\bR\x06public\x1aP\n" +
 	"\n" +
 	"PromoEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
