@@ -1378,6 +1378,90 @@ func (x *GenericResponse) GetError() string {
 	return ""
 }
 
+type ShowcaseCategory struct {
+	state         protoimpl.MessageState     `protogen:"open.v1"`
+	Uuid          string                     `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	Title         string                     `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	Type          string                     `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	Sorter        *int32                     `protobuf:"varint,4,opt,name=sorter,proto3,oneof" json:"sorter,omitempty"`
+	Promo         map[string]*structpb.Value `protobuf:"bytes,5,rep,name=promo,proto3" json:"promo,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Showcases     []string                   `protobuf:"bytes,6,rep,name=showcases,proto3" json:"showcases,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ShowcaseCategory) Reset() {
+	*x = ShowcaseCategory{}
+	mi := &file_services_providers_services_providers_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShowcaseCategory) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShowcaseCategory) ProtoMessage() {}
+
+func (x *ShowcaseCategory) ProtoReflect() protoreflect.Message {
+	mi := &file_services_providers_services_providers_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShowcaseCategory.ProtoReflect.Descriptor instead.
+func (*ShowcaseCategory) Descriptor() ([]byte, []int) {
+	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *ShowcaseCategory) GetUuid() string {
+	if x != nil {
+		return x.Uuid
+	}
+	return ""
+}
+
+func (x *ShowcaseCategory) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *ShowcaseCategory) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *ShowcaseCategory) GetSorter() int32 {
+	if x != nil && x.Sorter != nil {
+		return *x.Sorter
+	}
+	return 0
+}
+
+func (x *ShowcaseCategory) GetPromo() map[string]*structpb.Value {
+	if x != nil {
+		return x.Promo
+	}
+	return nil
+}
+
+func (x *ShowcaseCategory) GetShowcases() []string {
+	if x != nil {
+		return x.Showcases
+	}
+	return nil
+}
+
 type ShowcaseItem struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	Plan             *string                `protobuf:"bytes,1,opt,name=plan,proto3,oneof" json:"plan,omitempty"`
@@ -1389,7 +1473,7 @@ type ShowcaseItem struct {
 
 func (x *ShowcaseItem) Reset() {
 	*x = ShowcaseItem{}
-	mi := &file_services_providers_services_providers_proto_msgTypes[23]
+	mi := &file_services_providers_services_providers_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1401,7 +1485,7 @@ func (x *ShowcaseItem) String() string {
 func (*ShowcaseItem) ProtoMessage() {}
 
 func (x *ShowcaseItem) ProtoReflect() protoreflect.Message {
-	mi := &file_services_providers_services_providers_proto_msgTypes[23]
+	mi := &file_services_providers_services_providers_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1414,7 +1498,7 @@ func (x *ShowcaseItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ShowcaseItem.ProtoReflect.Descriptor instead.
 func (*ShowcaseItem) Descriptor() ([]byte, []int) {
-	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{23}
+	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ShowcaseItem) GetPlan() string {
@@ -1458,7 +1542,7 @@ type Showcase struct {
 
 func (x *Showcase) Reset() {
 	*x = Showcase{}
-	mi := &file_services_providers_services_providers_proto_msgTypes[24]
+	mi := &file_services_providers_services_providers_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1470,7 +1554,7 @@ func (x *Showcase) String() string {
 func (*Showcase) ProtoMessage() {}
 
 func (x *Showcase) ProtoReflect() protoreflect.Message {
-	mi := &file_services_providers_services_providers_proto_msgTypes[24]
+	mi := &file_services_providers_services_providers_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1483,7 +1567,7 @@ func (x *Showcase) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Showcase.ProtoReflect.Descriptor instead.
 func (*Showcase) Descriptor() ([]byte, []int) {
-	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{24}
+	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *Showcase) GetUuid() string {
@@ -1588,7 +1672,7 @@ type LanguagePromo struct {
 
 func (x *LanguagePromo) Reset() {
 	*x = LanguagePromo{}
-	mi := &file_services_providers_services_providers_proto_msgTypes[25]
+	mi := &file_services_providers_services_providers_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1600,7 +1684,7 @@ func (x *LanguagePromo) String() string {
 func (*LanguagePromo) ProtoMessage() {}
 
 func (x *LanguagePromo) ProtoReflect() protoreflect.Message {
-	mi := &file_services_providers_services_providers_proto_msgTypes[25]
+	mi := &file_services_providers_services_providers_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1613,7 +1697,7 @@ func (x *LanguagePromo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LanguagePromo.ProtoReflect.Descriptor instead.
 func (*LanguagePromo) Descriptor() ([]byte, []int) {
-	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{25}
+	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *LanguagePromo) GetIcons() []*Icon {
@@ -1689,7 +1773,7 @@ type Icon struct {
 
 func (x *Icon) Reset() {
 	*x = Icon{}
-	mi := &file_services_providers_services_providers_proto_msgTypes[26]
+	mi := &file_services_providers_services_providers_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1701,7 +1785,7 @@ func (x *Icon) String() string {
 func (*Icon) ProtoMessage() {}
 
 func (x *Icon) ProtoReflect() protoreflect.Message {
-	mi := &file_services_providers_services_providers_proto_msgTypes[26]
+	mi := &file_services_providers_services_providers_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1714,7 +1798,7 @@ func (x *Icon) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Icon.ProtoReflect.Descriptor instead.
 func (*Icon) Descriptor() ([]byte, []int) {
-	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{26}
+	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *Icon) GetId() int32 {
@@ -1741,7 +1825,7 @@ type Location struct {
 
 func (x *Location) Reset() {
 	*x = Location{}
-	mi := &file_services_providers_services_providers_proto_msgTypes[27]
+	mi := &file_services_providers_services_providers_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1753,7 +1837,7 @@ func (x *Location) String() string {
 func (*Location) ProtoMessage() {}
 
 func (x *Location) ProtoReflect() protoreflect.Message {
-	mi := &file_services_providers_services_providers_proto_msgTypes[27]
+	mi := &file_services_providers_services_providers_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1766,7 +1850,7 @@ func (x *Location) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Location.ProtoReflect.Descriptor instead.
 func (*Location) Descriptor() ([]byte, []int) {
-	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{27}
+	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *Location) GetDescription() string {
@@ -1794,7 +1878,7 @@ type Offer struct {
 
 func (x *Offer) Reset() {
 	*x = Offer{}
-	mi := &file_services_providers_services_providers_proto_msgTypes[28]
+	mi := &file_services_providers_services_providers_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1806,7 +1890,7 @@ func (x *Offer) String() string {
 func (*Offer) ProtoMessage() {}
 
 func (x *Offer) ProtoReflect() protoreflect.Message {
-	mi := &file_services_providers_services_providers_proto_msgTypes[28]
+	mi := &file_services_providers_services_providers_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1819,7 +1903,7 @@ func (x *Offer) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Offer.ProtoReflect.Descriptor instead.
 func (*Offer) Descriptor() ([]byte, []int) {
-	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{28}
+	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *Offer) GetLink() string {
@@ -1853,7 +1937,7 @@ type TitleDesc struct {
 
 func (x *TitleDesc) Reset() {
 	*x = TitleDesc{}
-	mi := &file_services_providers_services_providers_proto_msgTypes[29]
+	mi := &file_services_providers_services_providers_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1865,7 +1949,7 @@ func (x *TitleDesc) String() string {
 func (*TitleDesc) ProtoMessage() {}
 
 func (x *TitleDesc) ProtoReflect() protoreflect.Message {
-	mi := &file_services_providers_services_providers_proto_msgTypes[29]
+	mi := &file_services_providers_services_providers_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1878,7 +1962,7 @@ func (x *TitleDesc) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TitleDesc.ProtoReflect.Descriptor instead.
 func (*TitleDesc) Descriptor() ([]byte, []int) {
-	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{29}
+	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *TitleDesc) GetDescription() string {
@@ -1906,7 +1990,7 @@ type Service struct {
 
 func (x *Service) Reset() {
 	*x = Service{}
-	mi := &file_services_providers_services_providers_proto_msgTypes[30]
+	mi := &file_services_providers_services_providers_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1918,7 +2002,7 @@ func (x *Service) String() string {
 func (*Service) ProtoMessage() {}
 
 func (x *Service) ProtoReflect() protoreflect.Message {
-	mi := &file_services_providers_services_providers_proto_msgTypes[30]
+	mi := &file_services_providers_services_providers_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1931,7 +2015,7 @@ func (x *Service) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Service.ProtoReflect.Descriptor instead.
 func (*Service) Descriptor() ([]byte, []int) {
-	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{30}
+	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *Service) GetBtn() string {
@@ -1964,7 +2048,7 @@ type Main struct {
 
 func (x *Main) Reset() {
 	*x = Main{}
-	mi := &file_services_providers_services_providers_proto_msgTypes[31]
+	mi := &file_services_providers_services_providers_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1976,7 +2060,7 @@ func (x *Main) String() string {
 func (*Main) ProtoMessage() {}
 
 func (x *Main) ProtoReflect() protoreflect.Message {
-	mi := &file_services_providers_services_providers_proto_msgTypes[31]
+	mi := &file_services_providers_services_providers_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1989,7 +2073,7 @@ func (x *Main) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Main.ProtoReflect.Descriptor instead.
 func (*Main) Descriptor() ([]byte, []int) {
-	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{31}
+	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *Main) GetDefault() string {
@@ -2008,7 +2092,7 @@ type Showcases struct {
 
 func (x *Showcases) Reset() {
 	*x = Showcases{}
-	mi := &file_services_providers_services_providers_proto_msgTypes[32]
+	mi := &file_services_providers_services_providers_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2020,7 +2104,7 @@ func (x *Showcases) String() string {
 func (*Showcases) ProtoMessage() {}
 
 func (x *Showcases) ProtoReflect() protoreflect.Message {
-	mi := &file_services_providers_services_providers_proto_msgTypes[32]
+	mi := &file_services_providers_services_providers_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2033,12 +2117,56 @@ func (x *Showcases) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Showcases.ProtoReflect.Descriptor instead.
 func (*Showcases) Descriptor() ([]byte, []int) {
-	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{32}
+	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *Showcases) GetShowcases() []*Showcase {
 	if x != nil {
 		return x.Showcases
+	}
+	return nil
+}
+
+type ShowcaseCategories struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Categories    []*ShowcaseCategory    `protobuf:"bytes,1,rep,name=categories,proto3" json:"categories,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ShowcaseCategories) Reset() {
+	*x = ShowcaseCategories{}
+	mi := &file_services_providers_services_providers_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShowcaseCategories) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShowcaseCategories) ProtoMessage() {}
+
+func (x *ShowcaseCategories) ProtoReflect() protoreflect.Message {
+	mi := &file_services_providers_services_providers_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShowcaseCategories.ProtoReflect.Descriptor instead.
+func (*ShowcaseCategories) Descriptor() ([]byte, []int) {
+	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *ShowcaseCategories) GetCategories() []*ShowcaseCategory {
+	if x != nil {
+		return x.Categories
 	}
 	return nil
 }
@@ -2053,7 +2181,7 @@ type SuspendRules struct {
 
 func (x *SuspendRules) Reset() {
 	*x = SuspendRules{}
-	mi := &file_services_providers_services_providers_proto_msgTypes[33]
+	mi := &file_services_providers_services_providers_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2065,7 +2193,7 @@ func (x *SuspendRules) String() string {
 func (*SuspendRules) ProtoMessage() {}
 
 func (x *SuspendRules) ProtoReflect() protoreflect.Message {
-	mi := &file_services_providers_services_providers_proto_msgTypes[33]
+	mi := &file_services_providers_services_providers_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2078,7 +2206,7 @@ func (x *SuspendRules) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SuspendRules.ProtoReflect.Descriptor instead.
 func (*SuspendRules) Descriptor() ([]byte, []int) {
-	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{33}
+	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *SuspendRules) GetSchedules() []*DaySchedule {
@@ -2106,7 +2234,7 @@ type DaySchedule struct {
 
 func (x *DaySchedule) Reset() {
 	*x = DaySchedule{}
-	mi := &file_services_providers_services_providers_proto_msgTypes[34]
+	mi := &file_services_providers_services_providers_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2118,7 +2246,7 @@ func (x *DaySchedule) String() string {
 func (*DaySchedule) ProtoMessage() {}
 
 func (x *DaySchedule) ProtoReflect() protoreflect.Message {
-	mi := &file_services_providers_services_providers_proto_msgTypes[34]
+	mi := &file_services_providers_services_providers_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2131,7 +2259,7 @@ func (x *DaySchedule) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DaySchedule.ProtoReflect.Descriptor instead.
 func (*DaySchedule) Descriptor() ([]byte, []int) {
-	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{34}
+	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *DaySchedule) GetDay() DayOfWeek {
@@ -2165,7 +2293,7 @@ type TimeRange struct {
 
 func (x *TimeRange) Reset() {
 	*x = TimeRange{}
-	mi := &file_services_providers_services_providers_proto_msgTypes[35]
+	mi := &file_services_providers_services_providers_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2177,7 +2305,7 @@ func (x *TimeRange) String() string {
 func (*TimeRange) ProtoMessage() {}
 
 func (x *TimeRange) ProtoReflect() protoreflect.Message {
-	mi := &file_services_providers_services_providers_proto_msgTypes[35]
+	mi := &file_services_providers_services_providers_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2190,7 +2318,7 @@ func (x *TimeRange) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TimeRange.ProtoReflect.Descriptor instead.
 func (*TimeRange) Descriptor() ([]byte, []int) {
-	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{35}
+	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *TimeRange) GetStartTime() string {
@@ -2217,7 +2345,7 @@ type ObjectPublicData struct {
 
 func (x *ObjectPublicData) Reset() {
 	*x = ObjectPublicData{}
-	mi := &file_services_providers_services_providers_proto_msgTypes[36]
+	mi := &file_services_providers_services_providers_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2229,7 +2357,7 @@ func (x *ObjectPublicData) String() string {
 func (*ObjectPublicData) ProtoMessage() {}
 
 func (x *ObjectPublicData) ProtoReflect() protoreflect.Message {
-	mi := &file_services_providers_services_providers_proto_msgTypes[36]
+	mi := &file_services_providers_services_providers_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2242,7 +2370,7 @@ func (x *ObjectPublicData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ObjectPublicData.ProtoReflect.Descriptor instead.
 func (*ObjectPublicData) Descriptor() ([]byte, []int) {
-	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{36}
+	return file_services_providers_services_providers_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *ObjectPublicData) GetUuid() string {
@@ -2396,7 +2524,19 @@ const file_services_providers_services_providers_proto_rawDesc = "" +
 	"\x04data\x18\x02 \x01(\v2\x17.google.protobuf.StructR\x04data\"?\n" +
 	"\x0fGenericResponse\x12\x16\n" +
 	"\x06result\x18\x01 \x01(\bR\x06result\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"{\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"\xb7\x02\n" +
+	"\x10ShowcaseCategory\x12\x12\n" +
+	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x14\n" +
+	"\x05title\x18\x02 \x01(\tR\x05title\x12\x12\n" +
+	"\x04type\x18\x03 \x01(\tR\x04type\x12\x1b\n" +
+	"\x06sorter\x18\x04 \x01(\x05H\x00R\x06sorter\x88\x01\x01\x12M\n" +
+	"\x05promo\x18\x05 \x03(\v27.nocloud.services_providers.ShowcaseCategory.PromoEntryR\x05promo\x12\x1c\n" +
+	"\tshowcases\x18\x06 \x03(\tR\tshowcases\x1aP\n" +
+	"\n" +
+	"PromoEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01B\t\n" +
+	"\a_sorter\"{\n" +
 	"\fShowcaseItem\x12\x17\n" +
 	"\x04plan\x18\x01 \x01(\tH\x00R\x04plan\x88\x01\x01\x12+\n" +
 	"\x11services_provider\x18\x02 \x01(\tR\x10servicesProvider\x12\x1c\n" +
@@ -2457,7 +2597,11 @@ const file_services_providers_services_providers_proto_rawDesc = "" +
 	"\x04Main\x12\x18\n" +
 	"\adefault\x18\x01 \x01(\tR\adefault\"O\n" +
 	"\tShowcases\x12B\n" +
-	"\tshowcases\x18\x01 \x03(\v2$.nocloud.services_providers.ShowcaseR\tshowcases\"o\n" +
+	"\tshowcases\x18\x01 \x03(\v2$.nocloud.services_providers.ShowcaseR\tshowcases\"b\n" +
+	"\x12ShowcaseCategories\x12L\n" +
+	"\n" +
+	"categories\x18\x01 \x03(\v2,.nocloud.services_providers.ShowcaseCategoryR\n" +
+	"categories\"o\n" +
 	"\fSuspendRules\x12E\n" +
 	"\tschedules\x18\x01 \x03(\v2'.nocloud.services_providers.DayScheduleR\tschedules\x12\x18\n" +
 	"\aenabled\x18\x02 \x01(\bR\aenabled\"\xb9\x01\n" +
@@ -2517,7 +2661,13 @@ const file_services_providers_services_providers_proto_rawDesc = "" +
 	"\x06Update\x12$.nocloud.services_providers.Showcase\x1a$.nocloud.services_providers.Showcase\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*2\x11/showcases/{uuid}\x12n\n" +
 	"\x03Get\x12&.nocloud.services_providers.GetRequest\x1a$.nocloud.services_providers.Showcase\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/showcases/{uuid}\x12j\n" +
 	"\x04List\x12'.nocloud.services_providers.ListRequest\x1a%.nocloud.services_providers.Showcases\"\x12\x82\xd3\xe4\x93\x02\f\x12\n" +
-	"/showcasesB\xf2\x01\n" +
+	"/showcases2\xbb\x05\n" +
+	"\x19ShowcaseCategoriesService\x12\x85\x01\n" +
+	"\x06Create\x12,.nocloud.services_providers.ShowcaseCategory\x1a,.nocloud.services_providers.ShowcaseCategory\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/showcase_categories\x12\x84\x01\n" +
+	"\x06Delete\x12).nocloud.services_providers.DeleteRequest\x1a*.nocloud.services_providers.DeleteResponse\"#\x82\xd3\xe4\x93\x02\x1d*\x1b/showcase_categories/{uuid}\x12\x8c\x01\n" +
+	"\x06Update\x12,.nocloud.services_providers.ShowcaseCategory\x1a,.nocloud.services_providers.ShowcaseCategory\"&\x82\xd3\xe4\x93\x02 :\x01*2\x1b/showcase_categories/{uuid}\x12\x80\x01\n" +
+	"\x03Get\x12&.nocloud.services_providers.GetRequest\x1a,.nocloud.services_providers.ShowcaseCategory\"#\x82\xd3\xe4\x93\x02\x1d\x12\x1b/showcase_categories/{uuid}\x12}\n" +
+	"\x04List\x12'.nocloud.services_providers.ListRequest\x1a..nocloud.services_providers.ShowcaseCategories\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/showcase_categoriesB\xf2\x01\n" +
 	"\x1ecom.nocloud.services_providersB\x16ServicesProvidersProtoP\x01Z3github.com/slntopp/nocloud-proto/services_providers\xa2\x02\x03NSX\xaa\x02\x19Nocloud.ServicesProviders\xca\x02\x19Nocloud\\ServicesProviders\xe2\x02%Nocloud\\ServicesProviders\\GPBMetadata\xea\x02\x1aNocloud::ServicesProvidersb\x06proto3"
 
 var (
@@ -2533,7 +2683,7 @@ func file_services_providers_services_providers_proto_rawDescGZIP() []byte {
 }
 
 var file_services_providers_services_providers_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_services_providers_services_providers_proto_msgTypes = make([]protoimpl.MessageInfo, 54)
+var file_services_providers_services_providers_proto_msgTypes = make([]protoimpl.MessageInfo, 57)
 var file_services_providers_services_providers_proto_goTypes = []any{
 	(DayOfWeek)(0),                         // 0: nocloud.services_providers.DayOfWeek
 	(*Var)(nil),                            // 1: nocloud.services_providers.Var
@@ -2559,145 +2709,161 @@ var file_services_providers_services_providers_proto_goTypes = []any{
 	(*GetTypeResponse)(nil),                // 21: nocloud.services_providers.GetTypeResponse
 	(*ServicesProvidersExtentionData)(nil), // 22: nocloud.services_providers.ServicesProvidersExtentionData
 	(*GenericResponse)(nil),                // 23: nocloud.services_providers.GenericResponse
-	(*ShowcaseItem)(nil),                   // 24: nocloud.services_providers.ShowcaseItem
-	(*Showcase)(nil),                       // 25: nocloud.services_providers.Showcase
-	(*LanguagePromo)(nil),                  // 26: nocloud.services_providers.LanguagePromo
-	(*Icon)(nil),                           // 27: nocloud.services_providers.Icon
-	(*Location)(nil),                       // 28: nocloud.services_providers.Location
-	(*Offer)(nil),                          // 29: nocloud.services_providers.Offer
-	(*TitleDesc)(nil),                      // 30: nocloud.services_providers.TitleDesc
-	(*Service)(nil),                        // 31: nocloud.services_providers.Service
-	(*Main)(nil),                           // 32: nocloud.services_providers.Main
-	(*Showcases)(nil),                      // 33: nocloud.services_providers.Showcases
-	(*SuspendRules)(nil),                   // 34: nocloud.services_providers.SuspendRules
-	(*DaySchedule)(nil),                    // 35: nocloud.services_providers.DaySchedule
-	(*TimeRange)(nil),                      // 36: nocloud.services_providers.TimeRange
-	(*ObjectPublicData)(nil),               // 37: nocloud.services_providers.ObjectPublicData
-	nil,                                    // 38: nocloud.services_providers.Var.ValueEntry
-	nil,                                    // 39: nocloud.services_providers.LocationConf.ExtraEntry
-	nil,                                    // 40: nocloud.services_providers.Hook.VarsEntry
-	nil,                                    // 41: nocloud.services_providers.ServicesProvider.SecretsEntry
-	nil,                                    // 42: nocloud.services_providers.ServicesProvider.VarsEntry
-	nil,                                    // 43: nocloud.services_providers.ServicesProvider.ExtentionsEntry
-	nil,                                    // 44: nocloud.services_providers.ServicesProvider.PublicDataEntry
-	nil,                                    // 45: nocloud.services_providers.ServicesProvider.MetaEntry
-	nil,                                    // 46: nocloud.services_providers.ServicesProvider.HooksEntry
-	nil,                                    // 47: nocloud.services_providers.ListRequest.FiltersEntry
-	nil,                                    // 48: nocloud.services_providers.InvokeRequest.ParamsEntry
-	nil,                                    // 49: nocloud.services_providers.InvokeResponse.MetaEntry
-	nil,                                    // 50: nocloud.services_providers.PrepSP.ExtraEntry
-	nil,                                    // 51: nocloud.services_providers.Showcase.PromoEntry
-	nil,                                    // 52: nocloud.services_providers.Showcase.MetaEntry
-	nil,                                    // 53: nocloud.services_providers.LanguagePromo.LocationsEntry
-	nil,                                    // 54: nocloud.services_providers.ObjectPublicData.DataEntry
-	(*states.State)(nil),                   // 55: nocloud.states.State
-	(*access.Access)(nil),                  // 56: nocloud.access.Access
-	(statuses.NoCloudStatus)(0),            // 57: nocloud.statuses.NoCloudStatus
-	(*structpb.Struct)(nil),                // 58: google.protobuf.Struct
-	(*structpb.Value)(nil),                 // 59: google.protobuf.Value
+	(*ShowcaseCategory)(nil),               // 24: nocloud.services_providers.ShowcaseCategory
+	(*ShowcaseItem)(nil),                   // 25: nocloud.services_providers.ShowcaseItem
+	(*Showcase)(nil),                       // 26: nocloud.services_providers.Showcase
+	(*LanguagePromo)(nil),                  // 27: nocloud.services_providers.LanguagePromo
+	(*Icon)(nil),                           // 28: nocloud.services_providers.Icon
+	(*Location)(nil),                       // 29: nocloud.services_providers.Location
+	(*Offer)(nil),                          // 30: nocloud.services_providers.Offer
+	(*TitleDesc)(nil),                      // 31: nocloud.services_providers.TitleDesc
+	(*Service)(nil),                        // 32: nocloud.services_providers.Service
+	(*Main)(nil),                           // 33: nocloud.services_providers.Main
+	(*Showcases)(nil),                      // 34: nocloud.services_providers.Showcases
+	(*ShowcaseCategories)(nil),             // 35: nocloud.services_providers.ShowcaseCategories
+	(*SuspendRules)(nil),                   // 36: nocloud.services_providers.SuspendRules
+	(*DaySchedule)(nil),                    // 37: nocloud.services_providers.DaySchedule
+	(*TimeRange)(nil),                      // 38: nocloud.services_providers.TimeRange
+	(*ObjectPublicData)(nil),               // 39: nocloud.services_providers.ObjectPublicData
+	nil,                                    // 40: nocloud.services_providers.Var.ValueEntry
+	nil,                                    // 41: nocloud.services_providers.LocationConf.ExtraEntry
+	nil,                                    // 42: nocloud.services_providers.Hook.VarsEntry
+	nil,                                    // 43: nocloud.services_providers.ServicesProvider.SecretsEntry
+	nil,                                    // 44: nocloud.services_providers.ServicesProvider.VarsEntry
+	nil,                                    // 45: nocloud.services_providers.ServicesProvider.ExtentionsEntry
+	nil,                                    // 46: nocloud.services_providers.ServicesProvider.PublicDataEntry
+	nil,                                    // 47: nocloud.services_providers.ServicesProvider.MetaEntry
+	nil,                                    // 48: nocloud.services_providers.ServicesProvider.HooksEntry
+	nil,                                    // 49: nocloud.services_providers.ListRequest.FiltersEntry
+	nil,                                    // 50: nocloud.services_providers.InvokeRequest.ParamsEntry
+	nil,                                    // 51: nocloud.services_providers.InvokeResponse.MetaEntry
+	nil,                                    // 52: nocloud.services_providers.PrepSP.ExtraEntry
+	nil,                                    // 53: nocloud.services_providers.ShowcaseCategory.PromoEntry
+	nil,                                    // 54: nocloud.services_providers.Showcase.PromoEntry
+	nil,                                    // 55: nocloud.services_providers.Showcase.MetaEntry
+	nil,                                    // 56: nocloud.services_providers.LanguagePromo.LocationsEntry
+	nil,                                    // 57: nocloud.services_providers.ObjectPublicData.DataEntry
+	(*states.State)(nil),                   // 58: nocloud.states.State
+	(*access.Access)(nil),                  // 59: nocloud.access.Access
+	(statuses.NoCloudStatus)(0),            // 60: nocloud.statuses.NoCloudStatus
+	(*structpb.Struct)(nil),                // 61: google.protobuf.Struct
+	(*structpb.Value)(nil),                 // 62: google.protobuf.Value
 }
 var file_services_providers_services_providers_proto_depIdxs = []int32{
-	38, // 0: nocloud.services_providers.Var.value:type_name -> nocloud.services_providers.Var.ValueEntry
-	39, // 1: nocloud.services_providers.LocationConf.extra:type_name -> nocloud.services_providers.LocationConf.ExtraEntry
-	40, // 2: nocloud.services_providers.Hook.vars:type_name -> nocloud.services_providers.Hook.VarsEntry
-	41, // 3: nocloud.services_providers.ServicesProvider.secrets:type_name -> nocloud.services_providers.ServicesProvider.SecretsEntry
-	42, // 4: nocloud.services_providers.ServicesProvider.vars:type_name -> nocloud.services_providers.ServicesProvider.VarsEntry
-	43, // 5: nocloud.services_providers.ServicesProvider.extentions:type_name -> nocloud.services_providers.ServicesProvider.ExtentionsEntry
-	55, // 6: nocloud.services_providers.ServicesProvider.state:type_name -> nocloud.states.State
-	44, // 7: nocloud.services_providers.ServicesProvider.public_data:type_name -> nocloud.services_providers.ServicesProvider.PublicDataEntry
+	40, // 0: nocloud.services_providers.Var.value:type_name -> nocloud.services_providers.Var.ValueEntry
+	41, // 1: nocloud.services_providers.LocationConf.extra:type_name -> nocloud.services_providers.LocationConf.ExtraEntry
+	42, // 2: nocloud.services_providers.Hook.vars:type_name -> nocloud.services_providers.Hook.VarsEntry
+	43, // 3: nocloud.services_providers.ServicesProvider.secrets:type_name -> nocloud.services_providers.ServicesProvider.SecretsEntry
+	44, // 4: nocloud.services_providers.ServicesProvider.vars:type_name -> nocloud.services_providers.ServicesProvider.VarsEntry
+	45, // 5: nocloud.services_providers.ServicesProvider.extentions:type_name -> nocloud.services_providers.ServicesProvider.ExtentionsEntry
+	58, // 6: nocloud.services_providers.ServicesProvider.state:type_name -> nocloud.states.State
+	46, // 7: nocloud.services_providers.ServicesProvider.public_data:type_name -> nocloud.services_providers.ServicesProvider.PublicDataEntry
 	2,  // 8: nocloud.services_providers.ServicesProvider.proxy:type_name -> nocloud.services_providers.ProxyConf
 	3,  // 9: nocloud.services_providers.ServicesProvider.locations:type_name -> nocloud.services_providers.LocationConf
-	56, // 10: nocloud.services_providers.ServicesProvider.access:type_name -> nocloud.access.Access
-	45, // 11: nocloud.services_providers.ServicesProvider.meta:type_name -> nocloud.services_providers.ServicesProvider.MetaEntry
-	57, // 12: nocloud.services_providers.ServicesProvider.status:type_name -> nocloud.statuses.NoCloudStatus
-	46, // 13: nocloud.services_providers.ServicesProvider.hooks:type_name -> nocloud.services_providers.ServicesProvider.HooksEntry
-	34, // 14: nocloud.services_providers.ServicesProvider.suspend_rules:type_name -> nocloud.services_providers.SuspendRules
-	47, // 15: nocloud.services_providers.ListRequest.filters:type_name -> nocloud.services_providers.ListRequest.FiltersEntry
+	59, // 10: nocloud.services_providers.ServicesProvider.access:type_name -> nocloud.access.Access
+	47, // 11: nocloud.services_providers.ServicesProvider.meta:type_name -> nocloud.services_providers.ServicesProvider.MetaEntry
+	60, // 12: nocloud.services_providers.ServicesProvider.status:type_name -> nocloud.statuses.NoCloudStatus
+	48, // 13: nocloud.services_providers.ServicesProvider.hooks:type_name -> nocloud.services_providers.ServicesProvider.HooksEntry
+	36, // 14: nocloud.services_providers.ServicesProvider.suspend_rules:type_name -> nocloud.services_providers.SuspendRules
+	49, // 15: nocloud.services_providers.ListRequest.filters:type_name -> nocloud.services_providers.ListRequest.FiltersEntry
 	5,  // 16: nocloud.services_providers.ListResponse.pool:type_name -> nocloud.services_providers.ServicesProvider
-	48, // 17: nocloud.services_providers.InvokeRequest.params:type_name -> nocloud.services_providers.InvokeRequest.ParamsEntry
-	49, // 18: nocloud.services_providers.InvokeResponse.meta:type_name -> nocloud.services_providers.InvokeResponse.MetaEntry
+	50, // 17: nocloud.services_providers.InvokeRequest.params:type_name -> nocloud.services_providers.InvokeRequest.ParamsEntry
+	51, // 18: nocloud.services_providers.InvokeResponse.meta:type_name -> nocloud.services_providers.InvokeResponse.MetaEntry
 	5,  // 19: nocloud.services_providers.PrepSP.sp:type_name -> nocloud.services_providers.ServicesProvider
-	50, // 20: nocloud.services_providers.PrepSP.extra:type_name -> nocloud.services_providers.PrepSP.ExtraEntry
-	58, // 21: nocloud.services_providers.ServicesProvidersExtentionData.data:type_name -> google.protobuf.Struct
-	24, // 22: nocloud.services_providers.Showcase.items:type_name -> nocloud.services_providers.ShowcaseItem
-	51, // 23: nocloud.services_providers.Showcase.promo:type_name -> nocloud.services_providers.Showcase.PromoEntry
-	3,  // 24: nocloud.services_providers.Showcase.locations:type_name -> nocloud.services_providers.LocationConf
-	52, // 25: nocloud.services_providers.Showcase.meta:type_name -> nocloud.services_providers.Showcase.MetaEntry
-	32, // 26: nocloud.services_providers.Showcase.main:type_name -> nocloud.services_providers.Main
-	27, // 27: nocloud.services_providers.LanguagePromo.icons:type_name -> nocloud.services_providers.Icon
-	28, // 28: nocloud.services_providers.LanguagePromo.location:type_name -> nocloud.services_providers.Location
-	53, // 29: nocloud.services_providers.LanguagePromo.locations:type_name -> nocloud.services_providers.LanguagePromo.LocationsEntry
-	29, // 30: nocloud.services_providers.LanguagePromo.offer:type_name -> nocloud.services_providers.Offer
-	30, // 31: nocloud.services_providers.LanguagePromo.rewards:type_name -> nocloud.services_providers.TitleDesc
-	31, // 32: nocloud.services_providers.LanguagePromo.service:type_name -> nocloud.services_providers.Service
-	25, // 33: nocloud.services_providers.Showcases.showcases:type_name -> nocloud.services_providers.Showcase
-	35, // 34: nocloud.services_providers.SuspendRules.schedules:type_name -> nocloud.services_providers.DaySchedule
-	0,  // 35: nocloud.services_providers.DaySchedule.day:type_name -> nocloud.services_providers.DayOfWeek
-	36, // 36: nocloud.services_providers.DaySchedule.allowed_suspend_time:type_name -> nocloud.services_providers.TimeRange
-	54, // 37: nocloud.services_providers.ObjectPublicData.data:type_name -> nocloud.services_providers.ObjectPublicData.DataEntry
-	59, // 38: nocloud.services_providers.Var.ValueEntry.value:type_name -> google.protobuf.Value
-	59, // 39: nocloud.services_providers.LocationConf.ExtraEntry.value:type_name -> google.protobuf.Value
-	59, // 40: nocloud.services_providers.ServicesProvider.SecretsEntry.value:type_name -> google.protobuf.Value
-	1,  // 41: nocloud.services_providers.ServicesProvider.VarsEntry.value:type_name -> nocloud.services_providers.Var
-	58, // 42: nocloud.services_providers.ServicesProvider.ExtentionsEntry.value:type_name -> google.protobuf.Struct
-	59, // 43: nocloud.services_providers.ServicesProvider.PublicDataEntry.value:type_name -> google.protobuf.Value
-	59, // 44: nocloud.services_providers.ServicesProvider.MetaEntry.value:type_name -> google.protobuf.Value
-	4,  // 45: nocloud.services_providers.ServicesProvider.HooksEntry.value:type_name -> nocloud.services_providers.Hook
-	59, // 46: nocloud.services_providers.ListRequest.FiltersEntry.value:type_name -> google.protobuf.Value
-	59, // 47: nocloud.services_providers.InvokeRequest.ParamsEntry.value:type_name -> google.protobuf.Value
-	59, // 48: nocloud.services_providers.InvokeResponse.MetaEntry.value:type_name -> google.protobuf.Value
-	59, // 49: nocloud.services_providers.PrepSP.ExtraEntry.value:type_name -> google.protobuf.Value
-	26, // 50: nocloud.services_providers.Showcase.PromoEntry.value:type_name -> nocloud.services_providers.LanguagePromo
-	59, // 51: nocloud.services_providers.Showcase.MetaEntry.value:type_name -> google.protobuf.Value
-	28, // 52: nocloud.services_providers.LanguagePromo.LocationsEntry.value:type_name -> nocloud.services_providers.Location
-	59, // 53: nocloud.services_providers.ObjectPublicData.DataEntry.value:type_name -> google.protobuf.Value
-	5,  // 54: nocloud.services_providers.ServicesProvidersService.Test:input_type -> nocloud.services_providers.ServicesProvider
-	5,  // 55: nocloud.services_providers.ServicesProvidersService.Create:input_type -> nocloud.services_providers.ServicesProvider
-	10, // 56: nocloud.services_providers.ServicesProvidersService.Delete:input_type -> nocloud.services_providers.DeleteRequest
-	5,  // 57: nocloud.services_providers.ServicesProvidersService.Update:input_type -> nocloud.services_providers.ServicesProvider
-	7,  // 58: nocloud.services_providers.ServicesProvidersService.Get:input_type -> nocloud.services_providers.GetRequest
-	8,  // 59: nocloud.services_providers.ServicesProvidersService.List:input_type -> nocloud.services_providers.ListRequest
-	17, // 60: nocloud.services_providers.ServicesProvidersService.Invoke:input_type -> nocloud.services_providers.InvokeRequest
-	19, // 61: nocloud.services_providers.ServicesProvidersService.Prep:input_type -> nocloud.services_providers.PrepSP
-	8,  // 62: nocloud.services_providers.ServicesProvidersService.ListExtentions:input_type -> nocloud.services_providers.ListRequest
-	13, // 63: nocloud.services_providers.ServicesProvidersService.BindPlan:input_type -> nocloud.services_providers.BindPlanRequest
-	15, // 64: nocloud.services_providers.ServicesProvidersService.UnbindPlan:input_type -> nocloud.services_providers.UnbindPlanRequest
-	20, // 65: nocloud.services_providers.ServicesProvidersExtentionsService.GetType:input_type -> nocloud.services_providers.GetTypeRequest
-	22, // 66: nocloud.services_providers.ServicesProvidersExtentionsService.Test:input_type -> nocloud.services_providers.ServicesProvidersExtentionData
-	22, // 67: nocloud.services_providers.ServicesProvidersExtentionsService.Register:input_type -> nocloud.services_providers.ServicesProvidersExtentionData
-	22, // 68: nocloud.services_providers.ServicesProvidersExtentionsService.Update:input_type -> nocloud.services_providers.ServicesProvidersExtentionData
-	22, // 69: nocloud.services_providers.ServicesProvidersExtentionsService.Unregister:input_type -> nocloud.services_providers.ServicesProvidersExtentionData
-	25, // 70: nocloud.services_providers.ShowcasesService.Create:input_type -> nocloud.services_providers.Showcase
-	10, // 71: nocloud.services_providers.ShowcasesService.Delete:input_type -> nocloud.services_providers.DeleteRequest
-	25, // 72: nocloud.services_providers.ShowcasesService.Update:input_type -> nocloud.services_providers.Showcase
-	7,  // 73: nocloud.services_providers.ShowcasesService.Get:input_type -> nocloud.services_providers.GetRequest
-	8,  // 74: nocloud.services_providers.ShowcasesService.List:input_type -> nocloud.services_providers.ListRequest
-	6,  // 75: nocloud.services_providers.ServicesProvidersService.Test:output_type -> nocloud.services_providers.TestResponse
-	5,  // 76: nocloud.services_providers.ServicesProvidersService.Create:output_type -> nocloud.services_providers.ServicesProvider
-	11, // 77: nocloud.services_providers.ServicesProvidersService.Delete:output_type -> nocloud.services_providers.DeleteResponse
-	5,  // 78: nocloud.services_providers.ServicesProvidersService.Update:output_type -> nocloud.services_providers.ServicesProvider
-	5,  // 79: nocloud.services_providers.ServicesProvidersService.Get:output_type -> nocloud.services_providers.ServicesProvider
-	9,  // 80: nocloud.services_providers.ServicesProvidersService.List:output_type -> nocloud.services_providers.ListResponse
-	18, // 81: nocloud.services_providers.ServicesProvidersService.Invoke:output_type -> nocloud.services_providers.InvokeResponse
-	19, // 82: nocloud.services_providers.ServicesProvidersService.Prep:output_type -> nocloud.services_providers.PrepSP
-	12, // 83: nocloud.services_providers.ServicesProvidersService.ListExtentions:output_type -> nocloud.services_providers.ListExtentionsResponse
-	14, // 84: nocloud.services_providers.ServicesProvidersService.BindPlan:output_type -> nocloud.services_providers.BindPlanResponse
-	16, // 85: nocloud.services_providers.ServicesProvidersService.UnbindPlan:output_type -> nocloud.services_providers.UnbindPlanResponse
-	21, // 86: nocloud.services_providers.ServicesProvidersExtentionsService.GetType:output_type -> nocloud.services_providers.GetTypeResponse
-	23, // 87: nocloud.services_providers.ServicesProvidersExtentionsService.Test:output_type -> nocloud.services_providers.GenericResponse
-	23, // 88: nocloud.services_providers.ServicesProvidersExtentionsService.Register:output_type -> nocloud.services_providers.GenericResponse
-	23, // 89: nocloud.services_providers.ServicesProvidersExtentionsService.Update:output_type -> nocloud.services_providers.GenericResponse
-	23, // 90: nocloud.services_providers.ServicesProvidersExtentionsService.Unregister:output_type -> nocloud.services_providers.GenericResponse
-	25, // 91: nocloud.services_providers.ShowcasesService.Create:output_type -> nocloud.services_providers.Showcase
-	11, // 92: nocloud.services_providers.ShowcasesService.Delete:output_type -> nocloud.services_providers.DeleteResponse
-	25, // 93: nocloud.services_providers.ShowcasesService.Update:output_type -> nocloud.services_providers.Showcase
-	25, // 94: nocloud.services_providers.ShowcasesService.Get:output_type -> nocloud.services_providers.Showcase
-	33, // 95: nocloud.services_providers.ShowcasesService.List:output_type -> nocloud.services_providers.Showcases
-	75, // [75:96] is the sub-list for method output_type
-	54, // [54:75] is the sub-list for method input_type
-	54, // [54:54] is the sub-list for extension type_name
-	54, // [54:54] is the sub-list for extension extendee
-	0,  // [0:54] is the sub-list for field type_name
+	52, // 20: nocloud.services_providers.PrepSP.extra:type_name -> nocloud.services_providers.PrepSP.ExtraEntry
+	61, // 21: nocloud.services_providers.ServicesProvidersExtentionData.data:type_name -> google.protobuf.Struct
+	53, // 22: nocloud.services_providers.ShowcaseCategory.promo:type_name -> nocloud.services_providers.ShowcaseCategory.PromoEntry
+	25, // 23: nocloud.services_providers.Showcase.items:type_name -> nocloud.services_providers.ShowcaseItem
+	54, // 24: nocloud.services_providers.Showcase.promo:type_name -> nocloud.services_providers.Showcase.PromoEntry
+	3,  // 25: nocloud.services_providers.Showcase.locations:type_name -> nocloud.services_providers.LocationConf
+	55, // 26: nocloud.services_providers.Showcase.meta:type_name -> nocloud.services_providers.Showcase.MetaEntry
+	33, // 27: nocloud.services_providers.Showcase.main:type_name -> nocloud.services_providers.Main
+	28, // 28: nocloud.services_providers.LanguagePromo.icons:type_name -> nocloud.services_providers.Icon
+	29, // 29: nocloud.services_providers.LanguagePromo.location:type_name -> nocloud.services_providers.Location
+	56, // 30: nocloud.services_providers.LanguagePromo.locations:type_name -> nocloud.services_providers.LanguagePromo.LocationsEntry
+	30, // 31: nocloud.services_providers.LanguagePromo.offer:type_name -> nocloud.services_providers.Offer
+	31, // 32: nocloud.services_providers.LanguagePromo.rewards:type_name -> nocloud.services_providers.TitleDesc
+	32, // 33: nocloud.services_providers.LanguagePromo.service:type_name -> nocloud.services_providers.Service
+	26, // 34: nocloud.services_providers.Showcases.showcases:type_name -> nocloud.services_providers.Showcase
+	24, // 35: nocloud.services_providers.ShowcaseCategories.categories:type_name -> nocloud.services_providers.ShowcaseCategory
+	37, // 36: nocloud.services_providers.SuspendRules.schedules:type_name -> nocloud.services_providers.DaySchedule
+	0,  // 37: nocloud.services_providers.DaySchedule.day:type_name -> nocloud.services_providers.DayOfWeek
+	38, // 38: nocloud.services_providers.DaySchedule.allowed_suspend_time:type_name -> nocloud.services_providers.TimeRange
+	57, // 39: nocloud.services_providers.ObjectPublicData.data:type_name -> nocloud.services_providers.ObjectPublicData.DataEntry
+	62, // 40: nocloud.services_providers.Var.ValueEntry.value:type_name -> google.protobuf.Value
+	62, // 41: nocloud.services_providers.LocationConf.ExtraEntry.value:type_name -> google.protobuf.Value
+	62, // 42: nocloud.services_providers.ServicesProvider.SecretsEntry.value:type_name -> google.protobuf.Value
+	1,  // 43: nocloud.services_providers.ServicesProvider.VarsEntry.value:type_name -> nocloud.services_providers.Var
+	61, // 44: nocloud.services_providers.ServicesProvider.ExtentionsEntry.value:type_name -> google.protobuf.Struct
+	62, // 45: nocloud.services_providers.ServicesProvider.PublicDataEntry.value:type_name -> google.protobuf.Value
+	62, // 46: nocloud.services_providers.ServicesProvider.MetaEntry.value:type_name -> google.protobuf.Value
+	4,  // 47: nocloud.services_providers.ServicesProvider.HooksEntry.value:type_name -> nocloud.services_providers.Hook
+	62, // 48: nocloud.services_providers.ListRequest.FiltersEntry.value:type_name -> google.protobuf.Value
+	62, // 49: nocloud.services_providers.InvokeRequest.ParamsEntry.value:type_name -> google.protobuf.Value
+	62, // 50: nocloud.services_providers.InvokeResponse.MetaEntry.value:type_name -> google.protobuf.Value
+	62, // 51: nocloud.services_providers.PrepSP.ExtraEntry.value:type_name -> google.protobuf.Value
+	62, // 52: nocloud.services_providers.ShowcaseCategory.PromoEntry.value:type_name -> google.protobuf.Value
+	27, // 53: nocloud.services_providers.Showcase.PromoEntry.value:type_name -> nocloud.services_providers.LanguagePromo
+	62, // 54: nocloud.services_providers.Showcase.MetaEntry.value:type_name -> google.protobuf.Value
+	29, // 55: nocloud.services_providers.LanguagePromo.LocationsEntry.value:type_name -> nocloud.services_providers.Location
+	62, // 56: nocloud.services_providers.ObjectPublicData.DataEntry.value:type_name -> google.protobuf.Value
+	5,  // 57: nocloud.services_providers.ServicesProvidersService.Test:input_type -> nocloud.services_providers.ServicesProvider
+	5,  // 58: nocloud.services_providers.ServicesProvidersService.Create:input_type -> nocloud.services_providers.ServicesProvider
+	10, // 59: nocloud.services_providers.ServicesProvidersService.Delete:input_type -> nocloud.services_providers.DeleteRequest
+	5,  // 60: nocloud.services_providers.ServicesProvidersService.Update:input_type -> nocloud.services_providers.ServicesProvider
+	7,  // 61: nocloud.services_providers.ServicesProvidersService.Get:input_type -> nocloud.services_providers.GetRequest
+	8,  // 62: nocloud.services_providers.ServicesProvidersService.List:input_type -> nocloud.services_providers.ListRequest
+	17, // 63: nocloud.services_providers.ServicesProvidersService.Invoke:input_type -> nocloud.services_providers.InvokeRequest
+	19, // 64: nocloud.services_providers.ServicesProvidersService.Prep:input_type -> nocloud.services_providers.PrepSP
+	8,  // 65: nocloud.services_providers.ServicesProvidersService.ListExtentions:input_type -> nocloud.services_providers.ListRequest
+	13, // 66: nocloud.services_providers.ServicesProvidersService.BindPlan:input_type -> nocloud.services_providers.BindPlanRequest
+	15, // 67: nocloud.services_providers.ServicesProvidersService.UnbindPlan:input_type -> nocloud.services_providers.UnbindPlanRequest
+	20, // 68: nocloud.services_providers.ServicesProvidersExtentionsService.GetType:input_type -> nocloud.services_providers.GetTypeRequest
+	22, // 69: nocloud.services_providers.ServicesProvidersExtentionsService.Test:input_type -> nocloud.services_providers.ServicesProvidersExtentionData
+	22, // 70: nocloud.services_providers.ServicesProvidersExtentionsService.Register:input_type -> nocloud.services_providers.ServicesProvidersExtentionData
+	22, // 71: nocloud.services_providers.ServicesProvidersExtentionsService.Update:input_type -> nocloud.services_providers.ServicesProvidersExtentionData
+	22, // 72: nocloud.services_providers.ServicesProvidersExtentionsService.Unregister:input_type -> nocloud.services_providers.ServicesProvidersExtentionData
+	26, // 73: nocloud.services_providers.ShowcasesService.Create:input_type -> nocloud.services_providers.Showcase
+	10, // 74: nocloud.services_providers.ShowcasesService.Delete:input_type -> nocloud.services_providers.DeleteRequest
+	26, // 75: nocloud.services_providers.ShowcasesService.Update:input_type -> nocloud.services_providers.Showcase
+	7,  // 76: nocloud.services_providers.ShowcasesService.Get:input_type -> nocloud.services_providers.GetRequest
+	8,  // 77: nocloud.services_providers.ShowcasesService.List:input_type -> nocloud.services_providers.ListRequest
+	24, // 78: nocloud.services_providers.ShowcaseCategoriesService.Create:input_type -> nocloud.services_providers.ShowcaseCategory
+	10, // 79: nocloud.services_providers.ShowcaseCategoriesService.Delete:input_type -> nocloud.services_providers.DeleteRequest
+	24, // 80: nocloud.services_providers.ShowcaseCategoriesService.Update:input_type -> nocloud.services_providers.ShowcaseCategory
+	7,  // 81: nocloud.services_providers.ShowcaseCategoriesService.Get:input_type -> nocloud.services_providers.GetRequest
+	8,  // 82: nocloud.services_providers.ShowcaseCategoriesService.List:input_type -> nocloud.services_providers.ListRequest
+	6,  // 83: nocloud.services_providers.ServicesProvidersService.Test:output_type -> nocloud.services_providers.TestResponse
+	5,  // 84: nocloud.services_providers.ServicesProvidersService.Create:output_type -> nocloud.services_providers.ServicesProvider
+	11, // 85: nocloud.services_providers.ServicesProvidersService.Delete:output_type -> nocloud.services_providers.DeleteResponse
+	5,  // 86: nocloud.services_providers.ServicesProvidersService.Update:output_type -> nocloud.services_providers.ServicesProvider
+	5,  // 87: nocloud.services_providers.ServicesProvidersService.Get:output_type -> nocloud.services_providers.ServicesProvider
+	9,  // 88: nocloud.services_providers.ServicesProvidersService.List:output_type -> nocloud.services_providers.ListResponse
+	18, // 89: nocloud.services_providers.ServicesProvidersService.Invoke:output_type -> nocloud.services_providers.InvokeResponse
+	19, // 90: nocloud.services_providers.ServicesProvidersService.Prep:output_type -> nocloud.services_providers.PrepSP
+	12, // 91: nocloud.services_providers.ServicesProvidersService.ListExtentions:output_type -> nocloud.services_providers.ListExtentionsResponse
+	14, // 92: nocloud.services_providers.ServicesProvidersService.BindPlan:output_type -> nocloud.services_providers.BindPlanResponse
+	16, // 93: nocloud.services_providers.ServicesProvidersService.UnbindPlan:output_type -> nocloud.services_providers.UnbindPlanResponse
+	21, // 94: nocloud.services_providers.ServicesProvidersExtentionsService.GetType:output_type -> nocloud.services_providers.GetTypeResponse
+	23, // 95: nocloud.services_providers.ServicesProvidersExtentionsService.Test:output_type -> nocloud.services_providers.GenericResponse
+	23, // 96: nocloud.services_providers.ServicesProvidersExtentionsService.Register:output_type -> nocloud.services_providers.GenericResponse
+	23, // 97: nocloud.services_providers.ServicesProvidersExtentionsService.Update:output_type -> nocloud.services_providers.GenericResponse
+	23, // 98: nocloud.services_providers.ServicesProvidersExtentionsService.Unregister:output_type -> nocloud.services_providers.GenericResponse
+	26, // 99: nocloud.services_providers.ShowcasesService.Create:output_type -> nocloud.services_providers.Showcase
+	11, // 100: nocloud.services_providers.ShowcasesService.Delete:output_type -> nocloud.services_providers.DeleteResponse
+	26, // 101: nocloud.services_providers.ShowcasesService.Update:output_type -> nocloud.services_providers.Showcase
+	26, // 102: nocloud.services_providers.ShowcasesService.Get:output_type -> nocloud.services_providers.Showcase
+	34, // 103: nocloud.services_providers.ShowcasesService.List:output_type -> nocloud.services_providers.Showcases
+	24, // 104: nocloud.services_providers.ShowcaseCategoriesService.Create:output_type -> nocloud.services_providers.ShowcaseCategory
+	11, // 105: nocloud.services_providers.ShowcaseCategoriesService.Delete:output_type -> nocloud.services_providers.DeleteResponse
+	24, // 106: nocloud.services_providers.ShowcaseCategoriesService.Update:output_type -> nocloud.services_providers.ShowcaseCategory
+	24, // 107: nocloud.services_providers.ShowcaseCategoriesService.Get:output_type -> nocloud.services_providers.ShowcaseCategory
+	35, // 108: nocloud.services_providers.ShowcaseCategoriesService.List:output_type -> nocloud.services_providers.ShowcaseCategories
+	83, // [83:109] is the sub-list for method output_type
+	57, // [57:83] is the sub-list for method input_type
+	57, // [57:57] is the sub-list for extension type_name
+	57, // [57:57] is the sub-list for extension extendee
+	0,  // [0:57] is the sub-list for field type_name
 }
 
 func init() { file_services_providers_services_providers_proto_init() }
@@ -2709,15 +2875,16 @@ func file_services_providers_services_providers_proto_init() {
 	file_services_providers_services_providers_proto_msgTypes[4].OneofWrappers = []any{}
 	file_services_providers_services_providers_proto_msgTypes[23].OneofWrappers = []any{}
 	file_services_providers_services_providers_proto_msgTypes[24].OneofWrappers = []any{}
+	file_services_providers_services_providers_proto_msgTypes[25].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_services_providers_services_providers_proto_rawDesc), len(file_services_providers_services_providers_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   54,
+			NumMessages:   57,
 			NumExtensions: 0,
-			NumServices:   3,
+			NumServices:   4,
 		},
 		GoTypes:           file_services_providers_services_providers_proto_goTypes,
 		DependencyIndexes: file_services_providers_services_providers_proto_depIdxs,

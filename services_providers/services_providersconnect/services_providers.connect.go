@@ -43,6 +43,9 @@ const (
 	ServicesProvidersExtentionsServiceName = "nocloud.services_providers.ServicesProvidersExtentionsService"
 	// ShowcasesServiceName is the fully-qualified name of the ShowcasesService service.
 	ShowcasesServiceName = "nocloud.services_providers.ShowcasesService"
+	// ShowcaseCategoriesServiceName is the fully-qualified name of the ShowcaseCategoriesService
+	// service.
+	ShowcaseCategoriesServiceName = "nocloud.services_providers.ShowcaseCategoriesService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -111,6 +114,21 @@ const (
 	ShowcasesServiceGetProcedure = "/nocloud.services_providers.ShowcasesService/Get"
 	// ShowcasesServiceListProcedure is the fully-qualified name of the ShowcasesService's List RPC.
 	ShowcasesServiceListProcedure = "/nocloud.services_providers.ShowcasesService/List"
+	// ShowcaseCategoriesServiceCreateProcedure is the fully-qualified name of the
+	// ShowcaseCategoriesService's Create RPC.
+	ShowcaseCategoriesServiceCreateProcedure = "/nocloud.services_providers.ShowcaseCategoriesService/Create"
+	// ShowcaseCategoriesServiceDeleteProcedure is the fully-qualified name of the
+	// ShowcaseCategoriesService's Delete RPC.
+	ShowcaseCategoriesServiceDeleteProcedure = "/nocloud.services_providers.ShowcaseCategoriesService/Delete"
+	// ShowcaseCategoriesServiceUpdateProcedure is the fully-qualified name of the
+	// ShowcaseCategoriesService's Update RPC.
+	ShowcaseCategoriesServiceUpdateProcedure = "/nocloud.services_providers.ShowcaseCategoriesService/Update"
+	// ShowcaseCategoriesServiceGetProcedure is the fully-qualified name of the
+	// ShowcaseCategoriesService's Get RPC.
+	ShowcaseCategoriesServiceGetProcedure = "/nocloud.services_providers.ShowcaseCategoriesService/Get"
+	// ShowcaseCategoriesServiceListProcedure is the fully-qualified name of the
+	// ShowcaseCategoriesService's List RPC.
+	ShowcaseCategoriesServiceListProcedure = "/nocloud.services_providers.ShowcaseCategoriesService/List"
 )
 
 // ServicesProvidersServiceClient is a client for the
@@ -797,4 +815,181 @@ func (UnimplementedShowcasesServiceHandler) Get(context.Context, *connect.Reques
 
 func (UnimplementedShowcasesServiceHandler) List(context.Context, *connect.Request[services_providers.ListRequest]) (*connect.Response[services_providers.Showcases], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.services_providers.ShowcasesService.List is not implemented"))
+}
+
+// ShowcaseCategoriesServiceClient is a client for the
+// nocloud.services_providers.ShowcaseCategoriesService service.
+type ShowcaseCategoriesServiceClient interface {
+	Create(context.Context, *connect.Request[services_providers.ShowcaseCategory]) (*connect.Response[services_providers.ShowcaseCategory], error)
+	Delete(context.Context, *connect.Request[services_providers.DeleteRequest]) (*connect.Response[services_providers.DeleteResponse], error)
+	Update(context.Context, *connect.Request[services_providers.ShowcaseCategory]) (*connect.Response[services_providers.ShowcaseCategory], error)
+	Get(context.Context, *connect.Request[services_providers.GetRequest]) (*connect.Response[services_providers.ShowcaseCategory], error)
+	List(context.Context, *connect.Request[services_providers.ListRequest]) (*connect.Response[services_providers.ShowcaseCategories], error)
+}
+
+// NewShowcaseCategoriesServiceClient constructs a client for the
+// nocloud.services_providers.ShowcaseCategoriesService service. By default, it uses the Connect
+// protocol with the binary Protobuf Codec, asks for gzipped responses, and sends uncompressed
+// requests. To use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC() or
+// connect.WithGRPCWeb() options.
+//
+// The URL supplied here should be the base URL for the Connect or gRPC server (for example,
+// http://api.acme.com or https://acme.com/grpc).
+func NewShowcaseCategoriesServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) ShowcaseCategoriesServiceClient {
+	baseURL = strings.TrimRight(baseURL, "/")
+	showcaseCategoriesServiceMethods := services_providers.File_services_providers_services_providers_proto.Services().ByName("ShowcaseCategoriesService").Methods()
+	return &showcaseCategoriesServiceClient{
+		create: connect.NewClient[services_providers.ShowcaseCategory, services_providers.ShowcaseCategory](
+			httpClient,
+			baseURL+ShowcaseCategoriesServiceCreateProcedure,
+			connect.WithSchema(showcaseCategoriesServiceMethods.ByName("Create")),
+			connect.WithClientOptions(opts...),
+		),
+		delete: connect.NewClient[services_providers.DeleteRequest, services_providers.DeleteResponse](
+			httpClient,
+			baseURL+ShowcaseCategoriesServiceDeleteProcedure,
+			connect.WithSchema(showcaseCategoriesServiceMethods.ByName("Delete")),
+			connect.WithClientOptions(opts...),
+		),
+		update: connect.NewClient[services_providers.ShowcaseCategory, services_providers.ShowcaseCategory](
+			httpClient,
+			baseURL+ShowcaseCategoriesServiceUpdateProcedure,
+			connect.WithSchema(showcaseCategoriesServiceMethods.ByName("Update")),
+			connect.WithClientOptions(opts...),
+		),
+		get: connect.NewClient[services_providers.GetRequest, services_providers.ShowcaseCategory](
+			httpClient,
+			baseURL+ShowcaseCategoriesServiceGetProcedure,
+			connect.WithSchema(showcaseCategoriesServiceMethods.ByName("Get")),
+			connect.WithClientOptions(opts...),
+		),
+		list: connect.NewClient[services_providers.ListRequest, services_providers.ShowcaseCategories](
+			httpClient,
+			baseURL+ShowcaseCategoriesServiceListProcedure,
+			connect.WithSchema(showcaseCategoriesServiceMethods.ByName("List")),
+			connect.WithClientOptions(opts...),
+		),
+	}
+}
+
+// showcaseCategoriesServiceClient implements ShowcaseCategoriesServiceClient.
+type showcaseCategoriesServiceClient struct {
+	create *connect.Client[services_providers.ShowcaseCategory, services_providers.ShowcaseCategory]
+	delete *connect.Client[services_providers.DeleteRequest, services_providers.DeleteResponse]
+	update *connect.Client[services_providers.ShowcaseCategory, services_providers.ShowcaseCategory]
+	get    *connect.Client[services_providers.GetRequest, services_providers.ShowcaseCategory]
+	list   *connect.Client[services_providers.ListRequest, services_providers.ShowcaseCategories]
+}
+
+// Create calls nocloud.services_providers.ShowcaseCategoriesService.Create.
+func (c *showcaseCategoriesServiceClient) Create(ctx context.Context, req *connect.Request[services_providers.ShowcaseCategory]) (*connect.Response[services_providers.ShowcaseCategory], error) {
+	return c.create.CallUnary(ctx, req)
+}
+
+// Delete calls nocloud.services_providers.ShowcaseCategoriesService.Delete.
+func (c *showcaseCategoriesServiceClient) Delete(ctx context.Context, req *connect.Request[services_providers.DeleteRequest]) (*connect.Response[services_providers.DeleteResponse], error) {
+	return c.delete.CallUnary(ctx, req)
+}
+
+// Update calls nocloud.services_providers.ShowcaseCategoriesService.Update.
+func (c *showcaseCategoriesServiceClient) Update(ctx context.Context, req *connect.Request[services_providers.ShowcaseCategory]) (*connect.Response[services_providers.ShowcaseCategory], error) {
+	return c.update.CallUnary(ctx, req)
+}
+
+// Get calls nocloud.services_providers.ShowcaseCategoriesService.Get.
+func (c *showcaseCategoriesServiceClient) Get(ctx context.Context, req *connect.Request[services_providers.GetRequest]) (*connect.Response[services_providers.ShowcaseCategory], error) {
+	return c.get.CallUnary(ctx, req)
+}
+
+// List calls nocloud.services_providers.ShowcaseCategoriesService.List.
+func (c *showcaseCategoriesServiceClient) List(ctx context.Context, req *connect.Request[services_providers.ListRequest]) (*connect.Response[services_providers.ShowcaseCategories], error) {
+	return c.list.CallUnary(ctx, req)
+}
+
+// ShowcaseCategoriesServiceHandler is an implementation of the
+// nocloud.services_providers.ShowcaseCategoriesService service.
+type ShowcaseCategoriesServiceHandler interface {
+	Create(context.Context, *connect.Request[services_providers.ShowcaseCategory]) (*connect.Response[services_providers.ShowcaseCategory], error)
+	Delete(context.Context, *connect.Request[services_providers.DeleteRequest]) (*connect.Response[services_providers.DeleteResponse], error)
+	Update(context.Context, *connect.Request[services_providers.ShowcaseCategory]) (*connect.Response[services_providers.ShowcaseCategory], error)
+	Get(context.Context, *connect.Request[services_providers.GetRequest]) (*connect.Response[services_providers.ShowcaseCategory], error)
+	List(context.Context, *connect.Request[services_providers.ListRequest]) (*connect.Response[services_providers.ShowcaseCategories], error)
+}
+
+// NewShowcaseCategoriesServiceHandler builds an HTTP handler from the service implementation. It
+// returns the path on which to mount the handler and the handler itself.
+//
+// By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
+// and JSON codecs. They also support gzip compression.
+func NewShowcaseCategoriesServiceHandler(svc ShowcaseCategoriesServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	showcaseCategoriesServiceMethods := services_providers.File_services_providers_services_providers_proto.Services().ByName("ShowcaseCategoriesService").Methods()
+	showcaseCategoriesServiceCreateHandler := connect.NewUnaryHandler(
+		ShowcaseCategoriesServiceCreateProcedure,
+		svc.Create,
+		connect.WithSchema(showcaseCategoriesServiceMethods.ByName("Create")),
+		connect.WithHandlerOptions(opts...),
+	)
+	showcaseCategoriesServiceDeleteHandler := connect.NewUnaryHandler(
+		ShowcaseCategoriesServiceDeleteProcedure,
+		svc.Delete,
+		connect.WithSchema(showcaseCategoriesServiceMethods.ByName("Delete")),
+		connect.WithHandlerOptions(opts...),
+	)
+	showcaseCategoriesServiceUpdateHandler := connect.NewUnaryHandler(
+		ShowcaseCategoriesServiceUpdateProcedure,
+		svc.Update,
+		connect.WithSchema(showcaseCategoriesServiceMethods.ByName("Update")),
+		connect.WithHandlerOptions(opts...),
+	)
+	showcaseCategoriesServiceGetHandler := connect.NewUnaryHandler(
+		ShowcaseCategoriesServiceGetProcedure,
+		svc.Get,
+		connect.WithSchema(showcaseCategoriesServiceMethods.ByName("Get")),
+		connect.WithHandlerOptions(opts...),
+	)
+	showcaseCategoriesServiceListHandler := connect.NewUnaryHandler(
+		ShowcaseCategoriesServiceListProcedure,
+		svc.List,
+		connect.WithSchema(showcaseCategoriesServiceMethods.ByName("List")),
+		connect.WithHandlerOptions(opts...),
+	)
+	return "/nocloud.services_providers.ShowcaseCategoriesService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case ShowcaseCategoriesServiceCreateProcedure:
+			showcaseCategoriesServiceCreateHandler.ServeHTTP(w, r)
+		case ShowcaseCategoriesServiceDeleteProcedure:
+			showcaseCategoriesServiceDeleteHandler.ServeHTTP(w, r)
+		case ShowcaseCategoriesServiceUpdateProcedure:
+			showcaseCategoriesServiceUpdateHandler.ServeHTTP(w, r)
+		case ShowcaseCategoriesServiceGetProcedure:
+			showcaseCategoriesServiceGetHandler.ServeHTTP(w, r)
+		case ShowcaseCategoriesServiceListProcedure:
+			showcaseCategoriesServiceListHandler.ServeHTTP(w, r)
+		default:
+			http.NotFound(w, r)
+		}
+	})
+}
+
+// UnimplementedShowcaseCategoriesServiceHandler returns CodeUnimplemented from all methods.
+type UnimplementedShowcaseCategoriesServiceHandler struct{}
+
+func (UnimplementedShowcaseCategoriesServiceHandler) Create(context.Context, *connect.Request[services_providers.ShowcaseCategory]) (*connect.Response[services_providers.ShowcaseCategory], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.services_providers.ShowcaseCategoriesService.Create is not implemented"))
+}
+
+func (UnimplementedShowcaseCategoriesServiceHandler) Delete(context.Context, *connect.Request[services_providers.DeleteRequest]) (*connect.Response[services_providers.DeleteResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.services_providers.ShowcaseCategoriesService.Delete is not implemented"))
+}
+
+func (UnimplementedShowcaseCategoriesServiceHandler) Update(context.Context, *connect.Request[services_providers.ShowcaseCategory]) (*connect.Response[services_providers.ShowcaseCategory], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.services_providers.ShowcaseCategoriesService.Update is not implemented"))
+}
+
+func (UnimplementedShowcaseCategoriesServiceHandler) Get(context.Context, *connect.Request[services_providers.GetRequest]) (*connect.Response[services_providers.ShowcaseCategory], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.services_providers.ShowcaseCategoriesService.Get is not implemented"))
+}
+
+func (UnimplementedShowcaseCategoriesServiceHandler) List(context.Context, *connect.Request[services_providers.ListRequest]) (*connect.Response[services_providers.ShowcaseCategories], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.services_providers.ShowcaseCategoriesService.List is not implemented"))
 }

@@ -50,6 +50,9 @@
       "name": "ShowcasesService"
     },
     {
+      "name": "ShowcaseCategoriesService"
+    },
+    {
       "name": "InstancesService"
     },
     {
@@ -6891,6 +6894,188 @@
         ]
       }
     },
+    "/showcase_categories": {
+      "get": {
+        "operationId": "ShowcaseCategoriesService_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/services_providersShowcaseCategories"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "anonymously",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "showDeleted",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "excludeUuids",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "filters",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "omitPromos",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "tags": [
+          "ShowcaseCategoriesService"
+        ]
+      },
+      "post": {
+        "operationId": "ShowcaseCategoriesService_Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/services_providersShowcaseCategory"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/services_providersShowcaseCategory"
+            }
+          }
+        ],
+        "tags": [
+          "ShowcaseCategoriesService"
+        ]
+      }
+    },
+    "/showcase_categories/{uuid}": {
+      "get": {
+        "operationId": "ShowcaseCategoriesService_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/services_providersShowcaseCategory"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ShowcaseCategoriesService"
+        ]
+      },
+      "delete": {
+        "operationId": "ShowcaseCategoriesService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/nocloudservices_providersDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ShowcaseCategoriesService"
+        ]
+      },
+      "patch": {
+        "operationId": "ShowcaseCategoriesService_Update",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/services_providersShowcaseCategory"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/services_providersShowcaseCategoriesServiceUpdateBody"
+            }
+          }
+        ],
+        "tags": [
+          "ShowcaseCategoriesService"
+        ]
+      }
+    },
     "/showcases": {
       "get": {
         "operationId": "ShowcasesService_List",
@@ -12251,6 +12436,71 @@
         },
         "main": {
           "$ref": "#/definitions/services_providersMain"
+        }
+      }
+    },
+    "services_providersShowcaseCategories": {
+      "type": "object",
+      "properties": {
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/services_providersShowcaseCategory"
+          }
+        }
+      }
+    },
+    "services_providersShowcaseCategoriesServiceUpdateBody": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "sorter": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "promo": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "showcases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "services_providersShowcaseCategory": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "sorter": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "promo": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "showcases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },

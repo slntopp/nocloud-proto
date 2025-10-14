@@ -1024,3 +1024,258 @@ var ShowcasesService_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "services_providers/services_providers.proto",
 }
+
+const (
+	ShowcaseCategoriesService_Create_FullMethodName = "/nocloud.services_providers.ShowcaseCategoriesService/Create"
+	ShowcaseCategoriesService_Delete_FullMethodName = "/nocloud.services_providers.ShowcaseCategoriesService/Delete"
+	ShowcaseCategoriesService_Update_FullMethodName = "/nocloud.services_providers.ShowcaseCategoriesService/Update"
+	ShowcaseCategoriesService_Get_FullMethodName    = "/nocloud.services_providers.ShowcaseCategoriesService/Get"
+	ShowcaseCategoriesService_List_FullMethodName   = "/nocloud.services_providers.ShowcaseCategoriesService/List"
+)
+
+// ShowcaseCategoriesServiceClient is the client API for ShowcaseCategoriesService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ShowcaseCategoriesServiceClient interface {
+	Create(ctx context.Context, in *ShowcaseCategory, opts ...grpc.CallOption) (*ShowcaseCategory, error)
+	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
+	Update(ctx context.Context, in *ShowcaseCategory, opts ...grpc.CallOption) (*ShowcaseCategory, error)
+	Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*ShowcaseCategory, error)
+	List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ShowcaseCategories, error)
+}
+
+type showcaseCategoriesServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewShowcaseCategoriesServiceClient(cc grpc.ClientConnInterface) ShowcaseCategoriesServiceClient {
+	return &showcaseCategoriesServiceClient{cc}
+}
+
+func (c *showcaseCategoriesServiceClient) Create(ctx context.Context, in *ShowcaseCategory, opts ...grpc.CallOption) (*ShowcaseCategory, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ShowcaseCategory)
+	err := c.cc.Invoke(ctx, ShowcaseCategoriesService_Create_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *showcaseCategoriesServiceClient) Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteResponse)
+	err := c.cc.Invoke(ctx, ShowcaseCategoriesService_Delete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *showcaseCategoriesServiceClient) Update(ctx context.Context, in *ShowcaseCategory, opts ...grpc.CallOption) (*ShowcaseCategory, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ShowcaseCategory)
+	err := c.cc.Invoke(ctx, ShowcaseCategoriesService_Update_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *showcaseCategoriesServiceClient) Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*ShowcaseCategory, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ShowcaseCategory)
+	err := c.cc.Invoke(ctx, ShowcaseCategoriesService_Get_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *showcaseCategoriesServiceClient) List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ShowcaseCategories, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ShowcaseCategories)
+	err := c.cc.Invoke(ctx, ShowcaseCategoriesService_List_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ShowcaseCategoriesServiceServer is the server API for ShowcaseCategoriesService service.
+// All implementations must embed UnimplementedShowcaseCategoriesServiceServer
+// for forward compatibility.
+type ShowcaseCategoriesServiceServer interface {
+	Create(context.Context, *ShowcaseCategory) (*ShowcaseCategory, error)
+	Delete(context.Context, *DeleteRequest) (*DeleteResponse, error)
+	Update(context.Context, *ShowcaseCategory) (*ShowcaseCategory, error)
+	Get(context.Context, *GetRequest) (*ShowcaseCategory, error)
+	List(context.Context, *ListRequest) (*ShowcaseCategories, error)
+	mustEmbedUnimplementedShowcaseCategoriesServiceServer()
+}
+
+// UnimplementedShowcaseCategoriesServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedShowcaseCategoriesServiceServer struct{}
+
+func (UnimplementedShowcaseCategoriesServiceServer) Create(context.Context, *ShowcaseCategory) (*ShowcaseCategory, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (UnimplementedShowcaseCategoriesServiceServer) Delete(context.Context, *DeleteRequest) (*DeleteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedShowcaseCategoriesServiceServer) Update(context.Context, *ShowcaseCategory) (*ShowcaseCategory, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (UnimplementedShowcaseCategoriesServiceServer) Get(context.Context, *GetRequest) (*ShowcaseCategory, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedShowcaseCategoriesServiceServer) List(context.Context, *ListRequest) (*ShowcaseCategories, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedShowcaseCategoriesServiceServer) mustEmbedUnimplementedShowcaseCategoriesServiceServer() {
+}
+func (UnimplementedShowcaseCategoriesServiceServer) testEmbeddedByValue() {}
+
+// UnsafeShowcaseCategoriesServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ShowcaseCategoriesServiceServer will
+// result in compilation errors.
+type UnsafeShowcaseCategoriesServiceServer interface {
+	mustEmbedUnimplementedShowcaseCategoriesServiceServer()
+}
+
+func RegisterShowcaseCategoriesServiceServer(s grpc.ServiceRegistrar, srv ShowcaseCategoriesServiceServer) {
+	// If the following call pancis, it indicates UnimplementedShowcaseCategoriesServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&ShowcaseCategoriesService_ServiceDesc, srv)
+}
+
+func _ShowcaseCategoriesService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ShowcaseCategory)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ShowcaseCategoriesServiceServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ShowcaseCategoriesService_Create_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ShowcaseCategoriesServiceServer).Create(ctx, req.(*ShowcaseCategory))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ShowcaseCategoriesService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ShowcaseCategoriesServiceServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ShowcaseCategoriesService_Delete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ShowcaseCategoriesServiceServer).Delete(ctx, req.(*DeleteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ShowcaseCategoriesService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ShowcaseCategory)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ShowcaseCategoriesServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ShowcaseCategoriesService_Update_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ShowcaseCategoriesServiceServer).Update(ctx, req.(*ShowcaseCategory))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ShowcaseCategoriesService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ShowcaseCategoriesServiceServer).Get(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ShowcaseCategoriesService_Get_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ShowcaseCategoriesServiceServer).Get(ctx, req.(*GetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ShowcaseCategoriesService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ShowcaseCategoriesServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ShowcaseCategoriesService_List_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ShowcaseCategoriesServiceServer).List(ctx, req.(*ListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// ShowcaseCategoriesService_ServiceDesc is the grpc.ServiceDesc for ShowcaseCategoriesService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ShowcaseCategoriesService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "nocloud.services_providers.ShowcaseCategoriesService",
+	HandlerType: (*ShowcaseCategoriesServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Create",
+			Handler:    _ShowcaseCategoriesService_Create_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _ShowcaseCategoriesService_Delete_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _ShowcaseCategoriesService_Update_Handler,
+		},
+		{
+			MethodName: "Get",
+			Handler:    _ShowcaseCategoriesService_Get_Handler,
+		},
+		{
+			MethodName: "List",
+			Handler:    _ShowcaseCategoriesService_List_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "services_providers/services_providers.proto",
+}

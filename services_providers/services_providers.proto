@@ -226,6 +226,15 @@ service ServicesProvidersExtentionsService {
   rpc Unregister(ServicesProvidersExtentionData) returns (GenericResponse);
 }
 
+message ShowcaseCategory{
+  string uuid = 1;
+  string title = 2;
+  string type = 3;
+  optional int32 sorter = 4;
+  map<string, google.protobuf.Value> promo = 5;
+  repeated string showcases = 6;
+}
+
 message ShowcaseItem {
   optional string plan = 1;
   string services_provider = 2;
@@ -296,6 +305,10 @@ message Showcases {
   repeated Showcase showcases = 1;
 }
 
+message ShowcaseCategories {
+  repeated ShowcaseCategory categories = 1;
+}
+
 message SuspendRules {
   repeated DaySchedule schedules = 1;
   bool enabled = 2;
@@ -357,6 +370,45 @@ service ShowcasesService {
       returns (nocloud.services_providers.Showcases) {
     option (google.api.http) = {
       get : "/showcases"
+    };
+  };
+}
+
+service ShowcaseCategoriesService {
+  rpc Create(nocloud.services_providers.ShowcaseCategory)
+      returns (nocloud.services_providers.ShowcaseCategory) {
+    option (google.api.http) = {
+      post : "/showcase_categories"
+      body : "*"
+    };
+  };
+
+  rpc Delete(nocloud.services_providers.DeleteRequest)
+      returns (nocloud.services_providers.DeleteResponse) {
+    option (google.api.http) = {
+      delete : "/showcase_categories/{uuid}"
+    };
+  };
+
+  rpc Update(nocloud.services_providers.ShowcaseCategory)
+      returns (nocloud.services_providers.ShowcaseCategory) {
+    option (google.api.http) = {
+      patch : "/showcase_categories/{uuid}"
+      body : "*"
+    };
+  };
+
+  rpc Get(nocloud.services_providers.GetRequest)
+      returns (nocloud.services_providers.ShowcaseCategory) {
+    option (google.api.http) = {
+      get : "/showcase_categories/{uuid}"
+    };
+  };
+
+  rpc List(nocloud.services_providers.ListRequest)
+      returns (nocloud.services_providers.ShowcaseCategories) {
+    option (google.api.http) = {
+      get : "/showcase_categories"
     };
   };
 }
