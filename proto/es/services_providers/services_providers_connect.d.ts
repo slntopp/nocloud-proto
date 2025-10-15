@@ -18,7 +18,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { BindPlanRequest, BindPlanResponse, DeleteRequest, DeleteResponse, GenericResponse, GetRequest, GetTypeRequest, GetTypeResponse, InvokeRequest, InvokeResponse, ListExtentionsResponse, ListRequest, ListResponse, PrepSP, ServicesProvider, ServicesProvidersExtentionData, Showcase, Showcases, TestResponse, UnbindPlanRequest, UnbindPlanResponse } from "./services_providers_pb.js";
+import { BindPlanRequest, BindPlanResponse, DeleteRequest, DeleteResponse, GenericResponse, GetRequest, GetTypeRequest, GetTypeResponse, InvokeRequest, InvokeResponse, ListExtentionsResponse, ListRequest, ListResponse, PrepSP, ServicesProvider, ServicesProvidersExtentionData, Showcase, ShowcaseCategories, ShowcaseCategory, Showcases, TestResponse, UnbindPlanRequest, UnbindPlanResponse } from "./services_providers_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -232,6 +232,60 @@ export declare const ShowcasesService: {
       readonly name: "List",
       readonly I: typeof ListRequest,
       readonly O: typeof Showcases,
+      readonly kind: MethodKind.Unary,
+    },
+  }
+};
+
+/**
+ * @generated from service nocloud.services_providers.ShowcaseCategoriesService
+ */
+export declare const ShowcaseCategoriesService: {
+  readonly typeName: "nocloud.services_providers.ShowcaseCategoriesService",
+  readonly methods: {
+    /**
+     * @generated from rpc nocloud.services_providers.ShowcaseCategoriesService.Create
+     */
+    readonly create: {
+      readonly name: "Create",
+      readonly I: typeof ShowcaseCategory,
+      readonly O: typeof ShowcaseCategory,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.services_providers.ShowcaseCategoriesService.Delete
+     */
+    readonly delete: {
+      readonly name: "Delete",
+      readonly I: typeof DeleteRequest,
+      readonly O: typeof DeleteResponse,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.services_providers.ShowcaseCategoriesService.Update
+     */
+    readonly update: {
+      readonly name: "Update",
+      readonly I: typeof ShowcaseCategory,
+      readonly O: typeof ShowcaseCategory,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.services_providers.ShowcaseCategoriesService.Get
+     */
+    readonly get: {
+      readonly name: "Get",
+      readonly I: typeof GetRequest,
+      readonly O: typeof ShowcaseCategory,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.services_providers.ShowcaseCategoriesService.List
+     */
+    readonly list: {
+      readonly name: "List",
+      readonly I: typeof ListRequest,
+      readonly O: typeof ShowcaseCategories,
       readonly kind: MethodKind.Unary,
     },
   }

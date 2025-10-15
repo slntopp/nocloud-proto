@@ -790,6 +790,60 @@ export declare class GenericResponse extends Message<GenericResponse> {
 }
 
 /**
+ * @generated from message nocloud.services_providers.ShowcaseCategory
+ */
+export declare class ShowcaseCategory extends Message<ShowcaseCategory> {
+  /**
+   * @generated from field: string uuid = 1;
+   */
+  uuid: string;
+
+  /**
+   * @generated from field: string title = 2;
+   */
+  title: string;
+
+  /**
+   * @generated from field: string type = 3;
+   */
+  type: string;
+
+  /**
+   * @generated from field: optional int32 sorter = 4;
+   */
+  sorter?: number;
+
+  /**
+   * @generated from field: map<string, google.protobuf.Value> promo = 5;
+   */
+  promo: { [key: string]: Value };
+
+  /**
+   * @generated from field: repeated string showcases = 6;
+   */
+  showcases: string[];
+
+  /**
+   * @generated from field: bool public = 7;
+   */
+  public: boolean;
+
+  constructor(data?: PartialMessage<ShowcaseCategory>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.services_providers.ShowcaseCategory";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ShowcaseCategory;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ShowcaseCategory;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ShowcaseCategory;
+
+  static equals(a: ShowcaseCategory | PlainMessage<ShowcaseCategory> | undefined, b: ShowcaseCategory | PlainMessage<ShowcaseCategory> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.services_providers.ShowcaseItem
  */
 export declare class ShowcaseItem extends Message<ShowcaseItem> {
@@ -1169,6 +1223,30 @@ export declare class Showcases extends Message<Showcases> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Showcases;
 
   static equals(a: Showcases | PlainMessage<Showcases> | undefined, b: Showcases | PlainMessage<Showcases> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.services_providers.ShowcaseCategories
+ */
+export declare class ShowcaseCategories extends Message<ShowcaseCategories> {
+  /**
+   * @generated from field: repeated nocloud.services_providers.ShowcaseCategory categories = 1;
+   */
+  categories: ShowcaseCategory[];
+
+  constructor(data?: PartialMessage<ShowcaseCategories>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.services_providers.ShowcaseCategories";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ShowcaseCategories;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ShowcaseCategories;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ShowcaseCategories;
+
+  static equals(a: ShowcaseCategories | PlainMessage<ShowcaseCategories> | undefined, b: ShowcaseCategories | PlainMessage<ShowcaseCategories> | undefined): boolean;
 }
 
 /**

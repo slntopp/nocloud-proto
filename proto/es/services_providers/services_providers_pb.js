@@ -300,6 +300,22 @@ export const GenericResponse = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * @generated from message nocloud.services_providers.ShowcaseCategory
+ */
+export const ShowcaseCategory = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.services_providers.ShowcaseCategory",
+  () => [
+    { no: 1, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "type", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "sorter", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
+    { no: 5, name: "promo", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
+    { no: 6, name: "showcases", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 7, name: "public", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
  * @generated from message nocloud.services_providers.ShowcaseItem
  */
 export const ShowcaseItem = /*@__PURE__*/ proto3.makeMessageType(
@@ -426,6 +442,16 @@ export const Showcases = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.services_providers.Showcases",
   () => [
     { no: 1, name: "showcases", kind: "message", T: Showcase, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message nocloud.services_providers.ShowcaseCategories
+ */
+export const ShowcaseCategories = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.services_providers.ShowcaseCategories",
+  () => [
+    { no: 1, name: "categories", kind: "message", T: ShowcaseCategory, repeated: true },
   ],
 );
 

@@ -18,7 +18,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { BindPlanRequest, BindPlanResponse, DeleteRequest, DeleteResponse, GenericResponse, GetRequest, GetTypeRequest, GetTypeResponse, InvokeRequest, InvokeResponse, ListExtentionsResponse, ListRequest, ListResponse, PrepSP, ServicesProvider, ServicesProvidersExtentionData, Showcase, Showcases, TestResponse, UnbindPlanRequest, UnbindPlanResponse } from "./services_providers_pb.js";
+import { BindPlanRequest, BindPlanResponse, DeleteRequest, DeleteResponse, GenericResponse, GetRequest, GetTypeRequest, GetTypeResponse, InvokeRequest, InvokeResponse, ListExtentionsResponse, ListRequest, ListResponse, PrepSP, ServicesProvider, ServicesProvidersExtentionData, Showcase, ShowcaseCategories, ShowcaseCategory, Showcases, TestResponse, UnbindPlanRequest, UnbindPlanResponse } from "./services_providers_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -232,6 +232,60 @@ export const ShowcasesService = {
       name: "List",
       I: ListRequest,
       O: Showcases,
+      kind: MethodKind.Unary,
+    },
+  }
+};
+
+/**
+ * @generated from service nocloud.services_providers.ShowcaseCategoriesService
+ */
+export const ShowcaseCategoriesService = {
+  typeName: "nocloud.services_providers.ShowcaseCategoriesService",
+  methods: {
+    /**
+     * @generated from rpc nocloud.services_providers.ShowcaseCategoriesService.Create
+     */
+    create: {
+      name: "Create",
+      I: ShowcaseCategory,
+      O: ShowcaseCategory,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.services_providers.ShowcaseCategoriesService.Delete
+     */
+    delete: {
+      name: "Delete",
+      I: DeleteRequest,
+      O: DeleteResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.services_providers.ShowcaseCategoriesService.Update
+     */
+    update: {
+      name: "Update",
+      I: ShowcaseCategory,
+      O: ShowcaseCategory,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.services_providers.ShowcaseCategoriesService.Get
+     */
+    get: {
+      name: "Get",
+      I: GetRequest,
+      O: ShowcaseCategory,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.services_providers.ShowcaseCategoriesService.List
+     */
+    list: {
+      name: "List",
+      I: ListRequest,
+      O: ShowcaseCategories,
       kind: MethodKind.Unary,
     },
   }
