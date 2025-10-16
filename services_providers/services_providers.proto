@@ -229,7 +229,7 @@ service ServicesProvidersExtentionsService {
 message ShowcaseCategory{
   string uuid = 1;
   string title = 2;
-  string type = 3;
+  repeated string type = 3;
   optional int32 sorter = 4;
   map<string, google.protobuf.Value> promo = 5;
   repeated string showcases = 6;

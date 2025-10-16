@@ -307,7 +307,7 @@ export const ShowcaseCategory = /*@__PURE__*/ proto3.makeMessageType(
   () => [
     { no: 1, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "type", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "type", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 4, name: "sorter", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
     { no: 5, name: "promo", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Value} },
     { no: 6, name: "showcases", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },

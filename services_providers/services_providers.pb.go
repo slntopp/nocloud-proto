@@ -1382,7 +1382,7 @@ type ShowcaseCategory struct {
 	state         protoimpl.MessageState     `protogen:"open.v1"`
 	Uuid          string                     `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
 	Title         string                     `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
-	Type          string                     `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	Type          []string                   `protobuf:"bytes,3,rep,name=type,proto3" json:"type,omitempty"`
 	Sorter        *int32                     `protobuf:"varint,4,opt,name=sorter,proto3,oneof" json:"sorter,omitempty"`
 	Promo         map[string]*structpb.Value `protobuf:"bytes,5,rep,name=promo,proto3" json:"promo,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	Showcases     []string                   `protobuf:"bytes,6,rep,name=showcases,proto3" json:"showcases,omitempty"`
@@ -1435,11 +1435,11 @@ func (x *ShowcaseCategory) GetTitle() string {
 	return ""
 }
 
-func (x *ShowcaseCategory) GetType() string {
+func (x *ShowcaseCategory) GetType() []string {
 	if x != nil {
 		return x.Type
 	}
-	return ""
+	return nil
 }
 
 func (x *ShowcaseCategory) GetSorter() int32 {
@@ -2536,7 +2536,7 @@ const file_services_providers_services_providers_proto_rawDesc = "" +
 	"\x10ShowcaseCategory\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x12\n" +
-	"\x04type\x18\x03 \x01(\tR\x04type\x12\x1b\n" +
+	"\x04type\x18\x03 \x03(\tR\x04type\x12\x1b\n" +
 	"\x06sorter\x18\x04 \x01(\x05H\x00R\x06sorter\x88\x01\x01\x12M\n" +
 	"\x05promo\x18\x05 \x03(\v27.nocloud.services_providers.ShowcaseCategory.PromoEntryR\x05promo\x12\x1c\n" +
 	"\tshowcases\x18\x06 \x03(\tR\tshowcases\x12\x16\n" +

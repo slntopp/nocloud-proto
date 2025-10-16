@@ -804,9 +804,9 @@ export declare class ShowcaseCategory extends Message<ShowcaseCategory> {
   title: string;
 
   /**
-   * @generated from field: string type = 3;
+   * @generated from field: repeated string type = 3;
    */
-  type: string;
+  type: string[];
 
   /**
    * @generated from field: optional int32 sorter = 4;

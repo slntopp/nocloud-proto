@@ -12458,7 +12458,10 @@
           "type": "string"
         },
         "type": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "sorter": {
           "type": "integer",
@@ -12489,7 +12492,10 @@
           "type": "string"
         },
         "type": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "sorter": {
           "type": "integer",
