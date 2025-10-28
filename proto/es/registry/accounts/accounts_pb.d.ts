@@ -45,6 +45,45 @@ export declare enum AccountStatus {
 }
 
 /**
+ * @generated from message nocloud.registry.accounts.AccountGroup
+ */
+export declare class AccountGroup extends Message<AccountGroup> {
+  /**
+   * @generated from field: string uuid = 1;
+   */
+  uuid: string;
+
+  /**
+   * @generated from field: string title = 2;
+   */
+  title: string;
+
+  /**
+   * @generated from field: string color = 3;
+   */
+  color: string;
+
+  /**
+   * @generated from field: bool has_own_invoice_order = 5;
+   */
+  hasOwnInvoiceOrder: boolean;
+
+  constructor(data?: PartialMessage<AccountGroup>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.AccountGroup";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AccountGroup;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AccountGroup;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AccountGroup;
+
+  static equals(a: AccountGroup | PlainMessage<AccountGroup> | undefined, b: AccountGroup | PlainMessage<AccountGroup> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.registry.accounts.Credentials
  */
 export declare class Credentials extends Message<Credentials> {
@@ -325,6 +364,11 @@ export declare class Account extends Message<Account> {
    * @generated from field: string language_code = 18;
    */
   languageCode: string;
+
+  /**
+   * @generated from field: string account_group = 19;
+   */
+  accountGroup: string;
 
   constructor(data?: PartialMessage<Account>);
 
@@ -971,5 +1015,34 @@ export declare class ChangeLanguageCodeResponse extends Message<ChangeLanguageCo
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ChangeLanguageCodeResponse;
 
   static equals(a: ChangeLanguageCodeResponse | PlainMessage<ChangeLanguageCodeResponse> | undefined, b: ChangeLanguageCodeResponse | PlainMessage<ChangeLanguageCodeResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.registry.accounts.AccountGroupsListResponse
+ */
+export declare class AccountGroupsListResponse extends Message<AccountGroupsListResponse> {
+  /**
+   * @generated from field: repeated nocloud.registry.accounts.AccountGroup pool = 1;
+   */
+  pool: AccountGroup[];
+
+  /**
+   * @generated from field: int64 count = 2;
+   */
+  count: bigint;
+
+  constructor(data?: PartialMessage<AccountGroupsListResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.AccountGroupsListResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AccountGroupsListResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AccountGroupsListResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AccountGroupsListResponse;
+
+  static equals(a: AccountGroupsListResponse | PlainMessage<AccountGroupsListResponse> | undefined, b: AccountGroupsListResponse | PlainMessage<AccountGroupsListResponse> | undefined): boolean;
 }
 

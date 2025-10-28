@@ -18,7 +18,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { Account, ChangeLanguageCodeRequest, ChangeLanguageCodeResponse, ChangePhoneRequest, ChangePhoneResponse, CreateRequest, CreateResponse, DeleteRequest, DeleteResponse, GetRequest, ListRequest, ListResponse, SetCredentialsRequest, SetCredentialsResponse, SuspendRequest, SuspendResponse, TokenRequest, TokenResponse, UnsuspendRequest, UnsuspendResponse, UpdateResponse } from "./accounts/accounts_pb.js";
+import { Account, AccountGroup, AccountGroupsListResponse, ChangeLanguageCodeRequest, ChangeLanguageCodeResponse, ChangePhoneRequest, ChangePhoneResponse, CreateRequest, CreateResponse, DeleteRequest, DeleteResponse, GetRequest, ListRequest, ListResponse, SetCredentialsRequest, SetCredentialsResponse, SuspendRequest, SuspendResponse, TokenRequest, TokenResponse, UnsuspendRequest, UnsuspendResponse, UpdateResponse } from "./accounts/accounts_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 import { AddNoteRequest, NoteResponse, PatchNoteRequest, RemoveNoteRequest } from "../notes/notes_pb.js";
 import { VerificationRequest, VerificationResponse } from "./registry_pb.js";
@@ -244,6 +244,60 @@ export declare const NamespacesService: {
       readonly name: "Patch",
       readonly I: typeof PatchRequest,
       readonly O: typeof PatchResponse,
+      readonly kind: MethodKind.Unary,
+    },
+  }
+};
+
+/**
+ * @generated from service nocloud.registry.AccountGroupsService
+ */
+export declare const AccountGroupsService: {
+  readonly typeName: "nocloud.registry.AccountGroupsService",
+  readonly methods: {
+    /**
+     * @generated from rpc nocloud.registry.AccountGroupsService.Create
+     */
+    readonly create: {
+      readonly name: "Create",
+      readonly I: typeof AccountGroup,
+      readonly O: typeof AccountGroup,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.registry.AccountGroupsService.Delete
+     */
+    readonly delete: {
+      readonly name: "Delete",
+      readonly I: typeof DeleteRequest,
+      readonly O: typeof DeleteResponse,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.registry.AccountGroupsService.Update
+     */
+    readonly update: {
+      readonly name: "Update",
+      readonly I: typeof AccountGroup,
+      readonly O: typeof AccountGroup,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.registry.AccountGroupsService.Get
+     */
+    readonly get: {
+      readonly name: "Get",
+      readonly I: typeof GetRequest,
+      readonly O: typeof AccountGroup,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.registry.AccountGroupsService.List
+     */
+    readonly list: {
+      readonly name: "List",
+      readonly I: typeof ListRequest,
+      readonly O: typeof AccountGroupsListResponse,
       readonly kind: MethodKind.Unary,
     },
   }

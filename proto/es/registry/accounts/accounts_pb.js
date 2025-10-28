@@ -36,6 +36,19 @@ export const AccountStatus = /*@__PURE__*/ proto3.makeEnum(
 );
 
 /**
+ * @generated from message nocloud.registry.accounts.AccountGroup
+ */
+export const AccountGroup = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.AccountGroup",
+  () => [
+    { no: 1, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "color", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "has_own_invoice_order", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
  * @generated from message nocloud.registry.accounts.Credentials
  */
 export const Credentials = /*@__PURE__*/ proto3.makeMessageType(
@@ -119,6 +132,7 @@ export const Account = /*@__PURE__*/ proto3.makeMessageType(
     { no: 16, name: "is_phone_verified", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 17, name: "meta", kind: "message", T: AccountMeta },
     { no: 18, name: "language_code", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 19, name: "account_group", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -359,5 +373,16 @@ export const ChangeLanguageCodeRequest = /*@__PURE__*/ proto3.makeMessageType(
 export const ChangeLanguageCodeResponse = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.registry.accounts.ChangeLanguageCodeResponse",
   [],
+);
+
+/**
+ * @generated from message nocloud.registry.accounts.AccountGroupsListResponse
+ */
+export const AccountGroupsListResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.AccountGroupsListResponse",
+  () => [
+    { no: 1, name: "pool", kind: "message", T: AccountGroup, repeated: true },
+    { no: 2, name: "count", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
 );
 

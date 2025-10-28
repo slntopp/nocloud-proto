@@ -43,6 +43,8 @@ const (
 	AccountsServiceName = "nocloud.registry.AccountsService"
 	// NamespacesServiceName is the fully-qualified name of the NamespacesService service.
 	NamespacesServiceName = "nocloud.registry.NamespacesService"
+	// AccountGroupsServiceName is the fully-qualified name of the AccountGroupsService service.
+	AccountGroupsServiceName = "nocloud.registry.AccountGroupsService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -107,6 +109,21 @@ const (
 	NamespacesServiceDeleteProcedure = "/nocloud.registry.NamespacesService/Delete"
 	// NamespacesServicePatchProcedure is the fully-qualified name of the NamespacesService's Patch RPC.
 	NamespacesServicePatchProcedure = "/nocloud.registry.NamespacesService/Patch"
+	// AccountGroupsServiceCreateProcedure is the fully-qualified name of the AccountGroupsService's
+	// Create RPC.
+	AccountGroupsServiceCreateProcedure = "/nocloud.registry.AccountGroupsService/Create"
+	// AccountGroupsServiceDeleteProcedure is the fully-qualified name of the AccountGroupsService's
+	// Delete RPC.
+	AccountGroupsServiceDeleteProcedure = "/nocloud.registry.AccountGroupsService/Delete"
+	// AccountGroupsServiceUpdateProcedure is the fully-qualified name of the AccountGroupsService's
+	// Update RPC.
+	AccountGroupsServiceUpdateProcedure = "/nocloud.registry.AccountGroupsService/Update"
+	// AccountGroupsServiceGetProcedure is the fully-qualified name of the AccountGroupsService's Get
+	// RPC.
+	AccountGroupsServiceGetProcedure = "/nocloud.registry.AccountGroupsService/Get"
+	// AccountGroupsServiceListProcedure is the fully-qualified name of the AccountGroupsService's List
+	// RPC.
+	AccountGroupsServiceListProcedure = "/nocloud.registry.AccountGroupsService/List"
 )
 
 // AccountsServiceClient is a client for the nocloud.registry.AccountsService service.
@@ -793,4 +810,179 @@ func (UnimplementedNamespacesServiceHandler) Delete(context.Context, *connect.Re
 
 func (UnimplementedNamespacesServiceHandler) Patch(context.Context, *connect.Request[namespaces.PatchRequest]) (*connect.Response[namespaces.PatchResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.registry.NamespacesService.Patch is not implemented"))
+}
+
+// AccountGroupsServiceClient is a client for the nocloud.registry.AccountGroupsService service.
+type AccountGroupsServiceClient interface {
+	Create(context.Context, *connect.Request[accounts.AccountGroup]) (*connect.Response[accounts.AccountGroup], error)
+	Delete(context.Context, *connect.Request[accounts.DeleteRequest]) (*connect.Response[accounts.DeleteResponse], error)
+	Update(context.Context, *connect.Request[accounts.AccountGroup]) (*connect.Response[accounts.AccountGroup], error)
+	Get(context.Context, *connect.Request[accounts.GetRequest]) (*connect.Response[accounts.AccountGroup], error)
+	List(context.Context, *connect.Request[accounts.ListRequest]) (*connect.Response[accounts.AccountGroupsListResponse], error)
+}
+
+// NewAccountGroupsServiceClient constructs a client for the nocloud.registry.AccountGroupsService
+// service. By default, it uses the Connect protocol with the binary Protobuf Codec, asks for
+// gzipped responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply
+// the connect.WithGRPC() or connect.WithGRPCWeb() options.
+//
+// The URL supplied here should be the base URL for the Connect or gRPC server (for example,
+// http://api.acme.com or https://acme.com/grpc).
+func NewAccountGroupsServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) AccountGroupsServiceClient {
+	baseURL = strings.TrimRight(baseURL, "/")
+	accountGroupsServiceMethods := registry.File_registry_registry_proto.Services().ByName("AccountGroupsService").Methods()
+	return &accountGroupsServiceClient{
+		create: connect.NewClient[accounts.AccountGroup, accounts.AccountGroup](
+			httpClient,
+			baseURL+AccountGroupsServiceCreateProcedure,
+			connect.WithSchema(accountGroupsServiceMethods.ByName("Create")),
+			connect.WithClientOptions(opts...),
+		),
+		delete: connect.NewClient[accounts.DeleteRequest, accounts.DeleteResponse](
+			httpClient,
+			baseURL+AccountGroupsServiceDeleteProcedure,
+			connect.WithSchema(accountGroupsServiceMethods.ByName("Delete")),
+			connect.WithClientOptions(opts...),
+		),
+		update: connect.NewClient[accounts.AccountGroup, accounts.AccountGroup](
+			httpClient,
+			baseURL+AccountGroupsServiceUpdateProcedure,
+			connect.WithSchema(accountGroupsServiceMethods.ByName("Update")),
+			connect.WithClientOptions(opts...),
+		),
+		get: connect.NewClient[accounts.GetRequest, accounts.AccountGroup](
+			httpClient,
+			baseURL+AccountGroupsServiceGetProcedure,
+			connect.WithSchema(accountGroupsServiceMethods.ByName("Get")),
+			connect.WithClientOptions(opts...),
+		),
+		list: connect.NewClient[accounts.ListRequest, accounts.AccountGroupsListResponse](
+			httpClient,
+			baseURL+AccountGroupsServiceListProcedure,
+			connect.WithSchema(accountGroupsServiceMethods.ByName("List")),
+			connect.WithClientOptions(opts...),
+		),
+	}
+}
+
+// accountGroupsServiceClient implements AccountGroupsServiceClient.
+type accountGroupsServiceClient struct {
+	create *connect.Client[accounts.AccountGroup, accounts.AccountGroup]
+	delete *connect.Client[accounts.DeleteRequest, accounts.DeleteResponse]
+	update *connect.Client[accounts.AccountGroup, accounts.AccountGroup]
+	get    *connect.Client[accounts.GetRequest, accounts.AccountGroup]
+	list   *connect.Client[accounts.ListRequest, accounts.AccountGroupsListResponse]
+}
+
+// Create calls nocloud.registry.AccountGroupsService.Create.
+func (c *accountGroupsServiceClient) Create(ctx context.Context, req *connect.Request[accounts.AccountGroup]) (*connect.Response[accounts.AccountGroup], error) {
+	return c.create.CallUnary(ctx, req)
+}
+
+// Delete calls nocloud.registry.AccountGroupsService.Delete.
+func (c *accountGroupsServiceClient) Delete(ctx context.Context, req *connect.Request[accounts.DeleteRequest]) (*connect.Response[accounts.DeleteResponse], error) {
+	return c.delete.CallUnary(ctx, req)
+}
+
+// Update calls nocloud.registry.AccountGroupsService.Update.
+func (c *accountGroupsServiceClient) Update(ctx context.Context, req *connect.Request[accounts.AccountGroup]) (*connect.Response[accounts.AccountGroup], error) {
+	return c.update.CallUnary(ctx, req)
+}
+
+// Get calls nocloud.registry.AccountGroupsService.Get.
+func (c *accountGroupsServiceClient) Get(ctx context.Context, req *connect.Request[accounts.GetRequest]) (*connect.Response[accounts.AccountGroup], error) {
+	return c.get.CallUnary(ctx, req)
+}
+
+// List calls nocloud.registry.AccountGroupsService.List.
+func (c *accountGroupsServiceClient) List(ctx context.Context, req *connect.Request[accounts.ListRequest]) (*connect.Response[accounts.AccountGroupsListResponse], error) {
+	return c.list.CallUnary(ctx, req)
+}
+
+// AccountGroupsServiceHandler is an implementation of the nocloud.registry.AccountGroupsService
+// service.
+type AccountGroupsServiceHandler interface {
+	Create(context.Context, *connect.Request[accounts.AccountGroup]) (*connect.Response[accounts.AccountGroup], error)
+	Delete(context.Context, *connect.Request[accounts.DeleteRequest]) (*connect.Response[accounts.DeleteResponse], error)
+	Update(context.Context, *connect.Request[accounts.AccountGroup]) (*connect.Response[accounts.AccountGroup], error)
+	Get(context.Context, *connect.Request[accounts.GetRequest]) (*connect.Response[accounts.AccountGroup], error)
+	List(context.Context, *connect.Request[accounts.ListRequest]) (*connect.Response[accounts.AccountGroupsListResponse], error)
+}
+
+// NewAccountGroupsServiceHandler builds an HTTP handler from the service implementation. It returns
+// the path on which to mount the handler and the handler itself.
+//
+// By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
+// and JSON codecs. They also support gzip compression.
+func NewAccountGroupsServiceHandler(svc AccountGroupsServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	accountGroupsServiceMethods := registry.File_registry_registry_proto.Services().ByName("AccountGroupsService").Methods()
+	accountGroupsServiceCreateHandler := connect.NewUnaryHandler(
+		AccountGroupsServiceCreateProcedure,
+		svc.Create,
+		connect.WithSchema(accountGroupsServiceMethods.ByName("Create")),
+		connect.WithHandlerOptions(opts...),
+	)
+	accountGroupsServiceDeleteHandler := connect.NewUnaryHandler(
+		AccountGroupsServiceDeleteProcedure,
+		svc.Delete,
+		connect.WithSchema(accountGroupsServiceMethods.ByName("Delete")),
+		connect.WithHandlerOptions(opts...),
+	)
+	accountGroupsServiceUpdateHandler := connect.NewUnaryHandler(
+		AccountGroupsServiceUpdateProcedure,
+		svc.Update,
+		connect.WithSchema(accountGroupsServiceMethods.ByName("Update")),
+		connect.WithHandlerOptions(opts...),
+	)
+	accountGroupsServiceGetHandler := connect.NewUnaryHandler(
+		AccountGroupsServiceGetProcedure,
+		svc.Get,
+		connect.WithSchema(accountGroupsServiceMethods.ByName("Get")),
+		connect.WithHandlerOptions(opts...),
+	)
+	accountGroupsServiceListHandler := connect.NewUnaryHandler(
+		AccountGroupsServiceListProcedure,
+		svc.List,
+		connect.WithSchema(accountGroupsServiceMethods.ByName("List")),
+		connect.WithHandlerOptions(opts...),
+	)
+	return "/nocloud.registry.AccountGroupsService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case AccountGroupsServiceCreateProcedure:
+			accountGroupsServiceCreateHandler.ServeHTTP(w, r)
+		case AccountGroupsServiceDeleteProcedure:
+			accountGroupsServiceDeleteHandler.ServeHTTP(w, r)
+		case AccountGroupsServiceUpdateProcedure:
+			accountGroupsServiceUpdateHandler.ServeHTTP(w, r)
+		case AccountGroupsServiceGetProcedure:
+			accountGroupsServiceGetHandler.ServeHTTP(w, r)
+		case AccountGroupsServiceListProcedure:
+			accountGroupsServiceListHandler.ServeHTTP(w, r)
+		default:
+			http.NotFound(w, r)
+		}
+	})
+}
+
+// UnimplementedAccountGroupsServiceHandler returns CodeUnimplemented from all methods.
+type UnimplementedAccountGroupsServiceHandler struct{}
+
+func (UnimplementedAccountGroupsServiceHandler) Create(context.Context, *connect.Request[accounts.AccountGroup]) (*connect.Response[accounts.AccountGroup], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.registry.AccountGroupsService.Create is not implemented"))
+}
+
+func (UnimplementedAccountGroupsServiceHandler) Delete(context.Context, *connect.Request[accounts.DeleteRequest]) (*connect.Response[accounts.DeleteResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.registry.AccountGroupsService.Delete is not implemented"))
+}
+
+func (UnimplementedAccountGroupsServiceHandler) Update(context.Context, *connect.Request[accounts.AccountGroup]) (*connect.Response[accounts.AccountGroup], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.registry.AccountGroupsService.Update is not implemented"))
+}
+
+func (UnimplementedAccountGroupsServiceHandler) Get(context.Context, *connect.Request[accounts.GetRequest]) (*connect.Response[accounts.AccountGroup], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.registry.AccountGroupsService.Get is not implemented"))
+}
+
+func (UnimplementedAccountGroupsServiceHandler) List(context.Context, *connect.Request[accounts.ListRequest]) (*connect.Response[accounts.AccountGroupsListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.registry.AccountGroupsService.List is not implemented"))
 }

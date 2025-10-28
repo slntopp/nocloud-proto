@@ -202,3 +202,42 @@ service NamespacesService {
     };
   };
 }
+
+service AccountGroupsService {
+  rpc Create(nocloud.registry.accounts.AccountGroup)
+      returns (nocloud.registry.accounts.AccountGroup) {
+    option (google.api.http) = {
+      post : "/account_groups"
+      body : "*"
+    };
+  };
+
+  rpc Delete(nocloud.registry.accounts.DeleteRequest)
+      returns (nocloud.registry.accounts.DeleteResponse) {
+    option (google.api.http) = {
+      delete : "/account_groups/{uuid}"
+    };
+  };
+
+  rpc Update(nocloud.registry.accounts.AccountGroup)
+      returns (nocloud.registry.accounts.AccountGroup) {
+    option (google.api.http) = {
+      patch : "/account_groups/{uuid}"
+      body : "*"
+    };
+  };
+
+  rpc Get(nocloud.registry.accounts.GetRequest)
+      returns (nocloud.registry.accounts.AccountGroup) {
+    option (google.api.http) = {
+      get : "/account_groups/{uuid}"
+    };
+  };
+
+  rpc List(nocloud.registry.accounts.ListRequest)
+      returns (nocloud.registry.accounts.AccountGroupsListResponse) {
+    option (google.api.http) = {
+      get : "/account_groups"
+    };
+  };
+}

@@ -22,6 +22,13 @@ import "billing/billing.proto";
 import "google/protobuf/struct.proto";
 import "notes/notes.proto";
 
+message AccountGroup{
+  string uuid = 1;
+  string title = 2;
+  string color = 3;
+  bool   has_own_invoice_order = 5;
+}
+
 message Credentials {
   string type = 1;
   repeated string data = 2;
@@ -84,6 +91,8 @@ message Account {
   AccountMeta meta = 17;
 
   string language_code = 18;
+
+  string account_group = 19;
 }
 
 message AccountMeta {
@@ -171,3 +180,8 @@ message ChangeLanguageCodeRequest {
 }
 
 message ChangeLanguageCodeResponse {}
+
+message AccountGroupsListResponse {
+  repeated AccountGroup pool = 1;
+  int64 count = 2;
+}

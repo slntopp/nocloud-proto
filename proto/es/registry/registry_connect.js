@@ -18,7 +18,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { Account, ChangeLanguageCodeRequest, ChangeLanguageCodeResponse, ChangePhoneRequest, ChangePhoneResponse, CreateRequest, CreateResponse, DeleteRequest, DeleteResponse, GetRequest, ListRequest, ListResponse, SetCredentialsRequest, SetCredentialsResponse, SuspendRequest, SuspendResponse, TokenRequest, TokenResponse, UnsuspendRequest, UnsuspendResponse, UpdateResponse } from "./accounts/accounts_pb.js";
+import { Account, AccountGroup, AccountGroupsListResponse, ChangeLanguageCodeRequest, ChangeLanguageCodeResponse, ChangePhoneRequest, ChangePhoneResponse, CreateRequest, CreateResponse, DeleteRequest, DeleteResponse, GetRequest, ListRequest, ListResponse, SetCredentialsRequest, SetCredentialsResponse, SuspendRequest, SuspendResponse, TokenRequest, TokenResponse, UnsuspendRequest, UnsuspendResponse, UpdateResponse } from "./accounts/accounts_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 import { AddNoteRequest, NoteResponse, PatchNoteRequest, RemoveNoteRequest } from "../notes/notes_pb.js";
 import { VerificationRequest, VerificationResponse } from "./registry_pb.js";
@@ -244,6 +244,60 @@ export const NamespacesService = {
       name: "Patch",
       I: PatchRequest,
       O: PatchResponse,
+      kind: MethodKind.Unary,
+    },
+  }
+};
+
+/**
+ * @generated from service nocloud.registry.AccountGroupsService
+ */
+export const AccountGroupsService = {
+  typeName: "nocloud.registry.AccountGroupsService",
+  methods: {
+    /**
+     * @generated from rpc nocloud.registry.AccountGroupsService.Create
+     */
+    create: {
+      name: "Create",
+      I: AccountGroup,
+      O: AccountGroup,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.registry.AccountGroupsService.Delete
+     */
+    delete: {
+      name: "Delete",
+      I: DeleteRequest,
+      O: DeleteResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.registry.AccountGroupsService.Update
+     */
+    update: {
+      name: "Update",
+      I: AccountGroup,
+      O: AccountGroup,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.registry.AccountGroupsService.Get
+     */
+    get: {
+      name: "Get",
+      I: GetRequest,
+      O: AccountGroup,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.registry.AccountGroupsService.List
+     */
+    list: {
+      name: "List",
+      I: ListRequest,
+      O: AccountGroupsListResponse,
       kind: MethodKind.Unary,
     },
   }

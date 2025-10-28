@@ -1037,3 +1037,257 @@ var NamespacesService_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "registry/registry.proto",
 }
+
+const (
+	AccountGroupsService_Create_FullMethodName = "/nocloud.registry.AccountGroupsService/Create"
+	AccountGroupsService_Delete_FullMethodName = "/nocloud.registry.AccountGroupsService/Delete"
+	AccountGroupsService_Update_FullMethodName = "/nocloud.registry.AccountGroupsService/Update"
+	AccountGroupsService_Get_FullMethodName    = "/nocloud.registry.AccountGroupsService/Get"
+	AccountGroupsService_List_FullMethodName   = "/nocloud.registry.AccountGroupsService/List"
+)
+
+// AccountGroupsServiceClient is the client API for AccountGroupsService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type AccountGroupsServiceClient interface {
+	Create(ctx context.Context, in *accounts.AccountGroup, opts ...grpc.CallOption) (*accounts.AccountGroup, error)
+	Delete(ctx context.Context, in *accounts.DeleteRequest, opts ...grpc.CallOption) (*accounts.DeleteResponse, error)
+	Update(ctx context.Context, in *accounts.AccountGroup, opts ...grpc.CallOption) (*accounts.AccountGroup, error)
+	Get(ctx context.Context, in *accounts.GetRequest, opts ...grpc.CallOption) (*accounts.AccountGroup, error)
+	List(ctx context.Context, in *accounts.ListRequest, opts ...grpc.CallOption) (*accounts.AccountGroupsListResponse, error)
+}
+
+type accountGroupsServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewAccountGroupsServiceClient(cc grpc.ClientConnInterface) AccountGroupsServiceClient {
+	return &accountGroupsServiceClient{cc}
+}
+
+func (c *accountGroupsServiceClient) Create(ctx context.Context, in *accounts.AccountGroup, opts ...grpc.CallOption) (*accounts.AccountGroup, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(accounts.AccountGroup)
+	err := c.cc.Invoke(ctx, AccountGroupsService_Create_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountGroupsServiceClient) Delete(ctx context.Context, in *accounts.DeleteRequest, opts ...grpc.CallOption) (*accounts.DeleteResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(accounts.DeleteResponse)
+	err := c.cc.Invoke(ctx, AccountGroupsService_Delete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountGroupsServiceClient) Update(ctx context.Context, in *accounts.AccountGroup, opts ...grpc.CallOption) (*accounts.AccountGroup, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(accounts.AccountGroup)
+	err := c.cc.Invoke(ctx, AccountGroupsService_Update_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountGroupsServiceClient) Get(ctx context.Context, in *accounts.GetRequest, opts ...grpc.CallOption) (*accounts.AccountGroup, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(accounts.AccountGroup)
+	err := c.cc.Invoke(ctx, AccountGroupsService_Get_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountGroupsServiceClient) List(ctx context.Context, in *accounts.ListRequest, opts ...grpc.CallOption) (*accounts.AccountGroupsListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(accounts.AccountGroupsListResponse)
+	err := c.cc.Invoke(ctx, AccountGroupsService_List_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AccountGroupsServiceServer is the server API for AccountGroupsService service.
+// All implementations must embed UnimplementedAccountGroupsServiceServer
+// for forward compatibility.
+type AccountGroupsServiceServer interface {
+	Create(context.Context, *accounts.AccountGroup) (*accounts.AccountGroup, error)
+	Delete(context.Context, *accounts.DeleteRequest) (*accounts.DeleteResponse, error)
+	Update(context.Context, *accounts.AccountGroup) (*accounts.AccountGroup, error)
+	Get(context.Context, *accounts.GetRequest) (*accounts.AccountGroup, error)
+	List(context.Context, *accounts.ListRequest) (*accounts.AccountGroupsListResponse, error)
+	mustEmbedUnimplementedAccountGroupsServiceServer()
+}
+
+// UnimplementedAccountGroupsServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedAccountGroupsServiceServer struct{}
+
+func (UnimplementedAccountGroupsServiceServer) Create(context.Context, *accounts.AccountGroup) (*accounts.AccountGroup, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (UnimplementedAccountGroupsServiceServer) Delete(context.Context, *accounts.DeleteRequest) (*accounts.DeleteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedAccountGroupsServiceServer) Update(context.Context, *accounts.AccountGroup) (*accounts.AccountGroup, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (UnimplementedAccountGroupsServiceServer) Get(context.Context, *accounts.GetRequest) (*accounts.AccountGroup, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedAccountGroupsServiceServer) List(context.Context, *accounts.ListRequest) (*accounts.AccountGroupsListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedAccountGroupsServiceServer) mustEmbedUnimplementedAccountGroupsServiceServer() {}
+func (UnimplementedAccountGroupsServiceServer) testEmbeddedByValue()                              {}
+
+// UnsafeAccountGroupsServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AccountGroupsServiceServer will
+// result in compilation errors.
+type UnsafeAccountGroupsServiceServer interface {
+	mustEmbedUnimplementedAccountGroupsServiceServer()
+}
+
+func RegisterAccountGroupsServiceServer(s grpc.ServiceRegistrar, srv AccountGroupsServiceServer) {
+	// If the following call pancis, it indicates UnimplementedAccountGroupsServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&AccountGroupsService_ServiceDesc, srv)
+}
+
+func _AccountGroupsService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(accounts.AccountGroup)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountGroupsServiceServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountGroupsService_Create_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountGroupsServiceServer).Create(ctx, req.(*accounts.AccountGroup))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountGroupsService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(accounts.DeleteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountGroupsServiceServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountGroupsService_Delete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountGroupsServiceServer).Delete(ctx, req.(*accounts.DeleteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountGroupsService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(accounts.AccountGroup)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountGroupsServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountGroupsService_Update_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountGroupsServiceServer).Update(ctx, req.(*accounts.AccountGroup))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountGroupsService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(accounts.GetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountGroupsServiceServer).Get(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountGroupsService_Get_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountGroupsServiceServer).Get(ctx, req.(*accounts.GetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountGroupsService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(accounts.ListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountGroupsServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountGroupsService_List_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountGroupsServiceServer).List(ctx, req.(*accounts.ListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// AccountGroupsService_ServiceDesc is the grpc.ServiceDesc for AccountGroupsService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var AccountGroupsService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "nocloud.registry.AccountGroupsService",
+	HandlerType: (*AccountGroupsServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Create",
+			Handler:    _AccountGroupsService_Create_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _AccountGroupsService_Delete_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _AccountGroupsService_Update_Handler,
+		},
+		{
+			MethodName: "Get",
+			Handler:    _AccountGroupsService_Get_Handler,
+		},
+		{
+			MethodName: "List",
+			Handler:    _AccountGroupsService_List_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "registry/registry.proto",
+}

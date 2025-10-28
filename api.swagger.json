@@ -83,6 +83,9 @@
       "name": "NamespacesService"
     },
     {
+      "name": "AccountGroupsService"
+    },
+    {
       "name": "SessionsService"
     },
     {
@@ -102,6 +105,207 @@
     "text/event-stream"
   ],
   "paths": {
+    "/account_groups": {
+      "get": {
+        "operationId": "AccountGroupsService_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/accountsAccountGroupsListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "namespace",
+            "description": "Namespace ID to seek account in",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "depth",
+            "description": "Depth",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "field",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filters",
+            "description": "This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18",
+            "in": "query",
+            "required": false
+          }
+        ],
+        "tags": [
+          "AccountGroupsService"
+        ]
+      },
+      "post": {
+        "operationId": "AccountGroupsService_Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/accountsAccountGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/accountsAccountGroup"
+            }
+          }
+        ],
+        "tags": [
+          "AccountGroupsService"
+        ]
+      }
+    },
+    "/account_groups/{uuid}": {
+      "get": {
+        "operationId": "AccountGroupsService_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/accountsAccountGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "public",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "tags": [
+          "AccountGroupsService"
+        ]
+      },
+      "delete": {
+        "operationId": "AccountGroupsService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/registryaccountsDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AccountGroupsService"
+        ]
+      },
+      "patch": {
+        "operationId": "AccountGroupsService_Update",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/accountsAccountGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/registryAccountGroupsServiceUpdateBody"
+            }
+          }
+        ],
+        "tags": [
+          "AccountGroupsService"
+        ]
+      }
+    },
     "/accounts": {
       "post": {
         "operationId": "AccountsService_List",
@@ -8148,6 +8352,42 @@
         },
         "languageCode": {
           "type": "string"
+        },
+        "accountGroup": {
+          "type": "string"
+        }
+      }
+    },
+    "accountsAccountGroup": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        },
+        "hasOwnInvoiceOrder": {
+          "type": "boolean"
+        }
+      }
+    },
+    "accountsAccountGroupsListResponse": {
+      "type": "object",
+      "properties": {
+        "pool": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/accountsAccountGroup"
+          }
+        },
+        "count": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -11637,6 +11877,20 @@
       "default": "NULL_VALUE",
       "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\nThe JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
     },
+    "registryAccountGroupsServiceUpdateBody": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        },
+        "hasOwnInvoiceOrder": {
+          "type": "boolean"
+        }
+      }
+    },
     "registryAccountsServiceAddNoteBody": {
       "type": "object",
       "properties": {
@@ -11720,6 +11974,9 @@
           "$ref": "#/definitions/accountsAccountMeta"
         },
         "languageCode": {
+          "type": "string"
+        },
+        "accountGroup": {
           "type": "string"
         }
       }

@@ -291,7 +291,13 @@ const file_registry_registry_proto_rawDesc = "" +
 	"\x04Join\x12(.nocloud.registry.namespaces.JoinRequest\x1a).nocloud.registry.namespaces.JoinResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/namespaces/{namespace}/join\x12\x84\x01\n" +
 	"\x04Link\x12(.nocloud.registry.namespaces.LinkRequest\x1a).nocloud.registry.namespaces.LinkResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/namespaces/{namespace}/link\x12}\n" +
 	"\x06Delete\x12*.nocloud.registry.namespaces.DeleteRequest\x1a+.nocloud.registry.namespaces.DeleteResponse\"\x1a\x82\xd3\xe4\x93\x02\x14*\x12/namespaces/{uuid}\x12}\n" +
-	"\x05Patch\x12).nocloud.registry.namespaces.PatchRequest\x1a*.nocloud.registry.namespaces.PatchResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*2\x12/namespaces/{uuid}B\xb1\x01\n" +
+	"\x05Patch\x12).nocloud.registry.namespaces.PatchRequest\x1a*.nocloud.registry.namespaces.PatchResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*2\x12/namespaces/{uuid}2\x82\x05\n" +
+	"\x14AccountGroupsService\x12v\n" +
+	"\x06Create\x12'.nocloud.registry.accounts.AccountGroup\x1a'.nocloud.registry.accounts.AccountGroup\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*\"\x0f/account_groups\x12}\n" +
+	"\x06Delete\x12(.nocloud.registry.accounts.DeleteRequest\x1a).nocloud.registry.accounts.DeleteResponse\"\x1e\x82\xd3\xe4\x93\x02\x18*\x16/account_groups/{uuid}\x12}\n" +
+	"\x06Update\x12'.nocloud.registry.accounts.AccountGroup\x1a'.nocloud.registry.accounts.AccountGroup\"!\x82\xd3\xe4\x93\x02\x1b:\x01*2\x16/account_groups/{uuid}\x12u\n" +
+	"\x03Get\x12%.nocloud.registry.accounts.GetRequest\x1a'.nocloud.registry.accounts.AccountGroup\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/account_groups/{uuid}\x12}\n" +
+	"\x04List\x12&.nocloud.registry.accounts.ListRequest\x1a4.nocloud.registry.accounts.AccountGroupsListResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/account_groupsB\xb1\x01\n" +
 	"\x14com.nocloud.registryB\rRegistryProtoP\x01Z)github.com/slntopp/nocloud-proto/registry\xa2\x02\x03NRX\xaa\x02\x10Nocloud.Registry\xca\x02\x10Nocloud\\Registry\xe2\x02\x1cNocloud\\Registry\\GPBMetadata\xea\x02\x11Nocloud::Registryb\x06proto3"
 
 var (
@@ -334,24 +340,26 @@ var file_registry_registry_proto_goTypes = []any{
 	(*namespaces.LinkRequest)(nil),              // 22: nocloud.registry.namespaces.LinkRequest
 	(*namespaces.DeleteRequest)(nil),            // 23: nocloud.registry.namespaces.DeleteRequest
 	(*namespaces.PatchRequest)(nil),             // 24: nocloud.registry.namespaces.PatchRequest
-	(*accounts.TokenResponse)(nil),              // 25: nocloud.registry.accounts.TokenResponse
-	(*accounts.SetCredentialsResponse)(nil),     // 26: nocloud.registry.accounts.SetCredentialsResponse
-	(*notes.NoteResponse)(nil),                  // 27: nocloud.notes.NoteResponse
-	(*accounts.CreateResponse)(nil),             // 28: nocloud.registry.accounts.CreateResponse
-	(*accounts.UpdateResponse)(nil),             // 29: nocloud.registry.accounts.UpdateResponse
-	(*accounts.ListResponse)(nil),               // 30: nocloud.registry.accounts.ListResponse
-	(*accounts.DeleteResponse)(nil),             // 31: nocloud.registry.accounts.DeleteResponse
-	(*accounts.SuspendResponse)(nil),            // 32: nocloud.registry.accounts.SuspendResponse
-	(*accounts.UnsuspendResponse)(nil),          // 33: nocloud.registry.accounts.UnsuspendResponse
-	(*accounts.ChangePhoneResponse)(nil),        // 34: nocloud.registry.accounts.ChangePhoneResponse
-	(*accounts.ChangeLanguageCodeResponse)(nil), // 35: nocloud.registry.accounts.ChangeLanguageCodeResponse
-	(*namespaces.CreateResponse)(nil),           // 36: nocloud.registry.namespaces.CreateResponse
-	(*namespaces.ListResponse)(nil),             // 37: nocloud.registry.namespaces.ListResponse
-	(*namespaces.Namespace)(nil),                // 38: nocloud.registry.namespaces.Namespace
-	(*namespaces.JoinResponse)(nil),             // 39: nocloud.registry.namespaces.JoinResponse
-	(*namespaces.LinkResponse)(nil),             // 40: nocloud.registry.namespaces.LinkResponse
-	(*namespaces.DeleteResponse)(nil),           // 41: nocloud.registry.namespaces.DeleteResponse
-	(*namespaces.PatchResponse)(nil),            // 42: nocloud.registry.namespaces.PatchResponse
+	(*accounts.AccountGroup)(nil),               // 25: nocloud.registry.accounts.AccountGroup
+	(*accounts.TokenResponse)(nil),              // 26: nocloud.registry.accounts.TokenResponse
+	(*accounts.SetCredentialsResponse)(nil),     // 27: nocloud.registry.accounts.SetCredentialsResponse
+	(*notes.NoteResponse)(nil),                  // 28: nocloud.notes.NoteResponse
+	(*accounts.CreateResponse)(nil),             // 29: nocloud.registry.accounts.CreateResponse
+	(*accounts.UpdateResponse)(nil),             // 30: nocloud.registry.accounts.UpdateResponse
+	(*accounts.ListResponse)(nil),               // 31: nocloud.registry.accounts.ListResponse
+	(*accounts.DeleteResponse)(nil),             // 32: nocloud.registry.accounts.DeleteResponse
+	(*accounts.SuspendResponse)(nil),            // 33: nocloud.registry.accounts.SuspendResponse
+	(*accounts.UnsuspendResponse)(nil),          // 34: nocloud.registry.accounts.UnsuspendResponse
+	(*accounts.ChangePhoneResponse)(nil),        // 35: nocloud.registry.accounts.ChangePhoneResponse
+	(*accounts.ChangeLanguageCodeResponse)(nil), // 36: nocloud.registry.accounts.ChangeLanguageCodeResponse
+	(*namespaces.CreateResponse)(nil),           // 37: nocloud.registry.namespaces.CreateResponse
+	(*namespaces.ListResponse)(nil),             // 38: nocloud.registry.namespaces.ListResponse
+	(*namespaces.Namespace)(nil),                // 39: nocloud.registry.namespaces.Namespace
+	(*namespaces.JoinResponse)(nil),             // 40: nocloud.registry.namespaces.JoinResponse
+	(*namespaces.LinkResponse)(nil),             // 41: nocloud.registry.namespaces.LinkResponse
+	(*namespaces.DeleteResponse)(nil),           // 42: nocloud.registry.namespaces.DeleteResponse
+	(*namespaces.PatchResponse)(nil),            // 43: nocloud.registry.namespaces.PatchResponse
+	(*accounts.AccountGroupsListResponse)(nil),  // 44: nocloud.registry.accounts.AccountGroupsListResponse
 }
 var file_registry_registry_proto_depIdxs = []int32{
 	0,  // 0: nocloud.registry.VerificationRequest.action:type_name -> nocloud.registry.VerificationAction
@@ -379,31 +387,41 @@ var file_registry_registry_proto_depIdxs = []int32{
 	22, // 22: nocloud.registry.NamespacesService.Link:input_type -> nocloud.registry.namespaces.LinkRequest
 	23, // 23: nocloud.registry.NamespacesService.Delete:input_type -> nocloud.registry.namespaces.DeleteRequest
 	24, // 24: nocloud.registry.NamespacesService.Patch:input_type -> nocloud.registry.namespaces.PatchRequest
-	25, // 25: nocloud.registry.AccountsService.Token:output_type -> nocloud.registry.accounts.TokenResponse
-	26, // 26: nocloud.registry.AccountsService.SetCredentials:output_type -> nocloud.registry.accounts.SetCredentialsResponse
-	27, // 27: nocloud.registry.AccountsService.AddNote:output_type -> nocloud.notes.NoteResponse
-	27, // 28: nocloud.registry.AccountsService.PatchNote:output_type -> nocloud.notes.NoteResponse
-	27, // 29: nocloud.registry.AccountsService.RemoveNote:output_type -> nocloud.notes.NoteResponse
-	28, // 30: nocloud.registry.AccountsService.Create:output_type -> nocloud.registry.accounts.CreateResponse
-	28, // 31: nocloud.registry.AccountsService.SignUp:output_type -> nocloud.registry.accounts.CreateResponse
-	29, // 32: nocloud.registry.AccountsService.Update:output_type -> nocloud.registry.accounts.UpdateResponse
-	10, // 33: nocloud.registry.AccountsService.Get:output_type -> nocloud.registry.accounts.Account
-	30, // 34: nocloud.registry.AccountsService.List:output_type -> nocloud.registry.accounts.ListResponse
-	31, // 35: nocloud.registry.AccountsService.Delete:output_type -> nocloud.registry.accounts.DeleteResponse
-	32, // 36: nocloud.registry.AccountsService.Suspend:output_type -> nocloud.registry.accounts.SuspendResponse
-	33, // 37: nocloud.registry.AccountsService.Unsuspend:output_type -> nocloud.registry.accounts.UnsuspendResponse
-	3,  // 38: nocloud.registry.AccountsService.Verify:output_type -> nocloud.registry.VerificationResponse
-	34, // 39: nocloud.registry.AccountsService.ChangePhone:output_type -> nocloud.registry.accounts.ChangePhoneResponse
-	35, // 40: nocloud.registry.AccountsService.ChangeLanguageCode:output_type -> nocloud.registry.accounts.ChangeLanguageCodeResponse
-	36, // 41: nocloud.registry.NamespacesService.Create:output_type -> nocloud.registry.namespaces.CreateResponse
-	37, // 42: nocloud.registry.NamespacesService.List:output_type -> nocloud.registry.namespaces.ListResponse
-	38, // 43: nocloud.registry.NamespacesService.Get:output_type -> nocloud.registry.namespaces.Namespace
-	39, // 44: nocloud.registry.NamespacesService.Join:output_type -> nocloud.registry.namespaces.JoinResponse
-	40, // 45: nocloud.registry.NamespacesService.Link:output_type -> nocloud.registry.namespaces.LinkResponse
-	41, // 46: nocloud.registry.NamespacesService.Delete:output_type -> nocloud.registry.namespaces.DeleteResponse
-	42, // 47: nocloud.registry.NamespacesService.Patch:output_type -> nocloud.registry.namespaces.PatchResponse
-	25, // [25:48] is the sub-list for method output_type
-	2,  // [2:25] is the sub-list for method input_type
+	25, // 25: nocloud.registry.AccountGroupsService.Create:input_type -> nocloud.registry.accounts.AccountGroup
+	13, // 26: nocloud.registry.AccountGroupsService.Delete:input_type -> nocloud.registry.accounts.DeleteRequest
+	25, // 27: nocloud.registry.AccountGroupsService.Update:input_type -> nocloud.registry.accounts.AccountGroup
+	11, // 28: nocloud.registry.AccountGroupsService.Get:input_type -> nocloud.registry.accounts.GetRequest
+	12, // 29: nocloud.registry.AccountGroupsService.List:input_type -> nocloud.registry.accounts.ListRequest
+	26, // 30: nocloud.registry.AccountsService.Token:output_type -> nocloud.registry.accounts.TokenResponse
+	27, // 31: nocloud.registry.AccountsService.SetCredentials:output_type -> nocloud.registry.accounts.SetCredentialsResponse
+	28, // 32: nocloud.registry.AccountsService.AddNote:output_type -> nocloud.notes.NoteResponse
+	28, // 33: nocloud.registry.AccountsService.PatchNote:output_type -> nocloud.notes.NoteResponse
+	28, // 34: nocloud.registry.AccountsService.RemoveNote:output_type -> nocloud.notes.NoteResponse
+	29, // 35: nocloud.registry.AccountsService.Create:output_type -> nocloud.registry.accounts.CreateResponse
+	29, // 36: nocloud.registry.AccountsService.SignUp:output_type -> nocloud.registry.accounts.CreateResponse
+	30, // 37: nocloud.registry.AccountsService.Update:output_type -> nocloud.registry.accounts.UpdateResponse
+	10, // 38: nocloud.registry.AccountsService.Get:output_type -> nocloud.registry.accounts.Account
+	31, // 39: nocloud.registry.AccountsService.List:output_type -> nocloud.registry.accounts.ListResponse
+	32, // 40: nocloud.registry.AccountsService.Delete:output_type -> nocloud.registry.accounts.DeleteResponse
+	33, // 41: nocloud.registry.AccountsService.Suspend:output_type -> nocloud.registry.accounts.SuspendResponse
+	34, // 42: nocloud.registry.AccountsService.Unsuspend:output_type -> nocloud.registry.accounts.UnsuspendResponse
+	3,  // 43: nocloud.registry.AccountsService.Verify:output_type -> nocloud.registry.VerificationResponse
+	35, // 44: nocloud.registry.AccountsService.ChangePhone:output_type -> nocloud.registry.accounts.ChangePhoneResponse
+	36, // 45: nocloud.registry.AccountsService.ChangeLanguageCode:output_type -> nocloud.registry.accounts.ChangeLanguageCodeResponse
+	37, // 46: nocloud.registry.NamespacesService.Create:output_type -> nocloud.registry.namespaces.CreateResponse
+	38, // 47: nocloud.registry.NamespacesService.List:output_type -> nocloud.registry.namespaces.ListResponse
+	39, // 48: nocloud.registry.NamespacesService.Get:output_type -> nocloud.registry.namespaces.Namespace
+	40, // 49: nocloud.registry.NamespacesService.Join:output_type -> nocloud.registry.namespaces.JoinResponse
+	41, // 50: nocloud.registry.NamespacesService.Link:output_type -> nocloud.registry.namespaces.LinkResponse
+	42, // 51: nocloud.registry.NamespacesService.Delete:output_type -> nocloud.registry.namespaces.DeleteResponse
+	43, // 52: nocloud.registry.NamespacesService.Patch:output_type -> nocloud.registry.namespaces.PatchResponse
+	25, // 53: nocloud.registry.AccountGroupsService.Create:output_type -> nocloud.registry.accounts.AccountGroup
+	32, // 54: nocloud.registry.AccountGroupsService.Delete:output_type -> nocloud.registry.accounts.DeleteResponse
+	25, // 55: nocloud.registry.AccountGroupsService.Update:output_type -> nocloud.registry.accounts.AccountGroup
+	25, // 56: nocloud.registry.AccountGroupsService.Get:output_type -> nocloud.registry.accounts.AccountGroup
+	44, // 57: nocloud.registry.AccountGroupsService.List:output_type -> nocloud.registry.accounts.AccountGroupsListResponse
+	30, // [30:58] is the sub-list for method output_type
+	2,  // [2:30] is the sub-list for method input_type
 	2,  // [2:2] is the sub-list for extension type_name
 	2,  // [2:2] is the sub-list for extension extendee
 	0,  // [0:2] is the sub-list for field type_name
@@ -423,7 +441,7 @@ func file_registry_registry_proto_init() {
 			NumEnums:      2,
 			NumMessages:   2,
 			NumExtensions: 0,
-			NumServices:   2,
+			NumServices:   3,
 		},
 		GoTypes:           file_registry_registry_proto_goTypes,
 		DependencyIndexes: file_registry_registry_proto_depIdxs,
