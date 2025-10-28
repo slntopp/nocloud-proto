@@ -45,6 +45,45 @@ export declare enum AccountStatus {
 }
 
 /**
+ * @generated from message nocloud.registry.accounts.InvoiceOrderSettings
+ */
+export declare class InvoiceOrderSettings extends Message<InvoiceOrderSettings> {
+  /**
+   * @generated from field: string template = 1;
+   */
+  template: string;
+
+  /**
+   * @generated from field: string new_template = 2;
+   */
+  newTemplate: string;
+
+  /**
+   * @generated from field: int64 start_with_number = 3;
+   */
+  startWithNumber: bigint;
+
+  /**
+   * @generated from field: string reset_counter_mode = 4;
+   */
+  resetCounterMode: string;
+
+  constructor(data?: PartialMessage<InvoiceOrderSettings>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.InvoiceOrderSettings";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): InvoiceOrderSettings;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): InvoiceOrderSettings;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): InvoiceOrderSettings;
+
+  static equals(a: InvoiceOrderSettings | PlainMessage<InvoiceOrderSettings> | undefined, b: InvoiceOrderSettings | PlainMessage<InvoiceOrderSettings> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.registry.accounts.AccountGroup
  */
 export declare class AccountGroup extends Message<AccountGroup> {
@@ -67,6 +106,13 @@ export declare class AccountGroup extends Message<AccountGroup> {
    * @generated from field: bool has_own_invoice_order = 5;
    */
   hasOwnInvoiceOrder: boolean;
+
+  /**
+   * Active only if has_own_invoice_order == true. Otherwise, inherited from nocloud invoice settings
+   *
+   * @generated from field: nocloud.registry.accounts.InvoiceOrderSettings invoice_order_settings = 6;
+   */
+  invoiceOrderSettings?: InvoiceOrderSettings;
 
   constructor(data?: PartialMessage<AccountGroup>);
 

@@ -8372,6 +8372,10 @@
         },
         "hasOwnInvoiceOrder": {
           "type": "boolean"
+        },
+        "invoiceOrderSettings": {
+          "$ref": "#/definitions/accountsInvoiceOrderSettings",
+          "title": "Active only if has_own_invoice_order == true. Otherwise, inherited from nocloud invoice settings"
         }
       }
     },
@@ -8480,6 +8484,24 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "accountsInvoiceOrderSettings": {
+      "type": "object",
+      "properties": {
+        "template": {
+          "type": "string"
+        },
+        "newTemplate": {
+          "type": "string"
+        },
+        "startWithNumber": {
+          "type": "string",
+          "format": "int64"
+        },
+        "resetCounterMode": {
+          "type": "string"
         }
       }
     },
@@ -11888,6 +11910,10 @@
         },
         "hasOwnInvoiceOrder": {
           "type": "boolean"
+        },
+        "invoiceOrderSettings": {
+          "$ref": "#/definitions/accountsInvoiceOrderSettings",
+          "title": "Active only if has_own_invoice_order == true. Otherwise, inherited from nocloud invoice settings"
         }
       }
     },

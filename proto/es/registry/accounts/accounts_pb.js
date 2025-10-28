@@ -36,6 +36,19 @@ export const AccountStatus = /*@__PURE__*/ proto3.makeEnum(
 );
 
 /**
+ * @generated from message nocloud.registry.accounts.InvoiceOrderSettings
+ */
+export const InvoiceOrderSettings = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.InvoiceOrderSettings",
+  () => [
+    { no: 1, name: "template", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "new_template", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "start_with_number", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 4, name: "reset_counter_mode", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
  * @generated from message nocloud.registry.accounts.AccountGroup
  */
 export const AccountGroup = /*@__PURE__*/ proto3.makeMessageType(
@@ -45,6 +58,7 @@ export const AccountGroup = /*@__PURE__*/ proto3.makeMessageType(
     { no: 2, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "color", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "has_own_invoice_order", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 6, name: "invoice_order_settings", kind: "message", T: InvoiceOrderSettings },
   ],
 );
 

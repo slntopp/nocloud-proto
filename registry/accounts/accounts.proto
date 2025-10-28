@@ -22,11 +22,20 @@ import "billing/billing.proto";
 import "google/protobuf/struct.proto";
 import "notes/notes.proto";
 
+message InvoiceOrderSettings {
+  string template = 1;
+  string new_template = 2;
+  int64  start_with_number = 3;
+  string reset_counter_mode = 4;
+}
+
 message AccountGroup{
   string uuid = 1;
   string title = 2;
   string color = 3;
+
   bool   has_own_invoice_order = 5;
+  InvoiceOrderSettings invoice_order_settings = 6; // Active only if has_own_invoice_order == true. Otherwise, inherited from nocloud invoice settings
 }
 
 message Credentials {
