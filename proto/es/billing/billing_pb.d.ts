@@ -3360,3 +3360,47 @@ export declare class StreamResponseBody extends Message<StreamResponseBody> {
   static equals(a: StreamResponseBody | PlainMessage<StreamResponseBody> | undefined, b: StreamResponseBody | PlainMessage<StreamResponseBody> | undefined): boolean;
 }
 
+/**
+ * @generated from message nocloud.billing.PaymentGateway
+ */
+export declare class PaymentGateway extends Message<PaymentGateway> {
+  /**
+   * @generated from field: string key = 1;
+   */
+  key: string;
+
+  /**
+   * @generated from field: string display_name = 2;
+   */
+  displayName: string;
+
+  /**
+   * @generated from field: bool enabled = 3;
+   */
+  enabled: boolean;
+
+  /**
+   * @generated from field: string checkout_extra_text = 4;
+   */
+  checkoutExtraText: string;
+
+  /**
+   * @generated from field: string checkout_panel_html = 5;
+   */
+  checkoutPanelHtml: string;
+
+  constructor(data?: PartialMessage<PaymentGateway>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.PaymentGateway";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PaymentGateway;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PaymentGateway;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PaymentGateway;
+
+  static equals(a: PaymentGateway | PlainMessage<PaymentGateway> | undefined, b: PaymentGateway | PlainMessage<PaymentGateway> | undefined): boolean;
+}
+
