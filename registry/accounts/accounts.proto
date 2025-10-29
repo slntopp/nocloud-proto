@@ -29,6 +29,11 @@ message InvoiceOrderSettings {
   string reset_counter_mode = 4;
 }
 
+message InvoiceParametersCustom {
+  string invoice_from = 1;
+  string logo_url = 2;
+}
+
 message AccountGroup{
   string uuid = 1;
   string title = 2;
@@ -36,6 +41,8 @@ message AccountGroup{
 
   bool   has_own_invoice_order = 5;
   InvoiceOrderSettings invoice_order_settings = 6; // Active only if has_own_invoice_order == true. Otherwise, inherited from nocloud invoice settings
+  bool has_own_invoice_base = 7;
+  InvoiceParametersCustom invoice_parameters_custom = 8; // Active only if has_own_invoice_base == true. Otherwise, inherited from nocloud invoice settings
 }
 
 message Credentials {

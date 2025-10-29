@@ -84,6 +84,35 @@ export declare class InvoiceOrderSettings extends Message<InvoiceOrderSettings> 
 }
 
 /**
+ * @generated from message nocloud.registry.accounts.InvoiceParametersCustom
+ */
+export declare class InvoiceParametersCustom extends Message<InvoiceParametersCustom> {
+  /**
+   * @generated from field: string invoice_from = 1;
+   */
+  invoiceFrom: string;
+
+  /**
+   * @generated from field: string logo_url = 2;
+   */
+  logoUrl: string;
+
+  constructor(data?: PartialMessage<InvoiceParametersCustom>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.InvoiceParametersCustom";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): InvoiceParametersCustom;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): InvoiceParametersCustom;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): InvoiceParametersCustom;
+
+  static equals(a: InvoiceParametersCustom | PlainMessage<InvoiceParametersCustom> | undefined, b: InvoiceParametersCustom | PlainMessage<InvoiceParametersCustom> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.registry.accounts.AccountGroup
  */
 export declare class AccountGroup extends Message<AccountGroup> {
@@ -113,6 +142,18 @@ export declare class AccountGroup extends Message<AccountGroup> {
    * @generated from field: nocloud.registry.accounts.InvoiceOrderSettings invoice_order_settings = 6;
    */
   invoiceOrderSettings?: InvoiceOrderSettings;
+
+  /**
+   * @generated from field: bool has_own_invoice_base = 7;
+   */
+  hasOwnInvoiceBase: boolean;
+
+  /**
+   * Active only if has_own_invoice_base == true. Otherwise, inherited from nocloud invoice settings
+   *
+   * @generated from field: nocloud.registry.accounts.InvoiceParametersCustom invoice_parameters_custom = 8;
+   */
+  invoiceParametersCustom?: InvoiceParametersCustom;
 
   constructor(data?: PartialMessage<AccountGroup>);
 

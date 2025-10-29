@@ -49,6 +49,17 @@ export const InvoiceOrderSettings = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * @generated from message nocloud.registry.accounts.InvoiceParametersCustom
+ */
+export const InvoiceParametersCustom = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.InvoiceParametersCustom",
+  () => [
+    { no: 1, name: "invoice_from", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "logo_url", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
  * @generated from message nocloud.registry.accounts.AccountGroup
  */
 export const AccountGroup = /*@__PURE__*/ proto3.makeMessageType(
@@ -59,6 +70,8 @@ export const AccountGroup = /*@__PURE__*/ proto3.makeMessageType(
     { no: 3, name: "color", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "has_own_invoice_order", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 6, name: "invoice_order_settings", kind: "message", T: InvoiceOrderSettings },
+    { no: 7, name: "has_own_invoice_base", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 8, name: "invoice_parameters_custom", kind: "message", T: InvoiceParametersCustom },
   ],
 );
 

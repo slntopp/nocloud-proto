@@ -8376,6 +8376,13 @@
         "invoiceOrderSettings": {
           "$ref": "#/definitions/accountsInvoiceOrderSettings",
           "title": "Active only if has_own_invoice_order == true. Otherwise, inherited from nocloud invoice settings"
+        },
+        "hasOwnInvoiceBase": {
+          "type": "boolean"
+        },
+        "invoiceParametersCustom": {
+          "$ref": "#/definitions/accountsInvoiceParametersCustom",
+          "title": "Active only if has_own_invoice_base == true. Otherwise, inherited from nocloud invoice settings"
         }
       }
     },
@@ -8501,6 +8508,17 @@
           "format": "int64"
         },
         "resetCounterMode": {
+          "type": "string"
+        }
+      }
+    },
+    "accountsInvoiceParametersCustom": {
+      "type": "object",
+      "properties": {
+        "invoiceFrom": {
+          "type": "string"
+        },
+        "logoUrl": {
           "type": "string"
         }
       }
@@ -11914,6 +11932,13 @@
         "invoiceOrderSettings": {
           "$ref": "#/definitions/accountsInvoiceOrderSettings",
           "title": "Active only if has_own_invoice_order == true. Otherwise, inherited from nocloud invoice settings"
+        },
+        "hasOwnInvoiceBase": {
+          "type": "boolean"
+        },
+        "invoiceParametersCustom": {
+          "$ref": "#/definitions/accountsInvoiceParametersCustom",
+          "title": "Active only if has_own_invoice_base == true. Otherwise, inherited from nocloud invoice settings"
         }
       }
     },
