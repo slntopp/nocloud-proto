@@ -368,6 +368,38 @@
         ]
       }
     },
+    "/accounts/change_account_group": {
+      "post": {
+        "operationId": "AccountsService_ChangeAccountGroup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/accountsChangeAccountGroupResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/accountsChangeAccountGroupRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AccountsService"
+        ]
+      }
+    },
     "/accounts/change_language": {
       "post": {
         "operationId": "AccountsService_ChangeLanguageCode",
@@ -8449,6 +8481,20 @@
           "format": "double"
         }
       }
+    },
+    "accountsChangeAccountGroupRequest": {
+      "type": "object",
+      "properties": {
+        "accountGroup": {
+          "type": "string"
+        },
+        "targetAccount": {
+          "type": "string"
+        }
+      }
+    },
+    "accountsChangeAccountGroupResponse": {
+      "type": "object"
     },
     "accountsChangeLanguageCodeRequest": {
       "type": "object",

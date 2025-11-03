@@ -53,6 +53,7 @@ const (
 	AccountsService_Verify_FullMethodName             = "/nocloud.registry.AccountsService/Verify"
 	AccountsService_ChangePhone_FullMethodName        = "/nocloud.registry.AccountsService/ChangePhone"
 	AccountsService_ChangeLanguageCode_FullMethodName = "/nocloud.registry.AccountsService/ChangeLanguageCode"
+	AccountsService_ChangeAccountGroup_FullMethodName = "/nocloud.registry.AccountsService/ChangeAccountGroup"
 )
 
 // AccountsServiceClient is the client API for AccountsService service.
@@ -75,6 +76,7 @@ type AccountsServiceClient interface {
 	Verify(ctx context.Context, in *VerificationRequest, opts ...grpc.CallOption) (*VerificationResponse, error)
 	ChangePhone(ctx context.Context, in *accounts.ChangePhoneRequest, opts ...grpc.CallOption) (*accounts.ChangePhoneResponse, error)
 	ChangeLanguageCode(ctx context.Context, in *accounts.ChangeLanguageCodeRequest, opts ...grpc.CallOption) (*accounts.ChangeLanguageCodeResponse, error)
+	ChangeAccountGroup(ctx context.Context, in *accounts.ChangeAccountGroupRequest, opts ...grpc.CallOption) (*accounts.ChangeAccountGroupResponse, error)
 }
 
 type accountsServiceClient struct {
@@ -245,6 +247,16 @@ func (c *accountsServiceClient) ChangeLanguageCode(ctx context.Context, in *acco
 	return out, nil
 }
 
+func (c *accountsServiceClient) ChangeAccountGroup(ctx context.Context, in *accounts.ChangeAccountGroupRequest, opts ...grpc.CallOption) (*accounts.ChangeAccountGroupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(accounts.ChangeAccountGroupResponse)
+	err := c.cc.Invoke(ctx, AccountsService_ChangeAccountGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AccountsServiceServer is the server API for AccountsService service.
 // All implementations must embed UnimplementedAccountsServiceServer
 // for forward compatibility.
@@ -265,6 +277,7 @@ type AccountsServiceServer interface {
 	Verify(context.Context, *VerificationRequest) (*VerificationResponse, error)
 	ChangePhone(context.Context, *accounts.ChangePhoneRequest) (*accounts.ChangePhoneResponse, error)
 	ChangeLanguageCode(context.Context, *accounts.ChangeLanguageCodeRequest) (*accounts.ChangeLanguageCodeResponse, error)
+	ChangeAccountGroup(context.Context, *accounts.ChangeAccountGroupRequest) (*accounts.ChangeAccountGroupResponse, error)
 	mustEmbedUnimplementedAccountsServiceServer()
 }
 
@@ -322,6 +335,9 @@ func (UnimplementedAccountsServiceServer) ChangePhone(context.Context, *accounts
 }
 func (UnimplementedAccountsServiceServer) ChangeLanguageCode(context.Context, *accounts.ChangeLanguageCodeRequest) (*accounts.ChangeLanguageCodeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ChangeLanguageCode not implemented")
+}
+func (UnimplementedAccountsServiceServer) ChangeAccountGroup(context.Context, *accounts.ChangeAccountGroupRequest) (*accounts.ChangeAccountGroupResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ChangeAccountGroup not implemented")
 }
 func (UnimplementedAccountsServiceServer) mustEmbedUnimplementedAccountsServiceServer() {}
 func (UnimplementedAccountsServiceServer) testEmbeddedByValue()                         {}
@@ -632,6 +648,24 @@ func _AccountsService_ChangeLanguageCode_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AccountsService_ChangeAccountGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(accounts.ChangeAccountGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServiceServer).ChangeAccountGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountsService_ChangeAccountGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServiceServer).ChangeAccountGroup(ctx, req.(*accounts.ChangeAccountGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AccountsService_ServiceDesc is the grpc.ServiceDesc for AccountsService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -702,6 +736,10 @@ var AccountsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ChangeLanguageCode",
 			Handler:    _AccountsService_ChangeLanguageCode_Handler,
+		},
+		{
+			MethodName: "ChangeAccountGroup",
+			Handler:    _AccountsService_ChangeAccountGroup_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

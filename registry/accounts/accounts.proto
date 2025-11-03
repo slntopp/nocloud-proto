@@ -201,3 +201,10 @@ message AccountGroupsListResponse {
   repeated AccountGroup pool = 1;
   int64 count = 2;
 }
+
+message ChangeAccountGroupRequest {
+  string account_group = 1;
+  optional string target_account = 2;
+}
+
+message ChangeAccountGroupResponse {}

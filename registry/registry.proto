@@ -151,6 +151,13 @@ service AccountsService {
       body: "*"
     };
   };
+  rpc ChangeAccountGroup (accounts.ChangeAccountGroupRequest)
+      returns (accounts.ChangeAccountGroupResponse){
+    option (google.api.http) = {
+      post: "/accounts/change_account_group"
+      body: "*"
+    };
+  };
 }
 
 service NamespacesService {

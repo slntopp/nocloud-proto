@@ -413,3 +413,22 @@ export const AccountGroupsListResponse = /*@__PURE__*/ proto3.makeMessageType(
   ],
 );
 
+/**
+ * @generated from message nocloud.registry.accounts.ChangeAccountGroupRequest
+ */
+export const ChangeAccountGroupRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.ChangeAccountGroupRequest",
+  () => [
+    { no: 1, name: "account_group", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "target_account", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+  ],
+);
+
+/**
+ * @generated from message nocloud.registry.accounts.ChangeAccountGroupResponse
+ */
+export const ChangeAccountGroupResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.ChangeAccountGroupResponse",
+  [],
+);
+

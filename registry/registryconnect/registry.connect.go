@@ -93,6 +93,9 @@ const (
 	// AccountsServiceChangeLanguageCodeProcedure is the fully-qualified name of the AccountsService's
 	// ChangeLanguageCode RPC.
 	AccountsServiceChangeLanguageCodeProcedure = "/nocloud.registry.AccountsService/ChangeLanguageCode"
+	// AccountsServiceChangeAccountGroupProcedure is the fully-qualified name of the AccountsService's
+	// ChangeAccountGroup RPC.
+	AccountsServiceChangeAccountGroupProcedure = "/nocloud.registry.AccountsService/ChangeAccountGroup"
 	// NamespacesServiceCreateProcedure is the fully-qualified name of the NamespacesService's Create
 	// RPC.
 	NamespacesServiceCreateProcedure = "/nocloud.registry.NamespacesService/Create"
@@ -144,6 +147,7 @@ type AccountsServiceClient interface {
 	Verify(context.Context, *connect.Request[registry.VerificationRequest]) (*connect.Response[registry.VerificationResponse], error)
 	ChangePhone(context.Context, *connect.Request[accounts.ChangePhoneRequest]) (*connect.Response[accounts.ChangePhoneResponse], error)
 	ChangeLanguageCode(context.Context, *connect.Request[accounts.ChangeLanguageCodeRequest]) (*connect.Response[accounts.ChangeLanguageCodeResponse], error)
+	ChangeAccountGroup(context.Context, *connect.Request[accounts.ChangeAccountGroupRequest]) (*connect.Response[accounts.ChangeAccountGroupResponse], error)
 }
 
 // NewAccountsServiceClient constructs a client for the nocloud.registry.AccountsService service. By
@@ -253,6 +257,12 @@ func NewAccountsServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(accountsServiceMethods.ByName("ChangeLanguageCode")),
 			connect.WithClientOptions(opts...),
 		),
+		changeAccountGroup: connect.NewClient[accounts.ChangeAccountGroupRequest, accounts.ChangeAccountGroupResponse](
+			httpClient,
+			baseURL+AccountsServiceChangeAccountGroupProcedure,
+			connect.WithSchema(accountsServiceMethods.ByName("ChangeAccountGroup")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -274,6 +284,7 @@ type accountsServiceClient struct {
 	verify             *connect.Client[registry.VerificationRequest, registry.VerificationResponse]
 	changePhone        *connect.Client[accounts.ChangePhoneRequest, accounts.ChangePhoneResponse]
 	changeLanguageCode *connect.Client[accounts.ChangeLanguageCodeRequest, accounts.ChangeLanguageCodeResponse]
+	changeAccountGroup *connect.Client[accounts.ChangeAccountGroupRequest, accounts.ChangeAccountGroupResponse]
 }
 
 // Token calls nocloud.registry.AccountsService.Token.
@@ -356,6 +367,11 @@ func (c *accountsServiceClient) ChangeLanguageCode(ctx context.Context, req *con
 	return c.changeLanguageCode.CallUnary(ctx, req)
 }
 
+// ChangeAccountGroup calls nocloud.registry.AccountsService.ChangeAccountGroup.
+func (c *accountsServiceClient) ChangeAccountGroup(ctx context.Context, req *connect.Request[accounts.ChangeAccountGroupRequest]) (*connect.Response[accounts.ChangeAccountGroupResponse], error) {
+	return c.changeAccountGroup.CallUnary(ctx, req)
+}
+
 // AccountsServiceHandler is an implementation of the nocloud.registry.AccountsService service.
 type AccountsServiceHandler interface {
 	Token(context.Context, *connect.Request[accounts.TokenRequest]) (*connect.Response[accounts.TokenResponse], error)
@@ -374,6 +390,7 @@ type AccountsServiceHandler interface {
 	Verify(context.Context, *connect.Request[registry.VerificationRequest]) (*connect.Response[registry.VerificationResponse], error)
 	ChangePhone(context.Context, *connect.Request[accounts.ChangePhoneRequest]) (*connect.Response[accounts.ChangePhoneResponse], error)
 	ChangeLanguageCode(context.Context, *connect.Request[accounts.ChangeLanguageCodeRequest]) (*connect.Response[accounts.ChangeLanguageCodeResponse], error)
+	ChangeAccountGroup(context.Context, *connect.Request[accounts.ChangeAccountGroupRequest]) (*connect.Response[accounts.ChangeAccountGroupResponse], error)
 }
 
 // NewAccountsServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -479,6 +496,12 @@ func NewAccountsServiceHandler(svc AccountsServiceHandler, opts ...connect.Handl
 		connect.WithSchema(accountsServiceMethods.ByName("ChangeLanguageCode")),
 		connect.WithHandlerOptions(opts...),
 	)
+	accountsServiceChangeAccountGroupHandler := connect.NewUnaryHandler(
+		AccountsServiceChangeAccountGroupProcedure,
+		svc.ChangeAccountGroup,
+		connect.WithSchema(accountsServiceMethods.ByName("ChangeAccountGroup")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/nocloud.registry.AccountsService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case AccountsServiceTokenProcedure:
@@ -513,6 +536,8 @@ func NewAccountsServiceHandler(svc AccountsServiceHandler, opts ...connect.Handl
 			accountsServiceChangePhoneHandler.ServeHTTP(w, r)
 		case AccountsServiceChangeLanguageCodeProcedure:
 			accountsServiceChangeLanguageCodeHandler.ServeHTTP(w, r)
+		case AccountsServiceChangeAccountGroupProcedure:
+			accountsServiceChangeAccountGroupHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -584,6 +609,10 @@ func (UnimplementedAccountsServiceHandler) ChangePhone(context.Context, *connect
 
 func (UnimplementedAccountsServiceHandler) ChangeLanguageCode(context.Context, *connect.Request[accounts.ChangeLanguageCodeRequest]) (*connect.Response[accounts.ChangeLanguageCodeResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.registry.AccountsService.ChangeLanguageCode is not implemented"))
+}
+
+func (UnimplementedAccountsServiceHandler) ChangeAccountGroup(context.Context, *connect.Request[accounts.ChangeAccountGroupRequest]) (*connect.Response[accounts.ChangeAccountGroupResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.registry.AccountsService.ChangeAccountGroup is not implemented"))
 }
 
 // NamespacesServiceClient is a client for the nocloud.registry.NamespacesService service.

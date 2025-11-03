@@ -18,7 +18,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { Account, AccountGroup, AccountGroupsListResponse, ChangeLanguageCodeRequest, ChangeLanguageCodeResponse, ChangePhoneRequest, ChangePhoneResponse, CreateRequest, CreateResponse, DeleteRequest, DeleteResponse, GetRequest, ListRequest, ListResponse, SetCredentialsRequest, SetCredentialsResponse, SuspendRequest, SuspendResponse, TokenRequest, TokenResponse, UnsuspendRequest, UnsuspendResponse, UpdateResponse } from "./accounts/accounts_pb.js";
+import { Account, AccountGroup, AccountGroupsListResponse, ChangeAccountGroupRequest, ChangeAccountGroupResponse, ChangeLanguageCodeRequest, ChangeLanguageCodeResponse, ChangePhoneRequest, ChangePhoneResponse, CreateRequest, CreateResponse, DeleteRequest, DeleteResponse, GetRequest, ListRequest, ListResponse, SetCredentialsRequest, SetCredentialsResponse, SuspendRequest, SuspendResponse, TokenRequest, TokenResponse, UnsuspendRequest, UnsuspendResponse, UpdateResponse } from "./accounts/accounts_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 import { AddNoteRequest, NoteResponse, PatchNoteRequest, RemoveNoteRequest } from "../notes/notes_pb.js";
 import { VerificationRequest, VerificationResponse } from "./registry_pb.js";
@@ -172,6 +172,15 @@ export declare const AccountsService: {
       readonly name: "ChangeLanguageCode",
       readonly I: typeof ChangeLanguageCodeRequest,
       readonly O: typeof ChangeLanguageCodeResponse,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.registry.AccountsService.ChangeAccountGroup
+     */
+    readonly changeAccountGroup: {
+      readonly name: "ChangeAccountGroup",
+      readonly I: typeof ChangeAccountGroupRequest,
+      readonly O: typeof ChangeAccountGroupResponse,
       readonly kind: MethodKind.Unary,
     },
   }

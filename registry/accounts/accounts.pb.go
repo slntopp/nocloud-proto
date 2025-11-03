@@ -1969,6 +1969,94 @@ func (x *AccountGroupsListResponse) GetCount() int64 {
 	return 0
 }
 
+type ChangeAccountGroupRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AccountGroup  string                 `protobuf:"bytes,1,opt,name=account_group,json=accountGroup,proto3" json:"account_group,omitempty"`
+	TargetAccount *string                `protobuf:"bytes,2,opt,name=target_account,json=targetAccount,proto3,oneof" json:"target_account,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ChangeAccountGroupRequest) Reset() {
+	*x = ChangeAccountGroupRequest{}
+	mi := &file_registry_accounts_accounts_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChangeAccountGroupRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChangeAccountGroupRequest) ProtoMessage() {}
+
+func (x *ChangeAccountGroupRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_registry_accounts_accounts_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChangeAccountGroupRequest.ProtoReflect.Descriptor instead.
+func (*ChangeAccountGroupRequest) Descriptor() ([]byte, []int) {
+	return file_registry_accounts_accounts_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *ChangeAccountGroupRequest) GetAccountGroup() string {
+	if x != nil {
+		return x.AccountGroup
+	}
+	return ""
+}
+
+func (x *ChangeAccountGroupRequest) GetTargetAccount() string {
+	if x != nil && x.TargetAccount != nil {
+		return *x.TargetAccount
+	}
+	return ""
+}
+
+type ChangeAccountGroupResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ChangeAccountGroupResponse) Reset() {
+	*x = ChangeAccountGroupResponse{}
+	mi := &file_registry_accounts_accounts_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChangeAccountGroupResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChangeAccountGroupResponse) ProtoMessage() {}
+
+func (x *ChangeAccountGroupResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_registry_accounts_accounts_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChangeAccountGroupResponse.ProtoReflect.Descriptor instead.
+func (*ChangeAccountGroupResponse) Descriptor() ([]byte, []int) {
+	return file_registry_accounts_accounts_proto_rawDescGZIP(), []int{33}
+}
+
 var File_registry_accounts_accounts_proto protoreflect.FileDescriptor
 
 const file_registry_accounts_accounts_proto_rawDesc = "" +
@@ -2126,7 +2214,12 @@ const file_registry_accounts_accounts_proto_rawDesc = "" +
 	"\x1aChangeLanguageCodeResponse\"n\n" +
 	"\x19AccountGroupsListResponse\x12;\n" +
 	"\x04pool\x18\x01 \x03(\v2'.nocloud.registry.accounts.AccountGroupR\x04pool\x12\x14\n" +
-	"\x05count\x18\x02 \x01(\x03R\x05count*9\n" +
+	"\x05count\x18\x02 \x01(\x03R\x05count\"\x7f\n" +
+	"\x19ChangeAccountGroupRequest\x12#\n" +
+	"\raccount_group\x18\x01 \x01(\tR\faccountGroup\x12*\n" +
+	"\x0etarget_account\x18\x02 \x01(\tH\x00R\rtargetAccount\x88\x01\x01B\x11\n" +
+	"\x0f_target_account\"\x1c\n" +
+	"\x1aChangeAccountGroupResponse*9\n" +
 	"\rAccountStatus\x12\n" +
 	"\n" +
 	"\x06ACTIVE\x10\x00\x12\b\n" +
@@ -2147,7 +2240,7 @@ func file_registry_accounts_accounts_proto_rawDescGZIP() []byte {
 }
 
 var file_registry_accounts_accounts_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_registry_accounts_accounts_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
+var file_registry_accounts_accounts_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
 var file_registry_accounts_accounts_proto_goTypes = []any{
 	(AccountStatus)(0),                 // 0: nocloud.registry.accounts.AccountStatus
 	(*InvoiceOrderSettings)(nil),       // 1: nocloud.registry.accounts.InvoiceOrderSettings
@@ -2182,37 +2275,39 @@ var file_registry_accounts_accounts_proto_goTypes = []any{
 	(*ChangeLanguageCodeRequest)(nil),  // 30: nocloud.registry.accounts.ChangeLanguageCodeRequest
 	(*ChangeLanguageCodeResponse)(nil), // 31: nocloud.registry.accounts.ChangeLanguageCodeResponse
 	(*AccountGroupsListResponse)(nil),  // 32: nocloud.registry.accounts.AccountGroupsListResponse
-	nil,                                // 33: nocloud.registry.accounts.ListRequest.FiltersEntry
-	(*billing.Currency)(nil),           // 34: nocloud.billing.Currency
-	(*structpb.Struct)(nil),            // 35: google.protobuf.Struct
-	(*access.Access)(nil),              // 36: nocloud.access.Access
-	(*notes.AdminNote)(nil),            // 37: nocloud.notes.AdminNote
-	(*structpb.Value)(nil),             // 38: google.protobuf.Value
+	(*ChangeAccountGroupRequest)(nil),  // 33: nocloud.registry.accounts.ChangeAccountGroupRequest
+	(*ChangeAccountGroupResponse)(nil), // 34: nocloud.registry.accounts.ChangeAccountGroupResponse
+	nil,                                // 35: nocloud.registry.accounts.ListRequest.FiltersEntry
+	(*billing.Currency)(nil),           // 36: nocloud.billing.Currency
+	(*structpb.Struct)(nil),            // 37: google.protobuf.Struct
+	(*access.Access)(nil),              // 38: nocloud.access.Access
+	(*notes.AdminNote)(nil),            // 39: nocloud.notes.AdminNote
+	(*structpb.Value)(nil),             // 40: google.protobuf.Value
 }
 var file_registry_accounts_accounts_proto_depIdxs = []int32{
 	1,  // 0: nocloud.registry.accounts.AccountGroup.invoice_order_settings:type_name -> nocloud.registry.accounts.InvoiceOrderSettings
 	2,  // 1: nocloud.registry.accounts.AccountGroup.invoice_parameters_custom:type_name -> nocloud.registry.accounts.InvoiceParametersCustom
 	4,  // 2: nocloud.registry.accounts.CreateRequest.auth:type_name -> nocloud.registry.accounts.Credentials
-	34, // 3: nocloud.registry.accounts.CreateRequest.currency:type_name -> nocloud.billing.Currency
-	35, // 4: nocloud.registry.accounts.CreateRequest.data:type_name -> google.protobuf.Struct
-	35, // 5: nocloud.registry.accounts.Account.data:type_name -> google.protobuf.Struct
-	36, // 6: nocloud.registry.accounts.Account.access:type_name -> nocloud.access.Access
+	36, // 3: nocloud.registry.accounts.CreateRequest.currency:type_name -> nocloud.billing.Currency
+	37, // 4: nocloud.registry.accounts.CreateRequest.data:type_name -> google.protobuf.Struct
+	37, // 5: nocloud.registry.accounts.Account.data:type_name -> google.protobuf.Struct
+	38, // 6: nocloud.registry.accounts.Account.access:type_name -> nocloud.access.Access
 	8,  // 7: nocloud.registry.accounts.Account.suspend_conf:type_name -> nocloud.registry.accounts.SuspendConf
-	34, // 8: nocloud.registry.accounts.Account.currency:type_name -> nocloud.billing.Currency
+	36, // 8: nocloud.registry.accounts.Account.currency:type_name -> nocloud.billing.Currency
 	0,  // 9: nocloud.registry.accounts.Account.status:type_name -> nocloud.registry.accounts.AccountStatus
-	37, // 10: nocloud.registry.accounts.Account.admin_notes:type_name -> nocloud.notes.AdminNote
+	39, // 10: nocloud.registry.accounts.Account.admin_notes:type_name -> nocloud.notes.AdminNote
 	10, // 11: nocloud.registry.accounts.Account.meta:type_name -> nocloud.registry.accounts.AccountMeta
 	11, // 12: nocloud.registry.accounts.AccountMeta.notifications:type_name -> nocloud.registry.accounts.Notifications
 	12, // 13: nocloud.registry.accounts.Notifications.first_balance_notify:type_name -> nocloud.registry.accounts.BalanceNotification
 	12, // 14: nocloud.registry.accounts.Notifications.second_balance_notify:type_name -> nocloud.registry.accounts.BalanceNotification
 	13, // 15: nocloud.registry.accounts.BalanceNotification.base:type_name -> nocloud.registry.accounts.AccountNotification
-	33, // 16: nocloud.registry.accounts.ListRequest.filters:type_name -> nocloud.registry.accounts.ListRequest.FiltersEntry
+	35, // 16: nocloud.registry.accounts.ListRequest.filters:type_name -> nocloud.registry.accounts.ListRequest.FiltersEntry
 	9,  // 17: nocloud.registry.accounts.ListResponse.pool:type_name -> nocloud.registry.accounts.Account
 	4,  // 18: nocloud.registry.accounts.SetCredentialsRequest.auth:type_name -> nocloud.registry.accounts.Credentials
 	4,  // 19: nocloud.registry.accounts.TokenRequest.auth:type_name -> nocloud.registry.accounts.Credentials
 	27, // 20: nocloud.registry.accounts.ChangePhoneRequest.new_phone:type_name -> nocloud.registry.accounts.Phone
 	3,  // 21: nocloud.registry.accounts.AccountGroupsListResponse.pool:type_name -> nocloud.registry.accounts.AccountGroup
-	38, // 22: nocloud.registry.accounts.ListRequest.FiltersEntry.value:type_name -> google.protobuf.Value
+	40, // 22: nocloud.registry.accounts.ListRequest.FiltersEntry.value:type_name -> google.protobuf.Value
 	23, // [23:23] is the sub-list for method output_type
 	23, // [23:23] is the sub-list for method input_type
 	23, // [23:23] is the sub-list for extension type_name
@@ -2233,13 +2328,14 @@ func file_registry_accounts_accounts_proto_init() {
 	file_registry_accounts_accounts_proto_msgTypes[14].OneofWrappers = []any{}
 	file_registry_accounts_accounts_proto_msgTypes[18].OneofWrappers = []any{}
 	file_registry_accounts_accounts_proto_msgTypes[29].OneofWrappers = []any{}
+	file_registry_accounts_accounts_proto_msgTypes[32].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_registry_accounts_accounts_proto_rawDesc), len(file_registry_accounts_accounts_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   33,
+			NumMessages:   35,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

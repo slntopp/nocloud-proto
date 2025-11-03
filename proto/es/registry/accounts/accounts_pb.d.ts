@@ -1133,3 +1133,51 @@ export declare class AccountGroupsListResponse extends Message<AccountGroupsList
   static equals(a: AccountGroupsListResponse | PlainMessage<AccountGroupsListResponse> | undefined, b: AccountGroupsListResponse | PlainMessage<AccountGroupsListResponse> | undefined): boolean;
 }
 
+/**
+ * @generated from message nocloud.registry.accounts.ChangeAccountGroupRequest
+ */
+export declare class ChangeAccountGroupRequest extends Message<ChangeAccountGroupRequest> {
+  /**
+   * @generated from field: string account_group = 1;
+   */
+  accountGroup: string;
+
+  /**
+   * @generated from field: optional string target_account = 2;
+   */
+  targetAccount?: string;
+
+  constructor(data?: PartialMessage<ChangeAccountGroupRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.ChangeAccountGroupRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ChangeAccountGroupRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ChangeAccountGroupRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ChangeAccountGroupRequest;
+
+  static equals(a: ChangeAccountGroupRequest | PlainMessage<ChangeAccountGroupRequest> | undefined, b: ChangeAccountGroupRequest | PlainMessage<ChangeAccountGroupRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.registry.accounts.ChangeAccountGroupResponse
+ */
+export declare class ChangeAccountGroupResponse extends Message<ChangeAccountGroupResponse> {
+  constructor(data?: PartialMessage<ChangeAccountGroupResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.ChangeAccountGroupResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ChangeAccountGroupResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ChangeAccountGroupResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ChangeAccountGroupResponse;
+
+  static equals(a: ChangeAccountGroupResponse | PlainMessage<ChangeAccountGroupResponse> | undefined, b: ChangeAccountGroupResponse | PlainMessage<ChangeAccountGroupResponse> | undefined): boolean;
+}
+
