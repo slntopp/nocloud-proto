@@ -45,6 +45,11 @@ export declare class AdminNote extends Message<AdminNote> {
    */
   updated: bigint;
 
+  /**
+   * @generated from field: bool pinned = 5;
+   */
+  pinned: boolean;
+
   constructor(data?: PartialMessage<AdminNote>);
 
   static readonly runtime: typeof proto3;
@@ -73,6 +78,11 @@ export declare class AddNoteRequest extends Message<AddNoteRequest> {
    * @generated from field: string msg = 2;
    */
   msg: string;
+
+  /**
+   * @generated from field: bool pinned = 3;
+   */
+  pinned: boolean;
 
   constructor(data?: PartialMessage<AddNoteRequest>);
 
@@ -107,6 +117,11 @@ export declare class PatchNoteRequest extends Message<PatchNoteRequest> {
    * @generated from field: string msg = 3;
    */
   msg: string;
+
+  /**
+   * @generated from field: bool pinned = 4;
+   */
+  pinned: boolean;
 
   constructor(data?: PartialMessage<PatchNoteRequest>);
 

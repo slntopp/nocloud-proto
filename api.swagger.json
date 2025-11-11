@@ -10756,6 +10756,9 @@
       "properties": {
         "msg": {
           "type": "string"
+        },
+        "pinned": {
+          "type": "boolean"
         }
       }
     },
@@ -10780,6 +10783,9 @@
         },
         "msg": {
           "type": "string"
+        },
+        "pinned": {
+          "type": "boolean"
         }
       }
     },
@@ -11675,6 +11681,9 @@
         "updated": {
           "type": "string",
           "format": "int64"
+        },
+        "pinned": {
+          "type": "boolean"
         }
       }
     },
@@ -11993,6 +12002,9 @@
       "properties": {
         "msg": {
           "type": "string"
+        },
+        "pinned": {
+          "type": "boolean"
         }
       }
     },
@@ -12005,6 +12017,9 @@
         },
         "msg": {
           "type": "string"
+        },
+        "pinned": {
+          "type": "boolean"
         }
       }
     },

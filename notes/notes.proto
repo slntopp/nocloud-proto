@@ -22,17 +22,21 @@ message AdminNote {
     string msg = 2;
     int64 created = 3;
     int64 updated = 4;
+
+    bool pinned = 5;
 }
 
 message AddNoteRequest {
     string uuid = 1;
     string msg = 2;
+    bool pinned = 3;
 }
 
 message PatchNoteRequest {
     string uuid = 1;
     uint64 index = 2;
     string msg = 3;
+    bool pinned = 4;
 }
 
 message RemoveNoteRequest {

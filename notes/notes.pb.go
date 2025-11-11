@@ -42,6 +42,7 @@ type AdminNote struct {
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
 	Created       int64                  `protobuf:"varint,3,opt,name=created,proto3" json:"created,omitempty"`
 	Updated       int64                  `protobuf:"varint,4,opt,name=updated,proto3" json:"updated,omitempty"`
+	Pinned        bool                   `protobuf:"varint,5,opt,name=pinned,proto3" json:"pinned,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -104,10 +105,18 @@ func (x *AdminNote) GetUpdated() int64 {
 	return 0
 }
 
+func (x *AdminNote) GetPinned() bool {
+	if x != nil {
+		return x.Pinned
+	}
+	return false
+}
+
 type AddNoteRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Uuid          string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Pinned        bool                   `protobuf:"varint,3,opt,name=pinned,proto3" json:"pinned,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -156,11 +165,19 @@ func (x *AddNoteRequest) GetMsg() string {
 	return ""
 }
 
+func (x *AddNoteRequest) GetPinned() bool {
+	if x != nil {
+		return x.Pinned
+	}
+	return false
+}
+
 type PatchNoteRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Uuid          string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
 	Index         uint64                 `protobuf:"varint,2,opt,name=index,proto3" json:"index,omitempty"`
 	Msg           string                 `protobuf:"bytes,3,opt,name=msg,proto3" json:"msg,omitempty"`
+	Pinned        bool                   `protobuf:"varint,4,opt,name=pinned,proto3" json:"pinned,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -214,6 +231,13 @@ func (x *PatchNoteRequest) GetMsg() string {
 		return x.Msg
 	}
 	return ""
+}
+
+func (x *PatchNoteRequest) GetPinned() bool {
+	if x != nil {
+		return x.Pinned
+	}
+	return false
 }
 
 type RemoveNoteRequest struct {
@@ -324,19 +348,22 @@ var File_notes_notes_proto protoreflect.FileDescriptor
 
 const file_notes_notes_proto_rawDesc = "" +
 	"\n" +
-	"\x11notes/notes.proto\x12\rnocloud.notes\"g\n" +
+	"\x11notes/notes.proto\x12\rnocloud.notes\"\x7f\n" +
 	"\tAdminNote\x12\x14\n" +
 	"\x05admin\x18\x01 \x01(\tR\x05admin\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x18\n" +
 	"\acreated\x18\x03 \x01(\x03R\acreated\x12\x18\n" +
-	"\aupdated\x18\x04 \x01(\x03R\aupdated\"6\n" +
+	"\aupdated\x18\x04 \x01(\x03R\aupdated\x12\x16\n" +
+	"\x06pinned\x18\x05 \x01(\bR\x06pinned\"N\n" +
 	"\x0eAddNoteRequest\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg\"N\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x16\n" +
+	"\x06pinned\x18\x03 \x01(\bR\x06pinned\"f\n" +
 	"\x10PatchNoteRequest\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x14\n" +
 	"\x05index\x18\x02 \x01(\x04R\x05index\x12\x10\n" +
-	"\x03msg\x18\x03 \x01(\tR\x03msg\"=\n" +
+	"\x03msg\x18\x03 \x01(\tR\x03msg\x12\x16\n" +
+	"\x06pinned\x18\x04 \x01(\bR\x06pinned\"=\n" +
 	"\x11RemoveNoteRequest\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x14\n" +
 	"\x05index\x18\x02 \x01(\x04R\x05index\"a\n" +
