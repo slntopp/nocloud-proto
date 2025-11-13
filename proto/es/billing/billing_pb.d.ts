@@ -3370,24 +3370,16 @@ export declare class PaymentGateway extends Message<PaymentGateway> {
   key: string;
 
   /**
-   * @generated from field: string display_name = 2;
-   */
-  displayName: string;
-
-  /**
-   * @generated from field: bool enabled = 3;
+   * @generated from field: bool enabled = 2;
    */
   enabled: boolean;
 
   /**
-   * @generated from field: string checkout_extra_text = 4;
+   * Display info based on language code
+   *
+   * @generated from field: map<string, nocloud.billing.PaymentGatewayDisplay> language_display = 3;
    */
-  checkoutExtraText: string;
-
-  /**
-   * @generated from field: string checkout_panel_html = 5;
-   */
-  checkoutPanelHtml: string;
+  languageDisplay: { [key: string]: PaymentGatewayDisplay };
 
   constructor(data?: PartialMessage<PaymentGateway>);
 
@@ -3402,5 +3394,39 @@ export declare class PaymentGateway extends Message<PaymentGateway> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PaymentGateway;
 
   static equals(a: PaymentGateway | PlainMessage<PaymentGateway> | undefined, b: PaymentGateway | PlainMessage<PaymentGateway> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.PaymentGatewayDisplay
+ */
+export declare class PaymentGatewayDisplay extends Message<PaymentGatewayDisplay> {
+  /**
+   * @generated from field: string display_name = 1;
+   */
+  displayName: string;
+
+  /**
+   * @generated from field: string checkout_extra_text = 2;
+   */
+  checkoutExtraText: string;
+
+  /**
+   * @generated from field: string checkout_panel_html = 3;
+   */
+  checkoutPanelHtml: string;
+
+  constructor(data?: PartialMessage<PaymentGatewayDisplay>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.PaymentGatewayDisplay";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PaymentGatewayDisplay;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PaymentGatewayDisplay;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PaymentGatewayDisplay;
+
+  static equals(a: PaymentGatewayDisplay | PlainMessage<PaymentGatewayDisplay> | undefined, b: PaymentGatewayDisplay | PlainMessage<PaymentGatewayDisplay> | undefined): boolean;
 }
 

@@ -1018,9 +1018,12 @@ service PromocodesService {
 
 message PaymentGateway {
   string key = 1;
-  string display_name = 2;
-  bool enabled = 3;
+  bool enabled = 2;
+  map<string, PaymentGatewayDisplay> language_display = 3; // Display info based on language code
+}
 
-  string checkout_extra_text = 4;
-  string checkout_panel_html = 5;
+message PaymentGatewayDisplay{
+  string display_name = 1;
+  string checkout_extra_text = 2;
+  string checkout_panel_html = 3;
 }

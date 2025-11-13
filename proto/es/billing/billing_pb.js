@@ -1189,10 +1189,20 @@ export const PaymentGateway = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.billing.PaymentGateway",
   () => [
     { no: 1, name: "key", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "display_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 4, name: "checkout_extra_text", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 5, name: "checkout_panel_html", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 3, name: "language_display", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: PaymentGatewayDisplay} },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.PaymentGatewayDisplay
+ */
+export const PaymentGatewayDisplay = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.PaymentGatewayDisplay",
+  () => [
+    { no: 1, name: "display_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "checkout_extra_text", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "checkout_panel_html", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
