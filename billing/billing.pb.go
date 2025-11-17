@@ -1884,28 +1884,29 @@ func (x *TaxOptions) GetTaxIncluded() bool {
 }
 
 type Invoice struct {
-	state         protoimpl.MessageState     `protogen:"open.v1"`
-	Uuid          string                     `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	Payment       int64                      `protobuf:"varint,2,opt,name=payment,proto3" json:"payment,omitempty"`     // Payment date timestamp
-	Processed     int64                      `protobuf:"varint,3,opt,name=processed,proto3" json:"processed,omitempty"` // Processed date timestamp(when actions applied)(only for payment flow)
-	Returned      int64                      `protobuf:"varint,4,opt,name=returned,proto3" json:"returned,omitempty"`   // Returned date timestamp(not 0 if invoice has returned status)
-	Deadline      int64                      `protobuf:"varint,5,opt,name=deadline,proto3" json:"deadline,omitempty"`
-	Status        BillingStatus              `protobuf:"varint,6,opt,name=status,proto3,enum=nocloud.billing.BillingStatus" json:"status,omitempty"`
-	Account       string                     `protobuf:"bytes,7,opt,name=account,proto3" json:"account,omitempty"`
-	Transactions  []string                   `protobuf:"bytes,8,rep,name=transactions,proto3" json:"transactions,omitempty"`
-	Total         float64                    `protobuf:"fixed64,9,opt,name=total,proto3" json:"total,omitempty"` // Final total, amount that client will pay
-	Meta          map[string]*structpb.Value `protobuf:"bytes,10,rep,name=meta,proto3" json:"meta,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Currency      *Currency                  `protobuf:"bytes,11,opt,name=currency,proto3" json:"currency,omitempty"`
-	Created       int64                      `protobuf:"varint,12,opt,name=created,proto3" json:"created,omitempty"`
-	Items         []*Item                    `protobuf:"bytes,13,rep,name=items,proto3" json:"items,omitempty"`
-	Type          ActionType                 `protobuf:"varint,14,opt,name=type,proto3,enum=nocloud.billing.ActionType" json:"type,omitempty"`
-	Number        string                     `protobuf:"bytes,15,opt,name=number,proto3" json:"number,omitempty"`
-	Instances     []string                   `protobuf:"bytes,16,rep,name=instances,proto3" json:"instances,omitempty"` // Linked instances
-	TaxOptions    *TaxOptions                `protobuf:"bytes,17,opt,name=tax_options,json=taxOptions,proto3" json:"tax_options,omitempty"`
-	Subtotal      float64                    `protobuf:"fixed64,18,opt,name=subtotal,proto3" json:"subtotal,omitempty"` // Total before additional fees (taxes etc.)
-	Properties    *AdditionalProperties      `protobuf:"bytes,19,opt,name=properties,proto3" json:"properties,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState     `protogen:"open.v1"`
+	Uuid           string                     `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	Payment        int64                      `protobuf:"varint,2,opt,name=payment,proto3" json:"payment,omitempty"`     // Payment date timestamp
+	Processed      int64                      `protobuf:"varint,3,opt,name=processed,proto3" json:"processed,omitempty"` // Processed date timestamp(when actions applied)(only for payment flow)
+	Returned       int64                      `protobuf:"varint,4,opt,name=returned,proto3" json:"returned,omitempty"`   // Returned date timestamp(not 0 if invoice has returned status)
+	Deadline       int64                      `protobuf:"varint,5,opt,name=deadline,proto3" json:"deadline,omitempty"`
+	Status         BillingStatus              `protobuf:"varint,6,opt,name=status,proto3,enum=nocloud.billing.BillingStatus" json:"status,omitempty"`
+	Account        string                     `protobuf:"bytes,7,opt,name=account,proto3" json:"account,omitempty"`
+	Transactions   []string                   `protobuf:"bytes,8,rep,name=transactions,proto3" json:"transactions,omitempty"`
+	Total          float64                    `protobuf:"fixed64,9,opt,name=total,proto3" json:"total,omitempty"` // Final total, amount that client will pay
+	Meta           map[string]*structpb.Value `protobuf:"bytes,10,rep,name=meta,proto3" json:"meta,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Currency       *Currency                  `protobuf:"bytes,11,opt,name=currency,proto3" json:"currency,omitempty"`
+	Created        int64                      `protobuf:"varint,12,opt,name=created,proto3" json:"created,omitempty"`
+	Items          []*Item                    `protobuf:"bytes,13,rep,name=items,proto3" json:"items,omitempty"`
+	Type           ActionType                 `protobuf:"varint,14,opt,name=type,proto3,enum=nocloud.billing.ActionType" json:"type,omitempty"`
+	Number         string                     `protobuf:"bytes,15,opt,name=number,proto3" json:"number,omitempty"`
+	Instances      []string                   `protobuf:"bytes,16,rep,name=instances,proto3" json:"instances,omitempty"` // Linked instances
+	TaxOptions     *TaxOptions                `protobuf:"bytes,17,opt,name=tax_options,json=taxOptions,proto3" json:"tax_options,omitempty"`
+	Subtotal       float64                    `protobuf:"fixed64,18,opt,name=subtotal,proto3" json:"subtotal,omitempty"` // Total before additional fees (taxes etc.)
+	Properties     *AdditionalProperties      `protobuf:"bytes,19,opt,name=properties,proto3" json:"properties,omitempty"`
+	PaymentGateway string                     `protobuf:"bytes,20,opt,name=payment_gateway,json=paymentGateway,proto3" json:"payment_gateway,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *Invoice) Reset() {
@@ -2069,6 +2070,13 @@ func (x *Invoice) GetProperties() *AdditionalProperties {
 		return x.Properties
 	}
 	return nil
+}
+
+func (x *Invoice) GetPaymentGateway() string {
+	if x != nil {
+		return x.PaymentGateway
+	}
+	return ""
 }
 
 type InvoiceMeta struct {
@@ -6058,7 +6066,7 @@ const file_billing_billing_proto_rawDesc = "" +
 	"\n" +
 	"TaxOptions\x12\x19\n" +
 	"\btax_rate\x18\x01 \x01(\x01R\ataxRate\x12!\n" +
-	"\ftax_included\x18\x02 \x01(\bR\vtaxIncluded\"\xa8\x06\n" +
+	"\ftax_included\x18\x02 \x01(\bR\vtaxIncluded\"\xd1\x06\n" +
 	"\aInvoice\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x18\n" +
 	"\apayment\x18\x02 \x01(\x03R\apayment\x12\x1c\n" +
@@ -6082,7 +6090,8 @@ const file_billing_billing_proto_rawDesc = "" +
 	"\bsubtotal\x18\x12 \x01(\x01R\bsubtotal\x12E\n" +
 	"\n" +
 	"properties\x18\x13 \x01(\v2%.nocloud.billing.AdditionalPropertiesR\n" +
-	"properties\x1aO\n" +
+	"properties\x12'\n" +
+	"\x0fpayment_gateway\x18\x14 \x01(\tR\x0epaymentGateway\x1aO\n" +
 	"\tMetaEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
 	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\"5\n" +

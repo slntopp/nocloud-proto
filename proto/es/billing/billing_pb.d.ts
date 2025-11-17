@@ -1228,6 +1228,11 @@ export declare class Invoice extends Message<Invoice> {
    */
   properties?: AdditionalProperties;
 
+  /**
+   * @generated from field: string payment_gateway = 20;
+   */
+  paymentGateway: string;
+
   constructor(data?: PartialMessage<Invoice>);
 
   static readonly runtime: typeof proto3;

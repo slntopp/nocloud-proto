@@ -3175,6 +3175,12 @@
             "in": "query",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "paymentGateway",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -9725,6 +9731,9 @@
         },
         "properties": {
           "$ref": "#/definitions/billingAdditionalProperties"
+        },
+        "paymentGateway": {
+          "type": "string"
         }
       }
     },
