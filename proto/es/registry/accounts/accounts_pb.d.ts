@@ -250,6 +250,11 @@ export declare class CreateRequest extends Message<CreateRequest> {
    */
   accountOwner: string;
 
+  /**
+   * @generated from field: string account_group = 8;
+   */
+  accountGroup: string;
+
   constructor(data?: PartialMessage<CreateRequest>);
 
   static readonly runtime: typeof proto3;

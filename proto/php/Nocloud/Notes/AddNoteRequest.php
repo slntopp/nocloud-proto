@@ -22,6 +22,10 @@ class AddNoteRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string msg = 2 [json_name = "msg"];</code>
      */
     protected $msg = '';
+    /**
+     * Generated from protobuf field <code>bool pinned = 3 [json_name = "pinned"];</code>
+     */
+    protected $pinned = false;
 
     /**
      * Constructor.
@@ -31,6 +35,7 @@ class AddNoteRequest extends \Google\Protobuf\Internal\Message
      *
      *     @type string $uuid
      *     @type string $msg
+     *     @type bool $pinned
      * }
      */
     public function __construct($data = NULL) {
@@ -78,6 +83,28 @@ class AddNoteRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->msg = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool pinned = 3 [json_name = "pinned"];</code>
+     * @return bool
+     */
+    public function getPinned()
+    {
+        return $this->pinned;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool pinned = 3 [json_name = "pinned"];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setPinned($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->pinned = $var;
 
         return $this;
     }

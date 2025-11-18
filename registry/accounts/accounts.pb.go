@@ -362,6 +362,7 @@ type CreateRequest struct {
 	Currency      *billing.Currency      `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`    // Account Balance Currency
 	Data          *structpb.Struct       `protobuf:"bytes,6,opt,name=data,proto3" json:"data,omitempty"`
 	AccountOwner  string                 `protobuf:"bytes,7,opt,name=account_owner,json=accountOwner,proto3" json:"account_owner,omitempty"` // Mother account of this account. If != "" - then this account is gonna be subaccount
+	AccountGroup  string                 `protobuf:"bytes,8,opt,name=account_group,json=accountGroup,proto3" json:"account_group,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -441,6 +442,13 @@ func (x *CreateRequest) GetData() *structpb.Struct {
 func (x *CreateRequest) GetAccountOwner() string {
 	if x != nil {
 		return x.AccountOwner
+	}
+	return ""
+}
+
+func (x *CreateRequest) GetAccountGroup() string {
+	if x != nil {
+		return x.AccountGroup
 	}
 	return ""
 }
@@ -2080,7 +2088,7 @@ const file_registry_accounts_accounts_proto_rawDesc = "" +
 	"\x19invoice_parameters_custom\x18\b \x01(\v22.nocloud.registry.accounts.InvoiceParametersCustomR\x17invoiceParametersCustom\"5\n" +
 	"\vCredentials\x12\x12\n" +
 	"\x04type\x18\x01 \x01(\tR\x04type\x12\x12\n" +
-	"\x04data\x18\x02 \x03(\tR\x04data\"\xb0\x02\n" +
+	"\x04data\x18\x02 \x03(\tR\x04data\"\xd5\x02\n" +
 	"\rCreateRequest\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12:\n" +
 	"\x04auth\x18\x02 \x01(\v2&.nocloud.registry.accounts.CredentialsR\x04auth\x12\x1c\n" +
@@ -2088,7 +2096,8 @@ const file_registry_accounts_accounts_proto_rawDesc = "" +
 	"\x06access\x18\x04 \x01(\x05H\x00R\x06access\x88\x01\x01\x125\n" +
 	"\bcurrency\x18\x05 \x01(\v2\x19.nocloud.billing.CurrencyR\bcurrency\x12+\n" +
 	"\x04data\x18\x06 \x01(\v2\x17.google.protobuf.StructR\x04data\x12#\n" +
-	"\raccount_owner\x18\a \x01(\tR\faccountOwnerB\t\n" +
+	"\raccount_owner\x18\a \x01(\tR\faccountOwner\x12#\n" +
+	"\raccount_group\x18\b \x01(\tR\faccountGroupB\t\n" +
 	"\a_access\"B\n" +
 	"\x0eCreateResponse\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x1c\n" +

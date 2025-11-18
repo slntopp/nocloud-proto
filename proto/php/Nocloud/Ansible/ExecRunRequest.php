@@ -18,6 +18,10 @@ class ExecRunRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string uuid = 1 [json_name = "uuid"];</code>
      */
     protected $uuid = '';
+    /**
+     * Generated from protobuf field <code>bool wait_finish = 2 [json_name = "waitFinish"];</code>
+     */
+    protected $wait_finish = false;
 
     /**
      * Constructor.
@@ -26,6 +30,7 @@ class ExecRunRequest extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $uuid
+     *     @type bool $wait_finish
      * }
      */
     public function __construct($data = NULL) {
@@ -51,6 +56,28 @@ class ExecRunRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->uuid = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool wait_finish = 2 [json_name = "waitFinish"];</code>
+     * @return bool
+     */
+    public function getWaitFinish()
+    {
+        return $this->wait_finish;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool wait_finish = 2 [json_name = "waitFinish"];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setWaitFinish($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->wait_finish = $var;
 
         return $this;
     }

@@ -46,6 +46,10 @@ class Currency extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string code = 7 [json_name = "code"];</code>
      */
     protected $code = '';
+    /**
+     * Generated from protobuf field <code>bool default = 8 [json_name = "default"];</code>
+     */
+    protected $default = false;
 
     /**
      * Constructor.
@@ -62,6 +66,7 @@ class Currency extends \Google\Protobuf\Internal\Message
      *     @type string $format
      *     @type string $code
      *           Unique code
+     *     @type bool $default
      * }
      */
     public function __construct($data = NULL) {
@@ -227,6 +232,28 @@ class Currency extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->code = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool default = 8 [json_name = "default"];</code>
+     * @return bool
+     */
+    public function getDefault()
+    {
+        return $this->default;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool default = 8 [json_name = "default"];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setDefault($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->default = $var;
 
         return $this;
     }

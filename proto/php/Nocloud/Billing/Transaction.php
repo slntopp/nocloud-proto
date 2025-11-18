@@ -90,6 +90,10 @@ class Transaction extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>optional string previous = 14 [json_name = "previous"];</code>
      */
     protected $previous = null;
+    /**
+     * Generated from protobuf field <code>bool ignore_overlapping = 15 [json_name = "ignoreOverlapping"];</code>
+     */
+    protected $ignore_overlapping = false;
 
     /**
      * Constructor.
@@ -124,6 +128,7 @@ class Transaction extends \Google\Protobuf\Internal\Message
      *     @type int|string $created
      *     @type string $base
      *     @type string $previous
+     *     @type bool $ignore_overlapping
      * }
      */
     public function __construct($data = NULL) {
@@ -505,6 +510,28 @@ class Transaction extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->previous = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool ignore_overlapping = 15 [json_name = "ignoreOverlapping"];</code>
+     * @return bool
+     */
+    public function getIgnoreOverlapping()
+    {
+        return $this->ignore_overlapping;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool ignore_overlapping = 15 [json_name = "ignoreOverlapping"];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setIgnoreOverlapping($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->ignore_overlapping = $var;
 
         return $this;
     }

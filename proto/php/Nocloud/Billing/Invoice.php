@@ -53,6 +53,8 @@ class Invoice extends \Google\Protobuf\Internal\Message
      */
     private $transactions;
     /**
+     * Final total, amount that client will pay
+     *
      * Generated from protobuf field <code>double total = 9 [json_name = "total"];</code>
      */
     protected $total = 0.0;
@@ -80,6 +82,30 @@ class Invoice extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string number = 15 [json_name = "number"];</code>
      */
     protected $number = '';
+    /**
+     * Linked instances
+     *
+     * Generated from protobuf field <code>repeated string instances = 16 [json_name = "instances"];</code>
+     */
+    private $instances;
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.TaxOptions tax_options = 17 [json_name = "taxOptions"];</code>
+     */
+    protected $tax_options = null;
+    /**
+     * Total before additional fees (taxes etc.)
+     *
+     * Generated from protobuf field <code>double subtotal = 18 [json_name = "subtotal"];</code>
+     */
+    protected $subtotal = 0.0;
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.AdditionalProperties properties = 19 [json_name = "properties"];</code>
+     */
+    protected $properties = null;
+    /**
+     * Generated from protobuf field <code>string payment_gateway = 20 [json_name = "paymentGateway"];</code>
+     */
+    protected $payment_gateway = '';
 
     /**
      * Constructor.
@@ -99,12 +125,20 @@ class Invoice extends \Google\Protobuf\Internal\Message
      *     @type string $account
      *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $transactions
      *     @type float $total
+     *           Final total, amount that client will pay
      *     @type array|\Google\Protobuf\Internal\MapField $meta
      *     @type \Nocloud\Billing\Currency $currency
      *     @type int|string $created
      *     @type array<\Nocloud\Billing\Item>|\Google\Protobuf\Internal\RepeatedField $items
      *     @type int $type
      *     @type string $number
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $instances
+     *           Linked instances
+     *     @type \Nocloud\Billing\TaxOptions $tax_options
+     *     @type float $subtotal
+     *           Total before additional fees (taxes etc.)
+     *     @type \Nocloud\Billing\AdditionalProperties $properties
+     *     @type string $payment_gateway
      * }
      */
     public function __construct($data = NULL) {
@@ -301,6 +335,8 @@ class Invoice extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Final total, amount that client will pay
+     *
      * Generated from protobuf field <code>double total = 9 [json_name = "total"];</code>
      * @return float
      */
@@ -310,6 +346,8 @@ class Invoice extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Final total, amount that client will pay
+     *
      * Generated from protobuf field <code>double total = 9 [json_name = "total"];</code>
      * @param float $var
      * @return $this
@@ -460,6 +498,144 @@ class Invoice extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->number = $var;
+
+        return $this;
+    }
+
+    /**
+     * Linked instances
+     *
+     * Generated from protobuf field <code>repeated string instances = 16 [json_name = "instances"];</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getInstances()
+    {
+        return $this->instances;
+    }
+
+    /**
+     * Linked instances
+     *
+     * Generated from protobuf field <code>repeated string instances = 16 [json_name = "instances"];</code>
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setInstances($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
+        $this->instances = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.TaxOptions tax_options = 17 [json_name = "taxOptions"];</code>
+     * @return \Nocloud\Billing\TaxOptions|null
+     */
+    public function getTaxOptions()
+    {
+        return $this->tax_options;
+    }
+
+    public function hasTaxOptions()
+    {
+        return isset($this->tax_options);
+    }
+
+    public function clearTaxOptions()
+    {
+        unset($this->tax_options);
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.TaxOptions tax_options = 17 [json_name = "taxOptions"];</code>
+     * @param \Nocloud\Billing\TaxOptions $var
+     * @return $this
+     */
+    public function setTaxOptions($var)
+    {
+        GPBUtil::checkMessage($var, \Nocloud\Billing\TaxOptions::class);
+        $this->tax_options = $var;
+
+        return $this;
+    }
+
+    /**
+     * Total before additional fees (taxes etc.)
+     *
+     * Generated from protobuf field <code>double subtotal = 18 [json_name = "subtotal"];</code>
+     * @return float
+     */
+    public function getSubtotal()
+    {
+        return $this->subtotal;
+    }
+
+    /**
+     * Total before additional fees (taxes etc.)
+     *
+     * Generated from protobuf field <code>double subtotal = 18 [json_name = "subtotal"];</code>
+     * @param float $var
+     * @return $this
+     */
+    public function setSubtotal($var)
+    {
+        GPBUtil::checkDouble($var);
+        $this->subtotal = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.AdditionalProperties properties = 19 [json_name = "properties"];</code>
+     * @return \Nocloud\Billing\AdditionalProperties|null
+     */
+    public function getProperties()
+    {
+        return $this->properties;
+    }
+
+    public function hasProperties()
+    {
+        return isset($this->properties);
+    }
+
+    public function clearProperties()
+    {
+        unset($this->properties);
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.AdditionalProperties properties = 19 [json_name = "properties"];</code>
+     * @param \Nocloud\Billing\AdditionalProperties $var
+     * @return $this
+     */
+    public function setProperties($var)
+    {
+        GPBUtil::checkMessage($var, \Nocloud\Billing\AdditionalProperties::class);
+        $this->properties = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string payment_gateway = 20 [json_name = "paymentGateway"];</code>
+     * @return string
+     */
+    public function getPaymentGateway()
+    {
+        return $this->payment_gateway;
+    }
+
+    /**
+     * Generated from protobuf field <code>string payment_gateway = 20 [json_name = "paymentGateway"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setPaymentGateway($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->payment_gateway = $var;
 
         return $this;
     }

@@ -76,6 +76,26 @@ class Account extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string paymentsGateway = 14 [json_name = "paymentsGateway"];</code>
      */
     protected $paymentsGateway = '';
+    /**
+     * Generated from protobuf field <code>bool is_email_verified = 15 [json_name = "isEmailVerified"];</code>
+     */
+    protected $is_email_verified = false;
+    /**
+     * Generated from protobuf field <code>bool is_phone_verified = 16 [json_name = "isPhoneVerified"];</code>
+     */
+    protected $is_phone_verified = false;
+    /**
+     * Generated from protobuf field <code>.nocloud.registry.accounts.AccountMeta meta = 17 [json_name = "meta"];</code>
+     */
+    protected $meta = null;
+    /**
+     * Generated from protobuf field <code>string language_code = 18 [json_name = "languageCode"];</code>
+     */
+    protected $language_code = '';
+    /**
+     * Generated from protobuf field <code>string account_group = 19 [json_name = "accountGroup"];</code>
+     */
+    protected $account_group = '';
 
     /**
      * Constructor.
@@ -100,6 +120,11 @@ class Account extends \Google\Protobuf\Internal\Message
      *     @type string $account_owner
      *           Mother account of this account. If != "" - then this account is subaccount
      *     @type string $paymentsGateway
+     *     @type bool $is_email_verified
+     *     @type bool $is_phone_verified
+     *     @type \Nocloud\Registry\Accounts\AccountMeta $meta
+     *     @type string $language_code
+     *     @type string $account_group
      * }
      */
     public function __construct($data = NULL) {
@@ -483,6 +508,126 @@ class Account extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->paymentsGateway = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool is_email_verified = 15 [json_name = "isEmailVerified"];</code>
+     * @return bool
+     */
+    public function getIsEmailVerified()
+    {
+        return $this->is_email_verified;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool is_email_verified = 15 [json_name = "isEmailVerified"];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setIsEmailVerified($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->is_email_verified = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool is_phone_verified = 16 [json_name = "isPhoneVerified"];</code>
+     * @return bool
+     */
+    public function getIsPhoneVerified()
+    {
+        return $this->is_phone_verified;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool is_phone_verified = 16 [json_name = "isPhoneVerified"];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setIsPhoneVerified($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->is_phone_verified = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.registry.accounts.AccountMeta meta = 17 [json_name = "meta"];</code>
+     * @return \Nocloud\Registry\Accounts\AccountMeta|null
+     */
+    public function getMeta()
+    {
+        return $this->meta;
+    }
+
+    public function hasMeta()
+    {
+        return isset($this->meta);
+    }
+
+    public function clearMeta()
+    {
+        unset($this->meta);
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.registry.accounts.AccountMeta meta = 17 [json_name = "meta"];</code>
+     * @param \Nocloud\Registry\Accounts\AccountMeta $var
+     * @return $this
+     */
+    public function setMeta($var)
+    {
+        GPBUtil::checkMessage($var, \Nocloud\Registry\Accounts\AccountMeta::class);
+        $this->meta = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string language_code = 18 [json_name = "languageCode"];</code>
+     * @return string
+     */
+    public function getLanguageCode()
+    {
+        return $this->language_code;
+    }
+
+    /**
+     * Generated from protobuf field <code>string language_code = 18 [json_name = "languageCode"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setLanguageCode($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->language_code = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string account_group = 19 [json_name = "accountGroup"];</code>
+     * @return string
+     */
+    public function getAccountGroup()
+    {
+        return $this->account_group;
+    }
+
+    /**
+     * Generated from protobuf field <code>string account_group = 19 [json_name = "accountGroup"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setAccountGroup($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->account_group = $var;
 
         return $this;
     }

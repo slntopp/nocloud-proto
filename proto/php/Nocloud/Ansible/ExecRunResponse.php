@@ -14,6 +14,14 @@ use Google\Protobuf\Internal\GPBUtil;
  */
 class ExecRunResponse extends \Google\Protobuf\Internal\Message
 {
+    /**
+     * Generated from protobuf field <code>string status = 1 [json_name = "status"];</code>
+     */
+    protected $status = '';
+    /**
+     * Generated from protobuf field <code>repeated .nocloud.ansible.ExecRunResponse.Error error = 2 [json_name = "error"];</code>
+     */
+    private $error;
 
     /**
      * Constructor.
@@ -21,11 +29,57 @@ class ExecRunResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
+     *     @type string $status
+     *     @type array<\Nocloud\Ansible\ExecRunResponse\Error>|\Google\Protobuf\Internal\RepeatedField $error
      * }
      */
     public function __construct($data = NULL) {
         \Nocloud\Ansible\GPBMetadata\Ansible::initOnce();
         parent::__construct($data);
+    }
+
+    /**
+     * Generated from protobuf field <code>string status = 1 [json_name = "status"];</code>
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Generated from protobuf field <code>string status = 1 [json_name = "status"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setStatus($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->status = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated .nocloud.ansible.ExecRunResponse.Error error = 2 [json_name = "error"];</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getError()
+    {
+        return $this->error;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated .nocloud.ansible.ExecRunResponse.Error error = 2 [json_name = "error"];</code>
+     * @param array<\Nocloud\Ansible\ExecRunResponse\Error>|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setError($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Nocloud\Ansible\ExecRunResponse\Error::class);
+        $this->error = $arr;
+
+        return $this;
     }
 
 }

@@ -31,9 +31,9 @@ class Showcase extends \Google\Protobuf\Internal\Message
      */
     private $items;
     /**
-     * Generated from protobuf field <code>.google.protobuf.Value promo = 5 [json_name = "promo"];</code>
+     * Generated from protobuf field <code>map<string, .nocloud.services_providers.LanguagePromo> promo = 5 [json_name = "promo"];</code>
      */
-    protected $promo = null;
+    private $promo;
     /**
      * Generated from protobuf field <code>bool primary = 6 [json_name = "primary"];</code>
      */
@@ -50,6 +50,18 @@ class Showcase extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>optional int32 sorter = 9 [json_name = "sorter"];</code>
      */
     protected $sorter = null;
+    /**
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 10 [json_name = "meta"];</code>
+     */
+    private $meta;
+    /**
+     * Generated from protobuf field <code>repeated string languages = 11 [json_name = "languages"];</code>
+     */
+    private $languages;
+    /**
+     * Generated from protobuf field <code>.nocloud.services_providers.Main main = 12 [json_name = "main"];</code>
+     */
+    protected $main = null;
 
     /**
      * Constructor.
@@ -61,11 +73,14 @@ class Showcase extends \Google\Protobuf\Internal\Message
      *     @type string $title
      *     @type string $icon
      *     @type array<\Nocloud\ServicesProviders\ShowcaseItem>|\Google\Protobuf\Internal\RepeatedField $items
-     *     @type \Google\Protobuf\Value $promo
+     *     @type array|\Google\Protobuf\Internal\MapField $promo
      *     @type bool $primary
      *     @type bool $public
      *     @type array<\Nocloud\ServicesProviders\LocationConf>|\Google\Protobuf\Internal\RepeatedField $locations
      *     @type int $sorter
+     *     @type array|\Google\Protobuf\Internal\MapField $meta
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $languages
+     *     @type \Nocloud\ServicesProviders\Main $main
      * }
      */
     public function __construct($data = NULL) {
@@ -162,33 +177,23 @@ class Showcase extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.google.protobuf.Value promo = 5 [json_name = "promo"];</code>
-     * @return \Google\Protobuf\Value|null
+     * Generated from protobuf field <code>map<string, .nocloud.services_providers.LanguagePromo> promo = 5 [json_name = "promo"];</code>
+     * @return \Google\Protobuf\Internal\MapField
      */
     public function getPromo()
     {
         return $this->promo;
     }
 
-    public function hasPromo()
-    {
-        return isset($this->promo);
-    }
-
-    public function clearPromo()
-    {
-        unset($this->promo);
-    }
-
     /**
-     * Generated from protobuf field <code>.google.protobuf.Value promo = 5 [json_name = "promo"];</code>
-     * @param \Google\Protobuf\Value $var
+     * Generated from protobuf field <code>map<string, .nocloud.services_providers.LanguagePromo> promo = 5 [json_name = "promo"];</code>
+     * @param array|\Google\Protobuf\Internal\MapField $var
      * @return $this
      */
     public function setPromo($var)
     {
-        GPBUtil::checkMessage($var, \Google\Protobuf\Value::class);
-        $this->promo = $var;
+        $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::MESSAGE, \Nocloud\ServicesProviders\LanguagePromo::class);
+        $this->promo = $arr;
 
         return $this;
     }
@@ -287,6 +292,82 @@ class Showcase extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt32($var);
         $this->sorter = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 10 [json_name = "meta"];</code>
+     * @return \Google\Protobuf\Internal\MapField
+     */
+    public function getMeta()
+    {
+        return $this->meta;
+    }
+
+    /**
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> meta = 10 [json_name = "meta"];</code>
+     * @param array|\Google\Protobuf\Internal\MapField $var
+     * @return $this
+     */
+    public function setMeta($var)
+    {
+        $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::MESSAGE, \Google\Protobuf\Value::class);
+        $this->meta = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated string languages = 11 [json_name = "languages"];</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getLanguages()
+    {
+        return $this->languages;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated string languages = 11 [json_name = "languages"];</code>
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setLanguages($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
+        $this->languages = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.services_providers.Main main = 12 [json_name = "main"];</code>
+     * @return \Nocloud\ServicesProviders\Main|null
+     */
+    public function getMain()
+    {
+        return $this->main;
+    }
+
+    public function hasMain()
+    {
+        return isset($this->main);
+    }
+
+    public function clearMain()
+    {
+        unset($this->main);
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.services_providers.Main main = 12 [json_name = "main"];</code>
+     * @param \Nocloud\ServicesProviders\Main $var
+     * @return $this
+     */
+    public function setMain($var)
+    {
+        GPBUtil::checkMessage($var, \Nocloud\ServicesProviders\Main::class);
+        $this->main = $var;
 
         return $this;
     }

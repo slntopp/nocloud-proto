@@ -15,6 +15,8 @@ use Google\Protobuf\Internal\GPBUtil;
 class CreateRequest extends \Google\Protobuf\Internal\Message
 {
     /**
+     * Ignored when auto_assign is true
+     *
      * Generated from protobuf field <code>string ig = 1 [json_name = "ig"];</code>
      */
     protected $ig = '';
@@ -23,11 +25,29 @@ class CreateRequest extends \Google\Protobuf\Internal\Message
      */
     protected $instance = null;
     /**
-     * uuid of promocode
+     * Uuid of promocode
      *
      * Generated from protobuf field <code>optional string promocode = 3 [json_name = "promocode"];</code>
      */
     protected $promocode = null;
+    /**
+     * If true, then auto creates service, instance group, links instance group with sp (if not already done). ig field is ignored in this case
+     *
+     * Generated from protobuf field <code>bool auto_assign = 4 [json_name = "autoAssign"];</code>
+     */
+    protected $auto_assign = false;
+    /**
+     * Instances group service provider. Used only when auto_assign is true. Required field if auto_assign is true
+     *
+     * Generated from protobuf field <code>string sp = 5 [json_name = "sp"];</code>
+     */
+    protected $sp = '';
+    /**
+     * Target account. Used only when auto_assign is true. Required field if auto_assign is true
+     *
+     * Generated from protobuf field <code>string account = 6 [json_name = "account"];</code>
+     */
+    protected $account = '';
 
     /**
      * Constructor.
@@ -36,9 +56,16 @@ class CreateRequest extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $ig
+     *           Ignored when auto_assign is true
      *     @type \Nocloud\Instances\Instance $instance
      *     @type string $promocode
-     *           uuid of promocode
+     *           Uuid of promocode
+     *     @type bool $auto_assign
+     *           If true, then auto creates service, instance group, links instance group with sp (if not already done). ig field is ignored in this case
+     *     @type string $sp
+     *           Instances group service provider. Used only when auto_assign is true. Required field if auto_assign is true
+     *     @type string $account
+     *           Target account. Used only when auto_assign is true. Required field if auto_assign is true
      * }
      */
     public function __construct($data = NULL) {
@@ -47,6 +74,8 @@ class CreateRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Ignored when auto_assign is true
+     *
      * Generated from protobuf field <code>string ig = 1 [json_name = "ig"];</code>
      * @return string
      */
@@ -56,6 +85,8 @@ class CreateRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Ignored when auto_assign is true
+     *
      * Generated from protobuf field <code>string ig = 1 [json_name = "ig"];</code>
      * @param string $var
      * @return $this
@@ -101,7 +132,7 @@ class CreateRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * uuid of promocode
+     * Uuid of promocode
      *
      * Generated from protobuf field <code>optional string promocode = 3 [json_name = "promocode"];</code>
      * @return string
@@ -122,7 +153,7 @@ class CreateRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * uuid of promocode
+     * Uuid of promocode
      *
      * Generated from protobuf field <code>optional string promocode = 3 [json_name = "promocode"];</code>
      * @param string $var
@@ -132,6 +163,84 @@ class CreateRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->promocode = $var;
+
+        return $this;
+    }
+
+    /**
+     * If true, then auto creates service, instance group, links instance group with sp (if not already done). ig field is ignored in this case
+     *
+     * Generated from protobuf field <code>bool auto_assign = 4 [json_name = "autoAssign"];</code>
+     * @return bool
+     */
+    public function getAutoAssign()
+    {
+        return $this->auto_assign;
+    }
+
+    /**
+     * If true, then auto creates service, instance group, links instance group with sp (if not already done). ig field is ignored in this case
+     *
+     * Generated from protobuf field <code>bool auto_assign = 4 [json_name = "autoAssign"];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setAutoAssign($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->auto_assign = $var;
+
+        return $this;
+    }
+
+    /**
+     * Instances group service provider. Used only when auto_assign is true. Required field if auto_assign is true
+     *
+     * Generated from protobuf field <code>string sp = 5 [json_name = "sp"];</code>
+     * @return string
+     */
+    public function getSp()
+    {
+        return $this->sp;
+    }
+
+    /**
+     * Instances group service provider. Used only when auto_assign is true. Required field if auto_assign is true
+     *
+     * Generated from protobuf field <code>string sp = 5 [json_name = "sp"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setSp($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->sp = $var;
+
+        return $this;
+    }
+
+    /**
+     * Target account. Used only when auto_assign is true. Required field if auto_assign is true
+     *
+     * Generated from protobuf field <code>string account = 6 [json_name = "account"];</code>
+     * @return string
+     */
+    public function getAccount()
+    {
+        return $this->account;
+    }
+
+    /**
+     * Target account. Used only when auto_assign is true. Required field if auto_assign is true
+     *
+     * Generated from protobuf field <code>string account = 6 [json_name = "account"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setAccount($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->account = $var;
 
         return $this;
     }

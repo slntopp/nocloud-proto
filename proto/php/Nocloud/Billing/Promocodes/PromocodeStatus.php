@@ -15,21 +15,26 @@ use UnexpectedValueException;
 class PromocodeStatus
 {
     /**
-     * Generated from protobuf enum <code>ACTIVE = 0;</code>
+     * Generated from protobuf enum <code>STATUS_UNKNOWN = 0;</code>
      */
-    const ACTIVE = 0;
+    const STATUS_UNKNOWN = 0;
+    /**
+     * Generated from protobuf enum <code>ACTIVE = 1;</code>
+     */
+    const ACTIVE = 1;
     /**
      * Temporary inactive for applying (still active for users which entered this promocode)
      *
-     * Generated from protobuf enum <code>SUSPENDED = 1;</code>
+     * Generated from protobuf enum <code>SUSPENDED = 2;</code>
      */
-    const SUSPENDED = 1;
+    const SUSPENDED = 2;
     /**
-     * Generated from protobuf enum <code>DELETED = 2;</code>
+     * Generated from protobuf enum <code>DELETED = 3;</code>
      */
-    const DELETED = 2;
+    const DELETED = 3;
 
     private static $valueToName = [
+        self::STATUS_UNKNOWN => 'STATUS_UNKNOWN',
         self::ACTIVE => 'ACTIVE',
         self::SUSPENDED => 'SUSPENDED',
         self::DELETED => 'DELETED',

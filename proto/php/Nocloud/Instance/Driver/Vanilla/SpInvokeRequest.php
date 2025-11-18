@@ -26,6 +26,10 @@ class SpInvokeRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>map<string, .google.protobuf.Value> params = 3 [json_name = "params"];</code>
      */
     private $params;
+    /**
+     * Generated from protobuf field <code>bool admin_access = 4 [json_name = "adminAccess"];</code>
+     */
+    protected $admin_access = false;
 
     /**
      * Constructor.
@@ -36,6 +40,7 @@ class SpInvokeRequest extends \Google\Protobuf\Internal\Message
      *     @type \Nocloud\ServicesProviders\ServicesProvider $services_provider
      *     @type string $method
      *     @type array|\Google\Protobuf\Internal\MapField $params
+     *     @type bool $admin_access
      * }
      */
     public function __construct($data = NULL) {
@@ -115,6 +120,28 @@ class SpInvokeRequest extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::MESSAGE, \Google\Protobuf\Value::class);
         $this->params = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool admin_access = 4 [json_name = "adminAccess"];</code>
+     * @return bool
+     */
+    public function getAdminAccess()
+    {
+        return $this->admin_access;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool admin_access = 4 [json_name = "adminAccess"];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setAdminAccess($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->admin_access = $var;
 
         return $this;
     }

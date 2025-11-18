@@ -78,6 +78,14 @@ class ServicesProvider extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>map<string, .nocloud.services_providers.Hook> hooks = 15 [json_name = "hooks"];</code>
      */
     private $hooks;
+    /**
+     * Generated from protobuf field <code>.nocloud.services_providers.SuspendRules suspend_rules = 16 [json_name = "suspendRules"];</code>
+     */
+    protected $suspend_rules = null;
+    /**
+     * Generated from protobuf field <code>optional int64 monitoring_frequency = 17 [json_name = "monitoringFrequency"];</code>
+     */
+    protected $monitoring_frequency = null;
 
     /**
      * Constructor.
@@ -102,6 +110,8 @@ class ServicesProvider extends \Google\Protobuf\Internal\Message
      *     @type array|\Google\Protobuf\Internal\MapField $meta
      *     @type int $status
      *     @type array|\Google\Protobuf\Internal\MapField $hooks
+     *     @type \Nocloud\ServicesProviders\SuspendRules $suspend_rules
+     *     @type int|string $monitoring_frequency
      * }
      */
     public function __construct($data = NULL) {
@@ -473,6 +483,70 @@ class ServicesProvider extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::MESSAGE, \Nocloud\ServicesProviders\Hook::class);
         $this->hooks = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.services_providers.SuspendRules suspend_rules = 16 [json_name = "suspendRules"];</code>
+     * @return \Nocloud\ServicesProviders\SuspendRules|null
+     */
+    public function getSuspendRules()
+    {
+        return $this->suspend_rules;
+    }
+
+    public function hasSuspendRules()
+    {
+        return isset($this->suspend_rules);
+    }
+
+    public function clearSuspendRules()
+    {
+        unset($this->suspend_rules);
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.services_providers.SuspendRules suspend_rules = 16 [json_name = "suspendRules"];</code>
+     * @param \Nocloud\ServicesProviders\SuspendRules $var
+     * @return $this
+     */
+    public function setSuspendRules($var)
+    {
+        GPBUtil::checkMessage($var, \Nocloud\ServicesProviders\SuspendRules::class);
+        $this->suspend_rules = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>optional int64 monitoring_frequency = 17 [json_name = "monitoringFrequency"];</code>
+     * @return int|string
+     */
+    public function getMonitoringFrequency()
+    {
+        return isset($this->monitoring_frequency) ? $this->monitoring_frequency : 0;
+    }
+
+    public function hasMonitoringFrequency()
+    {
+        return isset($this->monitoring_frequency);
+    }
+
+    public function clearMonitoringFrequency()
+    {
+        unset($this->monitoring_frequency);
+    }
+
+    /**
+     * Generated from protobuf field <code>optional int64 monitoring_frequency = 17 [json_name = "monitoringFrequency"];</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setMonitoringFrequency($var)
+    {
+        GPBUtil::checkInt64($var);
+        $this->monitoring_frequency = $var;
 
         return $this;
     }

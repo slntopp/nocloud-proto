@@ -2,15 +2,15 @@
 // GENERATED CODE -- DO NOT EDIT!
 
 // Original file comments:
-//
+// 
 // Copyright © 2021-2023 Nikita Ivanovski info@slnt-opp.xyz
-//
+// 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+// 
 // http://www.apache.org/licenses/LICENSE-2.0
-//
+// 
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -410,6 +410,20 @@ class BillingServiceClient extends \Grpc\BaseStub {
     }
 
     /**
+     * @param \Nocloud\Billing\SendInvoiceEmailRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function SendInvoiceEmail(\Nocloud\Billing\SendInvoiceEmailRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.billing.BillingService/SendInvoiceEmail',
+        $argument,
+        ['\Nocloud\Billing\SendInvoiceEmailResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * @param \Nocloud\Billing\GetInvoiceSettingsTemplateExampleRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -434,6 +448,20 @@ class BillingServiceClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/nocloud.billing.BillingService/RunDailyCronJob',
         $argument,
         ['\Nocloud\Billing\RunDailyCronJobResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Billing\StreamRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\ServerStreamingCall
+     */
+    public function Stream(\Nocloud\Billing\StreamRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_serverStreamRequest('/nocloud.billing.BillingService/Stream',
+        $argument,
+        ['\Nocloud\Billing\StreamResponse', 'decode'],
         $metadata, $options);
     }
 

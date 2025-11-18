@@ -29,13 +29,13 @@ class Item extends \Google\Protobuf\Internal\Message
      */
     protected $price = 0.0;
     /**
-     * Generated from protobuf field <code>string instance = 4 [json_name = "instance"];</code>
-     */
-    protected $instance = '';
-    /**
-     * Generated from protobuf field <code>string description = 5 [json_name = "description"];</code>
+     * Generated from protobuf field <code>string description = 4 [json_name = "description"];</code>
      */
     protected $description = '';
+    /**
+     * Generated from protobuf field <code>bool apply_tax = 5 [json_name = "applyTax"];</code>
+     */
+    protected $apply_tax = false;
 
     /**
      * Constructor.
@@ -46,8 +46,8 @@ class Item extends \Google\Protobuf\Internal\Message
      *     @type int $amount
      *     @type string $unit
      *     @type float $price
-     *     @type string $instance
      *     @type string $description
+     *     @type bool $apply_tax
      * }
      */
     public function __construct($data = NULL) {
@@ -122,29 +122,7 @@ class Item extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string instance = 4 [json_name = "instance"];</code>
-     * @return string
-     */
-    public function getInstance()
-    {
-        return $this->instance;
-    }
-
-    /**
-     * Generated from protobuf field <code>string instance = 4 [json_name = "instance"];</code>
-     * @param string $var
-     * @return $this
-     */
-    public function setInstance($var)
-    {
-        GPBUtil::checkString($var, True);
-        $this->instance = $var;
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>string description = 5 [json_name = "description"];</code>
+     * Generated from protobuf field <code>string description = 4 [json_name = "description"];</code>
      * @return string
      */
     public function getDescription()
@@ -153,7 +131,7 @@ class Item extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string description = 5 [json_name = "description"];</code>
+     * Generated from protobuf field <code>string description = 4 [json_name = "description"];</code>
      * @param string $var
      * @return $this
      */
@@ -161,6 +139,28 @@ class Item extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->description = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool apply_tax = 5 [json_name = "applyTax"];</code>
+     * @return bool
+     */
+    public function getApplyTax()
+    {
+        return $this->apply_tax;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool apply_tax = 5 [json_name = "applyTax"];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setApplyTax($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->apply_tax = $var;
 
         return $this;
     }

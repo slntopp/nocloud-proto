@@ -30,6 +30,10 @@ class AdminNote extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>int64 updated = 4 [json_name = "updated"];</code>
      */
     protected $updated = 0;
+    /**
+     * Generated from protobuf field <code>bool pinned = 5 [json_name = "pinned"];</code>
+     */
+    protected $pinned = false;
 
     /**
      * Constructor.
@@ -41,6 +45,7 @@ class AdminNote extends \Google\Protobuf\Internal\Message
      *     @type string $msg
      *     @type int|string $created
      *     @type int|string $updated
+     *     @type bool $pinned
      * }
      */
     public function __construct($data = NULL) {
@@ -132,6 +137,28 @@ class AdminNote extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt64($var);
         $this->updated = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool pinned = 5 [json_name = "pinned"];</code>
+     * @return bool
+     */
+    public function getPinned()
+    {
+        return $this->pinned;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool pinned = 5 [json_name = "pinned"];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setPinned($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->pinned = $var;
 
         return $this;
     }

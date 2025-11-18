@@ -54,6 +54,10 @@ class CreateRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string account_owner = 7 [json_name = "accountOwner"];</code>
      */
     protected $account_owner = '';
+    /**
+     * Generated from protobuf field <code>string account_group = 8 [json_name = "accountGroup"];</code>
+     */
+    protected $account_group = '';
 
     /**
      * Constructor.
@@ -74,6 +78,7 @@ class CreateRequest extends \Google\Protobuf\Internal\Message
      *     @type \Google\Protobuf\Struct $data
      *     @type string $account_owner
      *           Mother account of this account. If != "" - then this account is gonna be subaccount
+     *     @type string $account_group
      * }
      */
     public function __construct($data = NULL) {
@@ -295,6 +300,28 @@ class CreateRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->account_owner = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string account_group = 8 [json_name = "accountGroup"];</code>
+     * @return string
+     */
+    public function getAccountGroup()
+    {
+        return $this->account_group;
+    }
+
+    /**
+     * Generated from protobuf field <code>string account_group = 8 [json_name = "accountGroup"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setAccountGroup($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->account_group = $var;
 
         return $this;
     }

@@ -16,8 +16,10 @@ class Edge
           return;
         }
         \Nocloud\States\GPBMetadata\States::initOnce();
+        \GPBMetadata\Google\Protobuf\Struct::initOnce();
+        \Google\Api\GPBMetadata\Annotations::initOnce();
         $pool->internalAddGeneratedFile(
-            "\x0A\xFB\x02\x0A\x0Fedge/edge.proto\x12\x0Cnocloud.edge\"\x0D\x0A\x0BTestRequest\"<\x0A\x0CTestResponse\x12\x16\x0A\x06result\x18\x01 \x01(\x08R\x06result\x12\x14\x0A\x05error\x18\x02 \x01(\x09R\x05error\"\x07\x0A\x05Empty2\x8B\x01\x0A\x0BEdgeService\x12=\x0A\x04Test\x12\x19.nocloud.edge.TestRequest\x1A\x1A.nocloud.edge.TestResponse\x12=\x0A\x09PostState\x12\x1B.nocloud.states.ObjectState\x1A\x13.nocloud.edge.EmptyBn\x0A\x10com.nocloud.edgeB\x09EdgeProtoP\x01\xA2\x02\x03NEX\xAA\x02\x0CNocloud.Edge\xCA\x02\x0CNocloud\\Edge\xE2\x02\x18Nocloud\\Edge\\GPBMetadata\xEA\x02\x0DNocloud::Edgeb\x06proto3"
+            "\x0A\x8A\x05\x0A\x0Fedge/edge.proto\x12\x0Cnocloud.edge\x1A\x1Cgoogle/protobuf/struct.proto\x1A\x1Cgoogle/api/annotations.proto\"\x0D\x0A\x0BTestRequest\"<\x0A\x0CTestResponse\x12\x16\x0A\x06result\x18\x01 \x01(\x08R\x06result\x12\x14\x0A\x05error\x18\x02 \x01(\x09R\x05error\"\x07\x0A\x05Empty\"P\x0A\x0AConfigData\x12\x14\x0A\x05field\x18\x01 \x01(\x09R\x05field\x12,\x0A\x05value\x18\x02 \x01(\x0B2\x16.google.protobuf.ValueR\x05value2\x8C\x02\x0A\x0BEdgeService\x12=\x0A\x04Test\x12\x19.nocloud.edge.TestRequest\x1A\x1A.nocloud.edge.TestResponse\x12Z\x0A\x09PostState\x12\x1B.nocloud.states.ObjectState\x1A\x13.nocloud.edge.Empty\"\x1B\x82\xD3\xE4\x93\x02\x15\"\x10/edge/post_state:\x01*\x12b\x0A\x0EPostConfigData\x12\x18.nocloud.edge.ConfigData\x1A\x13.nocloud.edge.Empty\"!\x82\xD3\xE4\x93\x02\x1B\"\x16/edge/post_config_data:\x01*Bn\x0A\x10com.nocloud.edgeB\x09EdgeProtoP\x01\xA2\x02\x03NEX\xAA\x02\x0CNocloud.Edge\xCA\x02\x0CNocloud\\Edge\xE2\x02\x18Nocloud\\Edge\\GPBMetadata\xEA\x02\x0DNocloud::Edgeb\x06proto3"
         , true);
 
         static::$is_initialized = true;

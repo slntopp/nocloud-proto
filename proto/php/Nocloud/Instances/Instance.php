@@ -88,6 +88,10 @@ class Instance extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>repeated string addons = 18 [json_name = "addons"];</code>
      */
     private $addons;
+    /**
+     * Generated from protobuf field <code>.nocloud.instances.InstanceMeta meta = 19 [json_name = "meta"];</code>
+     */
+    protected $meta = null;
 
     /**
      * Constructor.
@@ -114,6 +118,7 @@ class Instance extends \Google\Protobuf\Internal\Message
      *     @type int|string $period
      *     @type float $estimate
      *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $addons
+     *     @type \Nocloud\Instances\InstanceMeta $meta
      * }
      */
     public function __construct($data = NULL) {
@@ -567,6 +572,38 @@ class Instance extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
         $this->addons = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.instances.InstanceMeta meta = 19 [json_name = "meta"];</code>
+     * @return \Nocloud\Instances\InstanceMeta|null
+     */
+    public function getMeta()
+    {
+        return $this->meta;
+    }
+
+    public function hasMeta()
+    {
+        return isset($this->meta);
+    }
+
+    public function clearMeta()
+    {
+        unset($this->meta);
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.instances.InstanceMeta meta = 19 [json_name = "meta"];</code>
+     * @param \Nocloud\Instances\InstanceMeta $var
+     * @return $this
+     */
+    public function setMeta($var)
+    {
+        GPBUtil::checkMessage($var, \Nocloud\Instances\InstanceMeta::class);
+        $this->meta = $var;
 
         return $this;
     }

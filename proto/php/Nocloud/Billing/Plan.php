@@ -78,6 +78,10 @@ class Plan extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>repeated .nocloud.billing.CustomEvent custom_events = 13 [json_name = "customEvents"];</code>
      */
     private $custom_events;
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.AdditionalProperties properties = 14 [json_name = "properties"];</code>
+     */
+    protected $properties = null;
 
     /**
      * Constructor.
@@ -104,6 +108,7 @@ class Plan extends \Google\Protobuf\Internal\Message
      *     @type int $status
      *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $addons
      *     @type array<\Nocloud\Billing\CustomEvent>|\Google\Protobuf\Internal\RepeatedField $custom_events
+     *     @type \Nocloud\Billing\AdditionalProperties $properties
      * }
      */
     public function __construct($data = NULL) {
@@ -427,6 +432,38 @@ class Plan extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Nocloud\Billing\CustomEvent::class);
         $this->custom_events = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.AdditionalProperties properties = 14 [json_name = "properties"];</code>
+     * @return \Nocloud\Billing\AdditionalProperties|null
+     */
+    public function getProperties()
+    {
+        return $this->properties;
+    }
+
+    public function hasProperties()
+    {
+        return isset($this->properties);
+    }
+
+    public function clearProperties()
+    {
+        unset($this->properties);
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.AdditionalProperties properties = 14 [json_name = "properties"];</code>
+     * @param \Nocloud\Billing\AdditionalProperties $var
+     * @return $this
+     */
+    public function setProperties($var)
+    {
+        GPBUtil::checkMessage($var, \Nocloud\Billing\AdditionalProperties::class);
+        $this->properties = $var;
 
         return $this;
     }

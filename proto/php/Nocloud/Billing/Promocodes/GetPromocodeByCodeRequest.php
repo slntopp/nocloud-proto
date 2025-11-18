@@ -18,6 +18,10 @@ class GetPromocodeByCodeRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string code = 1 [json_name = "code"];</code>
      */
     protected $code = '';
+    /**
+     * Generated from protobuf field <code>optional string billing_plan = 2 [json_name = "billingPlan"];</code>
+     */
+    protected $billing_plan = null;
 
     /**
      * Constructor.
@@ -26,6 +30,7 @@ class GetPromocodeByCodeRequest extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $code
+     *     @type string $billing_plan
      * }
      */
     public function __construct($data = NULL) {
@@ -51,6 +56,38 @@ class GetPromocodeByCodeRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->code = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string billing_plan = 2 [json_name = "billingPlan"];</code>
+     * @return string
+     */
+    public function getBillingPlan()
+    {
+        return isset($this->billing_plan) ? $this->billing_plan : '';
+    }
+
+    public function hasBillingPlan()
+    {
+        return isset($this->billing_plan);
+    }
+
+    public function clearBillingPlan()
+    {
+        unset($this->billing_plan);
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string billing_plan = 2 [json_name = "billingPlan"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setBillingPlan($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->billing_plan = $var;
 
         return $this;
     }

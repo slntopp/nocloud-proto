@@ -120,6 +120,10 @@ class Record extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string addon = 19 [json_name = "addon"];</code>
      */
     protected $addon = '';
+    /**
+     * Generated from protobuf field <code>bool ignore_overlapping = 20 [json_name = "ignoreOverlapping"];</code>
+     */
+    protected $ignore_overlapping = false;
 
     /**
      * Constructor.
@@ -164,6 +168,7 @@ class Record extends \Google\Protobuf\Internal\Message
      *     @type float $cost
      *     @type string $addon
      *           Addon key
+     *     @type bool $ignore_overlapping
      * }
      */
     public function __construct($data = NULL) {
@@ -675,6 +680,28 @@ class Record extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->addon = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool ignore_overlapping = 20 [json_name = "ignoreOverlapping"];</code>
+     * @return bool
+     */
+    public function getIgnoreOverlapping()
+    {
+        return $this->ignore_overlapping;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool ignore_overlapping = 20 [json_name = "ignoreOverlapping"];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setIgnoreOverlapping($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->ignore_overlapping = $var;
 
         return $this;
     }

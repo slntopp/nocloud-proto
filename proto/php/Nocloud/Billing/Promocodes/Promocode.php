@@ -37,9 +37,9 @@ class Promocode extends \Google\Protobuf\Internal\Message
      */
     protected $status = 0;
     /**
-     * Generated from protobuf field <code>.nocloud.billing.promocodes.PromocodeState state = 6 [json_name = "state"];</code>
+     * Generated from protobuf field <code>.nocloud.billing.promocodes.PromocodeCondition condition = 6 [json_name = "condition"];</code>
      */
-    protected $state = 0;
+    protected $condition = 0;
     /**
      * User can't apply promocode after due_date. 0 - unlimited
      *
@@ -101,7 +101,7 @@ class Promocode extends \Google\Protobuf\Internal\Message
      *     @type string $code
      *           Unique code, which user must enter as promocode
      *     @type int $status
-     *     @type int $state
+     *     @type int $condition
      *     @type int|string $due_date
      *           User can't apply promocode after due_date. 0 - unlimited
      *     @type int|string $limit
@@ -239,23 +239,23 @@ class Promocode extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.nocloud.billing.promocodes.PromocodeState state = 6 [json_name = "state"];</code>
+     * Generated from protobuf field <code>.nocloud.billing.promocodes.PromocodeCondition condition = 6 [json_name = "condition"];</code>
      * @return int
      */
-    public function getState()
+    public function getCondition()
     {
-        return $this->state;
+        return $this->condition;
     }
 
     /**
-     * Generated from protobuf field <code>.nocloud.billing.promocodes.PromocodeState state = 6 [json_name = "state"];</code>
+     * Generated from protobuf field <code>.nocloud.billing.promocodes.PromocodeCondition condition = 6 [json_name = "condition"];</code>
      * @param int $var
      * @return $this
      */
-    public function setState($var)
+    public function setCondition($var)
     {
-        GPBUtil::checkEnum($var, \Nocloud\Billing\Promocodes\PromocodeState::class);
-        $this->state = $var;
+        GPBUtil::checkEnum($var, \Nocloud\Billing\Promocodes\PromocodeCondition::class);
+        $this->condition = $var;
 
         return $this;
     }

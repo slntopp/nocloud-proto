@@ -22,6 +22,18 @@ class ListRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>bool show_deleted = 2 [json_name = "showDeleted"];</code>
      */
     protected $show_deleted = false;
+    /**
+     * Generated from protobuf field <code>repeated string exclude_uuids = 3 [json_name = "excludeUuids"];</code>
+     */
+    private $exclude_uuids;
+    /**
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> filters = 4 [json_name = "filters"];</code>
+     */
+    private $filters;
+    /**
+     * Generated from protobuf field <code>bool omitPromos = 5 [json_name = "omitPromos"];</code>
+     */
+    protected $omitPromos = false;
 
     /**
      * Constructor.
@@ -31,6 +43,9 @@ class ListRequest extends \Google\Protobuf\Internal\Message
      *
      *     @type bool $anonymously
      *     @type bool $show_deleted
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $exclude_uuids
+     *     @type array|\Google\Protobuf\Internal\MapField $filters
+     *     @type bool $omitPromos
      * }
      */
     public function __construct($data = NULL) {
@@ -78,6 +93,72 @@ class ListRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkBool($var);
         $this->show_deleted = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated string exclude_uuids = 3 [json_name = "excludeUuids"];</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getExcludeUuids()
+    {
+        return $this->exclude_uuids;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated string exclude_uuids = 3 [json_name = "excludeUuids"];</code>
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setExcludeUuids($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
+        $this->exclude_uuids = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> filters = 4 [json_name = "filters"];</code>
+     * @return \Google\Protobuf\Internal\MapField
+     */
+    public function getFilters()
+    {
+        return $this->filters;
+    }
+
+    /**
+     * Generated from protobuf field <code>map<string, .google.protobuf.Value> filters = 4 [json_name = "filters"];</code>
+     * @param array|\Google\Protobuf\Internal\MapField $var
+     * @return $this
+     */
+    public function setFilters($var)
+    {
+        $arr = GPBUtil::checkMapField($var, \Google\Protobuf\Internal\GPBType::STRING, \Google\Protobuf\Internal\GPBType::MESSAGE, \Google\Protobuf\Value::class);
+        $this->filters = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool omitPromos = 5 [json_name = "omitPromos"];</code>
+     * @return bool
+     */
+    public function getOmitPromos()
+    {
+        return $this->omitPromos;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool omitPromos = 5 [json_name = "omitPromos"];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setOmitPromos($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->omitPromos = $var;
 
         return $this;
     }

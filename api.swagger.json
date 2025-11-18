@@ -12173,6 +12173,9 @@
         "accountOwner": {
           "type": "string",
           "title": "Mother account of this account. If != \"\" - then this account is gonna be subaccount"
+        },
+        "accountGroup": {
+          "type": "string"
         }
       }
     },

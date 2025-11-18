@@ -54,6 +54,10 @@ class Addon extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.nocloud.billing.addons.Kind kind = 10 [json_name = "kind"];</code>
      */
     protected $kind = 0;
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.addons.Action action = 11 [json_name = "action"];</code>
+     */
+    protected $action = null;
 
     /**
      * Constructor.
@@ -71,6 +75,7 @@ class Addon extends \Google\Protobuf\Internal\Message
      *     @type int|string $created
      *     @type bool $system
      *     @type int $kind
+     *     @type \Nocloud\Billing\Addons\Action $action
      * }
      */
     public function __construct($data = NULL) {
@@ -294,6 +299,38 @@ class Addon extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkEnum($var, \Nocloud\Billing\Addons\Kind::class);
         $this->kind = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.addons.Action action = 11 [json_name = "action"];</code>
+     * @return \Nocloud\Billing\Addons\Action|null
+     */
+    public function getAction()
+    {
+        return $this->action;
+    }
+
+    public function hasAction()
+    {
+        return isset($this->action);
+    }
+
+    public function clearAction()
+    {
+        unset($this->action);
+    }
+
+    /**
+     * Generated from protobuf field <code>.nocloud.billing.addons.Action action = 11 [json_name = "action"];</code>
+     * @param \Nocloud\Billing\Addons\Action $var
+     * @return $this
+     */
+    public function setAction($var)
+    {
+        GPBUtil::checkMessage($var, \Nocloud\Billing\Addons\Action::class);
+        $this->action = $var;
 
         return $this;
     }

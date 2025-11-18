@@ -22,6 +22,10 @@ class UpdateInvoiceRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>bool is_send_email = 2 [json_name = "isSendEmail"];</code>
      */
     protected $is_send_email = false;
+    /**
+     * Generated from protobuf field <code>bool ignore_null_fields = 3 [json_name = "ignoreNullFields"];</code>
+     */
+    protected $ignore_null_fields = false;
 
     /**
      * Constructor.
@@ -31,6 +35,7 @@ class UpdateInvoiceRequest extends \Google\Protobuf\Internal\Message
      *
      *     @type \Nocloud\Billing\Invoice $invoice
      *     @type bool $is_send_email
+     *     @type bool $ignore_null_fields
      * }
      */
     public function __construct($data = NULL) {
@@ -88,6 +93,28 @@ class UpdateInvoiceRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkBool($var);
         $this->is_send_email = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool ignore_null_fields = 3 [json_name = "ignoreNullFields"];</code>
+     * @return bool
+     */
+    public function getIgnoreNullFields()
+    {
+        return $this->ignore_null_fields;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool ignore_null_fields = 3 [json_name = "ignoreNullFields"];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setIgnoreNullFields($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->ignore_null_fields = $var;
 
         return $this;
     }

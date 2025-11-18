@@ -2,15 +2,15 @@
 // GENERATED CODE -- DO NOT EDIT!
 
 // Original file comments:
-//
+// 
 // Copyright © 2021-2023 Nikita Ivanovski info@slnt-opp.xyz
-//
+// 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+// 
 // http://www.apache.org/licenses/LICENSE-2.0
-//
+// 
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -210,6 +210,62 @@ class AccountsServiceClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/nocloud.registry.AccountsService/Unsuspend',
         $argument,
         ['\Nocloud\Registry\Accounts\UnsuspendResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Registry\VerificationRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function Verify(\Nocloud\Registry\VerificationRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.registry.AccountsService/Verify',
+        $argument,
+        ['\Nocloud\Registry\VerificationResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Registry\Accounts\ChangePhoneRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function ChangePhone(\Nocloud\Registry\Accounts\ChangePhoneRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.registry.AccountsService/ChangePhone',
+        $argument,
+        ['\Nocloud\Registry\Accounts\ChangePhoneResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Registry\Accounts\ChangeLanguageCodeRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function ChangeLanguageCode(\Nocloud\Registry\Accounts\ChangeLanguageCodeRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.registry.AccountsService/ChangeLanguageCode',
+        $argument,
+        ['\Nocloud\Registry\Accounts\ChangeLanguageCodeResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Nocloud\Registry\Accounts\ChangeAccountGroupRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function ChangeAccountGroup(\Nocloud\Registry\Accounts\ChangeAccountGroupRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/nocloud.registry.AccountsService/ChangeAccountGroup',
+        $argument,
+        ['\Nocloud\Registry\Accounts\ChangeAccountGroupResponse', 'decode'],
         $metadata, $options);
     }
 

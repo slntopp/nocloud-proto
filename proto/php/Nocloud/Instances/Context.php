@@ -26,6 +26,10 @@ class Context extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string event = 3 [json_name = "event"];</code>
      */
     protected $event = '';
+    /**
+     * Generated from protobuf field <code>optional string addon = 4 [json_name = "addon"];</code>
+     */
+    protected $addon = null;
 
     /**
      * Constructor.
@@ -36,6 +40,7 @@ class Context extends \Google\Protobuf\Internal\Message
      *     @type string $instance
      *     @type string $sp
      *     @type string $event
+     *     @type string $addon
      * }
      */
     public function __construct($data = NULL) {
@@ -105,6 +110,38 @@ class Context extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->event = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string addon = 4 [json_name = "addon"];</code>
+     * @return string
+     */
+    public function getAddon()
+    {
+        return isset($this->addon) ? $this->addon : '';
+    }
+
+    public function hasAddon()
+    {
+        return isset($this->addon);
+    }
+
+    public function clearAddon()
+    {
+        unset($this->addon);
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string addon = 4 [json_name = "addon"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setAddon($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->addon = $var;
 
         return $this;
     }
