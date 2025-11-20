@@ -59,6 +59,7 @@ message CreateRequest {
   google.protobuf.Struct data = 6;
   string account_owner = 7; // Mother account of this account. If != "" - then this account is gonna be subaccount
   string account_group = 8;
+  string payment_gateway = 9; // Empty string == whmcs
 }
 
 message CreateResponse {

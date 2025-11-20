@@ -255,6 +255,13 @@ export declare class CreateRequest extends Message<CreateRequest> {
    */
   accountGroup: string;
 
+  /**
+   * Empty string == whmcs
+   *
+   * @generated from field: string payment_gateway = 9;
+   */
+  paymentGateway: string;
+
   constructor(data?: PartialMessage<CreateRequest>);
 
   static readonly runtime: typeof proto3;

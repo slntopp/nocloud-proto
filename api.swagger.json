@@ -12176,6 +12176,10 @@
         },
         "accountGroup": {
           "type": "string"
+        },
+        "paymentGateway": {
+          "type": "string",
+          "title": "Empty string == whmcs"
         }
       }
     },

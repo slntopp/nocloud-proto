@@ -354,17 +354,18 @@ func (x *Credentials) GetData() []string {
 }
 
 type CreateRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Title         string                 `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`          // New Account title
-	Auth          *Credentials           `protobuf:"bytes,2,opt,name=auth,proto3" json:"auth,omitempty"`            // Credentials for New Account
-	Namespace     string                 `protobuf:"bytes,3,opt,name=namespace,proto3" json:"namespace,omitempty"`  // Namespace to put Account under
-	Access        *int32                 `protobuf:"varint,4,opt,name=access,proto3,oneof" json:"access,omitempty"` // Account access level to parent namespace
-	Currency      *billing.Currency      `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`    // Account Balance Currency
-	Data          *structpb.Struct       `protobuf:"bytes,6,opt,name=data,proto3" json:"data,omitempty"`
-	AccountOwner  string                 `protobuf:"bytes,7,opt,name=account_owner,json=accountOwner,proto3" json:"account_owner,omitempty"` // Mother account of this account. If != "" - then this account is gonna be subaccount
-	AccountGroup  string                 `protobuf:"bytes,8,opt,name=account_group,json=accountGroup,proto3" json:"account_group,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Title          string                 `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`          // New Account title
+	Auth           *Credentials           `protobuf:"bytes,2,opt,name=auth,proto3" json:"auth,omitempty"`            // Credentials for New Account
+	Namespace      string                 `protobuf:"bytes,3,opt,name=namespace,proto3" json:"namespace,omitempty"`  // Namespace to put Account under
+	Access         *int32                 `protobuf:"varint,4,opt,name=access,proto3,oneof" json:"access,omitempty"` // Account access level to parent namespace
+	Currency       *billing.Currency      `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`    // Account Balance Currency
+	Data           *structpb.Struct       `protobuf:"bytes,6,opt,name=data,proto3" json:"data,omitempty"`
+	AccountOwner   string                 `protobuf:"bytes,7,opt,name=account_owner,json=accountOwner,proto3" json:"account_owner,omitempty"` // Mother account of this account. If != "" - then this account is gonna be subaccount
+	AccountGroup   string                 `protobuf:"bytes,8,opt,name=account_group,json=accountGroup,proto3" json:"account_group,omitempty"`
+	PaymentGateway string                 `protobuf:"bytes,9,opt,name=payment_gateway,json=paymentGateway,proto3" json:"payment_gateway,omitempty"` // Empty string == whmcs
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *CreateRequest) Reset() {
@@ -449,6 +450,13 @@ func (x *CreateRequest) GetAccountOwner() string {
 func (x *CreateRequest) GetAccountGroup() string {
 	if x != nil {
 		return x.AccountGroup
+	}
+	return ""
+}
+
+func (x *CreateRequest) GetPaymentGateway() string {
+	if x != nil {
+		return x.PaymentGateway
 	}
 	return ""
 }
@@ -2088,7 +2096,7 @@ const file_registry_accounts_accounts_proto_rawDesc = "" +
 	"\x19invoice_parameters_custom\x18\b \x01(\v22.nocloud.registry.accounts.InvoiceParametersCustomR\x17invoiceParametersCustom\"5\n" +
 	"\vCredentials\x12\x12\n" +
 	"\x04type\x18\x01 \x01(\tR\x04type\x12\x12\n" +
-	"\x04data\x18\x02 \x03(\tR\x04data\"\xd5\x02\n" +
+	"\x04data\x18\x02 \x03(\tR\x04data\"\xfe\x02\n" +
 	"\rCreateRequest\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12:\n" +
 	"\x04auth\x18\x02 \x01(\v2&.nocloud.registry.accounts.CredentialsR\x04auth\x12\x1c\n" +
@@ -2097,7 +2105,8 @@ const file_registry_accounts_accounts_proto_rawDesc = "" +
 	"\bcurrency\x18\x05 \x01(\v2\x19.nocloud.billing.CurrencyR\bcurrency\x12+\n" +
 	"\x04data\x18\x06 \x01(\v2\x17.google.protobuf.StructR\x04data\x12#\n" +
 	"\raccount_owner\x18\a \x01(\tR\faccountOwner\x12#\n" +
-	"\raccount_group\x18\b \x01(\tR\faccountGroupB\t\n" +
+	"\raccount_group\x18\b \x01(\tR\faccountGroup\x12'\n" +
+	"\x0fpayment_gateway\x18\t \x01(\tR\x0epaymentGatewayB\t\n" +
 	"\a_access\"B\n" +
 	"\x0eCreateResponse\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x1c\n" +

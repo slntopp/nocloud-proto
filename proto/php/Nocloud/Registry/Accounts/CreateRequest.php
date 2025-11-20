@@ -58,6 +58,12 @@ class CreateRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string account_group = 8 [json_name = "accountGroup"];</code>
      */
     protected $account_group = '';
+    /**
+     * Empty string == whmcs
+     *
+     * Generated from protobuf field <code>string payment_gateway = 9 [json_name = "paymentGateway"];</code>
+     */
+    protected $payment_gateway = '';
 
     /**
      * Constructor.
@@ -79,6 +85,8 @@ class CreateRequest extends \Google\Protobuf\Internal\Message
      *     @type string $account_owner
      *           Mother account of this account. If != "" - then this account is gonna be subaccount
      *     @type string $account_group
+     *     @type string $payment_gateway
+     *           Empty string == whmcs
      * }
      */
     public function __construct($data = NULL) {
@@ -322,6 +330,32 @@ class CreateRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->account_group = $var;
+
+        return $this;
+    }
+
+    /**
+     * Empty string == whmcs
+     *
+     * Generated from protobuf field <code>string payment_gateway = 9 [json_name = "paymentGateway"];</code>
+     * @return string
+     */
+    public function getPaymentGateway()
+    {
+        return $this->payment_gateway;
+    }
+
+    /**
+     * Empty string == whmcs
+     *
+     * Generated from protobuf field <code>string payment_gateway = 9 [json_name = "paymentGateway"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setPaymentGateway($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->payment_gateway = $var;
 
         return $this;
     }

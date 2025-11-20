@@ -100,6 +100,7 @@ export const CreateRequest = /*@__PURE__*/ proto3.makeMessageType(
     { no: 6, name: "data", kind: "message", T: Struct },
     { no: 7, name: "account_owner", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 8, name: "account_group", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 9, name: "payment_gateway", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
