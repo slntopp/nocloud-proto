@@ -45,6 +45,7 @@ export const InvoiceOrderSettings = /*@__PURE__*/ proto3.makeMessageType(
     { no: 2, name: "new_template", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "start_with_number", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 4, name: "reset_counter_mode", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "must_reset_invoice_number_at", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ],
 );
 

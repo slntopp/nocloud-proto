@@ -68,6 +68,11 @@ export declare class InvoiceOrderSettings extends Message<InvoiceOrderSettings> 
    */
   resetCounterMode: string;
 
+  /**
+   * @generated from field: int64 must_reset_invoice_number_at = 5;
+   */
+  mustResetInvoiceNumberAt: bigint;
+
   constructor(data?: PartialMessage<InvoiceOrderSettings>);
 
   static readonly runtime: typeof proto3;

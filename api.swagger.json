@@ -8593,6 +8593,10 @@
         },
         "resetCounterMode": {
           "type": "string"
+        },
+        "mustResetInvoiceNumberAt": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },

@@ -27,6 +27,7 @@ message InvoiceOrderSettings {
   string new_template = 2;
   int64  start_with_number = 3;
   string reset_counter_mode = 4;
+  int64 must_reset_invoice_number_at = 5;
 }
 
 message InvoiceParametersCustom {
