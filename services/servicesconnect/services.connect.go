@@ -72,6 +72,21 @@ const (
 	ServicesServiceStreamProcedure = "/nocloud.services.ServicesService/Stream"
 )
 
+// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
+var (
+	servicesServiceServiceDescriptor         = services.File_services_services_proto.Services().ByName("ServicesService")
+	servicesServiceCreateMethodDescriptor    = servicesServiceServiceDescriptor.Methods().ByName("Create")
+	servicesServiceUpdateMethodDescriptor    = servicesServiceServiceDescriptor.Methods().ByName("Update")
+	servicesServiceDeleteMethodDescriptor    = servicesServiceServiceDescriptor.Methods().ByName("Delete")
+	servicesServiceGetMethodDescriptor       = servicesServiceServiceDescriptor.Methods().ByName("Get")
+	servicesServiceListMethodDescriptor      = servicesServiceServiceDescriptor.Methods().ByName("List")
+	servicesServiceUpMethodDescriptor        = servicesServiceServiceDescriptor.Methods().ByName("Up")
+	servicesServiceDownMethodDescriptor      = servicesServiceServiceDescriptor.Methods().ByName("Down")
+	servicesServiceSuspendMethodDescriptor   = servicesServiceServiceDescriptor.Methods().ByName("Suspend")
+	servicesServiceUnsuspendMethodDescriptor = servicesServiceServiceDescriptor.Methods().ByName("Unsuspend")
+	servicesServiceStreamMethodDescriptor    = servicesServiceServiceDescriptor.Methods().ByName("Stream")
+)
+
 // ServicesServiceClient is a client for the nocloud.services.ServicesService service.
 type ServicesServiceClient interface {
 	// rpc TestConfig(nocloud.services.CreateRequest)
@@ -102,66 +117,65 @@ type ServicesServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewServicesServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) ServicesServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
-	servicesServiceMethods := services.File_services_services_proto.Services().ByName("ServicesService").Methods()
 	return &servicesServiceClient{
 		create: connect.NewClient[services.CreateRequest, services.Service](
 			httpClient,
 			baseURL+ServicesServiceCreateProcedure,
-			connect.WithSchema(servicesServiceMethods.ByName("Create")),
+			connect.WithSchema(servicesServiceCreateMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		update: connect.NewClient[services.Service, services.Service](
 			httpClient,
 			baseURL+ServicesServiceUpdateProcedure,
-			connect.WithSchema(servicesServiceMethods.ByName("Update")),
+			connect.WithSchema(servicesServiceUpdateMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		delete: connect.NewClient[services.DeleteRequest, services.DeleteResponse](
 			httpClient,
 			baseURL+ServicesServiceDeleteProcedure,
-			connect.WithSchema(servicesServiceMethods.ByName("Delete")),
+			connect.WithSchema(servicesServiceDeleteMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		get: connect.NewClient[services.GetRequest, services.Service](
 			httpClient,
 			baseURL+ServicesServiceGetProcedure,
-			connect.WithSchema(servicesServiceMethods.ByName("Get")),
+			connect.WithSchema(servicesServiceGetMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		list: connect.NewClient[services.ListRequest, services.Services](
 			httpClient,
 			baseURL+ServicesServiceListProcedure,
-			connect.WithSchema(servicesServiceMethods.ByName("List")),
+			connect.WithSchema(servicesServiceListMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		up: connect.NewClient[services.UpRequest, services.UpResponse](
 			httpClient,
 			baseURL+ServicesServiceUpProcedure,
-			connect.WithSchema(servicesServiceMethods.ByName("Up")),
+			connect.WithSchema(servicesServiceUpMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		down: connect.NewClient[services.DownRequest, services.DownResponse](
 			httpClient,
 			baseURL+ServicesServiceDownProcedure,
-			connect.WithSchema(servicesServiceMethods.ByName("Down")),
+			connect.WithSchema(servicesServiceDownMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		suspend: connect.NewClient[services.SuspendRequest, services.SuspendResponse](
 			httpClient,
 			baseURL+ServicesServiceSuspendProcedure,
-			connect.WithSchema(servicesServiceMethods.ByName("Suspend")),
+			connect.WithSchema(servicesServiceSuspendMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		unsuspend: connect.NewClient[services.UnsuspendRequest, services.UnsuspendResponse](
 			httpClient,
 			baseURL+ServicesServiceUnsuspendProcedure,
-			connect.WithSchema(servicesServiceMethods.ByName("Unsuspend")),
+			connect.WithSchema(servicesServiceUnsuspendMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		stream: connect.NewClient[services.StreamRequest, states.ObjectState](
 			httpClient,
 			baseURL+ServicesServiceStreamProcedure,
-			connect.WithSchema(servicesServiceMethods.ByName("Stream")),
+			connect.WithSchema(servicesServiceStreamMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -258,65 +272,64 @@ type ServicesServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewServicesServiceHandler(svc ServicesServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	servicesServiceMethods := services.File_services_services_proto.Services().ByName("ServicesService").Methods()
 	servicesServiceCreateHandler := connect.NewUnaryHandler(
 		ServicesServiceCreateProcedure,
 		svc.Create,
-		connect.WithSchema(servicesServiceMethods.ByName("Create")),
+		connect.WithSchema(servicesServiceCreateMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	servicesServiceUpdateHandler := connect.NewUnaryHandler(
 		ServicesServiceUpdateProcedure,
 		svc.Update,
-		connect.WithSchema(servicesServiceMethods.ByName("Update")),
+		connect.WithSchema(servicesServiceUpdateMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	servicesServiceDeleteHandler := connect.NewUnaryHandler(
 		ServicesServiceDeleteProcedure,
 		svc.Delete,
-		connect.WithSchema(servicesServiceMethods.ByName("Delete")),
+		connect.WithSchema(servicesServiceDeleteMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	servicesServiceGetHandler := connect.NewUnaryHandler(
 		ServicesServiceGetProcedure,
 		svc.Get,
-		connect.WithSchema(servicesServiceMethods.ByName("Get")),
+		connect.WithSchema(servicesServiceGetMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	servicesServiceListHandler := connect.NewUnaryHandler(
 		ServicesServiceListProcedure,
 		svc.List,
-		connect.WithSchema(servicesServiceMethods.ByName("List")),
+		connect.WithSchema(servicesServiceListMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	servicesServiceUpHandler := connect.NewUnaryHandler(
 		ServicesServiceUpProcedure,
 		svc.Up,
-		connect.WithSchema(servicesServiceMethods.ByName("Up")),
+		connect.WithSchema(servicesServiceUpMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	servicesServiceDownHandler := connect.NewUnaryHandler(
 		ServicesServiceDownProcedure,
 		svc.Down,
-		connect.WithSchema(servicesServiceMethods.ByName("Down")),
+		connect.WithSchema(servicesServiceDownMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	servicesServiceSuspendHandler := connect.NewUnaryHandler(
 		ServicesServiceSuspendProcedure,
 		svc.Suspend,
-		connect.WithSchema(servicesServiceMethods.ByName("Suspend")),
+		connect.WithSchema(servicesServiceSuspendMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	servicesServiceUnsuspendHandler := connect.NewUnaryHandler(
 		ServicesServiceUnsuspendProcedure,
 		svc.Unsuspend,
-		connect.WithSchema(servicesServiceMethods.ByName("Unsuspend")),
+		connect.WithSchema(servicesServiceUnsuspendMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	servicesServiceStreamHandler := connect.NewServerStreamHandler(
 		ServicesServiceStreamProcedure,
 		svc.Stream,
-		connect.WithSchema(servicesServiceMethods.ByName("Stream")),
+		connect.WithSchema(servicesServiceStreamMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.services.ServicesService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

@@ -1755,6 +1755,35 @@ export declare class UpdateInvoiceRequest extends Message<UpdateInvoiceRequest> 
 }
 
 /**
+ * @generated from message nocloud.billing.ChangeInvoiceNumberRequest
+ */
+export declare class ChangeInvoiceNumberRequest extends Message<ChangeInvoiceNumberRequest> {
+  /**
+   * @generated from field: string invoice = 1;
+   */
+  invoice: string;
+
+  /**
+   * @generated from field: string new_number = 2;
+   */
+  newNumber: string;
+
+  constructor(data?: PartialMessage<ChangeInvoiceNumberRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.ChangeInvoiceNumberRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ChangeInvoiceNumberRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ChangeInvoiceNumberRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ChangeInvoiceNumberRequest;
+
+  static equals(a: ChangeInvoiceNumberRequest | PlainMessage<ChangeInvoiceNumberRequest> | undefined, b: ChangeInvoiceNumberRequest | PlainMessage<ChangeInvoiceNumberRequest> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.billing.UpdateInvoiceStatusRequest
  */
 export declare class UpdateInvoiceStatusRequest extends Message<UpdateInvoiceStatusRequest> {

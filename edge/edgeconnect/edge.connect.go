@@ -58,6 +58,14 @@ const (
 	EdgeServicePostConfigDataProcedure = "/nocloud.edge.EdgeService/PostConfigData"
 )
 
+// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
+var (
+	edgeServiceServiceDescriptor              = edge.File_edge_edge_proto.Services().ByName("EdgeService")
+	edgeServiceTestMethodDescriptor           = edgeServiceServiceDescriptor.Methods().ByName("Test")
+	edgeServicePostStateMethodDescriptor      = edgeServiceServiceDescriptor.Methods().ByName("PostState")
+	edgeServicePostConfigDataMethodDescriptor = edgeServiceServiceDescriptor.Methods().ByName("PostConfigData")
+)
+
 // EdgeServiceClient is a client for the nocloud.edge.EdgeService service.
 type EdgeServiceClient interface {
 	Test(context.Context, *connect.Request[edge.TestRequest]) (*connect.Response[edge.TestResponse], error)
@@ -74,24 +82,23 @@ type EdgeServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewEdgeServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) EdgeServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
-	edgeServiceMethods := edge.File_edge_edge_proto.Services().ByName("EdgeService").Methods()
 	return &edgeServiceClient{
 		test: connect.NewClient[edge.TestRequest, edge.TestResponse](
 			httpClient,
 			baseURL+EdgeServiceTestProcedure,
-			connect.WithSchema(edgeServiceMethods.ByName("Test")),
+			connect.WithSchema(edgeServiceTestMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		postState: connect.NewClient[states.ObjectState, edge.Empty](
 			httpClient,
 			baseURL+EdgeServicePostStateProcedure,
-			connect.WithSchema(edgeServiceMethods.ByName("PostState")),
+			connect.WithSchema(edgeServicePostStateMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		postConfigData: connect.NewClient[edge.ConfigData, edge.Empty](
 			httpClient,
 			baseURL+EdgeServicePostConfigDataProcedure,
-			connect.WithSchema(edgeServiceMethods.ByName("PostConfigData")),
+			connect.WithSchema(edgeServicePostConfigDataMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -132,23 +139,22 @@ type EdgeServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewEdgeServiceHandler(svc EdgeServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	edgeServiceMethods := edge.File_edge_edge_proto.Services().ByName("EdgeService").Methods()
 	edgeServiceTestHandler := connect.NewUnaryHandler(
 		EdgeServiceTestProcedure,
 		svc.Test,
-		connect.WithSchema(edgeServiceMethods.ByName("Test")),
+		connect.WithSchema(edgeServiceTestMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	edgeServicePostStateHandler := connect.NewUnaryHandler(
 		EdgeServicePostStateProcedure,
 		svc.PostState,
-		connect.WithSchema(edgeServiceMethods.ByName("PostState")),
+		connect.WithSchema(edgeServicePostStateMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	edgeServicePostConfigDataHandler := connect.NewUnaryHandler(
 		EdgeServicePostConfigDataProcedure,
 		svc.PostConfigData,
-		connect.WithSchema(edgeServiceMethods.ByName("PostConfigData")),
+		connect.WithSchema(edgeServicePostConfigDataMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.edge.EdgeService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

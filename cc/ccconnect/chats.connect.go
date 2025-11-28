@@ -62,6 +62,22 @@ const (
 	ChatServiceStreamProcedure = "/nocloud.cc.ChatService/Stream"
 )
 
+// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
+var (
+	chatServiceServiceDescriptor                 = cc.File_cc_chats_proto.Services().ByName("ChatService")
+	chatServiceSendChatMessageMethodDescriptor   = chatServiceServiceDescriptor.Methods().ByName("SendChatMessage")
+	chatServiceListChatMessagesMethodDescriptor  = chatServiceServiceDescriptor.Methods().ByName("ListChatMessages")
+	chatServiceGetChatMessageMethodDescriptor    = chatServiceServiceDescriptor.Methods().ByName("GetChatMessage")
+	chatServiceDeleteChatMessageMethodDescriptor = chatServiceServiceDescriptor.Methods().ByName("DeleteChatMessage")
+	chatServiceUpdateChatMessageMethodDescriptor = chatServiceServiceDescriptor.Methods().ByName("UpdateChatMessage")
+	chatServiceGetChatMethodDescriptor           = chatServiceServiceDescriptor.Methods().ByName("GetChat")
+	chatServiceInviteMethodDescriptor            = chatServiceServiceDescriptor.Methods().ByName("Invite")
+	chatServiceCreateChatMethodDescriptor        = chatServiceServiceDescriptor.Methods().ByName("CreateChat")
+	chatServiceDeleteChatMethodDescriptor        = chatServiceServiceDescriptor.Methods().ByName("DeleteChat")
+	chatServiceUpdateChatMethodDescriptor        = chatServiceServiceDescriptor.Methods().ByName("UpdateChat")
+	chatServiceStreamMethodDescriptor            = chatServiceServiceDescriptor.Methods().ByName("Stream")
+)
+
 // ChatServiceClient is a client for the nocloud.cc.ChatService service.
 type ChatServiceClient interface {
 	SendChatMessage(context.Context, *connect.Request[cc.SendChatMessageRequest]) (*connect.Response[cc.ChatMessage], error)
@@ -86,72 +102,71 @@ type ChatServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewChatServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) ChatServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
-	chatServiceMethods := cc.File_cc_chats_proto.Services().ByName("ChatService").Methods()
 	return &chatServiceClient{
 		sendChatMessage: connect.NewClient[cc.SendChatMessageRequest, cc.ChatMessage](
 			httpClient,
 			baseURL+ChatServiceSendChatMessageProcedure,
-			connect.WithSchema(chatServiceMethods.ByName("SendChatMessage")),
+			connect.WithSchema(chatServiceSendChatMessageMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		listChatMessages: connect.NewClient[cc.ListChatMessagesRequest, cc.ListChatMessagesResponse](
 			httpClient,
 			baseURL+ChatServiceListChatMessagesProcedure,
-			connect.WithSchema(chatServiceMethods.ByName("ListChatMessages")),
+			connect.WithSchema(chatServiceListChatMessagesMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		getChatMessage: connect.NewClient[cc.GetChatMessageRequest, cc.ChatMessage](
 			httpClient,
 			baseURL+ChatServiceGetChatMessageProcedure,
-			connect.WithSchema(chatServiceMethods.ByName("GetChatMessage")),
+			connect.WithSchema(chatServiceGetChatMessageMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		deleteChatMessage: connect.NewClient[cc.DeleteChatMessageRequest, cc.Response](
 			httpClient,
 			baseURL+ChatServiceDeleteChatMessageProcedure,
-			connect.WithSchema(chatServiceMethods.ByName("DeleteChatMessage")),
+			connect.WithSchema(chatServiceDeleteChatMessageMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		updateChatMessage: connect.NewClient[cc.ChatMessage, cc.ChatMessage](
 			httpClient,
 			baseURL+ChatServiceUpdateChatMessageProcedure,
-			connect.WithSchema(chatServiceMethods.ByName("UpdateChatMessage")),
+			connect.WithSchema(chatServiceUpdateChatMessageMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		getChat: connect.NewClient[cc.GetChatRequest, cc.Chat](
 			httpClient,
 			baseURL+ChatServiceGetChatProcedure,
-			connect.WithSchema(chatServiceMethods.ByName("GetChat")),
+			connect.WithSchema(chatServiceGetChatMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		invite: connect.NewClient[cc.InviteChatRequest, cc.Response](
 			httpClient,
 			baseURL+ChatServiceInviteProcedure,
-			connect.WithSchema(chatServiceMethods.ByName("Invite")),
+			connect.WithSchema(chatServiceInviteMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		createChat: connect.NewClient[cc.CreateChatRequest, cc.Chat](
 			httpClient,
 			baseURL+ChatServiceCreateChatProcedure,
-			connect.WithSchema(chatServiceMethods.ByName("CreateChat")),
+			connect.WithSchema(chatServiceCreateChatMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		deleteChat: connect.NewClient[cc.DeleteChatRequest, cc.Response](
 			httpClient,
 			baseURL+ChatServiceDeleteChatProcedure,
-			connect.WithSchema(chatServiceMethods.ByName("DeleteChat")),
+			connect.WithSchema(chatServiceDeleteChatMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		updateChat: connect.NewClient[cc.Chat, cc.Chat](
 			httpClient,
 			baseURL+ChatServiceUpdateChatProcedure,
-			connect.WithSchema(chatServiceMethods.ByName("UpdateChat")),
+			connect.WithSchema(chatServiceUpdateChatMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		stream: connect.NewClient[cc.ChatMessageStreamRequest, cc.ChatMessage](
 			httpClient,
 			baseURL+ChatServiceStreamProcedure,
-			connect.WithSchema(chatServiceMethods.ByName("Stream")),
+			connect.WithSchema(chatServiceStreamMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -248,71 +263,70 @@ type ChatServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewChatServiceHandler(svc ChatServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	chatServiceMethods := cc.File_cc_chats_proto.Services().ByName("ChatService").Methods()
 	chatServiceSendChatMessageHandler := connect.NewUnaryHandler(
 		ChatServiceSendChatMessageProcedure,
 		svc.SendChatMessage,
-		connect.WithSchema(chatServiceMethods.ByName("SendChatMessage")),
+		connect.WithSchema(chatServiceSendChatMessageMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	chatServiceListChatMessagesHandler := connect.NewUnaryHandler(
 		ChatServiceListChatMessagesProcedure,
 		svc.ListChatMessages,
-		connect.WithSchema(chatServiceMethods.ByName("ListChatMessages")),
+		connect.WithSchema(chatServiceListChatMessagesMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	chatServiceGetChatMessageHandler := connect.NewUnaryHandler(
 		ChatServiceGetChatMessageProcedure,
 		svc.GetChatMessage,
-		connect.WithSchema(chatServiceMethods.ByName("GetChatMessage")),
+		connect.WithSchema(chatServiceGetChatMessageMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	chatServiceDeleteChatMessageHandler := connect.NewUnaryHandler(
 		ChatServiceDeleteChatMessageProcedure,
 		svc.DeleteChatMessage,
-		connect.WithSchema(chatServiceMethods.ByName("DeleteChatMessage")),
+		connect.WithSchema(chatServiceDeleteChatMessageMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	chatServiceUpdateChatMessageHandler := connect.NewUnaryHandler(
 		ChatServiceUpdateChatMessageProcedure,
 		svc.UpdateChatMessage,
-		connect.WithSchema(chatServiceMethods.ByName("UpdateChatMessage")),
+		connect.WithSchema(chatServiceUpdateChatMessageMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	chatServiceGetChatHandler := connect.NewUnaryHandler(
 		ChatServiceGetChatProcedure,
 		svc.GetChat,
-		connect.WithSchema(chatServiceMethods.ByName("GetChat")),
+		connect.WithSchema(chatServiceGetChatMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	chatServiceInviteHandler := connect.NewUnaryHandler(
 		ChatServiceInviteProcedure,
 		svc.Invite,
-		connect.WithSchema(chatServiceMethods.ByName("Invite")),
+		connect.WithSchema(chatServiceInviteMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	chatServiceCreateChatHandler := connect.NewUnaryHandler(
 		ChatServiceCreateChatProcedure,
 		svc.CreateChat,
-		connect.WithSchema(chatServiceMethods.ByName("CreateChat")),
+		connect.WithSchema(chatServiceCreateChatMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	chatServiceDeleteChatHandler := connect.NewUnaryHandler(
 		ChatServiceDeleteChatProcedure,
 		svc.DeleteChat,
-		connect.WithSchema(chatServiceMethods.ByName("DeleteChat")),
+		connect.WithSchema(chatServiceDeleteChatMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	chatServiceUpdateChatHandler := connect.NewUnaryHandler(
 		ChatServiceUpdateChatProcedure,
 		svc.UpdateChat,
-		connect.WithSchema(chatServiceMethods.ByName("UpdateChat")),
+		connect.WithSchema(chatServiceUpdateChatMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	chatServiceStreamHandler := connect.NewServerStreamHandler(
 		ChatServiceStreamProcedure,
 		svc.Stream,
-		connect.WithSchema(chatServiceMethods.ByName("Stream")),
+		connect.WithSchema(chatServiceStreamMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.cc.ChatService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

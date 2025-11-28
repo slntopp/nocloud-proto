@@ -18,7 +18,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { ApplySaleRequest, ApplySaleResponse, ChangeDefaultCurrencyRequest, ChangeDefaultCurrencyResponse, ConversionRequest, ConversionResponse, CreateCurrencyRequest, CreateCurrencyResponse, CreateExchangeRateRequest, CreateExchangeRateResponse, CreateInvoiceRequest, CreateRenewalInvoiceRequest, CreateTopUpBalanceInvoiceRequest, DeleteExchangeRateRequest, DeleteExchangeRateResponse, GetActiveRequest, GetCurrenciesRequest, GetCurrenciesResponse, GetExchangeRateRequest, GetExchangeRateResponse, GetExchangeRatesRequest, GetExchangeRatesResponse, GetInstancesReportRequest, GetInstancesReportResponse, GetInstancesReportsCountRequest, GetInvoicesCountRequest, GetInvoicesCountResponse, GetInvoiceSettingsTemplateExampleRequest, GetInvoiceSettingsTemplateExampleResponse, GetInvoicesRequest, GetRecordsReportsCountRequest, GetRecordsReportsRequest, GetRecordsReportsResponse, GetReportsCountResponse, GetTransactionsCountRequest, GetTransactionsCountResponse, GetTransactionsRequest, Invoice, Invoices, ListPlansInstancesRequest, ListPlansInstancesResponse, ListRequest, ListResponse, MultiConversionRequest, MultiConversionResponse, PayRequest, PayResponse, PayWithBalanceRequest, PayWithBalanceResponse, Plan, PlansUniqueRequest, PlansUniqueResponse, Records, ReprocessTransactionsRequest, RunDailyCronJobRequest, RunDailyCronJobResponse, SendInvoiceEmailRequest, SendInvoiceEmailResponse, StreamRequest, StreamResponse, Transaction, Transactions, UpdateCurrencyRequest, UpdateCurrencyResponse, UpdateExchangeRateRequest, UpdateExchangeRateResponse, UpdateInvoiceRequest, UpdateInvoiceStatusRequest, UpdateTransactionResponse } from "./billing_pb.js";
+import { ApplySaleRequest, ApplySaleResponse, ChangeDefaultCurrencyRequest, ChangeDefaultCurrencyResponse, ChangeInvoiceNumberRequest, ConversionRequest, ConversionResponse, CreateCurrencyRequest, CreateCurrencyResponse, CreateExchangeRateRequest, CreateExchangeRateResponse, CreateInvoiceRequest, CreateRenewalInvoiceRequest, CreateTopUpBalanceInvoiceRequest, DeleteExchangeRateRequest, DeleteExchangeRateResponse, GetActiveRequest, GetCurrenciesRequest, GetCurrenciesResponse, GetExchangeRateRequest, GetExchangeRateResponse, GetExchangeRatesRequest, GetExchangeRatesResponse, GetInstancesReportRequest, GetInstancesReportResponse, GetInstancesReportsCountRequest, GetInvoicesCountRequest, GetInvoicesCountResponse, GetInvoiceSettingsTemplateExampleRequest, GetInvoiceSettingsTemplateExampleResponse, GetInvoicesRequest, GetRecordsReportsCountRequest, GetRecordsReportsRequest, GetRecordsReportsResponse, GetReportsCountResponse, GetTransactionsCountRequest, GetTransactionsCountResponse, GetTransactionsRequest, Invoice, Invoices, ListPlansInstancesRequest, ListPlansInstancesResponse, ListRequest, ListResponse, MultiConversionRequest, MultiConversionResponse, PayRequest, PayResponse, PayWithBalanceRequest, PayWithBalanceResponse, Plan, PlansUniqueRequest, PlansUniqueResponse, Records, ReprocessTransactionsRequest, RunDailyCronJobRequest, RunDailyCronJobResponse, SendInvoiceEmailRequest, SendInvoiceEmailResponse, StreamRequest, StreamResponse, Transaction, Transactions, UpdateCurrencyRequest, UpdateCurrencyResponse, UpdateExchangeRateRequest, UpdateExchangeRateResponse, UpdateInvoiceRequest, UpdateInvoiceStatusRequest, UpdateTransactionResponse } from "./billing_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 import { Addon, BulkAddons, CountAddonsRequest, CountAddonsResponse, ListAddonsRequest, ListAddonsResponse } from "./addons/addons_pb.js";
 import { CountDescriptionsRequest, CountDescriptionsResponse, Description, ListDescriptionsRequest, ListDescriptionsResponse } from "./descriptions/descriptions_pb.js";
@@ -261,6 +261,15 @@ export declare const BillingService: {
     readonly updateInvoice: {
       readonly name: "UpdateInvoice",
       readonly I: typeof UpdateInvoiceRequest,
+      readonly O: typeof Invoice,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.billing.BillingService.ChangeInvoiceNumber
+     */
+    readonly changeInvoiceNumber: {
+      readonly name: "ChangeInvoiceNumber",
+      readonly I: typeof ChangeInvoiceNumberRequest,
       readonly O: typeof Invoice,
       readonly kind: MethodKind.Unary,
     },

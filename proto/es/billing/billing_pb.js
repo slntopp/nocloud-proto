@@ -580,6 +580,17 @@ export const UpdateInvoiceRequest = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * @generated from message nocloud.billing.ChangeInvoiceNumberRequest
+ */
+export const ChangeInvoiceNumberRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.ChangeInvoiceNumberRequest",
+  () => [
+    { no: 1, name: "invoice", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "new_number", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
  * @generated from message nocloud.billing.UpdateInvoiceStatusRequest
  */
 export const UpdateInvoiceStatusRequest = /*@__PURE__*/ proto3.makeMessageType(

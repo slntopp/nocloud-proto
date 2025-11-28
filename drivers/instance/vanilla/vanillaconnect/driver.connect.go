@@ -79,6 +79,22 @@ const (
 	DriverServiceGetExpirationProcedure = "/nocloud.instance.driver.vanilla.DriverService/GetExpiration"
 )
 
+// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
+var (
+	driverServiceServiceDescriptor                         = vanilla.File_drivers_instance_vanilla_driver_proto.Services().ByName("DriverService")
+	driverServiceTestServiceProviderConfigMethodDescriptor = driverServiceServiceDescriptor.Methods().ByName("TestServiceProviderConfig")
+	driverServiceTestInstancesGroupConfigMethodDescriptor  = driverServiceServiceDescriptor.Methods().ByName("TestInstancesGroupConfig")
+	driverServiceGetTypeMethodDescriptor                   = driverServiceServiceDescriptor.Methods().ByName("GetType")
+	driverServiceUpMethodDescriptor                        = driverServiceServiceDescriptor.Methods().ByName("Up")
+	driverServiceDownMethodDescriptor                      = driverServiceServiceDescriptor.Methods().ByName("Down")
+	driverServiceMonitoringMethodDescriptor                = driverServiceServiceDescriptor.Methods().ByName("Monitoring")
+	driverServiceSuspendMonitoringMethodDescriptor         = driverServiceServiceDescriptor.Methods().ByName("SuspendMonitoring")
+	driverServiceInvokeMethodDescriptor                    = driverServiceServiceDescriptor.Methods().ByName("Invoke")
+	driverServiceSpInvokeMethodDescriptor                  = driverServiceServiceDescriptor.Methods().ByName("SpInvoke")
+	driverServiceSpPrepMethodDescriptor                    = driverServiceServiceDescriptor.Methods().ByName("SpPrep")
+	driverServiceGetExpirationMethodDescriptor             = driverServiceServiceDescriptor.Methods().ByName("GetExpiration")
+)
+
 // DriverServiceClient is a client for the nocloud.instance.driver.vanilla.DriverService service.
 type DriverServiceClient interface {
 	TestServiceProviderConfig(context.Context, *connect.Request[vanilla.TestServiceProviderConfigRequest]) (*connect.Response[services_providers.TestResponse], error)
@@ -103,72 +119,71 @@ type DriverServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewDriverServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) DriverServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
-	driverServiceMethods := vanilla.File_drivers_instance_vanilla_driver_proto.Services().ByName("DriverService").Methods()
 	return &driverServiceClient{
 		testServiceProviderConfig: connect.NewClient[vanilla.TestServiceProviderConfigRequest, services_providers.TestResponse](
 			httpClient,
 			baseURL+DriverServiceTestServiceProviderConfigProcedure,
-			connect.WithSchema(driverServiceMethods.ByName("TestServiceProviderConfig")),
+			connect.WithSchema(driverServiceTestServiceProviderConfigMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		testInstancesGroupConfig: connect.NewClient[instances.TestInstancesGroupConfigRequest, instances.TestInstancesGroupConfigResponse](
 			httpClient,
 			baseURL+DriverServiceTestInstancesGroupConfigProcedure,
-			connect.WithSchema(driverServiceMethods.ByName("TestInstancesGroupConfig")),
+			connect.WithSchema(driverServiceTestInstancesGroupConfigMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		getType: connect.NewClient[vanilla.GetTypeRequest, vanilla.GetTypeResponse](
 			httpClient,
 			baseURL+DriverServiceGetTypeProcedure,
-			connect.WithSchema(driverServiceMethods.ByName("GetType")),
+			connect.WithSchema(driverServiceGetTypeMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		up: connect.NewClient[vanilla.UpRequest, vanilla.UpResponse](
 			httpClient,
 			baseURL+DriverServiceUpProcedure,
-			connect.WithSchema(driverServiceMethods.ByName("Up")),
+			connect.WithSchema(driverServiceUpMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		down: connect.NewClient[vanilla.DownRequest, vanilla.DownResponse](
 			httpClient,
 			baseURL+DriverServiceDownProcedure,
-			connect.WithSchema(driverServiceMethods.ByName("Down")),
+			connect.WithSchema(driverServiceDownMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		monitoring: connect.NewClient[vanilla.MonitoringRequest, vanilla.MonitoringResponse](
 			httpClient,
 			baseURL+DriverServiceMonitoringProcedure,
-			connect.WithSchema(driverServiceMethods.ByName("Monitoring")),
+			connect.WithSchema(driverServiceMonitoringMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		suspendMonitoring: connect.NewClient[vanilla.MonitoringRequest, vanilla.MonitoringResponse](
 			httpClient,
 			baseURL+DriverServiceSuspendMonitoringProcedure,
-			connect.WithSchema(driverServiceMethods.ByName("SuspendMonitoring")),
+			connect.WithSchema(driverServiceSuspendMonitoringMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		invoke: connect.NewClient[vanilla.InvokeRequest, instances.InvokeResponse](
 			httpClient,
 			baseURL+DriverServiceInvokeProcedure,
-			connect.WithSchema(driverServiceMethods.ByName("Invoke")),
+			connect.WithSchema(driverServiceInvokeMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		spInvoke: connect.NewClient[vanilla.SpInvokeRequest, services_providers.InvokeResponse](
 			httpClient,
 			baseURL+DriverServiceSpInvokeProcedure,
-			connect.WithSchema(driverServiceMethods.ByName("SpInvoke")),
+			connect.WithSchema(driverServiceSpInvokeMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		spPrep: connect.NewClient[services_providers.PrepSP, services_providers.PrepSP](
 			httpClient,
 			baseURL+DriverServiceSpPrepProcedure,
-			connect.WithSchema(driverServiceMethods.ByName("SpPrep")),
+			connect.WithSchema(driverServiceSpPrepMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		getExpiration: connect.NewClient[vanilla.GetExpirationRequest, vanilla.GetExpirationResponse](
 			httpClient,
 			baseURL+DriverServiceGetExpirationProcedure,
-			connect.WithSchema(driverServiceMethods.ByName("GetExpiration")),
+			connect.WithSchema(driverServiceGetExpirationMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -268,71 +283,70 @@ type DriverServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewDriverServiceHandler(svc DriverServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	driverServiceMethods := vanilla.File_drivers_instance_vanilla_driver_proto.Services().ByName("DriverService").Methods()
 	driverServiceTestServiceProviderConfigHandler := connect.NewUnaryHandler(
 		DriverServiceTestServiceProviderConfigProcedure,
 		svc.TestServiceProviderConfig,
-		connect.WithSchema(driverServiceMethods.ByName("TestServiceProviderConfig")),
+		connect.WithSchema(driverServiceTestServiceProviderConfigMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	driverServiceTestInstancesGroupConfigHandler := connect.NewUnaryHandler(
 		DriverServiceTestInstancesGroupConfigProcedure,
 		svc.TestInstancesGroupConfig,
-		connect.WithSchema(driverServiceMethods.ByName("TestInstancesGroupConfig")),
+		connect.WithSchema(driverServiceTestInstancesGroupConfigMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	driverServiceGetTypeHandler := connect.NewUnaryHandler(
 		DriverServiceGetTypeProcedure,
 		svc.GetType,
-		connect.WithSchema(driverServiceMethods.ByName("GetType")),
+		connect.WithSchema(driverServiceGetTypeMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	driverServiceUpHandler := connect.NewUnaryHandler(
 		DriverServiceUpProcedure,
 		svc.Up,
-		connect.WithSchema(driverServiceMethods.ByName("Up")),
+		connect.WithSchema(driverServiceUpMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	driverServiceDownHandler := connect.NewUnaryHandler(
 		DriverServiceDownProcedure,
 		svc.Down,
-		connect.WithSchema(driverServiceMethods.ByName("Down")),
+		connect.WithSchema(driverServiceDownMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	driverServiceMonitoringHandler := connect.NewUnaryHandler(
 		DriverServiceMonitoringProcedure,
 		svc.Monitoring,
-		connect.WithSchema(driverServiceMethods.ByName("Monitoring")),
+		connect.WithSchema(driverServiceMonitoringMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	driverServiceSuspendMonitoringHandler := connect.NewUnaryHandler(
 		DriverServiceSuspendMonitoringProcedure,
 		svc.SuspendMonitoring,
-		connect.WithSchema(driverServiceMethods.ByName("SuspendMonitoring")),
+		connect.WithSchema(driverServiceSuspendMonitoringMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	driverServiceInvokeHandler := connect.NewUnaryHandler(
 		DriverServiceInvokeProcedure,
 		svc.Invoke,
-		connect.WithSchema(driverServiceMethods.ByName("Invoke")),
+		connect.WithSchema(driverServiceInvokeMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	driverServiceSpInvokeHandler := connect.NewUnaryHandler(
 		DriverServiceSpInvokeProcedure,
 		svc.SpInvoke,
-		connect.WithSchema(driverServiceMethods.ByName("SpInvoke")),
+		connect.WithSchema(driverServiceSpInvokeMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	driverServiceSpPrepHandler := connect.NewUnaryHandler(
 		DriverServiceSpPrepProcedure,
 		svc.SpPrep,
-		connect.WithSchema(driverServiceMethods.ByName("SpPrep")),
+		connect.WithSchema(driverServiceSpPrepMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	driverServiceGetExpirationHandler := connect.NewUnaryHandler(
 		DriverServiceGetExpirationProcedure,
 		svc.GetExpiration,
-		connect.WithSchema(driverServiceMethods.ByName("GetExpiration")),
+		connect.WithSchema(driverServiceGetExpirationMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.instance.driver.vanilla.DriverService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

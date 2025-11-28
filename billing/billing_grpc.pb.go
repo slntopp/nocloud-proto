@@ -237,6 +237,7 @@ const (
 	BillingService_GetInvoices_FullMethodName                       = "/nocloud.billing.BillingService/GetInvoices"
 	BillingService_GetInvoicesCount_FullMethodName                  = "/nocloud.billing.BillingService/GetInvoicesCount"
 	BillingService_UpdateInvoice_FullMethodName                     = "/nocloud.billing.BillingService/UpdateInvoice"
+	BillingService_ChangeInvoiceNumber_FullMethodName               = "/nocloud.billing.BillingService/ChangeInvoiceNumber"
 	BillingService_Pay_FullMethodName                               = "/nocloud.billing.BillingService/Pay"
 	BillingService_UpdateInvoiceStatus_FullMethodName               = "/nocloud.billing.BillingService/UpdateInvoiceStatus"
 	BillingService_CreateTopUpBalanceInvoice_FullMethodName         = "/nocloud.billing.BillingService/CreateTopUpBalanceInvoice"
@@ -274,6 +275,7 @@ type BillingServiceClient interface {
 	GetInvoices(ctx context.Context, in *GetInvoicesRequest, opts ...grpc.CallOption) (*Invoices, error)
 	GetInvoicesCount(ctx context.Context, in *GetInvoicesCountRequest, opts ...grpc.CallOption) (*GetInvoicesCountResponse, error)
 	UpdateInvoice(ctx context.Context, in *UpdateInvoiceRequest, opts ...grpc.CallOption) (*Invoice, error)
+	ChangeInvoiceNumber(ctx context.Context, in *ChangeInvoiceNumberRequest, opts ...grpc.CallOption) (*Invoice, error)
 	Pay(ctx context.Context, in *PayRequest, opts ...grpc.CallOption) (*PayResponse, error)
 	UpdateInvoiceStatus(ctx context.Context, in *UpdateInvoiceStatusRequest, opts ...grpc.CallOption) (*Invoice, error)
 	CreateTopUpBalanceInvoice(ctx context.Context, in *CreateTopUpBalanceInvoiceRequest, opts ...grpc.CallOption) (*Invoice, error)
@@ -513,6 +515,16 @@ func (c *billingServiceClient) UpdateInvoice(ctx context.Context, in *UpdateInvo
 	return out, nil
 }
 
+func (c *billingServiceClient) ChangeInvoiceNumber(ctx context.Context, in *ChangeInvoiceNumberRequest, opts ...grpc.CallOption) (*Invoice, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Invoice)
+	err := c.cc.Invoke(ctx, BillingService_ChangeInvoiceNumber_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *billingServiceClient) Pay(ctx context.Context, in *PayRequest, opts ...grpc.CallOption) (*PayResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(PayResponse)
@@ -638,6 +650,7 @@ type BillingServiceServer interface {
 	GetInvoices(context.Context, *GetInvoicesRequest) (*Invoices, error)
 	GetInvoicesCount(context.Context, *GetInvoicesCountRequest) (*GetInvoicesCountResponse, error)
 	UpdateInvoice(context.Context, *UpdateInvoiceRequest) (*Invoice, error)
+	ChangeInvoiceNumber(context.Context, *ChangeInvoiceNumberRequest) (*Invoice, error)
 	Pay(context.Context, *PayRequest) (*PayResponse, error)
 	UpdateInvoiceStatus(context.Context, *UpdateInvoiceStatusRequest) (*Invoice, error)
 	CreateTopUpBalanceInvoice(context.Context, *CreateTopUpBalanceInvoiceRequest) (*Invoice, error)
@@ -722,6 +735,9 @@ func (UnimplementedBillingServiceServer) GetInvoicesCount(context.Context, *GetI
 }
 func (UnimplementedBillingServiceServer) UpdateInvoice(context.Context, *UpdateInvoiceRequest) (*Invoice, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateInvoice not implemented")
+}
+func (UnimplementedBillingServiceServer) ChangeInvoiceNumber(context.Context, *ChangeInvoiceNumberRequest) (*Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ChangeInvoiceNumber not implemented")
 }
 func (UnimplementedBillingServiceServer) Pay(context.Context, *PayRequest) (*PayResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Pay not implemented")
@@ -1167,6 +1183,24 @@ func _BillingService_UpdateInvoice_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BillingService_ChangeInvoiceNumber_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ChangeInvoiceNumberRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).ChangeInvoiceNumber(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_ChangeInvoiceNumber_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).ChangeInvoiceNumber(ctx, req.(*ChangeInvoiceNumberRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BillingService_Pay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PayRequest)
 	if err := dec(in); err != nil {
@@ -1416,6 +1450,10 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateInvoice",
 			Handler:    _BillingService_UpdateInvoice_Handler,
+		},
+		{
+			MethodName: "ChangeInvoiceNumber",
+			Handler:    _BillingService_ChangeInvoiceNumber_Handler,
 		},
 		{
 			MethodName: "Pay",

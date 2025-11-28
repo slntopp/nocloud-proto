@@ -58,6 +58,15 @@ const (
 	DNSDeleteProcedure = "/nocloud.dns.DNS/Delete"
 )
 
+// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
+var (
+	dNSServiceDescriptor      = dns.File_dns_dns_proto.Services().ByName("DNS")
+	dNSGetMethodDescriptor    = dNSServiceDescriptor.Methods().ByName("Get")
+	dNSListMethodDescriptor   = dNSServiceDescriptor.Methods().ByName("List")
+	dNSPutMethodDescriptor    = dNSServiceDescriptor.Methods().ByName("Put")
+	dNSDeleteMethodDescriptor = dNSServiceDescriptor.Methods().ByName("Delete")
+)
+
 // DNSClient is a client for the nocloud.dns.DNS service.
 type DNSClient interface {
 	Get(context.Context, *connect.Request[dns.Zone]) (*connect.Response[dns.Zone], error)
@@ -75,30 +84,29 @@ type DNSClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewDNSClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) DNSClient {
 	baseURL = strings.TrimRight(baseURL, "/")
-	dNSMethods := dns.File_dns_dns_proto.Services().ByName("DNS").Methods()
 	return &dNSClient{
 		get: connect.NewClient[dns.Zone, dns.Zone](
 			httpClient,
 			baseURL+DNSGetProcedure,
-			connect.WithSchema(dNSMethods.ByName("Get")),
+			connect.WithSchema(dNSGetMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		list: connect.NewClient[dns.ListRequest, dns.ListResponse](
 			httpClient,
 			baseURL+DNSListProcedure,
-			connect.WithSchema(dNSMethods.ByName("List")),
+			connect.WithSchema(dNSListMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		put: connect.NewClient[dns.Zone, dns.Result](
 			httpClient,
 			baseURL+DNSPutProcedure,
-			connect.WithSchema(dNSMethods.ByName("Put")),
+			connect.WithSchema(dNSPutMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		delete: connect.NewClient[dns.Zone, dns.Result](
 			httpClient,
 			baseURL+DNSDeleteProcedure,
-			connect.WithSchema(dNSMethods.ByName("Delete")),
+			connect.WithSchema(dNSDeleteMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -146,29 +154,28 @@ type DNSHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewDNSHandler(svc DNSHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	dNSMethods := dns.File_dns_dns_proto.Services().ByName("DNS").Methods()
 	dNSGetHandler := connect.NewUnaryHandler(
 		DNSGetProcedure,
 		svc.Get,
-		connect.WithSchema(dNSMethods.ByName("Get")),
+		connect.WithSchema(dNSGetMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	dNSListHandler := connect.NewUnaryHandler(
 		DNSListProcedure,
 		svc.List,
-		connect.WithSchema(dNSMethods.ByName("List")),
+		connect.WithSchema(dNSListMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	dNSPutHandler := connect.NewUnaryHandler(
 		DNSPutProcedure,
 		svc.Put,
-		connect.WithSchema(dNSMethods.ByName("Put")),
+		connect.WithSchema(dNSPutMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	dNSDeleteHandler := connect.NewUnaryHandler(
 		DNSDeleteProcedure,
 		svc.Delete,
-		connect.WithSchema(dNSMethods.ByName("Delete")),
+		connect.WithSchema(dNSDeleteMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.dns.DNS/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

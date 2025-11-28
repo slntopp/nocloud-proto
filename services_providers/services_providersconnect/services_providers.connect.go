@@ -131,6 +131,40 @@ const (
 	ShowcaseCategoriesServiceListProcedure = "/nocloud.services_providers.ShowcaseCategoriesService/List"
 )
 
+// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
+var (
+	servicesProvidersServiceServiceDescriptor                    = services_providers.File_services_providers_services_providers_proto.Services().ByName("ServicesProvidersService")
+	servicesProvidersServiceTestMethodDescriptor                 = servicesProvidersServiceServiceDescriptor.Methods().ByName("Test")
+	servicesProvidersServiceCreateMethodDescriptor               = servicesProvidersServiceServiceDescriptor.Methods().ByName("Create")
+	servicesProvidersServiceDeleteMethodDescriptor               = servicesProvidersServiceServiceDescriptor.Methods().ByName("Delete")
+	servicesProvidersServiceUpdateMethodDescriptor               = servicesProvidersServiceServiceDescriptor.Methods().ByName("Update")
+	servicesProvidersServiceGetMethodDescriptor                  = servicesProvidersServiceServiceDescriptor.Methods().ByName("Get")
+	servicesProvidersServiceListMethodDescriptor                 = servicesProvidersServiceServiceDescriptor.Methods().ByName("List")
+	servicesProvidersServiceInvokeMethodDescriptor               = servicesProvidersServiceServiceDescriptor.Methods().ByName("Invoke")
+	servicesProvidersServicePrepMethodDescriptor                 = servicesProvidersServiceServiceDescriptor.Methods().ByName("Prep")
+	servicesProvidersServiceListExtentionsMethodDescriptor       = servicesProvidersServiceServiceDescriptor.Methods().ByName("ListExtentions")
+	servicesProvidersServiceBindPlanMethodDescriptor             = servicesProvidersServiceServiceDescriptor.Methods().ByName("BindPlan")
+	servicesProvidersServiceUnbindPlanMethodDescriptor           = servicesProvidersServiceServiceDescriptor.Methods().ByName("UnbindPlan")
+	servicesProvidersExtentionsServiceServiceDescriptor          = services_providers.File_services_providers_services_providers_proto.Services().ByName("ServicesProvidersExtentionsService")
+	servicesProvidersExtentionsServiceGetTypeMethodDescriptor    = servicesProvidersExtentionsServiceServiceDescriptor.Methods().ByName("GetType")
+	servicesProvidersExtentionsServiceTestMethodDescriptor       = servicesProvidersExtentionsServiceServiceDescriptor.Methods().ByName("Test")
+	servicesProvidersExtentionsServiceRegisterMethodDescriptor   = servicesProvidersExtentionsServiceServiceDescriptor.Methods().ByName("Register")
+	servicesProvidersExtentionsServiceUpdateMethodDescriptor     = servicesProvidersExtentionsServiceServiceDescriptor.Methods().ByName("Update")
+	servicesProvidersExtentionsServiceUnregisterMethodDescriptor = servicesProvidersExtentionsServiceServiceDescriptor.Methods().ByName("Unregister")
+	showcasesServiceServiceDescriptor                            = services_providers.File_services_providers_services_providers_proto.Services().ByName("ShowcasesService")
+	showcasesServiceCreateMethodDescriptor                       = showcasesServiceServiceDescriptor.Methods().ByName("Create")
+	showcasesServiceDeleteMethodDescriptor                       = showcasesServiceServiceDescriptor.Methods().ByName("Delete")
+	showcasesServiceUpdateMethodDescriptor                       = showcasesServiceServiceDescriptor.Methods().ByName("Update")
+	showcasesServiceGetMethodDescriptor                          = showcasesServiceServiceDescriptor.Methods().ByName("Get")
+	showcasesServiceListMethodDescriptor                         = showcasesServiceServiceDescriptor.Methods().ByName("List")
+	showcaseCategoriesServiceServiceDescriptor                   = services_providers.File_services_providers_services_providers_proto.Services().ByName("ShowcaseCategoriesService")
+	showcaseCategoriesServiceCreateMethodDescriptor              = showcaseCategoriesServiceServiceDescriptor.Methods().ByName("Create")
+	showcaseCategoriesServiceDeleteMethodDescriptor              = showcaseCategoriesServiceServiceDescriptor.Methods().ByName("Delete")
+	showcaseCategoriesServiceUpdateMethodDescriptor              = showcaseCategoriesServiceServiceDescriptor.Methods().ByName("Update")
+	showcaseCategoriesServiceGetMethodDescriptor                 = showcaseCategoriesServiceServiceDescriptor.Methods().ByName("Get")
+	showcaseCategoriesServiceListMethodDescriptor                = showcaseCategoriesServiceServiceDescriptor.Methods().ByName("List")
+)
+
 // ServicesProvidersServiceClient is a client for the
 // nocloud.services_providers.ServicesProvidersService service.
 type ServicesProvidersServiceClient interface {
@@ -157,72 +191,71 @@ type ServicesProvidersServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewServicesProvidersServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) ServicesProvidersServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
-	servicesProvidersServiceMethods := services_providers.File_services_providers_services_providers_proto.Services().ByName("ServicesProvidersService").Methods()
 	return &servicesProvidersServiceClient{
 		test: connect.NewClient[services_providers.ServicesProvider, services_providers.TestResponse](
 			httpClient,
 			baseURL+ServicesProvidersServiceTestProcedure,
-			connect.WithSchema(servicesProvidersServiceMethods.ByName("Test")),
+			connect.WithSchema(servicesProvidersServiceTestMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		create: connect.NewClient[services_providers.ServicesProvider, services_providers.ServicesProvider](
 			httpClient,
 			baseURL+ServicesProvidersServiceCreateProcedure,
-			connect.WithSchema(servicesProvidersServiceMethods.ByName("Create")),
+			connect.WithSchema(servicesProvidersServiceCreateMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		delete: connect.NewClient[services_providers.DeleteRequest, services_providers.DeleteResponse](
 			httpClient,
 			baseURL+ServicesProvidersServiceDeleteProcedure,
-			connect.WithSchema(servicesProvidersServiceMethods.ByName("Delete")),
+			connect.WithSchema(servicesProvidersServiceDeleteMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		update: connect.NewClient[services_providers.ServicesProvider, services_providers.ServicesProvider](
 			httpClient,
 			baseURL+ServicesProvidersServiceUpdateProcedure,
-			connect.WithSchema(servicesProvidersServiceMethods.ByName("Update")),
+			connect.WithSchema(servicesProvidersServiceUpdateMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		get: connect.NewClient[services_providers.GetRequest, services_providers.ServicesProvider](
 			httpClient,
 			baseURL+ServicesProvidersServiceGetProcedure,
-			connect.WithSchema(servicesProvidersServiceMethods.ByName("Get")),
+			connect.WithSchema(servicesProvidersServiceGetMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		list: connect.NewClient[services_providers.ListRequest, services_providers.ListResponse](
 			httpClient,
 			baseURL+ServicesProvidersServiceListProcedure,
-			connect.WithSchema(servicesProvidersServiceMethods.ByName("List")),
+			connect.WithSchema(servicesProvidersServiceListMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		invoke: connect.NewClient[services_providers.InvokeRequest, services_providers.InvokeResponse](
 			httpClient,
 			baseURL+ServicesProvidersServiceInvokeProcedure,
-			connect.WithSchema(servicesProvidersServiceMethods.ByName("Invoke")),
+			connect.WithSchema(servicesProvidersServiceInvokeMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		prep: connect.NewClient[services_providers.PrepSP, services_providers.PrepSP](
 			httpClient,
 			baseURL+ServicesProvidersServicePrepProcedure,
-			connect.WithSchema(servicesProvidersServiceMethods.ByName("Prep")),
+			connect.WithSchema(servicesProvidersServicePrepMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		listExtentions: connect.NewClient[services_providers.ListRequest, services_providers.ListExtentionsResponse](
 			httpClient,
 			baseURL+ServicesProvidersServiceListExtentionsProcedure,
-			connect.WithSchema(servicesProvidersServiceMethods.ByName("ListExtentions")),
+			connect.WithSchema(servicesProvidersServiceListExtentionsMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		bindPlan: connect.NewClient[services_providers.BindPlanRequest, services_providers.BindPlanResponse](
 			httpClient,
 			baseURL+ServicesProvidersServiceBindPlanProcedure,
-			connect.WithSchema(servicesProvidersServiceMethods.ByName("BindPlan")),
+			connect.WithSchema(servicesProvidersServiceBindPlanMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		unbindPlan: connect.NewClient[services_providers.UnbindPlanRequest, services_providers.UnbindPlanResponse](
 			httpClient,
 			baseURL+ServicesProvidersServiceUnbindPlanProcedure,
-			connect.WithSchema(servicesProvidersServiceMethods.ByName("UnbindPlan")),
+			connect.WithSchema(servicesProvidersServiceUnbindPlanMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -320,71 +353,70 @@ type ServicesProvidersServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewServicesProvidersServiceHandler(svc ServicesProvidersServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	servicesProvidersServiceMethods := services_providers.File_services_providers_services_providers_proto.Services().ByName("ServicesProvidersService").Methods()
 	servicesProvidersServiceTestHandler := connect.NewUnaryHandler(
 		ServicesProvidersServiceTestProcedure,
 		svc.Test,
-		connect.WithSchema(servicesProvidersServiceMethods.ByName("Test")),
+		connect.WithSchema(servicesProvidersServiceTestMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	servicesProvidersServiceCreateHandler := connect.NewUnaryHandler(
 		ServicesProvidersServiceCreateProcedure,
 		svc.Create,
-		connect.WithSchema(servicesProvidersServiceMethods.ByName("Create")),
+		connect.WithSchema(servicesProvidersServiceCreateMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	servicesProvidersServiceDeleteHandler := connect.NewUnaryHandler(
 		ServicesProvidersServiceDeleteProcedure,
 		svc.Delete,
-		connect.WithSchema(servicesProvidersServiceMethods.ByName("Delete")),
+		connect.WithSchema(servicesProvidersServiceDeleteMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	servicesProvidersServiceUpdateHandler := connect.NewUnaryHandler(
 		ServicesProvidersServiceUpdateProcedure,
 		svc.Update,
-		connect.WithSchema(servicesProvidersServiceMethods.ByName("Update")),
+		connect.WithSchema(servicesProvidersServiceUpdateMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	servicesProvidersServiceGetHandler := connect.NewUnaryHandler(
 		ServicesProvidersServiceGetProcedure,
 		svc.Get,
-		connect.WithSchema(servicesProvidersServiceMethods.ByName("Get")),
+		connect.WithSchema(servicesProvidersServiceGetMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	servicesProvidersServiceListHandler := connect.NewUnaryHandler(
 		ServicesProvidersServiceListProcedure,
 		svc.List,
-		connect.WithSchema(servicesProvidersServiceMethods.ByName("List")),
+		connect.WithSchema(servicesProvidersServiceListMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	servicesProvidersServiceInvokeHandler := connect.NewUnaryHandler(
 		ServicesProvidersServiceInvokeProcedure,
 		svc.Invoke,
-		connect.WithSchema(servicesProvidersServiceMethods.ByName("Invoke")),
+		connect.WithSchema(servicesProvidersServiceInvokeMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	servicesProvidersServicePrepHandler := connect.NewUnaryHandler(
 		ServicesProvidersServicePrepProcedure,
 		svc.Prep,
-		connect.WithSchema(servicesProvidersServiceMethods.ByName("Prep")),
+		connect.WithSchema(servicesProvidersServicePrepMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	servicesProvidersServiceListExtentionsHandler := connect.NewUnaryHandler(
 		ServicesProvidersServiceListExtentionsProcedure,
 		svc.ListExtentions,
-		connect.WithSchema(servicesProvidersServiceMethods.ByName("ListExtentions")),
+		connect.WithSchema(servicesProvidersServiceListExtentionsMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	servicesProvidersServiceBindPlanHandler := connect.NewUnaryHandler(
 		ServicesProvidersServiceBindPlanProcedure,
 		svc.BindPlan,
-		connect.WithSchema(servicesProvidersServiceMethods.ByName("BindPlan")),
+		connect.WithSchema(servicesProvidersServiceBindPlanMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	servicesProvidersServiceUnbindPlanHandler := connect.NewUnaryHandler(
 		ServicesProvidersServiceUnbindPlanProcedure,
 		svc.UnbindPlan,
-		connect.WithSchema(servicesProvidersServiceMethods.ByName("UnbindPlan")),
+		connect.WithSchema(servicesProvidersServiceUnbindPlanMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.services_providers.ServicesProvidersService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -484,36 +516,35 @@ type ServicesProvidersExtentionsServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewServicesProvidersExtentionsServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) ServicesProvidersExtentionsServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
-	servicesProvidersExtentionsServiceMethods := services_providers.File_services_providers_services_providers_proto.Services().ByName("ServicesProvidersExtentionsService").Methods()
 	return &servicesProvidersExtentionsServiceClient{
 		getType: connect.NewClient[services_providers.GetTypeRequest, services_providers.GetTypeResponse](
 			httpClient,
 			baseURL+ServicesProvidersExtentionsServiceGetTypeProcedure,
-			connect.WithSchema(servicesProvidersExtentionsServiceMethods.ByName("GetType")),
+			connect.WithSchema(servicesProvidersExtentionsServiceGetTypeMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		test: connect.NewClient[services_providers.ServicesProvidersExtentionData, services_providers.GenericResponse](
 			httpClient,
 			baseURL+ServicesProvidersExtentionsServiceTestProcedure,
-			connect.WithSchema(servicesProvidersExtentionsServiceMethods.ByName("Test")),
+			connect.WithSchema(servicesProvidersExtentionsServiceTestMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		register: connect.NewClient[services_providers.ServicesProvidersExtentionData, services_providers.GenericResponse](
 			httpClient,
 			baseURL+ServicesProvidersExtentionsServiceRegisterProcedure,
-			connect.WithSchema(servicesProvidersExtentionsServiceMethods.ByName("Register")),
+			connect.WithSchema(servicesProvidersExtentionsServiceRegisterMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		update: connect.NewClient[services_providers.ServicesProvidersExtentionData, services_providers.GenericResponse](
 			httpClient,
 			baseURL+ServicesProvidersExtentionsServiceUpdateProcedure,
-			connect.WithSchema(servicesProvidersExtentionsServiceMethods.ByName("Update")),
+			connect.WithSchema(servicesProvidersExtentionsServiceUpdateMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		unregister: connect.NewClient[services_providers.ServicesProvidersExtentionData, services_providers.GenericResponse](
 			httpClient,
 			baseURL+ServicesProvidersExtentionsServiceUnregisterProcedure,
-			connect.WithSchema(servicesProvidersExtentionsServiceMethods.ByName("Unregister")),
+			connect.WithSchema(servicesProvidersExtentionsServiceUnregisterMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -569,35 +600,34 @@ type ServicesProvidersExtentionsServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewServicesProvidersExtentionsServiceHandler(svc ServicesProvidersExtentionsServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	servicesProvidersExtentionsServiceMethods := services_providers.File_services_providers_services_providers_proto.Services().ByName("ServicesProvidersExtentionsService").Methods()
 	servicesProvidersExtentionsServiceGetTypeHandler := connect.NewUnaryHandler(
 		ServicesProvidersExtentionsServiceGetTypeProcedure,
 		svc.GetType,
-		connect.WithSchema(servicesProvidersExtentionsServiceMethods.ByName("GetType")),
+		connect.WithSchema(servicesProvidersExtentionsServiceGetTypeMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	servicesProvidersExtentionsServiceTestHandler := connect.NewUnaryHandler(
 		ServicesProvidersExtentionsServiceTestProcedure,
 		svc.Test,
-		connect.WithSchema(servicesProvidersExtentionsServiceMethods.ByName("Test")),
+		connect.WithSchema(servicesProvidersExtentionsServiceTestMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	servicesProvidersExtentionsServiceRegisterHandler := connect.NewUnaryHandler(
 		ServicesProvidersExtentionsServiceRegisterProcedure,
 		svc.Register,
-		connect.WithSchema(servicesProvidersExtentionsServiceMethods.ByName("Register")),
+		connect.WithSchema(servicesProvidersExtentionsServiceRegisterMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	servicesProvidersExtentionsServiceUpdateHandler := connect.NewUnaryHandler(
 		ServicesProvidersExtentionsServiceUpdateProcedure,
 		svc.Update,
-		connect.WithSchema(servicesProvidersExtentionsServiceMethods.ByName("Update")),
+		connect.WithSchema(servicesProvidersExtentionsServiceUpdateMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	servicesProvidersExtentionsServiceUnregisterHandler := connect.NewUnaryHandler(
 		ServicesProvidersExtentionsServiceUnregisterProcedure,
 		svc.Unregister,
-		connect.WithSchema(servicesProvidersExtentionsServiceMethods.ByName("Unregister")),
+		connect.WithSchema(servicesProvidersExtentionsServiceUnregisterMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.services_providers.ServicesProvidersExtentionsService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -660,36 +690,35 @@ type ShowcasesServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewShowcasesServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) ShowcasesServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
-	showcasesServiceMethods := services_providers.File_services_providers_services_providers_proto.Services().ByName("ShowcasesService").Methods()
 	return &showcasesServiceClient{
 		create: connect.NewClient[services_providers.Showcase, services_providers.Showcase](
 			httpClient,
 			baseURL+ShowcasesServiceCreateProcedure,
-			connect.WithSchema(showcasesServiceMethods.ByName("Create")),
+			connect.WithSchema(showcasesServiceCreateMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		delete: connect.NewClient[services_providers.DeleteRequest, services_providers.DeleteResponse](
 			httpClient,
 			baseURL+ShowcasesServiceDeleteProcedure,
-			connect.WithSchema(showcasesServiceMethods.ByName("Delete")),
+			connect.WithSchema(showcasesServiceDeleteMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		update: connect.NewClient[services_providers.Showcase, services_providers.Showcase](
 			httpClient,
 			baseURL+ShowcasesServiceUpdateProcedure,
-			connect.WithSchema(showcasesServiceMethods.ByName("Update")),
+			connect.WithSchema(showcasesServiceUpdateMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		get: connect.NewClient[services_providers.GetRequest, services_providers.Showcase](
 			httpClient,
 			baseURL+ShowcasesServiceGetProcedure,
-			connect.WithSchema(showcasesServiceMethods.ByName("Get")),
+			connect.WithSchema(showcasesServiceGetMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		list: connect.NewClient[services_providers.ListRequest, services_providers.Showcases](
 			httpClient,
 			baseURL+ShowcasesServiceListProcedure,
-			connect.WithSchema(showcasesServiceMethods.ByName("List")),
+			connect.WithSchema(showcasesServiceListMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -745,35 +774,34 @@ type ShowcasesServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewShowcasesServiceHandler(svc ShowcasesServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	showcasesServiceMethods := services_providers.File_services_providers_services_providers_proto.Services().ByName("ShowcasesService").Methods()
 	showcasesServiceCreateHandler := connect.NewUnaryHandler(
 		ShowcasesServiceCreateProcedure,
 		svc.Create,
-		connect.WithSchema(showcasesServiceMethods.ByName("Create")),
+		connect.WithSchema(showcasesServiceCreateMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	showcasesServiceDeleteHandler := connect.NewUnaryHandler(
 		ShowcasesServiceDeleteProcedure,
 		svc.Delete,
-		connect.WithSchema(showcasesServiceMethods.ByName("Delete")),
+		connect.WithSchema(showcasesServiceDeleteMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	showcasesServiceUpdateHandler := connect.NewUnaryHandler(
 		ShowcasesServiceUpdateProcedure,
 		svc.Update,
-		connect.WithSchema(showcasesServiceMethods.ByName("Update")),
+		connect.WithSchema(showcasesServiceUpdateMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	showcasesServiceGetHandler := connect.NewUnaryHandler(
 		ShowcasesServiceGetProcedure,
 		svc.Get,
-		connect.WithSchema(showcasesServiceMethods.ByName("Get")),
+		connect.WithSchema(showcasesServiceGetMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	showcasesServiceListHandler := connect.NewUnaryHandler(
 		ShowcasesServiceListProcedure,
 		svc.List,
-		connect.WithSchema(showcasesServiceMethods.ByName("List")),
+		connect.WithSchema(showcasesServiceListMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.services_providers.ShowcasesService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -837,36 +865,35 @@ type ShowcaseCategoriesServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewShowcaseCategoriesServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) ShowcaseCategoriesServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
-	showcaseCategoriesServiceMethods := services_providers.File_services_providers_services_providers_proto.Services().ByName("ShowcaseCategoriesService").Methods()
 	return &showcaseCategoriesServiceClient{
 		create: connect.NewClient[services_providers.ShowcaseCategory, services_providers.ShowcaseCategory](
 			httpClient,
 			baseURL+ShowcaseCategoriesServiceCreateProcedure,
-			connect.WithSchema(showcaseCategoriesServiceMethods.ByName("Create")),
+			connect.WithSchema(showcaseCategoriesServiceCreateMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		delete: connect.NewClient[services_providers.DeleteRequest, services_providers.DeleteResponse](
 			httpClient,
 			baseURL+ShowcaseCategoriesServiceDeleteProcedure,
-			connect.WithSchema(showcaseCategoriesServiceMethods.ByName("Delete")),
+			connect.WithSchema(showcaseCategoriesServiceDeleteMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		update: connect.NewClient[services_providers.ShowcaseCategory, services_providers.ShowcaseCategory](
 			httpClient,
 			baseURL+ShowcaseCategoriesServiceUpdateProcedure,
-			connect.WithSchema(showcaseCategoriesServiceMethods.ByName("Update")),
+			connect.WithSchema(showcaseCategoriesServiceUpdateMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		get: connect.NewClient[services_providers.GetRequest, services_providers.ShowcaseCategory](
 			httpClient,
 			baseURL+ShowcaseCategoriesServiceGetProcedure,
-			connect.WithSchema(showcaseCategoriesServiceMethods.ByName("Get")),
+			connect.WithSchema(showcaseCategoriesServiceGetMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		list: connect.NewClient[services_providers.ListRequest, services_providers.ShowcaseCategories](
 			httpClient,
 			baseURL+ShowcaseCategoriesServiceListProcedure,
-			connect.WithSchema(showcaseCategoriesServiceMethods.ByName("List")),
+			connect.WithSchema(showcaseCategoriesServiceListMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -922,35 +949,34 @@ type ShowcaseCategoriesServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewShowcaseCategoriesServiceHandler(svc ShowcaseCategoriesServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	showcaseCategoriesServiceMethods := services_providers.File_services_providers_services_providers_proto.Services().ByName("ShowcaseCategoriesService").Methods()
 	showcaseCategoriesServiceCreateHandler := connect.NewUnaryHandler(
 		ShowcaseCategoriesServiceCreateProcedure,
 		svc.Create,
-		connect.WithSchema(showcaseCategoriesServiceMethods.ByName("Create")),
+		connect.WithSchema(showcaseCategoriesServiceCreateMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	showcaseCategoriesServiceDeleteHandler := connect.NewUnaryHandler(
 		ShowcaseCategoriesServiceDeleteProcedure,
 		svc.Delete,
-		connect.WithSchema(showcaseCategoriesServiceMethods.ByName("Delete")),
+		connect.WithSchema(showcaseCategoriesServiceDeleteMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	showcaseCategoriesServiceUpdateHandler := connect.NewUnaryHandler(
 		ShowcaseCategoriesServiceUpdateProcedure,
 		svc.Update,
-		connect.WithSchema(showcaseCategoriesServiceMethods.ByName("Update")),
+		connect.WithSchema(showcaseCategoriesServiceUpdateMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	showcaseCategoriesServiceGetHandler := connect.NewUnaryHandler(
 		ShowcaseCategoriesServiceGetProcedure,
 		svc.Get,
-		connect.WithSchema(showcaseCategoriesServiceMethods.ByName("Get")),
+		connect.WithSchema(showcaseCategoriesServiceGetMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	showcaseCategoriesServiceListHandler := connect.NewUnaryHandler(
 		ShowcaseCategoriesServiceListProcedure,
 		svc.List,
-		connect.WithSchema(showcaseCategoriesServiceMethods.ByName("List")),
+		connect.WithSchema(showcaseCategoriesServiceListMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.services_providers.ShowcaseCategoriesService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

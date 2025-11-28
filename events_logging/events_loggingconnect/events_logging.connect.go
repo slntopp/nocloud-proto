@@ -56,6 +56,13 @@ const (
 	EventsLoggingServiceGetCountProcedure = "/nocloud.events_logging.EventsLoggingService/GetCount"
 )
 
+// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
+var (
+	eventsLoggingServiceServiceDescriptor         = events_logging.File_events_logging_events_logging_proto.Services().ByName("EventsLoggingService")
+	eventsLoggingServiceGetEventsMethodDescriptor = eventsLoggingServiceServiceDescriptor.Methods().ByName("GetEvents")
+	eventsLoggingServiceGetCountMethodDescriptor  = eventsLoggingServiceServiceDescriptor.Methods().ByName("GetCount")
+)
+
 // EventsLoggingServiceClient is a client for the nocloud.events_logging.EventsLoggingService
 // service.
 type EventsLoggingServiceClient interface {
@@ -73,18 +80,17 @@ type EventsLoggingServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewEventsLoggingServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) EventsLoggingServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
-	eventsLoggingServiceMethods := events_logging.File_events_logging_events_logging_proto.Services().ByName("EventsLoggingService").Methods()
 	return &eventsLoggingServiceClient{
 		getEvents: connect.NewClient[events_logging.GetEventsRequest, events_logging.Events](
 			httpClient,
 			baseURL+EventsLoggingServiceGetEventsProcedure,
-			connect.WithSchema(eventsLoggingServiceMethods.ByName("GetEvents")),
+			connect.WithSchema(eventsLoggingServiceGetEventsMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		getCount: connect.NewClient[events_logging.GetEventsCountRequest, events_logging.GetEventsCountResponse](
 			httpClient,
 			baseURL+EventsLoggingServiceGetCountProcedure,
-			connect.WithSchema(eventsLoggingServiceMethods.ByName("GetCount")),
+			connect.WithSchema(eventsLoggingServiceGetCountMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -119,17 +125,16 @@ type EventsLoggingServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewEventsLoggingServiceHandler(svc EventsLoggingServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	eventsLoggingServiceMethods := events_logging.File_events_logging_events_logging_proto.Services().ByName("EventsLoggingService").Methods()
 	eventsLoggingServiceGetEventsHandler := connect.NewUnaryHandler(
 		EventsLoggingServiceGetEventsProcedure,
 		svc.GetEvents,
-		connect.WithSchema(eventsLoggingServiceMethods.ByName("GetEvents")),
+		connect.WithSchema(eventsLoggingServiceGetEventsMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	eventsLoggingServiceGetCountHandler := connect.NewUnaryHandler(
 		EventsLoggingServiceGetCountProcedure,
 		svc.GetCount,
-		connect.WithSchema(eventsLoggingServiceMethods.ByName("GetCount")),
+		connect.WithSchema(eventsLoggingServiceGetCountMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.events_logging.EventsLoggingService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

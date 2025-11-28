@@ -2702,6 +2702,38 @@
         ]
       }
     },
+    "/billing/invoices/number": {
+      "patch": {
+        "operationId": "BillingService_ChangeInvoiceNumber",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingInvoice"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingChangeInvoiceNumberRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
     "/billing/invoices/renewal": {
       "put": {
         "operationId": "BillingService_CreateRenewalInvoice",
@@ -9215,6 +9247,17 @@
     },
     "billingChangeDefaultCurrencyResponse": {
       "type": "object"
+    },
+    "billingChangeInvoiceNumberRequest": {
+      "type": "object",
+      "properties": {
+        "invoice": {
+          "type": "string"
+        },
+        "newNumber": {
+          "type": "string"
+        }
+      }
     },
     "billingConversionRequest": {
       "type": "object",

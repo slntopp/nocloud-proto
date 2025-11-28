@@ -360,6 +360,11 @@ message UpdateInvoiceRequest{
   bool ignore_null_fields = 3;
 }
 
+message ChangeInvoiceNumberRequest{
+  string invoice = 1;
+  string new_number = 2;
+}
+
 message UpdateInvoiceStatusRequest{
   message Params{
     int64 payment_date = 1;
@@ -627,6 +632,12 @@ service BillingService {
   rpc UpdateInvoice (UpdateInvoiceRequest) returns (Invoice) {
     option (google.api.http) = {
       patch: "/billing/invoices"
+      body: "*"
+    };
+  };
+  rpc ChangeInvoiceNumber (ChangeInvoiceNumberRequest) returns (Invoice) {
+    option (google.api.http) = {
+      patch: "/billing/invoices/number"
       body: "*"
     };
   };

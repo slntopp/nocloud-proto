@@ -129,6 +129,42 @@ const (
 	AccountGroupsServiceListProcedure = "/nocloud.registry.AccountGroupsService/List"
 )
 
+// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
+var (
+	accountsServiceServiceDescriptor                  = registry.File_registry_registry_proto.Services().ByName("AccountsService")
+	accountsServiceTokenMethodDescriptor              = accountsServiceServiceDescriptor.Methods().ByName("Token")
+	accountsServiceSetCredentialsMethodDescriptor     = accountsServiceServiceDescriptor.Methods().ByName("SetCredentials")
+	accountsServiceAddNoteMethodDescriptor            = accountsServiceServiceDescriptor.Methods().ByName("AddNote")
+	accountsServicePatchNoteMethodDescriptor          = accountsServiceServiceDescriptor.Methods().ByName("PatchNote")
+	accountsServiceRemoveNoteMethodDescriptor         = accountsServiceServiceDescriptor.Methods().ByName("RemoveNote")
+	accountsServiceCreateMethodDescriptor             = accountsServiceServiceDescriptor.Methods().ByName("Create")
+	accountsServiceSignUpMethodDescriptor             = accountsServiceServiceDescriptor.Methods().ByName("SignUp")
+	accountsServiceUpdateMethodDescriptor             = accountsServiceServiceDescriptor.Methods().ByName("Update")
+	accountsServiceGetMethodDescriptor                = accountsServiceServiceDescriptor.Methods().ByName("Get")
+	accountsServiceListMethodDescriptor               = accountsServiceServiceDescriptor.Methods().ByName("List")
+	accountsServiceDeleteMethodDescriptor             = accountsServiceServiceDescriptor.Methods().ByName("Delete")
+	accountsServiceSuspendMethodDescriptor            = accountsServiceServiceDescriptor.Methods().ByName("Suspend")
+	accountsServiceUnsuspendMethodDescriptor          = accountsServiceServiceDescriptor.Methods().ByName("Unsuspend")
+	accountsServiceVerifyMethodDescriptor             = accountsServiceServiceDescriptor.Methods().ByName("Verify")
+	accountsServiceChangePhoneMethodDescriptor        = accountsServiceServiceDescriptor.Methods().ByName("ChangePhone")
+	accountsServiceChangeLanguageCodeMethodDescriptor = accountsServiceServiceDescriptor.Methods().ByName("ChangeLanguageCode")
+	accountsServiceChangeAccountGroupMethodDescriptor = accountsServiceServiceDescriptor.Methods().ByName("ChangeAccountGroup")
+	namespacesServiceServiceDescriptor                = registry.File_registry_registry_proto.Services().ByName("NamespacesService")
+	namespacesServiceCreateMethodDescriptor           = namespacesServiceServiceDescriptor.Methods().ByName("Create")
+	namespacesServiceListMethodDescriptor             = namespacesServiceServiceDescriptor.Methods().ByName("List")
+	namespacesServiceGetMethodDescriptor              = namespacesServiceServiceDescriptor.Methods().ByName("Get")
+	namespacesServiceJoinMethodDescriptor             = namespacesServiceServiceDescriptor.Methods().ByName("Join")
+	namespacesServiceLinkMethodDescriptor             = namespacesServiceServiceDescriptor.Methods().ByName("Link")
+	namespacesServiceDeleteMethodDescriptor           = namespacesServiceServiceDescriptor.Methods().ByName("Delete")
+	namespacesServicePatchMethodDescriptor            = namespacesServiceServiceDescriptor.Methods().ByName("Patch")
+	accountGroupsServiceServiceDescriptor             = registry.File_registry_registry_proto.Services().ByName("AccountGroupsService")
+	accountGroupsServiceCreateMethodDescriptor        = accountGroupsServiceServiceDescriptor.Methods().ByName("Create")
+	accountGroupsServiceDeleteMethodDescriptor        = accountGroupsServiceServiceDescriptor.Methods().ByName("Delete")
+	accountGroupsServiceUpdateMethodDescriptor        = accountGroupsServiceServiceDescriptor.Methods().ByName("Update")
+	accountGroupsServiceGetMethodDescriptor           = accountGroupsServiceServiceDescriptor.Methods().ByName("Get")
+	accountGroupsServiceListMethodDescriptor          = accountGroupsServiceServiceDescriptor.Methods().ByName("List")
+)
+
 // AccountsServiceClient is a client for the nocloud.registry.AccountsService service.
 type AccountsServiceClient interface {
 	Token(context.Context, *connect.Request[accounts.TokenRequest]) (*connect.Response[accounts.TokenResponse], error)
@@ -159,108 +195,107 @@ type AccountsServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewAccountsServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) AccountsServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
-	accountsServiceMethods := registry.File_registry_registry_proto.Services().ByName("AccountsService").Methods()
 	return &accountsServiceClient{
 		token: connect.NewClient[accounts.TokenRequest, accounts.TokenResponse](
 			httpClient,
 			baseURL+AccountsServiceTokenProcedure,
-			connect.WithSchema(accountsServiceMethods.ByName("Token")),
+			connect.WithSchema(accountsServiceTokenMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		setCredentials: connect.NewClient[accounts.SetCredentialsRequest, accounts.SetCredentialsResponse](
 			httpClient,
 			baseURL+AccountsServiceSetCredentialsProcedure,
-			connect.WithSchema(accountsServiceMethods.ByName("SetCredentials")),
+			connect.WithSchema(accountsServiceSetCredentialsMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		addNote: connect.NewClient[notes.AddNoteRequest, notes.NoteResponse](
 			httpClient,
 			baseURL+AccountsServiceAddNoteProcedure,
-			connect.WithSchema(accountsServiceMethods.ByName("AddNote")),
+			connect.WithSchema(accountsServiceAddNoteMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		patchNote: connect.NewClient[notes.PatchNoteRequest, notes.NoteResponse](
 			httpClient,
 			baseURL+AccountsServicePatchNoteProcedure,
-			connect.WithSchema(accountsServiceMethods.ByName("PatchNote")),
+			connect.WithSchema(accountsServicePatchNoteMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		removeNote: connect.NewClient[notes.RemoveNoteRequest, notes.NoteResponse](
 			httpClient,
 			baseURL+AccountsServiceRemoveNoteProcedure,
-			connect.WithSchema(accountsServiceMethods.ByName("RemoveNote")),
+			connect.WithSchema(accountsServiceRemoveNoteMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		create: connect.NewClient[accounts.CreateRequest, accounts.CreateResponse](
 			httpClient,
 			baseURL+AccountsServiceCreateProcedure,
-			connect.WithSchema(accountsServiceMethods.ByName("Create")),
+			connect.WithSchema(accountsServiceCreateMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		signUp: connect.NewClient[accounts.CreateRequest, accounts.CreateResponse](
 			httpClient,
 			baseURL+AccountsServiceSignUpProcedure,
-			connect.WithSchema(accountsServiceMethods.ByName("SignUp")),
+			connect.WithSchema(accountsServiceSignUpMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		update: connect.NewClient[accounts.Account, accounts.UpdateResponse](
 			httpClient,
 			baseURL+AccountsServiceUpdateProcedure,
-			connect.WithSchema(accountsServiceMethods.ByName("Update")),
+			connect.WithSchema(accountsServiceUpdateMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		get: connect.NewClient[accounts.GetRequest, accounts.Account](
 			httpClient,
 			baseURL+AccountsServiceGetProcedure,
-			connect.WithSchema(accountsServiceMethods.ByName("Get")),
+			connect.WithSchema(accountsServiceGetMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		list: connect.NewClient[accounts.ListRequest, accounts.ListResponse](
 			httpClient,
 			baseURL+AccountsServiceListProcedure,
-			connect.WithSchema(accountsServiceMethods.ByName("List")),
+			connect.WithSchema(accountsServiceListMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		delete: connect.NewClient[accounts.DeleteRequest, accounts.DeleteResponse](
 			httpClient,
 			baseURL+AccountsServiceDeleteProcedure,
-			connect.WithSchema(accountsServiceMethods.ByName("Delete")),
+			connect.WithSchema(accountsServiceDeleteMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		suspend: connect.NewClient[accounts.SuspendRequest, accounts.SuspendResponse](
 			httpClient,
 			baseURL+AccountsServiceSuspendProcedure,
-			connect.WithSchema(accountsServiceMethods.ByName("Suspend")),
+			connect.WithSchema(accountsServiceSuspendMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		unsuspend: connect.NewClient[accounts.UnsuspendRequest, accounts.UnsuspendResponse](
 			httpClient,
 			baseURL+AccountsServiceUnsuspendProcedure,
-			connect.WithSchema(accountsServiceMethods.ByName("Unsuspend")),
+			connect.WithSchema(accountsServiceUnsuspendMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		verify: connect.NewClient[registry.VerificationRequest, registry.VerificationResponse](
 			httpClient,
 			baseURL+AccountsServiceVerifyProcedure,
-			connect.WithSchema(accountsServiceMethods.ByName("Verify")),
+			connect.WithSchema(accountsServiceVerifyMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		changePhone: connect.NewClient[accounts.ChangePhoneRequest, accounts.ChangePhoneResponse](
 			httpClient,
 			baseURL+AccountsServiceChangePhoneProcedure,
-			connect.WithSchema(accountsServiceMethods.ByName("ChangePhone")),
+			connect.WithSchema(accountsServiceChangePhoneMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		changeLanguageCode: connect.NewClient[accounts.ChangeLanguageCodeRequest, accounts.ChangeLanguageCodeResponse](
 			httpClient,
 			baseURL+AccountsServiceChangeLanguageCodeProcedure,
-			connect.WithSchema(accountsServiceMethods.ByName("ChangeLanguageCode")),
+			connect.WithSchema(accountsServiceChangeLanguageCodeMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		changeAccountGroup: connect.NewClient[accounts.ChangeAccountGroupRequest, accounts.ChangeAccountGroupResponse](
 			httpClient,
 			baseURL+AccountsServiceChangeAccountGroupProcedure,
-			connect.WithSchema(accountsServiceMethods.ByName("ChangeAccountGroup")),
+			connect.WithSchema(accountsServiceChangeAccountGroupMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -399,107 +434,106 @@ type AccountsServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewAccountsServiceHandler(svc AccountsServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	accountsServiceMethods := registry.File_registry_registry_proto.Services().ByName("AccountsService").Methods()
 	accountsServiceTokenHandler := connect.NewUnaryHandler(
 		AccountsServiceTokenProcedure,
 		svc.Token,
-		connect.WithSchema(accountsServiceMethods.ByName("Token")),
+		connect.WithSchema(accountsServiceTokenMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	accountsServiceSetCredentialsHandler := connect.NewUnaryHandler(
 		AccountsServiceSetCredentialsProcedure,
 		svc.SetCredentials,
-		connect.WithSchema(accountsServiceMethods.ByName("SetCredentials")),
+		connect.WithSchema(accountsServiceSetCredentialsMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	accountsServiceAddNoteHandler := connect.NewUnaryHandler(
 		AccountsServiceAddNoteProcedure,
 		svc.AddNote,
-		connect.WithSchema(accountsServiceMethods.ByName("AddNote")),
+		connect.WithSchema(accountsServiceAddNoteMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	accountsServicePatchNoteHandler := connect.NewUnaryHandler(
 		AccountsServicePatchNoteProcedure,
 		svc.PatchNote,
-		connect.WithSchema(accountsServiceMethods.ByName("PatchNote")),
+		connect.WithSchema(accountsServicePatchNoteMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	accountsServiceRemoveNoteHandler := connect.NewUnaryHandler(
 		AccountsServiceRemoveNoteProcedure,
 		svc.RemoveNote,
-		connect.WithSchema(accountsServiceMethods.ByName("RemoveNote")),
+		connect.WithSchema(accountsServiceRemoveNoteMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	accountsServiceCreateHandler := connect.NewUnaryHandler(
 		AccountsServiceCreateProcedure,
 		svc.Create,
-		connect.WithSchema(accountsServiceMethods.ByName("Create")),
+		connect.WithSchema(accountsServiceCreateMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	accountsServiceSignUpHandler := connect.NewUnaryHandler(
 		AccountsServiceSignUpProcedure,
 		svc.SignUp,
-		connect.WithSchema(accountsServiceMethods.ByName("SignUp")),
+		connect.WithSchema(accountsServiceSignUpMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	accountsServiceUpdateHandler := connect.NewUnaryHandler(
 		AccountsServiceUpdateProcedure,
 		svc.Update,
-		connect.WithSchema(accountsServiceMethods.ByName("Update")),
+		connect.WithSchema(accountsServiceUpdateMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	accountsServiceGetHandler := connect.NewUnaryHandler(
 		AccountsServiceGetProcedure,
 		svc.Get,
-		connect.WithSchema(accountsServiceMethods.ByName("Get")),
+		connect.WithSchema(accountsServiceGetMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	accountsServiceListHandler := connect.NewUnaryHandler(
 		AccountsServiceListProcedure,
 		svc.List,
-		connect.WithSchema(accountsServiceMethods.ByName("List")),
+		connect.WithSchema(accountsServiceListMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	accountsServiceDeleteHandler := connect.NewUnaryHandler(
 		AccountsServiceDeleteProcedure,
 		svc.Delete,
-		connect.WithSchema(accountsServiceMethods.ByName("Delete")),
+		connect.WithSchema(accountsServiceDeleteMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	accountsServiceSuspendHandler := connect.NewUnaryHandler(
 		AccountsServiceSuspendProcedure,
 		svc.Suspend,
-		connect.WithSchema(accountsServiceMethods.ByName("Suspend")),
+		connect.WithSchema(accountsServiceSuspendMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	accountsServiceUnsuspendHandler := connect.NewUnaryHandler(
 		AccountsServiceUnsuspendProcedure,
 		svc.Unsuspend,
-		connect.WithSchema(accountsServiceMethods.ByName("Unsuspend")),
+		connect.WithSchema(accountsServiceUnsuspendMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	accountsServiceVerifyHandler := connect.NewUnaryHandler(
 		AccountsServiceVerifyProcedure,
 		svc.Verify,
-		connect.WithSchema(accountsServiceMethods.ByName("Verify")),
+		connect.WithSchema(accountsServiceVerifyMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	accountsServiceChangePhoneHandler := connect.NewUnaryHandler(
 		AccountsServiceChangePhoneProcedure,
 		svc.ChangePhone,
-		connect.WithSchema(accountsServiceMethods.ByName("ChangePhone")),
+		connect.WithSchema(accountsServiceChangePhoneMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	accountsServiceChangeLanguageCodeHandler := connect.NewUnaryHandler(
 		AccountsServiceChangeLanguageCodeProcedure,
 		svc.ChangeLanguageCode,
-		connect.WithSchema(accountsServiceMethods.ByName("ChangeLanguageCode")),
+		connect.WithSchema(accountsServiceChangeLanguageCodeMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	accountsServiceChangeAccountGroupHandler := connect.NewUnaryHandler(
 		AccountsServiceChangeAccountGroupProcedure,
 		svc.ChangeAccountGroup,
-		connect.WithSchema(accountsServiceMethods.ByName("ChangeAccountGroup")),
+		connect.WithSchema(accountsServiceChangeAccountGroupMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.registry.AccountsService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -635,48 +669,47 @@ type NamespacesServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewNamespacesServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) NamespacesServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
-	namespacesServiceMethods := registry.File_registry_registry_proto.Services().ByName("NamespacesService").Methods()
 	return &namespacesServiceClient{
 		create: connect.NewClient[namespaces.CreateRequest, namespaces.CreateResponse](
 			httpClient,
 			baseURL+NamespacesServiceCreateProcedure,
-			connect.WithSchema(namespacesServiceMethods.ByName("Create")),
+			connect.WithSchema(namespacesServiceCreateMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		list: connect.NewClient[namespaces.ListRequest, namespaces.ListResponse](
 			httpClient,
 			baseURL+NamespacesServiceListProcedure,
-			connect.WithSchema(namespacesServiceMethods.ByName("List")),
+			connect.WithSchema(namespacesServiceListMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		get: connect.NewClient[namespaces.GetRequest, namespaces.Namespace](
 			httpClient,
 			baseURL+NamespacesServiceGetProcedure,
-			connect.WithSchema(namespacesServiceMethods.ByName("Get")),
+			connect.WithSchema(namespacesServiceGetMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		join: connect.NewClient[namespaces.JoinRequest, namespaces.JoinResponse](
 			httpClient,
 			baseURL+NamespacesServiceJoinProcedure,
-			connect.WithSchema(namespacesServiceMethods.ByName("Join")),
+			connect.WithSchema(namespacesServiceJoinMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		link: connect.NewClient[namespaces.LinkRequest, namespaces.LinkResponse](
 			httpClient,
 			baseURL+NamespacesServiceLinkProcedure,
-			connect.WithSchema(namespacesServiceMethods.ByName("Link")),
+			connect.WithSchema(namespacesServiceLinkMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		delete: connect.NewClient[namespaces.DeleteRequest, namespaces.DeleteResponse](
 			httpClient,
 			baseURL+NamespacesServiceDeleteProcedure,
-			connect.WithSchema(namespacesServiceMethods.ByName("Delete")),
+			connect.WithSchema(namespacesServiceDeleteMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		patch: connect.NewClient[namespaces.PatchRequest, namespaces.PatchResponse](
 			httpClient,
 			baseURL+NamespacesServicePatchProcedure,
-			connect.WithSchema(namespacesServiceMethods.ByName("Patch")),
+			connect.WithSchema(namespacesServicePatchMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -745,47 +778,46 @@ type NamespacesServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewNamespacesServiceHandler(svc NamespacesServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	namespacesServiceMethods := registry.File_registry_registry_proto.Services().ByName("NamespacesService").Methods()
 	namespacesServiceCreateHandler := connect.NewUnaryHandler(
 		NamespacesServiceCreateProcedure,
 		svc.Create,
-		connect.WithSchema(namespacesServiceMethods.ByName("Create")),
+		connect.WithSchema(namespacesServiceCreateMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	namespacesServiceListHandler := connect.NewUnaryHandler(
 		NamespacesServiceListProcedure,
 		svc.List,
-		connect.WithSchema(namespacesServiceMethods.ByName("List")),
+		connect.WithSchema(namespacesServiceListMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	namespacesServiceGetHandler := connect.NewUnaryHandler(
 		NamespacesServiceGetProcedure,
 		svc.Get,
-		connect.WithSchema(namespacesServiceMethods.ByName("Get")),
+		connect.WithSchema(namespacesServiceGetMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	namespacesServiceJoinHandler := connect.NewUnaryHandler(
 		NamespacesServiceJoinProcedure,
 		svc.Join,
-		connect.WithSchema(namespacesServiceMethods.ByName("Join")),
+		connect.WithSchema(namespacesServiceJoinMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	namespacesServiceLinkHandler := connect.NewUnaryHandler(
 		NamespacesServiceLinkProcedure,
 		svc.Link,
-		connect.WithSchema(namespacesServiceMethods.ByName("Link")),
+		connect.WithSchema(namespacesServiceLinkMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	namespacesServiceDeleteHandler := connect.NewUnaryHandler(
 		NamespacesServiceDeleteProcedure,
 		svc.Delete,
-		connect.WithSchema(namespacesServiceMethods.ByName("Delete")),
+		connect.WithSchema(namespacesServiceDeleteMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	namespacesServicePatchHandler := connect.NewUnaryHandler(
 		NamespacesServicePatchProcedure,
 		svc.Patch,
-		connect.WithSchema(namespacesServiceMethods.ByName("Patch")),
+		connect.WithSchema(namespacesServicePatchMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.registry.NamespacesService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -859,36 +891,35 @@ type AccountGroupsServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewAccountGroupsServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) AccountGroupsServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
-	accountGroupsServiceMethods := registry.File_registry_registry_proto.Services().ByName("AccountGroupsService").Methods()
 	return &accountGroupsServiceClient{
 		create: connect.NewClient[accounts.AccountGroup, accounts.AccountGroup](
 			httpClient,
 			baseURL+AccountGroupsServiceCreateProcedure,
-			connect.WithSchema(accountGroupsServiceMethods.ByName("Create")),
+			connect.WithSchema(accountGroupsServiceCreateMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		delete: connect.NewClient[accounts.DeleteRequest, accounts.DeleteResponse](
 			httpClient,
 			baseURL+AccountGroupsServiceDeleteProcedure,
-			connect.WithSchema(accountGroupsServiceMethods.ByName("Delete")),
+			connect.WithSchema(accountGroupsServiceDeleteMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		update: connect.NewClient[accounts.AccountGroup, accounts.AccountGroup](
 			httpClient,
 			baseURL+AccountGroupsServiceUpdateProcedure,
-			connect.WithSchema(accountGroupsServiceMethods.ByName("Update")),
+			connect.WithSchema(accountGroupsServiceUpdateMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		get: connect.NewClient[accounts.GetRequest, accounts.AccountGroup](
 			httpClient,
 			baseURL+AccountGroupsServiceGetProcedure,
-			connect.WithSchema(accountGroupsServiceMethods.ByName("Get")),
+			connect.WithSchema(accountGroupsServiceGetMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		list: connect.NewClient[accounts.ListRequest, accounts.AccountGroupsListResponse](
 			httpClient,
 			baseURL+AccountGroupsServiceListProcedure,
-			connect.WithSchema(accountGroupsServiceMethods.ByName("List")),
+			connect.WithSchema(accountGroupsServiceListMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -944,35 +975,34 @@ type AccountGroupsServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewAccountGroupsServiceHandler(svc AccountGroupsServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	accountGroupsServiceMethods := registry.File_registry_registry_proto.Services().ByName("AccountGroupsService").Methods()
 	accountGroupsServiceCreateHandler := connect.NewUnaryHandler(
 		AccountGroupsServiceCreateProcedure,
 		svc.Create,
-		connect.WithSchema(accountGroupsServiceMethods.ByName("Create")),
+		connect.WithSchema(accountGroupsServiceCreateMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	accountGroupsServiceDeleteHandler := connect.NewUnaryHandler(
 		AccountGroupsServiceDeleteProcedure,
 		svc.Delete,
-		connect.WithSchema(accountGroupsServiceMethods.ByName("Delete")),
+		connect.WithSchema(accountGroupsServiceDeleteMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	accountGroupsServiceUpdateHandler := connect.NewUnaryHandler(
 		AccountGroupsServiceUpdateProcedure,
 		svc.Update,
-		connect.WithSchema(accountGroupsServiceMethods.ByName("Update")),
+		connect.WithSchema(accountGroupsServiceUpdateMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	accountGroupsServiceGetHandler := connect.NewUnaryHandler(
 		AccountGroupsServiceGetProcedure,
 		svc.Get,
-		connect.WithSchema(accountGroupsServiceMethods.ByName("Get")),
+		connect.WithSchema(accountGroupsServiceGetMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	accountGroupsServiceListHandler := connect.NewUnaryHandler(
 		AccountGroupsServiceListProcedure,
 		svc.List,
-		connect.WithSchema(accountGroupsServiceMethods.ByName("List")),
+		connect.WithSchema(accountGroupsServiceListMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.registry.AccountGroupsService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
