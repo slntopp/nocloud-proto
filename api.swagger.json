@@ -8578,6 +8578,29 @@
         }
       }
     },
+    "accountsInvoiceFromFields": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "taxId": {
+          "type": "string"
+        }
+      }
+    },
     "accountsInvoiceOrderSettings": {
       "type": "object",
       "properties": {
@@ -8604,7 +8627,7 @@
       "type": "object",
       "properties": {
         "invoiceFrom": {
-          "type": "string"
+          "$ref": "#/definitions/accountsInvoiceFromFields"
         },
         "logoUrl": {
           "type": "string"

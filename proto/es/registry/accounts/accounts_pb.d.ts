@@ -89,13 +89,62 @@ export declare class InvoiceOrderSettings extends Message<InvoiceOrderSettings> 
 }
 
 /**
+ * @generated from message nocloud.registry.accounts.InvoiceFromFields
+ */
+export declare class InvoiceFromFields extends Message<InvoiceFromFields> {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * @generated from field: string address = 2;
+   */
+  address: string;
+
+  /**
+   * @generated from field: string city = 3;
+   */
+  city: string;
+
+  /**
+   * @generated from field: string postal_code = 4;
+   */
+  postalCode: string;
+
+  /**
+   * @generated from field: string country = 5;
+   */
+  country: string;
+
+  /**
+   * @generated from field: string tax_id = 6;
+   */
+  taxId: string;
+
+  constructor(data?: PartialMessage<InvoiceFromFields>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.InvoiceFromFields";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): InvoiceFromFields;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): InvoiceFromFields;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): InvoiceFromFields;
+
+  static equals(a: InvoiceFromFields | PlainMessage<InvoiceFromFields> | undefined, b: InvoiceFromFields | PlainMessage<InvoiceFromFields> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.registry.accounts.InvoiceParametersCustom
  */
 export declare class InvoiceParametersCustom extends Message<InvoiceParametersCustom> {
   /**
-   * @generated from field: string invoice_from = 1;
+   * @generated from field: nocloud.registry.accounts.InvoiceFromFields invoice_from = 1;
    */
-  invoiceFrom: string;
+  invoiceFrom?: InvoiceFromFields;
 
   /**
    * @generated from field: string logo_url = 2;

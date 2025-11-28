@@ -30,8 +30,17 @@ message InvoiceOrderSettings {
   int64 must_reset_invoice_number_at = 5;
 }
 
+message InvoiceFromFields{
+  string name = 1;
+  string address = 2;
+  string city = 3;
+  string postal_code = 4;
+  string country = 5;
+  string tax_id = 6;
+}
+
 message InvoiceParametersCustom {
-  string invoice_from = 1;
+  InvoiceFromFields invoice_from = 1;
   string logo_url = 2;
 }
 

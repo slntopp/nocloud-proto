@@ -50,12 +50,27 @@ export const InvoiceOrderSettings = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * @generated from message nocloud.registry.accounts.InvoiceFromFields
+ */
+export const InvoiceFromFields = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.InvoiceFromFields",
+  () => [
+    { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "address", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "city", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "postal_code", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "country", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 6, name: "tax_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
  * @generated from message nocloud.registry.accounts.InvoiceParametersCustom
  */
 export const InvoiceParametersCustom = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.registry.accounts.InvoiceParametersCustom",
   () => [
-    { no: 1, name: "invoice_from", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "invoice_from", kind: "message", T: InvoiceFromFields },
     { no: 2, name: "logo_url", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
