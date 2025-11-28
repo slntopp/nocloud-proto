@@ -70,7 +70,7 @@ export const InvoiceFromFields = /*@__PURE__*/ proto3.makeMessageType(
 export const InvoiceParametersCustom = /*@__PURE__*/ proto3.makeMessageType(
   "nocloud.registry.accounts.InvoiceParametersCustom",
   () => [
-    { no: 1, name: "invoice_from", kind: "message", T: InvoiceFromFields },
+    { no: 1, name: "invoice_from_fields", kind: "message", T: InvoiceFromFields },
     { no: 2, name: "logo_url", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );

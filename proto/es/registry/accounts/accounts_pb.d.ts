@@ -142,9 +142,9 @@ export declare class InvoiceFromFields extends Message<InvoiceFromFields> {
  */
 export declare class InvoiceParametersCustom extends Message<InvoiceParametersCustom> {
   /**
-   * @generated from field: nocloud.registry.accounts.InvoiceFromFields invoice_from = 1;
+   * @generated from field: nocloud.registry.accounts.InvoiceFromFields invoice_from_fields = 1;
    */
-  invoiceFrom?: InvoiceFromFields;
+  invoiceFromFields?: InvoiceFromFields;
 
   /**
    * @generated from field: string logo_url = 2;

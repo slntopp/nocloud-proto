@@ -8626,7 +8626,7 @@
     "accountsInvoiceParametersCustom": {
       "type": "object",
       "properties": {
-        "invoiceFrom": {
+        "invoiceFromFields": {
           "$ref": "#/definitions/accountsInvoiceFromFields"
         },
         "logoUrl": {

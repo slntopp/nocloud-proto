@@ -40,7 +40,7 @@ message InvoiceFromFields{
 }
 
 message InvoiceParametersCustom {
-  InvoiceFromFields invoice_from = 1;
+  InvoiceFromFields invoice_from_fields = 1;
   string logo_url = 2;
 }
 
