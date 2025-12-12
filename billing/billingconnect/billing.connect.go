@@ -256,86 +256,6 @@ const (
 	PromocodesServiceApplySaleProcedure = "/nocloud.billing.PromocodesService/ApplySale"
 )
 
-// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
-var (
-	recordsServiceServiceDescriptor                                 = billing.File_billing_billing_proto.Services().ByName("RecordsService")
-	recordsServiceGetActiveMethodDescriptor                         = recordsServiceServiceDescriptor.Methods().ByName("GetActive")
-	recordsServiceCreateMethodDescriptor                            = recordsServiceServiceDescriptor.Methods().ByName("Create")
-	recordsServiceUpdateMethodDescriptor                            = recordsServiceServiceDescriptor.Methods().ByName("Update")
-	billingServiceServiceDescriptor                                 = billing.File_billing_billing_proto.Services().ByName("BillingService")
-	billingServiceCreatePlanMethodDescriptor                        = billingServiceServiceDescriptor.Methods().ByName("CreatePlan")
-	billingServiceUpdatePlanMethodDescriptor                        = billingServiceServiceDescriptor.Methods().ByName("UpdatePlan")
-	billingServiceGetPlanMethodDescriptor                           = billingServiceServiceDescriptor.Methods().ByName("GetPlan")
-	billingServiceListPlansMethodDescriptor                         = billingServiceServiceDescriptor.Methods().ByName("ListPlans")
-	billingServiceListPlansInstancesMethodDescriptor                = billingServiceServiceDescriptor.Methods().ByName("ListPlansInstances")
-	billingServicePlansUniqueMethodDescriptor                       = billingServiceServiceDescriptor.Methods().ByName("PlansUnique")
-	billingServiceDeletePlanMethodDescriptor                        = billingServiceServiceDescriptor.Methods().ByName("DeletePlan")
-	billingServiceCreateTransactionMethodDescriptor                 = billingServiceServiceDescriptor.Methods().ByName("CreateTransaction")
-	billingServiceGetTransactionsMethodDescriptor                   = billingServiceServiceDescriptor.Methods().ByName("GetTransactions")
-	billingServiceGetTransactionsCountMethodDescriptor              = billingServiceServiceDescriptor.Methods().ByName("GetTransactionsCount")
-	billingServiceUpdateTransactionMethodDescriptor                 = billingServiceServiceDescriptor.Methods().ByName("UpdateTransaction")
-	billingServiceGetRecordsMethodDescriptor                        = billingServiceServiceDescriptor.Methods().ByName("GetRecords")
-	billingServiceGetInstancesReportsMethodDescriptor               = billingServiceServiceDescriptor.Methods().ByName("GetInstancesReports")
-	billingServiceGetInstancesReportsCountMethodDescriptor          = billingServiceServiceDescriptor.Methods().ByName("GetInstancesReportsCount")
-	billingServiceGetRecordsReportsMethodDescriptor                 = billingServiceServiceDescriptor.Methods().ByName("GetRecordsReports")
-	billingServiceGetRecordsReportsCountMethodDescriptor            = billingServiceServiceDescriptor.Methods().ByName("GetRecordsReportsCount")
-	billingServiceReprocessMethodDescriptor                         = billingServiceServiceDescriptor.Methods().ByName("Reprocess")
-	billingServiceCreateInvoiceMethodDescriptor                     = billingServiceServiceDescriptor.Methods().ByName("CreateInvoice")
-	billingServiceGetInvoiceMethodDescriptor                        = billingServiceServiceDescriptor.Methods().ByName("GetInvoice")
-	billingServiceGetInvoicesMethodDescriptor                       = billingServiceServiceDescriptor.Methods().ByName("GetInvoices")
-	billingServiceGetInvoicesCountMethodDescriptor                  = billingServiceServiceDescriptor.Methods().ByName("GetInvoicesCount")
-	billingServiceUpdateInvoiceMethodDescriptor                     = billingServiceServiceDescriptor.Methods().ByName("UpdateInvoice")
-	billingServiceChangeInvoiceNumberMethodDescriptor               = billingServiceServiceDescriptor.Methods().ByName("ChangeInvoiceNumber")
-	billingServicePayMethodDescriptor                               = billingServiceServiceDescriptor.Methods().ByName("Pay")
-	billingServiceUpdateInvoiceStatusMethodDescriptor               = billingServiceServiceDescriptor.Methods().ByName("UpdateInvoiceStatus")
-	billingServiceCreateTopUpBalanceInvoiceMethodDescriptor         = billingServiceServiceDescriptor.Methods().ByName("CreateTopUpBalanceInvoice")
-	billingServiceCreateRenewalInvoiceMethodDescriptor              = billingServiceServiceDescriptor.Methods().ByName("CreateRenewalInvoice")
-	billingServicePayWithBalanceMethodDescriptor                    = billingServiceServiceDescriptor.Methods().ByName("PayWithBalance")
-	billingServiceSendInvoiceEmailMethodDescriptor                  = billingServiceServiceDescriptor.Methods().ByName("SendInvoiceEmail")
-	billingServiceGetInvoiceSettingsTemplateExampleMethodDescriptor = billingServiceServiceDescriptor.Methods().ByName("GetInvoiceSettingsTemplateExample")
-	billingServiceRunDailyCronJobMethodDescriptor                   = billingServiceServiceDescriptor.Methods().ByName("RunDailyCronJob")
-	billingServiceStreamMethodDescriptor                            = billingServiceServiceDescriptor.Methods().ByName("Stream")
-	currencyServiceServiceDescriptor                                = billing.File_billing_billing_proto.Services().ByName("CurrencyService")
-	currencyServiceCreateCurrencyMethodDescriptor                   = currencyServiceServiceDescriptor.Methods().ByName("CreateCurrency")
-	currencyServiceUpdateCurrencyMethodDescriptor                   = currencyServiceServiceDescriptor.Methods().ByName("UpdateCurrency")
-	currencyServiceGetCurrenciesMethodDescriptor                    = currencyServiceServiceDescriptor.Methods().ByName("GetCurrencies")
-	currencyServiceGetExchangeRateMethodDescriptor                  = currencyServiceServiceDescriptor.Methods().ByName("GetExchangeRate")
-	currencyServiceGetExchangeRatesMethodDescriptor                 = currencyServiceServiceDescriptor.Methods().ByName("GetExchangeRates")
-	currencyServiceCreateExchangeRateMethodDescriptor               = currencyServiceServiceDescriptor.Methods().ByName("CreateExchangeRate")
-	currencyServiceUpdateExchangeRateMethodDescriptor               = currencyServiceServiceDescriptor.Methods().ByName("UpdateExchangeRate")
-	currencyServiceDeleteExchangeRateMethodDescriptor               = currencyServiceServiceDescriptor.Methods().ByName("DeleteExchangeRate")
-	currencyServiceConvertMethodDescriptor                          = currencyServiceServiceDescriptor.Methods().ByName("Convert")
-	currencyServiceConvertManyMethodDescriptor                      = currencyServiceServiceDescriptor.Methods().ByName("ConvertMany")
-	currencyServiceChangeDefaultCurrencyMethodDescriptor            = currencyServiceServiceDescriptor.Methods().ByName("ChangeDefaultCurrency")
-	addonsServiceServiceDescriptor                                  = billing.File_billing_billing_proto.Services().ByName("AddonsService")
-	addonsServiceCreateMethodDescriptor                             = addonsServiceServiceDescriptor.Methods().ByName("Create")
-	addonsServiceCreateBulkMethodDescriptor                         = addonsServiceServiceDescriptor.Methods().ByName("CreateBulk")
-	addonsServiceUpdateMethodDescriptor                             = addonsServiceServiceDescriptor.Methods().ByName("Update")
-	addonsServiceUpdateBulkMethodDescriptor                         = addonsServiceServiceDescriptor.Methods().ByName("UpdateBulk")
-	addonsServiceGetMethodDescriptor                                = addonsServiceServiceDescriptor.Methods().ByName("Get")
-	addonsServiceListMethodDescriptor                               = addonsServiceServiceDescriptor.Methods().ByName("List")
-	addonsServiceCountMethodDescriptor                              = addonsServiceServiceDescriptor.Methods().ByName("Count")
-	addonsServiceDeleteMethodDescriptor                             = addonsServiceServiceDescriptor.Methods().ByName("Delete")
-	descriptionsServiceServiceDescriptor                            = billing.File_billing_billing_proto.Services().ByName("DescriptionsService")
-	descriptionsServiceCreateMethodDescriptor                       = descriptionsServiceServiceDescriptor.Methods().ByName("Create")
-	descriptionsServiceUpdateMethodDescriptor                       = descriptionsServiceServiceDescriptor.Methods().ByName("Update")
-	descriptionsServiceGetMethodDescriptor                          = descriptionsServiceServiceDescriptor.Methods().ByName("Get")
-	descriptionsServiceListMethodDescriptor                         = descriptionsServiceServiceDescriptor.Methods().ByName("List")
-	descriptionsServiceCountMethodDescriptor                        = descriptionsServiceServiceDescriptor.Methods().ByName("Count")
-	descriptionsServiceDeleteMethodDescriptor                       = descriptionsServiceServiceDescriptor.Methods().ByName("Delete")
-	promocodesServiceServiceDescriptor                              = billing.File_billing_billing_proto.Services().ByName("PromocodesService")
-	promocodesServiceCreateMethodDescriptor                         = promocodesServiceServiceDescriptor.Methods().ByName("Create")
-	promocodesServiceUpdateMethodDescriptor                         = promocodesServiceServiceDescriptor.Methods().ByName("Update")
-	promocodesServiceGetMethodDescriptor                            = promocodesServiceServiceDescriptor.Methods().ByName("Get")
-	promocodesServiceGetByCodeMethodDescriptor                      = promocodesServiceServiceDescriptor.Methods().ByName("GetByCode")
-	promocodesServiceListMethodDescriptor                           = promocodesServiceServiceDescriptor.Methods().ByName("List")
-	promocodesServiceCountMethodDescriptor                          = promocodesServiceServiceDescriptor.Methods().ByName("Count")
-	promocodesServiceDeleteMethodDescriptor                         = promocodesServiceServiceDescriptor.Methods().ByName("Delete")
-	promocodesServiceApplyMethodDescriptor                          = promocodesServiceServiceDescriptor.Methods().ByName("Apply")
-	promocodesServiceDetachMethodDescriptor                         = promocodesServiceServiceDescriptor.Methods().ByName("Detach")
-	promocodesServiceApplySaleMethodDescriptor                      = promocodesServiceServiceDescriptor.Methods().ByName("ApplySale")
-)
-
 // RecordsServiceClient is a client for the nocloud.billing.RecordsService service.
 type RecordsServiceClient interface {
 	GetActive(context.Context, *connect.Request[billing.GetActiveRequest]) (*connect.Response[billing.Records], error)
@@ -352,23 +272,24 @@ type RecordsServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewRecordsServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) RecordsServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	recordsServiceMethods := billing.File_billing_billing_proto.Services().ByName("RecordsService").Methods()
 	return &recordsServiceClient{
 		getActive: connect.NewClient[billing.GetActiveRequest, billing.Records](
 			httpClient,
 			baseURL+RecordsServiceGetActiveProcedure,
-			connect.WithSchema(recordsServiceGetActiveMethodDescriptor),
+			connect.WithSchema(recordsServiceMethods.ByName("GetActive")),
 			connect.WithClientOptions(opts...),
 		),
 		create: connect.NewClient[billing.Records, billing.Records](
 			httpClient,
 			baseURL+RecordsServiceCreateProcedure,
-			connect.WithSchema(recordsServiceCreateMethodDescriptor),
+			connect.WithSchema(recordsServiceMethods.ByName("Create")),
 			connect.WithClientOptions(opts...),
 		),
 		update: connect.NewClient[billing.Records, billing.Records](
 			httpClient,
 			baseURL+RecordsServiceUpdateProcedure,
-			connect.WithSchema(recordsServiceUpdateMethodDescriptor),
+			connect.WithSchema(recordsServiceMethods.ByName("Update")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -409,22 +330,23 @@ type RecordsServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewRecordsServiceHandler(svc RecordsServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	recordsServiceMethods := billing.File_billing_billing_proto.Services().ByName("RecordsService").Methods()
 	recordsServiceGetActiveHandler := connect.NewUnaryHandler(
 		RecordsServiceGetActiveProcedure,
 		svc.GetActive,
-		connect.WithSchema(recordsServiceGetActiveMethodDescriptor),
+		connect.WithSchema(recordsServiceMethods.ByName("GetActive")),
 		connect.WithHandlerOptions(opts...),
 	)
 	recordsServiceCreateHandler := connect.NewUnaryHandler(
 		RecordsServiceCreateProcedure,
 		svc.Create,
-		connect.WithSchema(recordsServiceCreateMethodDescriptor),
+		connect.WithSchema(recordsServiceMethods.ByName("Create")),
 		connect.WithHandlerOptions(opts...),
 	)
 	recordsServiceUpdateHandler := connect.NewUnaryHandler(
 		RecordsServiceUpdateProcedure,
 		svc.Update,
-		connect.WithSchema(recordsServiceUpdateMethodDescriptor),
+		connect.WithSchema(recordsServiceMethods.ByName("Update")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.billing.RecordsService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -501,197 +423,198 @@ type BillingServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewBillingServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) BillingServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	billingServiceMethods := billing.File_billing_billing_proto.Services().ByName("BillingService").Methods()
 	return &billingServiceClient{
 		createPlan: connect.NewClient[billing.Plan, billing.Plan](
 			httpClient,
 			baseURL+BillingServiceCreatePlanProcedure,
-			connect.WithSchema(billingServiceCreatePlanMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("CreatePlan")),
 			connect.WithClientOptions(opts...),
 		),
 		updatePlan: connect.NewClient[billing.Plan, billing.Plan](
 			httpClient,
 			baseURL+BillingServiceUpdatePlanProcedure,
-			connect.WithSchema(billingServiceUpdatePlanMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("UpdatePlan")),
 			connect.WithClientOptions(opts...),
 		),
 		getPlan: connect.NewClient[billing.Plan, billing.Plan](
 			httpClient,
 			baseURL+BillingServiceGetPlanProcedure,
-			connect.WithSchema(billingServiceGetPlanMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("GetPlan")),
 			connect.WithClientOptions(opts...),
 		),
 		listPlans: connect.NewClient[billing.ListRequest, billing.ListResponse](
 			httpClient,
 			baseURL+BillingServiceListPlansProcedure,
-			connect.WithSchema(billingServiceListPlansMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("ListPlans")),
 			connect.WithClientOptions(opts...),
 		),
 		listPlansInstances: connect.NewClient[billing.ListPlansInstancesRequest, billing.ListPlansInstancesResponse](
 			httpClient,
 			baseURL+BillingServiceListPlansInstancesProcedure,
-			connect.WithSchema(billingServiceListPlansInstancesMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("ListPlansInstances")),
 			connect.WithClientOptions(opts...),
 		),
 		plansUnique: connect.NewClient[billing.PlansUniqueRequest, billing.PlansUniqueResponse](
 			httpClient,
 			baseURL+BillingServicePlansUniqueProcedure,
-			connect.WithSchema(billingServicePlansUniqueMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("PlansUnique")),
 			connect.WithClientOptions(opts...),
 		),
 		deletePlan: connect.NewClient[billing.Plan, billing.Plan](
 			httpClient,
 			baseURL+BillingServiceDeletePlanProcedure,
-			connect.WithSchema(billingServiceDeletePlanMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("DeletePlan")),
 			connect.WithClientOptions(opts...),
 		),
 		createTransaction: connect.NewClient[billing.Transaction, billing.Transaction](
 			httpClient,
 			baseURL+BillingServiceCreateTransactionProcedure,
-			connect.WithSchema(billingServiceCreateTransactionMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("CreateTransaction")),
 			connect.WithClientOptions(opts...),
 		),
 		getTransactions: connect.NewClient[billing.GetTransactionsRequest, billing.Transactions](
 			httpClient,
 			baseURL+BillingServiceGetTransactionsProcedure,
-			connect.WithSchema(billingServiceGetTransactionsMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("GetTransactions")),
 			connect.WithClientOptions(opts...),
 		),
 		getTransactionsCount: connect.NewClient[billing.GetTransactionsCountRequest, billing.GetTransactionsCountResponse](
 			httpClient,
 			baseURL+BillingServiceGetTransactionsCountProcedure,
-			connect.WithSchema(billingServiceGetTransactionsCountMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("GetTransactionsCount")),
 			connect.WithClientOptions(opts...),
 		),
 		updateTransaction: connect.NewClient[billing.Transaction, billing.UpdateTransactionResponse](
 			httpClient,
 			baseURL+BillingServiceUpdateTransactionProcedure,
-			connect.WithSchema(billingServiceUpdateTransactionMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("UpdateTransaction")),
 			connect.WithClientOptions(opts...),
 		),
 		getRecords: connect.NewClient[billing.Transaction, billing.Records](
 			httpClient,
 			baseURL+BillingServiceGetRecordsProcedure,
-			connect.WithSchema(billingServiceGetRecordsMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("GetRecords")),
 			connect.WithClientOptions(opts...),
 		),
 		getInstancesReports: connect.NewClient[billing.GetInstancesReportRequest, billing.GetInstancesReportResponse](
 			httpClient,
 			baseURL+BillingServiceGetInstancesReportsProcedure,
-			connect.WithSchema(billingServiceGetInstancesReportsMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("GetInstancesReports")),
 			connect.WithClientOptions(opts...),
 		),
 		getInstancesReportsCount: connect.NewClient[billing.GetInstancesReportsCountRequest, billing.GetReportsCountResponse](
 			httpClient,
 			baseURL+BillingServiceGetInstancesReportsCountProcedure,
-			connect.WithSchema(billingServiceGetInstancesReportsCountMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("GetInstancesReportsCount")),
 			connect.WithClientOptions(opts...),
 		),
 		getRecordsReports: connect.NewClient[billing.GetRecordsReportsRequest, billing.GetRecordsReportsResponse](
 			httpClient,
 			baseURL+BillingServiceGetRecordsReportsProcedure,
-			connect.WithSchema(billingServiceGetRecordsReportsMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("GetRecordsReports")),
 			connect.WithClientOptions(opts...),
 		),
 		getRecordsReportsCount: connect.NewClient[billing.GetRecordsReportsCountRequest, billing.GetReportsCountResponse](
 			httpClient,
 			baseURL+BillingServiceGetRecordsReportsCountProcedure,
-			connect.WithSchema(billingServiceGetRecordsReportsCountMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("GetRecordsReportsCount")),
 			connect.WithClientOptions(opts...),
 		),
 		reprocess: connect.NewClient[billing.ReprocessTransactionsRequest, billing.Transactions](
 			httpClient,
 			baseURL+BillingServiceReprocessProcedure,
-			connect.WithSchema(billingServiceReprocessMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("Reprocess")),
 			connect.WithClientOptions(opts...),
 		),
 		createInvoice: connect.NewClient[billing.CreateInvoiceRequest, billing.Invoice](
 			httpClient,
 			baseURL+BillingServiceCreateInvoiceProcedure,
-			connect.WithSchema(billingServiceCreateInvoiceMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("CreateInvoice")),
 			connect.WithClientOptions(opts...),
 		),
 		getInvoice: connect.NewClient[billing.Invoice, billing.Invoice](
 			httpClient,
 			baseURL+BillingServiceGetInvoiceProcedure,
-			connect.WithSchema(billingServiceGetInvoiceMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("GetInvoice")),
 			connect.WithClientOptions(opts...),
 		),
 		getInvoices: connect.NewClient[billing.GetInvoicesRequest, billing.Invoices](
 			httpClient,
 			baseURL+BillingServiceGetInvoicesProcedure,
-			connect.WithSchema(billingServiceGetInvoicesMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("GetInvoices")),
 			connect.WithClientOptions(opts...),
 		),
 		getInvoicesCount: connect.NewClient[billing.GetInvoicesCountRequest, billing.GetInvoicesCountResponse](
 			httpClient,
 			baseURL+BillingServiceGetInvoicesCountProcedure,
-			connect.WithSchema(billingServiceGetInvoicesCountMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("GetInvoicesCount")),
 			connect.WithClientOptions(opts...),
 		),
 		updateInvoice: connect.NewClient[billing.UpdateInvoiceRequest, billing.Invoice](
 			httpClient,
 			baseURL+BillingServiceUpdateInvoiceProcedure,
-			connect.WithSchema(billingServiceUpdateInvoiceMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("UpdateInvoice")),
 			connect.WithClientOptions(opts...),
 		),
 		changeInvoiceNumber: connect.NewClient[billing.ChangeInvoiceNumberRequest, billing.Invoice](
 			httpClient,
 			baseURL+BillingServiceChangeInvoiceNumberProcedure,
-			connect.WithSchema(billingServiceChangeInvoiceNumberMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("ChangeInvoiceNumber")),
 			connect.WithClientOptions(opts...),
 		),
 		pay: connect.NewClient[billing.PayRequest, billing.PayResponse](
 			httpClient,
 			baseURL+BillingServicePayProcedure,
-			connect.WithSchema(billingServicePayMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("Pay")),
 			connect.WithClientOptions(opts...),
 		),
 		updateInvoiceStatus: connect.NewClient[billing.UpdateInvoiceStatusRequest, billing.Invoice](
 			httpClient,
 			baseURL+BillingServiceUpdateInvoiceStatusProcedure,
-			connect.WithSchema(billingServiceUpdateInvoiceStatusMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("UpdateInvoiceStatus")),
 			connect.WithClientOptions(opts...),
 		),
 		createTopUpBalanceInvoice: connect.NewClient[billing.CreateTopUpBalanceInvoiceRequest, billing.Invoice](
 			httpClient,
 			baseURL+BillingServiceCreateTopUpBalanceInvoiceProcedure,
-			connect.WithSchema(billingServiceCreateTopUpBalanceInvoiceMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("CreateTopUpBalanceInvoice")),
 			connect.WithClientOptions(opts...),
 		),
 		createRenewalInvoice: connect.NewClient[billing.CreateRenewalInvoiceRequest, billing.Invoice](
 			httpClient,
 			baseURL+BillingServiceCreateRenewalInvoiceProcedure,
-			connect.WithSchema(billingServiceCreateRenewalInvoiceMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("CreateRenewalInvoice")),
 			connect.WithClientOptions(opts...),
 		),
 		payWithBalance: connect.NewClient[billing.PayWithBalanceRequest, billing.PayWithBalanceResponse](
 			httpClient,
 			baseURL+BillingServicePayWithBalanceProcedure,
-			connect.WithSchema(billingServicePayWithBalanceMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("PayWithBalance")),
 			connect.WithClientOptions(opts...),
 		),
 		sendInvoiceEmail: connect.NewClient[billing.SendInvoiceEmailRequest, billing.SendInvoiceEmailResponse](
 			httpClient,
 			baseURL+BillingServiceSendInvoiceEmailProcedure,
-			connect.WithSchema(billingServiceSendInvoiceEmailMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("SendInvoiceEmail")),
 			connect.WithClientOptions(opts...),
 		),
 		getInvoiceSettingsTemplateExample: connect.NewClient[billing.GetInvoiceSettingsTemplateExampleRequest, billing.GetInvoiceSettingsTemplateExampleResponse](
 			httpClient,
 			baseURL+BillingServiceGetInvoiceSettingsTemplateExampleProcedure,
-			connect.WithSchema(billingServiceGetInvoiceSettingsTemplateExampleMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("GetInvoiceSettingsTemplateExample")),
 			connect.WithClientOptions(opts...),
 		),
 		runDailyCronJob: connect.NewClient[billing.RunDailyCronJobRequest, billing.RunDailyCronJobResponse](
 			httpClient,
 			baseURL+BillingServiceRunDailyCronJobProcedure,
-			connect.WithSchema(billingServiceRunDailyCronJobMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("RunDailyCronJob")),
 			connect.WithClientOptions(opts...),
 		),
 		stream: connect.NewClient[billing.StreamRequest, billing.StreamResponse](
 			httpClient,
 			baseURL+BillingServiceStreamProcedure,
-			connect.WithSchema(billingServiceStreamMethodDescriptor),
+			connect.WithSchema(billingServiceMethods.ByName("Stream")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -936,196 +859,197 @@ type BillingServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewBillingServiceHandler(svc BillingServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	billingServiceMethods := billing.File_billing_billing_proto.Services().ByName("BillingService").Methods()
 	billingServiceCreatePlanHandler := connect.NewUnaryHandler(
 		BillingServiceCreatePlanProcedure,
 		svc.CreatePlan,
-		connect.WithSchema(billingServiceCreatePlanMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("CreatePlan")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceUpdatePlanHandler := connect.NewUnaryHandler(
 		BillingServiceUpdatePlanProcedure,
 		svc.UpdatePlan,
-		connect.WithSchema(billingServiceUpdatePlanMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("UpdatePlan")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceGetPlanHandler := connect.NewUnaryHandler(
 		BillingServiceGetPlanProcedure,
 		svc.GetPlan,
-		connect.WithSchema(billingServiceGetPlanMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("GetPlan")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceListPlansHandler := connect.NewUnaryHandler(
 		BillingServiceListPlansProcedure,
 		svc.ListPlans,
-		connect.WithSchema(billingServiceListPlansMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("ListPlans")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceListPlansInstancesHandler := connect.NewUnaryHandler(
 		BillingServiceListPlansInstancesProcedure,
 		svc.ListPlansInstances,
-		connect.WithSchema(billingServiceListPlansInstancesMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("ListPlansInstances")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServicePlansUniqueHandler := connect.NewUnaryHandler(
 		BillingServicePlansUniqueProcedure,
 		svc.PlansUnique,
-		connect.WithSchema(billingServicePlansUniqueMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("PlansUnique")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceDeletePlanHandler := connect.NewUnaryHandler(
 		BillingServiceDeletePlanProcedure,
 		svc.DeletePlan,
-		connect.WithSchema(billingServiceDeletePlanMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("DeletePlan")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceCreateTransactionHandler := connect.NewUnaryHandler(
 		BillingServiceCreateTransactionProcedure,
 		svc.CreateTransaction,
-		connect.WithSchema(billingServiceCreateTransactionMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("CreateTransaction")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceGetTransactionsHandler := connect.NewUnaryHandler(
 		BillingServiceGetTransactionsProcedure,
 		svc.GetTransactions,
-		connect.WithSchema(billingServiceGetTransactionsMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("GetTransactions")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceGetTransactionsCountHandler := connect.NewUnaryHandler(
 		BillingServiceGetTransactionsCountProcedure,
 		svc.GetTransactionsCount,
-		connect.WithSchema(billingServiceGetTransactionsCountMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("GetTransactionsCount")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceUpdateTransactionHandler := connect.NewUnaryHandler(
 		BillingServiceUpdateTransactionProcedure,
 		svc.UpdateTransaction,
-		connect.WithSchema(billingServiceUpdateTransactionMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("UpdateTransaction")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceGetRecordsHandler := connect.NewUnaryHandler(
 		BillingServiceGetRecordsProcedure,
 		svc.GetRecords,
-		connect.WithSchema(billingServiceGetRecordsMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("GetRecords")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceGetInstancesReportsHandler := connect.NewUnaryHandler(
 		BillingServiceGetInstancesReportsProcedure,
 		svc.GetInstancesReports,
-		connect.WithSchema(billingServiceGetInstancesReportsMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("GetInstancesReports")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceGetInstancesReportsCountHandler := connect.NewUnaryHandler(
 		BillingServiceGetInstancesReportsCountProcedure,
 		svc.GetInstancesReportsCount,
-		connect.WithSchema(billingServiceGetInstancesReportsCountMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("GetInstancesReportsCount")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceGetRecordsReportsHandler := connect.NewUnaryHandler(
 		BillingServiceGetRecordsReportsProcedure,
 		svc.GetRecordsReports,
-		connect.WithSchema(billingServiceGetRecordsReportsMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("GetRecordsReports")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceGetRecordsReportsCountHandler := connect.NewUnaryHandler(
 		BillingServiceGetRecordsReportsCountProcedure,
 		svc.GetRecordsReportsCount,
-		connect.WithSchema(billingServiceGetRecordsReportsCountMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("GetRecordsReportsCount")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceReprocessHandler := connect.NewUnaryHandler(
 		BillingServiceReprocessProcedure,
 		svc.Reprocess,
-		connect.WithSchema(billingServiceReprocessMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("Reprocess")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceCreateInvoiceHandler := connect.NewUnaryHandler(
 		BillingServiceCreateInvoiceProcedure,
 		svc.CreateInvoice,
-		connect.WithSchema(billingServiceCreateInvoiceMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("CreateInvoice")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceGetInvoiceHandler := connect.NewUnaryHandler(
 		BillingServiceGetInvoiceProcedure,
 		svc.GetInvoice,
-		connect.WithSchema(billingServiceGetInvoiceMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("GetInvoice")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceGetInvoicesHandler := connect.NewUnaryHandler(
 		BillingServiceGetInvoicesProcedure,
 		svc.GetInvoices,
-		connect.WithSchema(billingServiceGetInvoicesMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("GetInvoices")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceGetInvoicesCountHandler := connect.NewUnaryHandler(
 		BillingServiceGetInvoicesCountProcedure,
 		svc.GetInvoicesCount,
-		connect.WithSchema(billingServiceGetInvoicesCountMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("GetInvoicesCount")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceUpdateInvoiceHandler := connect.NewUnaryHandler(
 		BillingServiceUpdateInvoiceProcedure,
 		svc.UpdateInvoice,
-		connect.WithSchema(billingServiceUpdateInvoiceMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("UpdateInvoice")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceChangeInvoiceNumberHandler := connect.NewUnaryHandler(
 		BillingServiceChangeInvoiceNumberProcedure,
 		svc.ChangeInvoiceNumber,
-		connect.WithSchema(billingServiceChangeInvoiceNumberMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("ChangeInvoiceNumber")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServicePayHandler := connect.NewUnaryHandler(
 		BillingServicePayProcedure,
 		svc.Pay,
-		connect.WithSchema(billingServicePayMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("Pay")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceUpdateInvoiceStatusHandler := connect.NewUnaryHandler(
 		BillingServiceUpdateInvoiceStatusProcedure,
 		svc.UpdateInvoiceStatus,
-		connect.WithSchema(billingServiceUpdateInvoiceStatusMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("UpdateInvoiceStatus")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceCreateTopUpBalanceInvoiceHandler := connect.NewUnaryHandler(
 		BillingServiceCreateTopUpBalanceInvoiceProcedure,
 		svc.CreateTopUpBalanceInvoice,
-		connect.WithSchema(billingServiceCreateTopUpBalanceInvoiceMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("CreateTopUpBalanceInvoice")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceCreateRenewalInvoiceHandler := connect.NewUnaryHandler(
 		BillingServiceCreateRenewalInvoiceProcedure,
 		svc.CreateRenewalInvoice,
-		connect.WithSchema(billingServiceCreateRenewalInvoiceMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("CreateRenewalInvoice")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServicePayWithBalanceHandler := connect.NewUnaryHandler(
 		BillingServicePayWithBalanceProcedure,
 		svc.PayWithBalance,
-		connect.WithSchema(billingServicePayWithBalanceMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("PayWithBalance")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceSendInvoiceEmailHandler := connect.NewUnaryHandler(
 		BillingServiceSendInvoiceEmailProcedure,
 		svc.SendInvoiceEmail,
-		connect.WithSchema(billingServiceSendInvoiceEmailMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("SendInvoiceEmail")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceGetInvoiceSettingsTemplateExampleHandler := connect.NewUnaryHandler(
 		BillingServiceGetInvoiceSettingsTemplateExampleProcedure,
 		svc.GetInvoiceSettingsTemplateExample,
-		connect.WithSchema(billingServiceGetInvoiceSettingsTemplateExampleMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("GetInvoiceSettingsTemplateExample")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceRunDailyCronJobHandler := connect.NewUnaryHandler(
 		BillingServiceRunDailyCronJobProcedure,
 		svc.RunDailyCronJob,
-		connect.WithSchema(billingServiceRunDailyCronJobMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("RunDailyCronJob")),
 		connect.WithHandlerOptions(opts...),
 	)
 	billingServiceStreamHandler := connect.NewServerStreamHandler(
 		BillingServiceStreamProcedure,
 		svc.Stream,
-		connect.WithSchema(billingServiceStreamMethodDescriptor),
+		connect.WithSchema(billingServiceMethods.ByName("Stream")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.billing.BillingService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -1355,71 +1279,72 @@ type CurrencyServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewCurrencyServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) CurrencyServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	currencyServiceMethods := billing.File_billing_billing_proto.Services().ByName("CurrencyService").Methods()
 	return &currencyServiceClient{
 		createCurrency: connect.NewClient[billing.CreateCurrencyRequest, billing.CreateCurrencyResponse](
 			httpClient,
 			baseURL+CurrencyServiceCreateCurrencyProcedure,
-			connect.WithSchema(currencyServiceCreateCurrencyMethodDescriptor),
+			connect.WithSchema(currencyServiceMethods.ByName("CreateCurrency")),
 			connect.WithClientOptions(opts...),
 		),
 		updateCurrency: connect.NewClient[billing.UpdateCurrencyRequest, billing.UpdateCurrencyResponse](
 			httpClient,
 			baseURL+CurrencyServiceUpdateCurrencyProcedure,
-			connect.WithSchema(currencyServiceUpdateCurrencyMethodDescriptor),
+			connect.WithSchema(currencyServiceMethods.ByName("UpdateCurrency")),
 			connect.WithClientOptions(opts...),
 		),
 		getCurrencies: connect.NewClient[billing.GetCurrenciesRequest, billing.GetCurrenciesResponse](
 			httpClient,
 			baseURL+CurrencyServiceGetCurrenciesProcedure,
-			connect.WithSchema(currencyServiceGetCurrenciesMethodDescriptor),
+			connect.WithSchema(currencyServiceMethods.ByName("GetCurrencies")),
 			connect.WithClientOptions(opts...),
 		),
 		getExchangeRate: connect.NewClient[billing.GetExchangeRateRequest, billing.GetExchangeRateResponse](
 			httpClient,
 			baseURL+CurrencyServiceGetExchangeRateProcedure,
-			connect.WithSchema(currencyServiceGetExchangeRateMethodDescriptor),
+			connect.WithSchema(currencyServiceMethods.ByName("GetExchangeRate")),
 			connect.WithClientOptions(opts...),
 		),
 		getExchangeRates: connect.NewClient[billing.GetExchangeRatesRequest, billing.GetExchangeRatesResponse](
 			httpClient,
 			baseURL+CurrencyServiceGetExchangeRatesProcedure,
-			connect.WithSchema(currencyServiceGetExchangeRatesMethodDescriptor),
+			connect.WithSchema(currencyServiceMethods.ByName("GetExchangeRates")),
 			connect.WithClientOptions(opts...),
 		),
 		createExchangeRate: connect.NewClient[billing.CreateExchangeRateRequest, billing.CreateExchangeRateResponse](
 			httpClient,
 			baseURL+CurrencyServiceCreateExchangeRateProcedure,
-			connect.WithSchema(currencyServiceCreateExchangeRateMethodDescriptor),
+			connect.WithSchema(currencyServiceMethods.ByName("CreateExchangeRate")),
 			connect.WithClientOptions(opts...),
 		),
 		updateExchangeRate: connect.NewClient[billing.UpdateExchangeRateRequest, billing.UpdateExchangeRateResponse](
 			httpClient,
 			baseURL+CurrencyServiceUpdateExchangeRateProcedure,
-			connect.WithSchema(currencyServiceUpdateExchangeRateMethodDescriptor),
+			connect.WithSchema(currencyServiceMethods.ByName("UpdateExchangeRate")),
 			connect.WithClientOptions(opts...),
 		),
 		deleteExchangeRate: connect.NewClient[billing.DeleteExchangeRateRequest, billing.DeleteExchangeRateResponse](
 			httpClient,
 			baseURL+CurrencyServiceDeleteExchangeRateProcedure,
-			connect.WithSchema(currencyServiceDeleteExchangeRateMethodDescriptor),
+			connect.WithSchema(currencyServiceMethods.ByName("DeleteExchangeRate")),
 			connect.WithClientOptions(opts...),
 		),
 		convert: connect.NewClient[billing.ConversionRequest, billing.ConversionResponse](
 			httpClient,
 			baseURL+CurrencyServiceConvertProcedure,
-			connect.WithSchema(currencyServiceConvertMethodDescriptor),
+			connect.WithSchema(currencyServiceMethods.ByName("Convert")),
 			connect.WithClientOptions(opts...),
 		),
 		convertMany: connect.NewClient[billing.MultiConversionRequest, billing.MultiConversionResponse](
 			httpClient,
 			baseURL+CurrencyServiceConvertManyProcedure,
-			connect.WithSchema(currencyServiceConvertManyMethodDescriptor),
+			connect.WithSchema(currencyServiceMethods.ByName("ConvertMany")),
 			connect.WithClientOptions(opts...),
 		),
 		changeDefaultCurrency: connect.NewClient[billing.ChangeDefaultCurrencyRequest, billing.ChangeDefaultCurrencyResponse](
 			httpClient,
 			baseURL+CurrencyServiceChangeDefaultCurrencyProcedure,
-			connect.WithSchema(currencyServiceChangeDefaultCurrencyMethodDescriptor),
+			connect.WithSchema(currencyServiceMethods.ByName("ChangeDefaultCurrency")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -1516,70 +1441,71 @@ type CurrencyServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewCurrencyServiceHandler(svc CurrencyServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	currencyServiceMethods := billing.File_billing_billing_proto.Services().ByName("CurrencyService").Methods()
 	currencyServiceCreateCurrencyHandler := connect.NewUnaryHandler(
 		CurrencyServiceCreateCurrencyProcedure,
 		svc.CreateCurrency,
-		connect.WithSchema(currencyServiceCreateCurrencyMethodDescriptor),
+		connect.WithSchema(currencyServiceMethods.ByName("CreateCurrency")),
 		connect.WithHandlerOptions(opts...),
 	)
 	currencyServiceUpdateCurrencyHandler := connect.NewUnaryHandler(
 		CurrencyServiceUpdateCurrencyProcedure,
 		svc.UpdateCurrency,
-		connect.WithSchema(currencyServiceUpdateCurrencyMethodDescriptor),
+		connect.WithSchema(currencyServiceMethods.ByName("UpdateCurrency")),
 		connect.WithHandlerOptions(opts...),
 	)
 	currencyServiceGetCurrenciesHandler := connect.NewUnaryHandler(
 		CurrencyServiceGetCurrenciesProcedure,
 		svc.GetCurrencies,
-		connect.WithSchema(currencyServiceGetCurrenciesMethodDescriptor),
+		connect.WithSchema(currencyServiceMethods.ByName("GetCurrencies")),
 		connect.WithHandlerOptions(opts...),
 	)
 	currencyServiceGetExchangeRateHandler := connect.NewUnaryHandler(
 		CurrencyServiceGetExchangeRateProcedure,
 		svc.GetExchangeRate,
-		connect.WithSchema(currencyServiceGetExchangeRateMethodDescriptor),
+		connect.WithSchema(currencyServiceMethods.ByName("GetExchangeRate")),
 		connect.WithHandlerOptions(opts...),
 	)
 	currencyServiceGetExchangeRatesHandler := connect.NewUnaryHandler(
 		CurrencyServiceGetExchangeRatesProcedure,
 		svc.GetExchangeRates,
-		connect.WithSchema(currencyServiceGetExchangeRatesMethodDescriptor),
+		connect.WithSchema(currencyServiceMethods.ByName("GetExchangeRates")),
 		connect.WithHandlerOptions(opts...),
 	)
 	currencyServiceCreateExchangeRateHandler := connect.NewUnaryHandler(
 		CurrencyServiceCreateExchangeRateProcedure,
 		svc.CreateExchangeRate,
-		connect.WithSchema(currencyServiceCreateExchangeRateMethodDescriptor),
+		connect.WithSchema(currencyServiceMethods.ByName("CreateExchangeRate")),
 		connect.WithHandlerOptions(opts...),
 	)
 	currencyServiceUpdateExchangeRateHandler := connect.NewUnaryHandler(
 		CurrencyServiceUpdateExchangeRateProcedure,
 		svc.UpdateExchangeRate,
-		connect.WithSchema(currencyServiceUpdateExchangeRateMethodDescriptor),
+		connect.WithSchema(currencyServiceMethods.ByName("UpdateExchangeRate")),
 		connect.WithHandlerOptions(opts...),
 	)
 	currencyServiceDeleteExchangeRateHandler := connect.NewUnaryHandler(
 		CurrencyServiceDeleteExchangeRateProcedure,
 		svc.DeleteExchangeRate,
-		connect.WithSchema(currencyServiceDeleteExchangeRateMethodDescriptor),
+		connect.WithSchema(currencyServiceMethods.ByName("DeleteExchangeRate")),
 		connect.WithHandlerOptions(opts...),
 	)
 	currencyServiceConvertHandler := connect.NewUnaryHandler(
 		CurrencyServiceConvertProcedure,
 		svc.Convert,
-		connect.WithSchema(currencyServiceConvertMethodDescriptor),
+		connect.WithSchema(currencyServiceMethods.ByName("Convert")),
 		connect.WithHandlerOptions(opts...),
 	)
 	currencyServiceConvertManyHandler := connect.NewUnaryHandler(
 		CurrencyServiceConvertManyProcedure,
 		svc.ConvertMany,
-		connect.WithSchema(currencyServiceConvertManyMethodDescriptor),
+		connect.WithSchema(currencyServiceMethods.ByName("ConvertMany")),
 		connect.WithHandlerOptions(opts...),
 	)
 	currencyServiceChangeDefaultCurrencyHandler := connect.NewUnaryHandler(
 		CurrencyServiceChangeDefaultCurrencyProcedure,
 		svc.ChangeDefaultCurrency,
-		connect.WithSchema(currencyServiceChangeDefaultCurrencyMethodDescriptor),
+		connect.WithSchema(currencyServiceMethods.ByName("ChangeDefaultCurrency")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.billing.CurrencyService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -1680,53 +1606,54 @@ type AddonsServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewAddonsServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) AddonsServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	addonsServiceMethods := billing.File_billing_billing_proto.Services().ByName("AddonsService").Methods()
 	return &addonsServiceClient{
 		create: connect.NewClient[addons.Addon, addons.Addon](
 			httpClient,
 			baseURL+AddonsServiceCreateProcedure,
-			connect.WithSchema(addonsServiceCreateMethodDescriptor),
+			connect.WithSchema(addonsServiceMethods.ByName("Create")),
 			connect.WithClientOptions(opts...),
 		),
 		createBulk: connect.NewClient[addons.BulkAddons, addons.BulkAddons](
 			httpClient,
 			baseURL+AddonsServiceCreateBulkProcedure,
-			connect.WithSchema(addonsServiceCreateBulkMethodDescriptor),
+			connect.WithSchema(addonsServiceMethods.ByName("CreateBulk")),
 			connect.WithClientOptions(opts...),
 		),
 		update: connect.NewClient[addons.Addon, addons.Addon](
 			httpClient,
 			baseURL+AddonsServiceUpdateProcedure,
-			connect.WithSchema(addonsServiceUpdateMethodDescriptor),
+			connect.WithSchema(addonsServiceMethods.ByName("Update")),
 			connect.WithClientOptions(opts...),
 		),
 		updateBulk: connect.NewClient[addons.BulkAddons, addons.BulkAddons](
 			httpClient,
 			baseURL+AddonsServiceUpdateBulkProcedure,
-			connect.WithSchema(addonsServiceUpdateBulkMethodDescriptor),
+			connect.WithSchema(addonsServiceMethods.ByName("UpdateBulk")),
 			connect.WithClientOptions(opts...),
 		),
 		get: connect.NewClient[addons.Addon, addons.Addon](
 			httpClient,
 			baseURL+AddonsServiceGetProcedure,
-			connect.WithSchema(addonsServiceGetMethodDescriptor),
+			connect.WithSchema(addonsServiceMethods.ByName("Get")),
 			connect.WithClientOptions(opts...),
 		),
 		list: connect.NewClient[addons.ListAddonsRequest, addons.ListAddonsResponse](
 			httpClient,
 			baseURL+AddonsServiceListProcedure,
-			connect.WithSchema(addonsServiceListMethodDescriptor),
+			connect.WithSchema(addonsServiceMethods.ByName("List")),
 			connect.WithClientOptions(opts...),
 		),
 		count: connect.NewClient[addons.CountAddonsRequest, addons.CountAddonsResponse](
 			httpClient,
 			baseURL+AddonsServiceCountProcedure,
-			connect.WithSchema(addonsServiceCountMethodDescriptor),
+			connect.WithSchema(addonsServiceMethods.ByName("Count")),
 			connect.WithClientOptions(opts...),
 		),
 		delete: connect.NewClient[addons.Addon, addons.Addon](
 			httpClient,
 			baseURL+AddonsServiceDeleteProcedure,
-			connect.WithSchema(addonsServiceDeleteMethodDescriptor),
+			connect.WithSchema(addonsServiceMethods.ByName("Delete")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -1802,52 +1729,53 @@ type AddonsServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewAddonsServiceHandler(svc AddonsServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	addonsServiceMethods := billing.File_billing_billing_proto.Services().ByName("AddonsService").Methods()
 	addonsServiceCreateHandler := connect.NewUnaryHandler(
 		AddonsServiceCreateProcedure,
 		svc.Create,
-		connect.WithSchema(addonsServiceCreateMethodDescriptor),
+		connect.WithSchema(addonsServiceMethods.ByName("Create")),
 		connect.WithHandlerOptions(opts...),
 	)
 	addonsServiceCreateBulkHandler := connect.NewUnaryHandler(
 		AddonsServiceCreateBulkProcedure,
 		svc.CreateBulk,
-		connect.WithSchema(addonsServiceCreateBulkMethodDescriptor),
+		connect.WithSchema(addonsServiceMethods.ByName("CreateBulk")),
 		connect.WithHandlerOptions(opts...),
 	)
 	addonsServiceUpdateHandler := connect.NewUnaryHandler(
 		AddonsServiceUpdateProcedure,
 		svc.Update,
-		connect.WithSchema(addonsServiceUpdateMethodDescriptor),
+		connect.WithSchema(addonsServiceMethods.ByName("Update")),
 		connect.WithHandlerOptions(opts...),
 	)
 	addonsServiceUpdateBulkHandler := connect.NewUnaryHandler(
 		AddonsServiceUpdateBulkProcedure,
 		svc.UpdateBulk,
-		connect.WithSchema(addonsServiceUpdateBulkMethodDescriptor),
+		connect.WithSchema(addonsServiceMethods.ByName("UpdateBulk")),
 		connect.WithHandlerOptions(opts...),
 	)
 	addonsServiceGetHandler := connect.NewUnaryHandler(
 		AddonsServiceGetProcedure,
 		svc.Get,
-		connect.WithSchema(addonsServiceGetMethodDescriptor),
+		connect.WithSchema(addonsServiceMethods.ByName("Get")),
 		connect.WithHandlerOptions(opts...),
 	)
 	addonsServiceListHandler := connect.NewUnaryHandler(
 		AddonsServiceListProcedure,
 		svc.List,
-		connect.WithSchema(addonsServiceListMethodDescriptor),
+		connect.WithSchema(addonsServiceMethods.ByName("List")),
 		connect.WithHandlerOptions(opts...),
 	)
 	addonsServiceCountHandler := connect.NewUnaryHandler(
 		AddonsServiceCountProcedure,
 		svc.Count,
-		connect.WithSchema(addonsServiceCountMethodDescriptor),
+		connect.WithSchema(addonsServiceMethods.ByName("Count")),
 		connect.WithHandlerOptions(opts...),
 	)
 	addonsServiceDeleteHandler := connect.NewUnaryHandler(
 		AddonsServiceDeleteProcedure,
 		svc.Delete,
-		connect.WithSchema(addonsServiceDeleteMethodDescriptor),
+		connect.WithSchema(addonsServiceMethods.ByName("Delete")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.billing.AddonsService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -1928,41 +1856,42 @@ type DescriptionsServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewDescriptionsServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) DescriptionsServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	descriptionsServiceMethods := billing.File_billing_billing_proto.Services().ByName("DescriptionsService").Methods()
 	return &descriptionsServiceClient{
 		create: connect.NewClient[descriptions.Description, descriptions.Description](
 			httpClient,
 			baseURL+DescriptionsServiceCreateProcedure,
-			connect.WithSchema(descriptionsServiceCreateMethodDescriptor),
+			connect.WithSchema(descriptionsServiceMethods.ByName("Create")),
 			connect.WithClientOptions(opts...),
 		),
 		update: connect.NewClient[descriptions.Description, descriptions.Description](
 			httpClient,
 			baseURL+DescriptionsServiceUpdateProcedure,
-			connect.WithSchema(descriptionsServiceUpdateMethodDescriptor),
+			connect.WithSchema(descriptionsServiceMethods.ByName("Update")),
 			connect.WithClientOptions(opts...),
 		),
 		get: connect.NewClient[descriptions.Description, descriptions.Description](
 			httpClient,
 			baseURL+DescriptionsServiceGetProcedure,
-			connect.WithSchema(descriptionsServiceGetMethodDescriptor),
+			connect.WithSchema(descriptionsServiceMethods.ByName("Get")),
 			connect.WithClientOptions(opts...),
 		),
 		list: connect.NewClient[descriptions.ListDescriptionsRequest, descriptions.ListDescriptionsResponse](
 			httpClient,
 			baseURL+DescriptionsServiceListProcedure,
-			connect.WithSchema(descriptionsServiceListMethodDescriptor),
+			connect.WithSchema(descriptionsServiceMethods.ByName("List")),
 			connect.WithClientOptions(opts...),
 		),
 		count: connect.NewClient[descriptions.CountDescriptionsRequest, descriptions.CountDescriptionsResponse](
 			httpClient,
 			baseURL+DescriptionsServiceCountProcedure,
-			connect.WithSchema(descriptionsServiceCountMethodDescriptor),
+			connect.WithSchema(descriptionsServiceMethods.ByName("Count")),
 			connect.WithClientOptions(opts...),
 		),
 		delete: connect.NewClient[descriptions.Description, descriptions.Description](
 			httpClient,
 			baseURL+DescriptionsServiceDeleteProcedure,
-			connect.WithSchema(descriptionsServiceDeleteMethodDescriptor),
+			connect.WithSchema(descriptionsServiceMethods.ByName("Delete")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -2025,40 +1954,41 @@ type DescriptionsServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewDescriptionsServiceHandler(svc DescriptionsServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	descriptionsServiceMethods := billing.File_billing_billing_proto.Services().ByName("DescriptionsService").Methods()
 	descriptionsServiceCreateHandler := connect.NewUnaryHandler(
 		DescriptionsServiceCreateProcedure,
 		svc.Create,
-		connect.WithSchema(descriptionsServiceCreateMethodDescriptor),
+		connect.WithSchema(descriptionsServiceMethods.ByName("Create")),
 		connect.WithHandlerOptions(opts...),
 	)
 	descriptionsServiceUpdateHandler := connect.NewUnaryHandler(
 		DescriptionsServiceUpdateProcedure,
 		svc.Update,
-		connect.WithSchema(descriptionsServiceUpdateMethodDescriptor),
+		connect.WithSchema(descriptionsServiceMethods.ByName("Update")),
 		connect.WithHandlerOptions(opts...),
 	)
 	descriptionsServiceGetHandler := connect.NewUnaryHandler(
 		DescriptionsServiceGetProcedure,
 		svc.Get,
-		connect.WithSchema(descriptionsServiceGetMethodDescriptor),
+		connect.WithSchema(descriptionsServiceMethods.ByName("Get")),
 		connect.WithHandlerOptions(opts...),
 	)
 	descriptionsServiceListHandler := connect.NewUnaryHandler(
 		DescriptionsServiceListProcedure,
 		svc.List,
-		connect.WithSchema(descriptionsServiceListMethodDescriptor),
+		connect.WithSchema(descriptionsServiceMethods.ByName("List")),
 		connect.WithHandlerOptions(opts...),
 	)
 	descriptionsServiceCountHandler := connect.NewUnaryHandler(
 		DescriptionsServiceCountProcedure,
 		svc.Count,
-		connect.WithSchema(descriptionsServiceCountMethodDescriptor),
+		connect.WithSchema(descriptionsServiceMethods.ByName("Count")),
 		connect.WithHandlerOptions(opts...),
 	)
 	descriptionsServiceDeleteHandler := connect.NewUnaryHandler(
 		DescriptionsServiceDeleteProcedure,
 		svc.Delete,
-		connect.WithSchema(descriptionsServiceDeleteMethodDescriptor),
+		connect.WithSchema(descriptionsServiceMethods.ByName("Delete")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.billing.DescriptionsService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -2131,65 +2061,66 @@ type PromocodesServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewPromocodesServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) PromocodesServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	promocodesServiceMethods := billing.File_billing_billing_proto.Services().ByName("PromocodesService").Methods()
 	return &promocodesServiceClient{
 		create: connect.NewClient[promocodes.Promocode, promocodes.Promocode](
 			httpClient,
 			baseURL+PromocodesServiceCreateProcedure,
-			connect.WithSchema(promocodesServiceCreateMethodDescriptor),
+			connect.WithSchema(promocodesServiceMethods.ByName("Create")),
 			connect.WithClientOptions(opts...),
 		),
 		update: connect.NewClient[promocodes.Promocode, promocodes.Promocode](
 			httpClient,
 			baseURL+PromocodesServiceUpdateProcedure,
-			connect.WithSchema(promocodesServiceUpdateMethodDescriptor),
+			connect.WithSchema(promocodesServiceMethods.ByName("Update")),
 			connect.WithClientOptions(opts...),
 		),
 		get: connect.NewClient[promocodes.Promocode, promocodes.Promocode](
 			httpClient,
 			baseURL+PromocodesServiceGetProcedure,
-			connect.WithSchema(promocodesServiceGetMethodDescriptor),
+			connect.WithSchema(promocodesServiceMethods.ByName("Get")),
 			connect.WithClientOptions(opts...),
 		),
 		getByCode: connect.NewClient[promocodes.GetPromocodeByCodeRequest, promocodes.Promocode](
 			httpClient,
 			baseURL+PromocodesServiceGetByCodeProcedure,
-			connect.WithSchema(promocodesServiceGetByCodeMethodDescriptor),
+			connect.WithSchema(promocodesServiceMethods.ByName("GetByCode")),
 			connect.WithClientOptions(opts...),
 		),
 		list: connect.NewClient[promocodes.ListPromocodesRequest, promocodes.ListPromocodesResponse](
 			httpClient,
 			baseURL+PromocodesServiceListProcedure,
-			connect.WithSchema(promocodesServiceListMethodDescriptor),
+			connect.WithSchema(promocodesServiceMethods.ByName("List")),
 			connect.WithClientOptions(opts...),
 		),
 		count: connect.NewClient[promocodes.CountPromocodesRequest, promocodes.CountPromocodesResponse](
 			httpClient,
 			baseURL+PromocodesServiceCountProcedure,
-			connect.WithSchema(promocodesServiceCountMethodDescriptor),
+			connect.WithSchema(promocodesServiceMethods.ByName("Count")),
 			connect.WithClientOptions(opts...),
 		),
 		delete: connect.NewClient[promocodes.Promocode, promocodes.Promocode](
 			httpClient,
 			baseURL+PromocodesServiceDeleteProcedure,
-			connect.WithSchema(promocodesServiceDeleteMethodDescriptor),
+			connect.WithSchema(promocodesServiceMethods.ByName("Delete")),
 			connect.WithClientOptions(opts...),
 		),
 		apply: connect.NewClient[promocodes.ApplyPromocodeRequest, promocodes.ApplyPromocodeResponse](
 			httpClient,
 			baseURL+PromocodesServiceApplyProcedure,
-			connect.WithSchema(promocodesServiceApplyMethodDescriptor),
+			connect.WithSchema(promocodesServiceMethods.ByName("Apply")),
 			connect.WithClientOptions(opts...),
 		),
 		detach: connect.NewClient[promocodes.DetachPromocodeRequest, promocodes.DetachPromocodeResponse](
 			httpClient,
 			baseURL+PromocodesServiceDetachProcedure,
-			connect.WithSchema(promocodesServiceDetachMethodDescriptor),
+			connect.WithSchema(promocodesServiceMethods.ByName("Detach")),
 			connect.WithClientOptions(opts...),
 		),
 		applySale: connect.NewClient[billing.ApplySaleRequest, billing.ApplySaleResponse](
 			httpClient,
 			baseURL+PromocodesServiceApplySaleProcedure,
-			connect.WithSchema(promocodesServiceApplySaleMethodDescriptor),
+			connect.WithSchema(promocodesServiceMethods.ByName("ApplySale")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -2279,64 +2210,65 @@ type PromocodesServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewPromocodesServiceHandler(svc PromocodesServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	promocodesServiceMethods := billing.File_billing_billing_proto.Services().ByName("PromocodesService").Methods()
 	promocodesServiceCreateHandler := connect.NewUnaryHandler(
 		PromocodesServiceCreateProcedure,
 		svc.Create,
-		connect.WithSchema(promocodesServiceCreateMethodDescriptor),
+		connect.WithSchema(promocodesServiceMethods.ByName("Create")),
 		connect.WithHandlerOptions(opts...),
 	)
 	promocodesServiceUpdateHandler := connect.NewUnaryHandler(
 		PromocodesServiceUpdateProcedure,
 		svc.Update,
-		connect.WithSchema(promocodesServiceUpdateMethodDescriptor),
+		connect.WithSchema(promocodesServiceMethods.ByName("Update")),
 		connect.WithHandlerOptions(opts...),
 	)
 	promocodesServiceGetHandler := connect.NewUnaryHandler(
 		PromocodesServiceGetProcedure,
 		svc.Get,
-		connect.WithSchema(promocodesServiceGetMethodDescriptor),
+		connect.WithSchema(promocodesServiceMethods.ByName("Get")),
 		connect.WithHandlerOptions(opts...),
 	)
 	promocodesServiceGetByCodeHandler := connect.NewUnaryHandler(
 		PromocodesServiceGetByCodeProcedure,
 		svc.GetByCode,
-		connect.WithSchema(promocodesServiceGetByCodeMethodDescriptor),
+		connect.WithSchema(promocodesServiceMethods.ByName("GetByCode")),
 		connect.WithHandlerOptions(opts...),
 	)
 	promocodesServiceListHandler := connect.NewUnaryHandler(
 		PromocodesServiceListProcedure,
 		svc.List,
-		connect.WithSchema(promocodesServiceListMethodDescriptor),
+		connect.WithSchema(promocodesServiceMethods.ByName("List")),
 		connect.WithHandlerOptions(opts...),
 	)
 	promocodesServiceCountHandler := connect.NewUnaryHandler(
 		PromocodesServiceCountProcedure,
 		svc.Count,
-		connect.WithSchema(promocodesServiceCountMethodDescriptor),
+		connect.WithSchema(promocodesServiceMethods.ByName("Count")),
 		connect.WithHandlerOptions(opts...),
 	)
 	promocodesServiceDeleteHandler := connect.NewUnaryHandler(
 		PromocodesServiceDeleteProcedure,
 		svc.Delete,
-		connect.WithSchema(promocodesServiceDeleteMethodDescriptor),
+		connect.WithSchema(promocodesServiceMethods.ByName("Delete")),
 		connect.WithHandlerOptions(opts...),
 	)
 	promocodesServiceApplyHandler := connect.NewUnaryHandler(
 		PromocodesServiceApplyProcedure,
 		svc.Apply,
-		connect.WithSchema(promocodesServiceApplyMethodDescriptor),
+		connect.WithSchema(promocodesServiceMethods.ByName("Apply")),
 		connect.WithHandlerOptions(opts...),
 	)
 	promocodesServiceDetachHandler := connect.NewUnaryHandler(
 		PromocodesServiceDetachProcedure,
 		svc.Detach,
-		connect.WithSchema(promocodesServiceDetachMethodDescriptor),
+		connect.WithSchema(promocodesServiceMethods.ByName("Detach")),
 		connect.WithHandlerOptions(opts...),
 	)
 	promocodesServiceApplySaleHandler := connect.NewUnaryHandler(
 		PromocodesServiceApplySaleProcedure,
 		svc.ApplySale,
-		connect.WithSchema(promocodesServiceApplySaleMethodDescriptor),
+		connect.WithSchema(promocodesServiceMethods.ByName("ApplySale")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.billing.PromocodesService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

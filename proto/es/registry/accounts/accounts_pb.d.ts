@@ -93,6 +93,8 @@ export declare class InvoiceOrderSettings extends Message<InvoiceOrderSettings> 
  */
 export declare class InvoiceFromFields extends Message<InvoiceFromFields> {
   /**
+   * Company Name
+   *
    * @generated from field: string name = 1;
    */
   name: string;
@@ -121,6 +123,11 @@ export declare class InvoiceFromFields extends Message<InvoiceFromFields> {
    * @generated from field: string tax_id = 6;
    */
   taxId: string;
+
+  /**
+   * @generated from field: string company_domain = 7;
+   */
+  companyDomain: string;
 
   constructor(data?: PartialMessage<InvoiceFromFields>);
 

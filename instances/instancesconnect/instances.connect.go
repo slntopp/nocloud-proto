@@ -87,26 +87,6 @@ const (
 	InstancesServiceTransferInstanceProcedure = "/nocloud.instances.InstancesService/TransferInstance"
 )
 
-// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
-var (
-	instancesServiceServiceDescriptor                = instances.File_instances_instances_proto.Services().ByName("InstancesService")
-	instancesServiceInvokeMethodDescriptor           = instancesServiceServiceDescriptor.Methods().ByName("Invoke")
-	instancesServiceDeleteMethodDescriptor           = instancesServiceServiceDescriptor.Methods().ByName("Delete")
-	instancesServiceAddNoteMethodDescriptor          = instancesServiceServiceDescriptor.Methods().ByName("AddNote")
-	instancesServicePatchNoteMethodDescriptor        = instancesServiceServiceDescriptor.Methods().ByName("PatchNote")
-	instancesServiceRemoveNoteMethodDescriptor       = instancesServiceServiceDescriptor.Methods().ByName("RemoveNote")
-	instancesServiceDetachMethodDescriptor           = instancesServiceServiceDescriptor.Methods().ByName("Detach")
-	instancesServiceAttachMethodDescriptor           = instancesServiceServiceDescriptor.Methods().ByName("Attach")
-	instancesServiceListMethodDescriptor             = instancesServiceServiceDescriptor.Methods().ByName("List")
-	instancesServiceGetMethodDescriptor              = instancesServiceServiceDescriptor.Methods().ByName("Get")
-	instancesServiceCreateMethodDescriptor           = instancesServiceServiceDescriptor.Methods().ByName("Create")
-	instancesServiceStartMethodDescriptor            = instancesServiceServiceDescriptor.Methods().ByName("Start")
-	instancesServiceUpdateMethodDescriptor           = instancesServiceServiceDescriptor.Methods().ByName("Update")
-	instancesServiceGetUniqueMethodDescriptor        = instancesServiceServiceDescriptor.Methods().ByName("GetUnique")
-	instancesServiceTransferIGMethodDescriptor       = instancesServiceServiceDescriptor.Methods().ByName("TransferIG")
-	instancesServiceTransferInstanceMethodDescriptor = instancesServiceServiceDescriptor.Methods().ByName("TransferInstance")
-)
-
 // InstancesServiceClient is a client for the nocloud.instances.InstancesService service.
 type InstancesServiceClient interface {
 	Invoke(context.Context, *connect.Request[instances.InvokeRequest]) (*connect.Response[instances.InvokeResponse], error)
@@ -135,95 +115,96 @@ type InstancesServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewInstancesServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) InstancesServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	instancesServiceMethods := instances.File_instances_instances_proto.Services().ByName("InstancesService").Methods()
 	return &instancesServiceClient{
 		invoke: connect.NewClient[instances.InvokeRequest, instances.InvokeResponse](
 			httpClient,
 			baseURL+InstancesServiceInvokeProcedure,
-			connect.WithSchema(instancesServiceInvokeMethodDescriptor),
+			connect.WithSchema(instancesServiceMethods.ByName("Invoke")),
 			connect.WithClientOptions(opts...),
 		),
 		delete: connect.NewClient[instances.DeleteRequest, instances.DeleteResponse](
 			httpClient,
 			baseURL+InstancesServiceDeleteProcedure,
-			connect.WithSchema(instancesServiceDeleteMethodDescriptor),
+			connect.WithSchema(instancesServiceMethods.ByName("Delete")),
 			connect.WithClientOptions(opts...),
 		),
 		addNote: connect.NewClient[notes.AddNoteRequest, notes.NoteResponse](
 			httpClient,
 			baseURL+InstancesServiceAddNoteProcedure,
-			connect.WithSchema(instancesServiceAddNoteMethodDescriptor),
+			connect.WithSchema(instancesServiceMethods.ByName("AddNote")),
 			connect.WithClientOptions(opts...),
 		),
 		patchNote: connect.NewClient[notes.PatchNoteRequest, notes.NoteResponse](
 			httpClient,
 			baseURL+InstancesServicePatchNoteProcedure,
-			connect.WithSchema(instancesServicePatchNoteMethodDescriptor),
+			connect.WithSchema(instancesServiceMethods.ByName("PatchNote")),
 			connect.WithClientOptions(opts...),
 		),
 		removeNote: connect.NewClient[notes.RemoveNoteRequest, notes.NoteResponse](
 			httpClient,
 			baseURL+InstancesServiceRemoveNoteProcedure,
-			connect.WithSchema(instancesServiceRemoveNoteMethodDescriptor),
+			connect.WithSchema(instancesServiceMethods.ByName("RemoveNote")),
 			connect.WithClientOptions(opts...),
 		),
 		detach: connect.NewClient[instances.DeleteRequest, instances.DeleteResponse](
 			httpClient,
 			baseURL+InstancesServiceDetachProcedure,
-			connect.WithSchema(instancesServiceDetachMethodDescriptor),
+			connect.WithSchema(instancesServiceMethods.ByName("Detach")),
 			connect.WithClientOptions(opts...),
 		),
 		attach: connect.NewClient[instances.DeleteRequest, instances.DeleteResponse](
 			httpClient,
 			baseURL+InstancesServiceAttachProcedure,
-			connect.WithSchema(instancesServiceAttachMethodDescriptor),
+			connect.WithSchema(instancesServiceMethods.ByName("Attach")),
 			connect.WithClientOptions(opts...),
 		),
 		list: connect.NewClient[instances.ListInstancesRequest, instances.ListInstancesResponse](
 			httpClient,
 			baseURL+InstancesServiceListProcedure,
-			connect.WithSchema(instancesServiceListMethodDescriptor),
+			connect.WithSchema(instancesServiceMethods.ByName("List")),
 			connect.WithClientOptions(opts...),
 		),
 		get: connect.NewClient[instances.Instance, instances.ResponseInstance](
 			httpClient,
 			baseURL+InstancesServiceGetProcedure,
-			connect.WithSchema(instancesServiceGetMethodDescriptor),
+			connect.WithSchema(instancesServiceMethods.ByName("Get")),
 			connect.WithClientOptions(opts...),
 		),
 		create: connect.NewClient[instances.CreateRequest, instances.CreateResponse](
 			httpClient,
 			baseURL+InstancesServiceCreateProcedure,
-			connect.WithSchema(instancesServiceCreateMethodDescriptor),
+			connect.WithSchema(instancesServiceMethods.ByName("Create")),
 			connect.WithClientOptions(opts...),
 		),
 		start: connect.NewClient[instances.StartRequest, instances.StartResponse](
 			httpClient,
 			baseURL+InstancesServiceStartProcedure,
-			connect.WithSchema(instancesServiceStartMethodDescriptor),
+			connect.WithSchema(instancesServiceMethods.ByName("Start")),
 			connect.WithClientOptions(opts...),
 		),
 		update: connect.NewClient[instances.UpdateRequest, instances.UpdateResponse](
 			httpClient,
 			baseURL+InstancesServiceUpdateProcedure,
-			connect.WithSchema(instancesServiceUpdateMethodDescriptor),
+			connect.WithSchema(instancesServiceMethods.ByName("Update")),
 			connect.WithClientOptions(opts...),
 		),
 		getUnique: connect.NewClient[instances.GetUniqueRequest, instances.GetUniqueResponse](
 			httpClient,
 			baseURL+InstancesServiceGetUniqueProcedure,
-			connect.WithSchema(instancesServiceGetUniqueMethodDescriptor),
+			connect.WithSchema(instancesServiceMethods.ByName("GetUnique")),
 			connect.WithClientOptions(opts...),
 		),
 		transferIG: connect.NewClient[instances.TransferIGRequest, instances.TransferIGResponse](
 			httpClient,
 			baseURL+InstancesServiceTransferIGProcedure,
-			connect.WithSchema(instancesServiceTransferIGMethodDescriptor),
+			connect.WithSchema(instancesServiceMethods.ByName("TransferIG")),
 			connect.WithClientOptions(opts...),
 		),
 		transferInstance: connect.NewClient[instances.TransferInstanceRequest, instances.TransferInstanceResponse](
 			httpClient,
 			baseURL+InstancesServiceTransferInstanceProcedure,
-			connect.WithSchema(instancesServiceTransferInstanceMethodDescriptor),
+			connect.WithSchema(instancesServiceMethods.ByName("TransferInstance")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -348,94 +329,95 @@ type InstancesServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewInstancesServiceHandler(svc InstancesServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	instancesServiceMethods := instances.File_instances_instances_proto.Services().ByName("InstancesService").Methods()
 	instancesServiceInvokeHandler := connect.NewUnaryHandler(
 		InstancesServiceInvokeProcedure,
 		svc.Invoke,
-		connect.WithSchema(instancesServiceInvokeMethodDescriptor),
+		connect.WithSchema(instancesServiceMethods.ByName("Invoke")),
 		connect.WithHandlerOptions(opts...),
 	)
 	instancesServiceDeleteHandler := connect.NewUnaryHandler(
 		InstancesServiceDeleteProcedure,
 		svc.Delete,
-		connect.WithSchema(instancesServiceDeleteMethodDescriptor),
+		connect.WithSchema(instancesServiceMethods.ByName("Delete")),
 		connect.WithHandlerOptions(opts...),
 	)
 	instancesServiceAddNoteHandler := connect.NewUnaryHandler(
 		InstancesServiceAddNoteProcedure,
 		svc.AddNote,
-		connect.WithSchema(instancesServiceAddNoteMethodDescriptor),
+		connect.WithSchema(instancesServiceMethods.ByName("AddNote")),
 		connect.WithHandlerOptions(opts...),
 	)
 	instancesServicePatchNoteHandler := connect.NewUnaryHandler(
 		InstancesServicePatchNoteProcedure,
 		svc.PatchNote,
-		connect.WithSchema(instancesServicePatchNoteMethodDescriptor),
+		connect.WithSchema(instancesServiceMethods.ByName("PatchNote")),
 		connect.WithHandlerOptions(opts...),
 	)
 	instancesServiceRemoveNoteHandler := connect.NewUnaryHandler(
 		InstancesServiceRemoveNoteProcedure,
 		svc.RemoveNote,
-		connect.WithSchema(instancesServiceRemoveNoteMethodDescriptor),
+		connect.WithSchema(instancesServiceMethods.ByName("RemoveNote")),
 		connect.WithHandlerOptions(opts...),
 	)
 	instancesServiceDetachHandler := connect.NewUnaryHandler(
 		InstancesServiceDetachProcedure,
 		svc.Detach,
-		connect.WithSchema(instancesServiceDetachMethodDescriptor),
+		connect.WithSchema(instancesServiceMethods.ByName("Detach")),
 		connect.WithHandlerOptions(opts...),
 	)
 	instancesServiceAttachHandler := connect.NewUnaryHandler(
 		InstancesServiceAttachProcedure,
 		svc.Attach,
-		connect.WithSchema(instancesServiceAttachMethodDescriptor),
+		connect.WithSchema(instancesServiceMethods.ByName("Attach")),
 		connect.WithHandlerOptions(opts...),
 	)
 	instancesServiceListHandler := connect.NewUnaryHandler(
 		InstancesServiceListProcedure,
 		svc.List,
-		connect.WithSchema(instancesServiceListMethodDescriptor),
+		connect.WithSchema(instancesServiceMethods.ByName("List")),
 		connect.WithHandlerOptions(opts...),
 	)
 	instancesServiceGetHandler := connect.NewUnaryHandler(
 		InstancesServiceGetProcedure,
 		svc.Get,
-		connect.WithSchema(instancesServiceGetMethodDescriptor),
+		connect.WithSchema(instancesServiceMethods.ByName("Get")),
 		connect.WithHandlerOptions(opts...),
 	)
 	instancesServiceCreateHandler := connect.NewUnaryHandler(
 		InstancesServiceCreateProcedure,
 		svc.Create,
-		connect.WithSchema(instancesServiceCreateMethodDescriptor),
+		connect.WithSchema(instancesServiceMethods.ByName("Create")),
 		connect.WithHandlerOptions(opts...),
 	)
 	instancesServiceStartHandler := connect.NewUnaryHandler(
 		InstancesServiceStartProcedure,
 		svc.Start,
-		connect.WithSchema(instancesServiceStartMethodDescriptor),
+		connect.WithSchema(instancesServiceMethods.ByName("Start")),
 		connect.WithHandlerOptions(opts...),
 	)
 	instancesServiceUpdateHandler := connect.NewUnaryHandler(
 		InstancesServiceUpdateProcedure,
 		svc.Update,
-		connect.WithSchema(instancesServiceUpdateMethodDescriptor),
+		connect.WithSchema(instancesServiceMethods.ByName("Update")),
 		connect.WithHandlerOptions(opts...),
 	)
 	instancesServiceGetUniqueHandler := connect.NewUnaryHandler(
 		InstancesServiceGetUniqueProcedure,
 		svc.GetUnique,
-		connect.WithSchema(instancesServiceGetUniqueMethodDescriptor),
+		connect.WithSchema(instancesServiceMethods.ByName("GetUnique")),
 		connect.WithHandlerOptions(opts...),
 	)
 	instancesServiceTransferIGHandler := connect.NewUnaryHandler(
 		InstancesServiceTransferIGProcedure,
 		svc.TransferIG,
-		connect.WithSchema(instancesServiceTransferIGMethodDescriptor),
+		connect.WithSchema(instancesServiceMethods.ByName("TransferIG")),
 		connect.WithHandlerOptions(opts...),
 	)
 	instancesServiceTransferInstanceHandler := connect.NewUnaryHandler(
 		InstancesServiceTransferInstanceProcedure,
 		svc.TransferInstance,
-		connect.WithSchema(instancesServiceTransferInstanceMethodDescriptor),
+		connect.WithSchema(instancesServiceMethods.ByName("TransferInstance")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.instances.InstancesService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

@@ -8582,7 +8582,8 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "title": "Company Name"
         },
         "address": {
           "type": "string"
@@ -8597,6 +8598,9 @@
           "type": "string"
         },
         "taxId": {
+          "type": "string"
+        },
+        "companyDomain": {
           "type": "string"
         }
       }

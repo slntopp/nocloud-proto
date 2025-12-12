@@ -60,15 +60,6 @@ const (
 	InternalProbeServiceRoutineProcedure = "/nocloud.health.InternalProbeService/Routine"
 )
 
-// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
-var (
-	healthServiceServiceDescriptor              = health.File_health_health_proto.Services().ByName("HealthService")
-	healthServiceProbeMethodDescriptor          = healthServiceServiceDescriptor.Methods().ByName("Probe")
-	internalProbeServiceServiceDescriptor       = health.File_health_health_proto.Services().ByName("InternalProbeService")
-	internalProbeServiceServiceMethodDescriptor = internalProbeServiceServiceDescriptor.Methods().ByName("Service")
-	internalProbeServiceRoutineMethodDescriptor = internalProbeServiceServiceDescriptor.Methods().ByName("Routine")
-)
-
 // HealthServiceClient is a client for the nocloud.health.HealthService service.
 type HealthServiceClient interface {
 	Probe(context.Context, *connect.Request[health.ProbeRequest]) (*connect.Response[health.ProbeResponse], error)
@@ -83,11 +74,12 @@ type HealthServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewHealthServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) HealthServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	healthServiceMethods := health.File_health_health_proto.Services().ByName("HealthService").Methods()
 	return &healthServiceClient{
 		probe: connect.NewClient[health.ProbeRequest, health.ProbeResponse](
 			httpClient,
 			baseURL+HealthServiceProbeProcedure,
-			connect.WithSchema(healthServiceProbeMethodDescriptor),
+			connect.WithSchema(healthServiceMethods.ByName("Probe")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -114,10 +106,11 @@ type HealthServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewHealthServiceHandler(svc HealthServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	healthServiceMethods := health.File_health_health_proto.Services().ByName("HealthService").Methods()
 	healthServiceProbeHandler := connect.NewUnaryHandler(
 		HealthServiceProbeProcedure,
 		svc.Probe,
-		connect.WithSchema(healthServiceProbeMethodDescriptor),
+		connect.WithSchema(healthServiceMethods.ByName("Probe")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.health.HealthService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -152,17 +145,18 @@ type InternalProbeServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewInternalProbeServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) InternalProbeServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	internalProbeServiceMethods := health.File_health_health_proto.Services().ByName("InternalProbeService").Methods()
 	return &internalProbeServiceClient{
 		service: connect.NewClient[health.ProbeRequest, health.ServingStatus](
 			httpClient,
 			baseURL+InternalProbeServiceServiceProcedure,
-			connect.WithSchema(internalProbeServiceServiceMethodDescriptor),
+			connect.WithSchema(internalProbeServiceMethods.ByName("Service")),
 			connect.WithClientOptions(opts...),
 		),
 		routine: connect.NewClient[health.ProbeRequest, health.RoutinesStatus](
 			httpClient,
 			baseURL+InternalProbeServiceRoutineProcedure,
-			connect.WithSchema(internalProbeServiceRoutineMethodDescriptor),
+			connect.WithSchema(internalProbeServiceMethods.ByName("Routine")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -197,16 +191,17 @@ type InternalProbeServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewInternalProbeServiceHandler(svc InternalProbeServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	internalProbeServiceMethods := health.File_health_health_proto.Services().ByName("InternalProbeService").Methods()
 	internalProbeServiceServiceHandler := connect.NewUnaryHandler(
 		InternalProbeServiceServiceProcedure,
 		svc.Service,
-		connect.WithSchema(internalProbeServiceServiceMethodDescriptor),
+		connect.WithSchema(internalProbeServiceMethods.ByName("Service")),
 		connect.WithHandlerOptions(opts...),
 	)
 	internalProbeServiceRoutineHandler := connect.NewUnaryHandler(
 		InternalProbeServiceRoutineProcedure,
 		svc.Routine,
-		connect.WithSchema(internalProbeServiceRoutineMethodDescriptor),
+		connect.WithSchema(internalProbeServiceMethods.ByName("Routine")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/nocloud.health.InternalProbeService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
