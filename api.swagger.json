@@ -8582,8 +8582,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string",
-          "title": "Company Name"
+          "type": "string"
         },
         "address": {
           "type": "string"
@@ -8601,6 +8600,9 @@
           "type": "string"
         },
         "companyDomain": {
+          "type": "string"
+        },
+        "companyName": {
           "type": "string"
         }
       }

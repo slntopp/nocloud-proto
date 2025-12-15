@@ -167,13 +167,14 @@ func (x *InvoiceOrderSettings) GetMustResetInvoiceNumberAt() int64 {
 
 type InvoiceFromFields struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"` // Company Name
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Address       string                 `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
 	City          string                 `protobuf:"bytes,3,opt,name=city,proto3" json:"city,omitempty"`
 	PostalCode    string                 `protobuf:"bytes,4,opt,name=postal_code,json=postalCode,proto3" json:"postal_code,omitempty"`
 	Country       string                 `protobuf:"bytes,5,opt,name=country,proto3" json:"country,omitempty"`
 	TaxId         string                 `protobuf:"bytes,6,opt,name=tax_id,json=taxId,proto3" json:"tax_id,omitempty"`
 	CompanyDomain string                 `protobuf:"bytes,7,opt,name=company_domain,json=companyDomain,proto3" json:"company_domain,omitempty"`
+	CompanyName   string                 `protobuf:"bytes,8,opt,name=company_name,json=companyName,proto3" json:"company_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -253,6 +254,13 @@ func (x *InvoiceFromFields) GetTaxId() string {
 func (x *InvoiceFromFields) GetCompanyDomain() string {
 	if x != nil {
 		return x.CompanyDomain
+	}
+	return ""
+}
+
+func (x *InvoiceFromFields) GetCompanyName() string {
+	if x != nil {
+		return x.CompanyName
 	}
 	return ""
 }
@@ -2183,7 +2191,7 @@ const file_registry_accounts_accounts_proto_rawDesc = "" +
 	"\fnew_template\x18\x02 \x01(\tR\vnewTemplate\x12*\n" +
 	"\x11start_with_number\x18\x03 \x01(\x03R\x0fstartWithNumber\x12,\n" +
 	"\x12reset_counter_mode\x18\x04 \x01(\tR\x10resetCounterMode\x12>\n" +
-	"\x1cmust_reset_invoice_number_at\x18\x05 \x01(\x03R\x18mustResetInvoiceNumberAt\"\xce\x01\n" +
+	"\x1cmust_reset_invoice_number_at\x18\x05 \x01(\x03R\x18mustResetInvoiceNumberAt\"\xf1\x01\n" +
 	"\x11InvoiceFromFields\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x18\n" +
 	"\aaddress\x18\x02 \x01(\tR\aaddress\x12\x12\n" +
@@ -2192,7 +2200,8 @@ const file_registry_accounts_accounts_proto_rawDesc = "" +
 	"postalCode\x12\x18\n" +
 	"\acountry\x18\x05 \x01(\tR\acountry\x12\x15\n" +
 	"\x06tax_id\x18\x06 \x01(\tR\x05taxId\x12%\n" +
-	"\x0ecompany_domain\x18\a \x01(\tR\rcompanyDomain\"\x92\x01\n" +
+	"\x0ecompany_domain\x18\a \x01(\tR\rcompanyDomain\x12!\n" +
+	"\fcompany_name\x18\b \x01(\tR\vcompanyName\"\x92\x01\n" +
 	"\x17InvoiceParametersCustom\x12\\\n" +
 	"\x13invoice_from_fields\x18\x01 \x01(\v2,.nocloud.registry.accounts.InvoiceFromFieldsR\x11invoiceFromFields\x12\x19\n" +
 	"\blogo_url\x18\x02 \x01(\tR\alogoUrl\"\x89\x03\n" +

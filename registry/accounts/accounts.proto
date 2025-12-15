@@ -31,13 +31,14 @@ message InvoiceOrderSettings {
 }
 
 message InvoiceFromFields{
-  string name = 1; // Company Name
+  string name = 1;
   string address = 2;
   string city = 3;
   string postal_code = 4;
   string country = 5;
   string tax_id = 6;
   string company_domain = 7;
+  string company_name = 8;
 }
 
 message InvoiceParametersCustom {

@@ -62,6 +62,7 @@ export const InvoiceFromFields = /*@__PURE__*/ proto3.makeMessageType(
     { no: 5, name: "country", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 6, name: "tax_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 7, name: "company_domain", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 8, name: "company_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
