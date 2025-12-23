@@ -363,7 +363,7 @@ type InstanceMeta struct {
 	state                  protoimpl.MessageState `protogen:"open.v1"`
 	Started                int64                  `protobuf:"varint,1,opt,name=started,proto3" json:"started,omitempty"`
 	AutoRenew              *bool                  `protobuf:"varint,2,opt,name=auto_renew,json=autoRenew,proto3,oneof" json:"auto_renew,omitempty"`
-	NextForcedRenewInvoice int64                  `protobuf:"varint,3,opt,name=next_forced_renew_invoice,json=nextForcedRenewInvoice,proto3" json:"next_forced_renew_invoice,omitempty"`
+	NextForcedRenewInvoice *int64                 `protobuf:"varint,3,opt,name=next_forced_renew_invoice,json=nextForcedRenewInvoice,proto3,oneof" json:"next_forced_renew_invoice,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -413,8 +413,8 @@ func (x *InstanceMeta) GetAutoRenew() bool {
 }
 
 func (x *InstanceMeta) GetNextForcedRenewInvoice() int64 {
-	if x != nil {
-		return x.NextForcedRenewInvoice
+	if x != nil && x.NextForcedRenewInvoice != nil {
+		return *x.NextForcedRenewInvoice
 	}
 	return 0
 }
@@ -1886,13 +1886,14 @@ const file_instances_instances_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
 	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01B\x05\n" +
 	"\x03_spB\t\n" +
-	"\a_access\"\x96\x01\n" +
+	"\a_access\"\xb9\x01\n" +
 	"\fInstanceMeta\x12\x18\n" +
 	"\astarted\x18\x01 \x01(\x03R\astarted\x12\"\n" +
 	"\n" +
-	"auto_renew\x18\x02 \x01(\bH\x00R\tautoRenew\x88\x01\x01\x129\n" +
-	"\x19next_forced_renew_invoice\x18\x03 \x01(\x03R\x16nextForcedRenewInvoiceB\r\n" +
-	"\v_auto_renew\"p\n" +
+	"auto_renew\x18\x02 \x01(\bH\x00R\tautoRenew\x88\x01\x01\x12>\n" +
+	"\x19next_forced_renew_invoice\x18\x03 \x01(\x03H\x01R\x16nextForcedRenewInvoice\x88\x01\x01B\r\n" +
+	"\v_auto_renewB\x1c\n" +
+	"\x1a_next_forced_renew_invoice\"p\n" +
 	"\aContext\x12\x1a\n" +
 	"\binstance\x18\x01 \x01(\tR\binstance\x12\x0e\n" +
 	"\x02sp\x18\x02 \x01(\tR\x02sp\x12\x14\n" +

@@ -233,9 +233,9 @@ export declare class InstanceMeta extends Message<InstanceMeta> {
   autoRenew?: boolean;
 
   /**
-   * @generated from field: int64 next_forced_renew_invoice = 3;
+   * @generated from field: optional int64 next_forced_renew_invoice = 3;
    */
-  nextForcedRenewInvoice: bigint;
+  nextForcedRenewInvoice?: bigint;
 
   constructor(data?: PartialMessage<InstanceMeta>);
 
