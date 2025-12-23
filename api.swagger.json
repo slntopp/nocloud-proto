@@ -5864,6 +5864,13 @@
             "in": "query",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "meta.nextForcedRenewInvoice",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -10788,6 +10795,10 @@
         },
         "autoRenew": {
           "type": "boolean"
+        },
+        "nextForcedRenewInvoice": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },

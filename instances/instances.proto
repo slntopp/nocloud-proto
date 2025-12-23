@@ -79,6 +79,7 @@ message InstancesGroup {
 message InstanceMeta {
     int64 started = 1;
     optional bool auto_renew = 2;
+    int64 next_forced_renew_invoice = 3;
 }
 
 message Context {

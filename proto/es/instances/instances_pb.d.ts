@@ -232,6 +232,11 @@ export declare class InstanceMeta extends Message<InstanceMeta> {
    */
   autoRenew?: boolean;
 
+  /**
+   * @generated from field: int64 next_forced_renew_invoice = 3;
+   */
+  nextForcedRenewInvoice: bigint;
+
   constructor(data?: PartialMessage<InstanceMeta>);
 
   static readonly runtime: typeof proto3;
