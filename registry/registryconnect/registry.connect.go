@@ -57,6 +57,8 @@ const (
 const (
 	// AccountsServiceTokenProcedure is the fully-qualified name of the AccountsService's Token RPC.
 	AccountsServiceTokenProcedure = "/nocloud.registry.AccountsService/Token"
+	// AccountsServiceLogoutProcedure is the fully-qualified name of the AccountsService's Logout RPC.
+	AccountsServiceLogoutProcedure = "/nocloud.registry.AccountsService/Logout"
 	// AccountsServiceSetCredentialsProcedure is the fully-qualified name of the AccountsService's
 	// SetCredentials RPC.
 	AccountsServiceSetCredentialsProcedure = "/nocloud.registry.AccountsService/SetCredentials"
@@ -132,6 +134,7 @@ const (
 // AccountsServiceClient is a client for the nocloud.registry.AccountsService service.
 type AccountsServiceClient interface {
 	Token(context.Context, *connect.Request[accounts.TokenRequest]) (*connect.Response[accounts.TokenResponse], error)
+	Logout(context.Context, *connect.Request[accounts.LogoutRequest]) (*connect.Response[accounts.LogoutResponse], error)
 	SetCredentials(context.Context, *connect.Request[accounts.SetCredentialsRequest]) (*connect.Response[accounts.SetCredentialsResponse], error)
 	AddNote(context.Context, *connect.Request[notes.AddNoteRequest]) (*connect.Response[notes.NoteResponse], error)
 	PatchNote(context.Context, *connect.Request[notes.PatchNoteRequest]) (*connect.Response[notes.NoteResponse], error)
@@ -165,6 +168,12 @@ func NewAccountsServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			httpClient,
 			baseURL+AccountsServiceTokenProcedure,
 			connect.WithSchema(accountsServiceMethods.ByName("Token")),
+			connect.WithClientOptions(opts...),
+		),
+		logout: connect.NewClient[accounts.LogoutRequest, accounts.LogoutResponse](
+			httpClient,
+			baseURL+AccountsServiceLogoutProcedure,
+			connect.WithSchema(accountsServiceMethods.ByName("Logout")),
 			connect.WithClientOptions(opts...),
 		),
 		setCredentials: connect.NewClient[accounts.SetCredentialsRequest, accounts.SetCredentialsResponse](
@@ -269,6 +278,7 @@ func NewAccountsServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 // accountsServiceClient implements AccountsServiceClient.
 type accountsServiceClient struct {
 	token              *connect.Client[accounts.TokenRequest, accounts.TokenResponse]
+	logout             *connect.Client[accounts.LogoutRequest, accounts.LogoutResponse]
 	setCredentials     *connect.Client[accounts.SetCredentialsRequest, accounts.SetCredentialsResponse]
 	addNote            *connect.Client[notes.AddNoteRequest, notes.NoteResponse]
 	patchNote          *connect.Client[notes.PatchNoteRequest, notes.NoteResponse]
@@ -290,6 +300,11 @@ type accountsServiceClient struct {
 // Token calls nocloud.registry.AccountsService.Token.
 func (c *accountsServiceClient) Token(ctx context.Context, req *connect.Request[accounts.TokenRequest]) (*connect.Response[accounts.TokenResponse], error) {
 	return c.token.CallUnary(ctx, req)
+}
+
+// Logout calls nocloud.registry.AccountsService.Logout.
+func (c *accountsServiceClient) Logout(ctx context.Context, req *connect.Request[accounts.LogoutRequest]) (*connect.Response[accounts.LogoutResponse], error) {
+	return c.logout.CallUnary(ctx, req)
 }
 
 // SetCredentials calls nocloud.registry.AccountsService.SetCredentials.
@@ -375,6 +390,7 @@ func (c *accountsServiceClient) ChangeAccountGroup(ctx context.Context, req *con
 // AccountsServiceHandler is an implementation of the nocloud.registry.AccountsService service.
 type AccountsServiceHandler interface {
 	Token(context.Context, *connect.Request[accounts.TokenRequest]) (*connect.Response[accounts.TokenResponse], error)
+	Logout(context.Context, *connect.Request[accounts.LogoutRequest]) (*connect.Response[accounts.LogoutResponse], error)
 	SetCredentials(context.Context, *connect.Request[accounts.SetCredentialsRequest]) (*connect.Response[accounts.SetCredentialsResponse], error)
 	AddNote(context.Context, *connect.Request[notes.AddNoteRequest]) (*connect.Response[notes.NoteResponse], error)
 	PatchNote(context.Context, *connect.Request[notes.PatchNoteRequest]) (*connect.Response[notes.NoteResponse], error)
@@ -404,6 +420,12 @@ func NewAccountsServiceHandler(svc AccountsServiceHandler, opts ...connect.Handl
 		AccountsServiceTokenProcedure,
 		svc.Token,
 		connect.WithSchema(accountsServiceMethods.ByName("Token")),
+		connect.WithHandlerOptions(opts...),
+	)
+	accountsServiceLogoutHandler := connect.NewUnaryHandler(
+		AccountsServiceLogoutProcedure,
+		svc.Logout,
+		connect.WithSchema(accountsServiceMethods.ByName("Logout")),
 		connect.WithHandlerOptions(opts...),
 	)
 	accountsServiceSetCredentialsHandler := connect.NewUnaryHandler(
@@ -506,6 +528,8 @@ func NewAccountsServiceHandler(svc AccountsServiceHandler, opts ...connect.Handl
 		switch r.URL.Path {
 		case AccountsServiceTokenProcedure:
 			accountsServiceTokenHandler.ServeHTTP(w, r)
+		case AccountsServiceLogoutProcedure:
+			accountsServiceLogoutHandler.ServeHTTP(w, r)
 		case AccountsServiceSetCredentialsProcedure:
 			accountsServiceSetCredentialsHandler.ServeHTTP(w, r)
 		case AccountsServiceAddNoteProcedure:
@@ -549,6 +573,10 @@ type UnimplementedAccountsServiceHandler struct{}
 
 func (UnimplementedAccountsServiceHandler) Token(context.Context, *connect.Request[accounts.TokenRequest]) (*connect.Response[accounts.TokenResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.registry.AccountsService.Token is not implemented"))
+}
+
+func (UnimplementedAccountsServiceHandler) Logout(context.Context, *connect.Request[accounts.LogoutRequest]) (*connect.Response[accounts.LogoutResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.registry.AccountsService.Logout is not implemented"))
 }
 
 func (UnimplementedAccountsServiceHandler) SetCredentials(context.Context, *connect.Request[accounts.SetCredentialsRequest]) (*connect.Response[accounts.SetCredentialsResponse], error) {

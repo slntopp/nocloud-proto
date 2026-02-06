@@ -6153,6 +6153,38 @@
         ]
       }
     },
+    "/logout": {
+      "post": {
+        "operationId": "AccountsService_Logout",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/accountsLogoutResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/accountsLogoutRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AccountsService"
+        ]
+      }
+    },
     "/messages": {
       "put": {
         "operationId": "ChatService_SendChatMessage",
@@ -8646,6 +8678,12 @@
           "type": "string"
         }
       }
+    },
+    "accountsLogoutRequest": {
+      "type": "object"
+    },
+    "accountsLogoutResponse": {
+      "type": "object"
     },
     "accountsNotifications": {
       "type": "object",

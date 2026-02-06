@@ -51,6 +51,13 @@ service AccountsService {
       body: "*"
     };
   };
+  rpc Logout (nocloud.registry.accounts.LogoutRequest)
+      returns (nocloud.registry.accounts.LogoutResponse) {
+    option (google.api.http) = {
+      post: "/logout"
+      body: "*"
+    };
+  };
   rpc SetCredentials (nocloud.registry.accounts.SetCredentialsRequest)
       returns (nocloud.registry.accounts.SetCredentialsResponse) {
     option (google.api.http) = {

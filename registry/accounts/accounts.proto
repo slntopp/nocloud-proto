@@ -22,6 +22,9 @@ import "billing/billing.proto";
 import "google/protobuf/struct.proto";
 import "notes/notes.proto";
 
+message LogoutRequest{}
+message LogoutResponse {}
+
 message InvoiceOrderSettings {
   string template = 1;
   string new_template = 2;

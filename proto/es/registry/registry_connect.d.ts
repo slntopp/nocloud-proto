@@ -18,7 +18,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { Account, AccountGroup, AccountGroupsListResponse, ChangeAccountGroupRequest, ChangeAccountGroupResponse, ChangeLanguageCodeRequest, ChangeLanguageCodeResponse, ChangePhoneRequest, ChangePhoneResponse, CreateRequest, CreateResponse, DeleteRequest, DeleteResponse, GetRequest, ListRequest, ListResponse, SetCredentialsRequest, SetCredentialsResponse, SuspendRequest, SuspendResponse, TokenRequest, TokenResponse, UnsuspendRequest, UnsuspendResponse, UpdateResponse } from "./accounts/accounts_pb.js";
+import { Account, AccountGroup, AccountGroupsListResponse, ChangeAccountGroupRequest, ChangeAccountGroupResponse, ChangeLanguageCodeRequest, ChangeLanguageCodeResponse, ChangePhoneRequest, ChangePhoneResponse, CreateRequest, CreateResponse, DeleteRequest, DeleteResponse, GetRequest, ListRequest, ListResponse, LogoutRequest, LogoutResponse, SetCredentialsRequest, SetCredentialsResponse, SuspendRequest, SuspendResponse, TokenRequest, TokenResponse, UnsuspendRequest, UnsuspendResponse, UpdateResponse } from "./accounts/accounts_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 import { AddNoteRequest, NoteResponse, PatchNoteRequest, RemoveNoteRequest } from "../notes/notes_pb.js";
 import { VerificationRequest, VerificationResponse } from "./registry_pb.js";
@@ -37,6 +37,15 @@ export declare const AccountsService: {
       readonly name: "Token",
       readonly I: typeof TokenRequest,
       readonly O: typeof TokenResponse,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.registry.AccountsService.Logout
+     */
+    readonly logout: {
+      readonly name: "Logout",
+      readonly I: typeof LogoutRequest,
+      readonly O: typeof LogoutResponse,
       readonly kind: MethodKind.Unary,
     },
     /**

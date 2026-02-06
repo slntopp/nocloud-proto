@@ -36,6 +36,22 @@ export const AccountStatus = /*@__PURE__*/ proto3.makeEnum(
 );
 
 /**
+ * @generated from message nocloud.registry.accounts.LogoutRequest
+ */
+export const LogoutRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.LogoutRequest",
+  [],
+);
+
+/**
+ * @generated from message nocloud.registry.accounts.LogoutResponse
+ */
+export const LogoutResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.LogoutResponse",
+  [],
+);
+
+/**
  * @generated from message nocloud.registry.accounts.InvoiceOrderSettings
  */
 export const InvoiceOrderSettings = /*@__PURE__*/ proto3.makeMessageType(

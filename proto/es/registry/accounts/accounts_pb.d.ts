@@ -45,6 +45,44 @@ export declare enum AccountStatus {
 }
 
 /**
+ * @generated from message nocloud.registry.accounts.LogoutRequest
+ */
+export declare class LogoutRequest extends Message<LogoutRequest> {
+  constructor(data?: PartialMessage<LogoutRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.LogoutRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LogoutRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LogoutRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LogoutRequest;
+
+  static equals(a: LogoutRequest | PlainMessage<LogoutRequest> | undefined, b: LogoutRequest | PlainMessage<LogoutRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.registry.accounts.LogoutResponse
+ */
+export declare class LogoutResponse extends Message<LogoutResponse> {
+  constructor(data?: PartialMessage<LogoutResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.LogoutResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LogoutResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LogoutResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LogoutResponse;
+
+  static equals(a: LogoutResponse | PlainMessage<LogoutResponse> | undefined, b: LogoutResponse | PlainMessage<LogoutResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.registry.accounts.InvoiceOrderSettings
  */
 export declare class InvoiceOrderSettings extends Message<InvoiceOrderSettings> {
