@@ -3,7 +3,7 @@ module github.com/slntopp/nocloud-proto
 go 1.24.0
 
 require (
-	connectrpc.com/connect v1.14.0
+	connectrpc.com/connect v1.19.1
 	github.com/Pallinder/go-randomdata v1.2.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.20.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20251202230838-ff82c1b0f217
