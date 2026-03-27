@@ -3258,6 +3258,38 @@
         ]
       }
     },
+    "/billing/ksef/enqueue": {
+      "post": {
+        "operationId": "BillingService_KsefEnqueue",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/billingKsefEnqueueResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/billingKsefEnqueueRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
     "/billing/plans": {
       "get": {
         "operationId": "BillingService_ListPlans",
@@ -9892,6 +9924,17 @@
         }
       },
       "title": "Position. Instance must be specified to connect action with instance"
+    },
+    "billingKsefEnqueueRequest": {
+      "type": "object",
+      "properties": {
+        "invoiceUuid": {
+          "type": "string"
+        }
+      }
+    },
+    "billingKsefEnqueueResponse": {
+      "type": "object"
     },
     "billingListPlansInstancesResponse": {
       "type": "object",

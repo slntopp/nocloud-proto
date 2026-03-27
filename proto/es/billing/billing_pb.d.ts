@@ -2627,6 +2627,49 @@ export declare class RunDailyCronJobResponse extends Message<RunDailyCronJobResp
 }
 
 /**
+ * @generated from message nocloud.billing.KsefEnqueueRequest
+ */
+export declare class KsefEnqueueRequest extends Message<KsefEnqueueRequest> {
+  /**
+   * @generated from field: string invoice_uuid = 1;
+   */
+  invoiceUuid: string;
+
+  constructor(data?: PartialMessage<KsefEnqueueRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.KsefEnqueueRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): KsefEnqueueRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): KsefEnqueueRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): KsefEnqueueRequest;
+
+  static equals(a: KsefEnqueueRequest | PlainMessage<KsefEnqueueRequest> | undefined, b: KsefEnqueueRequest | PlainMessage<KsefEnqueueRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.billing.KsefEnqueueResponse
+ */
+export declare class KsefEnqueueResponse extends Message<KsefEnqueueResponse> {
+  constructor(data?: PartialMessage<KsefEnqueueResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.billing.KsefEnqueueResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): KsefEnqueueResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): KsefEnqueueResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): KsefEnqueueResponse;
+
+  static equals(a: KsefEnqueueResponse | PlainMessage<KsefEnqueueResponse> | undefined, b: KsefEnqueueResponse | PlainMessage<KsefEnqueueResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.billing.Currency
  */
 export declare class Currency extends Message<Currency> {

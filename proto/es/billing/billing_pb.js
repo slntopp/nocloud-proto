@@ -903,6 +903,24 @@ export const RunDailyCronJobResponse = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * @generated from message nocloud.billing.KsefEnqueueRequest
+ */
+export const KsefEnqueueRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.KsefEnqueueRequest",
+  () => [
+    { no: 1, name: "invoice_uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.billing.KsefEnqueueResponse
+ */
+export const KsefEnqueueResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.billing.KsefEnqueueResponse",
+  [],
+);
+
+/**
  * @generated from message nocloud.billing.Currency
  */
 export const Currency = /*@__PURE__*/ proto3.makeMessageType(

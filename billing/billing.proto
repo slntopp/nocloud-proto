@@ -696,7 +696,19 @@ service BillingService {
       body: "*"
     };
   };
+
+  rpc KsefEnqueue(KsefEnqueueRequest) returns (KsefEnqueueResponse) {
+    option (google.api.http) = {
+      post: "/billing/ksef/enqueue"
+      body: "*"
+    };
+  };
 }
+
+message KsefEnqueueRequest {
+  string invoice_uuid = 1;
+}
+message KsefEnqueueResponse {}
 
 enum Rounding {
   ROUND_HALF = 0;

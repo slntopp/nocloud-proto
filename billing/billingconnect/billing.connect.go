@@ -161,6 +161,9 @@ const (
 	BillingServiceRunDailyCronJobProcedure = "/nocloud.billing.BillingService/RunDailyCronJob"
 	// BillingServiceStreamProcedure is the fully-qualified name of the BillingService's Stream RPC.
 	BillingServiceStreamProcedure = "/nocloud.billing.BillingService/Stream"
+	// BillingServiceKsefEnqueueProcedure is the fully-qualified name of the BillingService's
+	// KsefEnqueue RPC.
+	BillingServiceKsefEnqueueProcedure = "/nocloud.billing.BillingService/KsefEnqueue"
 	// CurrencyServiceCreateCurrencyProcedure is the fully-qualified name of the CurrencyService's
 	// CreateCurrency RPC.
 	CurrencyServiceCreateCurrencyProcedure = "/nocloud.billing.CurrencyService/CreateCurrency"
@@ -412,6 +415,7 @@ type BillingServiceClient interface {
 	GetInvoiceSettingsTemplateExample(context.Context, *connect.Request[billing.GetInvoiceSettingsTemplateExampleRequest]) (*connect.Response[billing.GetInvoiceSettingsTemplateExampleResponse], error)
 	RunDailyCronJob(context.Context, *connect.Request[billing.RunDailyCronJobRequest]) (*connect.Response[billing.RunDailyCronJobResponse], error)
 	Stream(context.Context, *connect.Request[billing.StreamRequest]) (*connect.ServerStreamForClient[billing.StreamResponse], error)
+	KsefEnqueue(context.Context, *connect.Request[billing.KsefEnqueueRequest]) (*connect.Response[billing.KsefEnqueueResponse], error)
 }
 
 // NewBillingServiceClient constructs a client for the nocloud.billing.BillingService service. By
@@ -617,6 +621,12 @@ func NewBillingServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(billingServiceMethods.ByName("Stream")),
 			connect.WithClientOptions(opts...),
 		),
+		ksefEnqueue: connect.NewClient[billing.KsefEnqueueRequest, billing.KsefEnqueueResponse](
+			httpClient,
+			baseURL+BillingServiceKsefEnqueueProcedure,
+			connect.WithSchema(billingServiceMethods.ByName("KsefEnqueue")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -654,6 +664,7 @@ type billingServiceClient struct {
 	getInvoiceSettingsTemplateExample *connect.Client[billing.GetInvoiceSettingsTemplateExampleRequest, billing.GetInvoiceSettingsTemplateExampleResponse]
 	runDailyCronJob                   *connect.Client[billing.RunDailyCronJobRequest, billing.RunDailyCronJobResponse]
 	stream                            *connect.Client[billing.StreamRequest, billing.StreamResponse]
+	ksefEnqueue                       *connect.Client[billing.KsefEnqueueRequest, billing.KsefEnqueueResponse]
 }
 
 // CreatePlan calls nocloud.billing.BillingService.CreatePlan.
@@ -817,6 +828,11 @@ func (c *billingServiceClient) Stream(ctx context.Context, req *connect.Request[
 	return c.stream.CallServerStream(ctx, req)
 }
 
+// KsefEnqueue calls nocloud.billing.BillingService.KsefEnqueue.
+func (c *billingServiceClient) KsefEnqueue(ctx context.Context, req *connect.Request[billing.KsefEnqueueRequest]) (*connect.Response[billing.KsefEnqueueResponse], error) {
+	return c.ksefEnqueue.CallUnary(ctx, req)
+}
+
 // BillingServiceHandler is an implementation of the nocloud.billing.BillingService service.
 type BillingServiceHandler interface {
 	CreatePlan(context.Context, *connect.Request[billing.Plan]) (*connect.Response[billing.Plan], error)
@@ -851,6 +867,7 @@ type BillingServiceHandler interface {
 	GetInvoiceSettingsTemplateExample(context.Context, *connect.Request[billing.GetInvoiceSettingsTemplateExampleRequest]) (*connect.Response[billing.GetInvoiceSettingsTemplateExampleResponse], error)
 	RunDailyCronJob(context.Context, *connect.Request[billing.RunDailyCronJobRequest]) (*connect.Response[billing.RunDailyCronJobResponse], error)
 	Stream(context.Context, *connect.Request[billing.StreamRequest], *connect.ServerStream[billing.StreamResponse]) error
+	KsefEnqueue(context.Context, *connect.Request[billing.KsefEnqueueRequest]) (*connect.Response[billing.KsefEnqueueResponse], error)
 }
 
 // NewBillingServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -1052,6 +1069,12 @@ func NewBillingServiceHandler(svc BillingServiceHandler, opts ...connect.Handler
 		connect.WithSchema(billingServiceMethods.ByName("Stream")),
 		connect.WithHandlerOptions(opts...),
 	)
+	billingServiceKsefEnqueueHandler := connect.NewUnaryHandler(
+		BillingServiceKsefEnqueueProcedure,
+		svc.KsefEnqueue,
+		connect.WithSchema(billingServiceMethods.ByName("KsefEnqueue")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/nocloud.billing.BillingService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case BillingServiceCreatePlanProcedure:
@@ -1118,6 +1141,8 @@ func NewBillingServiceHandler(svc BillingServiceHandler, opts ...connect.Handler
 			billingServiceRunDailyCronJobHandler.ServeHTTP(w, r)
 		case BillingServiceStreamProcedure:
 			billingServiceStreamHandler.ServeHTTP(w, r)
+		case BillingServiceKsefEnqueueProcedure:
+			billingServiceKsefEnqueueHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -1253,6 +1278,10 @@ func (UnimplementedBillingServiceHandler) RunDailyCronJob(context.Context, *conn
 
 func (UnimplementedBillingServiceHandler) Stream(context.Context, *connect.Request[billing.StreamRequest], *connect.ServerStream[billing.StreamResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.BillingService.Stream is not implemented"))
+}
+
+func (UnimplementedBillingServiceHandler) KsefEnqueue(context.Context, *connect.Request[billing.KsefEnqueueRequest]) (*connect.Response[billing.KsefEnqueueResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.billing.BillingService.KsefEnqueue is not implemented"))
 }
 
 // CurrencyServiceClient is a client for the nocloud.billing.CurrencyService service.

@@ -247,6 +247,7 @@ const (
 	BillingService_GetInvoiceSettingsTemplateExample_FullMethodName = "/nocloud.billing.BillingService/GetInvoiceSettingsTemplateExample"
 	BillingService_RunDailyCronJob_FullMethodName                   = "/nocloud.billing.BillingService/RunDailyCronJob"
 	BillingService_Stream_FullMethodName                            = "/nocloud.billing.BillingService/Stream"
+	BillingService_KsefEnqueue_FullMethodName                       = "/nocloud.billing.BillingService/KsefEnqueue"
 )
 
 // BillingServiceClient is the client API for BillingService service.
@@ -285,6 +286,7 @@ type BillingServiceClient interface {
 	GetInvoiceSettingsTemplateExample(ctx context.Context, in *GetInvoiceSettingsTemplateExampleRequest, opts ...grpc.CallOption) (*GetInvoiceSettingsTemplateExampleResponse, error)
 	RunDailyCronJob(ctx context.Context, in *RunDailyCronJobRequest, opts ...grpc.CallOption) (*RunDailyCronJobResponse, error)
 	Stream(ctx context.Context, in *StreamRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamResponse], error)
+	KsefEnqueue(ctx context.Context, in *KsefEnqueueRequest, opts ...grpc.CallOption) (*KsefEnqueueResponse, error)
 }
 
 type billingServiceClient struct {
@@ -624,6 +626,16 @@ func (c *billingServiceClient) Stream(ctx context.Context, in *StreamRequest, op
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type BillingService_StreamClient = grpc.ServerStreamingClient[StreamResponse]
 
+func (c *billingServiceClient) KsefEnqueue(ctx context.Context, in *KsefEnqueueRequest, opts ...grpc.CallOption) (*KsefEnqueueResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(KsefEnqueueResponse)
+	err := c.cc.Invoke(ctx, BillingService_KsefEnqueue_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BillingServiceServer is the server API for BillingService service.
 // All implementations must embed UnimplementedBillingServiceServer
 // for forward compatibility.
@@ -660,6 +672,7 @@ type BillingServiceServer interface {
 	GetInvoiceSettingsTemplateExample(context.Context, *GetInvoiceSettingsTemplateExampleRequest) (*GetInvoiceSettingsTemplateExampleResponse, error)
 	RunDailyCronJob(context.Context, *RunDailyCronJobRequest) (*RunDailyCronJobResponse, error)
 	Stream(*StreamRequest, grpc.ServerStreamingServer[StreamResponse]) error
+	KsefEnqueue(context.Context, *KsefEnqueueRequest) (*KsefEnqueueResponse, error)
 	mustEmbedUnimplementedBillingServiceServer()
 }
 
@@ -765,6 +778,9 @@ func (UnimplementedBillingServiceServer) RunDailyCronJob(context.Context, *RunDa
 }
 func (UnimplementedBillingServiceServer) Stream(*StreamRequest, grpc.ServerStreamingServer[StreamResponse]) error {
 	return status.Error(codes.Unimplemented, "method Stream not implemented")
+}
+func (UnimplementedBillingServiceServer) KsefEnqueue(context.Context, *KsefEnqueueRequest) (*KsefEnqueueResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method KsefEnqueue not implemented")
 }
 func (UnimplementedBillingServiceServer) mustEmbedUnimplementedBillingServiceServer() {}
 func (UnimplementedBillingServiceServer) testEmbeddedByValue()                        {}
@@ -1356,6 +1372,24 @@ func _BillingService_Stream_Handler(srv interface{}, stream grpc.ServerStream) e
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type BillingService_StreamServer = grpc.ServerStreamingServer[StreamResponse]
 
+func _BillingService_KsefEnqueue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(KsefEnqueueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServiceServer).KsefEnqueue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BillingService_KsefEnqueue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServiceServer).KsefEnqueue(ctx, req.(*KsefEnqueueRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BillingService_ServiceDesc is the grpc.ServiceDesc for BillingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1486,6 +1520,10 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RunDailyCronJob",
 			Handler:    _BillingService_RunDailyCronJob_Handler,
+		},
+		{
+			MethodName: "KsefEnqueue",
+			Handler:    _BillingService_KsefEnqueue_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
