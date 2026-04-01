@@ -410,6 +410,27 @@ export const ChangePhoneRequest = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * @generated from message nocloud.registry.accounts.CheckVerifyPhoneRequest
+ */
+export const CheckVerifyPhoneRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.CheckVerifyPhoneRequest",
+  () => [
+    { no: 1, name: "account", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "flag", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.registry.accounts.CheckVerifyPhoneResponse
+ */
+export const CheckVerifyPhoneResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.CheckVerifyPhoneResponse",
+  () => [
+    { no: 1, name: "result", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
  * @generated from message nocloud.registry.accounts.ChangePhoneResponse
  */
 export const ChangePhoneResponse = /*@__PURE__*/ proto3.makeMessageType(

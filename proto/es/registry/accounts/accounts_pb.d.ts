@@ -1147,6 +1147,59 @@ export declare class ChangePhoneRequest extends Message<ChangePhoneRequest> {
 }
 
 /**
+ * @generated from message nocloud.registry.accounts.CheckVerifyPhoneRequest
+ */
+export declare class CheckVerifyPhoneRequest extends Message<CheckVerifyPhoneRequest> {
+  /**
+   * @generated from field: string account = 1;
+   */
+  account: string;
+
+  /**
+   * @generated from field: bool flag = 2;
+   */
+  flag: boolean;
+
+  constructor(data?: PartialMessage<CheckVerifyPhoneRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.CheckVerifyPhoneRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CheckVerifyPhoneRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CheckVerifyPhoneRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CheckVerifyPhoneRequest;
+
+  static equals(a: CheckVerifyPhoneRequest | PlainMessage<CheckVerifyPhoneRequest> | undefined, b: CheckVerifyPhoneRequest | PlainMessage<CheckVerifyPhoneRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.registry.accounts.CheckVerifyPhoneResponse
+ */
+export declare class CheckVerifyPhoneResponse extends Message<CheckVerifyPhoneResponse> {
+  /**
+   * @generated from field: bool result = 1;
+   */
+  result: boolean;
+
+  constructor(data?: PartialMessage<CheckVerifyPhoneResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.CheckVerifyPhoneResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CheckVerifyPhoneResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CheckVerifyPhoneResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CheckVerifyPhoneResponse;
+
+  static equals(a: CheckVerifyPhoneResponse | PlainMessage<CheckVerifyPhoneResponse> | undefined, b: CheckVerifyPhoneResponse | PlainMessage<CheckVerifyPhoneResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message nocloud.registry.accounts.ChangePhoneResponse
  */
 export declare class ChangePhoneResponse extends Message<ChangePhoneResponse> {

@@ -165,6 +165,13 @@ service AccountsService {
       body: "*"
     };
   };
+  rpc CheckVerifyPhone (accounts.CheckVerifyPhoneRequest)
+      returns (accounts.CheckVerifyPhoneResponse){
+    option (google.api.http) = {
+      post: "/accounts/check_verify_phone"
+      body: "*"
+    };
+  };
 }
 
 service NamespacesService {

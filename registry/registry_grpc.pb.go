@@ -55,6 +55,7 @@ const (
 	AccountsService_ChangePhone_FullMethodName        = "/nocloud.registry.AccountsService/ChangePhone"
 	AccountsService_ChangeLanguageCode_FullMethodName = "/nocloud.registry.AccountsService/ChangeLanguageCode"
 	AccountsService_ChangeAccountGroup_FullMethodName = "/nocloud.registry.AccountsService/ChangeAccountGroup"
+	AccountsService_CheckVerifyPhone_FullMethodName   = "/nocloud.registry.AccountsService/CheckVerifyPhone"
 )
 
 // AccountsServiceClient is the client API for AccountsService service.
@@ -79,6 +80,7 @@ type AccountsServiceClient interface {
 	ChangePhone(ctx context.Context, in *accounts.ChangePhoneRequest, opts ...grpc.CallOption) (*accounts.ChangePhoneResponse, error)
 	ChangeLanguageCode(ctx context.Context, in *accounts.ChangeLanguageCodeRequest, opts ...grpc.CallOption) (*accounts.ChangeLanguageCodeResponse, error)
 	ChangeAccountGroup(ctx context.Context, in *accounts.ChangeAccountGroupRequest, opts ...grpc.CallOption) (*accounts.ChangeAccountGroupResponse, error)
+	CheckVerifyPhone(ctx context.Context, in *accounts.CheckVerifyPhoneRequest, opts ...grpc.CallOption) (*accounts.CheckVerifyPhoneResponse, error)
 }
 
 type accountsServiceClient struct {
@@ -269,6 +271,16 @@ func (c *accountsServiceClient) ChangeAccountGroup(ctx context.Context, in *acco
 	return out, nil
 }
 
+func (c *accountsServiceClient) CheckVerifyPhone(ctx context.Context, in *accounts.CheckVerifyPhoneRequest, opts ...grpc.CallOption) (*accounts.CheckVerifyPhoneResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(accounts.CheckVerifyPhoneResponse)
+	err := c.cc.Invoke(ctx, AccountsService_CheckVerifyPhone_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AccountsServiceServer is the server API for AccountsService service.
 // All implementations must embed UnimplementedAccountsServiceServer
 // for forward compatibility.
@@ -291,6 +303,7 @@ type AccountsServiceServer interface {
 	ChangePhone(context.Context, *accounts.ChangePhoneRequest) (*accounts.ChangePhoneResponse, error)
 	ChangeLanguageCode(context.Context, *accounts.ChangeLanguageCodeRequest) (*accounts.ChangeLanguageCodeResponse, error)
 	ChangeAccountGroup(context.Context, *accounts.ChangeAccountGroupRequest) (*accounts.ChangeAccountGroupResponse, error)
+	CheckVerifyPhone(context.Context, *accounts.CheckVerifyPhoneRequest) (*accounts.CheckVerifyPhoneResponse, error)
 	mustEmbedUnimplementedAccountsServiceServer()
 }
 
@@ -354,6 +367,9 @@ func (UnimplementedAccountsServiceServer) ChangeLanguageCode(context.Context, *a
 }
 func (UnimplementedAccountsServiceServer) ChangeAccountGroup(context.Context, *accounts.ChangeAccountGroupRequest) (*accounts.ChangeAccountGroupResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ChangeAccountGroup not implemented")
+}
+func (UnimplementedAccountsServiceServer) CheckVerifyPhone(context.Context, *accounts.CheckVerifyPhoneRequest) (*accounts.CheckVerifyPhoneResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CheckVerifyPhone not implemented")
 }
 func (UnimplementedAccountsServiceServer) mustEmbedUnimplementedAccountsServiceServer() {}
 func (UnimplementedAccountsServiceServer) testEmbeddedByValue()                         {}
@@ -700,6 +716,24 @@ func _AccountsService_ChangeAccountGroup_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AccountsService_CheckVerifyPhone_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(accounts.CheckVerifyPhoneRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountsServiceServer).CheckVerifyPhone(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountsService_CheckVerifyPhone_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountsServiceServer).CheckVerifyPhone(ctx, req.(*accounts.CheckVerifyPhoneRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AccountsService_ServiceDesc is the grpc.ServiceDesc for AccountsService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -778,6 +812,10 @@ var AccountsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ChangeAccountGroup",
 			Handler:    _AccountsService_ChangeAccountGroup_Handler,
+		},
+		{
+			MethodName: "CheckVerifyPhone",
+			Handler:    _AccountsService_CheckVerifyPhone_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

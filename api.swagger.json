@@ -464,6 +464,38 @@
         ]
       }
     },
+    "/accounts/check_verify_phone": {
+      "post": {
+        "operationId": "AccountsService_CheckVerifyPhone",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/accountsCheckVerifyPhoneResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/accountsCheckVerifyPhoneRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AccountsService"
+        ]
+      }
+    },
     "/accounts/signup": {
       "post": {
         "operationId": "AccountsService_SignUp",
@@ -8628,6 +8660,25 @@
       }
     },
     "accountsChangePhoneResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "boolean"
+        }
+      }
+    },
+    "accountsCheckVerifyPhoneRequest": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "string"
+        },
+        "flag": {
+          "type": "boolean"
+        }
+      }
+    },
+    "accountsCheckVerifyPhoneResponse": {
       "type": "object",
       "properties": {
         "result": {

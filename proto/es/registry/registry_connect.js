@@ -18,7 +18,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { Account, AccountGroup, AccountGroupsListResponse, ChangeAccountGroupRequest, ChangeAccountGroupResponse, ChangeLanguageCodeRequest, ChangeLanguageCodeResponse, ChangePhoneRequest, ChangePhoneResponse, CreateRequest, CreateResponse, DeleteRequest, DeleteResponse, GetRequest, ListRequest, ListResponse, LogoutRequest, LogoutResponse, SetCredentialsRequest, SetCredentialsResponse, SuspendRequest, SuspendResponse, TokenRequest, TokenResponse, UnsuspendRequest, UnsuspendResponse, UpdateResponse } from "./accounts/accounts_pb.js";
+import { Account, AccountGroup, AccountGroupsListResponse, ChangeAccountGroupRequest, ChangeAccountGroupResponse, ChangeLanguageCodeRequest, ChangeLanguageCodeResponse, ChangePhoneRequest, ChangePhoneResponse, CheckVerifyPhoneRequest, CheckVerifyPhoneResponse, CreateRequest, CreateResponse, DeleteRequest, DeleteResponse, GetRequest, ListRequest, ListResponse, LogoutRequest, LogoutResponse, SetCredentialsRequest, SetCredentialsResponse, SuspendRequest, SuspendResponse, TokenRequest, TokenResponse, UnsuspendRequest, UnsuspendResponse, UpdateResponse } from "./accounts/accounts_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 import { AddNoteRequest, NoteResponse, PatchNoteRequest, RemoveNoteRequest } from "../notes/notes_pb.js";
 import { VerificationRequest, VerificationResponse } from "./registry_pb.js";
@@ -190,6 +190,15 @@ export const AccountsService = {
       name: "ChangeAccountGroup",
       I: ChangeAccountGroupRequest,
       O: ChangeAccountGroupResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc nocloud.registry.AccountsService.CheckVerifyPhone
+     */
+    checkVerifyPhone: {
+      name: "CheckVerifyPhone",
+      I: CheckVerifyPhoneRequest,
+      O: CheckVerifyPhoneResponse,
       kind: MethodKind.Unary,
     },
   }
