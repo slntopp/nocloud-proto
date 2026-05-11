@@ -1,0 +1,44 @@
+- Hard Rules
+  - Keep changes scoped to this repository.
+  - Do not commit changes unless explicitly requested.
+  - Keep `go.mod` and `go.sum` in sync with Go dependency changes.
+  - Use existing build files and package scripts before adding new tooling.
+  - Treat `.proto` files as the source of truth.
+  - Do not hand-edit generated files when the change belongs in a `.proto` file.
+  - Do not run `npm test`; it is a placeholder script that exits with an error.
+
+- Authority & Links
+  - Project README: `README.md`.
+  - Go module: `github.com/slntopp/nocloud-proto`.
+  - `go.mod`.
+  - `package.json`.
+  - `package-lock.json`.
+  - `Dockerfile`.
+  - `buf.yaml`.
+  - `buf.gen.yaml`.
+  - `buf.gen.web.yaml`.
+  - `buf.gen.ts.yaml`.
+  - `buf.gen.php.yaml`.
+  - `buf.gen.dart.yaml`.
+  - `dependencies.json`.
+  - TypeScript example: `examples/ts/README.md`.
+
+- Setup / Test
+  - Use `go mod download` to fetch Go module dependencies.
+  - Use `go test ./...` for Go package checks.
+  - Use `npm install` before `npm run generate`.
+  - No working NPM test command is defined.
+
+- Workflow
+  - `go mod download`
+  - `go test ./...`
+  - `buf generate`
+  - `npm run generate`
+  - `buf generate --template buf.gen.php.yaml`
+
+- Stop Conditions
+  - Ask before using or changing secrets, credentials, or `.env` files.
+  - Ask before broad regeneration or formatting that changes unrelated files.
+  - Ask if required external services, credentials, or generator plugins are missing.
+  - Refuse destructive git operations unless explicitly requested.
+  - Omit uncertain repository rules instead of guessing.
