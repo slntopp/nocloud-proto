@@ -101,6 +101,13 @@ const (
 	// AccountsServiceCheckVerifyPhoneProcedure is the fully-qualified name of the AccountsService's
 	// CheckVerifyPhone RPC.
 	AccountsServiceCheckVerifyPhoneProcedure = "/nocloud.registry.AccountsService/CheckVerifyPhone"
+	// AccountsServiceGetMcpProcedure is the fully-qualified name of the AccountsService's GetMcp RPC.
+	AccountsServiceGetMcpProcedure = "/nocloud.registry.AccountsService/GetMcp"
+	// AccountsServiceSetMcpProcedure is the fully-qualified name of the AccountsService's SetMcp RPC.
+	AccountsServiceSetMcpProcedure = "/nocloud.registry.AccountsService/SetMcp"
+	// AccountsServiceRotateMcpProcedure is the fully-qualified name of the AccountsService's RotateMcp
+	// RPC.
+	AccountsServiceRotateMcpProcedure = "/nocloud.registry.AccountsService/RotateMcp"
 	// NamespacesServiceCreateProcedure is the fully-qualified name of the NamespacesService's Create
 	// RPC.
 	NamespacesServiceCreateProcedure = "/nocloud.registry.NamespacesService/Create"
@@ -155,6 +162,9 @@ type AccountsServiceClient interface {
 	ChangeLanguageCode(context.Context, *connect.Request[accounts.ChangeLanguageCodeRequest]) (*connect.Response[accounts.ChangeLanguageCodeResponse], error)
 	ChangeAccountGroup(context.Context, *connect.Request[accounts.ChangeAccountGroupRequest]) (*connect.Response[accounts.ChangeAccountGroupResponse], error)
 	CheckVerifyPhone(context.Context, *connect.Request[accounts.CheckVerifyPhoneRequest]) (*connect.Response[accounts.CheckVerifyPhoneResponse], error)
+	GetMcp(context.Context, *connect.Request[accounts.GetMcpRequest]) (*connect.Response[accounts.GetMcpResponse], error)
+	SetMcp(context.Context, *connect.Request[accounts.SetMcpRequest]) (*connect.Response[accounts.GetMcpResponse], error)
+	RotateMcp(context.Context, *connect.Request[accounts.RotateMcpRequest]) (*connect.Response[accounts.GetMcpResponse], error)
 }
 
 // NewAccountsServiceClient constructs a client for the nocloud.registry.AccountsService service. By
@@ -282,6 +292,24 @@ func NewAccountsServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(accountsServiceMethods.ByName("CheckVerifyPhone")),
 			connect.WithClientOptions(opts...),
 		),
+		getMcp: connect.NewClient[accounts.GetMcpRequest, accounts.GetMcpResponse](
+			httpClient,
+			baseURL+AccountsServiceGetMcpProcedure,
+			connect.WithSchema(accountsServiceMethods.ByName("GetMcp")),
+			connect.WithClientOptions(opts...),
+		),
+		setMcp: connect.NewClient[accounts.SetMcpRequest, accounts.GetMcpResponse](
+			httpClient,
+			baseURL+AccountsServiceSetMcpProcedure,
+			connect.WithSchema(accountsServiceMethods.ByName("SetMcp")),
+			connect.WithClientOptions(opts...),
+		),
+		rotateMcp: connect.NewClient[accounts.RotateMcpRequest, accounts.GetMcpResponse](
+			httpClient,
+			baseURL+AccountsServiceRotateMcpProcedure,
+			connect.WithSchema(accountsServiceMethods.ByName("RotateMcp")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -306,6 +334,9 @@ type accountsServiceClient struct {
 	changeLanguageCode *connect.Client[accounts.ChangeLanguageCodeRequest, accounts.ChangeLanguageCodeResponse]
 	changeAccountGroup *connect.Client[accounts.ChangeAccountGroupRequest, accounts.ChangeAccountGroupResponse]
 	checkVerifyPhone   *connect.Client[accounts.CheckVerifyPhoneRequest, accounts.CheckVerifyPhoneResponse]
+	getMcp             *connect.Client[accounts.GetMcpRequest, accounts.GetMcpResponse]
+	setMcp             *connect.Client[accounts.SetMcpRequest, accounts.GetMcpResponse]
+	rotateMcp          *connect.Client[accounts.RotateMcpRequest, accounts.GetMcpResponse]
 }
 
 // Token calls nocloud.registry.AccountsService.Token.
@@ -403,6 +434,21 @@ func (c *accountsServiceClient) CheckVerifyPhone(ctx context.Context, req *conne
 	return c.checkVerifyPhone.CallUnary(ctx, req)
 }
 
+// GetMcp calls nocloud.registry.AccountsService.GetMcp.
+func (c *accountsServiceClient) GetMcp(ctx context.Context, req *connect.Request[accounts.GetMcpRequest]) (*connect.Response[accounts.GetMcpResponse], error) {
+	return c.getMcp.CallUnary(ctx, req)
+}
+
+// SetMcp calls nocloud.registry.AccountsService.SetMcp.
+func (c *accountsServiceClient) SetMcp(ctx context.Context, req *connect.Request[accounts.SetMcpRequest]) (*connect.Response[accounts.GetMcpResponse], error) {
+	return c.setMcp.CallUnary(ctx, req)
+}
+
+// RotateMcp calls nocloud.registry.AccountsService.RotateMcp.
+func (c *accountsServiceClient) RotateMcp(ctx context.Context, req *connect.Request[accounts.RotateMcpRequest]) (*connect.Response[accounts.GetMcpResponse], error) {
+	return c.rotateMcp.CallUnary(ctx, req)
+}
+
 // AccountsServiceHandler is an implementation of the nocloud.registry.AccountsService service.
 type AccountsServiceHandler interface {
 	Token(context.Context, *connect.Request[accounts.TokenRequest]) (*connect.Response[accounts.TokenResponse], error)
@@ -424,6 +470,9 @@ type AccountsServiceHandler interface {
 	ChangeLanguageCode(context.Context, *connect.Request[accounts.ChangeLanguageCodeRequest]) (*connect.Response[accounts.ChangeLanguageCodeResponse], error)
 	ChangeAccountGroup(context.Context, *connect.Request[accounts.ChangeAccountGroupRequest]) (*connect.Response[accounts.ChangeAccountGroupResponse], error)
 	CheckVerifyPhone(context.Context, *connect.Request[accounts.CheckVerifyPhoneRequest]) (*connect.Response[accounts.CheckVerifyPhoneResponse], error)
+	GetMcp(context.Context, *connect.Request[accounts.GetMcpRequest]) (*connect.Response[accounts.GetMcpResponse], error)
+	SetMcp(context.Context, *connect.Request[accounts.SetMcpRequest]) (*connect.Response[accounts.GetMcpResponse], error)
+	RotateMcp(context.Context, *connect.Request[accounts.RotateMcpRequest]) (*connect.Response[accounts.GetMcpResponse], error)
 }
 
 // NewAccountsServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -547,6 +596,24 @@ func NewAccountsServiceHandler(svc AccountsServiceHandler, opts ...connect.Handl
 		connect.WithSchema(accountsServiceMethods.ByName("CheckVerifyPhone")),
 		connect.WithHandlerOptions(opts...),
 	)
+	accountsServiceGetMcpHandler := connect.NewUnaryHandler(
+		AccountsServiceGetMcpProcedure,
+		svc.GetMcp,
+		connect.WithSchema(accountsServiceMethods.ByName("GetMcp")),
+		connect.WithHandlerOptions(opts...),
+	)
+	accountsServiceSetMcpHandler := connect.NewUnaryHandler(
+		AccountsServiceSetMcpProcedure,
+		svc.SetMcp,
+		connect.WithSchema(accountsServiceMethods.ByName("SetMcp")),
+		connect.WithHandlerOptions(opts...),
+	)
+	accountsServiceRotateMcpHandler := connect.NewUnaryHandler(
+		AccountsServiceRotateMcpProcedure,
+		svc.RotateMcp,
+		connect.WithSchema(accountsServiceMethods.ByName("RotateMcp")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/nocloud.registry.AccountsService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case AccountsServiceTokenProcedure:
@@ -587,6 +654,12 @@ func NewAccountsServiceHandler(svc AccountsServiceHandler, opts ...connect.Handl
 			accountsServiceChangeAccountGroupHandler.ServeHTTP(w, r)
 		case AccountsServiceCheckVerifyPhoneProcedure:
 			accountsServiceCheckVerifyPhoneHandler.ServeHTTP(w, r)
+		case AccountsServiceGetMcpProcedure:
+			accountsServiceGetMcpHandler.ServeHTTP(w, r)
+		case AccountsServiceSetMcpProcedure:
+			accountsServiceSetMcpHandler.ServeHTTP(w, r)
+		case AccountsServiceRotateMcpProcedure:
+			accountsServiceRotateMcpHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -670,6 +743,18 @@ func (UnimplementedAccountsServiceHandler) ChangeAccountGroup(context.Context, *
 
 func (UnimplementedAccountsServiceHandler) CheckVerifyPhone(context.Context, *connect.Request[accounts.CheckVerifyPhoneRequest]) (*connect.Response[accounts.CheckVerifyPhoneResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.registry.AccountsService.CheckVerifyPhone is not implemented"))
+}
+
+func (UnimplementedAccountsServiceHandler) GetMcp(context.Context, *connect.Request[accounts.GetMcpRequest]) (*connect.Response[accounts.GetMcpResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.registry.AccountsService.GetMcp is not implemented"))
+}
+
+func (UnimplementedAccountsServiceHandler) SetMcp(context.Context, *connect.Request[accounts.SetMcpRequest]) (*connect.Response[accounts.GetMcpResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.registry.AccountsService.SetMcp is not implemented"))
+}
+
+func (UnimplementedAccountsServiceHandler) RotateMcp(context.Context, *connect.Request[accounts.RotateMcpRequest]) (*connect.Response[accounts.GetMcpResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("nocloud.registry.AccountsService.RotateMcp is not implemented"))
 }
 
 // NamespacesServiceClient is a client for the nocloud.registry.NamespacesService service.

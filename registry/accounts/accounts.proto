@@ -19,6 +19,7 @@ package nocloud.registry.accounts;
 
 import "access/access.proto";
 import "billing/billing.proto";
+import "google/protobuf/field_mask.proto";
 import "google/protobuf/struct.proto";
 import "notes/notes.proto";
 
@@ -126,6 +127,53 @@ message Account {
   string language_code = 18;
 
   string account_group = 19;
+
+  McpSettings mcp = 20;
+}
+
+// McpSettings is the account's client MCP policy. The JWT is not stored; GetMcp rebuilds it from gen.
+message McpSettings {
+  bool enabled = 1;
+  bool pay = 2;
+  bool reboot = 3;
+  bool tickets = 4;
+  optional double spend_day = 5;
+  optional double spend_month = 6;
+  int32 orders_day = 7;
+  int32 reboots_day = 8;
+  int32 gen = 9;
+}
+
+message GetMcpRequest {
+  string uuid = 1;
+}
+
+message GetMcpResponse {
+  McpSettings mcp = 1;
+  string token = 2;
+  string config = 3;
+  double spent_day = 4;
+  double spent_month = 5;
+  int32 orders_today = 6;
+  int32 reboots_today = 7;
+  string notice = 8;
+}
+
+message SetMcpRequest {
+  string uuid = 1;
+  google.protobuf.FieldMask update_mask = 2;
+  optional bool enabled = 3;
+  optional bool pay = 4;
+  optional bool reboot = 5;
+  optional bool tickets = 6;
+  optional double spend_day = 7;
+  optional double spend_month = 8;
+  optional int32 orders_day = 9;
+  optional int32 reboots_day = 10;
+}
+
+message RotateMcpRequest {
+  string uuid = 1;
 }
 
 message AccountMeta {

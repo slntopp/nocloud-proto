@@ -172,6 +172,26 @@ service AccountsService {
       body: "*"
     };
   };
+  rpc GetMcp (accounts.GetMcpRequest)
+      returns (accounts.GetMcpResponse) {
+    option (google.api.http) = {
+      get: "/accounts/{uuid}/mcp"
+    };
+  };
+  rpc SetMcp (accounts.SetMcpRequest)
+      returns (accounts.GetMcpResponse) {
+    option (google.api.http) = {
+      patch: "/accounts/{uuid}/mcp"
+      body: "*"
+    };
+  };
+  rpc RotateMcp (accounts.RotateMcpRequest)
+      returns (accounts.GetMcpResponse) {
+    option (google.api.http) = {
+      post: "/accounts/{uuid}/mcp/token"
+      body: "*"
+    };
+  };
 }
 
 service NamespacesService {
