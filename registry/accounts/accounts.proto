@@ -129,6 +129,22 @@ message Account {
   string account_group = 19;
 
   McpSettings mcp = 20;
+
+  // Admin-only. Real money the account paid us over a recent window; the server
+  // keeps it up to date and ignores it on Create/Update. Not returned to clients.
+  optional AccountSpending spending = 21;
+  // Admin-only. Grade name from the "account-grades" setting (e.g. "A+") pinned
+  // by hand; empty means the grade follows spending. Not returned to clients.
+  optional string grade_override = 22;
+}
+
+// AccountSpending is the sum of invoices paid with real money (not from
+// balance) over the last period_days, converted to the default currency.
+message AccountSpending {
+  double amount = 1;
+  nocloud.billing.Currency currency = 2;
+  int32 period_days = 3;
+  int64 calculated_at = 4; // Unix seconds
 }
 
 // McpSettings is the account's client MCP policy. The JWT is not stored; GetMcp rebuilds it from gen.

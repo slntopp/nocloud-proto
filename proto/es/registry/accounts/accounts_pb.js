@@ -18,7 +18,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { proto3, Struct, Value } from "@bufbuild/protobuf";
+import { FieldMask, proto3, Struct, Value } from "@bufbuild/protobuf";
 import { Currency } from "../../billing/billing_pb.js";
 import { Access } from "../../access/access_pb.js";
 import { AdminNote } from "../../notes/notes_pb.js";
@@ -196,6 +196,101 @@ export const Account = /*@__PURE__*/ proto3.makeMessageType(
     { no: 17, name: "meta", kind: "message", T: AccountMeta },
     { no: 18, name: "language_code", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 19, name: "account_group", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 20, name: "mcp", kind: "message", T: McpSettings },
+    { no: 21, name: "spending", kind: "message", T: AccountSpending, opt: true },
+    { no: 22, name: "grade_override", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+  ],
+);
+
+/**
+ * AccountSpending is the sum of invoices paid with real money (not from
+ * balance) over the last period_days, converted to the default currency.
+ *
+ * @generated from message nocloud.registry.accounts.AccountSpending
+ */
+export const AccountSpending = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.AccountSpending",
+  () => [
+    { no: 1, name: "amount", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 2, name: "currency", kind: "message", T: Currency },
+    { no: 3, name: "period_days", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 4, name: "calculated_at", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * McpSettings is the account's client MCP policy. The JWT is not stored; GetMcp rebuilds it from gen.
+ *
+ * @generated from message nocloud.registry.accounts.McpSettings
+ */
+export const McpSettings = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.McpSettings",
+  () => [
+    { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 2, name: "pay", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 3, name: "reboot", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 4, name: "tickets", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 5, name: "spend_day", kind: "scalar", T: 1 /* ScalarType.DOUBLE */, opt: true },
+    { no: 6, name: "spend_month", kind: "scalar", T: 1 /* ScalarType.DOUBLE */, opt: true },
+    { no: 7, name: "orders_day", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 8, name: "reboots_day", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 9, name: "gen", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.registry.accounts.GetMcpRequest
+ */
+export const GetMcpRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.GetMcpRequest",
+  () => [
+    { no: 1, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.registry.accounts.GetMcpResponse
+ */
+export const GetMcpResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.GetMcpResponse",
+  () => [
+    { no: 1, name: "mcp", kind: "message", T: McpSettings },
+    { no: 2, name: "token", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "config", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "spent_day", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 5, name: "spent_month", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 6, name: "orders_today", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 7, name: "reboots_today", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 8, name: "notice", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message nocloud.registry.accounts.SetMcpRequest
+ */
+export const SetMcpRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.SetMcpRequest",
+  () => [
+    { no: 1, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "update_mask", kind: "message", T: FieldMask },
+    { no: 3, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
+    { no: 4, name: "pay", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
+    { no: 5, name: "reboot", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
+    { no: 6, name: "tickets", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
+    { no: 7, name: "spend_day", kind: "scalar", T: 1 /* ScalarType.DOUBLE */, opt: true },
+    { no: 8, name: "spend_month", kind: "scalar", T: 1 /* ScalarType.DOUBLE */, opt: true },
+    { no: 9, name: "orders_day", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
+    { no: 10, name: "reboots_day", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
+  ],
+);
+
+/**
+ * @generated from message nocloud.registry.accounts.RotateMcpRequest
+ */
+export const RotateMcpRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "nocloud.registry.accounts.RotateMcpRequest",
+  () => [
+    { no: 1, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
