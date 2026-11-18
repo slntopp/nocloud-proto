@@ -24,12 +24,16 @@ message AdminNote {
     int64 updated = 4;
 
     bool pinned = 5;
+
+    // uuids of files attached to the note (core-chatting attachments)
+    repeated string attachments = 6;
 }
 
 message AddNoteRequest {
     string uuid = 1;
     string msg = 2;
     bool pinned = 3;
+    repeated string attachments = 4;
 }
 
 message PatchNoteRequest {
@@ -37,6 +41,7 @@ message PatchNoteRequest {
     uint64 index = 2;
     string msg = 3;
     bool pinned = 4;
+    repeated string attachments = 5;
 }
 
 message RemoveNoteRequest {

@@ -37,12 +37,14 @@ const (
 )
 
 type AdminNote struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Admin         string                 `protobuf:"bytes,1,opt,name=admin,proto3" json:"admin,omitempty"`
-	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
-	Created       int64                  `protobuf:"varint,3,opt,name=created,proto3" json:"created,omitempty"`
-	Updated       int64                  `protobuf:"varint,4,opt,name=updated,proto3" json:"updated,omitempty"`
-	Pinned        bool                   `protobuf:"varint,5,opt,name=pinned,proto3" json:"pinned,omitempty"`
+	state   protoimpl.MessageState `protogen:"open.v1"`
+	Admin   string                 `protobuf:"bytes,1,opt,name=admin,proto3" json:"admin,omitempty"`
+	Msg     string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Created int64                  `protobuf:"varint,3,opt,name=created,proto3" json:"created,omitempty"`
+	Updated int64                  `protobuf:"varint,4,opt,name=updated,proto3" json:"updated,omitempty"`
+	Pinned  bool                   `protobuf:"varint,5,opt,name=pinned,proto3" json:"pinned,omitempty"`
+	// uuids of files attached to the note (core-chatting attachments)
+	Attachments   []string `protobuf:"bytes,6,rep,name=attachments,proto3" json:"attachments,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -112,11 +114,19 @@ func (x *AdminNote) GetPinned() bool {
 	return false
 }
 
+func (x *AdminNote) GetAttachments() []string {
+	if x != nil {
+		return x.Attachments
+	}
+	return nil
+}
+
 type AddNoteRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Uuid          string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
 	Pinned        bool                   `protobuf:"varint,3,opt,name=pinned,proto3" json:"pinned,omitempty"`
+	Attachments   []string               `protobuf:"bytes,4,rep,name=attachments,proto3" json:"attachments,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -172,12 +182,20 @@ func (x *AddNoteRequest) GetPinned() bool {
 	return false
 }
 
+func (x *AddNoteRequest) GetAttachments() []string {
+	if x != nil {
+		return x.Attachments
+	}
+	return nil
+}
+
 type PatchNoteRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Uuid          string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
 	Index         uint64                 `protobuf:"varint,2,opt,name=index,proto3" json:"index,omitempty"`
 	Msg           string                 `protobuf:"bytes,3,opt,name=msg,proto3" json:"msg,omitempty"`
 	Pinned        bool                   `protobuf:"varint,4,opt,name=pinned,proto3" json:"pinned,omitempty"`
+	Attachments   []string               `protobuf:"bytes,5,rep,name=attachments,proto3" json:"attachments,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -238,6 +256,13 @@ func (x *PatchNoteRequest) GetPinned() bool {
 		return x.Pinned
 	}
 	return false
+}
+
+func (x *PatchNoteRequest) GetAttachments() []string {
+	if x != nil {
+		return x.Attachments
+	}
+	return nil
 }
 
 type RemoveNoteRequest struct {
@@ -348,22 +373,25 @@ var File_notes_notes_proto protoreflect.FileDescriptor
 
 const file_notes_notes_proto_rawDesc = "" +
 	"\n" +
-	"\x11notes/notes.proto\x12\rnocloud.notes\"\x7f\n" +
+	"\x11notes/notes.proto\x12\rnocloud.notes\"\xa1\x01\n" +
 	"\tAdminNote\x12\x14\n" +
 	"\x05admin\x18\x01 \x01(\tR\x05admin\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x18\n" +
 	"\acreated\x18\x03 \x01(\x03R\acreated\x12\x18\n" +
 	"\aupdated\x18\x04 \x01(\x03R\aupdated\x12\x16\n" +
-	"\x06pinned\x18\x05 \x01(\bR\x06pinned\"N\n" +
+	"\x06pinned\x18\x05 \x01(\bR\x06pinned\x12 \n" +
+	"\vattachments\x18\x06 \x03(\tR\vattachments\"p\n" +
 	"\x0eAddNoteRequest\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x16\n" +
-	"\x06pinned\x18\x03 \x01(\bR\x06pinned\"f\n" +
+	"\x06pinned\x18\x03 \x01(\bR\x06pinned\x12 \n" +
+	"\vattachments\x18\x04 \x03(\tR\vattachments\"\x88\x01\n" +
 	"\x10PatchNoteRequest\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x14\n" +
 	"\x05index\x18\x02 \x01(\x04R\x05index\x12\x10\n" +
 	"\x03msg\x18\x03 \x01(\tR\x03msg\x12\x16\n" +
-	"\x06pinned\x18\x04 \x01(\bR\x06pinned\"=\n" +
+	"\x06pinned\x18\x04 \x01(\bR\x06pinned\x12 \n" +
+	"\vattachments\x18\x05 \x03(\tR\vattachments\"=\n" +
 	"\x11RemoveNoteRequest\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x14\n" +
 	"\x05index\x18\x02 \x01(\x04R\x05index\"a\n" +

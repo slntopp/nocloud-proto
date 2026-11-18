@@ -18,7 +18,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage, Struct, Value } from "@bufbuild/protobuf";
+import type { BinaryReadOptions, FieldList, FieldMask, JsonReadOptions, JsonValue, PartialMessage, PlainMessage, Struct, Value } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 import type { Currency } from "../../billing/billing_pb.js";
 import type { Access } from "../../access/access_pb.js";
@@ -571,6 +571,27 @@ export declare class Account extends Message<Account> {
    */
   accountGroup: string;
 
+  /**
+   * @generated from field: nocloud.registry.accounts.McpSettings mcp = 20;
+   */
+  mcp?: McpSettings;
+
+  /**
+   * Admin-only. Real money the account paid us over a recent window; the server
+   * keeps it up to date and ignores it on Create/Update. Not returned to clients.
+   *
+   * @generated from field: optional nocloud.registry.accounts.AccountSpending spending = 21;
+   */
+  spending?: AccountSpending;
+
+  /**
+   * Admin-only. Grade name from the "account-grades" setting (e.g. "A+") pinned
+   * by hand; empty means the grade follows spending. Not returned to clients.
+   *
+   * @generated from field: optional string grade_override = 22;
+   */
+  gradeOverride?: string;
+
   constructor(data?: PartialMessage<Account>);
 
   static readonly runtime: typeof proto3;
@@ -584,6 +605,292 @@ export declare class Account extends Message<Account> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Account;
 
   static equals(a: Account | PlainMessage<Account> | undefined, b: Account | PlainMessage<Account> | undefined): boolean;
+}
+
+/**
+ * AccountSpending is the sum of invoices paid with real money (not from
+ * balance) over the last period_days, converted to the default currency.
+ *
+ * @generated from message nocloud.registry.accounts.AccountSpending
+ */
+export declare class AccountSpending extends Message<AccountSpending> {
+  /**
+   * @generated from field: double amount = 1;
+   */
+  amount: number;
+
+  /**
+   * @generated from field: nocloud.billing.Currency currency = 2;
+   */
+  currency?: Currency;
+
+  /**
+   * @generated from field: int32 period_days = 3;
+   */
+  periodDays: number;
+
+  /**
+   * Unix seconds
+   *
+   * @generated from field: int64 calculated_at = 4;
+   */
+  calculatedAt: bigint;
+
+  constructor(data?: PartialMessage<AccountSpending>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.AccountSpending";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AccountSpending;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AccountSpending;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AccountSpending;
+
+  static equals(a: AccountSpending | PlainMessage<AccountSpending> | undefined, b: AccountSpending | PlainMessage<AccountSpending> | undefined): boolean;
+}
+
+/**
+ * McpSettings is the account's client MCP policy. The JWT is not stored; GetMcp rebuilds it from gen.
+ *
+ * @generated from message nocloud.registry.accounts.McpSettings
+ */
+export declare class McpSettings extends Message<McpSettings> {
+  /**
+   * @generated from field: bool enabled = 1;
+   */
+  enabled: boolean;
+
+  /**
+   * @generated from field: bool pay = 2;
+   */
+  pay: boolean;
+
+  /**
+   * @generated from field: bool reboot = 3;
+   */
+  reboot: boolean;
+
+  /**
+   * @generated from field: bool tickets = 4;
+   */
+  tickets: boolean;
+
+  /**
+   * @generated from field: optional double spend_day = 5;
+   */
+  spendDay?: number;
+
+  /**
+   * @generated from field: optional double spend_month = 6;
+   */
+  spendMonth?: number;
+
+  /**
+   * @generated from field: int32 orders_day = 7;
+   */
+  ordersDay: number;
+
+  /**
+   * @generated from field: int32 reboots_day = 8;
+   */
+  rebootsDay: number;
+
+  /**
+   * @generated from field: int32 gen = 9;
+   */
+  gen: number;
+
+  constructor(data?: PartialMessage<McpSettings>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.McpSettings";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): McpSettings;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): McpSettings;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): McpSettings;
+
+  static equals(a: McpSettings | PlainMessage<McpSettings> | undefined, b: McpSettings | PlainMessage<McpSettings> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.registry.accounts.GetMcpRequest
+ */
+export declare class GetMcpRequest extends Message<GetMcpRequest> {
+  /**
+   * @generated from field: string uuid = 1;
+   */
+  uuid: string;
+
+  constructor(data?: PartialMessage<GetMcpRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.GetMcpRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetMcpRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetMcpRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetMcpRequest;
+
+  static equals(a: GetMcpRequest | PlainMessage<GetMcpRequest> | undefined, b: GetMcpRequest | PlainMessage<GetMcpRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.registry.accounts.GetMcpResponse
+ */
+export declare class GetMcpResponse extends Message<GetMcpResponse> {
+  /**
+   * @generated from field: nocloud.registry.accounts.McpSettings mcp = 1;
+   */
+  mcp?: McpSettings;
+
+  /**
+   * @generated from field: string token = 2;
+   */
+  token: string;
+
+  /**
+   * @generated from field: string config = 3;
+   */
+  config: string;
+
+  /**
+   * @generated from field: double spent_day = 4;
+   */
+  spentDay: number;
+
+  /**
+   * @generated from field: double spent_month = 5;
+   */
+  spentMonth: number;
+
+  /**
+   * @generated from field: int32 orders_today = 6;
+   */
+  ordersToday: number;
+
+  /**
+   * @generated from field: int32 reboots_today = 7;
+   */
+  rebootsToday: number;
+
+  /**
+   * @generated from field: string notice = 8;
+   */
+  notice: string;
+
+  constructor(data?: PartialMessage<GetMcpResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.GetMcpResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetMcpResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetMcpResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetMcpResponse;
+
+  static equals(a: GetMcpResponse | PlainMessage<GetMcpResponse> | undefined, b: GetMcpResponse | PlainMessage<GetMcpResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.registry.accounts.SetMcpRequest
+ */
+export declare class SetMcpRequest extends Message<SetMcpRequest> {
+  /**
+   * @generated from field: string uuid = 1;
+   */
+  uuid: string;
+
+  /**
+   * @generated from field: google.protobuf.FieldMask update_mask = 2;
+   */
+  updateMask?: FieldMask;
+
+  /**
+   * @generated from field: optional bool enabled = 3;
+   */
+  enabled?: boolean;
+
+  /**
+   * @generated from field: optional bool pay = 4;
+   */
+  pay?: boolean;
+
+  /**
+   * @generated from field: optional bool reboot = 5;
+   */
+  reboot?: boolean;
+
+  /**
+   * @generated from field: optional bool tickets = 6;
+   */
+  tickets?: boolean;
+
+  /**
+   * @generated from field: optional double spend_day = 7;
+   */
+  spendDay?: number;
+
+  /**
+   * @generated from field: optional double spend_month = 8;
+   */
+  spendMonth?: number;
+
+  /**
+   * @generated from field: optional int32 orders_day = 9;
+   */
+  ordersDay?: number;
+
+  /**
+   * @generated from field: optional int32 reboots_day = 10;
+   */
+  rebootsDay?: number;
+
+  constructor(data?: PartialMessage<SetMcpRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.SetMcpRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetMcpRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetMcpRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetMcpRequest;
+
+  static equals(a: SetMcpRequest | PlainMessage<SetMcpRequest> | undefined, b: SetMcpRequest | PlainMessage<SetMcpRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message nocloud.registry.accounts.RotateMcpRequest
+ */
+export declare class RotateMcpRequest extends Message<RotateMcpRequest> {
+  /**
+   * @generated from field: string uuid = 1;
+   */
+  uuid: string;
+
+  constructor(data?: PartialMessage<RotateMcpRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "nocloud.registry.accounts.RotateMcpRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RotateMcpRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RotateMcpRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RotateMcpRequest;
+
+  static equals(a: RotateMcpRequest | PlainMessage<RotateMcpRequest> | undefined, b: RotateMcpRequest | PlainMessage<RotateMcpRequest> | undefined): boolean;
 }
 
 /**

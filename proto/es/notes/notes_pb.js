@@ -31,6 +31,7 @@ export const AdminNote = /*@__PURE__*/ proto3.makeMessageType(
     { no: 3, name: "created", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 4, name: "updated", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 5, name: "pinned", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 6, name: "attachments", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
   ],
 );
 
@@ -43,6 +44,7 @@ export const AddNoteRequest = /*@__PURE__*/ proto3.makeMessageType(
     { no: 1, name: "uuid", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "msg", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "pinned", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 4, name: "attachments", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
   ],
 );
 
@@ -56,6 +58,7 @@ export const PatchNoteRequest = /*@__PURE__*/ proto3.makeMessageType(
     { no: 2, name: "index", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
     { no: 3, name: "msg", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "pinned", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 5, name: "attachments", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
   ],
 );
 
