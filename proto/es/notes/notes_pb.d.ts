@@ -50,6 +50,13 @@ export declare class AdminNote extends Message<AdminNote> {
    */
   pinned: boolean;
 
+  /**
+   * uuids of files attached to the note (core-chatting attachments)
+   *
+   * @generated from field: repeated string attachments = 6;
+   */
+  attachments: string[];
+
   constructor(data?: PartialMessage<AdminNote>);
 
   static readonly runtime: typeof proto3;
@@ -83,6 +90,11 @@ export declare class AddNoteRequest extends Message<AddNoteRequest> {
    * @generated from field: bool pinned = 3;
    */
   pinned: boolean;
+
+  /**
+   * @generated from field: repeated string attachments = 4;
+   */
+  attachments: string[];
 
   constructor(data?: PartialMessage<AddNoteRequest>);
 
@@ -122,6 +134,11 @@ export declare class PatchNoteRequest extends Message<PatchNoteRequest> {
    * @generated from field: bool pinned = 4;
    */
   pinned: boolean;
+
+  /**
+   * @generated from field: repeated string attachments = 5;
+   */
+  attachments: string[];
 
   constructor(data?: PartialMessage<PatchNoteRequest>);
 
